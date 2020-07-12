@@ -1,7 +1,7 @@
 import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
 import struct,shutil
-from bpy_extras import node_shader_utils
+from bpy_extras import io_utils,node_shader_utils
 
 bm_current_version = 10
 
@@ -229,6 +229,8 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
     # ====================== export texture
     ftexture = open(os.path.join(tempFolder, "texture.bm"), "wb")
+    source_dir = os.path.dirname(bpy.data.filepath)
+    
     for texture in textureList:
         # write finfo first
         write_string(finfo, texture.name)
@@ -236,14 +238,16 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         write_long(finfo, ftexture.tell())
 
         # confirm internal
-        filename = os.path.basename(texture.filepath)
+        texture_filepath = io_utils.path_reference(texture.filepath, source_dir, tempTextureFolder,
+                                                       'ABSOLUTE', "", None, texture.library)
+        filename = os.path.basename(texture_filepath)
         write_string(ftexture, filename)
         if (is_external_texture(filename)):
             write_int(ftexture, 1)
         else:
             # copy internal texture
             write_int(ftexture, 0)
-            shutil.copy(texture.filepath, os.path.join(tempTextureFolder, filename))
+            shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
 
     ftexture.close()
 
