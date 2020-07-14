@@ -19,7 +19,9 @@ if "bpy" in locals():
         importlib.reload(floor_rail_uv)
     if "utils" in locals():
         importlib.reload(utils)
-from . import utils, bm_import_export, floor_rail_uv
+    if "config" in locals():
+        importlib.reload(config)
+from . import config, utils, bm_import_export, floor_rail_uv
 
 # ============================================= func block
 

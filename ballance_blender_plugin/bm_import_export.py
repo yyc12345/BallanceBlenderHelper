@@ -2,6 +2,7 @@ import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
 import struct,shutil
 from bpy_extras import io_utils,node_shader_utils
+from . import utils, config
 
 bm_current_version = 10
 
@@ -230,6 +231,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     # ====================== export texture
     ftexture = open(os.path.join(tempFolder, "texture.bm"), "wb")
     source_dir = os.path.dirname(bpy.data.filepath)
+    existed_texture = set()
     
     for texture in textureList:
         # write finfo first
@@ -245,9 +247,11 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         if (is_external_texture(filename)):
             write_int(ftexture, 1)
         else:
-            # copy internal texture
+            # copy internal texture, if this file is copied, do not copy it again
             write_int(ftexture, 0)
-            shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
+            if filename not in existed_texture:
+                shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
+                existed_texture.add(filename)
 
     ftexture.close()
 
@@ -280,7 +284,10 @@ def get_component_id(name):
     return -1 # todo: finish this, -1 mean not a component
 
 def is_external_texture(name):
-    return False # todo: finish this. external mean no copy file
+    if name in config.external_texture_list:
+        return True
+    else:
+        return False
 
 def mesh_triangulate(me):
     bm = bmesh.new()
