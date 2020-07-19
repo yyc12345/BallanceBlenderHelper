@@ -89,13 +89,14 @@ class FloorUVOperator(bpy.types.Operator):
         return {'FINISHED'}
 
 class SuperAlignOperator(bpy.types.Operator):
+    """Align object with 3ds Max way"""
     bl_idname = "ballance.super_align"
     bl_label = "Super Align"
     bl_options = {'UNDO'}
 
-    align_x: bpy.props.BoolProperty(name="X postion")
-    align_y: bpy.props.BoolProperty(name="Y postion")
-    align_z: bpy.props.BoolProperty(name="Z postion")
+    align_x: bpy.props.BoolProperty(name="X position")
+    align_y: bpy.props.BoolProperty(name="Y position")
+    align_z: bpy.props.BoolProperty(name="Z position")
 
     current_references: bpy.props.EnumProperty(
         name="Current",
@@ -141,6 +142,7 @@ class SuperAlignOperator(bpy.types.Operator):
         col.prop(self, "target_references")
 
 class ThreeDViewerMenu(bpy.types.Menu):
+    """Ballance related 3D operator"""
     bl_label = "Ballance 3D"
     bl_idname = "OBJECT_MT_ballance3d_menu"
 
