@@ -21,14 +21,18 @@ if "bpy" in locals():
         importlib.reload(utils)
     if "config" in locals():
         importlib.reload(config)
-from . import config, utils, bm_import_export, floor_rail_uv
+    if "preferences" in locals():
+        importlib.reload(preferences)
+    if "super_align" in locals():
+        importlib.reload(super_align)
+from . import config, utils, bm_import_export, floor_rail_uv, preferences, super_align
 
 # ============================================= func block
 
 class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
-    """Load a Ballance Map File"""
+    """Load a Ballance Map File (BM file spec 1.0)"""
     bl_idname = "import_scene.bm"
-    bl_label = "Import BM"
+    bl_label = "Import BM "
     bl_options = {'PRESET', 'UNDO'}
     filename_ext = ".bm"
 
@@ -37,7 +41,7 @@ class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
         return {'FINISHED'}
         
 class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
-    """Save a Ballance Map File"""
+    """Save a Ballance Map File (BM file spec 1.0)"""
     bl_idname = "export_scene.bm"
     bl_label = 'Export BM'
     bl_options = {'PRESET'}
@@ -84,6 +88,58 @@ class FloorUVOperator(bpy.types.Operator):
         floor_rail_uv.virtoolize_floor_uv()
         return {'FINISHED'}
 
+class SuperAlignOperator(bpy.types.Operator):
+    bl_idname = "ballance.super_align"
+    bl_label = "Super Align"
+    bl_options = {'UNDO'}
+
+    align_x: bpy.props.BoolProperty(name="X postion")
+    align_y: bpy.props.BoolProperty(name="Y postion")
+    align_z: bpy.props.BoolProperty(name="Z postion")
+
+    current_references: bpy.props.EnumProperty(
+        name="Current",
+        items=(('MIN', "Min", ""),
+                ('CENTER', "Center (bound box)", ""),
+                ('POINT', "Center (axis)", ""),
+                ('MAX', "Max", "")
+                ),
+        )
+
+    target_references: bpy.props.EnumProperty(
+        name="Target",
+        items=(('MIN', "Min", ""),
+                ('CENTER', "Center (bound box)", ""),
+                ('POINT', "Center (axis)", ""),
+                ('MAX', "Max", "")
+                ),
+        )
+
+    @classmethod
+    def poll(self, context):
+        return super_align.check_align_target()
+
+    def execute(self, context):
+        super_align.align_object(self.align_x, self.align_y, self.align_z, self.current_references, self.target_references)
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+    def draw(self, context):
+        layout = self.layout
+        col = layout.column()
+        col.label(text="Align axis")
+
+        row = col.row()
+        row.prop(self, "align_x")
+        row.prop(self, "align_y")
+        row.prop(self, "align_z")
+
+        col.prop(self, "current_references")
+        col.prop(self, "target_references")
+
 class ThreeDViewerMenu(bpy.types.Menu):
     bl_label = "Ballance 3D"
     bl_idname = "OBJECT_MT_ballance3d_menu"
@@ -91,16 +147,19 @@ class ThreeDViewerMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
+        layout.operator("ballance.super_align")
         layout.operator("ballance.rail_uv")
         layout.operator("ballance.floor_uv")
 
 # ============================================= blender call system
 
 classes = (
+    preferences.BallanceBlenderPluginPreferences,
     ImportBM,
     ExportBM,
     RailUVOperator,
     FloorUVOperator,
+    SuperAlignOperator,
     ThreeDViewerMenu
 )
 
