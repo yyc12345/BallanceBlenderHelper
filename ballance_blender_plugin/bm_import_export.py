@@ -32,13 +32,9 @@ class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         name="Export target",
         description="Which one will be exported",
         )
-    no_component_suffix: bpy.props.StringProperty(
-        name="No component suffix",
-        description="The object which have this suffix will not be saved as component.",
-        )
     
     def execute(self, context):
-        export_bm(context, self.filepath, self.export_mode, self.export_target, self.no_component_suffix)
+        export_bm(context, self.filepath, self.export_mode, self.export_target, "") #todo: fix no_component_suffix
         return {'FINISHED'}
 
 

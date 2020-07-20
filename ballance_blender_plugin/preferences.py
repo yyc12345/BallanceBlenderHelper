@@ -8,6 +8,11 @@ class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
         description="The Ballance texture folder which will be used buy this plugin to get external texture.",
         )
 
+    no_component_collection: bpy.props.StringProperty(
+        name="No component collection",
+        description="(Import) The object which stored in this collectiion will not be saved as component. (Export) All forced no component objects will be stored in this collection",
+        )
+
     def draw(self, context):
         layout = self.layout
         
@@ -15,3 +20,4 @@ class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
         col = row.column()
 
         col.prop(self, "external_folder")
+        col.prop(self, "no_component_collection")
