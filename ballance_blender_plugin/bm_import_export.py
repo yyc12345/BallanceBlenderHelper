@@ -4,6 +4,46 @@ import struct,shutil
 from bpy_extras import io_utils,node_shader_utils
 from . import utils, config
 
+class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
+    """Load a Ballance Map File (BM file spec 1.0)"""
+    bl_idname = "import_scene.bm"
+    bl_label = "Import BM "
+    bl_options = {'PRESET', 'UNDO'}
+    filename_ext = ".bm"
+
+    def execute(self, context):
+        import_bm(context, self.filepath)
+        return {'FINISHED'}
+        
+class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
+    """Save a Ballance Map File (BM file spec 1.0)"""
+    bl_idname = "export_scene.bm"
+    bl_label = 'Export BM'
+    bl_options = {'PRESET'}
+    filename_ext = ".bm"
+    
+    export_mode: bpy.props.EnumProperty(
+        name="Export mode",
+        items=(('COLLECTION', "Selected collection", "Export the selected collection"),
+               ('OBJECT', "Selected objects", "Export the selected objects"),
+               ),
+        )
+    export_target: bpy.props.StringProperty(
+        name="Export target",
+        description="Which one will be exported",
+        )
+    no_component_suffix: bpy.props.StringProperty(
+        name="No component suffix",
+        description="The object which have this suffix will not be saved as component.",
+        )
+    
+    def execute(self, context):
+        export_bm(context, self.filepath, self.export_mode, self.export_target, self.no_component_suffix)
+        return {'FINISHED'}
+
+
+# ========================================== method
+
 bm_current_version = 10
 
 def import_bm(context,filepath):

@@ -1,6 +1,61 @@
 import bpy,mathutils
 from . import utils
 
+class SuperAlignOperator(bpy.types.Operator):
+    """Align object with 3ds Max way"""
+    bl_idname = "ballance.super_align"
+    bl_label = "Super Align"
+    bl_options = {'UNDO'}
+
+    align_x: bpy.props.BoolProperty(name="X position")
+    align_y: bpy.props.BoolProperty(name="Y position")
+    align_z: bpy.props.BoolProperty(name="Z position")
+
+    current_references: bpy.props.EnumProperty(
+        name="Current",
+        items=(('MIN', "Min", ""),
+                ('CENTER', "Center (bound box)", ""),
+                ('POINT', "Center (axis)", ""),
+                ('MAX', "Max", "")
+                ),
+        )
+
+    target_references: bpy.props.EnumProperty(
+        name="Target",
+        items=(('MIN', "Min", ""),
+                ('CENTER', "Center (bound box)", ""),
+                ('POINT', "Center (axis)", ""),
+                ('MAX', "Max", "")
+                ),
+        )
+
+    @classmethod
+    def poll(self, context):
+        return check_align_target()
+
+    def execute(self, context):
+        align_object(self.align_x, self.align_y, self.align_z, self.current_references, self.target_references)
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+    def draw(self, context):
+        layout = self.layout
+        col = layout.column()
+        col.label(text="Align axis")
+
+        row = col.row()
+        row.prop(self, "align_x")
+        row.prop(self, "align_y")
+        row.prop(self, "align_z")
+
+        col.prop(self, "current_references")
+        col.prop(self, "target_references")
+
+# ============================== method
+
 def check_align_target():
     if bpy.context.active_object is None:
         return False
