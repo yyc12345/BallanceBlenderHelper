@@ -359,6 +359,6 @@ def write_3vector(fs, x, y ,z):
 def write_2vector(fs, u, v):
     fs.write(struct.pack("ff", u, v))
 
-def write_face(fs, v1, vn1, vt1, v2, vn2, vt2, v3, vn3, vt3):
-    fs.write(struct.pack("IIIIIIIII", v1, vn1, vt1, v2, vn2, vt2, v3, vn3, vt3))
+def write_face(fs, v1, vt1, vn1, v2, vt2, vn2, v3, vt3, vn3):
+    fs.write(struct.pack("IIIIIIIII", v1, vt1, vn1, v2, vt2, vn2, v3, vt3, vn3))
 
