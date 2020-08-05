@@ -2,6 +2,7 @@ import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
 import struct,shutil
 from bpy_extras import io_utils,node_shader_utils
+from bpy_extras.image_utils import load_image
 from . import utils, config
 
 class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
@@ -11,8 +12,14 @@ class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
     bl_options = {'PRESET', 'UNDO'}
     filename_ext = ".bm"
 
+    @classmethod
+    def poll(self, context):
+        prefs = bpy.context.preferences.addons[__package__].preferences
+        return (os.path.isdir(prefs.temp_texture_folder) and os.path.isdir(prefs.external_folder))
+
     def execute(self, context):
-        import_bm(context, self.filepath)
+        prefs = bpy.context.preferences.addons[__package__].preferences
+        import_bm(context, self.filepath, prefs.external_folder, prefs.temp_texture_folder)
         return {'FINISHED'}
         
 class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
@@ -32,7 +39,7 @@ class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         name="Export target",
         description="Which one will be exported",
         )
-    
+
     def execute(self, context):
         export_bm(context, self.filepath, self.export_mode, self.export_target, "") #todo: fix no_component_suffix
         return {'FINISHED'}
@@ -40,11 +47,226 @@ class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
 
 # ========================================== method
 
-bm_current_version = 10
+bm_current_version = 11
 
-def import_bm(context,filepath):
-    # todo: finish this
-    pass
+def import_bm(context,filepath,externalTexture,blenderTempFolder):
+    # ============================================ alloc a temp folder
+    tempFolderObj = tempfile.TemporaryDirectory()
+    tempFolder = tempFolderObj.name
+    # debug
+    # print(tempFolder)
+    tempTextureFolder = os.path.join(tempFolder, "Texture")
+    prefs = bpy.context.preferences.addons[__package__].preferences
+    blenderTempTextureFolder = prefs.temp_texture_folder
+    externalTextureFolder = prefs.external_folder
+
+    with zipfile.ZipFile(filepath, 'r', zipfile.ZIP_DEFLATED, 9) as zipObj:
+        zipObj.extractall(tempFolder)
+
+    # index.bm
+    findex = open(os.path.join(tempFolder, "index.bm"), "rb")
+    # judge version first
+    gotten_version = read_uint32(findex)
+    if (gotten_version != bm_current_version):
+        utils.ShowMessageBox("Unsupported BM spec. Expect: {} Gotten: {}".format(bm_current_version, gotten_version), "Unsupported BM spec", 'WARNING')
+        findex.close()
+        tempFolderObj.cleanup()
+        return
+    objectList = []
+    meshList = []
+    materialList = []
+    textureList = []
+    while len(peek_stream(findex)) != 0:
+        index_name = read_string(findex)
+        index_type = read_uint8(findex)
+        index_offset = read_uint64(findex)
+        blockCache = info_block_helper(index_name, index_offset)
+        if index_type == info_bm_type.OBJECT:
+            objectList.append(blockCache)
+        elif index_type == info_bm_type.MESH:
+            meshList.append(blockCache)
+        elif index_type == info_bm_type.MATERIAL:
+            materialList.append(blockCache)
+        elif index_type == info_bm_type.TEXTURE:
+            textureList.append(blockCache)
+        else:
+            pass
+    findex.close()
+
+    # texture.bm
+    ftexture = open(os.path.join(tempFolder, "texture.bm"), "rb")
+    for item in textureList:
+        ftexture.seek(item.offset, os.SEEK_SET)
+        texture_filename = read_string(ftexture)
+        texture_isExternal = read_bool(ftexture)
+        if texture_isExternal:
+            item.blenderData = txur = load_image(texture_filename, externalTextureFolder)
+        else:
+            # not external. copy temp file into blender temp. then use it.
+            shutil.copy(os.path.join(tempTextureFolder, texture_filename), os.path.join(blenderTempTextureFolder, texture_filename))
+            item.blenderData = txur = load_image(texture_filename, blenderTempTextureFolder)
+        txur.name = item.name
+
+    ftexture.close()
+
+    # material.bm
+    fmaterial = open(os.path.join(tempFolder, "material.bm"), "rb")
+    for item in materialList:
+        fmaterial.seek(item.offset, os.SEEK_SET)
+
+        # read data
+        material_colAmbient = read_3vector(fmaterial)
+        material_colDiffuse = read_3vector(fmaterial)
+        material_colSpecular = read_3vector(fmaterial)
+        material_colEmissive = read_3vector(fmaterial)
+        material_specularPower = read_float(fmaterial)
+        material_useTexture = read_bool(fmaterial)
+        material_texture = read_uint32(fmaterial)
+
+        # create basic material
+        item.blenderData = m = bpy.data.materials.new(item.name)
+        m.use_nodes=True
+        for node in m.node_tree.nodes:
+            m.node_tree.nodes.remove(node)
+        bnode=m.node_tree.nodes.new(type="ShaderNodeBsdfPrincipled")
+        mnode=m.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
+        m.node_tree.links.new(bnode.outputs[0],mnode.inputs[0])
+
+        bnode.metallic = sum(material_colAmbient) / 3
+        m.diffuse_color = material_colDiffuse
+        bnode.specular = sum(material_colSpecular) / 3
+        m.specular_color = material_colEmissive
+        m.specular_intensity = material_specularPower
+
+        # create a texture
+        if material_useTexture:
+            inode=m.node_tree.nodes.new(type="ShaderNodeTexImage")
+            inode.image=textureList[material_texture].blenderData
+            m.node_tree.links.new(inode.outputs[0],bnode.inputs[0])
+
+        # write custom property
+        m['virtools-ambient'] = material_colAmbient
+        m['virtools-diffuse'] = material_colDiffuse
+        m['virtools-specular'] = material_colSpecular
+        m['virtools-emissive'] = material_colEmissive
+        m['virtools-power'] = material_specularPower
+
+    fmaterial.close()
+
+    # mesh.bm
+    fmesh = open(os.path.join(tempFolder, "mesh.bm"), "rb")
+    for item in meshList:
+        fmesh.seek(item.name, os.SEEK_SET)
+
+        # load a empty mesh first
+        mesh=bmesh.new()
+        materialSolt = []
+        # load vec but don't change it normal. normal will be added in following process
+        vCount = read_uint32(fmesh)
+        for i in range(vCount):
+            cache = read_3vector(fmesh)
+            # switch yz
+            mesh.verts.new((cache[0], cache[2], cache[1]))
+        mesh.verts.ensure_lookup_table()
+        mesh.verts.index_update()
+
+        # load vt and vn into list for following use
+        vtList = []
+        vnList = []
+        vCount = read_uint32(fmesh)
+        for i in range(vCount):
+            cache = read_2vector(fmesh)
+            # reverse v
+            vtList.append(cache[0], -cache[1])
+        vCount = read_uint32(fmesh)
+        for i in range(vCount):
+            cache = read_3vector(fmesh)
+            # switch yz
+            vnList.append((cache[0], cache[2], cache[1]))
+
+        # load face
+        fCount = read_uint32(fmesh)
+        ftellCache = fmesh.tell()
+        for i in range(fCount):
+            faceData = read_face(fmesh)
+            mesh_useMaterial = read_bool(fmesh)
+            mesh_materialIndex = read_uint32(fmesh)
+
+            # give vec normal
+            mesh.verts[faceData[6]].normal = vnList[faceData[8]]
+            mesh.verts[faceData[3]].normal = vnList[faceData[5]]
+            mesh.verts[faceData[0]].normal = vnList[faceData[2]]
+
+            # we need invert triangle sort
+            nf=mesh.faces.new((
+                mesh.verts[faceData[6]],
+                mesh.verts[faceData[3]],
+                mesh.verts[faceData[0]]
+            ))
+
+            if mesh_useMaterial:
+                neededMaterial = materialList[mesh_materialIndex].blenderData
+                if neededMaterial in materialSolt:
+                    neededIndex = materialSolt.index(neededMaterial)
+                else:
+                    neededIndex = len(materialSolt)
+                    materialSolt.append(neededMaterial)
+                nf.material_index = neededIndex
+            
+        uv=mesh.loops.layers.uv.new()
+        # back to face head and run again
+        fmesh.seek(ftellCache, os.SEEK_SET)
+        for i in range(fCount):
+            faceData = read_face(fmesh)
+            read_bool(fmesh)
+            read_uint32(fmesh)
+
+            # we assume all face's sort is out create sort
+            nf = mesh.faces[i]
+            lp = nf.loops[0]
+            lp[uv].uv=mathutils.Vector(vtList[faceData[7]])
+            lp = nf.loops[1]
+            lp[uv].uv=mathutils.Vector(vtList[faceData[4]])
+            lp = nf.loops[2]
+            lp[uv].uv=mathutils.Vector(vtList[faceData[1]])
+
+        # create real mesh and add material
+        msh = bpy.data.meshes.new(item.name)
+        mesh.to_mesh(msh)
+        mesh.free()
+        for mat in materialSolt:
+            msh.materials.append(mat)
+        item.blenderData = msh
+
+    fmesh.close()
+
+    # object
+    fobject = open(os.path.join(tempFolder, "object.bm"), "rb")
+    for item in objectList:
+        fobject.seek(item.offset, os.SEEK_SET)
+
+        # read data
+        object_isComponent = read_bool(fobject)
+        object_isForcedNoComponent = read_bool(fobject)
+        object_isHidden = read_bool(fobject)
+        object_worldMatrix = read_worldMaterix(fobject)
+        object_meshIndex = read_uint32(fobject)
+
+        # got mesh first
+        if object_isComponent:
+            neededMesh = load_component(object_meshIndex)
+        else:
+            neededMesh = meshList[object_meshIndex].blenderData
+
+        # create real object
+        obj = bpy.data.objects.new(item.name, neededMesh)
+        obj.matrix_world = object_worldMatrix
+        obj.hide_viewport = object_isHidden
+        # todo: finish forced collection grouping
+        
+    fobject.close()
+
+    tempFolderObj.cleanup()
     
 def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     # ============================================ alloc a temp folder
@@ -211,7 +433,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     textureSet = set()
     textureList = []
     textureCount = 0
-
+    # todo: texture filter have duplicated name error. fix it later
     for material in materialList:
         # write finfo first
         write_string(finfo, material.name)
@@ -307,11 +529,26 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
 # ======================================================================================= export / import assistant
 
+# shared
+
 class info_bm_type():
     OBJECT = 0
     MESH = 1
     MATERIAL = 2
     TEXTURE = 3
+
+# import
+
+class info_block_helper():
+    def __init__(self, name, offset):
+        self.name = name
+        self.offset = offset
+        self.blenderData = None
+
+def load_component(component_id):
+    return None
+
+# export
 
 def is_component(name):
     return get_component_id(name) != -1
@@ -333,6 +570,52 @@ def mesh_triangulate(me):
     bm.free()
 
 # ======================================================================================= file io assistant
+
+# import
+
+def peek_stream(fs):
+    res = fs.read(1)
+    fs.seek(-1, os.SEEK_CUR)
+    return res
+
+def read_float(fs):
+    return struct.unpack("f", fs.read(1))[0]
+
+def read_uint8(fs):
+    return struct.unpack("B", fs.read(1))[0]
+
+def read_uint32(fs):
+    return struct.unpack("I", fs.read(4))[0]
+
+def read_uint64(fs):
+    return struct.unpack("Q", fs.read(8))[0]
+
+def read_string(fs):
+    count  = read_uint32(fs)
+    return fs.read(count*4).decode("utf_32_le")
+
+def read_bool(fs):
+    return read_uint8(fs) != 0
+
+def read_worldMaterix(fs):
+    p = struct.unpack("ffffffffffffffff", fs.read(4*4*4))
+    res = mathutils.Materix((
+    (p[0], p[2], p[1], p[3]),
+    (p[8], p[10], p[9], p[11]),
+    (p[4], p[6], p[5], p[7]),
+    (p[12], p[14], p[13], p[15])))
+    return res.transposed()
+
+def read_3vector(fs):
+    return struct.unpack("fff", fs.read(3*4))
+
+def read_2vector(fs):
+    return struct.unpack("fff", fs.read(2*4))
+
+def read_face(fs):
+    return struct.unpack("IIIIIIIII", fs.read(4*9))
+
+# export
 
 def write_string(fs,str):
     count=len(str)

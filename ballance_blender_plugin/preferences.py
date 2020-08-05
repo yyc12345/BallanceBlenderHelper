@@ -13,6 +13,11 @@ class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
         description="(Import) The object which stored in this collectiion will not be saved as component. (Export) All forced no component objects will be stored in this collection",
         )
 
+    temp_texture_folder: bpy.props.StringProperty(
+        name="Temp texture folder",
+        description="The folder which will temporarily store the textures which are extracted from bm. Due to system temp folder will be deleted after decoding of bm, so this path should not be blank.",
+        )
+
     def draw(self, context):
         layout = self.layout
         
@@ -21,3 +26,4 @@ class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
 
         col.prop(self, "external_folder")
         col.prop(self, "no_component_collection")
+        col.prop(self, "temp_texture_folder")
