@@ -101,7 +101,8 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         texture_filename = read_string(ftexture)
         texture_isExternal = read_bool(ftexture)
         if texture_isExternal:
-            item.blenderData = txur = load_image(texture_filename, externalTextureFolder)
+            txur = load_image(texture_filename, externalTextureFolder)
+            item.blenderData = txur
         else:
             # not external. copy temp file into blender temp. then use it.
             # try copy. if fail, don't need to do more
@@ -109,7 +110,8 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
                 shutil.copy(os.path.join(tempTextureFolder, texture_filename), os.path.join(blenderTempTextureFolder, texture_filename))
             except:
                 pass
-            item.blenderData = txur = load_image(texture_filename, blenderTempTextureFolder)
+            txur = load_image(texture_filename, blenderTempTextureFolder)
+            item.blenderData = txur
         txur.name = item.name
 
     ftexture.close()
@@ -129,7 +131,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         material_texture = read_uint32(fmaterial)
 
         # create basic material
-        item.blenderData = m = bpy.data.materials.new(item.name)
+        m = bpy.data.materials.new(item.name)
         m.use_nodes=True
         for node in m.node_tree.nodes:
             m.node_tree.nodes.remove(node)
@@ -154,6 +156,8 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         m['virtools-specular'] = material_colSpecular
         m['virtools-emissive'] = material_colEmissive
         m['virtools-power'] = material_specularPower
+
+        item.blenderData = m
 
     fmaterial.close()
 
@@ -225,14 +229,11 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         mesh.loops.add(len(faceList)*3)  # triangle face confirm
         mesh.polygons.add(len(faceList))
         mesh.uv_layers.new(do_init=False)
+        mesh.create_normals_split()
 
         # add vertices data
         mesh.vertices.foreach_set("co", unpack_list(vList))
         mesh.loops.foreach_set("vertex_index", unpack_list(flat_vertices_index(faceList)))
-        '''
-        for _index, _item in enumerate(flat_vertices_index(faceList)):
-            mesh.loops[_index].vertex_index = _item
-        '''
         mesh.loops.foreach_set("normal", unpack_list(flat_vertices_normal(faceList, vnList)))
         mesh.uv_layers[0].data.foreach_set("uv", unpack_list(flat_vertices_uv(faceList, vtList)))
         for i in range(len(faceList)):
@@ -241,6 +242,8 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             if faceList[i][9] != -1:
                 mesh.polygons[i].material_index = faceList[i][9]
         
+        mesh.validate(clean_customdata=False)
+        mesh.update(calc_edges=False, calc_edges_loose=False)
 
         # add into item using
         item.blenderData = mesh
