@@ -241,6 +241,8 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             mesh.polygons[i].loop_total = 3
             if faceList[i][9] != -1:
                 mesh.polygons[i].material_index = faceList[i][9]
+
+            mesh.polygons[i].use_smooth = True
         
         mesh.validate(clean_customdata=False)
         mesh.update(calc_edges=False, calc_edges_loose=False)
