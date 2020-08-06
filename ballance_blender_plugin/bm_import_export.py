@@ -55,7 +55,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
     tempFolderObj = tempfile.TemporaryDirectory()
     tempFolder = tempFolderObj.name
     # debug
-    print(tempFolder)
+    # print(tempFolder)
     tempTextureFolder = os.path.join(tempFolder, "Texture")
     prefs = bpy.context.preferences.addons[__package__].preferences
     blenderTempTextureFolder = prefs.temp_texture_folder
@@ -158,7 +158,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         m['virtools-power'] = material_specularPower
 
         item.blenderData = m
-
+        
     fmaterial.close()
 
     # mesh.bm
