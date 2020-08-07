@@ -42,7 +42,7 @@ class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         )
 
     def execute(self, context):
-        export_bm(context, self.filepath, self.export_mode, self.export_target, "") #todo: fix no_component_suffix
+        export_bm(context, self.filepath, self.export_mode, self.export_target)
         return {'FINISHED'}
 
 
@@ -254,8 +254,20 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
 
     # object
     fobject = open(os.path.join(tempFolder, "object.bm"), "rb")
+
+    # we need get needed collection first
     view_layer = context.view_layer
     collection = view_layer.active_layer_collection.collection
+    if prefs.no_component_collection == "":
+        forcedCollection = None
+    else:
+        try:
+            forcedCollection = bpy.data.collections[prefs.no_component_collection]
+        except:
+            forcedCollection = bpy.data.collections.new(prefs.no_component_collection)
+            view_layer.active_layer_collection.collection.children.link(forcedCollection)
+
+    # start process it
     for item in objectList:
         fobject.seek(item.offset, os.SEEK_SET)
 
@@ -276,9 +288,12 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         obj = bpy.data.objects.new(item.name, neededMesh)
         obj.matrix_world = object_worldMatrix
         obj.hide_viewport = object_isHidden
-        # todo: finish forced collection grouping
+        
 
-        collection.objects.link(obj)
+        if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection != None):
+            forcedCollection.objects.link(obj)
+        else:
+            collection.objects.link(obj)
         
     fobject.close()
     view_layer.update()
@@ -293,27 +308,23 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     # tempFolder = "G:\\ziptest"
     tempTextureFolder = os.path.join(tempFolder, "Texture")
     os.makedirs(tempTextureFolder)
+    prefs = bpy.context.preferences.addons[__package__].preferences
     
-    # ============================================ find export target
+    # ============================================ find export target. don't need judge them in there. just collect them
     if export_mode== "COLLECTION":
         objectList = bpy.data.collections[export_target].objects
     else:
         objectList = [bpy.data.objects[export_target]]
 
-    needSuffixChecker = no_component_suffix != ""
-    componentObj = set()
-    for obj in objectList:
-        if needSuffixChecker and obj.name.endwith(no_component_suffix):
-            pass # meshObjList.add(obj)
-        else:
-            if is_component(obj.name):
-                componentObj.add(obj)
-            else:
-                pass # meshObjList.add(obj)
-                    
+    # try get forcedCollection
+    try:
+        forcedCollection = bpy.data.collections[prefs.no_component_collection]
+    except:
+        forcedCollection = None
+   
     # ============================================ export
     finfo = open(os.path.join(tempFolder, "index.bm"), "wb")
-    finfo.write(struct.pack("I", bm_current_version))
+    write_uint32(finfo, bm_current_version)
     
     # ====================== export object
     fobject = open(os.path.join(tempFolder, "object.bm"), "wb")
@@ -324,15 +335,22 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         # only export mesh object
         if obj.type != 'MESH':
             continue
-        
-        varis_component = obj in componentObj
 
         # clean no mesh object
         currentMesh = obj.data
         if currentMesh == None:
             continue
+
+        # judge component
+        object_isComponent = is_component(obj.name)
+        object_isForcedNoComponent = False
+        if (forcedCollection != None) and (obj.name in forcedCollection.objects):
+            # change it to forced no component
+            object_isComponent = False
+            object_isForcedNoComponent = True
+
         # triangle first and then group
-        if not varis_component:
+        if not object_isComponent:
             if currentMesh not in meshSet:
                 mesh_triangulate(currentMesh)
                 meshSet.add(currentMesh)
@@ -341,19 +359,23 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
                 meshCount += 1
             else:
                 meshId = meshList.index(currentMesh)
+        else:
+            meshId = get_component_id(obj.name)
+
+        # get visibility
+        object_isHidden = obj.hide_viewport
 
         # write finfo first
         write_string(finfo, obj.name)
-        write_int(finfo, info_bm_type.OBJECT)
-        write_long(finfo, fobject.tell())
+        write_uint32(finfo, info_bm_type.OBJECT)
+        write_uint64(finfo, fobject.tell())
 
         # write fobject
-        write_int(fobject, 1 if varis_component else 0)
+        write_bool(fobject, object_isComponent)
+        write_bool(fobject, object_isForcedNoComponent)
+        write_bool(fobject, object_isHidden)
         write_worldMatrix(fobject, obj.matrix_world)
-        if varis_component:
-            write_int(fobject, get_component_id(obj.name))
-        else:
-            write_int(fobject, meshId)
+        write_uint32(fobject, meshId)
 
     fobject.close()
 
@@ -366,13 +388,13 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
         # write finfo first
         write_string(finfo, mesh.name)
-        write_int(finfo, info_bm_type.MESH)
-        write_long(finfo, fmesh.tell())
+        write_uint32(finfo, info_bm_type.MESH)
+        write_uint64(finfo, fmesh.tell())
 
         # write fmesh
         # vertices
         vecList = mesh.vertices[:]
-        write_int(fmesh, len(vecList))
+        write_uint32(fmesh, len(vecList))
         for vec in vecList:
             #swap yz
             write_3vector(fmesh,vec.co[0],vec.co[2],vec.co[1])
@@ -380,7 +402,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         # uv
         face_index_pairs = [(face, index) for index, face in enumerate(mesh.polygons)]
         uv_layer = mesh.uv_layers.active.data[:]
-        write_int(fmesh, len(face_index_pairs) * 3)
+        write_uint32(fmesh, len(face_index_pairs) * 3)
         for f, f_index in face_index_pairs:
             # it should be triangle face, otherwise throw a error
             if (f.loop_total != 3):
@@ -392,7 +414,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
                 write_2vector(fmesh, uv[0], -uv[1])
 
         # normals
-        write_int(fmesh, len(face_index_pairs) * 3)
+        write_uint32(fmesh, len(face_index_pairs) * 3)
         for f, f_index in face_index_pairs:
             # no need to check triangle again
             for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
@@ -409,7 +431,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
                 materialSet.add(mat)
                 materialList.append(mat)
 
-        write_int(fmesh, len(face_index_pairs))
+        write_uint32(fmesh, len(face_index_pairs))
         vtIndex = []
         vnIndex = []
         vIndex = []
@@ -438,8 +460,8 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
             vIndex[0], vtIndex[0], vnIndex[0])
 
             # set used material
-            write_int(fmesh, 0 if noMaterial else 1)
-            write_int(fmesh, usedMat)
+            write_bool(fmesh, not noMaterial)
+            write_uint32(fmesh, usedMat)
 
         mesh.free_normals_split()
 
@@ -454,20 +476,29 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     for material in materialList:
         # write finfo first
         write_string(finfo, material.name)
-        write_int(finfo, info_bm_type.MATERIAL)
-        write_long(finfo, fmaterial.tell())
+        write_uint32(finfo, info_bm_type.MATERIAL)
+        write_uint64(finfo, fmaterial.tell())
 
-        # write basic color
+        # try get original written data
+        material_colAmbient = try_get_custom_property(material, 'virtools-ambient')
+        material_colDiffuse = try_get_custom_property(material, 'virtools-diffuse')
+        material_colSpecular = try_get_custom_property(material, 'virtools-specular')
+        material_colEmissive = try_get_custom_property(material, 'virtools-emissive')
+        material_specularPower = try_get_custom_property(material, 'virtools-power')
+
+        # get basic color
         mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
         if mat_wrap:
             use_mirror = mat_wrap.metallic != 0.0
             if use_mirror:
-                write_3vector(fmaterial, mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic)
+                set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
             else:
-                write_3vector(fmaterial, 1, 1, 1)
-            write_3vector(fmaterial, mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2])
-            write_3vector(fmaterial, mat_wrap.specular, mat_wrap.specular, mat_wrap.specular)
-        
+                set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
+            set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
+            set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
+            set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
+            set_value_when_none(material_specularPower, 0.0)
+
             # confirm texture
             tex_wrap = getattr(mat_wrap, "base_color_texture", None)
             if tex_wrap:
@@ -482,24 +513,35 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
                     else:
                         currentTexture = textureList.index(image)
 
-                    write_int(fmaterial, 1)
-                    write_int(fmaterial, currentTexture)
+                    material_useTexture = True
+                    material_texture = currentTexture
                 else:
                     # no texture
-                    write_int(fmaterial, 0)
-                    write_int(fmaterial, 0)
+                    material_useTexture = False
+                    material_texture = 0
             else:
                 # no texture
-                write_int(fmaterial, 0)
-                write_int(fmaterial, 0)
+                material_useTexture = False
+                material_texture = 0
 
         else:
             # no Principled BSDF. write garbage
-            write_3vector(fmaterial, 0.8, 0.8, 0.8)
-            write_3vector(fmaterial, 0.8, 0.8, 0.8)
-            write_3vector(fmaterial, 0.8, 0.8, 0.8)
-            write_int(fmaterial, 0)
-            write_int(fmaterial, 0)
+            set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
+            set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
+            set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
+            set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
+            set_value_when_none(material_specularPower, 0.0)
+
+            material_useTexture = False
+            material_texture = 0
+
+        write_color(fmaterial, material_colAmbient)
+        write_color(fmaterial, material_colDiffuse)
+        write_color(fmaterial, material_colSpecular)
+        write_color(fmaterial, material_colEmissive)
+        write_float(fmaterial, material_specularPower)
+        write_bool(fmaterial, material_useTexture)
+        write_uint32(fmaterial, material_texture)
     
     fmaterial.close()
 
@@ -511,8 +553,8 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     for texture in textureList:
         # write finfo first
         write_string(finfo, texture.name)
-        write_int(finfo, info_bm_type.TEXTURE)
-        write_long(finfo, ftexture.tell())
+        write_uint32(finfo, info_bm_type.TEXTURE)
+        write_uint64(finfo, ftexture.tell())
 
         # confirm internal
         texture_filepath = io_utils.path_reference(texture.filepath, source_dir, tempTextureFolder,
@@ -520,10 +562,10 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         filename = os.path.basename(texture_filepath)
         write_string(ftexture, filename)
         if (is_external_texture(filename)):
-            write_int(ftexture, 1)
+            write_bool(ftexture, True)
         else:
             # copy internal texture, if this file is copied, do not copy it again
-            write_int(ftexture, 0)
+            write_bool(ftexture, False)
             if filename not in existed_texture:
                 shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
                 existed_texture.add(filename)
@@ -604,6 +646,16 @@ def mesh_triangulate(me):
     bm.to_mesh(me)
     bm.free()
 
+def try_get_custom_property(obj, field):
+    try:
+        cache = obj[field]
+    except:
+        return None
+
+def set_value_when_none(obj, newValue):
+    if obj == None:
+        obj = newValue
+
 # ======================================================================================= file io assistant
 
 # import
@@ -654,14 +706,26 @@ def read_face(fs):
 
 def write_string(fs,str):
     count=len(str)
-    write_int(fs,count)
+    write_uint32(fs,count)
     fs.write(str.encode("utf_32_le"))
 
-def write_int(fs,num):
+def write_uint8(fs,num):
+    fs.write(struct.pack("B", num))
+
+def write_uint32(fs,num):
     fs.write(struct.pack("I", num))
 
-def write_long(fs,num):
+def write_uint64(fs,num):
     fs.write(struct.pack("Q", num))
+
+def write_bool(fs,boolean):
+    if boolean:
+        write_uint8(fs, 1)
+    else:
+        write_uint8(fs, 0)
+
+def write_float(fs,fl):
+    fs.write(struct.pack("f", fl))
 
 def write_worldMatrix(fs, matt):
     mat = matt.transposed()
@@ -673,6 +737,9 @@ def write_worldMatrix(fs, matt):
 
 def write_3vector(fs, x, y ,z):
     fs.write(struct.pack("fff", x, y ,z))
+
+def write_color(fs, colors):
+    write_3vector(fs, colors[0], colors[1], colors[2])
 
 def write_2vector(fs, u, v):
     fs.write(struct.pack("ff", u, v))
