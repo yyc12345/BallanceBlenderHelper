@@ -45,7 +45,6 @@ class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
         export_bm(context, self.filepath, self.export_mode, self.export_target)
         return {'FINISHED'}
 
-
 # ========================================== method
 
 bm_current_version = 11
@@ -286,21 +285,19 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
 
         # create real object
         obj = bpy.data.objects.new(item.name, neededMesh)
-        obj.matrix_world = object_worldMatrix
-        obj.hide_viewport = object_isHidden
-        
-
-        if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection != None):
+        if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection is not None):
             forcedCollection.objects.link(obj)
         else:
             collection.objects.link(obj)
+        obj.matrix_world = object_worldMatrix
+        obj.hide_set(object_isHidden)
         
     fobject.close()
     view_layer.update()
 
     tempFolderObj.cleanup()
     
-def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
+def export_bm(context,filepath,export_mode, export_target):
     # ============================================ alloc a temp folder
     tempFolderObj = tempfile.TemporaryDirectory()
     tempFolder = tempFolderObj.name
@@ -338,13 +335,13 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
         # clean no mesh object
         currentMesh = obj.data
-        if currentMesh == None:
+        if currentMesh is None:
             continue
 
         # judge component
         object_isComponent = is_component(obj.name)
         object_isForcedNoComponent = False
-        if (forcedCollection != None) and (obj.name in forcedCollection.objects):
+        if (forcedCollection is not None) and (obj.name in forcedCollection.objects):
             # change it to forced no component
             object_isComponent = False
             object_isForcedNoComponent = True
@@ -363,16 +360,17 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
             meshId = get_component_id(obj.name)
 
         # get visibility
-        object_isHidden = obj.hide_viewport
+        object_isHidden = not obj.visible_get()
 
         # write finfo first
         write_string(finfo, obj.name)
-        write_uint32(finfo, info_bm_type.OBJECT)
+        write_uint8(finfo, info_bm_type.OBJECT)
         write_uint64(finfo, fobject.tell())
 
         # write fobject
         write_bool(fobject, object_isComponent)
         write_bool(fobject, object_isForcedNoComponent)
+        print(object_isHidden)
         write_bool(fobject, object_isHidden)
         write_worldMatrix(fobject, obj.matrix_world)
         write_uint32(fobject, meshId)
@@ -388,7 +386,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
         # write finfo first
         write_string(finfo, mesh.name)
-        write_uint32(finfo, info_bm_type.MESH)
+        write_uint8(finfo, info_bm_type.MESH)
         write_uint64(finfo, fmesh.tell())
 
         # write fmesh
@@ -472,11 +470,10 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     textureSet = set()
     textureList = []
     textureCount = 0
-    # todo: texture filter have duplicated name error. fix it later
     for material in materialList:
         # write finfo first
         write_string(finfo, material.name)
-        write_uint32(finfo, info_bm_type.MATERIAL)
+        write_uint8(finfo, info_bm_type.MATERIAL)
         write_uint64(finfo, fmaterial.tell())
 
         # try get original written data
@@ -491,13 +488,13 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
         if mat_wrap:
             use_mirror = mat_wrap.metallic != 0.0
             if use_mirror:
-                set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
+                material_colAmbient = set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
             else:
-                set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
-            set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
-            set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
-            set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
-            set_value_when_none(material_specularPower, 0.0)
+                material_colAmbient = set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
+            material_colDiffuse = set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
+            material_colSpecular = set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
+            material_colEmissive = set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
+            material_specularPower = set_value_when_none(material_specularPower, 0.0)
 
             # confirm texture
             tex_wrap = getattr(mat_wrap, "base_color_texture", None)
@@ -526,11 +523,11 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
 
         else:
             # no Principled BSDF. write garbage
-            set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
-            set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
-            set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
-            set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
-            set_value_when_none(material_specularPower, 0.0)
+            material_colAmbient = set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
+            material_colDiffuse = set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
+            material_colSpecular = set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
+            material_colEmissive = set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
+            material_specularPower = set_value_when_none(material_specularPower, 0.0)
 
             material_useTexture = False
             material_texture = 0
@@ -553,7 +550,7 @@ def export_bm(context,filepath,export_mode, export_target, no_component_suffix):
     for texture in textureList:
         # write finfo first
         write_string(finfo, texture.name)
-        write_uint32(finfo, info_bm_type.TEXTURE)
+        write_uint8(finfo, info_bm_type.TEXTURE)
         write_uint64(finfo, ftexture.tell())
 
         # confirm internal
@@ -605,7 +602,68 @@ class info_block_helper():
         self.blenderData = None
 
 def load_component(component_id):
-    return None
+    # get file first
+    compName = config.component_list[component_id]
+    selectedFile = os.path.join(
+        os.path.dirname(__file__),
+        'meshes',
+        compName + '.bin'
+    )
+
+    # read file. please note this sector is sync with import_bm's mesh's code. when something change, please change each other.
+    fmesh = open(selectedFile, 'rb')
+
+    # create real mesh, we don't need to consider name. blender will solve duplicated name
+    mesh = bpy.data.meshes.new('mesh_' + compName)
+
+    vList = []
+    vnList = []
+    faceList = []
+    # in first read, store all data into list
+    listCount = read_uint32(fmesh)
+    for i in range(listCount):
+        cache = read_3vector(fmesh)
+        # switch yz
+        vList.append((cache[0], cache[2], cache[1]))
+    listCount = read_uint32(fmesh)
+    for i in range(listCount):
+        cache = read_3vector(fmesh)
+        # switch yz
+        vnList.append((cache[0], cache[2], cache[1]))
+    
+    listCount = read_uint32(fmesh)
+    for i in range(listCount):
+        faceData = read_component_face(fmesh)
+
+        # we need invert triangle sort
+        faceList.append((
+            faceData[4], faceData[5],
+            faceData[2], faceData[3],
+            faceData[0], faceData[1]
+        ))
+
+    # then, we need add correspond count for vertices
+    mesh.vertices.add(len(vList))
+    mesh.loops.add(len(faceList)*3)  # triangle face confirm
+    mesh.polygons.add(len(faceList))
+    mesh.create_normals_split()
+
+    # add vertices data
+    mesh.vertices.foreach_set("co", unpack_list(vList))
+    mesh.loops.foreach_set("vertex_index", unpack_list(flat_component_vertices_index(faceList)))
+    mesh.loops.foreach_set("normal", unpack_list(flat_component_vertices_normal(faceList, vnList)))
+    for i in range(len(faceList)):
+        mesh.polygons[i].loop_start = i * 3
+        mesh.polygons[i].loop_total = 3
+
+        mesh.polygons[i].use_smooth = True
+    
+    mesh.validate(clean_customdata=False)
+    mesh.update(calc_edges=False, calc_edges_loose=False)
+
+    fmesh.close()
+
+    return mesh
 
 def flat_vertices_index(faceList):
     for item in faceList:
@@ -625,13 +683,28 @@ def flat_vertices_uv(faceList, vtList):
         yield vtList[item[4]]
         yield vtList[item[7]]
 
+def flat_component_vertices_index(faceList):
+    for item in faceList:
+        yield (item[0], )
+        yield (item[2], )
+        yield (item[4], )
+
+def flat_component_vertices_normal(faceList, vnList):
+    for item in faceList:
+        yield vnList[item[1]]
+        yield vnList[item[3]]
+        yield vnList[item[5]]
+
 # export
 
 def is_component(name):
     return get_component_id(name) != -1
 
 def get_component_id(name):
-    return -1 # todo: finish this, -1 mean not a component
+    for ind, comp in enumerate(config.component_list):
+        if name.startswith(comp):
+            return ind
+    return -1
 
 def is_external_texture(name):
     if name in config.external_texture_list:
@@ -648,13 +721,15 @@ def mesh_triangulate(me):
 
 def try_get_custom_property(obj, field):
     try:
-        cache = obj[field]
+        return obj[field]
     except:
         return None
 
 def set_value_when_none(obj, newValue):
-    if obj == None:
-        obj = newValue
+    if obj is None:
+        return newValue
+    else:
+        return obj
 
 # ======================================================================================= file io assistant
 
@@ -701,6 +776,9 @@ def read_2vector(fs):
 
 def read_face(fs):
     return struct.unpack("IIIIIIIII", fs.read(4*9))
+
+def read_component_face(fs):
+    return struct.unpack("IIIIII", fs.read(4*6))
 
 # export
 

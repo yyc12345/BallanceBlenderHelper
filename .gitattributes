@@ -1,0 +1,2 @@
+# our generated mesh should be save as binary
+*.bin binary
