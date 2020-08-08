@@ -2,10 +2,13 @@ bl_info={
 	"name":"Ballance Blender Plugin",
 	"description":"Ballance mapping tools for Blender",
 	"author":"yyc12345",
-	"version":(0,1),
+	"version":(1,0),
 	"blender":(2,83,0),
 	"category":"Object",
-	"support":"TESTING"
+	"support":"TESTING",
+    "warning": "Please read document before using this plugin.",
+    "wiki_url": "https://github.com/yyc12345/BallanceBlenderHelper",
+    "tracker_url": "https://github.com/yyc12345/BallanceBlenderHelper/issues"
 }
 
 # ============================================= import system
