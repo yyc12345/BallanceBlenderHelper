@@ -64,235 +64,231 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
         zipObj.extractall(tempFolder)
 
     # index.bm
-    findex = open(os.path.join(tempFolder, "index.bm"), "rb")
-    # judge version first
-    gotten_version = read_uint32(findex)
-    if (gotten_version != bm_current_version):
-        utils.ShowMessageBox("Unsupported BM spec. Expect: {} Gotten: {}".format(bm_current_version, gotten_version), "Unsupported BM spec", 'WARNING')
-        findex.close()
-        tempFolderObj.cleanup()
-        return
     objectList = []
     meshList = []
     materialList = []
     textureList = []
-    while len(peek_stream(findex)) != 0:
-        index_name = read_string(findex)
-        index_type = read_uint8(findex)
-        index_offset = read_uint64(findex)
-        blockCache = info_block_helper(index_name, index_offset)
-        if index_type == info_bm_type.OBJECT:
-            objectList.append(blockCache)
-        elif index_type == info_bm_type.MESH:
-            meshList.append(blockCache)
-        elif index_type == info_bm_type.MATERIAL:
-            materialList.append(blockCache)
-        elif index_type == info_bm_type.TEXTURE:
-            textureList.append(blockCache)
-        else:
-            pass
-    findex.close()
+    with open(os.path.join(tempFolder, "index.bm"), "rb") as findex:
+        # judge version first
+        gotten_version = read_uint32(findex)
+        if (gotten_version != bm_current_version):
+            utils.ShowMessageBox("Unsupported BM spec. Expect: {} Gotten: {}".format(bm_current_version, gotten_version), "Unsupported BM spec", 'WARNING')
+            findex.close()
+            tempFolderObj.cleanup()
+            return
+
+        while len(peek_stream(findex)) != 0:
+            index_name = read_string(findex)
+            index_type = read_uint8(findex)
+            index_offset = read_uint64(findex)
+            blockCache = info_block_helper(index_name, index_offset)
+            if index_type == info_bm_type.OBJECT:
+                objectList.append(blockCache)
+            elif index_type == info_bm_type.MESH:
+                meshList.append(blockCache)
+            elif index_type == info_bm_type.MATERIAL:
+                materialList.append(blockCache)
+            elif index_type == info_bm_type.TEXTURE:
+                textureList.append(blockCache)
+            else:
+                pass
+
 
     # texture.bm
-    ftexture = open(os.path.join(tempFolder, "texture.bm"), "rb")
-    for item in textureList:
-        ftexture.seek(item.offset, os.SEEK_SET)
-        texture_filename = read_string(ftexture)
-        texture_isExternal = read_bool(ftexture)
-        if texture_isExternal:
-            txur = load_image(texture_filename, externalTextureFolder)
-            item.blenderData = txur
-        else:
-            # not external. copy temp file into blender temp. then use it.
-            # try copy. if fail, don't need to do more
-            try:
-                shutil.copy(os.path.join(tempTextureFolder, texture_filename), os.path.join(blenderTempTextureFolder, texture_filename))
-            except:
-                pass
-            txur = load_image(texture_filename, blenderTempTextureFolder)
-            item.blenderData = txur
-        txur.name = item.name
-
-    ftexture.close()
+    with open(os.path.join(tempFolder, "texture.bm"), "rb") as ftexture:
+        for item in textureList:
+            ftexture.seek(item.offset, os.SEEK_SET)
+            texture_filename = read_string(ftexture)
+            texture_isExternal = read_bool(ftexture)
+            if texture_isExternal:
+                txur = load_image(texture_filename, externalTextureFolder)
+                item.blenderData = txur
+            else:
+                # not external. copy temp file into blender temp. then use it.
+                # try copy. if fail, don't need to do more
+                try:
+                    shutil.copy(os.path.join(tempTextureFolder, texture_filename), os.path.join(blenderTempTextureFolder, texture_filename))
+                except:
+                    pass
+                txur = load_image(texture_filename, blenderTempTextureFolder)
+                item.blenderData = txur
+            txur.name = item.name
 
     # material.bm
-    fmaterial = open(os.path.join(tempFolder, "material.bm"), "rb")
-    for item in materialList:
-        fmaterial.seek(item.offset, os.SEEK_SET)
+    with open(os.path.join(tempFolder, "material.bm"), "rb") as fmaterial:
+        for item in materialList:
+            fmaterial.seek(item.offset, os.SEEK_SET)
 
-        # read data
-        material_colAmbient = read_3vector(fmaterial)
-        material_colDiffuse = read_3vector(fmaterial)
-        material_colSpecular = read_3vector(fmaterial)
-        material_colEmissive = read_3vector(fmaterial)
-        material_specularPower = read_float(fmaterial)
-        material_useTexture = read_bool(fmaterial)
-        material_texture = read_uint32(fmaterial)
+            # read data
+            material_colAmbient = read_3vector(fmaterial)
+            material_colDiffuse = read_3vector(fmaterial)
+            material_colSpecular = read_3vector(fmaterial)
+            material_colEmissive = read_3vector(fmaterial)
+            material_specularPower = read_float(fmaterial)
+            material_useTexture = read_bool(fmaterial)
+            material_texture = read_uint32(fmaterial)
 
-        # create basic material
-        m = bpy.data.materials.new(item.name)
-        m.use_nodes=True
-        for node in m.node_tree.nodes:
-            m.node_tree.nodes.remove(node)
-        bnode=m.node_tree.nodes.new(type="ShaderNodeBsdfPrincipled")
-        mnode=m.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
-        m.node_tree.links.new(bnode.outputs[0],mnode.inputs[0])
+            # create basic material
+            m = bpy.data.materials.new(item.name)
+            m.use_nodes=True
+            for node in m.node_tree.nodes:
+                m.node_tree.nodes.remove(node)
+            bnode=m.node_tree.nodes.new(type="ShaderNodeBsdfPrincipled")
+            mnode=m.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
+            m.node_tree.links.new(bnode.outputs[0],mnode.inputs[0])
 
-        m.metallic = sum(material_colAmbient) / 3
-        m.diffuse_color = [i for i in material_colDiffuse] + [1]
-        m.specular_color = material_colSpecular
-        m.specular_intensity = material_specularPower
+            m.metallic = sum(material_colAmbient) / 3
+            m.diffuse_color = [i for i in material_colDiffuse] + [1]
+            m.specular_color = material_colSpecular
+            m.specular_intensity = material_specularPower
 
-        # create a texture
-        if material_useTexture:
-            inode=m.node_tree.nodes.new(type="ShaderNodeTexImage")
-            inode.image=textureList[material_texture].blenderData
-            m.node_tree.links.new(inode.outputs[0],bnode.inputs[0])
+            # create a texture
+            if material_useTexture:
+                inode=m.node_tree.nodes.new(type="ShaderNodeTexImage")
+                inode.image=textureList[material_texture].blenderData
+                m.node_tree.links.new(inode.outputs[0],bnode.inputs[0])
 
-        # write custom property
-        m['virtools-ambient'] = material_colAmbient
-        m['virtools-diffuse'] = material_colDiffuse
-        m['virtools-specular'] = material_colSpecular
-        m['virtools-emissive'] = material_colEmissive
-        m['virtools-power'] = material_specularPower
+            # write custom property
+            m['virtools-ambient'] = material_colAmbient
+            m['virtools-diffuse'] = material_colDiffuse
+            m['virtools-specular'] = material_colSpecular
+            m['virtools-emissive'] = material_colEmissive
+            m['virtools-power'] = material_specularPower
 
-        item.blenderData = m
-        
-    fmaterial.close()
+            item.blenderData = m
+
 
     # mesh.bm
-    fmesh = open(os.path.join(tempFolder, "mesh.bm"), "rb")
-    vList=[]
-    vtList=[]
-    vnList=[]
-    faceList=[]
-    materialSolt = []
-    for item in meshList:
-        fmesh.seek(item.offset, os.SEEK_SET)
+    with open(os.path.join(tempFolder, "mesh.bm"), "rb") as fmesh:
+        vList=[]
+        vtList=[]
+        vnList=[]
+        faceList=[]
+        materialSolt = []
+        for item in meshList:
+            fmesh.seek(item.offset, os.SEEK_SET)
 
-        # create real mesh
-        mesh = bpy.data.meshes.new(item.name)
+            # create real mesh
+            mesh = bpy.data.meshes.new(item.name)
 
-        vList.clear()
-        vtList.clear()
-        vnList.clear()
-        faceList.clear()
-        materialSolt.clear()
-        # in first read, store all data into list
-        listCount = read_uint32(fmesh)
-        for i in range(listCount):
-            cache = read_3vector(fmesh)
-            # switch yz
-            vList.append((cache[0], cache[2], cache[1]))
-        listCount = read_uint32(fmesh)
-        for i in range(listCount):
-            cache = read_2vector(fmesh)
-            # reverse v
-            vtList.append((cache[0], -cache[1]))
-        listCount = read_uint32(fmesh)
-        for i in range(listCount):
-            cache = read_3vector(fmesh)
-            # switch yz
-            vnList.append((cache[0], cache[2], cache[1]))
-        
-        listCount = read_uint32(fmesh)
-        for i in range(listCount):
-            faceData = read_face(fmesh)
-            mesh_useMaterial = read_bool(fmesh)
-            mesh_materialIndex = read_uint32(fmesh)
+            vList.clear()
+            vtList.clear()
+            vnList.clear()
+            faceList.clear()
+            materialSolt.clear()
+            # in first read, store all data into list
+            listCount = read_uint32(fmesh)
+            for i in range(listCount):
+                cache = read_3vector(fmesh)
+                # switch yz
+                vList.append((cache[0], cache[2], cache[1]))
+            listCount = read_uint32(fmesh)
+            for i in range(listCount):
+                cache = read_2vector(fmesh)
+                # reverse v
+                vtList.append((cache[0], -cache[1]))
+            listCount = read_uint32(fmesh)
+            for i in range(listCount):
+                cache = read_3vector(fmesh)
+                # switch yz
+                vnList.append((cache[0], cache[2], cache[1]))
+            
+            listCount = read_uint32(fmesh)
+            for i in range(listCount):
+                faceData = read_face(fmesh)
+                mesh_useMaterial = read_bool(fmesh)
+                mesh_materialIndex = read_uint32(fmesh)
 
-            if mesh_useMaterial:
-                neededMaterial = materialList[mesh_materialIndex].blenderData
-                if neededMaterial in materialSolt:
-                    neededIndex = materialSolt.index(neededMaterial)
+                if mesh_useMaterial:
+                    neededMaterial = materialList[mesh_materialIndex].blenderData
+                    if neededMaterial in materialSolt:
+                        neededIndex = materialSolt.index(neededMaterial)
+                    else:
+                        neededIndex = len(materialSolt)
+                        materialSolt.append(neededMaterial)
                 else:
-                    neededIndex = len(materialSolt)
-                    materialSolt.append(neededMaterial)
-            else:
-                neededIndex = -1
+                    neededIndex = -1
 
-            # we need invert triangle sort
-            faceList.append((
-                faceData[6], faceData[7], faceData[8],
-                faceData[3], faceData[4], faceData[5],
-                faceData[0], faceData[1], faceData[2],
-                neededIndex
-            ))
+                # we need invert triangle sort
+                faceList.append((
+                    faceData[6], faceData[7], faceData[8],
+                    faceData[3], faceData[4], faceData[5],
+                    faceData[0], faceData[1], faceData[2],
+                    neededIndex
+                ))
 
-        # and then we need add material solt for this mesh
-        for mat in materialSolt:
-            mesh.materials.append(mat)
+            # and then we need add material solt for this mesh
+            for mat in materialSolt:
+                mesh.materials.append(mat)
 
-        # then, we need add correspond count for vertices
-        mesh.vertices.add(len(vList))
-        mesh.loops.add(len(faceList)*3)  # triangle face confirm
-        mesh.polygons.add(len(faceList))
-        mesh.uv_layers.new(do_init=False)
-        mesh.create_normals_split()
+            # then, we need add correspond count for vertices
+            mesh.vertices.add(len(vList))
+            mesh.loops.add(len(faceList)*3)  # triangle face confirm
+            mesh.polygons.add(len(faceList))
+            mesh.uv_layers.new(do_init=False)
+            mesh.create_normals_split()
 
-        # add vertices data
-        mesh.vertices.foreach_set("co", unpack_list(vList))
-        mesh.loops.foreach_set("vertex_index", unpack_list(flat_vertices_index(faceList)))
-        mesh.loops.foreach_set("normal", unpack_list(flat_vertices_normal(faceList, vnList)))
-        mesh.uv_layers[0].data.foreach_set("uv", unpack_list(flat_vertices_uv(faceList, vtList)))
-        for i in range(len(faceList)):
-            mesh.polygons[i].loop_start = i * 3
-            mesh.polygons[i].loop_total = 3
-            if faceList[i][9] != -1:
-                mesh.polygons[i].material_index = faceList[i][9]
+            # add vertices data
+            mesh.vertices.foreach_set("co", unpack_list(vList))
+            mesh.loops.foreach_set("vertex_index", unpack_list(flat_vertices_index(faceList)))
+            mesh.loops.foreach_set("normal", unpack_list(flat_vertices_normal(faceList, vnList)))
+            mesh.uv_layers[0].data.foreach_set("uv", unpack_list(flat_vertices_uv(faceList, vtList)))
+            for i in range(len(faceList)):
+                mesh.polygons[i].loop_start = i * 3
+                mesh.polygons[i].loop_total = 3
+                if faceList[i][9] != -1:
+                    mesh.polygons[i].material_index = faceList[i][9]
 
-            mesh.polygons[i].use_smooth = True
-        
-        mesh.validate(clean_customdata=False)
-        mesh.update(calc_edges=False, calc_edges_loose=False)
+                mesh.polygons[i].use_smooth = True
+            
+            mesh.validate(clean_customdata=False)
+            mesh.update(calc_edges=False, calc_edges_loose=False)
 
-        # add into item using
-        item.blenderData = mesh
-        
-    fmesh.close()
+            # add into item using
+            item.blenderData = mesh
+            
 
     # object
-    fobject = open(os.path.join(tempFolder, "object.bm"), "rb")
+    with open(os.path.join(tempFolder, "object.bm"), "rb") as fobject:
 
-    # we need get needed collection first
-    view_layer = context.view_layer
-    collection = view_layer.active_layer_collection.collection
-    if prefs.no_component_collection == "":
-        forcedCollection = None
-    else:
-        try:
-            forcedCollection = bpy.data.collections[prefs.no_component_collection]
-        except:
-            forcedCollection = bpy.data.collections.new(prefs.no_component_collection)
-            view_layer.active_layer_collection.collection.children.link(forcedCollection)
-
-    # start process it
-    for item in objectList:
-        fobject.seek(item.offset, os.SEEK_SET)
-
-        # read data
-        object_isComponent = read_bool(fobject)
-        object_isForcedNoComponent = read_bool(fobject)
-        object_isHidden = read_bool(fobject)
-        object_worldMatrix = read_worldMaterix(fobject)
-        object_meshIndex = read_uint32(fobject)
-
-        # got mesh first
-        if object_isComponent:
-            neededMesh = load_component(object_meshIndex)
+        # we need get needed collection first
+        view_layer = context.view_layer
+        collection = view_layer.active_layer_collection.collection
+        if prefs.no_component_collection == "":
+            forcedCollection = None
         else:
-            neededMesh = meshList[object_meshIndex].blenderData
+            try:
+                forcedCollection = bpy.data.collections[prefs.no_component_collection]
+            except:
+                forcedCollection = bpy.data.collections.new(prefs.no_component_collection)
+                view_layer.active_layer_collection.collection.children.link(forcedCollection)
 
-        # create real object
-        obj = bpy.data.objects.new(item.name, neededMesh)
-        if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection is not None):
-            forcedCollection.objects.link(obj)
-        else:
-            collection.objects.link(obj)
-        obj.matrix_world = object_worldMatrix
-        obj.hide_set(object_isHidden)
-        
-    fobject.close()
+        # start process it
+        for item in objectList:
+            fobject.seek(item.offset, os.SEEK_SET)
+
+            # read data
+            object_isComponent = read_bool(fobject)
+            object_isForcedNoComponent = read_bool(fobject)
+            object_isHidden = read_bool(fobject)
+            object_worldMatrix = read_worldMaterix(fobject)
+            object_meshIndex = read_uint32(fobject)
+
+            # got mesh first
+            if object_isComponent:
+                neededMesh = load_component(object_meshIndex)
+            else:
+                neededMesh = meshList[object_meshIndex].blenderData
+
+            # create real object
+            obj = bpy.data.objects.new(item.name, neededMesh)
+            if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection is not None):
+                forcedCollection.objects.link(obj)
+            else:
+                collection.objects.link(obj)
+            obj.matrix_world = object_worldMatrix
+            obj.hide_set(object_isHidden)
+
     view_layer.update()
 
     tempFolderObj.cleanup()
@@ -320,257 +316,252 @@ def export_bm(context,filepath,export_mode, export_target):
         forcedCollection = None
    
     # ============================================ export
-    finfo = open(os.path.join(tempFolder, "index.bm"), "wb")
-    write_uint32(finfo, bm_current_version)
-    
-    # ====================== export object
-    fobject = open(os.path.join(tempFolder, "object.bm"), "wb")
-    meshSet = set()
-    meshList = []
-    meshCount = 0
-    for obj in objectList:
-        # only export mesh object
-        if obj.type != 'MESH':
-            continue
+    with open(os.path.join(tempFolder, "index.bm"), "wb") as finfo:
+        write_uint32(finfo, bm_current_version)
+        
+        # ====================== export object
+        meshSet = set()
+        meshList = []
+        meshCount = 0        
+        with open(os.path.join(tempFolder, "object.bm"), "wb") as fobject:
+            for obj in objectList:
+                # only export mesh object
+                if obj.type != 'MESH':
+                    continue
 
-        # clean no mesh object
-        currentMesh = obj.data
-        if currentMesh is None:
-            continue
+                # clean no mesh object
+                currentMesh = obj.data
+                if currentMesh is None:
+                    continue
 
-        # judge component
-        object_isComponent = is_component(obj.name)
-        object_isForcedNoComponent = False
-        if (forcedCollection is not None) and (obj.name in forcedCollection.objects):
-            # change it to forced no component
-            object_isComponent = False
-            object_isForcedNoComponent = True
+                # judge component
+                object_isComponent = is_component(obj.name)
+                object_isForcedNoComponent = False
+                if (forcedCollection is not None) and (obj.name in forcedCollection.objects):
+                    # change it to forced no component
+                    object_isComponent = False
+                    object_isForcedNoComponent = True
 
-        # triangle first and then group
-        if not object_isComponent:
-            if currentMesh not in meshSet:
-                mesh_triangulate(currentMesh)
-                meshSet.add(currentMesh)
-                meshList.append(currentMesh)
-                meshId = meshCount
-                meshCount += 1
-            else:
-                meshId = meshList.index(currentMesh)
-        else:
-            meshId = get_component_id(obj.name)
-
-        # get visibility
-        object_isHidden = not obj.visible_get()
-
-        # write finfo first
-        write_string(finfo, obj.name)
-        write_uint8(finfo, info_bm_type.OBJECT)
-        write_uint64(finfo, fobject.tell())
-
-        # write fobject
-        write_bool(fobject, object_isComponent)
-        write_bool(fobject, object_isForcedNoComponent)
-        print(object_isHidden)
-        write_bool(fobject, object_isHidden)
-        write_worldMatrix(fobject, obj.matrix_world)
-        write_uint32(fobject, meshId)
-
-    fobject.close()
-
-    # ====================== export mesh
-    fmesh = open(os.path.join(tempFolder, "mesh.bm"), "wb")
-    materialSet = set()
-    materialList = []
-    for mesh in meshList:
-        mesh.calc_normals_split()
-
-        # write finfo first
-        write_string(finfo, mesh.name)
-        write_uint8(finfo, info_bm_type.MESH)
-        write_uint64(finfo, fmesh.tell())
-
-        # write fmesh
-        # vertices
-        vecList = mesh.vertices[:]
-        write_uint32(fmesh, len(vecList))
-        for vec in vecList:
-            #swap yz
-            write_3vector(fmesh,vec.co[0],vec.co[2],vec.co[1])
-
-        # uv
-        face_index_pairs = [(face, index) for index, face in enumerate(mesh.polygons)]
-        uv_layer = mesh.uv_layers.active.data[:]
-        write_uint32(fmesh, len(face_index_pairs) * 3)
-        for f, f_index in face_index_pairs:
-            # it should be triangle face, otherwise throw a error
-            if (f.loop_total != 3):
-                raise Exception("Not a triangle", f.poly.loop_total)
-
-            for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
-                uv = uv_layer[loop_index].uv
-                # reverse v
-                write_2vector(fmesh, uv[0], -uv[1])
-
-        # normals
-        write_uint32(fmesh, len(face_index_pairs) * 3)
-        for f, f_index in face_index_pairs:
-            # no need to check triangle again
-            for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
-                nml = mesh.loops[loop_index].normal
-                # swap yz
-                write_3vector(fmesh, nml[0], nml[2], nml[1])
-
-        # face
-        # get material first
-        currentMat = mesh.materials[:]
-        noMaterial = len(currentMat) == 0
-        for mat in currentMat:
-            if mat not in materialSet:
-                materialSet.add(mat)
-                materialList.append(mat)
-
-        write_uint32(fmesh, len(face_index_pairs))
-        vtIndex = []
-        vnIndex = []
-        vIndex = []
-        for f, f_index in face_index_pairs:
-            # confirm material use
-            if noMaterial:
-                usedMat = 0
-            else:
-                usedMat = materialList.index(currentMat[f.material_index])
-
-            # export face
-            vtIndex.clear()
-            vnIndex.clear()
-            vIndex.clear()
-
-            counter = 0
-            for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
-                vIndex.append(mesh.loops[loop_index].vertex_index)
-                vnIndex.append(f_index * 3 + counter)
-                vtIndex.append(f_index * 3 + counter)
-                counter += 1
-            # reverse vertices sort
-            write_face(fmesh,
-            vIndex[2], vtIndex[2], vnIndex[2],
-            vIndex[1], vtIndex[1], vnIndex[1],
-            vIndex[0], vtIndex[0], vnIndex[0])
-
-            # set used material
-            write_bool(fmesh, not noMaterial)
-            write_uint32(fmesh, usedMat)
-
-        mesh.free_normals_split()
-
-    fmesh.close()
-
-    # ====================== export material
-    fmaterial = open(os.path.join(tempFolder, "material.bm"), "wb")
-    textureSet = set()
-    textureList = []
-    textureCount = 0
-    for material in materialList:
-        # write finfo first
-        write_string(finfo, material.name)
-        write_uint8(finfo, info_bm_type.MATERIAL)
-        write_uint64(finfo, fmaterial.tell())
-
-        # try get original written data
-        material_colAmbient = try_get_custom_property(material, 'virtools-ambient')
-        material_colDiffuse = try_get_custom_property(material, 'virtools-diffuse')
-        material_colSpecular = try_get_custom_property(material, 'virtools-specular')
-        material_colEmissive = try_get_custom_property(material, 'virtools-emissive')
-        material_specularPower = try_get_custom_property(material, 'virtools-power')
-
-        # get basic color
-        mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
-        if mat_wrap:
-            use_mirror = mat_wrap.metallic != 0.0
-            if use_mirror:
-                material_colAmbient = set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
-            else:
-                material_colAmbient = set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
-            material_colDiffuse = set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
-            material_colSpecular = set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
-            material_colEmissive = set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
-            material_specularPower = set_value_when_none(material_specularPower, 0.0)
-
-            # confirm texture
-            tex_wrap = getattr(mat_wrap, "base_color_texture", None)
-            if tex_wrap:
-                image = tex_wrap.image
-                if image:
-                    # add into texture list
-                    if image not in textureSet:
-                        textureSet.add(image)
-                        textureList.append(image)
-                        currentTexture = textureCount
-                        textureCount += 1
+                # triangle first and then group
+                if not object_isComponent:
+                    if currentMesh not in meshSet:
+                        mesh_triangulate(currentMesh)
+                        meshSet.add(currentMesh)
+                        meshList.append(currentMesh)
+                        meshId = meshCount
+                        meshCount += 1
                     else:
-                        currentTexture = textureList.index(image)
-
-                    material_useTexture = True
-                    material_texture = currentTexture
+                        meshId = meshList.index(currentMesh)
                 else:
-                    # no texture
+                    meshId = get_component_id(obj.name)
+
+                # get visibility
+                object_isHidden = not obj.visible_get()
+
+                # write finfo first
+                write_string(finfo, obj.name)
+                write_uint8(finfo, info_bm_type.OBJECT)
+                write_uint64(finfo, fobject.tell())
+
+                # write fobject
+                write_bool(fobject, object_isComponent)
+                write_bool(fobject, object_isForcedNoComponent)
+                print(object_isHidden)
+                write_bool(fobject, object_isHidden)
+                write_worldMatrix(fobject, obj.matrix_world)
+                write_uint32(fobject, meshId)
+
+        # ====================== export mesh
+        materialSet = set()
+        materialList = []        
+        with open(os.path.join(tempFolder, "mesh.bm"), "wb") as fmesh:
+            for mesh in meshList:
+                mesh.calc_normals_split()
+
+                # write finfo first
+                write_string(finfo, mesh.name)
+                write_uint8(finfo, info_bm_type.MESH)
+                write_uint64(finfo, fmesh.tell())
+
+                # write fmesh
+                # vertices
+                vecList = mesh.vertices[:]
+                write_uint32(fmesh, len(vecList))
+                for vec in vecList:
+                    #swap yz
+                    write_3vector(fmesh,vec.co[0],vec.co[2],vec.co[1])
+
+                # uv
+                face_index_pairs = [(face, index) for index, face in enumerate(mesh.polygons)]
+                write_uint32(fmesh, len(face_index_pairs) * 3)
+                if mesh.uv_layers.active is not None:
+                    uv_layer = mesh.uv_layers.active.data[:]
+                    for f, f_index in face_index_pairs:
+                        # it should be triangle face, otherwise throw a error
+                        if (f.loop_total != 3):
+                            raise Exception("Not a triangle", f.poly.loop_total)
+
+                        for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
+                            uv = uv_layer[loop_index].uv
+                            # reverse v
+                            write_2vector(fmesh, uv[0], -uv[1])
+                else:
+                    # no uv data. write garbage
+                    for i in range(len(face_index_pairs) * 3):
+                        write_2vector(fmesh, 0.0, 0.0)
+
+                # normals
+                write_uint32(fmesh, len(face_index_pairs) * 3)
+                for f, f_index in face_index_pairs:
+                    # no need to check triangle again
+                    for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
+                        nml = mesh.loops[loop_index].normal
+                        # swap yz
+                        write_3vector(fmesh, nml[0], nml[2], nml[1])
+
+                # face
+                # get material first
+                currentMat = mesh.materials[:]
+                noMaterial = len(currentMat) == 0
+                for mat in currentMat:
+                    if mat not in materialSet:
+                        materialSet.add(mat)
+                        materialList.append(mat)
+
+                write_uint32(fmesh, len(face_index_pairs))
+                vtIndex = []
+                vnIndex = []
+                vIndex = []
+                for f, f_index in face_index_pairs:
+                    # confirm material use
+                    if noMaterial:
+                        usedMat = 0
+                    else:
+                        usedMat = materialList.index(currentMat[f.material_index])
+
+                    # export face
+                    vtIndex.clear()
+                    vnIndex.clear()
+                    vIndex.clear()
+
+                    counter = 0
+                    for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
+                        vIndex.append(mesh.loops[loop_index].vertex_index)
+                        vnIndex.append(f_index * 3 + counter)
+                        vtIndex.append(f_index * 3 + counter)
+                        counter += 1
+                    # reverse vertices sort
+                    write_face(fmesh,
+                    vIndex[2], vtIndex[2], vnIndex[2],
+                    vIndex[1], vtIndex[1], vnIndex[1],
+                    vIndex[0], vtIndex[0], vnIndex[0])
+
+                    # set used material
+                    write_bool(fmesh, not noMaterial)
+                    write_uint32(fmesh, usedMat)
+
+                mesh.free_normals_split()
+
+        # ====================== export material
+        textureSet = set()
+        textureList = []
+        textureCount = 0        
+        with open(os.path.join(tempFolder, "material.bm"), "wb") as fmaterial:
+            for material in materialList:
+                # write finfo first
+                write_string(finfo, material.name)
+                write_uint8(finfo, info_bm_type.MATERIAL)
+                write_uint64(finfo, fmaterial.tell())
+
+                # try get original written data
+                material_colAmbient = try_get_custom_property(material, 'virtools-ambient')
+                material_colDiffuse = try_get_custom_property(material, 'virtools-diffuse')
+                material_colSpecular = try_get_custom_property(material, 'virtools-specular')
+                material_colEmissive = try_get_custom_property(material, 'virtools-emissive')
+                material_specularPower = try_get_custom_property(material, 'virtools-power')
+
+                # get basic color
+                mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
+                if mat_wrap:
+                    use_mirror = mat_wrap.metallic != 0.0
+                    if use_mirror:
+                        material_colAmbient = set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
+                    else:
+                        material_colAmbient = set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
+                    material_colDiffuse = set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
+                    material_colSpecular = set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
+                    material_colEmissive = set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
+                    material_specularPower = set_value_when_none(material_specularPower, 0.0)
+
+                    # confirm texture
+                    tex_wrap = getattr(mat_wrap, "base_color_texture", None)
+                    if tex_wrap:
+                        image = tex_wrap.image
+                        if image:
+                            # add into texture list
+                            if image not in textureSet:
+                                textureSet.add(image)
+                                textureList.append(image)
+                                currentTexture = textureCount
+                                textureCount += 1
+                            else:
+                                currentTexture = textureList.index(image)
+
+                            material_useTexture = True
+                            material_texture = currentTexture
+                        else:
+                            # no texture
+                            material_useTexture = False
+                            material_texture = 0
+                    else:
+                        # no texture
+                        material_useTexture = False
+                        material_texture = 0
+
+                else:
+                    # no Principled BSDF. write garbage
+                    material_colAmbient = set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
+                    material_colDiffuse = set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
+                    material_colSpecular = set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
+                    material_colEmissive = set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
+                    material_specularPower = set_value_when_none(material_specularPower, 0.0)
+
                     material_useTexture = False
                     material_texture = 0
-            else:
-                # no texture
-                material_useTexture = False
-                material_texture = 0
 
-        else:
-            # no Principled BSDF. write garbage
-            material_colAmbient = set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
-            material_colDiffuse = set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
-            material_colSpecular = set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
-            material_colEmissive = set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
-            material_specularPower = set_value_when_none(material_specularPower, 0.0)
+                write_color(fmaterial, material_colAmbient)
+                write_color(fmaterial, material_colDiffuse)
+                write_color(fmaterial, material_colSpecular)
+                write_color(fmaterial, material_colEmissive)
+                write_float(fmaterial, material_specularPower)
+                write_bool(fmaterial, material_useTexture)
+                write_uint32(fmaterial, material_texture)
+            
 
-            material_useTexture = False
-            material_texture = 0
+        # ====================== export texture
+        source_dir = os.path.dirname(bpy.data.filepath)
+        existed_texture = set()        
+        with open(os.path.join(tempFolder, "texture.bm"), "wb") as ftexture:
+            for texture in textureList:
+                # write finfo first
+                write_string(finfo, texture.name)
+                write_uint8(finfo, info_bm_type.TEXTURE)
+                write_uint64(finfo, ftexture.tell())
 
-        write_color(fmaterial, material_colAmbient)
-        write_color(fmaterial, material_colDiffuse)
-        write_color(fmaterial, material_colSpecular)
-        write_color(fmaterial, material_colEmissive)
-        write_float(fmaterial, material_specularPower)
-        write_bool(fmaterial, material_useTexture)
-        write_uint32(fmaterial, material_texture)
-    
-    fmaterial.close()
+                # confirm internal
+                texture_filepath = io_utils.path_reference(texture.filepath, source_dir, tempTextureFolder,
+                                                            'ABSOLUTE', "", None, texture.library)
+                filename = os.path.basename(texture_filepath)
+                write_string(ftexture, filename)
+                if (is_external_texture(filename)):
+                    write_bool(ftexture, True)
+                else:
+                    # copy internal texture, if this file is copied, do not copy it again
+                    write_bool(ftexture, False)
+                    if filename not in existed_texture:
+                        shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
+                        existed_texture.add(filename)
 
-    # ====================== export texture
-    ftexture = open(os.path.join(tempFolder, "texture.bm"), "wb")
-    source_dir = os.path.dirname(bpy.data.filepath)
-    existed_texture = set()
-    
-    for texture in textureList:
-        # write finfo first
-        write_string(finfo, texture.name)
-        write_uint8(finfo, info_bm_type.TEXTURE)
-        write_uint64(finfo, ftexture.tell())
-
-        # confirm internal
-        texture_filepath = io_utils.path_reference(texture.filepath, source_dir, tempTextureFolder,
-                                                       'ABSOLUTE', "", None, texture.library)
-        filename = os.path.basename(texture_filepath)
-        write_string(ftexture, filename)
-        if (is_external_texture(filename)):
-            write_bool(ftexture, True)
-        else:
-            # copy internal texture, if this file is copied, do not copy it again
-            write_bool(ftexture, False)
-            if filename not in existed_texture:
-                shutil.copy(texture_filepath, os.path.join(tempTextureFolder, filename))
-                existed_texture.add(filename)
-
-    ftexture.close()
-
-    # close info fs
-    finfo.close()
 
     # ============================================ save zip and clean up folder
     if os.path.isfile(filepath):
