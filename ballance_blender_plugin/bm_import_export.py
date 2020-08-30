@@ -366,7 +366,6 @@ def export_bm(context,filepath,export_mode, export_target):
                 # write fobject
                 write_bool(fobject, object_isComponent)
                 write_bool(fobject, object_isForcedNoComponent)
-                print(object_isHidden)
                 write_bool(fobject, object_isHidden)
                 write_worldMatrix(fobject, obj.matrix_world)
                 write_uint32(fobject, meshId)
