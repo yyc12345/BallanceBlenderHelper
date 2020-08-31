@@ -18,17 +18,19 @@ if "bpy" in locals():
     import importlib
     if "bm_import_export" in locals():
         importlib.reload(bm_import_export)
-    if "floor_rail_uv" in locals():
-        importlib.reload(floor_rail_uv)
+    if "rail_uv" in locals():
+        importlib.reload(rail_uv)
     if "utils" in locals():
         importlib.reload(utils)
     if "config" in locals():
         importlib.reload(config)
     if "preferences" in locals():
         importlib.reload(preferences)
-    if "super_align" in locals():
-        importlib.reload(super_align)
-from . import config, utils, bm_import_export, floor_rail_uv, preferences, super_align
+    if "threedsmax_align" in locals():
+        importlib.reload(threedsmax_align)
+    if "no_uv_checker" in locals():
+        importlib.reload(no_uv_checker)
+from . import config, utils, bm_import_export, rail_uv, preferences, threedsmax_align, no_uv_checker
 
 # ============================================= menu system
 
@@ -40,8 +42,9 @@ class ThreeDViewerMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.operator("ballance.super_align")
+        layout.operator("ballance.threedsmax_align")
         layout.operator("ballance.rail_uv")
+        layout.operator("ballance.no_uv_checker")
 
 # ============================================= blender call system
 
@@ -49,8 +52,9 @@ classes = (
     preferences.BallanceBlenderPluginPreferences,
     bm_import_export.ImportBM,
     bm_import_export.ExportBM,
-    floor_rail_uv.RailUVOperator,
-    super_align.SuperAlignOperator,
+    rail_uv.RailUVOperator,
+    threedsmax_align.SuperAlignOperator,
+    no_uv_checker.NoUVCheckerOperator,
     ThreeDViewerMenu
 )
 

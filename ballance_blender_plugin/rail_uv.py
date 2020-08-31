@@ -23,7 +23,7 @@ def check_rail_target():
             continue
         if obj.mode != 'OBJECT':
             continue
-        if obj.data.uv_layers.active.data == None:
+        if obj.data.uv_layers.active is None:
             continue
         return True
     return False
@@ -38,7 +38,7 @@ def create_rail_uv():
         if obj.mode != 'OBJECT':
             ignoredObj.append(obj.name)
             continue
-        if obj.data.uv_layers.active.data == None:
+        if obj.data.uv_layers.active is None:
             ignoredObj.append(obj.name)
             continue
         
@@ -54,15 +54,4 @@ def create_rail_uv():
                 uv_layer[loop_index].uv[1] = 1 # vecList[index].co[1]
 
     if len(ignoredObj) != 0:
-        utils.ShowMessageBox("Following objects are not processed due to they are not suit for this function now: " + ', '.join(ignoredObj), "No processed object", 'WARNING')
-
-
-def virtoolize_floor_uv():
-    pass
-
-def mesh_triangulate(me):
-    bm = bmesh.new()
-    bm.from_mesh(me)
-    bmesh.ops.triangulate(bm, faces=bm.faces)
-    bm.to_mesh(me)
-    bm.free()
+        utils.ShowMessageBox("Following objects are not processed due to they are not suit for this function now: " + ', '.join(ignoredObj), "Check result", 'INFO')

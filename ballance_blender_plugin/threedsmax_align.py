@@ -3,8 +3,8 @@ from . import utils
 
 class SuperAlignOperator(bpy.types.Operator):
     """Align object with 3ds Max way"""
-    bl_idname = "ballance.super_align"
-    bl_label = "Super Align"
+    bl_idname = "ballance.threedsmax_align"
+    bl_label = "3ds Max Align"
     bl_options = {'UNDO'}
 
     align_x: bpy.props.BoolProperty(name="X position")
