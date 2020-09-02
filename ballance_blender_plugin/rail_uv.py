@@ -1,7 +1,7 @@
 import bpy,bmesh
 from . import utils
 
-class RailUVOperator(bpy.types.Operator):
+class BALLANCE_OT_rail_uv(bpy.types.Operator):
     """Create a UV for rail"""
     bl_idname = "ballance.rail_uv"
     bl_label = "Create Rail UV"
@@ -23,8 +23,6 @@ def check_rail_target():
             continue
         if obj.mode != 'OBJECT':
             continue
-        if obj.data.uv_layers.active is None:
-            continue
         return True
     return False
 
@@ -39,8 +37,8 @@ def create_rail_uv():
             ignoredObj.append(obj.name)
             continue
         if obj.data.uv_layers.active is None:
-            ignoredObj.append(obj.name)
-            continue
+            # create a empty uv for it.
+            obj.data.uv_layers.new(do_init=False)
         
         meshList.append(obj.data)
     
@@ -54,4 +52,4 @@ def create_rail_uv():
                 uv_layer[loop_index].uv[1] = 1 # vecList[index].co[1]
 
     if len(ignoredObj) != 0:
-        utils.ShowMessageBox("Following objects are not processed due to they are not suit for this function now: " + ', '.join(ignoredObj), "Check result", 'INFO')
+        utils.ShowMessageBox("Following objects are not processed due to they are not suit for this function now: " + ', '.join(ignoredObj), "Execution result", 'INFO')

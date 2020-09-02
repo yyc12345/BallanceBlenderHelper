@@ -1,7 +1,7 @@
 import bpy,bmesh
 from . import utils
 
-class NoUVCheckerOperator(bpy.types.Operator):
+class BALLANCE_OT_no_uv_checker(bpy.types.Operator):
     """Check whether the currently selected object has UV"""
     bl_idname = "ballance.no_uv_checker"
     bl_label = "Check UV"

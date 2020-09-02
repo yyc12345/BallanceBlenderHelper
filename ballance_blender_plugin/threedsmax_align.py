@@ -1,9 +1,9 @@
 import bpy,mathutils
 from . import utils
 
-class SuperAlignOperator(bpy.types.Operator):
+class BALLANCE_OT_super_align(bpy.types.Operator):
     """Align object with 3ds Max way"""
-    bl_idname = "ballance.threedsmax_align"
+    bl_idname = "ballance.super_align"
     bl_label = "3ds Max Align"
     bl_options = {'UNDO'}
 

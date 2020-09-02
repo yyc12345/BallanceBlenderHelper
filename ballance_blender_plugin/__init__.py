@@ -30,19 +30,21 @@ if "bpy" in locals():
         importlib.reload(threedsmax_align)
     if "no_uv_checker" in locals():
         importlib.reload(no_uv_checker)
-from . import config, utils, bm_import_export, rail_uv, preferences, threedsmax_align, no_uv_checker
+    if "add_elements" in locals():
+        importlib.reload(add_elements)
+from . import config, utils, bm_import_export, rail_uv, preferences, threedsmax_align, no_uv_checker, add_elements
 
 # ============================================= menu system
 
-class ThreeDViewerMenu(bpy.types.Menu):
+class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
     """Ballance related 3D operator"""
+    bl_idname = "BALLANCE_MT_ThreeDViewerMenu"
     bl_label = "Ballance 3D"
-    bl_idname = "OBJECT_MT_ballance3d_menu"
 
     def draw(self, context):
         layout = self.layout
 
-        layout.operator("ballance.threedsmax_align")
+        layout.operator("ballance.super_align")
         layout.operator("ballance.rail_uv")
         layout.operator("ballance.no_uv_checker")
 
@@ -50,23 +52,36 @@ class ThreeDViewerMenu(bpy.types.Menu):
 
 classes = (
     preferences.BallanceBlenderPluginPreferences,
-    bm_import_export.ImportBM,
-    bm_import_export.ExportBM,
-    rail_uv.RailUVOperator,
-    threedsmax_align.SuperAlignOperator,
-    no_uv_checker.NoUVCheckerOperator,
-    ThreeDViewerMenu
+    
+    bm_import_export.BALLANCE_OT_import_bm,
+    bm_import_export.BALLANCE_OT_export_bm,
+    rail_uv.BALLANCE_OT_rail_uv,
+    threedsmax_align.BALLANCE_OT_super_align,
+    no_uv_checker.BALLANCE_OT_no_uv_checker,
+    BALLANCE_MT_ThreeDViewerMenu,
+
+    add_elements.BALLANCE_OT_add_sector_related_elements,
+    add_elements.BALLANCE_OT_add_unique_elements,
+    add_elements.BALLANCE_OT_add_rail
 )
 
 def menu_func_bm_import(self, context):
-    self.layout.operator(bm_import_export.ImportBM.bl_idname, text="Ballance Map (.bm)")
+    self.layout.operator(bm_import_export.BALLANCE_OT_import_bm.bl_idname, text="Ballance Map (.bm)")
 def menu_func_bm_export(self, context):
-    self.layout.operator(bm_import_export.ExportBM.bl_idname, text="Ballance Map (.bm)")
+    self.layout.operator(bm_import_export.BALLANCE_OT_export_bm.bl_idname, text="Ballance Map (.bm)")
 def menu_func_ballance_3d(self, context):
     layout = self.layout
-    layout.menu(ThreeDViewerMenu.bl_idname)
+    layout.menu(BALLANCE_MT_ThreeDViewerMenu.bl_idname)
+def menu_func_ballance_add(self, context):
+    layout = self.layout
+    layout.separator()
+    layout.label(text="Ballance")
+    layout.operator_menu_enum("ballance.add_sector_related_elements", "elements_type", icon='MESH_ICOSPHERE', text="Normal elements")
+    layout.operator_menu_enum("ballance.add_unique_elements", "elements_type", icon='MESH_ICOSPHERE', text="Unique elements")
+    layout.operator("ballance.add_rail", icon='MESH_CUBE', text="Rail section")
 
 def register():
+    print(__package__)
     for cls in classes:
         bpy.utils.register_class(cls)
         
@@ -74,12 +89,14 @@ def register():
     bpy.types.TOPBAR_MT_file_export.append(menu_func_bm_export)
 
     bpy.types.VIEW3D_HT_header.append(menu_func_ballance_3d)
+    bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
         
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_bm_export)
     
     bpy.types.VIEW3D_HT_header.remove(menu_func_ballance_3d)
+    bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
 
     for cls in classes:
         bpy.utils.unregister_class(cls)

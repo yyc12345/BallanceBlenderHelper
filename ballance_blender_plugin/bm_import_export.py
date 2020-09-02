@@ -6,12 +6,43 @@ from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
 from . import utils, config
 
-class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
-    """Load a Ballance Map File (BM file spec 1.0)"""
-    bl_idname = "import_scene.bm"
+class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
+    """Load a Ballance Map File (BM file spec 1.1)"""
+    bl_idname = "ballance.import_bm"
     bl_label = "Import BM "
     bl_options = {'PRESET', 'UNDO'}
     filename_ext = ".bm"
+
+    texture_conflict_strategy: bpy.props.EnumProperty(
+        name="Texture name conflict",
+        items=(('NEW', "New instance", "Create a new instance"),
+               ('CURRENT', "Use current", "Use current"),),
+        description="Define how to process texture name conflict",
+        )
+
+    material_conflict_strategy: bpy.props.EnumProperty(
+        name="Material name conflict",
+        items=(('RENAME', "Rename", "Rename the new one"),
+               ('REPLACE', "Replace", "Replace the old one"),
+               ('CURRENT', "Use current", "Use current"),),
+        description="Define how to process material name conflict",
+        )
+
+    mesh_conflict_strategy: bpy.props.EnumProperty(
+        name="Mesh name conflict",
+        items=(('RENAME', "Rename", "Rename the new one"),
+               ('REPLACE', "Replace", "Replace the old one"),
+               ('CURRENT', "Use current", "Use current"),),
+        description="Define how to process mesh name conflict",
+        )
+
+    object_conflict_strategy: bpy.props.EnumProperty(
+        name="Object name conflict",
+        items=(('RENAME', "Rename", "Rename the new one"),
+               ('REPLACE', "Replace", "Replace the old one"),
+               ('CURRENT', "Use current", "Use current"),),
+        description="Define how to process object name conflict",
+        )
 
     @classmethod
     def poll(self, context):
@@ -23,9 +54,9 @@ class ImportBM(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
         import_bm(context, self.filepath, prefs.external_folder, prefs.temp_texture_folder)
         return {'FINISHED'}
         
-class ExportBM(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
-    """Save a Ballance Map File (BM file spec 1.0)"""
-    bl_idname = "export_scene.bm"
+class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
+    """Save a Ballance Map File (BM file spec 1.1)"""
+    bl_idname = "ballance.export_bm"
     bl_label = 'Export BM'
     bl_options = {'PRESET'}
     filename_ext = ".bm"
