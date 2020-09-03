@@ -55,7 +55,7 @@ class BALLANCE_OT_add_elements(bpy.types.Operator):
 class BALLANCE_OT_add_rail(bpy.types.Operator):
     """Add rail"""
     bl_idname = "ballance.add_rail"
-    bl_label = "Add unique elements"
+    bl_label = "Add rail section"
     bl_options = {'UNDO'}
 
     rail_type: bpy.props.EnumProperty(
@@ -79,6 +79,40 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
     )
 
     def execute(self, context):
+        bpy.ops.object.select_all(action='DESELECT')
+        # create one first
+        bpy.ops.mesh.primitive_circle_add(vertices=8,
+                                        radius=self.rail_radius,
+                                        fill_type='NOTHING',
+                                        calc_uvs=False,
+                                        enter_editmode=False,
+                                        align='WORLD',
+                                        location=(0.0, 0.0, 0.0))
+
+        firstObj = bpy.context.selected_objects[0]
+
+        # for double rail
+        if self.rail_type == 'DOUBLE':
+            bpy.ops.object.select_all(action='DESELECT')
+            bpy.ops.mesh.primitive_circle_add(vertices=8,
+                                            radius=self.rail_radius,
+                                            fill_type='NOTHING',
+                                            calc_uvs=False,
+                                            enter_editmode=False,
+                                            align='WORLD',
+                                            location=(self.rail_span, 0.0, 0.0))
+            secondObj = bpy.context.selected_objects[0]
+
+            # merge
+            bpy.ops.object.select_all(action='DESELECT')
+            bpy.context.view_layer.objects.active = firstObj
+            firstObj.select_set(True)
+            secondObj.select_set(True)
+            bpy.ops.object.join()
+
+        # apply 3d cursor
+        firstObj.matrix_world = bpy.context.scene.cursor.matrix
+
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -89,7 +123,8 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
         layout = self.layout
         layout.prop(self, "rail_type")
         layout.prop(self, "rail_radius")
-        layout.prop(self, "rail_span")
+        if self.rail_type == 'DOUBLE':
+            layout.prop(self, "rail_span")
 
 def addSceneAndChangePos(obj):
     obj.matrix_world = bpy.context.scene.cursor.matrix
