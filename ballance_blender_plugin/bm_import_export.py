@@ -622,6 +622,7 @@ class info_block_helper():
         self.offset = offset
         self.blenderData = None
 
+# NOTE: this function also used by add_elements.py
 def load_component(component_id):
     # get file first
     compName = config.component_list[component_id]

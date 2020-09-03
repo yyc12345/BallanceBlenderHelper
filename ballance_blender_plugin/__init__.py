@@ -60,8 +60,7 @@ classes = (
     no_uv_checker.BALLANCE_OT_no_uv_checker,
     BALLANCE_MT_ThreeDViewerMenu,
 
-    add_elements.BALLANCE_OT_add_sector_related_elements,
-    add_elements.BALLANCE_OT_add_unique_elements,
+    add_elements.BALLANCE_OT_add_elements,
     add_elements.BALLANCE_OT_add_rail
 )
 
@@ -76,8 +75,7 @@ def menu_func_ballance_add(self, context):
     layout = self.layout
     layout.separator()
     layout.label(text="Ballance")
-    layout.operator_menu_enum("ballance.add_sector_related_elements", "elements_type", icon='MESH_ICOSPHERE', text="Normal elements")
-    layout.operator_menu_enum("ballance.add_unique_elements", "elements_type", icon='MESH_ICOSPHERE', text="Unique elements")
+    layout.operator_menu_enum("ballance.add_elements", "elements_type", icon='MESH_ICOSPHERE', text="Elements")
     layout.operator("ballance.add_rail", icon='MESH_CUBE', text="Rail section")
 
 def register():
