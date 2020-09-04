@@ -79,7 +79,6 @@ def menu_func_ballance_add(self, context):
     layout.operator("ballance.add_rail", icon='MESH_CUBE', text="Rail section")
 
 def register():
-    print(__package__)
     for cls in classes:
         bpy.utils.register_class(cls)
         
