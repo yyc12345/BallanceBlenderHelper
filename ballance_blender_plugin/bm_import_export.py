@@ -18,30 +18,31 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
         items=(('NEW', "New instance", "Create a new instance"),
                ('CURRENT', "Use current", "Use current"),),
         description="Define how to process texture name conflict",
+        default='CURRENT',
         )
 
     material_conflict_strategy: bpy.props.EnumProperty(
         name="Material name conflict",
         items=(('RENAME', "Rename", "Rename the new one"),
-               ('REPLACE', "Replace", "Replace the old one"),
                ('CURRENT', "Use current", "Use current"),),
         description="Define how to process material name conflict",
+        default='RENAME',
         )
 
     mesh_conflict_strategy: bpy.props.EnumProperty(
         name="Mesh name conflict",
         items=(('RENAME', "Rename", "Rename the new one"),
-               ('REPLACE', "Replace", "Replace the old one"),
                ('CURRENT', "Use current", "Use current"),),
         description="Define how to process mesh name conflict",
+        default='RENAME',
         )
 
     object_conflict_strategy: bpy.props.EnumProperty(
         name="Object name conflict",
         items=(('RENAME', "Rename", "Rename the new one"),
-               ('REPLACE', "Replace", "Replace the old one"),
                ('CURRENT', "Use current", "Use current"),),
         description="Define how to process object name conflict",
+        default='RENAME',
         )
 
     @classmethod
@@ -51,7 +52,8 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
 
     def execute(self, context):
         prefs = bpy.context.preferences.addons[__package__].preferences
-        import_bm(context, self.filepath, prefs.external_folder, prefs.temp_texture_folder)
+        import_bm(context, self.filepath, prefs.external_folder, prefs.temp_texture_folder,
+        self.texture_conflict_strategy, self.material_conflict_strategy, self.mesh_conflict_strategy, self.object_conflict_strategy)
         return {'FINISHED'}
         
 class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
@@ -80,7 +82,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 
 bm_current_version = 11
 
-def import_bm(context,filepath,externalTexture,blenderTempFolder):
+def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, materialOpt, meshOpt, objectOpt):
     # ============================================ alloc a temp folder
     tempFolderObj = tempfile.TemporaryDirectory()
     tempFolder = tempFolderObj.name
@@ -132,7 +134,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             texture_filename = read_string(ftexture)
             texture_isExternal = read_bool(ftexture)
             if texture_isExternal:
-                txur = load_image(texture_filename, externalTextureFolder)
+                txur = load_image(texture_filename, externalTextureFolder, check_existing=(textureOpt == 'CURRENT'))
                 item.blenderData = txur
             else:
                 # not external. copy temp file into blender temp. then use it.
@@ -141,7 +143,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
                     shutil.copy(os.path.join(tempTextureFolder, texture_filename), os.path.join(blenderTempTextureFolder, texture_filename))
                 except:
                     pass
-                txur = load_image(texture_filename, blenderTempTextureFolder)
+                txur = load_image(texture_filename, blenderTempTextureFolder, check_existing=(textureOpt == 'CURRENT'))
                 item.blenderData = txur
             txur.name = item.name
 
@@ -160,7 +162,11 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             material_texture = read_uint32(fmaterial)
 
             # create basic material
-            m = bpy.data.materials.new(item.name)
+            (m, needSkip) = createInstanceWithOption(info_bm_type.MATERIAL, item.name, materialOpt)
+            item.blenderData = m
+            if needSkip:
+                continue
+                
             m.use_nodes=True
             for node in m.node_tree.nodes:
                 m.node_tree.nodes.remove(node)
@@ -186,8 +192,6 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             m['virtools-emissive'] = material_colEmissive
             m['virtools-power'] = material_specularPower
 
-            item.blenderData = m
-
 
     # mesh.bm
     with open(os.path.join(tempFolder, "mesh.bm"), "rb") as fmesh:
@@ -200,7 +204,10 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             fmesh.seek(item.offset, os.SEEK_SET)
 
             # create real mesh
-            mesh = bpy.data.meshes.new(item.name)
+            (mesh, needSkip) = createInstanceWithOption(info_bm_type.MESH, item.name, meshOpt)
+            item.blenderData = mesh
+            if needSkip:
+                continue
 
             vList.clear()
             vtList.clear()
@@ -274,9 +281,6 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
             
             mesh.validate(clean_customdata=False)
             mesh.update(calc_edges=False, calc_edges_loose=False)
-
-            # add into item using
-            item.blenderData = mesh
             
 
     # object
@@ -312,7 +316,9 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder):
                 neededMesh = meshList[object_meshIndex].blenderData
 
             # create real object
-            obj = bpy.data.objects.new(item.name, neededMesh)
+            (obj, needSkip) = createInstanceWithOption(info_bm_type.OBJECT, item.name, objectOpt, extraMesh=neededMesh)
+            if needSkip:
+                continue
             if (not object_isComponent) and object_isForcedNoComponent and (forcedCollection is not None):
                 forcedCollection.objects.link(obj)
             else:
@@ -621,6 +627,30 @@ class info_block_helper():
         self.name = name
         self.offset = offset
         self.blenderData = None
+
+def createInstanceWithOption(instType, instName, instOpt, extraMesh = None):
+    if instType == info_bm_type.OBJECT:
+        target = bpy.data.objects
+        args = (instName, extraMesh)
+    elif instType == info_bm_type.MESH:
+        target = bpy.data.meshes
+        args = (instName, )
+    elif instType == info_bm_type.MATERIAL:
+        target = bpy.data.materials
+        args = (instName, )
+
+    if instOpt == 'RENAME':
+        tempInst = target.new(*args)
+        tempSkip = False
+    elif instOpt == 'CURRENT':
+        try:
+            tempInst = target[instName]
+            tempSkip = True
+        except:
+            tempInst = target.new(*args)
+            tempSkip = False
+
+    return (tempInst, tempSkip)
 
 # NOTE: this function also used by add_elements.py
 def load_component(component_id):
