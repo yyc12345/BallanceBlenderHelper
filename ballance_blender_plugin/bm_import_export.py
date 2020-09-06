@@ -80,7 +80,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 
 # ========================================== method
 
-bm_current_version = 11
+bm_current_version = 12
 
 def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, materialOpt, meshOpt, objectOpt):
     # ============================================ alloc a temp folder
