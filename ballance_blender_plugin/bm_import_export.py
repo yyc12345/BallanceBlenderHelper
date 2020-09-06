@@ -7,11 +7,11 @@ from bpy_extras.image_utils import load_image
 from . import utils, config
 
 class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
-    """Load a Ballance Map File (BM file spec 1.1)"""
+    """Load a Ballance Map File (BM file spec 1.2)"""
     bl_idname = "ballance.import_bm"
     bl_label = "Import BM "
     bl_options = {'PRESET', 'UNDO'}
-    filename_ext = ".bm"
+    filename_ext = ".bmx"
 
     texture_conflict_strategy: bpy.props.EnumProperty(
         name="Texture name conflict",
@@ -57,11 +57,11 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
         return {'FINISHED'}
         
 class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
-    """Save a Ballance Map File (BM file spec 1.1)"""
+    """Save a Ballance Map File (BM file spec 1.2)"""
     bl_idname = "ballance.export_bm"
     bl_label = 'Export BM'
     bl_options = {'PRESET'}
-    filename_ext = ".bm"
+    filename_ext = ".bmx"
     
     export_mode: bpy.props.EnumProperty(
         name="Export mode",

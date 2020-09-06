@@ -2,7 +2,7 @@ bl_info={
 	"name":"Ballance Blender Plugin",
 	"description":"Ballance mapping tools for Blender",
 	"author":"yyc12345",
-	"version":(1,0),
+	"version":(1,1),
 	"blender":(2,83,0),
 	"category":"Object",
 	"support":"TESTING",
@@ -65,9 +65,9 @@ classes = (
 )
 
 def menu_func_bm_import(self, context):
-    self.layout.operator(bm_import_export.BALLANCE_OT_import_bm.bl_idname, text="Ballance Map (.bm)")
+    self.layout.operator(bm_import_export.BALLANCE_OT_import_bm.bl_idname, text="Ballance Map (.bmx)")
 def menu_func_bm_export(self, context):
-    self.layout.operator(bm_import_export.BALLANCE_OT_export_bm.bl_idname, text="Ballance Map (.bm)")
+    self.layout.operator(bm_import_export.BALLANCE_OT_export_bm.bl_idname, text="Ballance Map (.bmx)")
 def menu_func_ballance_3d(self, context):
     layout = self.layout
     layout.menu(BALLANCE_MT_ThreeDViewerMenu.bl_idname)
