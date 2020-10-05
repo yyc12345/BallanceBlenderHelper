@@ -1,3 +1,6 @@
+import json
+import os
+
 external_texture_list = set([
     "atari.avi",
     "atari.bmp",
@@ -111,3 +114,20 @@ component_list = [
     "PR_Resetpoint",
     "PS_FourFlames"
 ]
+
+floor_block_dict = {}
+floor_basic_block_list = []
+floor_derived_block_list = []
+with open(os.path.join(os.path.dirname(__file__), "json", "VanillaBlock.json")) as fp:
+    for item in json.load(fp):
+        floor_basic_block_list.append(item["Type"])
+        floor_block_dict[item["Type"]] = item
+with open(os.path.join(os.path.dirname(__file__), "json", "DerivedBlock.json")) as fp:
+    for item in json.load(fp):
+        floor_derived_block_list.append(item["Type"])
+        floor_block_dict[item["Type"]] = item
+
+blenderIcon_floor = None
+blenderIcon_floor_dict = {}
+# blenderIcon_elements = None
+# blenderIcon_elements_dict = {}
