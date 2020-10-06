@@ -1,4 +1,12 @@
 import bpy
+import bpy.types
+
+class MyPropertyGroup(bpy.types.PropertyGroup):
+    material_picker : bpy.props.PointerProperty(
+        type=bpy.types.Material,
+        name="Material",
+        description="The material used for rail"
+    )
 
 class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__

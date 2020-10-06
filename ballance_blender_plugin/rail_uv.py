@@ -1,5 +1,6 @@
 import bpy,bmesh
-from . import utils
+import bpy.types
+from . import utils, preferences
 
 class BALLANCE_OT_rail_uv(bpy.types.Operator):
     """Create a UV for rail"""
@@ -7,13 +8,41 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
     bl_label = "Create Rail UV"
     bl_options = {'UNDO'}
 
+    uv_type: bpy.props.EnumProperty(
+        name="Type",
+        description="Define how to create UV",
+        items=(
+            ("POINT", "Point", "All UV will be created in a specific point"),
+            ("UNIFORM", "Uniform", "All UV will be created within 1x1"),
+            ("SCALE", "Scale", "Give a scale number to scale UV")
+            ),
+    )
+
+    uv_scale : bpy.props.FloatProperty(
+        name="Scale",
+        description="The scale of UV",
+        min=0.0,
+        default=1.0,
+    )
+
     @classmethod
     def poll(self, context):
         return check_rail_target()
 
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
     def execute(self, context):
         create_rail_uv()
         return {'FINISHED'}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "uv_type")
+        layout.prop(context.scene.BallanceBlenderPluginProperty, "material_picker")
+        if self.uv_type == 'SCALE':
+            layout.prop(self, "uv_scale")
 
 # ====================== method
 

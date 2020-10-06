@@ -77,6 +77,7 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
 
 classes = (
     preferences.BallanceBlenderPluginPreferences,
+    preferences.MyPropertyGroup,
     
     bm_import_export.BALLANCE_OT_import_bm,
     bm_import_export.BALLANCE_OT_export_bm,
@@ -117,6 +118,8 @@ def register():
 
     for cls in classes:
         bpy.utils.register_class(cls)
+
+    bpy.types.Scene.BallanceBlenderPluginProperty = bpy.props.PointerProperty(type=preferences.MyPropertyGroup)
         
     bpy.types.TOPBAR_MT_file_import.append(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.append(menu_func_bm_export)
