@@ -118,7 +118,7 @@ component_list = [
 floor_block_dict = {}
 floor_basic_block_list = []
 floor_derived_block_list = []
-with open(os.path.join(os.path.dirname(__file__), "json", "VanillaBlock.json")) as fp:
+with open(os.path.join(os.path.dirname(__file__), "json", "BasicBlock.json")) as fp:
     for item in json.load(fp):
         floor_basic_block_list.append(item["Type"])
         floor_block_dict[item["Type"]] = item

@@ -5,7 +5,7 @@ class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
 
     external_folder: bpy.props.StringProperty(
         name="External texture folder",
-        description="The Ballance texture folder which will be used buy this plugin to get external texture.",
+        description="The Ballance texture folder which will be used by this plugin to get external texture.",
         )
 
     no_component_collection: bpy.props.StringProperty(

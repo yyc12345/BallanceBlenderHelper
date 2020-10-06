@@ -5,6 +5,14 @@
         "UnitSize": "Small",
         "ExpandType": "Column",
         "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": false,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
         "ThreeDTopFace": {
             "Vertices": [
                 "2.5,0,0;+d1;;",

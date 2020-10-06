@@ -103,7 +103,7 @@ def menu_func_ballance_add(self, context):
     layout.separator()
     layout.label(text="Ballance")
     layout.operator_menu_enum("ballance.add_elements", "elements_type", icon='MESH_ICOSPHERE', text="Elements")
-    layout.operator("ballance.add_rail", icon='MESH_CUBE', text="Rail section")
+    layout.operator("ballance.add_rail", icon='MESH_CIRCLE', text="Rail section")
     layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
 
 def register():

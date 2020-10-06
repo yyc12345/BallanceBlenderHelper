@@ -1,4 +1,5 @@
 import bpy,mathutils
+import os
 from . import utils, config
 
 class BALLANCE_OT_add_floor(bpy.types.Operator):
@@ -16,18 +17,21 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
     expand_length_1 : bpy.props.IntProperty(
         name="D1 length",
         description="The length of expand direction 1",
+        min=0,
         default=0,
     )
 
     expand_length_2 : bpy.props.IntProperty(
         name="D2 length",
         description="The length of expand direction 2",
+        min=0,
         default=0,
     )
 
     height_multiplier : bpy.props.FloatProperty(
         name="Height",
         description="The multiplier for height. Default height is 5",
+        min=0.0,
         default=1.0,
     )
 
@@ -62,6 +66,10 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         name="Bottom face"
     )
 
+    @classmethod
+    def poll(self, context):
+        prefs = bpy.context.preferences.addons[__package__].preferences
+        return os.path.isdir(prefs.external_folder)
 
     def execute(self, context):
         return {'FINISHED'}
@@ -75,10 +83,23 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         col = layout.column()
         col.label(text="Basic param")
         col.prop(self, "floor_type")
+        col.prop(self, "rotation_inside_mesh")
+        col.prop(self, "height_multiplier")
+
+        col.separator()
+        col.label(text="Expand")
         col.prop(self, "expand_length_1")
         col.prop(self, "expand_length_2")
-        col.prop(self, "height_multiplier")
-        col.prop(self, "rotation_inside_mesh")
+        grids = col.grid_flow(columns=3)
+        grids.separator()
+        grids.label(text="X")
+        grids.separator()
+        grids.label(text="X")
+        grids.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
+        grids.label(text="X")
+        grids.separator()
+        grids.label(text="X")
+        grids.separator()
 
         col.separator()
         col.label(text="Faces")
@@ -88,17 +109,15 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
 
         col.separator()
         col.label(text="Sides")
-        row = col.row(align=True)
-        row.label(text="")
-        row.prop(self, "use_2d_top")
-        row.label(text="")
-        row = col.row(align=True)
-        row.prop(self, "use_2d_left")
-        row.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
-        row.prop(self, "use_2d_right")
-        row = col.row(align=True)
-        row.label(text="")
-        row.prop(self, "use_2d_bottom")
-        row.label(text="")
+        grids = col.grid_flow(columns=3)
+        grids.separator()
+        grids.prop(self, "use_2d_top")
+        grids.separator()
+        grids.prop(self, "use_2d_left")
+        grids.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
+        grids.prop(self, "use_2d_right")
+        grids.separator()
+        grids.prop(self, "use_2d_bottom")
+        grids.separator()
 
 
