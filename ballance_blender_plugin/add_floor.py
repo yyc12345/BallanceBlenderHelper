@@ -66,6 +66,8 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         name="Bottom face"
     )
 
+    previous_floor_type = ''
+
     @classmethod
     def poll(self, context):
         prefs = bpy.context.preferences.addons[__package__].preferences
@@ -79,6 +81,22 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
     def draw(self, context):
+        # get floor prototype
+        floor_prototype = config.floor_block_dict[self.floor_type]
+
+        # try sync default value
+        if self.previous_floor_type != self.floor_type:
+            self.previous_floor_type = self.floor_type
+
+            default_sides = floor_prototype['DefaultSideConfig']
+            self.use_2d_top = default_sides['UseTwoDTop']
+            self.use_2d_right = default_sides['UseTwoDRight']
+            self.use_2d_bottom = default_sides['UseTwoDBottom']
+            self.use_2d_left = default_sides['UseTwoDLeft']
+            self.use_3d_top = default_sides['UseThreeDTop']
+            self.use_3d_bottom = default_sides['UseThreeDBottom']
+
+        # show property
         layout = self.layout
         col = layout.column()
         col.label(text="Basic param")
@@ -88,17 +106,21 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
 
         col.separator()
         col.label(text="Expand")
-        col.prop(self, "expand_length_1")
-        col.prop(self, "expand_length_2")
-        grids = col.grid_flow(columns=3)
+        if floor_prototype['ExpandType'] == 'Column' or floor_prototype['ExpandType'] == 'Freedom':
+            col.prop(self, "expand_length_1")
+        if floor_prototype['ExpandType'] == 'Freedom':
+            col.prop(self, "expand_length_2")
+        col.label(text="Unit size: " + floor_prototype['UnitSize'])
+        col.label(text="Expand mode: " + floor_prototype['ExpandType'])
+        grids = col.grid_flow(row_major=True, columns=3)
         grids.separator()
-        grids.label(text="X")
+        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][0])
         grids.separator()
-        grids.label(text="X")
+        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][3])
         grids.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
-        grids.label(text="X")
+        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][1])
         grids.separator()
-        grids.label(text="X")
+        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][2])
         grids.separator()
 
         col.separator()
@@ -109,7 +131,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
 
         col.separator()
         col.label(text="Sides")
-        grids = col.grid_flow(columns=3)
+        grids = col.grid_flow(row_major=True, columns=3)
         grids.separator()
         grids.prop(self, "use_2d_top")
         grids.separator()

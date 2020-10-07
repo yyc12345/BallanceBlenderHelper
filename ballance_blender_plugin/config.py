@@ -115,6 +115,34 @@ component_list = [
     "PS_FourFlames"
 ]
 
+'''
+format: key is diection, value is a dict
+dict's key is expand mode, value is a tuple
+tuple always have 4 items, it means (TOP_STR, RIGHT_STR, BOTTOM_STR, LEFT_STR)
+'''
+floor_expand_direction_map = {
+    "PositiveX": {
+        "Static": ("X", "X", "X", "X"),
+        "Column": ("X", "X", "D1", "X"),
+        "Freedom": ("X", "X", "D1", "D2"),
+    },
+    "NegativeX": {
+        "Static": ("X", "X", "X", "X"),
+        "Column": ("D1", "X", "X", "X"),
+        "Freedom": ("D1", "D2", "X", "X"),
+    },
+    "PositiveY": {
+        "Static": ("X", "X", "X", "X"),
+        "Column": ("X", "D1", "X", "X"),
+        "Freedom": ("X", "D1", "D2", "X"),
+    },
+    "NegativeY": {
+        "Static": ("X", "X", "X", "X"),
+        "Column": ("X", "X", "X", "D1"),
+        "Freedom": ("D2", "X", "X", "D1"),
+    }
+}
+
 floor_block_dict = {}
 floor_basic_block_list = []
 floor_derived_block_list = []
