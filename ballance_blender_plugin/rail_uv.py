@@ -59,6 +59,28 @@ def check_rail_target():
         return True
     return False
 
+def get_distance(iterator):
+    is_first_min = True
+    is_first_max = True
+    max_value = 0.0
+    min_value = 0.0
+
+    for item in iterator:
+        if is_first_max:
+            is_first_max = False
+            max_value = item
+        else:
+            if item > max_value:
+                max_value = item
+        if is_first_min:
+            is_first_min = False
+            min_value = item
+        else:
+            if item < min_value:
+                min_value = item
+
+    return max_value - min_value
+
 def create_rail_uv(rail_type, material_pointer, scale_size):
     objList = []
     ignoredObj = []
@@ -82,20 +104,19 @@ def create_rail_uv(rail_type, material_pointer, scale_size):
         obj.data.materials.clear()
         obj.data.materials.append(material_pointer)
 
+        # copy mesh vec for scale or uniform mode
+        vecList = mesh.vertices[:]
         real_scale = 1.0
         if rail_type == 'SCALE':
             real_scale = scale_size
         elif rail_type == 'UNIFORM':
             # calc proper scale
-            targetObjBbox = [mathutils.Vector(corner) for corner in obj.bound_box]
             maxLength = max(
-                max([vec.x for vec in targetObjBbox]) - min([vec.x for vec in targetObjBbox]),
-                max([vec.y for vec in targetObjBbox]) - min([vec.y for vec in targetObjBbox])
+                get_distance(vec.co[0] for vec in vecList),
+                get_distance(vec.co[1] for vec in vecList)
             )
             real_scale = 1.0 / maxLength
 
-        # copy mesh vec for scale or uniform mode
-        vecList = mesh.vertices[:]
         uv_layer = mesh.uv_layers.active.data
         for poly in mesh.polygons:
             for loop_index in range(poly.loop_start, poly.loop_start + poly.loop_total):
