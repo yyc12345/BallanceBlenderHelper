@@ -143,6 +143,15 @@ floor_expand_direction_map = {
     }
 }
 
+floor_texture_corresponding_map = {
+    "FloorSide": "Floor_Side.bmp",
+    "FloorTopBorder": "Floor_Top_Border.bmp",
+    "FloorTopBorderless": "Floor_Top_Borderless.bmp",
+    "FloorTopFlat": "Floor_Top_Flat.bmp",
+    "FloorTopProfil": "Floor_Top_Profil.bmp",
+    "FloorTopProfilFlat": "Floor_Top_ProfilFlat.bmp"
+}
+
 floor_block_dict = {}
 floor_basic_block_list = []
 floor_derived_block_list = []

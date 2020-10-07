@@ -148,6 +148,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
             txur.name = item.name
 
     # material.bm
+    # WARNING: this code is shared with add_floor - create_or_get_material()
     with open(os.path.join(tempFolder, "material.bm"), "rb") as fmaterial:
         for item in materialList:
             fmaterial.seek(item.offset, os.SEEK_SET)
@@ -194,6 +195,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
 
 
     # mesh.bm
+    # WARNING: this code is shared with add_floor
     with open(os.path.join(tempFolder, "mesh.bm"), "rb") as fmesh:
         vList=[]
         vtList=[]
