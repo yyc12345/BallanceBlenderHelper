@@ -33,13 +33,16 @@ def check_target():
         if obj.data.uv_layers.active is None:
             noUVObject.append(obj.name)
 
-    result = ("All objects: {}, Skipped: {}, No UV Count: {}. Following object don't have UV: ".format(len(bpy.context.selected_objects), invalidObjectCount, len(noUVObject)) + 
-    ", ".join(noUVObject[:4]) + 
-    (". Too much objects don't have UV. Please open terminal to browse them." if len(noUVObject) > 4 else ""))
-
     if len(noUVObject) > 4:
         print("Following object don't have UV:")
         for item in noUVObject:
             print(item)
 
-    utils.ShowMessageBox(result, "Check result", 'INFO')
+    utils.ShowMessageBox((
+        "All objects: {}".format(len(bpy.context.selected_objects)),
+        "Skipped: {}".format(invalidObjectCount),
+        "No UV Count: {}".format(len(noUVObject)),
+        "",
+        "Following object don't have UV: "
+    ) + tuple(noUVObject[:4]) + 
+    (("Too much objects don't have UV. Please open terminal to browse them." if len(noUVObject) > 4 else "") ,), "Check result", 'INFO')

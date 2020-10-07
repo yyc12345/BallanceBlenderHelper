@@ -1,4 +1,5 @@
 import bpy,bmesh
+import mathutils
 import bpy.types
 from . import utils, preferences
 
@@ -34,7 +35,10 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
     def execute(self, context):
-        create_rail_uv()
+        if context.scene.BallanceBlenderPluginProperty.material_picker == None:
+            utils.ShowMessageBox(("No specific material", ), "Lost parameter", 'ERROR')
+        else:
+            create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale)
         return {'FINISHED'}
 
     def draw(self, context):
@@ -55,8 +59,8 @@ def check_rail_target():
         return True
     return False
 
-def create_rail_uv():
-    meshList = []
+def create_rail_uv(rail_type, material_pointer, scale_size):
+    objList = []
     ignoredObj = []
     for obj in bpy.context.selected_objects:
         if obj.type != 'MESH':
@@ -69,16 +73,42 @@ def create_rail_uv():
             # create a empty uv for it.
             obj.data.uv_layers.new(do_init=False)
         
-        meshList.append(obj.data)
+        objList.append(obj)
     
-    for mesh in meshList:
-        # vecList = mesh.vertices[:]
+    for obj in objList:
+        mesh = obj.data
+
+        # clean it material and set rail first
+        obj.data.materials.clear()
+        obj.data.materials.append(material_pointer)
+
+        real_scale = 1.0
+        if rail_type == 'SCALE':
+            real_scale = scale_size
+        elif rail_type == 'UNIFORM':
+            # calc proper scale
+            targetObjBbox = [mathutils.Vector(corner) for corner in obj.bound_box]
+            maxLength = max(
+                max([vec.x for vec in targetObjBbox]) - min([vec.x for vec in targetObjBbox]),
+                max([vec.y for vec in targetObjBbox]) - min([vec.y for vec in targetObjBbox])
+            )
+            real_scale = 1.0 / maxLength
+
+        # copy mesh vec for scale or uniform mode
+        vecList = mesh.vertices[:]
         uv_layer = mesh.uv_layers.active.data
         for poly in mesh.polygons:
             for loop_index in range(poly.loop_start, poly.loop_start + poly.loop_total):
-                # index = mesh.loops[loop_index].vertex_index
-                uv_layer[loop_index].uv[0] = 0 # vecList[index].co[0]
-                uv_layer[loop_index].uv[1] = 1 # vecList[index].co[1]
+                # get correspond vec index
+                index = mesh.loops[loop_index].vertex_index
+                if rail_type == 'POINT':
+                    # set to 1 point
+                    uv_layer[loop_index].uv[0] = 0
+                    uv_layer[loop_index].uv[1] = 1
+                else:
+                    # following xy -> uv scale
+                    uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
+                    uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
 
     if len(ignoredObj) != 0:
-        utils.ShowMessageBox("Following objects are not processed due to they are not suit for this function now: " + ', '.join(ignoredObj), "Execution result", 'INFO')
+        utils.ShowMessageBox(("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), "Execution result", 'INFO')

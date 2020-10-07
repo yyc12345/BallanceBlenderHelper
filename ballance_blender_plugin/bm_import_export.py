@@ -105,7 +105,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
         # judge version first
         gotten_version = read_uint32(findex)
         if (gotten_version != bm_current_version):
-            utils.ShowMessageBox("Unsupported BM spec. Expect: {} Gotten: {}".format(bm_current_version, gotten_version), "Unsupported BM spec", 'WARNING')
+            utils.ShowMessageBox(("Unsupported BM spec. Expect: {} Gotten: {}".format(bm_current_version, gotten_version), ), "Unsupported BM spec", 'ERROR')
             findex.close()
             tempFolderObj.cleanup()
             return
