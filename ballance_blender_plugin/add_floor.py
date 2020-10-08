@@ -38,18 +38,6 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         default=1.0,
     )
 
-    rotation_inside_mesh: bpy.props.EnumProperty(
-        name="Rotation",
-        description="Rotation inside mesh",
-        items=(
-            ("R0", "0 degree", ""),
-            ("R90", "90 degree", ""),
-            ("R180", "180 degree", ""),
-            ("R270", "270 degree", "")
-        ),
-        default="R0"
-    )
-
     use_2d_top : bpy.props.BoolProperty(
         name="Top side"
     )
@@ -83,7 +71,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
             load_basic_floor(
                 objmesh, 
                 self.floor_type, 
-                self.rotation_inside_mesh, 
+                'R0', 
                 self.height_multiplier, 
                 self.expand_length_1,
                 self.expand_length_2,
@@ -98,7 +86,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
             load_derived_floor(
                 objmesh, 
                 self.floor_type, 
-                self.rotation_inside_mesh, 
+                'R0', 
                 self.height_multiplier, 
                 self.expand_length_1,
                 self.expand_length_2,
@@ -139,7 +127,6 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         col = layout.column()
         col.label(text="Basic param")
         col.prop(self, "floor_type")
-        col.prop(self, "rotation_inside_mesh")
         col.prop(self, "height_multiplier")
 
         col.separator()
