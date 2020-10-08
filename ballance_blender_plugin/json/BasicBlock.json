@@ -3,10 +3,6 @@
         "Type": "SinkBorder",
         "BindingDisplayTexture": "SinkBorder.png",
         "UnitSize": "Small",
-        "MinSize": {
-            "D1": 0,
-            "D2": 0
-        },
         "ExpandType": "Column",
         "InitColumnDirection": "PositiveX",
         "DefaultSideConfig": {

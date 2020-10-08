@@ -62,7 +62,6 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
 
         layout.label(text="Basic floor")
         for item in config.floor_basic_block_list:
-            print(config.blenderIcon_floor_dict[item])
             cop = layout.operator("ballance.add_floor", text=item, icon_value = config.blenderIcon_floor_dict[item])
             cop.floor_type = item
 

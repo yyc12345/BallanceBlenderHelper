@@ -1,7 +1,7 @@
 import bpy,mathutils
 import os, math
 from bpy_extras import io_utils,node_shader_utils
-from bpy_extras.io_utils import unpack_list
+# from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
 from . import utils, config
 
@@ -85,8 +85,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         elif self.floor_type in config.floor_derived_block_list:
             load_derived_floor(
                 objmesh, 
-                self.floor_type, 
-                'R0', 
+                self.floor_type,
                 self.height_multiplier, 
                 self.expand_length_1,
                 self.expand_length_2,
@@ -97,6 +96,10 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
                 self.use_3d_top,
                 self.use_3d_bottom))
 
+        # normalization mesh
+        objmesh.validate(clean_customdata=False)
+        objmesh.update(calc_edges=False, calc_edges_loose=False)
+        
         # create object and link it
         obj=bpy.data.objects.new('A_Floor_BMERevenge_', objmesh)
         utils.AddSceneAndMove2Cursor(obj)
@@ -249,8 +252,8 @@ def rotate_translate_vec(vec, rotation, unit, extra_translate):
         sino=-1
 
     return (
-        coso * vec[0] - sino * vec[1] + unit / 2 + unit * extra_translate[0],
-        sino * vec[0] + coso * vec[1] + unit / 2 + unit * extra_translate[1],
+        coso * vec[0] - sino * vec[1] + unit / 2 + extra_translate[0],
+        sino * vec[0] + coso * vec[1] + unit / 2 + extra_translate[1],
         vec[2]
     )
 
@@ -304,6 +307,33 @@ def solve_normal_data(point1, point2, point3):
 
     return tuple(nor)
 
+def solve_smashed_position(str_data, d1, d2):
+    sp=str_data.split(';')
+    sp_pos = sp[0].split(',')
+    sp_sync = sp[1].split(',')
+
+    vec = [int(sp_pos[0]), int(sp_pos[1])]
+
+    for i in range(2):
+        offset = 0 if sp_sync[i * 2] == '' else int(sp_sync[i * 2])
+        if sp_sync[i*2+1] == 'd1':
+            vec[i] += d1 + offset
+        elif sp_sync[i*2+1] == 'd2':
+            vec[i] += d2 + offset
+
+    return tuple(vec)
+
+def virtual_foreach_set(collection, field, base_num, data):
+    counter = 0
+    for i in data:
+        exec("a[j]." + field + "=q", {}, {
+            'a': collection,
+            'j': counter + base_num,
+            'q': i
+        })
+        counter+=1
+
+
 
 '''
 sides_struct should be a tuple and it always have 6 bool items
@@ -343,17 +373,28 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     # resolve face
     # solve material first
     materialDict = {}
-    counter = 0
-    mesh.materials.clear()
+    allmat = mesh.materials[:]
+    counter = len(allmat)
     for face_define in needCreatedFaces:
         for face in face_define['Faces']:
             new_texture = face['Textures']
             if new_texture not in materialDict.keys():
-                mesh.materials.append(create_or_get_material(new_texture))
-                materialDict[new_texture] = counter
-                counter += 1
+                # try get from existed solt
+                pending_material = create_or_get_material(new_texture)
+                if pending_material not in allmat:
+                    # no matched. add it
+                    mesh.materials.append(pending_material)
+                    materialDict[new_texture] = counter
+                    counter += 1
+                else:
+                    # use existed index
+                    materialDict[new_texture] = allmat.index(pending_material)
 
     # now, we can process real mesh
+    # load existed base count
+    global_offset_vec = len(mesh.vertices)
+    global_offset_face = len(mesh.polygons)
+    global_offset_facex4 = global_offset_face * 4
     vecList = []
     uvList = []
     normalList = []
@@ -383,7 +424,7 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
             
             # push indices into list
             for i in range(4):
-                faceList.append((vec_indices[i], ))
+                faceList.append(vec_indices[i] + global_offset_vec)
 
             # push material into list
             faceMatList.append(materialDict[face['Textures']])
@@ -392,22 +433,61 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     mesh.vertices.add(len(vecList))
     mesh.loops.add(len(faceMatList)*4)  # 4 vec face confirm
     mesh.polygons.add(len(faceMatList))
-    mesh.uv_layers.new(do_init=False)
-    mesh.create_normals_split()
+    if mesh.uv_layers.active is None:
+        # if no uv, create it
+        mesh.uv_layers.new(do_init=False)
+        mesh.create_normals_split()
 
-    mesh.vertices.foreach_set("co", unpack_list(vecList))
-    mesh.loops.foreach_set("vertex_index", unpack_list(faceList))
-    mesh.loops.foreach_set("normal", unpack_list(normalList))
-    mesh.uv_layers[0].data.foreach_set("uv", unpack_list(uvList))
+    virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
+    virtual_foreach_set(mesh.loops, "vertex_index", global_offset_facex4, faceList)
+    virtual_foreach_set(mesh.loops, "normal", global_offset_facex4, normalList)
+    virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_facex4, uvList)
 
     for i in range(len(faceMatList)):
-        mesh.polygons[i].loop_start = i * 4
-        mesh.polygons[i].loop_total = 4
-        mesh.polygons[i].material_index = faceMatList[i]
-        mesh.polygons[i].use_smooth = True
+        mesh.polygons[i + global_offset_face].loop_start = i * 4 + global_offset_facex4
+        mesh.polygons[i + global_offset_face].loop_total = 4
+        mesh.polygons[i + global_offset_face].material_index = faceMatList[i]
+        mesh.polygons[i + global_offset_face].use_smooth = True
     
-    mesh.validate(clean_customdata=False)
-    mesh.update(calc_edges=False, calc_edges_loose=False)
 
-def load_derived_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sides_struct):
-    pass
+def load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct):
+    floor_prototype = config.floor_block_dict[floor_type]
+
+    # set some unit
+    if floor_prototype['UnitSize'] == 'Small':
+        block_3dworld_unit = 2.5
+    elif floor_prototype['UnitSize'] == 'Large':
+        block_3dworld_unit = 5.0
+
+    # construct face dict
+    sides_dict = {
+        'True': True,
+        'False': False,
+        '2dTop': sides_struct[0],
+        '2dRight': sides_struct[1],
+        '2dBottom': sides_struct[2],
+        '2dLeft': sides_struct[3],
+        '3dTop': sides_struct[4],
+        '3dBottom': sides_struct[5]
+    }
+
+    # iterate smahsed blocks
+    for blk in floor_prototype['SmashedBlocks']:
+        start_pos = solve_smashed_position(blk['StartPosition'], d1, d2)
+        expand_pos = solve_smashed_position(blk['ExpandPosition'], d1, d2)
+
+        sides_data = tuple(sides_dict[x] for x in blk['SideSync'].split(';'))
+
+        # call basic floor creator
+        load_basic_floor(
+            mesh,
+            blk['Type'],
+            blk['Rotation'],
+            height_multiplier,
+            expand_pos[0],
+            expand_pos[1],
+            sides_data,
+            (start_pos[0] * block_3dworld_unit, start_pos[1] * block_3dworld_unit)
+        )
+
+
