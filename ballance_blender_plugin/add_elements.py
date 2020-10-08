@@ -36,7 +36,7 @@ class BALLANCE_OT_add_elements(bpy.types.Operator):
         # create object
         loadedMesh = bm_import_export.load_component(config.component_list.index(self.elements_type))
         obj = bpy.data.objects.new(finalObjectName, loadedMesh)
-        addSceneAndChangePos(obj)
+        utils.AddSceneAndMove2Cursor(obj)
 
         return {'FINISHED'}
 
@@ -125,10 +125,3 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
         layout.prop(self, "rail_radius")
         if self.rail_type == 'DOUBLE':
             layout.prop(self, "rail_span")
-
-def addSceneAndChangePos(obj):
-    obj.matrix_world = bpy.context.scene.cursor.matrix
-
-    view_layer = bpy.context.view_layer
-    collection = view_layer.active_layer_collection.collection
-    collection.objects.link(obj)

@@ -77,6 +77,41 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         return os.path.isdir(prefs.external_folder)
 
     def execute(self, context):
+        # load mesh
+        objmesh = bpy.data.meshes.new('done_')
+        if self.floor_type in config.floor_basic_block_list:
+            load_basic_floor(
+                objmesh, 
+                self.floor_type, 
+                self.rotation_inside_mesh, 
+                self.height_multiplier, 
+                self.expand_length_1,
+                self.expand_length_2,
+                (self.use_2d_top,
+                self.use_2d_right,
+                self.use_2d_bottom,
+                self.use_2d_left,
+                self.use_3d_top,
+                self.use_3d_bottom),
+                (0.0, 0.0))
+        elif self.floor_type in config.floor_derived_block_list:
+            load_derived_floor(
+                objmesh, 
+                self.floor_type, 
+                self.rotation_inside_mesh, 
+                self.height_multiplier, 
+                self.expand_length_1,
+                self.expand_length_2,
+                (self.use_2d_top,
+                self.use_2d_right,
+                self.use_2d_bottom,
+                self.use_2d_left,
+                self.use_3d_top,
+                self.use_3d_bottom))
+
+        # create object and link it
+        obj=bpy.data.objects.new('A_Floor_BMERevenge_', objmesh)
+        utils.AddSceneAndMove2Cursor(obj)
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -189,8 +224,8 @@ def create_or_get_material(material_name):
     return m
 
 def solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
-    sp = str_data.splite(';')
-    sp_point = sp[0].splite(',')
+    sp = str_data.split(';')
+    sp_point = sp[0].split(',')
     vec = [float(sp_point[0]), float(sp_point[1]), float(sp_point[2])]
 
     for i in range(3):
@@ -209,7 +244,7 @@ def solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
 
     return vec
 
-def rotate_vec(vec, rotation, unit):
+def rotate_translate_vec(vec, rotation, unit, extra_translate):
     vec[0] -= unit / 2
     vec[1] -= unit / 2
 
@@ -227,15 +262,15 @@ def rotate_vec(vec, rotation, unit):
         sino=-1
 
     return (
-        coso * vec[0] - sino * vec[1] + unit / 2,
-        sino * vec[0] + coso * vec[1] + unit / 2,
+        coso * vec[0] - sino * vec[1] + unit / 2 + unit * extra_translate[0],
+        sino * vec[0] + coso * vec[1] + unit / 2 + unit * extra_translate[1],
         vec[2]
     )
 
 
 def solve_uv_data(str_data, d1, d2, d3, unit):
-    sp = str_data.splite(';')
-    sp_point = sp[0].splite(',')
+    sp = str_data.split(';')
+    sp_point = sp[0].split(',')
     vec = [float(sp_point[0]), float(sp_point[1])]
 
     for i in range(2):
@@ -291,7 +326,7 @@ sides_struct should be a tuple and it always have 6 bool items
 WARNING: this code is shared with bm import export
 
 '''
-def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sides_struct):
+def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sides_struct, extra_translate):
     floor_prototype = config.floor_block_dict[floor_type]
 
     # set some unit
@@ -340,9 +375,9 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     for face_define in needCreatedFaces:
         base_indices = len(vecList)
         for vec in face_define['Vertices']:
-            vecList.append(rotate_vec(
+            vecList.append(rotate_translate_vec(
                     solve_vec_data(vec, d1, d2, height_multiplier, block_3dworld_unit, height_unit), 
-                    rotation, block_3dworld_unit))
+                    rotation, block_3dworld_unit, extra_translate))
 
         for uv in face_define['UVs']:
             uvList.append(solve_uv_data(uv, d1, d2, height_multiplier, block_uvworld_unit))
@@ -355,7 +390,7 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
                 face['P4'] + base_indices)
 
             # we need calc normal and push it into list
-            four_point_normal = solve_normal_data(vecList[vec_indices[0]]), vecList[vec_indices[1]], vecList[vec_indices[2]])
+            four_point_normal = solve_normal_data(vecList[vec_indices[0]], vecList[vec_indices[1]], vecList[vec_indices[2]])
             for i in range(4):
                 normalList.append(four_point_normal)
             
