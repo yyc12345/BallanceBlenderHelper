@@ -29,5 +29,36 @@
                 "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom"
             }
         ]
+    },
+    {
+        "Type": "NormalFloor",
+        "BindingDisplayTexture": "NormalFloor.png",
+        "UnitSize": "Small",
+        "ExpandType": "Column",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "NormalBorder",
+                "StartPosition": "0,0;,,,",
+                "ExpandPosition": "0,0;,d1,,",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom"
+            },
+            {
+                "Type": "NormalBorder",
+                "StartPosition": "0,1;,d1,,",
+                "ExpandPosition": "0,0;,d1,,",
+                "Rotation": "R180",
+                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom"
+            }
+        ]
     }
 ]
