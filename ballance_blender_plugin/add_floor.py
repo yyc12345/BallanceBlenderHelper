@@ -393,12 +393,13 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     # now, we can process real mesh
     # load existed base count
     global_offset_vec = len(mesh.vertices)
-    global_offset_face = len(mesh.polygons)
-    global_offset_facex4 = global_offset_face * 4
+    global_offset_polygons = len(mesh.polygons)
+    global_offset_loops = len(mesh.loops)
     vecList = []
     uvList = []
     normalList = []
     faceList = []
+    faceIndList = []
     faceMatList = []
     for face_define in needCreatedFaces:
         base_indices = len(vecList)
@@ -411,27 +412,40 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
             uvList.append(solve_uv_data(uv, d1, d2, height_multiplier, block_uvworld_unit))
 
         for face in face_define['Faces']:
-            vec_indices = (
-                face['P1'] + base_indices, 
-                face['P2'] + base_indices,
-                face['P3'] + base_indices,
-                face['P4'] + base_indices)
+            if face['Type'] == 'RECTANGLE':
+                # rectangle
+                vec_indices = (
+                    face['P1'] + base_indices, 
+                    face['P2'] + base_indices,
+                    face['P3'] + base_indices,
+                    face['P4'] + base_indices)
+                indCount = 4
+            elif face['Type'] == 'TRIANGLE':
+                # triangle
+                vec_indices = (
+                    face['P1'] + base_indices, 
+                    face['P2'] + base_indices,
+                    face['P3'] + base_indices)
+                indCount = 3
 
             # we need calc normal and push it into list
-            four_point_normal = solve_normal_data(vecList[vec_indices[0]], vecList[vec_indices[1]], vecList[vec_indices[2]])
-            for i in range(4):
-                normalList.append(four_point_normal)
+            point_normal = solve_normal_data(vecList[vec_indices[0]], vecList[vec_indices[1]], vecList[vec_indices[2]])
+            for i in range(indCount):
+                normalList.append(point_normal)
             
             # push indices into list
-            for i in range(4):
+            for i in range(indCount):
                 faceList.append(vec_indices[i] + global_offset_vec)
 
             # push material into list
             faceMatList.append(materialDict[face['Textures']])
 
+            # push face vec count into list
+            faceIndList.append(indCount)
+
     # push data into blender struct
     mesh.vertices.add(len(vecList))
-    mesh.loops.add(len(faceMatList)*4)  # 4 vec face confirm
+    mesh.loops.add(len(faceList))
     mesh.polygons.add(len(faceMatList))
     if mesh.uv_layers.active is None:
         # if no uv, create it
@@ -439,15 +453,18 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
         mesh.create_normals_split()
 
     virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
-    virtual_foreach_set(mesh.loops, "vertex_index", global_offset_facex4, faceList)
-    virtual_foreach_set(mesh.loops, "normal", global_offset_facex4, normalList)
-    virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_facex4, uvList)
+    virtual_foreach_set(mesh.loops, "vertex_index", global_offset_loops, faceList)
+    virtual_foreach_set(mesh.loops, "normal", global_offset_loops, normalList)
+    virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_loops, uvList)
 
+    cache_counter = 0
     for i in range(len(faceMatList)):
-        mesh.polygons[i + global_offset_face].loop_start = i * 4 + global_offset_facex4
-        mesh.polygons[i + global_offset_face].loop_total = 4
-        mesh.polygons[i + global_offset_face].material_index = faceMatList[i]
-        mesh.polygons[i + global_offset_face].use_smooth = True
+        indCount = faceIndList[i]
+        mesh.polygons[i + global_offset_polygons].loop_start = global_offset_loops + cache_counter
+        mesh.polygons[i + global_offset_polygons].loop_total = indCount
+        mesh.polygons[i + global_offset_polygons].material_index = faceMatList[i]
+        mesh.polygons[i + global_offset_polygons].use_smooth = True
+        cache_counter += indCount
     
 
 def load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct):

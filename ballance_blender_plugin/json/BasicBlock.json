@@ -28,6 +28,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -51,6 +52,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -74,6 +76,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -97,6 +100,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -120,6 +124,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -143,6 +148,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -175,6 +181,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 2,
                     "P2": 3,
                     "P3": 4,
@@ -182,6 +189,7 @@
                     "Textures": "FloorTopBorder"
                 },
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -220,6 +228,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -243,6 +252,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -266,6 +276,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -289,6 +300,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -312,6 +324,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 0,
                     "P2": 1,
                     "P3": 2,
@@ -335,6 +348,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
@@ -367,6 +381,7 @@
             ],
             "Faces": [
                 {
+                    "Type": "RECTANGLE",
                     "P1": 2,
                     "P2": 3,
                     "P3": 4,
@@ -374,6 +389,7 @@
                     "Textures": "FloorTopBorder"
                 },
                 {
+                    "Type": "RECTANGLE",
                     "P1": 3,
                     "P2": 2,
                     "P3": 1,
