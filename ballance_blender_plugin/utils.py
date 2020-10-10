@@ -11,8 +11,11 @@ def ShowMessageBox(message, title, icon):
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
 
 def AddSceneAndMove2Cursor(obj):
-    obj.matrix_world = bpy.context.scene.cursor.matrix
+    Move2Cursor(obj)
 
     view_layer = bpy.context.view_layer
     collection = view_layer.active_layer_collection.collection
     collection.objects.link(obj)
+
+def Move2Cursor(obj):
+    obj.location = bpy.context.scene.cursor.location

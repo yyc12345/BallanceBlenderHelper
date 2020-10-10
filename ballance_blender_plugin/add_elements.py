@@ -111,7 +111,7 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
             bpy.ops.object.join()
 
         # apply 3d cursor
-        firstObj.matrix_world = bpy.context.scene.cursor.matrix
+        utils.Move2Cursor(firstObj)
 
         return {'FINISHED'}
 
