@@ -47,19 +47,15 @@ def real_flatten_uv(mesh, reference_edge):
 
     if mesh.uv_layers.active is None:
         # if no uv, create it
-        mesh.uv_layers.new(do_init=True)
-    uv_layer = mesh.uv_layers.active
+        mesh.uv_layers.new(do_init=False)
 
-    selectedFace = []
     bm = bmesh.from_edit_mesh(mesh)
-    for face, index in ((face, index) for index, face in enumerate(bm.faces)):
-        if face.select:
-            selectedFace.append(index)
-    
-    vecList=mesh.vertices[:]
-    for ind in selectedFace:
-        face = mesh.polygons[ind]
-        allPoint = face.loop_total
+    uv_lay = bm.loops.layers.uv.active
+    for face in bm.faces:
+        if not face.select:
+            continue
+
+        allPoint = len(face.loops)
 
         if allPoint <= reference_edge:
             no_processed_count+=1
@@ -74,9 +70,9 @@ def real_flatten_uv(mesh, reference_edge):
         if p3Relative >= allPoint:
             p3Relative -= allPoint
 
-        p1=mathutils.Vector(tuple(vecList[mesh.loops[face.loop_start + p1Relative].vertex_index].co[x] for x in range(3)))
-        p2=mathutils.Vector(tuple(vecList[mesh.loops[face.loop_start + p2Relative].vertex_index].co[x] for x in range(3)))
-        p3=mathutils.Vector(tuple(vecList[mesh.loops[face.loop_start + p3Relative].vertex_index].co[x] for x in range(3)))
+        p1=mathutils.Vector(tuple(face.loops[p1Relative].vert.co[x] for x in range(3)))
+        p2=mathutils.Vector(tuple(face.loops[p2Relative].vert.co[x] for x in range(3)))
+        p3=mathutils.Vector(tuple(face.loops[p3Relative].vert.co[x] for x in range(3)))
 
         new_y_axis = p2 - p1
         new_y_axis.normalize()
@@ -88,7 +84,7 @@ def real_flatten_uv(mesh, reference_edge):
         new_x_axis = new_y_axis.cross(new_z_axis)
         new_x_axis.normalize()
 
-        # construct transition matrix
+        # construct rebase matrix
         origin_base = mathutils.Matrix((
             (1.0, 0, 0),
             (0, 1.0, 0),
@@ -104,18 +100,18 @@ def real_flatten_uv(mesh, reference_edge):
         transition_matrix.invert()
 
         # process each face
-        for loop_index in range(face.loop_start, face.loop_start + face.loop_total):
-            pp = mathutils.Vector(tuple(vecList[mesh.loops[loop_index].vertex_index].co[x] for x in range(3)))
+        for loop_index in range(allPoint):
+            pp = mathutils.Vector(tuple(face.loops[loop_index].vert.co[x] for x in range(3)))
             vec = pp-p1
             new_vec = transition_matrix @ vec
 
-            uv_layer.data[0].uv = (
+            face.loops[loop_index][uv_lay].uv = (
                 (new_vec.x if new_vec.x >=0 else -new_vec.x) / 5,
                 (new_vec.y) / 5
             )
 
-    mesh.validate(clean_customdata=False)
-    mesh.update(calc_edges=False, calc_edges_loose=False)
+    # Show the updates in the viewport
+    bmesh.update_edit_mesh(mesh)
 
     return no_processed_count
 
