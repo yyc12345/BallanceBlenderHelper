@@ -149,7 +149,10 @@ floor_texture_corresponding_map = {
     "FloorTopBorderless": "Floor_Top_Borderless.bmp",
     "FloorTopFlat": "Floor_Top_Flat.bmp",
     "FloorTopProfil": "Floor_Top_Profil.bmp",
-    "FloorTopProfilFlat": "Floor_Top_ProfilFlat.bmp"
+    "FloorTopProfilFlat": "Floor_Top_ProfilFlat.bmp",
+    "BallWood": "Ball_Wood.bmp",
+    "BallPaper": "Ball_Paper.bmp",
+    "BallStone": "Ball_Stone.bmp"
 }
 
 floor_block_dict = {}
