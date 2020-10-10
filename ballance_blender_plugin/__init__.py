@@ -36,7 +36,9 @@ if "bpy" in locals():
         importlib.reload(add_elements)
     if "add_floor" in locals():
         importlib.reload(add_floor)
-from . import config, utils, bm_import_export, rail_uv, preferences, threedsmax_align, no_uv_checker, add_elements, add_floor
+    if "flatten_uv" in locals():
+        importlib.reload(flatten_uv)
+from . import config, utils, bm_import_export, rail_uv, preferences, threedsmax_align, no_uv_checker, add_elements, add_floor, flatten_uv
 
 # ============================================= menu system
 
@@ -51,6 +53,7 @@ class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
         layout.operator("ballance.super_align")
         layout.operator("ballance.rail_uv")
         layout.operator("ballance.no_uv_checker")
+        layout.operator("ballance.flatten_uv")
 
 class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
     """Add Ballance floor"""
@@ -83,6 +86,7 @@ classes = (
     rail_uv.BALLANCE_OT_rail_uv,
     threedsmax_align.BALLANCE_OT_super_align,
     no_uv_checker.BALLANCE_OT_no_uv_checker,
+    flatten_uv.BALLANCE_OT_flatten_uv,
     BALLANCE_MT_ThreeDViewerMenu,
 
     add_elements.BALLANCE_OT_add_elements,

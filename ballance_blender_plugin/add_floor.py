@@ -447,10 +447,10 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     mesh.vertices.add(len(vecList))
     mesh.loops.add(len(faceList))
     mesh.polygons.add(len(faceMatList))
+    mesh.create_normals_split()
     if mesh.uv_layers.active is None:
         # if no uv, create it
         mesh.uv_layers.new(do_init=False)
-        mesh.create_normals_split()
 
     virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
     virtual_foreach_set(mesh.loops, "vertex_index", global_offset_loops, faceList)
