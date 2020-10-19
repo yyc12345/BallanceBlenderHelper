@@ -19,6 +19,16 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
             ),
     )
 
+    projection_axis: bpy.props.EnumProperty(
+        name="Projection axis",
+        description="Projection axis",
+        items=(
+            ("X", "X axis", "X axis"),
+            ("Y", "Y axis", "Y axis"),
+            ("Z", "Z axis", "Z axis")
+            ),
+    )
+
     uv_scale : bpy.props.FloatProperty(
         name="Scale",
         description="The scale of UV",
@@ -38,13 +48,15 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
         if context.scene.BallanceBlenderPluginProperty.material_picker == None:
             utils.ShowMessageBox(("No specific material", ), "Lost parameter", 'ERROR')
         else:
-            create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale)
+            create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale, self.projection_axis)
         return {'FINISHED'}
 
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "uv_type")
         layout.prop(context.scene.BallanceBlenderPluginProperty, "material_picker")
+        if self.uv_type != 'POINT':
+            layout.prop(self, "projection_axis")        
         if self.uv_type == 'SCALE':
             layout.prop(self, "uv_scale")
 
@@ -81,7 +93,7 @@ def get_distance(iterator):
 
     return max_value - min_value
 
-def create_rail_uv(rail_type, material_pointer, scale_size):
+def create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
     objList = []
     ignoredObj = []
     for obj in bpy.context.selected_objects:
@@ -111,10 +123,21 @@ def create_rail_uv(rail_type, material_pointer, scale_size):
             real_scale = scale_size
         elif rail_type == 'UNIFORM':
             # calc proper scale
-            maxLength = max(
-                get_distance(vec.co[0] for vec in vecList),
-                get_distance(vec.co[1] for vec in vecList)
-            )
+            if projection_axis == 'X':
+                maxLength = max(
+                    get_distance(vec.co[1] for vec in vecList),
+                    get_distance(vec.co[2] for vec in vecList)
+                )
+            elif projection_axis == 'Y':
+                maxLength = max(
+                    get_distance(vec.co[0] for vec in vecList),
+                    get_distance(vec.co[2] for vec in vecList)
+                )
+            elif projection_axis == 'Z':
+                maxLength = max(
+                    get_distance(vec.co[0] for vec in vecList),
+                    get_distance(vec.co[1] for vec in vecList)
+                )
             real_scale = 1.0 / maxLength
 
         uv_layer = mesh.uv_layers.active.data
@@ -128,8 +151,19 @@ def create_rail_uv(rail_type, material_pointer, scale_size):
                     uv_layer[loop_index].uv[1] = 1
                 else:
                     # following xy -> uv scale
-                    uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
-                    uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
+                    # 
+                    # use Z axis: X->U Y->V
+                    # use X axis: Y->U Z->V
+                    # use Y axis: X->U Z->V
+                    if projection_axis == 'X':
+                        uv_layer[loop_index].uv[0] = vecList[index].co[1] * real_scale
+                        uv_layer[loop_index].uv[1] = vecList[index].co[2] * real_scale
+                    elif projection_axis == 'Y':
+                        uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
+                        uv_layer[loop_index].uv[1] = vecList[index].co[2] * real_scale
+                    elif projection_axis == 'Z':
+                        uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
+                        uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
 
     if len(ignoredObj) != 0:
         utils.ShowMessageBox(("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), "Execution result", 'INFO')

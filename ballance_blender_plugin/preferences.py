@@ -8,6 +8,18 @@ class MyPropertyGroup(bpy.types.PropertyGroup):
         description="The material used for rail"
     )
 
+    collection_picker : bpy.props.PointerProperty(
+        type=bpy.types.Collection,
+        name="Collection",
+        description="The collection which will be exported"
+    )
+
+    object_picker : bpy.props.PointerProperty(
+        type=bpy.types.Object,
+        name="Object",
+        description="The object which will be exported"
+    )
+
 class BallanceBlenderPluginPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
 

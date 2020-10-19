@@ -65,18 +65,28 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
     
     export_mode: bpy.props.EnumProperty(
         name="Export mode",
-        items=(('COLLECTION', "Selected collection", "Export the selected collection"),
-               ('OBJECT', "Selected objects", "Export the selected objects"),
+        items=(('COLLECTION', "Collection", "Export a collection"),
+               ('OBJECT', "Objects", "Export an objects"),
                ),
-        )
-    export_target: bpy.props.StringProperty(
-        name="Export target",
-        description="Which one will be exported",
         )
 
     def execute(self, context):
-        export_bm(context, self.filepath, self.export_mode, self.export_target)
+        if (self.export_mode == 'COLLECTION' and context.scene.BallanceBlenderPluginProperty.collection_picker is None) or (self.export_mode == 'OBJECT' and context.scene.BallanceBlenderPluginProperty.object_picker is None):
+            utils.ShowMessageBox(("No specific target", ), "Lost parameter", 'ERROR')
+        else:
+            if self.export_mode == 'COLLECTION':
+                export_bm(context, self.filepath, self.export_mode, context.scene.BallanceBlenderPluginProperty.collection_picker)
+            elif self.export_mode == 'OBJECT':
+                export_bm(context, self.filepath, self.export_mode, context.scene.BallanceBlenderPluginProperty.object_picker)
         return {'FINISHED'}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "export_mode")
+        if self.export_mode == 'COLLECTION':
+            layout.prop(context.scene.BallanceBlenderPluginProperty, "collection_picker")
+        elif self.export_mode == 'OBJECT':
+            layout.prop(context.scene.BallanceBlenderPluginProperty, "object_picker")
 
 # ========================================== method
 
@@ -332,7 +342,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
 
     tempFolderObj.cleanup()
     
-def export_bm(context,filepath,export_mode, export_target):
+def export_bm(context, filepath, export_mode, export_target):
     # ============================================ alloc a temp folder
     tempFolderObj = tempfile.TemporaryDirectory()
     tempFolder = tempFolderObj.name
@@ -344,9 +354,9 @@ def export_bm(context,filepath,export_mode, export_target):
     
     # ============================================ find export target. don't need judge them in there. just collect them
     if export_mode== "COLLECTION":
-        objectList = bpy.data.collections[export_target].objects
+        objectList = export_target.objects
     else:
-        objectList = [bpy.data.objects[export_target]]
+        objectList = [export_target]
 
     # try get forcedCollection
     try:
