@@ -2,7 +2,7 @@ bl_info={
 	"name":"Ballance Blender Plugin",
 	"description":"Ballance mapping tools for Blender",
 	"author":"yyc12345",
-	"version":(1,1),
+	"version":(2,0),
 	"blender":(2,83,0),
 	"category":"Object",
 	"support":"TESTING",

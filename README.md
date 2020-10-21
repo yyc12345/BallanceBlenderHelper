@@ -6,13 +6,15 @@
 
 This is a Blender plugin which is served for Ballance mapping in Blender.
 
-Currently, it only contain fundamental functions. More useful features will be added in future.
+The latest commit may not be stable to use, please visit the Release page to get a stable version.
 
 ## Technical infomation
 
 Used BM file spec can be found in [there](https://github.com/yyc12345/gist/blob/master/BMFileSpec/BMSpec_ZH.md)(Chinese only).
 
 Used tools chain principle and the file format located in `meshes` can be found in [there](https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md)(Chinese only).
+
+The format of the files which are under the `jsons` folder and belong to the BMERevenge section, can be found in [here](https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_ZH.md)
 
 This plugin will continuously support Blender lastest **LTS** version. This plugin will migrate to new version when the new LTS version released. Currently, it based on Blender 2.83.x.
 
@@ -36,19 +38,43 @@ It should be noted that once the BM is exported, all the faces in the file will 
 
 Ballance 3D is a set of light tools related to 3D operations, which can be found in the upper right corner of the 3D view.
 
-#### Super Align
+#### 3ds Max Align
 
 Provide 3ds Max like align tools. Current active will be seen as reference object. All selected objects(except active object) will be seen as operating object (So you can select multiple objects to align to the reference object).
 
 #### Create Rail UV
 
-Create UV for rails. You should select the object which you want add rail like UV to. Then, click this menu. Before doing this, you need make sure all selected object have at least 1 UV map (If it have more than 1 UV map, only the first UV map will be changed).
+To create UVs for the rails in the map, you need to select the objects that need to add UVs similar to the rails, and then click this button to create.
+
+In the dialog, you can select the material to be used. You can also choose the unfolding mode. For shorter rails, you can choose Point mode. For longer rails, you can use Uniform mode. If you need to manually adjust the zoom ratio, please select Scale mode and specify the ratio (not recommended).
+
+You can also select the projection axis for better UV distribution.
+
+### Flatten UV
+
+In the object editing mode, it is a operator which is used to attach the currently selected surface to the UV. And you can specific the edge which will be attached into the V axis. Note that only convex faces are supported.
+
+In the edit mode, select the surface, click Flatten UV, and then scroll the slider to select an edge as a reference. If the generated UV is not attached correctly, such as the FloorSide's band is pasted to the bottom, you can reselect the reference edge and redo the operation until it is correct.
+
+### Add Menu
+
+In the add menu, we have added a set of commonly used objects. After adding, the object will move to the 3D cursor.
+
+#### Elements
+
+Add elements, you can also specify attributes such as section when adding (it will not be displayed for unique objects such as start point)
+
+#### Rail section
+
+Add rail section, you can choose monorail or rail (just decide the number of rail section loops added, and will not help you rotate the angle), as well as rail radius and rail span.
+
+#### Floors
+
+Adding floor is part of the BMERevenge project. Basic floor is a basic floor component, and Derived floor is a common component composed of basic components. The extension(length) and the side configuration can be set according to its properties. It also has the advantage of reducing vertices.
+
+It is recommended to merge the vertices by distance, unless there is a need to delete the surface after adding it
 
 ## Install
 
 Put `ballance_blender_plugin` into Blender's plugin folder, `scripts/addons_contrib`. Then enable this plugin in Blender's preferences (Don't forget to configure this plugin's settings).
 
-## Dev plan
-
-* Add elements in Add menu.
-* The assisted tools for creating custom floor in Blender (for example: add UV for floor).

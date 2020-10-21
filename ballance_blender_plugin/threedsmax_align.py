@@ -12,7 +12,7 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
     align_z: bpy.props.BoolProperty(name="Z position")
 
     current_references: bpy.props.EnumProperty(
-        name="Current",
+        name="Reference",
         items=(('MIN', "Min", ""),
                 ('CENTER', "Center (bound box)", ""),
                 ('POINT', "Center (axis)", ""),
