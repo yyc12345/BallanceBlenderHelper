@@ -30,6 +30,8 @@ class BALLANCE_OT_add_elements(bpy.types.Operator):
         # get name
         if self.elements_type in self.uniqueElements:
             finalObjectName = self.elements_type + "_01"
+        elif self.elements_type in self.attentionElements:
+            finalObjectName = self.elements_type + "_0" + str(self.elements_sector)
         else:
             finalObjectName = self.elements_type + "_0" + str(self.elements_sector) + "_"
 
