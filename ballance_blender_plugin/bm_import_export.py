@@ -7,7 +7,7 @@ from bpy_extras.image_utils import load_image
 from . import utils, config
 
 class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
-    """Load a Ballance Map File (BM file spec 1.2)"""
+    """Load a Ballance Map File (BM file spec 1.3)"""
     bl_idname = "ballance.import_bm"
     bl_label = "Import BM "
     bl_options = {'PRESET', 'UNDO'}
@@ -57,7 +57,7 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
         return {'FINISHED'}
         
 class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
-    """Save a Ballance Map File (BM file spec 1.2)"""
+    """Save a Ballance Map File (BM file spec 1.3)"""
     bl_idname = "ballance.export_bm"
     bl_label = 'Export BM'
     bl_options = {'PRESET'}
@@ -90,7 +90,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 
 # ========================================== method
 
-bm_current_version = 12
+bm_current_version = 13
 
 def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, materialOpt, meshOpt, objectOpt):
     # ============================================ alloc a temp folder
@@ -311,6 +311,7 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
                 view_layer.active_layer_collection.collection.children.link(forcedCollection)
 
         # start process it
+        object_groupList = []
         for item in objectList:
             fobject.seek(item.offset, os.SEEK_SET)
 
@@ -319,6 +320,10 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
             object_isForcedNoComponent = read_bool(fobject)
             object_isHidden = read_bool(fobject)
             object_worldMatrix = read_worldMaterix(fobject)
+            object_groupListCount = read_uint32(fobject)
+            object_groupList.clear()
+            for i in range(object_groupListCount):
+                object_groupList.append(read_string(fobject))
             object_meshIndex = read_uint32(fobject)
 
             # got mesh first
@@ -337,6 +342,10 @@ def import_bm(context,filepath,externalTexture,blenderTempFolder, textureOpt, ma
                 collection.objects.link(obj)
             obj.matrix_world = object_worldMatrix
             obj.hide_set(object_isHidden)
+
+            # write custom property
+            if len(object_groupList) != 0:
+                obj['virtools-group'] = tuple(object_groupList)
 
     view_layer.update()
 
@@ -407,6 +416,10 @@ def export_bm(context, filepath, export_mode, export_target):
                 # get visibility
                 object_isHidden = not obj.visible_get()
 
+                # try get grouping data
+                object_groupList = try_get_custom_property(obj, 'virtools-group')
+                object_groupList = set_value_when_none(object_groupList, [])
+
                 # write finfo first
                 write_string(finfo, obj.name)
                 write_uint8(finfo, info_bm_type.OBJECT)
@@ -417,6 +430,9 @@ def export_bm(context, filepath, export_mode, export_target):
                 write_bool(fobject, object_isForcedNoComponent)
                 write_bool(fobject, object_isHidden)
                 write_worldMatrix(fobject, obj.matrix_world)
+                write_uint32(fobject, len(object_groupList))
+                for item in object_groupList:
+                    write_string(fobject, item)
                 write_uint32(fobject, meshId)
 
         # ====================== export mesh
