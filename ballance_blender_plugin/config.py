@@ -146,7 +146,9 @@ floor_expand_direction_map = {
 floor_texture_corresponding_map = {
     "FloorSide": "Floor_Side.bmp",
     "FloorTopBorder": "Floor_Top_Border.bmp",
+    "FloorTopBorder_ForSide": "Floor_Top_Border.bmp",
     "FloorTopBorderless": "Floor_Top_Borderless.bmp",
+    "FloorTopBorderless_ForSide": "Floor_Top_Borderless.bmp",
     "FloorTopFlat": "Floor_Top_Flat.bmp",
     "FloorTopProfil": "Floor_Top_Profil.bmp",
     "FloorTopProfilFlat": "Floor_Top_ProfilFlat.bmp",
@@ -154,6 +156,12 @@ floor_texture_corresponding_map = {
     "BallPaper": "Ball_Paper.bmp",
     "BallStone": "Ball_Stone.bmp"
 }
+
+floor_side_material_list = [
+    "FloorSide",
+    "FloorTopBorder_ForSide",
+    "FloorTopBorderless_ForSide"
+]
 
 floor_block_dict = {}
 floor_basic_block_list = []

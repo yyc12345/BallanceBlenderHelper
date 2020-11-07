@@ -206,9 +206,9 @@ def create_or_get_material(material_name):
         # write custom property
         # WARNING: this data is shared with BallanceVirtoolsPlugin - mapping_BM.cpp - fix_blender_texture
         m['virtools-ambient'] = (0.0, 0.0, 0.0)
-        m['virtools-diffuse'] = (122 / 255.0, 122 / 255.0, 122 / 255.0) if material_name == 'FloorSide' else (1.0, 1.0, 1.0)
-        m['virtools-specular'] = (0.0, 0.0, 0.0) if material_name == 'FloorSide' else (80 / 255.0, 80 / 255.0, 80 / 255.0)
-        m['virtools-emissive'] = (104 / 255.0, 104 / 255.0, 104 / 255.0) if material_name == 'FloorSide' else (0.0, 0.0, 0.0)
+        m['virtools-diffuse'] = (122 / 255.0, 122 / 255.0, 122 / 255.0) if material_name in config.floor_side_material_list else (1.0, 1.0, 1.0)
+        m['virtools-specular'] = (0.0, 0.0, 0.0) if material_name in config.floor_side_material_list else (80 / 255.0, 80 / 255.0, 80 / 255.0)
+        m['virtools-emissive'] = (104 / 255.0, 104 / 255.0, 104 / 255.0) if material_name in config.floor_side_material_list else (0.0, 0.0, 0.0)
         m['virtools-power'] = 0.0
 
     return m
