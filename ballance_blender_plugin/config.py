@@ -157,10 +157,62 @@ floor_texture_corresponding_map = {
     "BallStone": "Ball_Stone.bmp"
 }
 
-floor_side_material_list = [
-    "FloorSide",
-    "FloorTopBorder_ForSide",
-    "FloorTopBorderless_ForSide"
+# WARNING: this data is shared with BallanceVirtoolsPlugin - mapping_BM.cpp - fix_blender_texture
+floor_material_statistic = [
+    {
+        "member": [
+                "FloorSide",
+                "FloorTopBorder_ForSide",
+                "FloorTopBorderless_ForSide"
+        ],
+        "data": {
+            "ambient": (0, 0, 0),
+            "diffuse": (122 / 255.0, 122 / 255.0, 122 / 255.0),
+            "specular": (0.0, 0.0, 0.0),
+            "emissive": (104 / 255.0, 104 / 255.0, 104 / 255.0),
+            "power": 0
+        }
+    },
+    {
+        "member": [
+                "FloorTopBorder",
+                "FloorTopBorderless",
+                "FloorTopFlat",
+                "FloorTopProfilFlat"
+        ],
+        "data": {
+            "ambient": (0, 0, 0),
+            "diffuse": (1.0, 1.0, 1.0),
+            "specular": (80 / 255.0, 80 / 255.0, 80 / 255.0),
+            "emissive": (0.0, 0.0, 0.0),
+            "power": 100
+        }
+    },
+    {
+        "member": [
+                "BallPaper"
+        ],
+        "data": {
+            "ambient": (25 / 255.0, 25 / 255.0, 25 / 255.0),
+            "diffuse": (1.0, 1.0, 1.0),
+            "specular": (0.0, 0.0, 0.0),
+            "emissive": (100 / 255.0, 100 / 255.0, 100 / 255.0),
+            "power": 0
+        }
+    },
+        {
+        "member": [
+                "BallStone",
+                "BallWood"
+        ],
+        "data": {
+            "ambient": (25 / 255.0, 25 / 255.0, 25 / 255.0),
+            "diffuse": (1.0, 1.0, 1.0),
+            "specular": (229 / 255.0, 229 / 255.0, 229 / 255.0),
+            "emissive": (60 / 255.0, 60 / 255.0, 60 / 255.0),
+            "power": 0
+        }
+    }
 ]
 
 floor_block_dict = {}

@@ -204,12 +204,14 @@ def create_or_get_material(material_name):
         m.node_tree.links.new(inode.outputs[0],bnode.inputs[0])
 
         # write custom property
-        # WARNING: this data is shared with BallanceVirtoolsPlugin - mapping_BM.cpp - fix_blender_texture
-        m['virtools-ambient'] = (0.0, 0.0, 0.0)
-        m['virtools-diffuse'] = (122 / 255.0, 122 / 255.0, 122 / 255.0) if material_name in config.floor_side_material_list else (1.0, 1.0, 1.0)
-        m['virtools-specular'] = (0.0, 0.0, 0.0) if material_name in config.floor_side_material_list else (80 / 255.0, 80 / 255.0, 80 / 255.0)
-        m['virtools-emissive'] = (104 / 255.0, 104 / 255.0, 104 / 255.0) if material_name in config.floor_side_material_list else (0.0, 0.0, 0.0)
-        m['virtools-power'] = 0.0
+        for try_item in config.floor_material_statistic:
+            if material_name in try_item['member']:
+                m['virtools-ambient'] = try_item['data']['ambient']
+                m['virtools-diffuse'] = try_item['data']['diffuse']
+                m['virtools-specular'] = try_item['data']['specular']
+                m['virtools-emissive'] = try_item['data']['emissive']
+                m['virtools-power'] = try_item['data']['power']
+                break
 
     return m
 
