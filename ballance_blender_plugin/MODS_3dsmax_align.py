@@ -1,5 +1,5 @@
-import bpy,mathutils
-from . import utils
+import bpy, mathutils
+from . import UTILS_functions
 
 class BALLANCE_OT_super_align(bpy.types.Operator):
     """Align object with 3ds Max way"""
@@ -31,10 +31,10 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
 
     @classmethod
     def poll(self, context):
-        return check_align_target()
+        return _check_align_target()
 
     def execute(self, context):
-        align_object(self.align_x, self.align_y, self.align_z, self.current_references, self.target_references)
+        _align_object(self.align_x, self.align_y, self.align_z, self.current_references, self.target_references)
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -56,7 +56,7 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
 
 # ============================== method
 
-def check_align_target():
+def _check_align_target():
     if bpy.context.active_object is None:
         return False
 
@@ -69,14 +69,14 @@ def check_align_target():
     
     return True
 
-def align_object(use_x, use_y, use_z, currentMode, targetMode):
+def _align_object(use_x, use_y, use_z, currentMode, targetMode):
     if not (use_x or use_y or use_z):
         return
 
     # calc active object data
     currentObj = bpy.context.active_object
     currentObjBbox = [currentObj.matrix_world @ mathutils.Vector(corner) for corner in currentObj.bound_box]
-    currentObjRef = provideObjRefPoint(currentObj, currentObjBbox, currentMode)
+    currentObjRef = _provide_obj_reference_point(currentObj, currentObjBbox, currentMode)
 
     # calc target
     targetObjList = bpy.context.selected_objects[:]
@@ -86,7 +86,7 @@ def align_object(use_x, use_y, use_z, currentMode, targetMode):
     # process each obj
     for targetObj in targetObjList:
         targetObjBbox = [targetObj.matrix_world @ mathutils.Vector(corner) for corner in targetObj.bound_box]
-        targetObjRef = provideObjRefPoint(targetObj, targetObjBbox, targetMode)
+        targetObjRef = _provide_obj_reference_point(targetObj, targetObjBbox, targetMode)
 
         if use_x:
             targetObj.location.x += currentObjRef.x - targetObjRef.x
@@ -95,7 +95,7 @@ def align_object(use_x, use_y, use_z, currentMode, targetMode):
         if use_z:
             targetObj.location.z += currentObjRef.z - targetObjRef.z
 
-def provideObjRefPoint(obj, vecList, mode):
+def _provide_obj_reference_point(obj, vecList, mode):
     refPoint = mathutils.Vector((0, 0, 0))
 
     if (mode == 'MIN'):

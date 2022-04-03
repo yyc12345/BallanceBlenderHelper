@@ -3,18 +3,18 @@ import os, math
 from bpy_extras import io_utils,node_shader_utils
 # from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
-from . import utils, config
+from . import UTILS_constants, UTILS_functions
 
-class BALLANCE_OT_add_floor(bpy.types.Operator):
+class BALLANCE_OT_add_floors(bpy.types.Operator):
     """Add Ballance floor"""
-    bl_idname = "ballance.add_floor"
+    bl_idname = "ballance.add_floors"
     bl_label = "Add floor"
     bl_options = {'UNDO'}
 
     floor_type: bpy.props.EnumProperty(
         name="Type",
         description="Floor type",
-        items=tuple((x, x, "") for x in config.floor_block_dict.keys()),
+        items=tuple((x, x, "") for x in UTILS_constants.floor_blockDict.keys()),
     )
 
     expand_length_1 : bpy.props.IntProperty(
@@ -39,16 +39,16 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
     )
 
     use_2d_top : bpy.props.BoolProperty(
-        name="Top side"
+        name="Top edge"
     )
     use_2d_right : bpy.props.BoolProperty(
-        name="Right side"
+        name="Right edge"
     )
     use_2d_bottom : bpy.props.BoolProperty(
-        name="Bottom side"
+        name="Bottom edge"
     )
     use_2d_left : bpy.props.BoolProperty(
-        name="Left side"
+        name="Left edge"
     )
     use_3d_top : bpy.props.BoolProperty(
         name="Top face"
@@ -65,10 +65,14 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         return os.path.isdir(prefs.external_folder)
 
     def execute(self, context):
+        # get prefs
+        prefs = bpy.context.preferences.addons[__package__].preferences
+        prefs_externalTexture = prefs.external_folder
+
         # load mesh
         objmesh = bpy.data.meshes.new('done_')
-        if self.floor_type in config.floor_basic_block_list:
-            load_basic_floor(
+        if self.floor_type in UTILS_constants.floor_basicBlockList:
+            _load_basic_floor(
                 objmesh, 
                 self.floor_type, 
                 'R0', 
@@ -81,9 +85,10 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
                 self.use_2d_left,
                 self.use_3d_top,
                 self.use_3d_bottom),
-                (0.0, 0.0))
-        elif self.floor_type in config.floor_derived_block_list:
-            load_derived_floor(
+                (0.0, 0.0),
+                prefs_externalTexture)
+        elif self.floor_type in UTILS_constants.floor_derivedBlockList:
+            _load_derived_floor(
                 objmesh, 
                 self.floor_type,
                 self.height_multiplier, 
@@ -94,7 +99,10 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
                 self.use_2d_bottom,
                 self.use_2d_left,
                 self.use_3d_top,
-                self.use_3d_bottom))
+                self.use_3d_bottom),
+                prefs_externalTexture)
+        else:
+            raise Exception("Fatal error: unknow floor type.")
 
         # normalization mesh
         objmesh.validate(clean_customdata=False)
@@ -102,7 +110,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         
         # create object and link it
         obj=bpy.data.objects.new('A_Floor_BMERevenge_', objmesh)
-        utils.AddSceneAndMove2Cursor(obj)
+        UTILS_functions.add_into_scene_and_move_to_cursor(obj)
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -111,7 +119,7 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
 
     def draw(self, context):
         # get floor prototype
-        floor_prototype = config.floor_block_dict[self.floor_type]
+        floor_prototype = UTILS_constants.floor_blockDict[self.floor_type]
 
         # try sync default value
         if self.previous_floor_type != self.floor_type:
@@ -142,13 +150,13 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         col.label(text="Expand mode: " + floor_prototype['ExpandType'])
         grids = col.grid_flow(row_major=True, columns=3)
         grids.separator()
-        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][0])
+        grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][0])
         grids.separator()
-        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][3])
-        grids.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
-        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][1])
+        grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][3])
+        grids.template_icon(icon_value = UTILS_constants.icons_floorDict[self.floor_type])
+        grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][1])
         grids.separator()
-        grids.label(text=config.floor_expand_direction_map[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][2])
+        grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][2])
         grids.separator()
 
         col.separator()
@@ -164,13 +172,13 @@ class BALLANCE_OT_add_floor(bpy.types.Operator):
         grids.prop(self, "use_2d_top")
         grids.separator()
         grids.prop(self, "use_2d_left")
-        grids.template_icon(icon_value = config.blenderIcon_floor_dict[self.floor_type])
+        grids.template_icon(icon_value = UTILS_constants.icons_floorDict[self.floor_type])
         grids.prop(self, "use_2d_right")
         grids.separator()
         grids.prop(self, "use_2d_bottom")
         grids.separator()
 
-def face_fallback(normal_face, expand_face, height):
+def _face_fallback(normal_face, expand_face, height):
     if expand_face == None:
         return normal_face
     
@@ -179,43 +187,44 @@ def face_fallback(normal_face, expand_face, height):
     else:
         return expand_face
 
-def create_or_get_material(material_name):
+def _create_or_get_material(material_name, prefs_externalTexture):
     # WARNING: this code is shared with bm_import_export
-    deconflict_name = "BMERevenge_" + material_name
-    try:
-        m = bpy.data.materials[deconflict_name]
-    except:
-        # it is not existed, we need create a new one
-        m = bpy.data.materials.new(deconflict_name)
-        # we need init it.
-        # load texture first
-        externalTextureFolder = bpy.context.preferences.addons[__package__].preferences.external_folder
-        txur = load_image(config.floor_texture_corresponding_map[material_name], externalTextureFolder, check_existing=False)    # force reload, we don't want it is shared with normal material
-        # create material and link texture
-        m.use_nodes=True
-        for node in m.node_tree.nodes:
-            m.node_tree.nodes.remove(node)
-        bnode=m.node_tree.nodes.new(type="ShaderNodeBsdfPrincipled")
-        mnode=m.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
-        m.node_tree.links.new(bnode.outputs[0],mnode.inputs[0])
+    deconflict_mtl_name = "BMERevenge_" + material_name
 
-        inode=m.node_tree.nodes.new(type="ShaderNodeTexImage")
-        inode.image=txur
-        m.node_tree.links.new(inode.outputs[0],bnode.inputs[0])
+    # create or get material
+    (mtl, skip_init) = UTILS_functions.create_instance_with_option(
+        UTILS_constants.BmfileInfoType.MATERIAL,
+        deconflict_mtl_name, 'CURRENT'
+    )
+    if skip_init:
+        return mtl
 
-        # write custom property
-        for try_item in config.floor_material_statistic:
-            if material_name in try_item['member']:
-                m['virtools-ambient'] = try_item['data']['ambient']
-                m['virtools-diffuse'] = try_item['data']['diffuse']
-                m['virtools-specular'] = try_item['data']['specular']
-                m['virtools-emissive'] = try_item['data']['emissive']
-                m['virtools-power'] = try_item['data']['power']
-                break
+    # initialize material parameter
+    # load texture first
+    texture_filename = UTILS_constants.floor_textureReflactMap[material_name]
+    deconflict_texture_name = "BMERevenge_" + texture_filename
+    (texture, skip_init) = UTILS_functions.create_instance_with_option(
+        UTILS_constants.BmfileInfoType.TEXTURE,
+        deconflict_texture_name, 'CURRENT',
+        extra_texture_path = prefs_externalTexture, extra_texture_filename = texture_filename
+    )
 
+    # iterate material statistic to get corresponding mtl data
+    for try_item in UTILS_constants.floor_materialStatistic:
+        if material_name in try_item['member']:
+            # got it
+            # set material data
+            UTILS_functions.create_material_nodes(mtl,
+                try_item['data']['ambient'], try_item['data']['diffuse'], 
+                try_item['data']['specular'], try_item['data']['emissive'],
+                try_item['data']['power'],
+                texture)
+            break
+    
+    # return mtl
     return m
 
-def solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
+def _solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
     sp = str_data.split(';')
     sp_point = sp[0].split(',')
     vec = [float(sp_point[0]), float(sp_point[1]), float(sp_point[2])]
@@ -236,7 +245,7 @@ def solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
 
     return vec
 
-def rotate_translate_vec(vec, rotation, unit, extra_translate):
+def _rotate_translate_vec(vec, rotation, unit, extra_translate):
     vec[0] -= unit / 2
     vec[1] -= unit / 2
 
@@ -260,7 +269,7 @@ def rotate_translate_vec(vec, rotation, unit, extra_translate):
     )
 
 
-def solve_uv_data(str_data, d1, d2, d3, unit):
+def _solve_uv_data(str_data, d1, d2, d3, unit):
     sp = str_data.split(';')
     sp_point = sp[0].split(',')
     vec = [float(sp_point[0]), float(sp_point[1])]
@@ -281,7 +290,7 @@ def solve_uv_data(str_data, d1, d2, d3, unit):
 
     return tuple(vec)
 
-def solve_normal_data(point1, point2, point3):
+def _solve_normal_data(point1, point2, point3):
     vector1 = (
         point2[0] - point1[0],
         point2[1] - point1[1],
@@ -309,7 +318,7 @@ def solve_normal_data(point1, point2, point3):
 
     return tuple(nor)
 
-def solve_smashed_position(str_data, d1, d2):
+def _solve_smashed_position(str_data, d1, d2):
     sp=str_data.split(';')
     sp_pos = sp[0].split(',')
     sp_sync = sp[1].split(',')
@@ -325,7 +334,7 @@ def solve_smashed_position(str_data, d1, d2):
 
     return tuple(vec)
 
-def virtual_foreach_set(collection, field, base_num, data):
+def _virtual_foreach_set(collection, field, base_num, data):
     counter = 0
     for i in data:
         exec("a[j]." + field + "=q", {}, {
@@ -345,8 +354,8 @@ sides_struct should be a tuple and it always have 6 bool items
 WARNING: this code is shared with bm import export
 
 '''
-def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sides_struct, extra_translate):
-    floor_prototype = config.floor_block_dict[floor_type]
+def _load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sides_struct, extra_translate, prefs_externalTexture):
+    floor_prototype = UTILS_constants.floor_blockDict[floor_type]
 
     # set some unit
     height_unit = 5.0
@@ -360,13 +369,13 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     # got all needed faces
     needCreatedFaces = []
     if sides_struct[0]:
-        needCreatedFaces.append(face_fallback(floor_prototype['TwoDTopSide'], floor_prototype['TwoDTopSideExpand'], height_multiplier))
+        needCreatedFaces.append(_face_fallback(floor_prototype['TwoDTopSide'], floor_prototype['TwoDTopSideExpand'], height_multiplier))
     if sides_struct[1]:
-        needCreatedFaces.append(face_fallback(floor_prototype['TwoDRightSide'], floor_prototype['TwoDRightSideExpand'], height_multiplier))
+        needCreatedFaces.append(_face_fallback(floor_prototype['TwoDRightSide'], floor_prototype['TwoDRightSideExpand'], height_multiplier))
     if sides_struct[2]:
-        needCreatedFaces.append(face_fallback(floor_prototype['TwoDBottomSide'], floor_prototype['TwoDBottomSideExpand'], height_multiplier))
+        needCreatedFaces.append(_face_fallback(floor_prototype['TwoDBottomSide'], floor_prototype['TwoDBottomSideExpand'], height_multiplier))
     if sides_struct[3]:
-        needCreatedFaces.append(face_fallback(floor_prototype['TwoDLeftSide'], floor_prototype['TwoDLeftSideExpand'], height_multiplier))
+        needCreatedFaces.append(_face_fallback(floor_prototype['TwoDLeftSide'], floor_prototype['TwoDLeftSideExpand'], height_multiplier))
     if sides_struct[4]:
         needCreatedFaces.append(floor_prototype['ThreeDTopFace'])
     if sides_struct[5]:
@@ -382,7 +391,7 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
             new_texture = face['Textures']
             if new_texture not in materialDict.keys():
                 # try get from existed solt
-                pending_material = create_or_get_material(new_texture)
+                pending_material = _create_or_get_material(new_texture, prefs_externalTexture)
                 if pending_material not in allmat:
                     # no matched. add it
                     mesh.materials.append(pending_material)
@@ -406,12 +415,12 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
     for face_define in needCreatedFaces:
         base_indices = len(vecList)
         for vec in face_define['Vertices']:
-            vecList.append(rotate_translate_vec(
-                    solve_vec_data(vec, d1, d2, height_multiplier, block_3dworld_unit, height_unit), 
+            vecList.append(_rotate_translate_vec(
+                    _solve_vec_data(vec, d1, d2, height_multiplier, block_3dworld_unit, height_unit), 
                     rotation, block_3dworld_unit, extra_translate))
 
         for uv in face_define['UVs']:
-            uvList.append(solve_uv_data(uv, d1, d2, height_multiplier, block_uvworld_unit))
+            uvList.append(_solve_uv_data(uv, d1, d2, height_multiplier, block_uvworld_unit))
 
         for face in face_define['Faces']:
             if face['Type'] == 'RECTANGLE':
@@ -431,7 +440,7 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
                 indCount = 3
 
             # we need calc normal and push it into list
-            point_normal = solve_normal_data(vecList[vec_indices[0]], vecList[vec_indices[1]], vecList[vec_indices[2]])
+            point_normal = _solve_normal_data(vecList[vec_indices[0]], vecList[vec_indices[1]], vecList[vec_indices[2]])
             for i in range(indCount):
                 normalList.append(point_normal)
             
@@ -454,10 +463,10 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
         # if no uv, create it
         mesh.uv_layers.new(do_init=False)
 
-    virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
-    virtual_foreach_set(mesh.loops, "vertex_index", global_offset_loops, faceList)
-    virtual_foreach_set(mesh.loops, "normal", global_offset_loops, normalList)
-    virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_loops, uvList)
+    _virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
+    _virtual_foreach_set(mesh.loops, "vertex_index", global_offset_loops, faceList)
+    _virtual_foreach_set(mesh.loops, "normal", global_offset_loops, normalList)
+    _virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_loops, uvList)
 
     cache_counter = 0
     for i in range(len(faceMatList)):
@@ -469,8 +478,8 @@ def load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, side
         cache_counter += indCount
     
 
-def load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct):
-    floor_prototype = config.floor_block_dict[floor_type]
+def _load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct, prefs_externalTexture):
+    floor_prototype = UTILS_constants.floor_blockDict[floor_type]
 
     # set some unit
     if floor_prototype['UnitSize'] == 'Small':
@@ -492,13 +501,13 @@ def load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct
 
     # iterate smahsed blocks
     for blk in floor_prototype['SmashedBlocks']:
-        start_pos = solve_smashed_position(blk['StartPosition'], d1, d2)
-        expand_pos = solve_smashed_position(blk['ExpandPosition'], d1, d2)
+        start_pos = _solve_smashed_position(blk['StartPosition'], d1, d2)
+        expand_pos = _solve_smashed_position(blk['ExpandPosition'], d1, d2)
 
         sides_data = tuple(sides_dict[x] for x in blk['SideSync'].split(';'))
 
         # call basic floor creator
-        load_basic_floor(
+        _load_basic_floor(
             mesh,
             blk['Type'],
             blk['Rotation'],
@@ -506,7 +515,8 @@ def load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struct
             expand_pos[0],
             expand_pos[1],
             sides_data,
-            (start_pos[0] * block_3dworld_unit, start_pos[1] * block_3dworld_unit)
+            (start_pos[0] * block_3dworld_unit, start_pos[1] * block_3dworld_unit),
+            prefs_externalTexture
         )
 
 

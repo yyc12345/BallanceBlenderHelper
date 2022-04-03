@@ -1,6 +1,6 @@
 import bpy,mathutils
 import bmesh
-from . import utils
+from . import UTILS_functions
 
 class BALLANCE_OT_flatten_uv(bpy.types.Operator):
     """Flatten selected face UV. Only works for convex face"""
@@ -9,7 +9,7 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
     bl_options = {'UNDO'}
 
     reference_edge : bpy.props.IntProperty(
-        name="Reference_edge",
+        name="Reference edge",
         description="The references edge of UV. It will be placed in V axis.",
         min=0,
         soft_min=0,
@@ -33,16 +33,19 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
     def execute(self, context):
-        no_processed_count = real_flatten_uv(bpy.context.active_object.data, self.reference_edge)
+        no_processed_count = _real_flatten_uv(bpy.context.active_object.data, self.reference_edge)
         if no_processed_count != 0:
-            utils.ShowMessageBox(("{} faces may not be processed correctly because they have problem.".format(no_processed_count), ), "Warning", 'ERROR')
+            UTILS_functions.show_message_box(
+                ("{} faces may not be processed correctly because they have problem.".format(no_processed_count), ), 
+                "Warning", 'ERROR'
+            )
         return {'FINISHED'}
 
     def draw(self, context):
         layout = self.layout
         layout.prop(self, "reference_edge")
 
-def real_flatten_uv(mesh, reference_edge):
+def _real_flatten_uv(mesh, reference_edge):
     no_processed_count = 0
 
     if mesh.uv_layers.active is None:

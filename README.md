@@ -50,7 +50,7 @@ In the dialog, you can select the material to be used. You can also choose the u
 
 You can also select the projection axis for better UV distribution.
 
-### Flatten UV
+#### Flatten UV
 
 In the object editing mode, it is a operator which is used to attach the currently selected surface to the UV. And you can specific the edge which will be attached into the V axis. Note that only convex faces are supported.
 

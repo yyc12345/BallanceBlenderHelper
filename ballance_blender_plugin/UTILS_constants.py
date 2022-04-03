@@ -1,7 +1,18 @@
 import json
 import os
 
-external_texture_list = set([
+bmfile_currentVersion = 14
+bmfile_flagUnicode = 0x800
+bmfile_flagDeflatedMaximum = 0x2
+bmfile_globalComment = 'Use BM Spec 1.4'.encode('utf-8')
+
+class BmfileInfoType():
+    OBJECT = 0
+    MESH = 1
+    MATERIAL = 2
+    TEXTURE = 3
+
+bmfile_externalTextureSet = set([
     "atari.avi",
     "atari.bmp",
     "Ball_LightningSphere1.bmp",
@@ -85,7 +96,7 @@ external_texture_list = set([
     "Wood_Raft.bmp"
 ])
 
-component_list = [
+bmfile_componentList = [
     "P_Extra_Life",
     "P_Extra_Point",
     "P_Trafo_Paper",
@@ -120,7 +131,7 @@ format: key is diection, value is a dict
 dict's key is expand mode, value is a tuple
 tuple always have 4 items, it means (TOP_STR, RIGHT_STR, BOTTOM_STR, LEFT_STR)
 '''
-floor_expand_direction_map = {
+floor_expandDirectionMap = {
     "PositiveX": {
         "Static": ("X", "X", "X", "X"),
         "Column": ("X", "X", "D1", "X"),
@@ -143,7 +154,7 @@ floor_expand_direction_map = {
     }
 }
 
-floor_texture_corresponding_map = {
+floor_textureReflactionMap = {
     "FloorSide": "Floor_Side.bmp",
     "FloorTopBorder": "Floor_Top_Border.bmp",
     "FloorTopBorder_ForSide": "Floor_Top_Border.bmp",
@@ -157,8 +168,8 @@ floor_texture_corresponding_map = {
     "BallStone": "Ball_Stone.bmp"
 }
 
-# WARNING: this data is shared with BallanceVirtoolsPlugin - mapping_BM.cpp - fix_blender_texture
-floor_material_statistic = [
+# WARNING: this data is shared with `BallanceVirtoolsPlugin/bvh/features/mapping/fix_texture.cpp`
+floor_materialStatistic = [
     {
         "member": [
                 "FloorSide",
@@ -215,19 +226,19 @@ floor_material_statistic = [
     }
 ]
 
-floor_block_dict = {}
-floor_basic_block_list = []
-floor_derived_block_list = []
+floor_blockDict = {}
+floor_basicBlockList = []
+floor_derivedBlockList = []
 with open(os.path.join(os.path.dirname(__file__), "json", "BasicBlock.json")) as fp:
     for item in json.load(fp):
-        floor_basic_block_list.append(item["Type"])
-        floor_block_dict[item["Type"]] = item
+        floor_basicBlockList.append(item["Type"])
+        floor_blockDict[item["Type"]] = item
 with open(os.path.join(os.path.dirname(__file__), "json", "DerivedBlock.json")) as fp:
     for item in json.load(fp):
-        floor_derived_block_list.append(item["Type"])
-        floor_block_dict[item["Type"]] = item
+        floor_derivedBlockList.append(item["Type"])
+        floor_blockDict[item["Type"]] = item
 
-blenderIcon_floor = None
-blenderIcon_floor_dict = {}
+icons_floor = None
+icons_floorDict = {}
 # blenderIcon_elements = None
 # blenderIcon_elements_dict = {}

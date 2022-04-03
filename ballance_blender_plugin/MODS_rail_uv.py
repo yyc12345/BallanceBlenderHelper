@@ -1,7 +1,7 @@
 import bpy,bmesh
 import mathutils
 import bpy.types
-from . import utils, preferences
+from . import UTILS_functions
 
 class BALLANCE_OT_rail_uv(bpy.types.Operator):
     """Create a UV for rail"""
@@ -38,7 +38,7 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
 
     @classmethod
     def poll(self, context):
-        return check_rail_target()
+        return _check_rail_target()
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -46,9 +46,9 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
 
     def execute(self, context):
         if context.scene.BallanceBlenderPluginProperty.material_picker == None:
-            utils.ShowMessageBox(("No specific material", ), "Lost parameter", 'ERROR')
+            UTILS_functions.show_message_box(("No specific material", ), "Lost parameter", 'ERROR')
         else:
-            create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale, self.projection_axis)
+            _create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale, self.projection_axis)
         return {'FINISHED'}
 
     def draw(self, context):
@@ -62,7 +62,7 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
 
 # ====================== method
 
-def check_rail_target():
+def _check_rail_target():
     for obj in bpy.context.selected_objects:
         if obj.type != 'MESH':
             continue
@@ -71,7 +71,7 @@ def check_rail_target():
         return True
     return False
 
-def get_distance(iterator):
+def _get_distance(iterator):
     is_first_min = True
     is_first_max = True
     max_value = 0.0
@@ -93,7 +93,7 @@ def get_distance(iterator):
 
     return max_value - min_value
 
-def create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
+def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
     objList = []
     ignoredObj = []
     for obj in bpy.context.selected_objects:
@@ -125,18 +125,18 @@ def create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
             # calc proper scale
             if projection_axis == 'X':
                 maxLength = max(
-                    get_distance(vec.co[1] for vec in vecList),
-                    get_distance(vec.co[2] for vec in vecList)
+                    _get_distance(vec.co[1] for vec in vecList),
+                    _get_distance(vec.co[2] for vec in vecList)
                 )
             elif projection_axis == 'Y':
                 maxLength = max(
-                    get_distance(vec.co[0] for vec in vecList),
-                    get_distance(vec.co[2] for vec in vecList)
+                    _get_distance(vec.co[0] for vec in vecList),
+                    _get_distance(vec.co[2] for vec in vecList)
                 )
             elif projection_axis == 'Z':
                 maxLength = max(
-                    get_distance(vec.co[0] for vec in vecList),
-                    get_distance(vec.co[1] for vec in vecList)
+                    _get_distance(vec.co[0] for vec in vecList),
+                    _get_distance(vec.co[1] for vec in vecList)
                 )
             real_scale = 1.0 / maxLength
 
@@ -166,4 +166,7 @@ def create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
                         uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
 
     if len(ignoredObj) != 0:
-        utils.ShowMessageBox(("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), "Execution result", 'INFO')
+        UTILS_functions.show_message_box(
+            ("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), 
+            "Execution result", 'INFO'
+        )

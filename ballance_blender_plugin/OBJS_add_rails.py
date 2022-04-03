@@ -1,62 +1,9 @@
-import bpy,mathutils
-from . import utils, config, bm_import_export
+import bpy, mathutils
+from . import UTILS_functions
 
-# ================================================= actual add
-
-class BALLANCE_OT_add_elements(bpy.types.Operator):
-    """Add sector related elements"""
-    bl_idname = "ballance.add_elements"
-    bl_label = "Add elements"
-    bl_options = {'UNDO'}
-
-    elements_type: bpy.props.EnumProperty(
-        name="Type",
-        description="This element type",
-        items=tuple(map(lambda x: (x, x, ""), config.component_list)),
-    )
-
-    attentionElements = ["PC_TwoFlames", "PR_Resetpoint"]
-    uniqueElements = ["PS_FourFlames", "PE_Balloon"]
-
-    elements_sector: bpy.props.IntProperty(
-        name="Sector",
-        description="Define which sector the object will be grouped in",
-        min=1,
-        max=8,
-        default=1,
-    )
-
-    def execute(self, context):
-        # get name
-        if self.elements_type in self.uniqueElements:
-            finalObjectName = self.elements_type + "_01"
-        elif self.elements_type in self.attentionElements:
-            finalObjectName = self.elements_type + "_0" + str(self.elements_sector)
-        else:
-            finalObjectName = self.elements_type + "_0" + str(self.elements_sector) + "_"
-
-        # create object
-        loadedMesh = bm_import_export.load_component(config.component_list.index(self.elements_type))
-        obj = bpy.data.objects.new(finalObjectName, loadedMesh)
-        utils.AddSceneAndMove2Cursor(obj)
-
-        return {'FINISHED'}
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-    def draw(self, context):
-        layout = self.layout
-        layout.prop(self, "elements_type")
-        if self.elements_type not in self.uniqueElements:
-            layout.prop(self, "elements_sector")
-        if self.elements_type in self.attentionElements:
-            layout.label(text="Please note that sector is suffix.")
-
-class BALLANCE_OT_add_rail(bpy.types.Operator):
+class BALLANCE_OT_add_rails(bpy.types.Operator):
     """Add rail"""
-    bl_idname = "ballance.add_rail"
+    bl_idname = "ballance.add_rails"
     bl_label = "Add rail section"
     bl_options = {'UNDO'}
 
@@ -113,7 +60,7 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
             bpy.ops.object.join()
 
         # apply 3d cursor
-        utils.Move2Cursor(firstObj)
+        UTILS_functions.add_into_scene_and_move_to_cursor(obj)
 
         return {'FINISHED'}
 
@@ -127,3 +74,4 @@ class BALLANCE_OT_add_rail(bpy.types.Operator):
         layout.prop(self, "rail_radius")
         if self.rail_type == 'DOUBLE':
             layout.prop(self, "rail_span")
+
