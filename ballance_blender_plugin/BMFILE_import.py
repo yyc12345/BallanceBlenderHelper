@@ -11,7 +11,14 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
     bl_idname = "ballance.import_bm"
     bl_label = "Import BM "
     bl_options = {'PRESET', 'UNDO'}
+
+    # ImportHelper mixin class uses this
     filename_ext = ".bmx"
+    filter_glob: bpy.props.StringProperty(
+        default="*.bmx",
+        options={'HIDDEN'},
+        maxlen=255,  # Max internal buffer length, longer would be clamped.
+    )
 
     texture_conflict_strategy: bpy.props.EnumProperty(
         name="Texture name conflict",

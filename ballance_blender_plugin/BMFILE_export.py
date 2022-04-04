@@ -9,7 +9,14 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
     bl_idname = "ballance.export_bm"
     bl_label = 'Export BM'
     bl_options = {'PRESET'}
+
+    # ExportHelper mixin class uses this
     filename_ext = ".bmx"
+    filter_glob: bpy.props.StringProperty(
+        default="*.bmx",
+        options={'HIDDEN'},
+        maxlen=255,  # Max internal buffer length, longer would be clamped.
+    )
     
     export_mode: bpy.props.EnumProperty(
         name="Export mode",

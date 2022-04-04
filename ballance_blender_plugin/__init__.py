@@ -13,7 +13,7 @@ bl_info={
 
 # ============================================= 
 # import system
-import bpy,bpy_extras
+import bpy, bpy_extras
 import bpy.utils.previews
 import os
 # import my code (with reload)
@@ -49,22 +49,22 @@ if "bpy" in locals():
     if "OBJS_add_rails" in locals():
         importlib.reload(OBJS_add_rails)
 
-    if "NAMES_rename_via_group" in locals():
-        importlib.reload(NAMES_rename_via_group)
+    if "NAMES_rename_system" in locals():
+        importlib.reload(NAMES_rename_system)
 
 from . import UTILS_constants, UTILS_functions, UTILS_preferences
 from . import BMFILE_export, BMFILE_import
 from . import MODS_3dsmax_align, MODS_flatten_uv, MODS_rail_uv
 from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails
-from . import NAMES_rename_via_group
+from . import NAMES_rename_system
 
 # ============================================= 
 # menu system
 
 class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
-    """Ballance related 3D operator"""
+    """Ballance related 3D operators"""
     bl_idname = "BALLANCE_MT_ThreeDViewerMenu"
-    bl_label = "Ballance 3D"
+    bl_label = "Ballance"
 
     def draw(self, context):
         layout = self.layout
@@ -72,6 +72,32 @@ class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
         layout.operator(MODS_3dsmax_align.BALLANCE_OT_super_align.bl_idname)
         layout.operator(MODS_rail_uv.BALLANCE_OT_rail_uv.bl_idname)
         layout.operator(MODS_flatten_uv.BALLANCE_OT_flatten_uv.bl_idname)
+
+class BALLANCE_MT_OutlinerMenu(bpy.types.Menu):
+    """Ballance rename operators"""
+    bl_idname = "BALLANCE_MT_OutlinerMenu"
+    bl_label = "Ballance"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.label(text="For Collection")
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_via_group.bl_idname)
+        oprt.oper_source = 'COLLECTION'
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname)
+        oprt.oper_source = 'COLLECTION'
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname)
+        oprt.oper_source = 'COLLECTION'
+
+        layout.separator()
+
+        layout.label(text="For Objects")
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_via_group.bl_idname)
+        oprt.oper_source = 'OBJECTS'
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname)
+        oprt.oper_source = 'OBJECTS'
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname)
+        oprt.oper_source = 'OBJECTS'
 
 class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
     """Add Ballance floor"""
@@ -117,7 +143,10 @@ classes = (
     OBJS_add_floors.BALLANCE_OT_add_floors,
     BALLANCE_MT_AddFloorMenu,
 
-    NAMES_rename_via_group.BALLANCE_OT_rename_via_group
+    NAMES_rename_system.BALLANCE_OT_rename_via_group,
+    NAMES_rename_system.BALLANCE_OT_convert_name,
+    NAMES_rename_system.BALLANCE_OT_auto_grouping,
+    BALLANCE_MT_OutlinerMenu
 )
 
 def menu_func_bm_import(self, context):
@@ -138,9 +167,8 @@ def menu_func_ballance_add(self, context):
     layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
 def menu_func_ballance_rename(self, context):
     layout = self.layout
-    layout.separator()
-    layout.label(text="Ballance")
-    layout.operator(NAMES_rename_via_group.BALLANCE_OT_rename_via_group.bl_idname, text="Rename via Group")
+    layout.menu(BALLANCE_MT_OutlinerMenu.bl_idname)
+
 
 def register():
     # we need init all icon first
@@ -161,15 +189,14 @@ def register():
 
     bpy.types.VIEW3D_MT_editor_menus.prepend(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
-    bpy.types.OUTLINER_MT_collection.append(menu_func_ballance_rename)
-        
+    bpy.types.OUTLINER_HT_header.append(menu_func_ballance_rename)
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_bm_export)
     
     bpy.types.VIEW3D_MT_editor_menus.remove(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
-    bpy.types.OUTLINER_MT_collection.remove(menu_func_ballance_rename)
+    bpy.types.OUTLINER_HT_header.remove(menu_func_ballance_rename)
 
     for cls in classes:
         bpy.utils.unregister_class(cls)
