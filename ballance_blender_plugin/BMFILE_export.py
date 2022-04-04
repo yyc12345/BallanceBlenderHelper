@@ -19,8 +19,8 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
         )
 
     def execute(self, context):
-        if (self.export_mode == 'COLLECTION' and context.scene.BallanceBlenderPluginProperty.collection_picker is None) or 
-            (self.export_mode == 'OBJECT' and context.scene.BallanceBlenderPluginProperty.object_picker is None):
+        if ((self.export_mode == 'COLLECTION' and context.scene.BallanceBlenderPluginProperty.collection_picker is None) or 
+            (self.export_mode == 'OBJECT' and context.scene.BallanceBlenderPluginProperty.object_picker is None)):
             UTILS_functions.show_message_box(("No specific target", ), "Lost parameter", 'ERROR')
         else:
             prefs = bpy.context.preferences.addons[__package__].preferences
@@ -47,7 +47,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTarget):
     # ============================================ alloc a temp folder
     utils_tempFolderObj = tempfile.TemporaryDirectory()
-    utils_tempFolder = tempFolderObj.name
+    utils_tempFolder = utils_tempFolderObj.name
     utils_tempTextureFolder = os.path.join(utils_tempFolder, "Texture")
     os.makedirs(utils_tempTextureFolder)
     
@@ -69,7 +69,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
    
     # ============================================ export
     with open(os.path.join(utils_tempFolder, "index.bm"), "wb") as finfo:
-        UTILS_file_io.write_uint32(finfo, bm_current_version)
+        UTILS_file_io.write_uint32(finfo, UTILS_constants.bmfile_currentVersion)
         
         # ====================== export object
         meshSet = set()
@@ -92,7 +92,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                     object_isComponent = False
                 else:
                     # check isComponent normally
-                    object_isComponent = is_component(obj.name)
+                    object_isComponent = UTILS_functions.is_component(obj.name)
 
                 # triangle first and then group
                 if not object_isComponent:
@@ -105,7 +105,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                     else:
                         object_meshIndex = meshList.index(object_blenderMesh)
                 else:
-                    object_meshIndex = get_component_id(obj.name)
+                    object_meshIndex = UTILS_functions.get_component_id(obj.name)
 
                 # get visibility
                 object_isHidden = not obj.visible_get()
@@ -124,7 +124,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 # write fobject
                 UTILS_file_io.write_bool(fobject, object_isComponent)
                 UTILS_file_io.write_bool(fobject, object_isHidden)
-                UTILS_file_io.write_worldMatrix(fobject, obj.matrix_world)
+                UTILS_file_io.write_world_matrix(fobject, obj.matrix_world)
                 UTILS_file_io.write_uint32(fobject, len(object_groupList))
                 for item in object_groupList:
                     UTILS_file_io.write_string(fobject, item)
@@ -337,7 +337,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
 # blender related functions
 
 def _is_external_texture(name):
-    if name in config.external_texture_list:
+    if name in UTILS_constants.bmfile_externalTextureSet:
         return True
     else:
         return False

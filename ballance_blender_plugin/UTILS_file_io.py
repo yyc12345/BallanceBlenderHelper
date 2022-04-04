@@ -1,5 +1,5 @@
-import bpy,bmesh,bpy_extras,mathutils
-import struct,shutil
+import bpy, bmesh, bpy_extras, mathutils
+import struct, shutil, os
 
 # writer
 
@@ -26,7 +26,7 @@ def write_bool(fs,boolean):
 def write_float(fs,fl):
     fs.write(struct.pack("f", fl))
 
-def write_worldMatrix(fs, matt):
+def write_world_matrix(fs, matt):
     mat = matt.transposed()
     fs.write(struct.pack("ffffffffffffffff",
     mat[0][0],mat[0][2], mat[0][1], mat[0][3],

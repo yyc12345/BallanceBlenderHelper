@@ -12,7 +12,7 @@ class BALLANCE_OT_add_components(bpy.types.Operator):
     elements_type: bpy.props.EnumProperty(
         name="Type",
         description="This element type",
-        items=tuple(map(lambda x: (x, x, ""), UTILS_constants.componentList)),
+        items=tuple(map(lambda x: (x, x, ""), UTILS_constants.bmfile_componentList)),
     )
 
     attentionElements = ["PC_TwoFlames", "PR_Resetpoint"]
@@ -37,7 +37,7 @@ class BALLANCE_OT_add_components(bpy.types.Operator):
 
         # create object
         loadedMesh = UTILS_functions.load_component(
-            UTILS_constants.componentList.index(self.elements_type))
+            UTILS_constants.bmfile_componentList.index(self.elements_type))
         obj = bpy.data.objects.new(finalObjectName, loadedMesh)
         UTILS_functions.add_into_scene_and_move_to_cursor(obj)
 

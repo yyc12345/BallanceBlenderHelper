@@ -82,7 +82,7 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
         layout = self.layout
 
         layout.label(text="Basic floor")
-        for item in UTILS_constants.floor_basicBlock_list:
+        for item in UTILS_constants.floor_basicBlockList:
             cop = layout.operator(
                 OBJS_add_floors.BALLANCE_OT_add_floors.bl_idname, 
                 text=item, icon_value = UTILS_constants.icons_floorDict[item])

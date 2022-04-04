@@ -1,6 +1,6 @@
 import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
-import struct,shutil
+import struct, shutil
 from bpy_extras import io_utils,node_shader_utils
 from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
@@ -88,7 +88,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             return
 
         # collect block header data
-        while len(peek_stream(findex)) != 0:
+        while len(UTILS_file_io.peek_stream(findex)) != 0:
             # read
             index_name = UTILS_file_io.read_string(findex)
             index_type = UTILS_file_io.read_uint8(findex)
@@ -120,7 +120,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             if texture_isExternal:
                 (texture_target, skip_init) = UTILS_functions.create_instance_with_option(
                     UTILS_constants.BmfileInfoType.TEXTURE, item.name, opts_texture,
-                    extra_texture_path= texture_filename, extra_texture_path= prefs_externalTexture)
+                    extra_texture_filename= texture_filename, extra_texture_path= prefs_externalTexture)
             else:
                 # not external. copy temp file into blender temp. then use it.
                 # try copy. if fail, don't need to do more
@@ -132,7 +132,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
 
                 (texture_target, skip_init) = UTILS_functions.create_instance_with_option(
                     UTILS_constants.BmfileInfoType.TEXTURE, item.name, opts_texture,
-                    extra_texture_path= texture_filename, extra_texture_path= prefs_tempTextureFolder)
+                    extra_texture_filename= texture_filename, extra_texture_path= prefs_tempTextureFolder)
             
             # setup name and blender data for header
             item.blender_data = texture_target
@@ -154,7 +154,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             material_texture = UTILS_file_io.read_uint32(fmaterial)
 
             # alloc basic material
-            (material_target, skip_init) = create_instance_with_option(
+            (material_target, skip_init) = UTILS_functions.create_instance_with_option(
                 UTILS_constants.BmfileInfoType.MATERIAL, item.name, opts_material)
             item.blender_data = material_target
             if skip_init:
@@ -178,7 +178,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             fmesh.seek(item.offset, os.SEEK_SET)
 
             # create real mesh
-            (mesh_target, skip_init) = create_instance_with_option(
+            (mesh_target, skip_init) = UTILS_functions.create_instance_with_option(
                 UTILS_constants.BmfileInfoType.MESH, item.name, opts_mesh)
             item.blender_data = mesh_target
             if skip_init:
@@ -215,7 +215,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
                 if mesh_useMaterial:
                     mesh_neededMaterial = materialList[mesh_materialIndex].blender_data
                     if mesh_neededMaterial in mesh_materialSolt:
-                        mesh_blenderMtlIndex = materialSolt.index(mesh_neededMaterial)
+                        mesh_blenderMtlIndex = mesh_materialSolt.index(mesh_neededMaterial)
                     else:
                         mesh_blenderMtlIndex = len(mesh_materialSolt)
                         mesh_materialSolt.append(mesh_neededMaterial)
@@ -235,22 +235,22 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
                 mesh_target.materials.append(mat)
 
             # then, we need add correspond count for vertices
-            mesh_target.vertices.add(len(vList))
-            mesh_target.loops.add(len(faceList)*3)  # triangle face confirm
-            mesh_target.polygons.add(len(faceList))
+            mesh_target.vertices.add(len(mesh_vList))
+            mesh_target.loops.add(len(mesh_faceList)*3)  # triangle face confirm
+            mesh_target.polygons.add(len(mesh_faceList))
             mesh_target.uv_layers.new(do_init=False)
             mesh_target.create_normals_split()
 
             # add vertices data
-            mesh_target.vertices.foreach_set("co", unpack_list(vList))
+            mesh_target.vertices.foreach_set("co", unpack_list(mesh_vList))
             mesh_target.loops.foreach_set("vertex_index", unpack_list(_flat_vertices_index(mesh_faceList)))
             mesh_target.loops.foreach_set("normal", unpack_list(_flat_vertices_normal(mesh_faceList, mesh_vnList)))
             mesh_target.uv_layers[0].data.foreach_set("uv", unpack_list(_flat_vertices_uv(mesh_faceList, mesh_vtList)))
-            for i in range(len(faceList)):
+            for i in range(len(mesh_faceList)):
                 mesh_target.polygons[i].loop_start = i * 3
                 mesh_target.polygons[i].loop_total = 3
-                if faceList[i][9] != -1:
-                    mesh_target.polygons[i].material_index = faceList[i][9]
+                if mesh_faceList[i][9] != -1:
+                    mesh_target.polygons[i].material_index = mesh_faceList[i][9]
 
                 mesh_target.polygons[i].use_smooth = True
             
@@ -285,7 +285,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             object_isComponent = UTILS_file_io.read_bool(fobject)
             #object_isForcedNoComponent = UTILS_file_io.read_bool(fobject)
             object_isHidden = UTILS_file_io.read_bool(fobject)
-            object_worldMatrix = UTILS_file_io.read_worldMaterix(fobject)
+            object_worldMatrix = UTILS_file_io.read_world_materix(fobject)
             object_groupListCount = UTILS_file_io.read_uint32(fobject)
             object_groupList.clear()
             for i in range(object_groupListCount):
@@ -299,15 +299,15 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
                 object_neededMesh = meshList[object_meshIndex].blender_data
 
             # create real object
-            (object_target, skip_init) = create_instance_with_option(
+            (object_target, skip_init) = UTILS_functions.create_instance_with_option(
                 UTILS_constants.BmfileInfoType.OBJECT, item.name, opts_object, 
-                extraMesh=object_neededMesh)
+                extra_mesh=object_neededMesh)
             if skip_init:
                 continue
 
             # link to correct collection
             if (object_fncgCollection is not None) and (not object_isComponent) and UTILS_functions.is_component(item.name):
-                # a object should be grouped into fncg should fufill following requirements
+                # a object should be grouped into fncg should check following requirements
                 # fncg is not null
                 # this object is a normal object
                 # but its name match component format

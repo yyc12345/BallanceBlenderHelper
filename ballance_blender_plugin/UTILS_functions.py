@@ -1,6 +1,7 @@
 import bpy, bmesh, bpy_extras, mathutils
-import struct, shutil
+import struct, shutil, os
 from bpy_extras.io_utils import unpack_list
+from bpy_extras.image_utils import load_image
 from bpy_extras import io_utils, node_shader_utils
 from . import UTILS_file_io, UTILS_constants
 
@@ -177,20 +178,21 @@ def create_instance_with_option(instance_type, instance_name, instance_opt,
 
             temp_is_existed = True
         except:
+            temp_instance = None
             temp_is_existed = False
 
         return (temp_instance, temp_is_existed)
 
     def create_instance():
-        if instType == UTILS_constants.BmfileInfoType.OBJECT:
+        if instance_type == UTILS_constants.BmfileInfoType.OBJECT:
             instance_obj = bpy.data.objects.new(instance_name, extra_mesh)
-            instance_obj.name = instance_name
-        elif instType == UTILS_constants.BmfileInfoType.MESH:
+            #instance_obj.name = instance_name
+        elif instance_type == UTILS_constants.BmfileInfoType.MESH:
             instance_obj = bpy.data.meshes.new(instance_name)
-            instance_obj.name = instance_name
-        elif instType == UTILS_constants.BmfileInfoType.MATERIAL:
+            #instance_obj.name = instance_name
+        elif instance_type == UTILS_constants.BmfileInfoType.MATERIAL:
             instance_obj = bpy.data.materials.new(instance_name)
-            instance_obj.name = instance_name
+            #instance_obj.name = instance_name
         elif instance_type == UTILS_constants.BmfileInfoType.TEXTURE:
             # this command will also check current available texture
             # because `get_instance()` only check texture name
@@ -206,7 +208,7 @@ def create_instance_with_option(instance_type, instance_name, instance_opt,
         # create new instance
         # or always create new instance if opts is not string
         temp_instance = create_instance()
-        temp_skip_init = True
+        temp_skip_init = False
     elif instance_opt == 'CURRENT':
         # try get instance
         (temp_instance, temp_is_existed) = get_instance()
