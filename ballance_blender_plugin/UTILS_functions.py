@@ -18,7 +18,7 @@ def show_message_box(message, title, icon):
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
 
 def add_into_scene_and_move_to_cursor(obj):
-    Move2Cursor(obj)
+    move_to_cursor(obj)
 
     view_layer = bpy.context.view_layer
     collection = view_layer.active_layer_collection.collection
@@ -174,7 +174,7 @@ def create_instance_with_option(instance_type, instance_name, instance_opt,
             elif instance_type == UTILS_constants.BmfileInfoType.MATERIAL:
                 temp_instance = bpy.data.materials[instance_name]
             elif instance_type == UTILS_constants.BmfileInfoType.TEXTURE:
-                temp_instance = bpy.data.textures[instance_name]
+                temp_instance = bpy.data.images[instance_name]
 
             temp_is_existed = True
         except:

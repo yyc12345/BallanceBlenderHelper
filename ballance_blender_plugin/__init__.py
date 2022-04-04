@@ -115,7 +115,9 @@ classes = (
     OBJS_add_components.BALLANCE_OT_add_components,
     OBJS_add_rails.BALLANCE_OT_add_rails,
     OBJS_add_floors.BALLANCE_OT_add_floors,
-    BALLANCE_MT_AddFloorMenu
+    BALLANCE_MT_AddFloorMenu,
+
+    NAMES_rename_via_group.BALLANCE_OT_rename_via_group
 )
 
 def menu_func_bm_import(self, context):
@@ -157,17 +159,17 @@ def register():
     bpy.types.TOPBAR_MT_file_import.append(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.append(menu_func_bm_export)
 
-    bpy.types.VIEW3D_HT_header.append(menu_func_ballance_3d)
+    bpy.types.VIEW3D_MT_editor_menus.prepend(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
-    bpy.types.COLLECTION_MT_context_menu.append(menu_func_ballance_rename)
+    bpy.types.OUTLINER_MT_collection.append(menu_func_ballance_rename)
         
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_bm_export)
     
-    bpy.types.VIEW3D_HT_header.remove(menu_func_ballance_3d)
+    bpy.types.VIEW3D_MT_editor_menus.remove(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
-    bpy.types.COLLECTION_MT_context_menu.remove(menu_func_ballance_rename)
+    bpy.types.OUTLINER_MT_collection.remove(menu_func_ballance_rename)
 
     for cls in classes:
         bpy.utils.unregister_class(cls)

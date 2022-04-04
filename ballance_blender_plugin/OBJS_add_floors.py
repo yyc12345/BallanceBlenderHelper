@@ -201,7 +201,7 @@ def _create_or_get_material(material_name, prefs_externalTexture):
 
     # initialize material parameter
     # load texture first
-    texture_filename = UTILS_constants.floor_textureReflactMap[material_name]
+    texture_filename = UTILS_constants.floor_textureReflactionMap[material_name]
     deconflict_texture_name = "BMERevenge_" + texture_filename
     (texture, skip_init) = UTILS_functions.create_instance_with_option(
         UTILS_constants.BmfileInfoType.TEXTURE,
@@ -222,7 +222,7 @@ def _create_or_get_material(material_name, prefs_externalTexture):
             break
     
     # return mtl
-    return m
+    return mtl
 
 def _solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
     sp = str_data.split(';')

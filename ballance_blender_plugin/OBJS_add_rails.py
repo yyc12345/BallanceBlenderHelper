@@ -60,7 +60,7 @@ class BALLANCE_OT_add_rails(bpy.types.Operator):
             bpy.ops.object.join()
 
         # apply 3d cursor
-        UTILS_functions.add_into_scene_and_move_to_cursor(obj)
+        UTILS_functions.move_to_cursor(firstObj)
 
         return {'FINISHED'}
 
