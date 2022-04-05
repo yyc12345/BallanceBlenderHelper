@@ -288,7 +288,9 @@ rename_woodGroupTester = set([
 ])
 
 # 61 mark: Sector_(0[1-8]|[1-9][0-9]{1,2}|9) may also work
-rename_regexCKGroupSector = re.compile('Sector_([123456789]{1}[0123456789]{1}[0123456789]{1}|[123456789]{1}[0123456789]{1}|0[12345678]{1}|9)')
-rename_regexYYCTwoFlames
-rename_regexYYCResetpoint
-
+rename_regexCKGroupSector = re.compile('^Sector_([123456789]{1}[0123456789]{1}[0123456789]{1}|[123456789]{1}[0123456789]{1}|0[12345678]{1}|9)$')
+rename_regexYYCComponent = re.compile('^(' + '|'.join(rename_normalComponentsGroupName) + ')_(0[1-9]|[1-9][0-9])_.*$')
+rename_regexYYCPC = re.compile('^PC_TwoFlames_(0[2-8])$')
+rename_regexYYCPR = re.compile('^PR_Resetpoint_(0[1-8])$')
+rename_regexImengyuComponent = re.compile('^(' + '|'.join(rename_normalComponentsGroupName) + '):[^:]*:([1-9]|[1-9][0-9])$')
+rename_regexImengyuPCRComp = re.compile('^(PC_CheckPoint|PR_ResetPoint):([0-9]+)$')

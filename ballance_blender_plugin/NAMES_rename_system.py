@@ -4,7 +4,7 @@ from . import UTILS_constants
 class rename_system_props(bpy.types.Operator):
     name_standard: bpy.props.EnumProperty(
         name="Name Standard",
-        description="Choose your prefered name standard",
+        description="Choose your name standard",
         items=(
             ("YYC", "YYC Tools Chains", "YYC Tools Chains name standard."),
             ("IMENGYU", "Imengyu Ballance", "Auto grouping name standard for Imengyu/Ballance")
@@ -45,6 +45,9 @@ class BALLANCE_OT_auto_grouping(rename_system_props):
 
     def execute(self, context):
         return {'FINISHED'}
+
+# ========================================== 
+# rename misc funcs
 
 class _ObjectBasicType():
     COMPONENT = 0
@@ -96,7 +99,9 @@ def _try_get_custom_property(obj, field):
     except:
         return None
 
-def _try_get_sector(group_set):
+def _get_sector_from_ckgroup(group_set):
+    # this counter is served for stupid 
+    # multi-sector-grouping accident.
     counter = 0
     last_matched_sector = ''
     for i in group_set:
@@ -110,11 +115,102 @@ def _try_get_sector(group_set):
     else:
         return last_matched_sector
 
+
+# ========================================== 
+# rename core funcs
+
+# NOTE: the implement of this function are copied from 
+# BallanceVirtoolsHelper/bvh/features/mapping/grouping.cpp
 def _get_name_info_from_yyc_name(obj_name):
-    pass
+    
+    # check component first
+    regex_result = UTILS_constants.rename_regexYYCComponent.match(obj_name)
+    if regex_result is not None:
+        data = _NameInfoHelper(_ObjectBasicType.COMPONENT)
+        data.component_type = regex_result.group(1)
+        data.sector = int(regex_result.group(2))
+        return data
+
+    # check PC PR elements
+    regex_result = UTILS_constants.rename_regexYYCPC(obj_name)
+    if regex_result is not None:
+        data = _NameInfoHelper(_ObjectBasicType.CHECKPOINT)
+        data.sector = int(regex_result.group(1))
+        return data
+    regex_result = UTILS_constants.rename_regexYYCPR(obj_name)
+    if regex_result is not None:
+        data = _NameInfoHelper(_ObjectBasicType.RESETPOINT)
+        data.sector = int(regex_result.group(1))
+        return data
+
+    # check other unique elements
+    if obj_name == "PS_FourFlames_01":
+        return _NameInfoHelper(_ObjectBasicType.LEVEL_START)
+    if obj_name == "PE_Balloon_01":
+        return _NameInfoHelper(_ObjectBasicType.LEVEL_END)
+
+    # process floors
+    if obj_name.startswith("A_Floor"):
+        return _NameInfoHelper(_ObjectBasicType.FLOOR)
+    if obj_name.startswith("A_Wood"):
+        return _NameInfoHelper(_ObjectBasicType.WOOD)
+    if obj_name.startswith("A_Rail"):
+        return _NameInfoHelper(_ObjectBasicType.RAIL)
+    if obj_name.startswith("A_Stopper"):
+        return _NameInfoHelper(_ObjectBasicType.STOPPER)
+
+    # process others
+    if obj_name.startswith("DepthCubes"):
+        return _NameInfoHelper(_ObjectBasicType.DEPTH_CUBE)
+    if obj_name.startswith("D_"):
+        return _NameInfoHelper(_ObjectBasicType.DECORATION)
+
+    return None
 
 def _get_name_info_from_imengyu_name(obj_name):
-    pass
+
+    # check component first
+    regex_result = UTILS_constants.rename_regexImengyuComponent.match(obj_name)
+    if regex_result is not None:
+        data = _NameInfoHelper(_ObjectBasicType.COMPONENT)
+        data.component_type = regex_result.group(1)
+        data.sector = int(regex_result.group(2))
+        return data
+
+    # check PC PR elements
+    regex_result = UTILS_constants.rename_regexImengyuPCRComp(obj_name)
+    if regex_result is not None:
+        eles_name = regex_result.group(1)
+        if eles_name == 'PC_CheckPoint':
+            data = _NameInfoHelper(_ObjectBasicType.CHECKPOINT)
+        elif eles_name == 'PR_ResetPoint':
+            data = _NameInfoHelper(_ObjectBasicType.RESETPOINT)
+        data.sector = int(regex_result.group(2))
+        return data
+
+    # check other unique elements
+    if obj_name == "PS_LevelStart":
+        return _NameInfoHelper(_ObjectBasicType.LEVEL_START)
+    if obj_name == "PE_LevelEnd":
+        return _NameInfoHelper(_ObjectBasicType.LEVEL_END)
+
+    # process floors
+    if obj_name.startswith("S_Floors"):
+        return _NameInfoHelper(_ObjectBasicType.FLOOR)
+    if obj_name.startswith("S_FloorWoods"):
+        return _NameInfoHelper(_ObjectBasicType.WOOD)
+    if obj_name.startswith("S_FloorRails"):
+        return _NameInfoHelper(_ObjectBasicType.RAIL)
+    if obj_name.startswith("S_FloorStopper"):
+        return _NameInfoHelper(_ObjectBasicType.STOPPER)
+
+    # process others
+    if obj_name.startswith("DepthTestCubes"):
+        return _NameInfoHelper(_ObjectBasicType.DEPTH_CUBE)
+    if obj_name.startswith("O_"):
+        return _NameInfoHelper(_ObjectBasicType.DECORATION)
+
+    return None
 
 def _get_name_info_from_group(obj):
     group_list = _try_get_custom_property(obj, 'virtools-group')
@@ -157,7 +253,7 @@ def _get_name_info_from_group(obj):
         # get it
         # now try get its sector
         gotten_elements = (tuple(set_result))[0]
-        gotten_sector = try_get_sector(group_set)
+        gotten_sector = _get_sector_from_ckgroup(group_set)
         if gotten_sector is None:
             # fail to get sector
             return None
@@ -194,7 +290,7 @@ def _get_name_info_from_group(obj):
 
 def _set_for_yyc_name(obj, name_info):
     basic_type = name_info.basic_type
-    if basic_type == _ObjectBasicType.COMPONENT:
+    if basic_type == _ObjectBasicType.DECORATION:
         obj.name = "D_"
 
     elif basic_type == _ObjectBasicType.LEVEL_START:
@@ -224,7 +320,7 @@ def _set_for_yyc_name(obj, name_info):
 
 def _set_for_imengyu_name(obj, name_info):
     basic_type = name_info.basic_type
-    if basic_type == _ObjectBasicType.COMPONENT:
+    if basic_type == _ObjectBasicType.DECORATION:
         obj.name = "O_"
 
     elif basic_type == _ObjectBasicType.LEVEL_START:
@@ -251,8 +347,56 @@ def _set_for_imengyu_name(obj, name_info):
     elif basic_type == _ObjectBasicType.COMPONENT:
         obj.name = "{}:{}:{:d}".format(name_info.component_type, obj.name.repalce(":", "_"), name_info.sector)
     
-
+# NOTE: the implement of this function are copied from 
+# BallanceVirtoolsHelper/bvh/features/mapping/grouping.cpp
 def _set_for_group(obj, name_info):
-    pass
+    gps = []
+    basic_type = name_info.basic_type
+
+    if basic_type == _ObjectBasicType.DECORATION:
+        # decoration do not need grouping
+        pass
+
+    elif basic_type == _ObjectBasicType.LEVEL_START:
+        gps.append("PS_Levelstart")
+    elif basic_type == _ObjectBasicType.LEVEL_END:
+        gps.append("PE_Levelende")
+    elif basic_type == _ObjectBasicType.RESETPOINT:
+        gps.append("PC_Checkpoints")
+    elif basic_type == _ObjectBasicType.CHECKPOINT:
+        gps.append("PR_Resetpoints")
+
+    elif basic_type == _ObjectBasicType.DEPTH_CUBE:
+        gps.append("DepthTestCubes")
+
+    elif basic_type == _ObjectBasicType.FLOOR:
+        gps.append("Phys_Floors")
+        gps.append("Sound_HitID_01")
+        gps.append("Sound_RollID_01")
+        gps.append("Shadow")
+    elif basic_type == _ObjectBasicType.WOOD:
+        gps.append("Phys_FloorRails")
+        gps.append("Sound_HitID_03")
+        gps.append("Sound_RollID_03")
+    elif basic_type == _ObjectBasicType.RAIL:
+        gps.append("Phys_Floors")
+        gps.append("Sound_HitID_02")
+        gps.append("Sound_RollID_02")
+        gps.append("Shadow")
+    elif basic_type == _ObjectBasicType.STOPPER:
+        gps.append("Phys_FloorStopper")
+    
+    elif basic_type == _ObjectBasicType.COMPONENT:
+        gps.append(name_info.component_type)
+
+        # set compabitility for 999 sector loader
+        if (name_info.sector == 9):
+            gps.append("Sector_9")
+        else:
+            gps.append("Sector_{:0>2d}".format(name_info.sector))
+    
+
+    # apply to custom property
+    obj['virtools-group'] = tuple(gps)
 
 
