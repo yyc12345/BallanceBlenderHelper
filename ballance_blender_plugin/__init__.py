@@ -62,7 +62,7 @@ from . import NAMES_rename_system
 # menu system
 
 class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
-    """Ballance related 3D operators"""
+    """Ballance 3D operators"""
     bl_idname = "BALLANCE_MT_ThreeDViewerMenu"
     bl_label = "Ballance"
 
@@ -81,23 +81,9 @@ class BALLANCE_MT_OutlinerMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text="For Collection")
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_via_group.bl_idname)
-        oprt.oper_source = 'COLLECTION'
+        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_by_group.bl_idname)
         oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname)
-        oprt.oper_source = 'COLLECTION'
         oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname)
-        oprt.oper_source = 'COLLECTION'
-
-        layout.separator()
-
-        layout.label(text="For Objects")
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_via_group.bl_idname)
-        oprt.oper_source = 'OBJECTS'
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname)
-        oprt.oper_source = 'OBJECTS'
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname)
-        oprt.oper_source = 'OBJECTS'
 
 class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
     """Add Ballance floor"""
@@ -143,7 +129,7 @@ classes = (
     OBJS_add_floors.BALLANCE_OT_add_floors,
     BALLANCE_MT_AddFloorMenu,
 
-    NAMES_rename_system.BALLANCE_OT_rename_via_group,
+    NAMES_rename_system.BALLANCE_OT_rename_by_group,
     NAMES_rename_system.BALLANCE_OT_convert_name,
     NAMES_rename_system.BALLANCE_OT_auto_grouping,
     BALLANCE_MT_OutlinerMenu

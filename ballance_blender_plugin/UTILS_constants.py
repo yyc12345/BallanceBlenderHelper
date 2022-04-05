@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 bmfile_currentVersion = 14
 bmfile_flagUnicode = 0x800
@@ -242,3 +243,52 @@ icons_floor = None
 icons_floorDict = {}
 # blenderIcon_elements = None
 # blenderIcon_elements_dict = {}
+
+rename_normalComponentsGroupName = set([
+    "P_Extra_Life",
+    "P_Extra_Point",
+    "P_Trafo_Paper",
+    "P_Trafo_Stone",
+    "P_Trafo_Wood",
+    "P_Ball_Paper",
+    "P_Ball_Stone",
+    "P_Ball_Wood",
+    "P_Box",
+    "P_Dome",
+    "P_Modul_01",
+    "P_Modul_03",
+    "P_Modul_08",
+    "P_Modul_17",
+    "P_Modul_18",
+    "P_Modul_19",
+    "P_Modul_25",
+    "P_Modul_26",
+    "P_Modul_29",
+    "P_Modul_30",
+    "P_Modul_34",
+    "P_Modul_37",
+    "P_Modul_41"
+])
+
+rename_uniqueComponentsGroupName = set([
+    "PS_Levelstart",
+    "PE_Levelende",
+    "PC_Checkpoints",
+    "PR_Resetpoints"
+])
+
+rename_floorGroupTester = set([
+    "Sound_HitID_01",
+    "Sound_RollID_01"
+])
+
+rename_woodGroupTester = set([
+    "Sound_HitID_02",
+    "Sound_RollID_02"
+])
+
+# 61 mark: Sector_(0[1-8]|[1-9][0-9]{1,2}|9) may also work
+rename_regexCKGroupSector = re.compile('Sector_([123456789]{1}[0123456789]{1}[0123456789]{1}|[123456789]{1}[0123456789]{1}|0[12345678]{1}|9)')
+rename_regexYYCTwoFlames
+rename_regexYYCResetpoint
+
