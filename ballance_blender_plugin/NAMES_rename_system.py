@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants
+from . import UTILS_constants, UTILS_functions
 
 class rename_system_props(bpy.types.Operator):
     name_standard: bpy.props.EnumProperty(
@@ -26,6 +26,7 @@ class BALLANCE_OT_rename_by_group(rename_system_props):
     bl_options = {'UNDO'}
 
     def execute(self, context):
+        _rename_core(_NameStandard.CKGROUP, _NameStandard.cvt_std_from_str_to_int(self.name_standard))
         return {'FINISHED'}
 
 class BALLANCE_OT_convert_name(rename_system_props):
@@ -34,8 +35,26 @@ class BALLANCE_OT_convert_name(rename_system_props):
     bl_label = "Convert Name"
     bl_options = {'UNDO'}
 
+    dest_name_standard: bpy.props.EnumProperty(
+        name="Destination Name Standard",
+        description="Choose your name standard",
+        items=(
+            ("YYC", "YYC Tools Chains", "YYC Tools Chains name standard."),
+            ("IMENGYU", "Imengyu Ballance", "Auto grouping name standard for Imengyu/Ballance")
+            ),
+    )
+
     def execute(self, context):
+        _rename_core(
+            _NameStandard.cvt_std_from_str_to_int(self.name_standard),
+            _NameStandard.cvt_std_from_str_to_int(self.dest_name_standard))
         return {'FINISHED'}
+
+    # rewrite draw func
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "name_standard")
+        layout.prop(self, "dest_name_standard")
 
 class BALLANCE_OT_auto_grouping(rename_system_props):
     """Auto Grouping object according to specific name standard."""
@@ -44,6 +63,7 @@ class BALLANCE_OT_auto_grouping(rename_system_props):
     bl_options = {'UNDO'}
 
     def execute(self, context):
+        _rename_core(_NameStandard.cvt_std_from_str_to_int(self.name_standard), _NameStandard.CKGROUP)
         return {'FINISHED'}
 
 # ========================================== 
@@ -67,8 +87,9 @@ class _ObjectBasicType():
     RESETPOINT = 10
 
 class _NameStandard():
-    YYC = 0
-    IMENGYU = 1
+    CKGROUP = 0
+    YYC = 1
+    IMENGYU = 2
 
     @staticmethod
     def cvt_std_from_str_to_int(std_str):
@@ -80,7 +101,7 @@ class _NameStandard():
             raise Exception("Unknow name standard.")
 
 class _NameInfoHelper():
-    def __init__(_basic_type):
+    def __init__(self, _basic_type):
         self.basic_type = _basic_type
 
     # extra field notes:
@@ -90,8 +111,8 @@ class _NameInfoHelper():
     # CHECKPOINT, RESETPOINT:
     #       sector(int)(following Ballance index, checkpoint starts with 1)
 
-def _get_selected_objects(oper_source):
-    return context.view_layer.active_layer_collection.collection.objects
+def _get_selected_objects():
+    return bpy.context.view_layer.active_layer_collection.collection.objects
 
 def _try_get_custom_property(obj, field):
     try:
@@ -132,12 +153,12 @@ def _get_name_info_from_yyc_name(obj_name):
         return data
 
     # check PC PR elements
-    regex_result = UTILS_constants.rename_regexYYCPC(obj_name)
+    regex_result = UTILS_constants.rename_regexYYCPC.match(obj_name)
     if regex_result is not None:
         data = _NameInfoHelper(_ObjectBasicType.CHECKPOINT)
         data.sector = int(regex_result.group(1))
         return data
-    regex_result = UTILS_constants.rename_regexYYCPR(obj_name)
+    regex_result = UTILS_constants.rename_regexYYCPR.match(obj_name)
     if regex_result is not None:
         data = _NameInfoHelper(_ObjectBasicType.RESETPOINT)
         data.sector = int(regex_result.group(1))
@@ -178,7 +199,7 @@ def _get_name_info_from_imengyu_name(obj_name):
         return data
 
     # check PC PR elements
-    regex_result = UTILS_constants.rename_regexImengyuPCRComp(obj_name)
+    regex_result = UTILS_constants.rename_regexImengyuPCRComp.match(obj_name)
     if regex_result is not None:
         eles_name = regex_result.group(1)
         if eles_name == 'PC_CheckPoint':
@@ -221,7 +242,7 @@ def _get_name_info_from_group(obj):
     group_set = set(group_list)
 
     # try to filter unique elements first
-    set_result = UTILS_constants.rename_uniqueComponentsGroupName(group_set)
+    set_result = UTILS_constants.rename_uniqueComponentsGroupName.intersection(group_set)
     if len(set_result) == 1:
         # get it
         gotten_group_name = (list(set_result))[0]
@@ -234,6 +255,8 @@ def _get_name_info_from_group(obj):
             # use _get_name_info_from_yyc_name to get it
             # _get_name_info_from_yyc_name is Ballance-compatible name standard
             data = _get_name_info_from_yyc_name(obj.name)
+            if data is None:
+                return None
             if data.basic_type != _ObjectBasicType.CHECKPOINT and data.basic_type != _ObjectBasicType.RESETPOINT:
                 # check whether it is checkpoint or resetpoint
                 # if not, it mean that we got error data from name
@@ -345,7 +368,7 @@ def _set_for_imengyu_name(obj, name_info):
         obj.name = "S_FloorStopper"
     
     elif basic_type == _ObjectBasicType.COMPONENT:
-        obj.name = "{}:{}:{:d}".format(name_info.component_type, obj.name.repalce(":", "_"), name_info.sector)
+        obj.name = "{}:{}:{:d}".format(name_info.component_type, obj.name.replace(":", "_"), name_info.sector)
     
 # NOTE: the implement of this function are copied from 
 # BallanceVirtoolsHelper/bvh/features/mapping/grouping.cpp
@@ -399,4 +422,50 @@ def _set_for_group(obj, name_info):
     # apply to custom property
     obj['virtools-group'] = tuple(gps)
 
+# ========================================== 
+# assemble funcs
 
+def _get_data(obj, standard):
+    if standard == _NameStandard.YYC:
+        return _get_name_info_from_yyc_name(obj.name)
+    elif standard == _NameStandard.IMENGYU:
+        return _get_name_info_from_imengyu_name(obj.name)
+    elif standard == _NameStandard.CKGROUP:
+        return _get_name_info_from_group(obj)
+    else:
+        raise Exception("Unknow standard")
+
+def _set_data(obj, name_info, standard):
+    if standard == _NameStandard.YYC:
+        return _set_for_yyc_name(obj, name_info)
+    elif standard == _NameStandard.IMENGYU:
+        return _set_for_imengyu_name(obj, name_info)
+    elif standard == _NameStandard.CKGROUP:
+        return _set_for_group(obj, name_info)
+    else:
+        raise Exception("Unknow standard")
+
+def _rename_core(source_std, dest_std):
+    failed_obj_counter = 0
+    all_obj_counter = 0
+
+    for obj in _get_selected_objects():
+        all_obj_counter += 1
+        info = _get_data(obj, source_std)
+        if info is None:
+            failed_obj_counter += 1
+            continue
+
+        _set_data(obj, info, dest_std)
+
+    print('------------')
+    print('All/failed - {}/{}'.format(all_obj_counter, failed_obj_counter))
+
+    UTILS_functions.show_message_box(
+        ('Rename system report',
+        'View console to get more detail',
+        'All: {}'.format(all_obj_counter),
+        'Failed: {}'.format(failed_obj_counter)),
+        "Info",
+        "INFO"
+    )
