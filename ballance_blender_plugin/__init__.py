@@ -29,6 +29,8 @@ if "bpy" in locals():
         importlib.reload(UTILS_file_io)
     if "UTILS_zip_helper" in locals():
         importlib.reload(UTILS_zip_helper)
+    if "UTILS_virtools_prop" in locals():
+        importlib.reload(UTILS_virtools_prop)
 
     if "BMFILE_export" in locals():
         importlib.reload(BMFILE_export)
@@ -52,11 +54,17 @@ if "bpy" in locals():
     if "NAMES_rename_system" in locals():
         importlib.reload(NAMES_rename_system)
 
-from . import UTILS_constants, UTILS_functions, UTILS_preferences
+    if "PROPS_virtools_group" in locals():
+        importlib.reload(PROPS_virtools_group)
+    if "PROPS_virtools_material" in locals():
+        importlib.reload(PROPS_virtools_material)
+
+from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop
 from . import BMFILE_export, BMFILE_import
 from . import MODS_3dsmax_align, MODS_flatten_uv, MODS_rail_uv
 from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails
 from . import NAMES_rename_system
+from . import PROPS_virtools_group, PROPS_virtools_material
 
 # ============================================= 
 # menu system
@@ -132,7 +140,16 @@ classes = (
     NAMES_rename_system.BALLANCE_OT_rename_by_group,
     NAMES_rename_system.BALLANCE_OT_convert_name,
     NAMES_rename_system.BALLANCE_OT_auto_grouping,
-    BALLANCE_MT_OutlinerMenu
+    BALLANCE_MT_OutlinerMenu,
+
+    UTILS_virtools_prop.BALLANCE_PG_virtools_material,
+    UTILS_virtools_prop.BALLANCE_PG_virtools_group,
+    PROPS_virtools_group.BALLANCE_OT_add_virtools_group,
+    PROPS_virtools_group.BALLANCE_OT_rm_virtools_group,
+    PROPS_virtools_group.BALLANCE_UL_virtools_group,
+    PROPS_virtools_group.BALLANCE_PT_virtools_group,
+    PROPS_virtools_material.BALLANCE_PT_virtools_material
+
 )
 
 def menu_func_bm_import(self, context):
@@ -169,13 +186,15 @@ def register():
         bpy.utils.register_class(cls)
 
     bpy.types.Scene.BallanceBlenderPluginProperty = bpy.props.PointerProperty(type=UTILS_preferences.MyPropertyGroup)
-        
+    UTILS_virtools_prop.register_props()
+
     bpy.types.TOPBAR_MT_file_import.append(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.append(menu_func_bm_export)
 
     bpy.types.VIEW3D_MT_editor_menus.prepend(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
     bpy.types.OUTLINER_HT_header.append(menu_func_ballance_rename)
+
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_bm_export)
@@ -183,6 +202,9 @@ def unregister():
     bpy.types.VIEW3D_MT_editor_menus.remove(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
     bpy.types.OUTLINER_HT_header.remove(menu_func_ballance_rename)
+
+    UTILS_virtools_prop.unregister_props()
+    del bpy.types.Scene.BallanceBlenderPluginProperty
 
     for cls in classes:
         bpy.utils.unregister_class(cls)
