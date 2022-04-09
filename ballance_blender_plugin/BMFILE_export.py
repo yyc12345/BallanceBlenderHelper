@@ -2,7 +2,7 @@ import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
 import struct, shutil
 from bpy_extras import io_utils, node_shader_utils
-from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper
+from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop
 
 class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
     """Save a Ballance Map File (BM file spec 1.4)"""
@@ -118,8 +118,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 object_isHidden = not obj.visible_get()
 
                 # try get grouping data
-                object_groupList = _try_get_custom_property(obj, 'virtools-group')
-                object_groupList = _set_value_when_none(object_groupList, [])
+                object_groupList = UTILS_virtools_prop.get_virtools_group_data(obj)
 
                 # =======================
                 # write to files
@@ -242,15 +241,17 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 UTILS_file_io.write_uint64(finfo, fmaterial.tell())
 
                 # try get original written data
-                material_colAmbient = _try_get_custom_property(material, 'virtools-ambient')
-                material_colDiffuse = _try_get_custom_property(material, 'virtools-diffuse')
-                material_colSpecular = _try_get_custom_property(material, 'virtools-specular')
-                material_colEmissive = _try_get_custom_property(material, 'virtools-emissive')
-                material_specularPower = _try_get_custom_property(material, 'virtools-power')
+                (material_colAmbient, material_colDiffuse, material_colSpecular, 
+                material_colEmissive, material_specularPower) = UTILS_virtools_prop.get_virtools_material_data(material)
 
                 # get basic color
                 mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
                 if mat_wrap:
+                    # we trying get texture data from Principled BSDF
+                    # because bpy.types.Material.virtools_material now can provide
+                    # Virtools material data stablely, so i annotate following code
+                    # only keep texture data
+                    '''
                     use_mirror = mat_wrap.metallic != 0.0
                     if use_mirror:
                         material_colAmbient = _set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
@@ -260,6 +261,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                     material_colSpecular = _set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
                     material_colEmissive = _set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
                     material_specularPower = _set_value_when_none(material_specularPower, 0.0)
+                    '''
 
                     # confirm texture
                     tex_wrap = getattr(mat_wrap, "base_color_texture", None)
@@ -288,11 +290,14 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
 
                 else:
                     # no Principled BSDF. write garbage
+                    # same reason for disabling following code
+                    '''
                     material_colAmbient = _set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
                     material_colDiffuse = _set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
                     material_colSpecular = _set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
                     material_colEmissive = _set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
                     material_specularPower = _set_value_when_none(material_specularPower, 0.0)
+                    '''
 
                     material_useTexture = False
                     material_textureIndex = 0
@@ -355,12 +360,6 @@ def _mesh_triangulate(me):
     bmesh.ops.triangulate(bm, faces=bm.faces)
     bm.to_mesh(me)
     bm.free()
-
-def _try_get_custom_property(obj, field):
-    try:
-        return obj[field]
-    except:
-        return None
 
 def _set_value_when_none(obj, newValue):
     if obj is None:

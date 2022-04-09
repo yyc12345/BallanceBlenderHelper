@@ -4,7 +4,7 @@ import struct, shutil
 from bpy_extras import io_utils,node_shader_utils
 from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
-from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper
+from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop
 
 class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
     """Load a Ballance Map File (BM file spec 1.4)"""
@@ -327,7 +327,9 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
 
             # write custom property
             if len(object_groupList) != 0:
-                object_target['virtools-group'] = tuple(object_groupList)
+                UTILS_virtools_prop.set_virtools_group_data(object_target, tuple(object_groupList))
+            else:
+                UTILS_virtools_prop.set_virtools_group_data(object_target, None)
 
         # update view layer after all objects has been imported
         blender_viewLayer.update()

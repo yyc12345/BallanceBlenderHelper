@@ -54,6 +54,8 @@ def set_virtools_material_data(mtl, ambient, diffuse, specular, emissive, specul
     data.emissive = emissive
     data.specular_power = specular_power
 
+def get_active_virtools_group(obj):
+    return obj.active_virtools_group
 def get_virtools_group(obj):
     return obj.virtools_group
 
@@ -64,10 +66,11 @@ def set_virtools_group_data(obj, new_data):
     data = get_virtools_group(obj)
     data.clear()
 
-    for item in new_data:
-        it = data.add()
-        it.name = ""
-        it.group_name = item
+    if new_data is not None:
+        for item in new_data:
+            it = data.add()
+            it.name = ""
+            it.group_name = item
 
 def register_props():
     bpy.types.Object.virtools_group = bpy.props.CollectionProperty(type=BALLANCE_PG_virtools_group)

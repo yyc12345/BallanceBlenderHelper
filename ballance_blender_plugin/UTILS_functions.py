@@ -3,7 +3,7 @@ import struct, shutil, os
 from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
 from bpy_extras import io_utils, node_shader_utils
-from . import UTILS_file_io, UTILS_constants
+from . import UTILS_file_io, UTILS_constants, UTILS_virtools_prop
 
 # =================================
 # scene operation
@@ -65,12 +65,10 @@ def create_material_nodes(input_mtl, ambient, diffuse, specular, emissive,
         input_mtl.node_tree.links.new(inode.outputs[0], bnode.inputs[0])
 
     # write custom property
-    input_mtl['virtools-ambient'] = ambient
-    input_mtl['virtools-diffuse'] = diffuse
-    input_mtl['virtools-specular'] = specular
-    input_mtl['virtools-emissive'] = emissive
-    input_mtl['virtools-power'] = specular_power
-   
+    UTILS_virtools_prop.set_virtools_material_data(input_mtl,
+        ambient, diffuse, specular, emissive, specular_power
+    )
+
 # =================================
 # load component
 

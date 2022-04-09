@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions
+from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
 
 class rename_system_props(bpy.types.Operator):
     name_standard: bpy.props.EnumProperty(
@@ -113,12 +113,6 @@ class _NameInfoHelper():
 
 def _get_selected_objects():
     return bpy.context.view_layer.active_layer_collection.collection.objects
-
-def _try_get_custom_property(obj, field):
-    try:
-        return obj[field]
-    except:
-        return None
 
 def _get_sector_from_ckgroup(group_set):
     # this counter is served for stupid 
@@ -248,8 +242,8 @@ def _get_name_info_from_imengyu_name(obj_name):
     return None
 
 def _get_name_info_from_group(obj):
-    group_list = _try_get_custom_property(obj, 'virtools-group')
-    if group_list is None:
+    group_list = UTILS_virtools_prop.get_virtools_group_data(obj)
+    if len(group_list) == 0:
         # name it as a decoration
         return _NameInfoHelper(_ObjectBasicType.DECORATION)
 
@@ -442,7 +436,7 @@ def _set_for_group(obj, name_info):
     
 
     # apply to custom property
-    obj['virtools-group'] = tuple(gps)
+    UTILS_virtools_prop.set_virtools_group_data(obj, tuple(gps))
 
 # ========================================== 
 # assemble funcs

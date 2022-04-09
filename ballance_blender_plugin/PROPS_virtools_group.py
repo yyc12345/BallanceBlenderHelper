@@ -13,7 +13,11 @@ class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
 
     def execute(self, context):
         obj = context.object
-        UTILS_virtools_prop.set_virtools_group_data(obj, ("aaa", "bbb", "ccc"))
+        gp = UTILS_virtools_prop.get_virtools_group(obj)
+        item = gp.add()
+        item.name = ""
+        item.group_name = "CKGroup"
+
         return {'FINISHED'}
 
 class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
@@ -24,16 +28,32 @@ class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
 
     @classmethod
     def poll(self, context):
-        return context.object is not None
+        if context.object is None:
+            return False
 
+        try:
+            obj = context.object
+            gp = UTILS_virtools_prop.get_virtools_group(obj)
+            active_gp = UTILS_virtools_prop.get_active_virtools_group(obj)
+            data = gp[active_gp]
+        except:
+            return False
+        else:
+            return True
+        
     def execute(self, context):
         obj = context.object
-        print(UTILS_virtools_prop.get_virtools_group_data(obj))
+        gp = UTILS_virtools_prop.get_virtools_group(obj)
+        active_gp = UTILS_virtools_prop.get_active_virtools_group(obj)
+        idx = int(active_gp)
+        
+        active_gp -= 1
+        gp.remove(idx)
         return {'FINISHED'}
 
 class BALLANCE_UL_virtools_group(bpy.types.UIList):
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
-        layout.prop(item, 'group_name', icon='GROUP', text="")
+        layout.prop(item, 'group_name', icon='GROUP', emboss=False, text="")
 
 class BALLANCE_PT_virtools_group(bpy.types.Panel):
     """Show Virtools Group Properties."""
