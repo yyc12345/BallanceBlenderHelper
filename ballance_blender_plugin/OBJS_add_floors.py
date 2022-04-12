@@ -214,7 +214,7 @@ def _create_or_get_material(material_name, prefs_externalTexture):
         if material_name in try_item['member']:
             # got it
             # set material data
-            UTILS_functions.create_material_nodes(mtl,
+            UTILS_functions.create_blender_material(mtl,
                 try_item['data']['ambient'], try_item['data']['diffuse'], 
                 try_item['data']['specular'], try_item['data']['emissive'],
                 try_item['data']['power'],

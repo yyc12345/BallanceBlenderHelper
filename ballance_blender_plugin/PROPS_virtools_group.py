@@ -7,6 +7,12 @@ class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
     bl_label = "Add Virtools Group"
     bl_options = {'UNDO'}
 
+    group_name: bpy.props.EnumProperty(
+        name="Group Name",
+        description="Group name. For custom group name, please pick `CustomCKGroup` and change it later.",
+        items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
+    )
+
     @classmethod
     def poll(self, context):
         return context.object is not None
@@ -16,9 +22,16 @@ class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
         gp = UTILS_virtools_prop.get_virtools_group(obj)
         item = gp.add()
         item.name = ""
-        item.group_name = "CKGroup"
+        item.group_name = str(self.group_name)
 
         return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+    def draw(self, context):
+        self.layout.prop(self, 'group_name')
 
 class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
     """Remove a Virtools Group for Active Object."""

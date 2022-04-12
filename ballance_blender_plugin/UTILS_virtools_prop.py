@@ -33,6 +33,12 @@ class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
         default=0.0,
     )
 
+    texture: bpy.props.PointerProperty(
+        type=bpy.types.Image,
+        name="Texture",
+        description="The texture used for Virtools material"
+    )
+
 class BALLANCE_PG_virtools_group(bpy.types.PropertyGroup):
     group_name: bpy.props.StringProperty(
         name="Group Name",
@@ -44,15 +50,16 @@ def get_virtools_material(mtl):
 
 def get_virtools_material_data(mtl):
     data = get_virtools_material(mtl)
-    return (data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power)
+    return (data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power, data.texture)
 
-def set_virtools_material_data(mtl, ambient, diffuse, specular, emissive, specular_power):
+def set_virtools_material_data(mtl, ambient, diffuse, specular, emissive, specular_power, texture):
     data = get_virtools_material(mtl)
     data.ambient = ambient
     data.diffuse = diffuse
     data.specular = specular
     data.emissive = emissive
     data.specular_power = specular_power
+    data.texture = texture
 
 def get_active_virtools_group(obj):
     return obj.active_virtools_group

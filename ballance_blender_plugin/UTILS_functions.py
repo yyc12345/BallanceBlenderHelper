@@ -42,13 +42,29 @@ def get_component_id(name):
 # =================================
 # create material
 
-def create_material_nodes(input_mtl, ambient, diffuse, specular, emissive,
+def create_blender_material(input_mtl, ambient, diffuse, specular, emissive,
         specular_power, texture):
 
     # adding material nodes
+    create_material_nodes(input_mtl,
+        ambient, diffuse, specular, emissive, specular_power, texture
+    )
+
+    # write custom property
+    UTILS_virtools_prop.set_virtools_material_data(input_mtl,
+        ambient, diffuse, specular, emissive, specular_power, texture
+    )
+
+def create_material_nodes(input_mtl, ambient, diffuse, specular, emissive,
+        specular_power, texture):
+
+    # enable nodes mode
     input_mtl.use_nodes=True
+    # delete all existed nodes
     for node in input_mtl.node_tree.nodes:
         input_mtl.node_tree.nodes.remove(node)
+
+    # create ballance-style blender material
     bnode = input_mtl.node_tree.nodes.new(type="ShaderNodeBsdfPrincipled")
     mnode = input_mtl.node_tree.nodes.new(type="ShaderNodeOutputMaterial")
     input_mtl.node_tree.links.new(bnode.outputs[0],mnode.inputs[0])
@@ -63,11 +79,6 @@ def create_material_nodes(input_mtl, ambient, diffuse, specular, emissive,
         inode = input_mtl.node_tree.nodes.new(type="ShaderNodeTexImage")
         inode.image = texture
         input_mtl.node_tree.links.new(inode.outputs[0], bnode.inputs[0])
-
-    # write custom property
-    UTILS_virtools_prop.set_virtools_material_data(input_mtl,
-        ambient, diffuse, specular, emissive, specular_power
-    )
 
 # =================================
 # load component

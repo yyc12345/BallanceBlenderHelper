@@ -168,7 +168,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
                 continue
             
             # try create material nodes
-            UTILS_functions.create_material_nodes(material_target,
+            UTILS_functions.create_blender_material(material_target,
                 material_colAmbient, material_colDiffuse, material_colSpecular, material_colEmissive,
                 material_specularPower,
                 textureList[material_texture].blender_data if material_useTexture else None)
