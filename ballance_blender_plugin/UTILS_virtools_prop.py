@@ -33,6 +33,29 @@ class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
         default=0.0,
     )
 
+    alpha_test: bpy.props.BoolProperty(
+        name="Alpha Test",
+        description="Alpha Func: VXCMP_GREATER. Alpha Ref: 1.",
+        default=False,
+    )
+
+    alpha_blend: bpy.props.BoolProperty(
+        name="Alpha Blend",
+        description="Source Blend: VXBLEND_SRCALPHA. Dest Blend: VXBLEND_INVSRCALPHA.",
+        default=False,
+    )
+
+    z_buffer: bpy.props.BoolProperty(
+        name="Z Buffer",
+        description="ZFunc: VXCMP_LESSEQUAL.",
+        default=False,
+    )
+
+    two_sided: bpy.props.BoolProperty(
+        name="Two Sided",
+        default=False,
+    )
+
     texture: bpy.props.PointerProperty(
         type=bpy.types.Image,
         name="Texture",
@@ -50,16 +73,25 @@ def get_virtools_material(mtl):
 
 def get_virtools_material_data(mtl):
     data = get_virtools_material(mtl)
-    return (data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power, data.texture)
+    return (
+        data.ambient, 
+        data.diffuse, 
+        data.specular, 
+        data.emissive, 
+        data.specular_power, 
+        data.alpha_test,
+        data.alpha_blend,
+        data.z_buffer,
+        data.two_sided,
+        data.texture
+    )
 
-def set_virtools_material_data(mtl, ambient, diffuse, specular, emissive, specular_power, texture):
+def set_virtools_material_data(mtl, packed_data):
     data = get_virtools_material(mtl)
-    data.ambient = ambient
-    data.diffuse = diffuse
-    data.specular = specular
-    data.emissive = emissive
-    data.specular_power = specular_power
-    data.texture = texture
+    # packed_data have the same order with the return value of `get_virtools_material_data`
+    (data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power,
+    data.alpha_test, data.alpha_blend, data.z_buffer, data.two_sided,
+    data.texture) = packed_data
 
 def get_active_virtools_group(obj):
     return obj.active_virtools_group

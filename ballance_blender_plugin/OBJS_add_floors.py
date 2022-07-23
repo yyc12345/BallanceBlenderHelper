@@ -214,11 +214,14 @@ def _create_or_get_material(material_name, prefs_externalTexture):
         if material_name in try_item['member']:
             # got it
             # set material data
+            # all floor do not have any transparency props, so we provide 4 False value.
             UTILS_functions.create_blender_material(mtl,
-                try_item['data']['ambient'], try_item['data']['diffuse'], 
+                (try_item['data']['ambient'], try_item['data']['diffuse'], 
                 try_item['data']['specular'], try_item['data']['emissive'],
                 try_item['data']['power'],
+                False, False, False, False,
                 texture)
+            )
             break
     
     # return mtl

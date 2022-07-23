@@ -42,21 +42,19 @@ def get_component_id(name):
 # =================================
 # create material
 
-def create_blender_material(input_mtl, ambient, diffuse, specular, emissive,
-        specular_power, texture):
+def create_blender_material(input_mtl, packed_data):
 
     # adding material nodes
-    create_material_nodes(input_mtl,
-        ambient, diffuse, specular, emissive, specular_power, texture
-    )
+    create_material_nodes(input_mtl, packed_data)
 
     # write custom property
-    UTILS_virtools_prop.set_virtools_material_data(input_mtl,
-        ambient, diffuse, specular, emissive, specular_power, texture
-    )
+    UTILS_virtools_prop.set_virtools_material_data(input_mtl, packed_data)
 
-def create_material_nodes(input_mtl, ambient, diffuse, specular, emissive,
-        specular_power, texture):
+def create_material_nodes(input_mtl, packed_data):
+
+    (ambient, diffuse, specular, emissive, specular_power, 
+    alpha_test, alpha_blend, z_buffer, two_sided,
+    texture) = packed_data
 
     # enable nodes mode
     input_mtl.use_nodes=True

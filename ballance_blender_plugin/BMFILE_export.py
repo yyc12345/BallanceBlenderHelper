@@ -241,72 +241,66 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 UTILS_file_io.write_uint64(finfo, fmaterial.tell())
 
                 # try get original written data
-                (material_colAmbient, material_colDiffuse, material_colSpecular, 
-                material_colEmissive, material_specularPower) = UTILS_virtools_prop.get_virtools_material_data(material)
+                (material_colAmbient, material_colDiffuse, material_colSpecular, material_colEmissive, material_specularPower,
+                material_alphaTest, material_alphaBlend, material_zBuffer, material_twoSided,
+                material_texture) = UTILS_virtools_prop.get_virtools_material_data(material)
 
-                # get basic color
-                mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
-                if mat_wrap:
-                    # we trying get texture data from Principled BSDF
-                    # because bpy.types.Material.virtools_material now can provide
-                    # Virtools material data stablely, so i annotate following code
-                    # only keep texture data
-                    '''
-                    use_mirror = mat_wrap.metallic != 0.0
-                    if use_mirror:
-                        material_colAmbient = _set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
-                    else:
-                        material_colAmbient = _set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
-                    material_colDiffuse = _set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
-                    material_colSpecular = _set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
-                    material_colEmissive = _set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
-                    material_specularPower = _set_value_when_none(material_specularPower, 0.0)
-                    '''
-
-                    # confirm texture
-                    tex_wrap = getattr(mat_wrap, "base_color_texture", None)
-                    if tex_wrap:
-                        image = tex_wrap.image
-                        if image:
-                            # add into texture list
-                            if image not in textureSet:
-                                textureSet.add(image)
-                                textureList.append(image)
-                                textureIndex = textureCount
-                                textureCount += 1
-                            else:
-                                textureIndex = textureList.index(image)
-
-                            material_useTexture = True
-                            material_textureIndex = textureIndex
+                # only try get from Principled BSDF when we couldn't get from virtools_material props
+                if material_texture is None:
+                    # get node
+                    mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
+                    # check existence of Principled BSDF
+                    if mat_wrap:
+                        # we trying get texture data from Principled BSDF
+                        # because bpy.types.Material.virtools_material now can provide
+                        # Virtools material data stablely, so i annotate following code
+                        # only keep texture data
+                        '''
+                        use_mirror = mat_wrap.metallic != 0.0
+                        if use_mirror:
+                            material_colAmbient = _set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
                         else:
-                            # no texture
-                            material_useTexture = False
-                            material_textureIndex = 0
-                    else:
-                        # no texture
-                        material_useTexture = False
-                        material_textureIndex = 0
+                            material_colAmbient = _set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
+                        material_colDiffuse = _set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
+                        material_colSpecular = _set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
+                        material_colEmissive = _set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
+                        material_specularPower = _set_value_when_none(material_specularPower, 0.0)
+                        '''
 
-                else:
-                    # no Principled BSDF. write garbage
-                    # same reason for disabling following code
-                    '''
-                    material_colAmbient = _set_value_when_none(material_colAmbient, (0.8, 0.8, 0.8))
-                    material_colDiffuse = _set_value_when_none(material_colDiffuse, (0.8, 0.8, 0.8))
-                    material_colSpecular = _set_value_when_none(material_colSpecular, (0.8, 0.8, 0.8))
-                    material_colEmissive = _set_value_when_none(material_colEmissive, (0.8, 0.8, 0.8))
-                    material_specularPower = _set_value_when_none(material_specularPower, 0.0)
-                    '''
+                        # confirm texture
+                        tex_wrap = getattr(mat_wrap, "base_color_texture", None)
+                        if tex_wrap:
+                            image = tex_wrap.image
+                            if image:
+                                material_texture = image
+                                
 
+                # check texture index
+                if material_texture is None:
                     material_useTexture = False
                     material_textureIndex = 0
+                else:
+                    # add into texture list
+                    if material_texture not in textureSet:
+                        textureSet.add(material_texture)
+                        textureList.append(material_texture)
+                        textureIndex = textureCount
+                        textureCount += 1
+                    else:
+                        textureIndex = textureList.index(material_texture)
+
+                    material_useTexture = True
+                    material_textureIndex = textureIndex
 
                 UTILS_file_io.write_color(fmaterial, material_colAmbient)
                 UTILS_file_io.write_color(fmaterial, material_colDiffuse)
                 UTILS_file_io.write_color(fmaterial, material_colSpecular)
                 UTILS_file_io.write_color(fmaterial, material_colEmissive)
                 UTILS_file_io.write_float(fmaterial, material_specularPower)
+                UTILS_file_io.write_bool(fmaterial, material_alphaTest)
+                UTILS_file_io.write_bool(fmaterial, material_alphaBlend)
+                UTILS_file_io.write_bool(fmaterial, material_zBuffer)
+                UTILS_file_io.write_bool(fmaterial, material_twoSided)
                 UTILS_file_io.write_bool(fmaterial, material_useTexture)
                 UTILS_file_io.write_uint32(fmaterial, material_textureIndex)
             

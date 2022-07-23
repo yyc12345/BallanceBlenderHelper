@@ -14,7 +14,7 @@ class BALLANCE_OT_apply_virtools_material(bpy.types.Operator):
     def execute(self, context):
         mtl = context.material
         mtl_data = UTILS_virtools_prop.get_virtools_material_data(mtl)
-        UTILS_functions.create_material_nodes(mtl, *mtl_data)
+        UTILS_functions.create_material_nodes(mtl, mtl_data)
 
         return {'FINISHED'}
 
@@ -41,6 +41,10 @@ class BALLANCE_PT_virtools_material(bpy.types.Panel):
         layout.prop(target, 'specular')
         layout.prop(target, 'emissive')
         layout.prop(target, 'specular_power')
+        layout.prop(target, 'alpha_test')
+        layout.prop(target, 'alpha_blend')
+        layout.prop(target, 'z_buffer')
+        layout.prop(target, 'two_sided')
 
         layout.operator("ballance.apply_virtools_material", icon="NODETREE")
 
