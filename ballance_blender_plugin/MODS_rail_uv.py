@@ -15,7 +15,8 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
         items=(
             ("POINT", "Point", "All UV will be created in a specific point"),
             ("UNIFORM", "Uniform", "All UV will be created within 1x1"),
-            ("SCALE", "Scale", "Give a scale number to scale UV")
+            ("SCALE", "Scale", "Give a scale number to scale UV"),
+            ("TT", "TT_ReflectionMapping", "The real internal process of Ballance rail")
             ),
     )
 
@@ -55,7 +56,7 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
         layout = self.layout
         layout.prop(self, "uv_type")
         layout.prop(context.scene.BallanceBlenderPluginProperty, "material_picker")
-        if self.uv_type != 'POINT':
+        if self.uv_type == 'SCALE' or self.uv_type == 'UNIFORM':
             layout.prop(self, "projection_axis")        
         if self.uv_type == 'SCALE':
             layout.prop(self, "uv_scale")
@@ -149,7 +150,7 @@ def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
                     # set to 1 point
                     uv_layer[loop_index].uv[0] = 0
                     uv_layer[loop_index].uv[1] = 1
-                else:
+                elif rail_type == 'SCALE' or rail_type == 'UNIFORM':
                     # following xy -> uv scale
                     # 
                     # use Z axis: X->U Y->V
@@ -164,9 +165,27 @@ def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
                     elif projection_axis == 'Z':
                         uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
                         uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
+                elif rail_type == 'TT':
+                    (uv_layer[loop_index].uv[0], uv_layer[loop_index].uv[1]) = _tt_reflection_mapping_compute(
+                         vecList[index].co,
+                         mesh.loops[loop_index].normal,
+                         (0.0, 0.0, 0.0)
+                    )
 
     if len(ignoredObj) != 0:
         UTILS_functions.show_message_box(
             ("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), 
             "Execution result", 'INFO'
         )
+
+def _tt_reflection_mapping_compute(_point, _n, _refobj):
+    # switch blender coord to virtools coord for convenient calc
+    point = mathutils.Vector((_point[0], _point[2], _point[1]))
+    n = mathutils.Vector((_n[0], _n[2], _n[1])).normalized()
+    refobj = mathutils.Vector((_refobj[0], _refobj[2], _refobj[1]))
+
+    p = (refobj - point).normalized()
+    b=(((2*(p*n))*n)-p).normalized()
+    
+    # convert back to blender coord
+    return ((b.x + 1.0) / 2.0, -(b.z + 1.0) / 2.0)
