@@ -332,9 +332,9 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
 
             # write custom property
             if len(object_groupList) != 0:
-                UTILS_virtools_prop.set_virtools_group_data(object_target, tuple(object_groupList))
+                UTILS_virtools_prop.fill_virtools_group_data(object_target, tuple(object_groupList))
             else:
-                UTILS_virtools_prop.set_virtools_group_data(object_target, None)
+                UTILS_virtools_prop.fill_virtools_group_data(object_target, None)
 
         # update view layer after all objects has been imported
         blender_viewLayer.update()

@@ -98,18 +98,81 @@ def get_active_virtools_group(obj):
 def get_virtools_group(obj):
     return obj.virtools_group
 
+def check_virtools_group_data(obj, probe):
+    for item in get_virtools_group(obj):
+        if probe == str(item.group_name):
+            return True
+
+    return False
+
+def add_virtools_group_data(obj, new_data):
+    # check exist
+    if check_virtools_group_data(obj, new_data):
+        # existed, give up
+        return False
+
+    # "add" do not need operate active_virtools_group
+    data = get_virtools_group(obj)
+    it = data.add()
+    it.name = ""
+    it.group_name = new_data
+
+    return True
+
+def remove_virtools_group_data(obj, rm_data):
+    gp = get_virtools_group(obj)
+    active_gp = get_active_virtools_group(obj)
+
+    for idx, item in enumerate(gp):
+        if rm_data == str(item.group_name):
+            # decrease active group if removed item is ahead of active group
+            if idx <= active_gp:
+                active_gp -= 1
+            # remove
+            gp.remove(idx)
+            # indicate success
+            return True
+
+    return False
+
+def remove_virtools_group_data_by_index(obj, rm_idx):
+    gp = get_virtools_group(obj)
+    active_gp = get_active_virtools_group(obj)
+
+    # report error
+    if rm_idx >= len(gp):
+        return False
+
+    # remove
+    if rm_idx <= active_gp:
+        active_gp -= 1
+    gp.remove(rm_idx)
+    return True
+
+def clear_virtools_group_data(obj):
+    gp = get_virtools_group(obj)
+    active_gp = get_active_virtools_group(obj)
+
+    gp.clear()
+    active_gp = 0
+
+def fill_virtools_group_data(obj, data_list):
+    # clear first
+    clear_virtools_group_data(obj)
+
+    # if no data to add, return
+    if data_list is None:
+        return
+
+    # add one by one after check duplication
+    data = get_virtools_group(obj)
+    for item in set(data_list):
+        it = data.add()
+        it.name = ""
+        it.group_name = item
+
 def get_virtools_group_data(obj):
     return tuple(str(item.group_name) for item in get_virtools_group(obj))
-
-def set_virtools_group_data(obj, new_data):
-    data = get_virtools_group(obj)
-    data.clear()
-
-    if new_data is not None:
-        for item in new_data:
-            it = data.add()
-            it.name = ""
-            it.group_name = item
 
 def register_props():
     bpy.types.Object.virtools_group = bpy.props.CollectionProperty(type=BALLANCE_PG_virtools_group)

@@ -7,10 +7,22 @@ class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
     bl_label = "Add Virtools Group"
     bl_options = {'UNDO'}
 
+    use_custom_name: bpy.props.BoolProperty(
+        name="Use Custom Name",
+        description="Whether use user defined group name.",
+        default=False,
+    )
+
     group_name: bpy.props.EnumProperty(
         name="Group Name",
-        description="Group name. For custom group name, please pick `CustomCKGroup` and change it later.",
+        description="Pick vanilla Ballance group name.",
         items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
+    )
+
+    custom_group_name: bpy.props.StringProperty(
+        name="Custom Group Name",
+        description="Input your custom group name.",
+        default="",
     )
 
     @classmethod
@@ -18,20 +30,27 @@ class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
         return context.object is not None
 
     def execute(self, context):
+        # get name first
+        gotten_group_name = str(self.custom_group_name if self.use_custom_name else self.group_name)
+
+        # try adding
         obj = context.object
-        gp = UTILS_virtools_prop.get_virtools_group(obj)
-        item = gp.add()
-        item.name = ""
-        item.group_name = str(self.group_name)
+        if not UTILS_virtools_prop.add_virtools_group_data(obj, gotten_group_name):
+            UTILS_functions.show_message_box(("Group name is duplicated!", ), "Duplicated Name", 'ERROR')
 
         return {'FINISHED'}
-
+    
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
-
+        
     def draw(self, context):
-        self.layout.prop(self, 'group_name')
+        self.layout.prop(self, 'use_custom_name')
+        if (self.use_custom_name):
+            self.layout.prop(self, 'custom_group_name')
+        else:
+            self.layout.prop(self, 'group_name')
+
 
 class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
     """Remove a Virtools Group for Active Object."""
@@ -44,24 +63,14 @@ class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
         if context.object is None:
             return False
 
-        try:
-            obj = context.object
-            gp = UTILS_virtools_prop.get_virtools_group(obj)
-            active_gp = UTILS_virtools_prop.get_active_virtools_group(obj)
-            data = gp[active_gp]
-        except:
-            return False
-        else:
-            return True
-        
-    def execute(self, context):
         obj = context.object
         gp = UTILS_virtools_prop.get_virtools_group(obj)
         active_gp = UTILS_virtools_prop.get_active_virtools_group(obj)
-        idx = int(active_gp)
-        
-        active_gp -= 1
-        gp.remove(idx)
+        return int(active_gp) >= 0 and int(active_gp) < len(gp)
+
+    def execute(self, context):
+        obj = context.object
+        UTILS_virtools_prop.remove_virtools_group_data_by_index(obj, int(UTILS_virtools_prop.get_active_virtools_group(obj)))
         return {'FINISHED'}
 
 class BALLANCE_UL_virtools_group(bpy.types.UIList):

@@ -436,7 +436,7 @@ def _set_for_group(obj, name_info):
     
 
     # apply to custom property
-    UTILS_virtools_prop.set_virtools_group_data(obj, tuple(gps))
+    UTILS_virtools_prop.fill_virtools_group_data(obj, tuple(gps))
 
 # ========================================== 
 # assemble funcs

@@ -345,9 +345,7 @@ propsVtGroups_availableGroups = (
 
     "Phys_Floors",
     "Phys_FloorRails",
-    "Phys_FloorStopper",
-
-    "CustomCKGroup"
+    "Phys_FloorStopper"
 )
 
 

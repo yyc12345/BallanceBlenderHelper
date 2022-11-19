@@ -50,6 +50,8 @@ if "bpy" in locals():
         importlib.reload(OBJS_add_floors)
     if "OBJS_add_rails" in locals():
         importlib.reload(OBJS_add_rails)
+    if "OBJS_group_opers" in locals():
+        importlib.reload(OBJS_group_opers)
 
     if "NAMES_rename_system" in locals():
         importlib.reload(NAMES_rename_system)
@@ -62,7 +64,7 @@ if "bpy" in locals():
 from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop
 from . import BMFILE_export, BMFILE_import
 from . import MODS_3dsmax_align, MODS_flatten_uv, MODS_rail_uv
-from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails
+from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails, OBJS_group_opers
 from . import NAMES_rename_system
 from . import PROPS_virtools_group, PROPS_virtools_material
 
@@ -149,8 +151,14 @@ classes = (
     PROPS_virtools_group.BALLANCE_UL_virtools_group,
     PROPS_virtools_group.BALLANCE_PT_virtools_group,
     PROPS_virtools_material.BALLANCE_OT_apply_virtools_material,
-    PROPS_virtools_material.BALLANCE_PT_virtools_material
+    PROPS_virtools_material.BALLANCE_PT_virtools_material,
 
+    OBJS_group_opers.BALLANCE_OT_select_virtools_group,
+    OBJS_group_opers.BALLANCE_OT_filter_virtools_group,
+    OBJS_group_opers.BALLANCE_OT_ctx_set_group,
+    OBJS_group_opers.BALLANCE_OT_ctx_unset_group,
+    OBJS_group_opers.BALLANCE_OT_ctx_clear_group,
+    
 )
 
 def menu_func_bm_import(self, context):
@@ -172,6 +180,21 @@ def menu_func_ballance_add(self, context):
 def menu_func_ballance_rename(self, context):
     layout = self.layout
     layout.menu(BALLANCE_MT_OutlinerMenu.bl_idname)
+def menu_func_ballance_select(self, context):
+    layout = self.layout
+    layout.separator()
+    layout.label(text="Ballance")
+    layout.operator(OBJS_group_opers.BALLANCE_OT_select_virtools_group.bl_idname, icon='SELECT_SET')
+    layout.operator(OBJS_group_opers.BALLANCE_OT_filter_virtools_group.bl_idname, icon='FILTER')
+def menu_func_ballance_grouping(self, context):
+    layout = self.layout
+    layout.separator()
+    col = layout.column()
+    col.operator_context = 'INVOKE_DEFAULT'
+    col.label(text="Ballance")
+    col.operator(OBJS_group_opers.BALLANCE_OT_ctx_set_group.bl_idname, icon='ADD', text="Group into...")
+    col.operator(OBJS_group_opers.BALLANCE_OT_ctx_unset_group.bl_idname, icon='REMOVE', text="Ungroup from...")
+    col.operator(OBJS_group_opers.BALLANCE_OT_ctx_clear_group.bl_idname, icon='TRASH', text="Clear Grouping")
 
 
 def register():
@@ -196,6 +219,9 @@ def register():
     bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
     bpy.types.OUTLINER_HT_header.append(menu_func_ballance_rename)
 
+    bpy.types.VIEW3D_MT_select_object.append(menu_func_ballance_select)
+    bpy.types.VIEW3D_MT_object_context_menu.append(menu_func_ballance_grouping)
+
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func_bm_export)
@@ -203,6 +229,9 @@ def unregister():
     bpy.types.VIEW3D_MT_editor_menus.remove(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
     bpy.types.OUTLINER_HT_header.remove(menu_func_ballance_rename)
+
+    bpy.types.VIEW3D_MT_select_object.remove(menu_func_ballance_select)
+    bpy.types.VIEW3D_MT_object_context_menu.remove(menu_func_ballance_grouping)
 
     UTILS_virtools_prop.unregister_props()
     del bpy.types.Scene.BallanceBlenderPluginProperty

@@ -2,7 +2,7 @@ import bpy, mathutils
 from . import UTILS_functions
 
 class BALLANCE_OT_super_align(bpy.types.Operator):
-    """Align object with 3ds Max way"""
+    """Align object with 3ds Max style"""
     bl_idname = "ballance.super_align"
     bl_label = "3ds Max Align"
     bl_options = {'UNDO'}
@@ -12,7 +12,7 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
     align_z: bpy.props.BoolProperty(name="Z position")
 
     current_references: bpy.props.EnumProperty(
-        name="Reference",
+        name="Reference (Active Object)",
         items=(('MIN', "Min", ""),
                 ('CENTER', "Center (bound box)", ""),
                 ('POINT', "Center (axis)", ""),
@@ -21,7 +21,7 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
         )
 
     target_references: bpy.props.EnumProperty(
-        name="Target",
+        name="Target (Other Objects)",
         items=(('MIN', "Min", ""),
                 ('CENTER', "Center (bound box)", ""),
                 ('POINT', "Center (axis)", ""),
