@@ -40,10 +40,9 @@ def get_component_id(name):
     return -1
 
 # =================================
-# create material
+# create / parse material
 
 def create_blender_material(input_mtl, packed_data):
-
     # adding material nodes
     create_material_nodes(input_mtl, packed_data)
 
@@ -51,8 +50,8 @@ def create_blender_material(input_mtl, packed_data):
     UTILS_virtools_prop.set_virtools_material_data(input_mtl, packed_data)
 
 def create_material_nodes(input_mtl, packed_data):
-
-    (ambient, diffuse, specular, emissive, specular_power, 
+    (enable_virtools_material,
+    ambient, diffuse, specular, emissive, specular_power, 
     alpha_test, alpha_blend, z_buffer, two_sided,
     texture) = packed_data
 
@@ -77,6 +76,41 @@ def create_material_nodes(input_mtl, packed_data):
         inode = input_mtl.node_tree.nodes.new(type="ShaderNodeTexImage")
         inode.image = texture
         input_mtl.node_tree.links.new(inode.outputs[0], bnode.inputs[0])
+
+# return None if fail to parse
+def parse_material_nodes(mtl):
+    # get node
+    mat_wrap = node_shader_utils.PrincipledBSDFWrapper(mtl)
+    # check existence of Principled BSDF
+    if mat_wrap:
+        # we trying get texture data from Principled BSDF
+        use_mirror = mat_wrap.metallic != 0.0
+        if use_mirror:
+            mtl_ambient = (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic)
+        else:
+            mtl_ambient = (1.0, 1.0, 1.0)
+        mtl_diffuse = (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2])
+        mtl_specular = (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular)
+        mtl_emissive = mat_wrap.emission_color[:3]
+        mtl_specularPower = 0.0
+
+        # confirm texture
+        mtl_texture = None
+        tex_wrap = getattr(mat_wrap, "base_color_texture", None)
+        if tex_wrap:
+            image = tex_wrap.image
+            if image:
+                mtl_texture = image
+
+        # return value
+        return (True,
+            mtl_ambient, mtl_diffuse, mtl_specular, mtl_emissive, mtl_specularPower,
+            False, False, False, False,
+            mtl_texture
+        )
+
+    else:
+        return None
 
 # =================================
 # load component

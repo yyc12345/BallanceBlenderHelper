@@ -2,6 +2,11 @@ import bpy
 from . import UTILS_constants, UTILS_functions
 
 class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
+    enable_virtools_material: bpy.props.BoolProperty(
+        name="Enable Virtools Material",
+        default=False,
+    )
+
     ambient: bpy.props.FloatVectorProperty(name="Ambient", 
                                 subtype='COLOR',
                                 min=0.0,
@@ -74,6 +79,7 @@ def get_virtools_material(mtl):
 def get_virtools_material_data(mtl):
     data = get_virtools_material(mtl)
     return (
+        data.enable_virtools_material,
         data.ambient, 
         data.diffuse, 
         data.specular, 
@@ -89,7 +95,8 @@ def get_virtools_material_data(mtl):
 def set_virtools_material_data(mtl, packed_data):
     data = get_virtools_material(mtl)
     # packed_data have the same order with the return value of `get_virtools_material_data`
-    (data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power,
+    (data.enable_virtools_material,
+    data.ambient, data.diffuse, data.specular, data.emissive, data.specular_power,
     data.alpha_test, data.alpha_blend, data.z_buffer, data.two_sided,
     data.texture) = packed_data
 

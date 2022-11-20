@@ -151,6 +151,7 @@ classes = (
     PROPS_virtools_group.BALLANCE_UL_virtools_group,
     PROPS_virtools_group.BALLANCE_PT_virtools_group,
     PROPS_virtools_material.BALLANCE_OT_apply_virtools_material,
+    PROPS_virtools_material.BALLANCE_OT_parse_virtools_material,
     PROPS_virtools_material.BALLANCE_PT_virtools_material,
 
     OBJS_group_opers.BALLANCE_OT_select_virtools_group,

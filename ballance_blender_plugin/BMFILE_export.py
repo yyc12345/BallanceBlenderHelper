@@ -241,40 +241,20 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 UTILS_file_io.write_uint64(finfo, fmaterial.tell())
 
                 # try get original written data
-                (material_colAmbient, material_colDiffuse, material_colSpecular, material_colEmissive, material_specularPower,
+                (material_enableVirtoolsMat,
+                material_colAmbient, material_colDiffuse, material_colSpecular, material_colEmissive, material_specularPower,
                 material_alphaTest, material_alphaBlend, material_zBuffer, material_twoSided,
                 material_texture) = UTILS_virtools_prop.get_virtools_material_data(material)
 
                 # only try get from Principled BSDF when we couldn't get from virtools_material props
-                if material_texture is None:
-                    # get node
-                    mat_wrap = node_shader_utils.PrincipledBSDFWrapper(material)
-                    # check existence of Principled BSDF
-                    if mat_wrap:
-                        # we trying get texture data from Principled BSDF
-                        # because bpy.types.Material.virtools_material now can provide
-                        # Virtools material data stablely, so i annotate following code
-                        # only keep texture data
-                        '''
-                        use_mirror = mat_wrap.metallic != 0.0
-                        if use_mirror:
-                            material_colAmbient = _set_value_when_none(material_colAmbient, (mat_wrap.metallic, mat_wrap.metallic, mat_wrap.metallic))
-                        else:
-                            material_colAmbient = _set_value_when_none(material_colAmbient, (1.0, 1.0, 1.0))
-                        material_colDiffuse = _set_value_when_none(material_colDiffuse, (mat_wrap.base_color[0], mat_wrap.base_color[1], mat_wrap.base_color[2]))
-                        material_colSpecular = _set_value_when_none(material_colSpecular, (mat_wrap.specular, mat_wrap.specular, mat_wrap.specular))
-                        material_colEmissive = _set_value_when_none(material_colEmissive, mat_wrap.emission_color[:3])
-                        material_specularPower = _set_value_when_none(material_specularPower, 0.0)
-                        '''
-
-                        # confirm texture
-                        tex_wrap = getattr(mat_wrap, "base_color_texture", None)
-                        if tex_wrap:
-                            image = tex_wrap.image
-                            if image:
-                                material_texture = image
-                                
-
+                if not material_enableVirtoolsMat:
+                    v = UTILS_functions.parse_material_nodes(material)
+                    if v is not None:
+                        (material_enableVirtoolsMat,
+                        material_colAmbient, material_colDiffuse, material_colSpecular, material_colEmissive, material_specularPower,
+                        material_alphaTest, material_alphaBlend, material_zBuffer, material_twoSided,
+                        material_texture) = v
+                
                 # check texture index
                 if material_texture is None:
                     material_useTexture = False
