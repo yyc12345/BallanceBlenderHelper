@@ -31,6 +31,8 @@ if "bpy" in locals():
         importlib.reload(UTILS_zip_helper)
     if "UTILS_virtools_prop" in locals():
         importlib.reload(UTILS_virtools_prop)
+    if "UTILS_safe_eval" in locals():
+        importlib.reload(UTILS_safe_eval)
 
     if "BMFILE_export" in locals():
         importlib.reload(BMFILE_export)
@@ -61,7 +63,7 @@ if "bpy" in locals():
     if "PROPS_virtools_material" in locals():
         importlib.reload(PROPS_virtools_material)
 
-from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop, UTILS_safe_eval
 from . import BMFILE_export, BMFILE_import
 from . import MODS_3dsmax_align, MODS_flatten_uv, MODS_rail_uv
 from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails, OBJS_group_opers

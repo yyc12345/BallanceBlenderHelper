@@ -16,17 +16,17 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkBorder",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "SinkBorder",
-                "StartPosition": "0,1;,d1,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom",
+                "StartPosition": "0 +d1, (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0"
             }
         ]
     },
@@ -47,17 +47,17 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,1;,d1,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom",
+                "StartPosition": "0 +d1, (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0"
             }
         ]
     },
@@ -78,45 +78,45 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalBorder",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R0",
-                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "1,1;,d1,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R180",
-                "SideSync": "False;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1) +d1, (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;2,d1,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d1, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,1;2,d1,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d1, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -137,45 +137,45 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkBorder",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R0",
-                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "SinkBorder",
-                "StartPosition": "1,1;,d1,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R180",
-                "SideSync": "False;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1) +d1, (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,0;2,d1,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d1, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,1;2,d1,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d1, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -196,31 +196,31 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -241,31 +241,31 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -286,66 +286,66 @@
         "SmashedBlocks": [
             {
                 "Type": "Flat",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,d1,,d2",
                 "Rotation": "R0",
-                "SideSync": "False;False;False;False;3dTop;3dBottom"
+                "SideSync": "False;False;False;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0 +d2"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,d2,,",
                 "Rotation": "R0",
-                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0 +d2, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,1;2,d2,,",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R90",
-                "SideSync": "False;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*1), 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,0;1,d2,2,d1",
-                "ExpandPosition": "0,0;,d2,,",
                 "Rotation": "R180",
-                "SideSync": "False;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1) +d2, (2.5*2) +d1, 0.0",
+                "ExpandParam": "0 +d2, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,0;,,1,d1",
-                "ExpandPosition": "0,0;,d1,,",
                 "Rotation": "R270",
-                "SideSync": "False;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "False;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1) +d1, 0.0",
+                "ExpandParam": "0 +d1, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;2,d2,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom"
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;2,d2,2,d1",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom"
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*2) +d1, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;,,2,d1",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*2) +d1, 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -366,31 +366,31 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;False;2dBottom;2dLeft;3dTop;3dBottom"
+                "SideSync": "False;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -411,24 +411,24 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom"
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalBorder",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "1,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;2dLeft;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;2dLeft;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "1, 0"
             }
         ]
     },
@@ -449,31 +449,31 @@
         "SmashedBlocks": [
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "False;2dTop;2dRight;False;3dTop;3dBottom"
+                "SideSync": "False;2dTop;2dRight;False;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "False;2dLeft;2dTop;False;3dTop;3dBottom"
+                "SideSync": "False;2dLeft;2dTop;False;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalInnerCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom"
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -494,31 +494,31 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkOutterCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom"
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkBorder",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;False;2dBottom;2dLeft;3dTop;3dBottom"
+                "SideSync": "False;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkBorder",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     },
@@ -539,24 +539,24 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom"
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkBorder",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "1,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;2dLeft;2dTop;3dTop;3dBottom"
+                "SideSync": "2dRight;False;2dLeft;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "1, 0"
             }
         ]
     },
@@ -577,31 +577,31 @@
         "SmashedBlocks": [
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "1,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R0",
-                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom"
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "0,1;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R90",
-                "SideSync": "False;2dTop;2dRight;False;3dTop;3dBottom"
+                "SideSync": "False;2dTop;2dRight;False;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "0,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R180",
-                "SideSync": "False;2dLeft;2dTop;False;3dTop;3dBottom"
+                "SideSync": "False;2dLeft;2dTop;False;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0.0",
+                "ExpandParam": "0, 0"
             },
             {
                 "Type": "SinkInnerCorner",
-                "StartPosition": "1,0;,,,",
-                "ExpandPosition": "0,0;,,,",
                 "Rotation": "R270",
-                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom"
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0.0",
+                "ExpandParam": "0, 0"
             }
         ]
     }

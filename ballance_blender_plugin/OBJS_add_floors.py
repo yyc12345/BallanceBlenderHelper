@@ -1,9 +1,10 @@
 import bpy,mathutils
 import os, math
+import ast
 from bpy_extras import io_utils,node_shader_utils
 # from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
-from . import UTILS_constants, UTILS_functions
+from . import UTILS_constants, UTILS_functions, UTILS_safe_eval
 
 class BALLANCE_OT_add_floors(bpy.types.Operator):
     """Add Ballance floor"""
@@ -85,7 +86,7 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
                 self.use_2d_left,
                 self.use_3d_top,
                 self.use_3d_bottom),
-                (0.0, 0.0),
+                (0.0, 0.0, 0.0),
                 prefs_externalTexture)
         elif self.floor_type in UTILS_constants.floor_derivedBlockList:
             _load_derived_floor(
@@ -228,30 +229,27 @@ def _create_or_get_material(material_name, prefs_externalTexture):
     # return mtl
     return mtl
 
-def _solve_vec_data(str_data, d1, d2, d3, unit, unit_height):
-    sp = str_data.split(';')
-    sp_point = sp[0].split(',')
-    vec = [float(sp_point[0]), float(sp_point[1]), float(sp_point[2])]
+def _solve_vec_data(str_data, d1, d2, d3, unit):
+    (cmd_x, cmd_y, cmd_z) = map(lambda x: x.strip(), str_data.split(','))
 
-    for i in range(3):
-        symbol = sp[i+1]
-        if symbol == '':
-            continue
+    # calc raw expand data
+    raw_d1 = d1 * unit
+    raw_d2 = d2 * unit
+    raw_d3 = (d3 - 1) * 5.0 # the 3d heigh unit of ballance floor is always 5.0
 
-        factor = 1.0 if symbol[0] == '+' else -1.0
-        p = symbol[1:]
-        if p == 'd1':
-            vec[i] += d1 * unit * factor
-        elif p == 'd2':
-            vec[i] += d2 * unit * factor
-        elif p == 'd3':
-            vec[i] += (d3 - 1) * unit_height * factor
+    # do safe eval
+    return (
+        UTILS_safe_eval.do_vec_calc(cmd_x, raw_d1, raw_d2, raw_d3),
+        UTILS_safe_eval.do_vec_calc(cmd_y, raw_d1, raw_d2, raw_d3),
+        UTILS_safe_eval.do_vec_calc(cmd_z, raw_d1, raw_d2, raw_d3)
+    )
 
-    return vec
-
-def _rotate_translate_vec(vec, rotation, unit, extra_translate):
-    vec[0] -= unit / 2
-    vec[1] -= unit / 2
+def _rotate_translate_vec(_vec, rotation, unit, extra_translate):
+    vec = (
+        _vec[0] - unit / 2, 
+        _vec[1] - unit / 2, 
+        _vec[2]
+    )
 
     if rotation == 'R0':
         coso=1
@@ -269,74 +267,49 @@ def _rotate_translate_vec(vec, rotation, unit, extra_translate):
     return (
         coso * vec[0] - sino * vec[1] + unit / 2 + extra_translate[0],
         sino * vec[0] + coso * vec[1] + unit / 2 + extra_translate[1],
-        vec[2]
+        vec[2] + extra_translate[2]
     )
 
 
 def _solve_uv_data(str_data, d1, d2, d3, unit):
-    sp = str_data.split(';')
-    sp_point = sp[0].split(',')
-    vec = [float(sp_point[0]), float(sp_point[1])]
+    (cmd_u, cmd_v) = map(lambda x: x.strip(), str_data.split(','))
 
-    for i in range(2):
-        symbol = sp[i+1]
-        if symbol == '':
-            continue
+    # calc raw expand data
+    raw_d1 = d1 * unit
+    raw_d2 = d2 * unit
+    raw_d3 = float(d3 - 1)  # the uv heigh unit of ballance floor is always 1.0
 
-        factor = 1.0 if symbol[0] == '+' else -1.0
-        p = symbol[1:]
-        if p == 'd1':
-            vec[i] += d1 * unit * factor
-        elif p == 'd2':
-            vec[i] += d2 * unit * factor
-        elif p == 'd3':
-            vec[i] += (d3 - 1) * unit * factor
-
-    return tuple(vec)
+    # do safe eval
+    return (
+        UTILS_safe_eval.do_vec_calc(cmd_u, raw_d1, raw_d2, raw_d3),
+        UTILS_safe_eval.do_vec_calc(cmd_v, raw_d1, raw_d2, raw_d3)
+    )
 
 def _solve_normal_data(point1, point2, point3):
-    vector1 = (
-        point2[0] - point1[0],
-        point2[1] - point1[1],
-        point2[2] - point1[2]
-    )
-    vector2 = (
-        point3[0] - point2[0],
-        point3[1] - point2[1],
-        point3[2] - point2[2]
-    )
+    p1 = mathutils.Vector(point1)
+    p2 = mathutils.Vector(point2)
+    p3 = mathutils.Vector(point3)
+
+    vector1 = p2 - p1
+    vector2 = p3 - p2
 
     # do vector x mutiply
     # vector1 x vector2
-    nor = [
-        vector1[1] * vector2[2] - vector1[2] * vector2[1],
-        vector1[2] * vector2[0] - vector1[0] * vector2[2],
-        vector1[0] * vector2[1] - vector1[1] * vector2[0]
-    ]
+    corss_mul = vector1.cross(vector2)
 
     # do a normalization
-    length = math.sqrt(nor[0] ** 2 + nor[1] ** 2 + nor[2] ** 2)
-    nor[0] /= length
-    nor[1] /= length
-    nor[2] /= length
+    corss_mul.normalize()
 
-    return tuple(nor)
+    return (corss_mul[0], corss_mul[1], corss_mul[2])
 
-def _solve_smashed_position(str_data, d1, d2):
-    sp=str_data.split(';')
-    sp_pos = sp[0].split(',')
-    sp_sync = sp[1].split(',')
+def _solve_expand_param(str_data, d1, d2):
+    (cmd_d1, cmd_d2) = map(lambda x: x.strip(), str_data.split(','))
 
-    vec = [int(sp_pos[0]), int(sp_pos[1])]
-
-    for i in range(2):
-        offset = 0 if sp_sync[i * 2] == '' else int(sp_sync[i * 2])
-        if sp_sync[i*2+1] == 'd1':
-            vec[i] += d1 + offset
-        elif sp_sync[i*2+1] == 'd2':
-            vec[i] += d2 + offset
-
-    return tuple(vec)
+    # do safe eval
+    return (
+        UTILS_safe_eval.do_expand_calc(cmd_d1, d1, d2),
+        UTILS_safe_eval.do_expand_calc(cmd_d2, d1, d2)
+    )
 
 def _virtual_foreach_set(collection, field, base_num, data):
     counter = 0
@@ -362,7 +335,6 @@ def _load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sid
     floor_prototype = UTILS_constants.floor_blockDict[floor_type]
 
     # set some unit
-    height_unit = 5.0
     if floor_prototype['UnitSize'] == 'Small':
         block_3dworld_unit = 2.5
         block_uvworld_unit = 0.5
@@ -420,27 +392,17 @@ def _load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sid
         base_indices = len(vecList)
         for vec in face_define['Vertices']:
             vecList.append(_rotate_translate_vec(
-                    _solve_vec_data(vec, d1, d2, height_multiplier, block_3dworld_unit, height_unit), 
+                    _solve_vec_data(vec, d1, d2, height_multiplier, block_3dworld_unit), 
                     rotation, block_3dworld_unit, extra_translate))
-
-        for uv in face_define['UVs']:
-            uvList.append(_solve_uv_data(uv, d1, d2, height_multiplier, block_uvworld_unit))
 
         for face in face_define['Faces']:
             if face['Type'] == 'RECTANGLE':
                 # rectangle
-                vec_indices = (
-                    face['P1'] + base_indices, 
-                    face['P2'] + base_indices,
-                    face['P3'] + base_indices,
-                    face['P4'] + base_indices)
+                vec_indices = tuple(map(lambda x: x + base_indices, face['Indices']))
                 indCount = 4
             elif face['Type'] == 'TRIANGLE':
                 # triangle
-                vec_indices = (
-                    face['P1'] + base_indices, 
-                    face['P2'] + base_indices,
-                    face['P3'] + base_indices)
+                vec_indices = tuple(map(lambda x: x + base_indices, face['Indices']))
                 indCount = 3
 
             # we need calc normal and push it into list
@@ -451,6 +413,10 @@ def _load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sid
             # push indices into list
             for i in range(indCount):
                 faceList.append(vec_indices[i] + global_offset_vec)
+
+            # push uvs into list
+            for i in range(indCount):
+                uvList.append(_solve_uv_data(face['UVs'][i], d1, d2, height_multiplier, block_uvworld_unit))
 
             # push material into list
             faceMatList.append(materialDict[face['Textures']])
@@ -505,8 +471,8 @@ def _load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struc
 
     # iterate smahsed blocks
     for blk in floor_prototype['SmashedBlocks']:
-        start_pos = _solve_smashed_position(blk['StartPosition'], d1, d2)
-        expand_pos = _solve_smashed_position(blk['ExpandPosition'], d1, d2)
+        start_pos = _solve_vec_data(blk['StartPosition'], d1, d2, height_multiplier, block_3dworld_unit)
+        expand_param = _solve_expand_param(blk['ExpandParam'], d1, d2)
 
         sides_data = tuple(sides_dict[x] for x in blk['SideSync'].split(';'))
 
@@ -516,10 +482,10 @@ def _load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struc
             blk['Type'],
             blk['Rotation'],
             height_multiplier,
-            expand_pos[0],
-            expand_pos[1],
+            expand_param[0],
+            expand_param[1],
             sides_data,
-            (start_pos[0] * block_3dworld_unit, start_pos[1] * block_3dworld_unit),
+            start_pos,
             prefs_externalTexture
         )
 

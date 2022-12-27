@@ -190,6 +190,7 @@ floor_materialStatistic = [
                 "FloorTopBorder",
                 "FloorTopBorderless",
                 "FloorTopFlat",
+                "FloorTopProfil",
                 "FloorTopProfilFlat"
         ],
         "data": {
