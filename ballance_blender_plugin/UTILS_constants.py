@@ -231,14 +231,21 @@ floor_materialStatistic = [
 floor_blockDict = {}
 floor_basicBlockList = []
 floor_derivedBlockList = []
-with open(os.path.join(os.path.dirname(__file__), "json", "BasicBlock.json")) as fp:
-    for item in json.load(fp):
-        floor_basicBlockList.append(item["Type"])
-        floor_blockDict[item["Type"]] = item
-with open(os.path.join(os.path.dirname(__file__), "json", "DerivedBlock.json")) as fp:
-    for item in json.load(fp):
-        floor_derivedBlockList.append(item["Type"])
-        floor_blockDict[item["Type"]] = item
+# read from json
+for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), "json", "basic_blocks")):
+    for relfile in walk_files:
+        if not relfile.endswith('.json'): continue
+        with open(os.path.join(walk_root, relfile)) as fp:
+            for item in json.load(fp):
+                floor_basicBlockList.append(item["Type"])
+                floor_blockDict[item["Type"]] = item
+for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), "json", "derived_blocks")):
+    for relfile in walk_files:
+        if not relfile.endswith('.json'): continue
+        with open(os.path.join(walk_root, relfile)) as fp:
+            for item in json.load(fp):
+                floor_derivedBlockList.append(item["Type"])
+                floor_blockDict[item["Type"]] = item
 
 icons_floor = None
 icons_floorDict = {}

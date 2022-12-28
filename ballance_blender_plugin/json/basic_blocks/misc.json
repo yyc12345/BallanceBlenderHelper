@@ -1,0 +1,483 @@
+[
+    {
+        "Type": "Flat",
+        "BindingDisplayTexture": "Flat.png",
+        "UnitSize": "Small",
+        "ExpandType": "Freedom",
+        "InitColumnDirection": "PositiveY",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": false,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": false,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "ThreeDTopFace": {
+            "Vertices": [
+                "0, 0, 0",
+                "2.5+d2, 0, 0",
+                "2.5+d2, 2.5+d1, 0",
+                "0, 2.5+d1, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 0.5",
+                        "0, -d2",
+                        "0.5+d1, -d2",
+                        "0.5+d1, 0.5"
+                    ]
+                }
+            ]
+        },
+        "ThreeDBottomFace": {
+            "Vertices": [
+                "0, 0, -5-d3",
+                "2.5+d2, 0, -5-d3",
+                "2.5+d2, 2.5+d1, -5-d3",
+                "0, 2.5+d1, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "UVs": [
+                        "0, 0.5",
+                        "0, -d2",
+                        "0.5+d1, -d2",
+                        "0.5+d1, 0.5"
+                    ]
+                }
+            ]
+        },
+        "TwoDTopSide": {
+            "Vertices": [
+                "0, 0, 0",
+                "0, 2.5+d1, 0",
+                "0, 2.5+d1, -5-d3",
+                "0, 0, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 0",
+                        "0, 0.5+d1",
+                        "1+d3, 0.5+d1",
+                        "1+d3, 0"
+                    ]
+                }
+            ]
+        },
+        "TwoDRightSide": {
+            "Vertices": [
+                "2.5+d2, 2.5+d1, 0",
+                "2.5+d2, 2.5+d1, -5-d3",
+                "0, 2.5+d1, -5-d3",
+                "0, 2.5+d1, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, -d2",
+                        "1+d3, -d2",
+                        "1+d3, 0.5",
+                        "0, 0.5"
+                    ]
+                }
+            ]
+        },
+        "TwoDBottomSide": {
+            "Vertices": [
+                "2.5+d2, 2.5+d1, 0",
+                "2.5+d2, 0, 0",
+                "2.5+d2, 0, -5-d3",
+                "2.5+d2, 2.5+d1, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 0.5+d1",
+                        "0, 0",
+                        "1+d3, 0",
+                        "1+d3, 0.5+d1"
+                    ]
+                }
+            ]
+        },
+        "TwoDLeftSide": {
+            "Vertices": [
+                "0, 0, 0",
+                "0, 0, -5-d3",
+                "2.5+d2, 0, -5-d3",
+                "2.5+d2, 0, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 0.5",
+                        "1+d3, 0.5",
+                        "1+d3, -d2",
+                        "0, -d2"
+                    ]
+                }
+            ]
+        },
+        "TwoDTopSideExpand": null,
+        "TwoDRightSideExpand": null,
+        "TwoDBottomSideExpand": null,
+        "TwoDLeftSideExpand": null
+    },
+    {
+        "Type": "NormalSinkTransition",
+        "BindingDisplayTexture": "NormalSinkTransition.png",
+        "UnitSize": "Large",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "ThreeDTopFace": {
+            "Vertices": [
+                "0, 0, 0",
+                "5, 0, 0",
+                "0, 2.5, -0.7",
+                "5, 5, 0",
+                "0, 5, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "TRIANGLE",
+                    "Textures": "FloorTopProfilFlat",
+                    "Indices": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "UVs": [
+                        "0, 1",
+                        "0, 0",
+                        "0.5, 1"
+                    ]
+                },
+                {
+                    "Type": "TRIANGLE",
+                    "Textures": "FloorTopProfilFlat",
+                    "Indices": [
+                        3,
+                        2,
+                        1
+                    ],
+                    "UVs": [
+                        "1, 0",
+                        "0.5, 1",
+                        "0, 0"
+                    ]
+                },
+                {
+                    "Type": "TRIANGLE",
+                    "Textures": "FloorTopProfilFlat",
+                    "Indices": [
+                        2,
+                        3,
+                        4
+                    ],
+                    "UVs": [
+                        "0.5, 1",
+                        "1, 0",
+                        "1, 1"
+                    ]
+                }
+            ]
+        },
+        "ThreeDBottomFace": {
+            "Vertices": [
+                "5, 0, -5-d3",
+                "5, 5, -5-d3",
+                "0, 5, -5-d3",
+                "0, 0, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "UVs": [
+                        "0, 1",
+                        "1, 1",
+                        "1, 0",
+                        "0, 0"
+                    ]
+                }
+            ]
+        },
+        "TwoDTopSide": {
+            "Vertices": [
+                "0, 0, -5-d3",
+                "0, 0, 0",
+                "0, 2.5, -0.7",
+                "0, 2.5, -5-d3",
+                "0, 5, -5-d3",
+                "0, 5, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, -d3",
+                        "0, 1",
+                        "0.5, 0.86",
+                        "0.5, -d3"
+                    ]
+                },
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        5,
+                        4,
+                        3,
+                        2
+                    ],
+                    "UVs": [
+                        "1, 1",
+                        "1, -d3",
+                        "0.5, -d3",
+                        "0.5, 0.86"
+                    ]
+                }
+            ]
+        },
+        "TwoDRightSide": {
+            "Vertices": [
+                "5, 5, 0",
+                "5, 5, -5-d3",
+                "0, 5, -5-d3",
+                "0, 5, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 0",
+                        "1+d3, 0",
+                        "1+d3, 1",
+                        "0, 1"
+                    ]
+                }
+            ]
+        },
+        "TwoDBottomSide": {
+            "Vertices": [
+                "5, 5, 0",
+                "5, 0, 0",
+                "5, 0, -5-d3",
+                "5, 5, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 1",
+                        "0, 0",
+                        "1+d3, 0",
+                        "1+d3, 1"
+                    ]
+                }
+            ]
+        },
+        "TwoDLeftSide": {
+            "Vertices": [
+                "5, 0, 0",
+                "5, 0, -5-d3",
+                "0, 0, -5-d3",
+                "0, 0, 0"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorSide",
+                    "Indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "UVs": [
+                        "0, 1",
+                        "1+d3, 1",
+                        "1+d3, 0",
+                        "0, 0"
+                    ]
+                }
+            ]
+        },
+        "TwoDTopSideExpand": null,
+        "TwoDRightSideExpand": {
+            "Vertices": [
+                "0, 5, 0",
+                "5, 5, 0",
+                "5, 5, -2.5",
+                "0, 5, -2.5",
+                "0, 5, -5-d3",
+                "5, 5, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorder_ForSide",
+                    "Indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "UVs": [
+                        "0, 1",
+                        "0, 0",
+                        "0.5, 0",
+                        "0.5, 1"
+                    ]
+                },
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        5,
+                        4,
+                        3,
+                        2
+                    ],
+                    "UVs": [
+                        "0.5+d3, 0",
+                        "0.5+d3, 1",
+                        "0, 1",
+                        "0, 0"
+                    ]
+                }
+            ]
+        },
+        "TwoDBottomSideExpand": null,
+        "TwoDLeftSideExpand": {
+            "Vertices": [
+                "0, 0, 0",
+                "5, 0, 0",
+                "5, 0, -2.5",
+                "0, 0, -2.5",
+                "0, 0, -5-d3",
+                "5, 0, -5-d3"
+            ],
+            "Faces": [
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorder_ForSide",
+                    "Indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "UVs": [
+                        "0.5, 1",
+                        "0.5, 0",
+                        "0, 0",
+                        "0, 1"
+                    ]
+                },
+                {
+                    "Type": "RECTANGLE",
+                    "Textures": "FloorTopBorderless_ForSide",
+                    "Indices": [
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "UVs": [
+                        "0, 0",
+                        "0, 1",
+                        "0.5+d3, 1",
+                        "0.5+d3, 0"
+                    ]
+                }
+            ]
+        }
+    }
+]
