@@ -31,59 +31,31 @@
         ]
     },
     {
-        "Type": "NormalFloorHead",
-        "BindingDisplayTexture": "NormalFloorHead.png",
+        "Type": "NormalFloorTerminal",
+        "BindingDisplayTexture": "NormalFloorTerminal.png",
         "UnitSize": "Small",
-        "ExpandType": "Column",
+        "ExpandType": "Static",
         "InitColumnDirection": "PositiveX",
         "DefaultSideConfig": {
             "UseTwoDTop": true,
             "UseTwoDRight": true,
-            "UseTwoDBottom": true,
+            "UseTwoDBottom": false,
             "UseTwoDLeft": true,
             "UseThreeDTop": true,
             "UseThreeDBottom": false
         },
         "SmashedBlocks": [
             {
-                "Type": "NormalBorder",
-                "Rotation": "R0",
-                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
-                "StartPosition": "(2.5*1), 0, 0",
-                "ExpandParam": "d1, 0"
-            },
-            {
-                "Type": "NormalBorder",
-                "Rotation": "R180",
-                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
-                "StartPosition": "(2.5*1) +d1, (2.5*1), 0",
-                "ExpandParam": "d1, 0"
-            },
-            {
                 "Type": "NormalOutterCorner",
                 "Rotation": "R0",
-                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom",
                 "StartPosition": "0, 0, 0",
                 "ExpandParam": "0, 0"
             },
             {
                 "Type": "NormalOutterCorner",
-                "Rotation": "R90",
-                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
-                "StartPosition": "(2.5*2) +d1, 0, 0",
-                "ExpandParam": "0, 0"
-            },
-            {
-                "Type": "NormalOutterCorner",
-                "Rotation": "R180",
-                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
-                "StartPosition": "(2.5*2) +d1, (2.5*1), 0",
-                "ExpandParam": "0, 0"
-            },
-            {
-                "Type": "NormalOutterCorner",
                 "Rotation": "R270",
-                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "SideSync": "2dRight;2dBottom;False;2dTop;3dTop;3dBottom",
                 "StartPosition": "0, (2.5*1), 0",
                 "ExpandParam": "0, 0"
             }

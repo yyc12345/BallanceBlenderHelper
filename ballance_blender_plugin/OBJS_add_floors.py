@@ -471,9 +471,19 @@ def _load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struc
 
     # iterate smahsed blocks
     for blk in floor_prototype['SmashedBlocks']:
+        # calc basic parameter
         start_pos = _solve_vec_data(blk['StartPosition'], d1, d2, height_multiplier, block_3dworld_unit)
         expand_param = _solve_expand_param(blk['ExpandParam'], d1, d2)
 
+        # re-calc height multiply for this block.
+        # if the translation of Z is not zero
+        if start_pos[2] != 0.0:
+            raw_height = (height_multiplier - 1) * 5.0 + start_pos[2] # test height
+            blk_height = max(0, (raw_height / 5.0) + 1)   # prevent minus height
+        else:
+            blk_height = height_multiplier
+        
+        # get face data
         sides_data = tuple(sides_dict[x] for x in blk['SideSync'].split(';'))
 
         # call basic floor creator
@@ -481,7 +491,7 @@ def _load_derived_floor(mesh, floor_type, height_multiplier, d1, d2, sides_struc
             mesh,
             blk['Type'],
             blk['Rotation'],
-            height_multiplier,
+            blk_height,
             expand_param[0],
             expand_param[1],
             sides_data,
