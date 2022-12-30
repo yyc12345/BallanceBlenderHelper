@@ -1,33 +1,7 @@
 import bpy
 from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
 
-class common_group_name_props(bpy.types.Operator):
-    use_custom_name: bpy.props.BoolProperty(
-        name="Use Custom Name",
-        description="Whether use user defined group name.",
-        default=False,
-    )
-
-    group_name: bpy.props.EnumProperty(
-        name="Group Name",
-        description="Pick vanilla Ballance group name.",
-        items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
-    )
-
-    custom_group_name: bpy.props.StringProperty(
-        name="Custom Group Name",
-        description="Input your custom group name.",
-        default="",
-    )
-
-    def get_group_name_string(self):
-        return str(self.custom_group_name if self.use_custom_name else self.group_name)
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-class BALLANCE_OT_select_virtools_group(common_group_name_props):
+class BALLANCE_OT_select_virtools_group(UTILS_virtools_prop.common_group_name_props):
     """Select objects by Virtools Group."""
     bl_idname = "ballance.select_virtools_group"
     bl_label = "Select by Virtools Group"
@@ -71,13 +45,9 @@ class BALLANCE_OT_select_virtools_group(common_group_name_props):
         row.prop(self, 'merge_selection')
 
         layout.separator()
-        layout.prop(self, 'use_custom_name')
-        if (self.use_custom_name):
-            layout.prop(self, 'custom_group_name')
-        else:
-            layout.prop(self, 'group_name')
+        self.parent_draw(layout)
 
-class BALLANCE_OT_filter_virtools_group(common_group_name_props):
+class BALLANCE_OT_filter_virtools_group(UTILS_virtools_prop.common_group_name_props):
     """Filter objects by Virtools Group."""
     bl_idname = "ballance.filter_virtools_group"
     bl_label = "Filter by Virtools Group"
@@ -123,15 +93,11 @@ class BALLANCE_OT_filter_virtools_group(common_group_name_props):
         row.prop(self, 'reverse_selection')
 
         layout.separator()
-        layout.prop(self, 'use_custom_name')
-        if (self.use_custom_name):
-            layout.prop(self, 'custom_group_name')
-        else:
-            layout.prop(self, 'group_name')
+        self.parent_draw(layout)
 
 
 
-class BALLANCE_OT_ctx_set_group(common_group_name_props):
+class BALLANCE_OT_ctx_set_group(UTILS_virtools_prop.common_group_name_props):
     """Grouping selected objects"""
     bl_idname = "ballance.ctx_set_group"
     bl_label = "Grouping Objects"
@@ -162,13 +128,9 @@ class BALLANCE_OT_ctx_set_group(common_group_name_props):
 
     def draw(self, context):
         layout = self.layout
-        layout.prop(self, 'use_custom_name')
-        if (self.use_custom_name):
-            layout.prop(self, 'custom_group_name')
-        else:
-            layout.prop(self, 'group_name')
+        self.parent_draw(layout)
 
-class BALLANCE_OT_ctx_unset_group(common_group_name_props):
+class BALLANCE_OT_ctx_unset_group(UTILS_virtools_prop.common_group_name_props):
     """Ungrouping selected objects"""
     bl_idname = "ballance.ctx_unset_group"
     bl_label = "Ungrouping Objects"
@@ -195,11 +157,7 @@ class BALLANCE_OT_ctx_unset_group(common_group_name_props):
 
     def draw(self, context):
         layout = self.layout
-        layout.prop(self, 'use_custom_name')
-        if (self.use_custom_name):
-            layout.prop(self, 'custom_group_name')
-        else:
-            layout.prop(self, 'group_name')
+        self.parent_draw(layout)
 
 class BALLANCE_OT_ctx_clear_group(bpy.types.Operator):
     """Clear Virtools Groups for selected objects"""

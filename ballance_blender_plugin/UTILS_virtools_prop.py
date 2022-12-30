@@ -73,6 +73,40 @@ class BALLANCE_PG_virtools_group(bpy.types.PropertyGroup):
         default=""
     )
 
+class common_group_name_props(bpy.types.Operator):
+    group_name_source: bpy.props.EnumProperty(
+        name="Group Name Source",
+        items=(('DEFINED', "Predefined", "Pre-defined group name."),
+               ('CUSTOM', "Custom", "User specified group name."),
+               ),
+    )
+
+    group_name: bpy.props.EnumProperty(
+        name="Group Name",
+        description="Pick vanilla Ballance group name.",
+        items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
+    )
+
+    custom_group_name: bpy.props.StringProperty(
+        name="Custom Group Name",
+        description="Input your custom group name.",
+        default="",
+    )
+
+    def parent_draw(self, parent_layout):
+        parent_layout.prop(self, 'group_name_source', expand=True)
+        if (self.group_name_source == 'CUSTOM'):
+            parent_layout.prop(self, 'custom_group_name')
+        else:
+            parent_layout.prop(self, 'group_name')
+
+    def get_group_name_string(self):
+        return str(self.custom_group_name if self.group_name_source == 'CUSTOM' else self.group_name)
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
 def get_virtools_material(mtl):
     return mtl.virtools_material
 

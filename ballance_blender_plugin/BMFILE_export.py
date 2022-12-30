@@ -44,7 +44,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 
     def draw(self, context):
         layout = self.layout
-        layout.prop(self, "export_mode")
+        layout.prop(self, "export_mode", expand=True)
         if self.export_mode == 'COLLECTION':
             layout.prop(context.scene.BallanceBlenderPluginProperty, "collection_picker")
         elif self.export_mode == 'OBJECT':

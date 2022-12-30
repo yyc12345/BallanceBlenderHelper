@@ -1,55 +1,26 @@
 import bpy
 from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
 
-class BALLANCE_OT_add_virtools_group(bpy.types.Operator):
+class BALLANCE_OT_add_virtools_group(UTILS_virtools_prop.common_group_name_props):
     """Add a Virtools Group for Active Object."""
     bl_idname = "ballance.add_virtools_group"
     bl_label = "Add Virtools Group"
     bl_options = {'UNDO'}
-
-    use_custom_name: bpy.props.BoolProperty(
-        name="Use Custom Name",
-        description="Whether use user defined group name.",
-        default=False,
-    )
-
-    group_name: bpy.props.EnumProperty(
-        name="Group Name",
-        description="Pick vanilla Ballance group name.",
-        items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
-    )
-
-    custom_group_name: bpy.props.StringProperty(
-        name="Custom Group Name",
-        description="Input your custom group name.",
-        default="",
-    )
 
     @classmethod
     def poll(self, context):
         return context.object is not None
 
     def execute(self, context):
-        # get name first
-        gotten_group_name = str(self.custom_group_name if self.use_custom_name else self.group_name)
-
         # try adding
         obj = context.object
-        if not UTILS_virtools_prop.add_virtools_group_data(obj, gotten_group_name):
+        if not UTILS_virtools_prop.add_virtools_group_data(obj, self.get_group_name_string()):
             UTILS_functions.show_message_box(("Group name is duplicated!", ), "Duplicated Name", 'ERROR')
 
         return {'FINISHED'}
-    
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-        
+
     def draw(self, context):
-        self.layout.prop(self, 'use_custom_name')
-        if (self.use_custom_name):
-            self.layout.prop(self, 'custom_group_name')
-        else:
-            self.layout.prop(self, 'group_name')
+        self.parent_draw(self.layout)
 
 
 class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):

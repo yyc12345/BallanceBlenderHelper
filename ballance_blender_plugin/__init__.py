@@ -85,18 +85,6 @@ class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
         layout.operator(MODS_rail_uv.BALLANCE_OT_rail_uv.bl_idname)
         layout.operator(MODS_flatten_uv.BALLANCE_OT_flatten_uv.bl_idname)
 
-class BALLANCE_MT_OutlinerMenu(bpy.types.Menu):
-    """Ballance rename operators"""
-    bl_idname = "BALLANCE_MT_OutlinerMenu"
-    bl_label = "Ballance"
-
-    def draw(self, context):
-        layout = self.layout
-
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_rename_by_group.bl_idname)
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname)
-        oprt = layout.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname)
-
 class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
     """Add Ballance floor"""
     bl_idname = "BALLANCE_MT_AddFloorMenu"
@@ -144,7 +132,6 @@ classes = (
     NAMES_rename_system.BALLANCE_OT_rename_by_group,
     NAMES_rename_system.BALLANCE_OT_convert_name,
     NAMES_rename_system.BALLANCE_OT_auto_grouping,
-    BALLANCE_MT_OutlinerMenu,
 
     UTILS_virtools_prop.BALLANCE_PG_virtools_material,
     UTILS_virtools_prop.BALLANCE_PG_virtools_group,
@@ -182,7 +169,13 @@ def menu_func_ballance_add(self, context):
     layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
 def menu_func_ballance_rename(self, context):
     layout = self.layout
-    layout.menu(BALLANCE_MT_OutlinerMenu.bl_idname)
+    layout.separator()
+    col = layout.column()
+    col.operator_context = 'INVOKE_DEFAULT'
+    col.label(text="Ballance")
+    col.operator(NAMES_rename_system.BALLANCE_OT_rename_by_group.bl_idname, icon='GREASEPENCIL')
+    col.operator(NAMES_rename_system.BALLANCE_OT_convert_name.bl_idname, icon='ARROW_LEFTRIGHT')
+    col.operator(NAMES_rename_system.BALLANCE_OT_auto_grouping.bl_idname, icon='GROUP')
 def menu_func_ballance_select(self, context):
     layout = self.layout
     layout.separator()
@@ -220,10 +213,13 @@ def register():
 
     bpy.types.VIEW3D_MT_editor_menus.prepend(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.append(menu_func_ballance_add)
-    bpy.types.OUTLINER_HT_header.append(menu_func_ballance_rename)
+    bpy.types.OUTLINER_MT_collection.append(menu_func_ballance_rename)
 
     bpy.types.VIEW3D_MT_select_object.append(menu_func_ballance_select)
+
     bpy.types.VIEW3D_MT_object_context_menu.append(menu_func_ballance_grouping)
+    bpy.types.OUTLINER_MT_object.append(menu_func_ballance_grouping)    # share the same menu
+    
 
 def unregister():
     bpy.types.TOPBAR_MT_file_import.remove(menu_func_bm_import)
@@ -231,10 +227,12 @@ def unregister():
     
     bpy.types.VIEW3D_MT_editor_menus.remove(menu_func_ballance_3d)
     bpy.types.VIEW3D_MT_add.remove(menu_func_ballance_add)
-    bpy.types.OUTLINER_HT_header.remove(menu_func_ballance_rename)
+    bpy.types.OUTLINER_MT_collection.remove(menu_func_ballance_rename)
 
     bpy.types.VIEW3D_MT_select_object.remove(menu_func_ballance_select)
+
     bpy.types.VIEW3D_MT_object_context_menu.remove(menu_func_ballance_grouping)
+    bpy.types.OUTLINER_MT_object.append(menu_func_ballance_grouping)
 
     UTILS_virtools_prop.unregister_props()
     del bpy.types.Scene.BallanceBlenderPluginProperty
