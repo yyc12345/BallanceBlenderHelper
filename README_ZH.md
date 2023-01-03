@@ -5,7 +5,7 @@
 ## 简介
 
 这是一个用于Blender的插件，其主要是服务于Ballance制图。  
-请使用拥有最新tag的commit内的代码。最新的commit不能保证其是稳定可用的。  
+请选择打了tag的最新commit使用。最新的commit不能保证其是稳定可用的。  
 本插件囊括了Ballance制图中可能会用到的各种功能。对于一些其它插件可以提供的功能，本插件不再重复提供。建议与下列插件合用以取得更好制图效果：
 
 * [BenjaminSauder/SimpleLattice](https://github.com/BenjaminSauder/SimpleLattice)：快速创建晶格以便变形物体。
@@ -17,17 +17,17 @@
 使用的制图链标准以及`meshes`文件夹下的文件的格式可以在[这里](https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md)查找  
 `jsons`文件夹下的，隶属于BMERevenge部分的文件的格式可以在[这里](https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_ZH.md)查找  
 
-支持Blender的原则是支持当前最新的 **LTS** 版本，在最新的LTS版本释出之后会花一些时间迁移插件。当前插件基于3.3.x版本
+支持Blender的原则是支持当前最新的 **LTS** 版本，在最新的LTS版本释出之后会花一些时间迁移插件。当前插件基于**3.3.x**版本
 
 ## 安装
 
-将`ballance_blender_plugin`直接复制到Blender插件目录`scripts/addons_contrib`内即可。然后在Blender偏好设置中启用即可（请在第一次使用前或更新插件后配置插件设置）。
+将`ballance_blender_plugin`直接复制到Blender插件目录`scripts/addons_contrib`内即可。然后在Blender偏好设置中启用即可（请在第一次安装后或更新插件后配置插件设置）。
 
 ## 功能介绍
 
 ### 插件设置
 
-* External texture folder：请填写为Ballance的Texture目录，插件将从此目录下调用外置贴图文件（即Ballance原本带有的贴图文件）
+* External texture folder：请填写为Ballance的`Texture`目录，插件将从此目录下调用外置贴图文件（即Ballance原本带有的贴图文件）
 * No component collection：处于此集合中的物体将被强制指定为非Component。如果留空则表示不需要这个功能。此功能通常用于机关模型强制替换。
 * Temp texture folder：用于缓存从BM文件中提取的贴图文件，请安排一个平时不会被自动清理的目录。由于Blender会持续从这个目录读取贴图文件，因此不能随意清空。
 
@@ -57,7 +57,7 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 #### Create Rail UV
 
 为地图中的钢轨创建UV，你需要先选中需要添加类似钢轨UV的物体，然后点击这个按钮以创建。  
-在弹出设置窗口中，可以选择使用的材质。还可以选择展开模式，在部分展开模式下，还可以选择投影轴。尽管Ballance最终会为所有钢轨重新上UV，一个在界面中看着赏心悦目的钢轨贴图还是比较重要的。  
+在弹出设置窗口中，可以选择使用的材质。还可以选择展开模式，在部分展开模式下，还可以选择投影轴和缩放大小。尽管Ballance最终会为所有钢轨重新上UV，一个在界面中看着赏心悦目的钢轨贴图还是比较重要的。  
 如果您需要在Blender中呈现游戏内钢轨的贴图效果（表现为所谓的平滑贴图），您可以选择`TT_ReflectionMapping`展开模式。此功能由逆向游戏所用函数得来。这在渲染地图宣传画时可能会很有用。
 
 #### Flatten UV
@@ -70,7 +70,7 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 
 ### 快速添加结构
 
-在添加菜单中我们添加了一套较为常用的物体。添加后物体会移动到3D游标处。
+在添加菜单中我们添加了一系列较为常用的物体。添加后物体会移动到3D游标处。
 
 #### Elements
 
@@ -105,13 +105,13 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 ### Virtools材质
 
 插件为每一个Blender材质添加了新的属性，被称为Virtools Material。它在Virtools材质与Blender材质之间架起沟通的桥梁。  
-转到`材质属性`面板，选择一个材质，额可以找到`Virtools Material`面板。  
-默认情况下，由用户创建的材质不启用Virtools Material，您可以通过点击Virtools Material的复选框来启用或关闭它。
+转到`材质属性`面板，选择一个材质，即可以找到`Virtools Material`面板。  
+默认情况下，由用户创建的材质不启用Virtools Material，您可以通过点击`Virtools Material`面板的复选框来启用或关闭它。
 
 在启用Virtools Material后，可以在`Basic Parameters`和`Advanced Parameters`中设置材质属性，就像在Virtools中操作一般。  
 `Basic Parameters`是基础材质属性。`Advanced Parameters`则是与透明相关的材质属性，主要用于半透明柱子底部等。
 
-操作中的`Apply Virtools Material`将把Virtools Material应用到Blender材质上。  
+`Operation`中的`Apply Virtools Material`将把Virtools Material应用到Blender材质上。  
 而`Parse from Blender Principled BSDF`将尝试将一个原理化BSDF转换为Virtools材质数据。  
 如果您是从Blender材质编辑的，请务必对此材质在导出前执行`Parse from Blender Principled BSDF`，或关闭Virtools Material功能，否则材质将无法正确保存。
 
@@ -119,12 +119,19 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 
 选择菜单中新增了两项按照Virtools归组数据进行筛选的功能。
 
-`Select by Virtools Group`将对当前活动集合内的物体按照其Virtools Group属性进行筛选。  
+#### Select by Virtools Group
+
+将对当前活动集合内的物体按照其Virtools Group属性进行选择。  
 勾选`Ignore Hide Property`后，即使是隐藏的物体，也会被筛选。  
 勾选`Merge Selection`，将会把选中的物体合并到当前选定的内容中。
 
-`Filter by Virtools Group`将会按照Virtools Group属性，过滤当前选中物体。  
+#### Filter by Virtools Group
+
+将会按照Virtools Group属性，过滤当前选中物体。  
 勾选`Reverse`将会反向操作，即去除掉符合条件的物体。
+
+如果可以，请尽可能使用`Filter by Virtools Group`而不是`Select by Virtools Group`。因为这样可以避免分析过多的物体。  
+例如先选定一个大致的范围，然后使用`Filter by Virtools Group`过滤，比直接使用`Select by Virtools Group`效率更高。
 
 ### 快速归组
 
