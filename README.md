@@ -33,7 +33,7 @@ Put `ballance_blender_plugin` into Blender's plugin folder, `scripts/addons_cont
 
 Temp Texture Folder does not allow files with duplicated name. Because of this, imagine this situation, there are two texture files with the same name in two BM files, but they represent different images. When you import them one by one for different maps. The later file will overwrite the previous file, And this will cause a texture error when the first Blender document was opened again. For the solution of this issue, the best way is to force packaging once. After successfully importing the BM, click `File - External Data - Pack Resources`, then you can clear Temp Texture Folder safely. With your preference, you also can click `File - External Data - Unpack Resources` to extract textures. This operation will extract and re-refer all textures into standalone texture folder within the folder where this Blender document is.
 
-### BM import / export
+### BM Import / Export
 
 Click `File - Import - Ballance Map` to import BM file.  
 When name conflicts occur during importing BM, you have ability to choose different strategies for 4 different data types, Texture, Material, Mesh and Object. You can specify them to create a new instance or use current data block.

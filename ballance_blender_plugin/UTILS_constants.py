@@ -353,7 +353,9 @@ propsVtGroups_availableGroups = (
 
     "Phys_Floors",
     "Phys_FloorRails",
-    "Phys_FloorStopper"
+    "Phys_FloorStopper",
+    
+    "Shadow"
 )
 
 
