@@ -98,7 +98,7 @@ class common_group_name_props(bpy.types.Operator):
         if (self.group_name_source == 'CUSTOM'):
             parent_layout.prop(self, 'custom_group_name')
         else:
-            parent_layout.prop(self, 'group_name')
+            parent_layout.prop(self, 'group_name') # do not translate group name. it's weird
 
     def get_group_name_string(self):
         return str(self.custom_group_name if self.group_name_source == 'CUSTOM' else self.group_name)

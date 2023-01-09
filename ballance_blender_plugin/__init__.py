@@ -108,6 +108,16 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
                 text=item, icon_value = UTILS_constants.icons_floorDict[item])
             cop.floor_type = item
 
+class BALLANCE_MT_AddRailMenu(bpy.types.Menu):
+    """Add Ballance rail"""
+    bl_idname = "BALLANCE_MT_AddRailMenu"
+    bl_label = "Rails"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator(OBJS_add_rails.BALLANCE_OT_add_rails.bl_idname, text="Rail Section")
+        layout.operator(OBJS_add_rails.BALLANCE_OT_add_tunnels.bl_idname, text="Tunnel Section")
+
 
 # ============================================= 
 # blender call system
@@ -126,8 +136,10 @@ classes = (
 
     OBJS_add_components.BALLANCE_OT_add_components,
     OBJS_add_rails.BALLANCE_OT_add_rails,
+    OBJS_add_rails.BALLANCE_OT_add_tunnels,
     OBJS_add_floors.BALLANCE_OT_add_floors,
     BALLANCE_MT_AddFloorMenu,
+    BALLANCE_MT_AddRailMenu,
 
     NAMES_rename_system.BALLANCE_OT_rename_by_group,
     NAMES_rename_system.BALLANCE_OT_convert_name,
@@ -162,11 +174,11 @@ def menu_func_ballance_add(self, context):
     layout = self.layout
     layout.separator()
     layout.label(text="Ballance")
+    layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
+    layout.menu(BALLANCE_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
     layout.operator_menu_enum(
         OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
         "elements_type", icon='MESH_ICOSPHERE', text="Elements")
-    layout.operator(OBJS_add_rails.BALLANCE_OT_add_rails.bl_idname, icon='MESH_CIRCLE', text="Rail section")
-    layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
 def menu_func_ballance_rename(self, context):
     layout = self.layout
     layout.separator()
