@@ -55,7 +55,7 @@ class BALLANCE_OT_add_components(bpy.types.Operator):
         UTILS_functions.add_into_scene_and_move_to_cursor(obj)
 
         # extra duplication
-        if self.elements_type in self.canDuplicatedElements:
+        if (self.elements_type in self.canDuplicatedElements) and self.elements_duplicated:
             for i in range(self.elements_dup_times - 1):
                 obj = bpy.data.objects.new(finalObjectName, loadedMesh)
                 UTILS_functions.add_into_scene_and_move_to_cursor(obj)

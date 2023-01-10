@@ -26,6 +26,12 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
         )
 
     def execute(self, context):
+        # detect edit mode
+        in_edit_mode = False
+        if bpy.context.object and bpy.context.object.mode == "EDIT":
+            in_edit_mode = True
+            bpy.ops.object.editmode_toggle()
+
         if ((self.export_mode == 'COLLECTION' and context.scene.BallanceBlenderPluginProperty.collection_picker is None) or 
             (self.export_mode == 'OBJECT' and context.scene.BallanceBlenderPluginProperty.object_picker is None)):
             UTILS_functions.show_message_box(("No specific target", ), "Lost parameter", 'ERROR')
@@ -40,6 +46,11 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
                 export_bm(context, self.filepath, 
                 prefs.no_component_collection,
                 self.export_mode, context.scene.BallanceBlenderPluginProperty.object_picker)
+
+        # restore edit mode
+        if in_edit_mode:
+            bpy.ops.object.editmode_toggle()
+
         return {'FINISHED'}
 
     def draw(self, context):

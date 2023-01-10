@@ -53,7 +53,7 @@ class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
     z_buffer: bpy.props.BoolProperty(
         name="Z Buffer",
         description="ZFunc: VXCMP_LESSEQUAL.",
-        default=False,
+        default=True,
     )
 
     two_sided: bpy.props.BoolProperty(

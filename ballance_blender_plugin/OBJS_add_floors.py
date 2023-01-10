@@ -221,7 +221,7 @@ def _create_or_get_material(material_name, prefs_externalTexture):
                 try_item['data']['ambient'], try_item['data']['diffuse'], 
                 try_item['data']['specular'], try_item['data']['emissive'],
                 try_item['data']['power'],
-                False, False, False, False,
+                False, False, True, False,
                 texture)
             )
             break

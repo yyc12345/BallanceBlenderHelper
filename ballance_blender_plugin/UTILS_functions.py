@@ -105,7 +105,7 @@ def parse_material_nodes(mtl):
         # return value
         return (True,
             mtl_ambient, mtl_diffuse, mtl_specular, mtl_emissive, mtl_specularPower,
-            False, False, False, False,
+            False, False, True, False,
             mtl_texture
         )
 
