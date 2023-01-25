@@ -43,6 +43,48 @@ class BALLANCE_OT_parse_virtools_material(bpy.types.Operator):
 
         return {'FINISHED'}
 
+class BALLANCE_OT_preset_virtools_material(bpy.types.Operator):
+    """Preset Virtools Material with Original Ballance Data."""
+    bl_idname = "ballance.preset_virtools_material"
+    bl_label = "Preset Virtools Material"
+    bl_options = {'UNDO'}
+
+    preset_type: bpy.props.EnumProperty(
+        name="Preset",
+        description="The preset which you want to apply.",
+        items=tuple(
+            (str(idx), item["human-readable"], "Suit for: " + ", ".join(item["member"]))
+            for idx, item in enumerate(UTILS_constants.floor_materialStatistic)
+        ),
+    )
+
+    @classmethod
+    def poll(cls, context):
+        return context.material is not None
+    
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+    
+    def draw(self, context):
+        self.layout.prop(self, "preset_type")
+
+    def execute(self, context):
+        preset_idx = int(self.preset_type)
+        preset_data = UTILS_constants.floor_materialStatistic[preset_idx]
+
+        # get data self and only change core colors
+        mtl = context.material
+        vtmtl = UTILS_virtools_prop.get_virtools_material(mtl)
+
+        vtmtl.ambient = preset_data['data']['ambient']
+        vtmtl.diffuse = preset_data['data']['diffuse']
+        vtmtl.specular = preset_data['data']['specular']
+        vtmtl.emissive = preset_data['data']['emissive']
+        vtmtl.specular_power = preset_data['data']['power']
+
+        return {'FINISHED'}
+
 class BALLANCE_PT_virtools_material(bpy.types.Panel):
     """Show Virtools Material Properties."""
     bl_label = "Virtools Material"
@@ -69,7 +111,9 @@ class BALLANCE_PT_virtools_material(bpy.types.Panel):
         layout.enabled = target.enable_virtools_material
 
         # draw layout
-        layout.label(text="Basic Parameters")
+        row = layout.row()
+        row.label(text="Basic Parameters")
+        row.operator(BALLANCE_OT_preset_virtools_material.bl_idname, text="", icon="PRESET")
         layout.prop(target, 'ambient')
         layout.prop(target, 'diffuse')
         layout.prop(target, 'specular')
@@ -86,6 +130,6 @@ class BALLANCE_PT_virtools_material(bpy.types.Panel):
 
         layout.separator()
         layout.label(text="Operations")
-        layout.operator("ballance.apply_virtools_material", icon="NODETREE")
-        layout.operator("ballance.parse_virtools_material", icon="HIDE_OFF")
+        layout.operator(BALLANCE_OT_apply_virtools_material.bl_idname, icon="NODETREE")
+        layout.operator(BALLANCE_OT_parse_virtools_material.bl_idname, icon="HIDE_OFF")
 

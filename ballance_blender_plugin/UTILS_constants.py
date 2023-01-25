@@ -169,13 +169,14 @@ floor_textureReflactionMap = {
     "BallStone": "Ball_Stone.bmp"
 }
 
-# WARNING: this data is shared with `BallanceVirtoolsPlugin/bvh/features/mapping/fix_texture.cpp`
+# WARNING: this data is shared with `BallanceVirtoolsPlugin/bvh/features/mapping/bmfile_fix_texture.cpp`
 floor_materialStatistic = [
     {
+        "human-readable": "Floor Side",
         "member": [
-                "FloorSide",
-                "FloorTopBorder_ForSide",
-                "FloorTopBorderless_ForSide"
+            "FloorSide",
+            "FloorTopBorder_ForSide",
+            "FloorTopBorderless_ForSide"
         ],
         "data": {
             "ambient": (0, 0, 0),
@@ -186,12 +187,13 @@ floor_materialStatistic = [
         }
     },
     {
+        "human-readable": "Floor Top",
         "member": [
-                "FloorTopBorder",
-                "FloorTopBorderless",
-                "FloorTopFlat",
-                "FloorTopProfil",
-                "FloorTopProfilFlat"
+            "FloorTopBorder",
+            "FloorTopBorderless",
+            "FloorTopFlat",
+            "FloorTopProfil",
+            "FloorTopProfilFlat"
         ],
         "data": {
             "ambient": (0, 0, 0),
@@ -202,8 +204,9 @@ floor_materialStatistic = [
         }
     },
     {
+        "human-readable": "Transform Paper",
         "member": [
-                "BallPaper"
+            "BallPaper"
         ],
         "data": {
             "ambient": (25 / 255.0, 25 / 255.0, 25 / 255.0),
@@ -213,10 +216,11 @@ floor_materialStatistic = [
             "power": 0
         }
     },
-        {
+    {
+        "human-readable": "Transform Stone & Wood",
         "member": [
-                "BallStone",
-                "BallWood"
+            "BallStone",
+            "BallWood"
         ],
         "data": {
             "ambient": (25 / 255.0, 25 / 255.0, 25 / 255.0),
@@ -224,6 +228,45 @@ floor_materialStatistic = [
             "specular": (229 / 255.0, 229 / 255.0, 229 / 255.0),
             "emissive": (60 / 255.0, 60 / 255.0, 60 / 255.0),
             "power": 0
+        }
+    },
+    {
+        "human-readable": "Rail",
+        "member": [
+            "Rail"
+        ],
+        "data": {
+            "ambient": (0.0, 0.0, 0.0),
+            "diffuse": (100 / 255.0, 118 / 255.0, 133 / 255.0),
+            "specular": (210 / 255.0, 210 / 255.0, 210 / 255.0),
+            "emissive": (124 / 255.0, 134 / 255.0, 150 / 255.0),
+            "power": 10
+        }
+    },
+    {
+        "human-readable": "Wood Path",
+        "member": [
+            "WoodPanel"
+        ],
+        "data": {
+            "ambient": (2 / 255.0, 2 / 255.0, 2 / 255.0),
+            "diffuse": (1.0, 1.0, 1.0),
+            "specular": (59 / 255.0, 59 / 255.0, 59 / 255.0),
+            "emissive": (30 / 255.0, 30 / 255.0, 30 / 255.0),
+            "power": 25
+        }
+    },
+    {
+        "human-readable": "Wood Chip",
+        "member": [
+            "WoodPlain2"
+        ],
+        "data": {
+            "ambient": (25 / 255.0, 25 / 255.0, 25 / 255.0),
+            "diffuse": (1.0, 1.0, 1.0),
+            "specular": (100 / 255.0, 100 / 255.0, 100 / 255.0),
+            "emissive": (50 / 255.0, 50 / 255.0, 50 / 255.0),
+            "power": 50
         }
     }
 ]

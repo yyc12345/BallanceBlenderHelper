@@ -7,29 +7,37 @@ class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
         default=False,
     )
 
-    ambient: bpy.props.FloatVectorProperty(name="Ambient", 
-                                subtype='COLOR',
-                                min=0.0,
-                                max=1.0,
-                                default=[0.0,0.0,0.0])
+    ambient: bpy.props.FloatVectorProperty(
+        name="Ambient", 
+        subtype='COLOR',
+        min=0.0,
+        max=1.0,
+        default=[76 / 255, 76 / 255, 76 / 255]
+    )
 
-    diffuse: bpy.props.FloatVectorProperty(name="Diffuse", 
-                                subtype='COLOR', 
-                                min=0.0,
-                                max=1.0,
-                                default=[0.0,0.0,0.0])
+    diffuse: bpy.props.FloatVectorProperty(
+        name="Diffuse", 
+        subtype='COLOR', 
+        min=0.0,
+        max=1.0,
+        default=[178 / 255, 178 / 255, 178 / 255]
+    )
 
-    specular: bpy.props.FloatVectorProperty(name="Specular", 
-                                subtype='COLOR', 
-                                min=0.0,
-                                max=1.0,
-                                default=[0.0,0.0,0.0])
+    specular: bpy.props.FloatVectorProperty(
+        name="Specular", 
+        subtype='COLOR', 
+        min=0.0,
+        max=1.0,
+        default=[127 / 255, 127 / 255, 127 / 255]
+    )
 
-    emissive: bpy.props.FloatVectorProperty(name="Emissive", 
-                                subtype='COLOR', 
-                                min=0.0,
-                                max=1.0,
-                                default=[0.0,0.0,0.0])
+    emissive: bpy.props.FloatVectorProperty(
+        name="Emissive", 
+        subtype='COLOR', 
+        min=0.0,
+        max=1.0,
+        default=[0.0, 0.0, 0.0]
+    )
 
     specular_power: bpy.props.FloatProperty(
         name="Specular Power",
