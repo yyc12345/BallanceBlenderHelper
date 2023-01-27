@@ -5,7 +5,7 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
     """Align object with 3ds Max style"""
     bl_idname = "ballance.super_align"
     bl_label = "3ds Max Align"
-    bl_options = {'UNDO'}
+    bl_options = {'REGISTER', 'UNDO'}
 
     align_x: bpy.props.BoolProperty(name="X position")
     align_y: bpy.props.BoolProperty(name="Y position")
@@ -18,7 +18,8 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
                 ('POINT', "Center (axis)", ""),
                 ('MAX', "Max", "")
                 ),
-        )
+        default='POINT',
+    )
 
     target_references: bpy.props.EnumProperty(
         name="Target (Other Objects)",
@@ -27,7 +28,8 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
                 ('POINT', "Center (axis)", ""),
                 ('MAX', "Max", "")
                 ),
-        )
+        default='POINT',
+    )
 
     @classmethod
     def poll(self, context):
@@ -37,9 +39,11 @@ class BALLANCE_OT_super_align(bpy.types.Operator):
         _align_object(self.align_x, self.align_y, self.align_z, self.current_references, self.target_references)
         return {'FINISHED'}
 
+    """
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
+    """
 
     def draw(self, context):
         layout = self.layout

@@ -13,9 +13,8 @@ bl_info={
 
 # ============================================= 
 # import system
-import bpy, bpy_extras
-import bpy.utils.previews
-import os
+import bpy
+
 # import my code (with reload)
 if "bpy" in locals():
     import importlib
@@ -33,6 +32,8 @@ if "bpy" in locals():
         importlib.reload(UTILS_virtools_prop)
     if "UTILS_safe_eval" in locals():
         importlib.reload(UTILS_safe_eval)
+    if "UTILS_icons_manager" in locals():
+        importlib.reload(UTILS_icons_manager)
 
     if "BMFILE_export" in locals():
         importlib.reload(BMFILE_export)
@@ -63,7 +64,7 @@ if "bpy" in locals():
     if "PROPS_virtools_material" in locals():
         importlib.reload(PROPS_virtools_material)
 
-from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop, UTILS_safe_eval
+from . import UTILS_constants, UTILS_functions, UTILS_preferences, UTILS_virtools_prop, UTILS_safe_eval, UTILS_icons_manager
 from . import BMFILE_export, BMFILE_import
 from . import MODS_3dsmax_align, MODS_flatten_uv, MODS_rail_uv
 from . import OBJS_add_components, OBJS_add_floors, OBJS_add_rails, OBJS_group_opers
@@ -97,7 +98,7 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
         for item in UTILS_constants.floor_basicBlockList:
             cop = layout.operator(
                 OBJS_add_floors.BALLANCE_OT_add_floors.bl_idname, 
-                text=item, icon_value = UTILS_constants.icons_floorDict[item])
+                text=item, icon_value = UTILS_icons_manager.get_floor_icon(item))
             cop.floor_type = item
 
         layout.separator()
@@ -105,7 +106,7 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
         for item in UTILS_constants.floor_derivedBlockList:
             cop = layout.operator(
                 OBJS_add_floors.BALLANCE_OT_add_floors.bl_idname, 
-                text=item, icon_value = UTILS_constants.icons_floorDict[item])
+                text=item, icon_value = UTILS_icons_manager.get_floor_icon(item))
             cop.floor_type = item
 
 class BALLANCE_MT_AddRailMenu(bpy.types.Menu):
@@ -208,12 +209,7 @@ def menu_func_ballance_grouping(self, context):
 
 def register():
     # we need init all icon first
-    icon_path = os.path.join(os.path.dirname(__file__), "icons")
-    UTILS_constants.icons_floor = bpy.utils.previews.new()
-    for key, value in UTILS_constants.floor_blockDict.items():
-        blockIconName = "Ballance_FloorIcon_" + key
-        UTILS_constants.icons_floor.load(blockIconName, os.path.join(icon_path, "floor", value["BindingDisplayTexture"]), 'IMAGE')
-        UTILS_constants.icons_floorDict[key] = UTILS_constants.icons_floor[blockIconName].icon_id
+    UTILS_icons_manager.register_icons()
 
     for cls in classes:
         bpy.utils.register_class(cls)
@@ -254,7 +250,7 @@ def unregister():
         bpy.utils.unregister_class(cls)
 
     # we need uninstall all icon after all classes unregister
-    bpy.utils.previews.remove(UTILS_constants.icons_floor)
+    UTILS_icons_manager.unregister_icons()
     
 if __name__=="__main__":
 	register()

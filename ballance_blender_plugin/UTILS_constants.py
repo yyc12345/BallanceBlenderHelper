@@ -290,11 +290,6 @@ for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__f
                 floor_derivedBlockList.append(item["Type"])
                 floor_blockDict[item["Type"]] = item
 
-icons_floor = None
-icons_floorDict = {}
-# blenderIcon_elements = None
-# blenderIcon_elements_dict = {}
-
 rename_normalComponentsGroupName = set([
     "P_Extra_Life",
     "P_Extra_Point",

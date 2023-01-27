@@ -4,18 +4,28 @@ import ast
 from bpy_extras import io_utils,node_shader_utils
 # from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
-from . import UTILS_constants, UTILS_functions, UTILS_safe_eval
+from . import UTILS_constants, UTILS_functions, UTILS_safe_eval, UTILS_icons_manager
 
 class BALLANCE_OT_add_floors(bpy.types.Operator):
     """Add Ballance floor"""
     bl_idname = "ballance.add_floors"
     bl_label = "Add floor"
-    bl_options = {'UNDO'}
+    bl_options = {'REGISTER', 'UNDO'}
 
     floor_type: bpy.props.EnumProperty(
         name="Type",
         description="Floor type",
-        items=tuple((x, x, "") for x in UTILS_constants.floor_blockDict.keys()),
+        items=tuple(
+            # token, display name, descriptions
+            (blk, blk, "") 
+            for blk in UTILS_constants.floor_blockDict.keys()
+        ),
+        #items=tuple(
+        #    # token, display name, descriptions, icon, index
+        #    (blk, blk, "", UTILS_icons_manager.get_floor_icon(blk), idx) 
+        #    for idx, blk in enumerate(UTILS_constants.floor_blockDict.keys())
+        #),
+
     )
 
     expand_length_1 : bpy.props.IntProperty(
@@ -40,22 +50,28 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
     )
 
     use_2d_top : bpy.props.BoolProperty(
-        name="Top edge"
+        name="Top edge",
+        default=True
     )
     use_2d_right : bpy.props.BoolProperty(
-        name="Right edge"
+        name="Right edge",
+        default=False
     )
     use_2d_bottom : bpy.props.BoolProperty(
-        name="Bottom edge"
+        name="Bottom edge",
+        default=True
     )
     use_2d_left : bpy.props.BoolProperty(
-        name="Left edge"
+        name="Left edge",
+        default=True
     )
     use_3d_top : bpy.props.BoolProperty(
-        name="Top face"
+        name="Top face",
+        default=True
     )
     use_3d_bottom : bpy.props.BoolProperty(
-        name="Bottom face"
+        name="Bottom face",
+        default=True
     )
 
     previous_floor_type = ''
@@ -114,11 +130,13 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         UTILS_functions.add_into_scene_and_move_to_cursor(obj)
         return {'FINISHED'}
 
+    
     def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
+        # yyc marked. Blumia reported.
+        # prepare settings before registing
+        # otherwise the mesh will not be created when first run.
+        # (do not change any properties)
 
-    def draw(self, context):
         # get floor prototype
         floor_prototype = UTILS_constants.floor_blockDict[self.floor_type]
 
@@ -133,6 +151,13 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
             self.use_2d_left = default_sides['UseTwoDLeft']
             self.use_3d_top = default_sides['UseThreeDTop']
             self.use_3d_bottom = default_sides['UseThreeDBottom']
+
+        return self.execute(context)
+    
+
+    def draw(self, context):
+        # get floor prototype
+        floor_prototype = UTILS_constants.floor_blockDict[self.floor_type]
 
         # show property
         layout = self.layout
@@ -154,7 +179,7 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][0])
         grids.separator()
         grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][3])
-        grids.template_icon(icon_value = UTILS_constants.icons_floorDict[self.floor_type])
+        grids.template_icon(icon_value = UTILS_icons_manager.get_floor_icon(self.floor_type))
         grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][1])
         grids.separator()
         grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][2])
@@ -173,7 +198,7 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         grids.prop(self, "use_2d_top")
         grids.separator()
         grids.prop(self, "use_2d_left")
-        grids.template_icon(icon_value = UTILS_constants.icons_floorDict[self.floor_type])
+        grids.template_icon(icon_value = UTILS_icons_manager.get_floor_icon(self.floor_type))
         grids.prop(self, "use_2d_right")
         grids.separator()
         grids.prop(self, "use_2d_bottom")

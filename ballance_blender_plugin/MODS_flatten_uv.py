@@ -6,7 +6,7 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
     """Flatten selected face UV. Only works for convex face"""
     bl_idname = "ballance.flatten_uv"
     bl_label = "Flatten UV"
-    bl_options = {'UNDO'}
+    bl_options = {'REGISTER', 'UNDO'}
 
     reference_edge : bpy.props.IntProperty(
         name="Reference edge",
@@ -20,7 +20,7 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
     @classmethod
     def poll(self, context):
         obj = bpy.context.active_object
-        if obj == None:
+        if obj is None:
             return False
         if obj.type != 'MESH':
             return False
@@ -28,17 +28,16 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
             return False
         return True
 
+    """
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
+    """
 
     def execute(self, context):
         no_processed_count = _real_flatten_uv(bpy.context.active_object.data, self.reference_edge)
         if no_processed_count != 0:
-            UTILS_functions.show_message_box(
-                ("{} faces may not be processed correctly because they have problem.".format(no_processed_count), ), 
-                "Warning", 'ERROR'
-            )
+            print("[Flatten UV] {} faces may not be processed correctly because they have problem.".format(no_processed_count))
         return {'FINISHED'}
 
     def draw(self, context):
