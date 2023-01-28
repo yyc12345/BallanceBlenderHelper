@@ -1,5 +1,6 @@
 import bpy,mathutils
 import bmesh
+import math
 from . import UTILS_functions
 
 class BALLANCE_OT_flatten_uv(bpy.types.Operator):
@@ -7,6 +8,19 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
     bl_idname = "ballance.flatten_uv"
     bl_label = "Flatten UV"
     bl_options = {'REGISTER', 'UNDO'}
+
+    normal_scale_correction = 5.0
+    sink_scale_correction = 5.0 * (math.sqrt(2.5 ** 2 + 0.7 ** 2) / 2.5)
+
+    scale_correction: bpy.props.EnumProperty(
+        name="Scale Correction",
+        description="Choose your UV scale.",
+        items=(
+            ("NORMAL", "Normal Floor", "Normal floor scale, 5.0"),
+            ("SINK", "Sink Floor", "Sink floor scale, around 5.19")
+        ),
+        default='NORMAL',
+    )
 
     reference_edge : bpy.props.IntProperty(
         name="Reference edge",
@@ -28,23 +42,26 @@ class BALLANCE_OT_flatten_uv(bpy.types.Operator):
             return False
         return True
 
-    """
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-    """
+    def get_scale_correction(self):
+        if self.scale_correction == 'NORMAL':
+            return BALLANCE_OT_flatten_uv.normal_scale_correction
+        elif self.scale_correction == 'SINK':
+            return BALLANCE_OT_flatten_uv.sink_scale_correction
+        else:
+            raise Exception("Unknow scale correction.")
 
     def execute(self, context):
-        no_processed_count = _real_flatten_uv(bpy.context.active_object.data, self.reference_edge)
+        no_processed_count = _real_flatten_uv(bpy.context.active_object.data, self.reference_edge, self.get_scale_correction())
         if no_processed_count != 0:
             print("[Flatten UV] {} faces may not be processed correctly because they have problem.".format(no_processed_count))
         return {'FINISHED'}
 
     def draw(self, context):
         layout = self.layout
+        layout.prop(self, "scale_correction")
         layout.prop(self, "reference_edge")
 
-def _real_flatten_uv(mesh, reference_edge):
+def _real_flatten_uv(mesh, reference_edge, scale_correction):
     no_processed_count = 0
 
     if mesh.uv_layers.active is None:
@@ -107,9 +124,11 @@ def _real_flatten_uv(mesh, reference_edge):
             vec = pp-p1
             new_vec = transition_matrix @ vec
 
+            # y axis always use 5.0 to scale
+            # however, x need use custom scale correction.
             face.loops[loop_index][uv_lay].uv = (
-                (new_vec.x if new_vec.x >=0 else -new_vec.x) / 5,
-                (new_vec.y) / 5
+                (new_vec.x if new_vec.x >=0 else -new_vec.x) / scale_correction,
+                (new_vec.y) / 5.0
             )
 
     # Show the updates in the viewport
