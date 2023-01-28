@@ -7,32 +7,55 @@ class BALLANCE_OT_select_virtools_group(UTILS_virtools_prop.common_group_name_pr
     bl_label = "Select by Virtools Group"
     bl_options = {'UNDO'}
 
-    merge_selection: bpy.props.BoolProperty(
-        name="Merge Selection",
-        description="Merge selection, rather than re-select them.",
-        default=False,
-    )
-
-    ignore_hide: bpy.props.BoolProperty(
-        name="Ignore Hide Property",
-        description="Select objects without considering visibility.",
-        default=False,
+    selection_type: bpy.props.EnumProperty(
+        name="Mode",
+        description="Selection mode",
+        items=(
+            ('SET', "Set", "Sets a new selection.", "SELECT_SET", 0),
+            ('EXTEND', "Extend", "Adds newly selected items to the existing selection.", "SELECT_EXTEND", 1),
+            ('SUBTRACT', "Subtract", "Removes newly selected items from the existing selection.", "SELECT_SUBTRACT", 2),
+            ('DIFFERENCE', "Invert", "Inverts the selection.", "SELECT_DIFFERENCE", 3),
+            ('INTERSECT', "Intersect", "Selects items that intersect with the existing selection.", "SELECT_INTERSECT", 4),
+        ),
+        default='SET'
     )
 
     def execute(self, context):
-        # iterate object
-        for obj in bpy.context.scene.objects:
-            # ignore hidden objects
-            if (not self.ignore_hide) and obj.hide_get() == True:
-                continue
+        if self.selection_type == 'SET':
+            # iterate object
+            for obj in bpy.context.scene.objects:
+                # check group and decide whether select this obj
+                obj.select_set(UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()))
+        
+        elif self.selection_type == 'EXTEND':
+            # also iterate all objects
+            for obj in bpy.context.scene.objects:
+                # directly add if group matched. do not deselect anything
+                if UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()):
+                    obj.select_set(True)
+        elif self.selection_type == 'SUBTRACT':
+            # subtract only involving selected item. so we get selected objest first
+            # and iterate it to reduce useless operations
+            selected = bpy.context.selected_objects[:]
+            for obj in selected:
+                # remove matched only
+                if UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()):
+                    obj.select_set(False)
 
-            # check group
-            if UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()):
-                # select object
-                obj.select_set(True)
-            else:
-                # if not in merge mode, deselect them
-                if not self.merge_selection:
+        elif self.selection_type == 'DIFFERENCE':
+            # construct a selected obj set for convenient operations
+            selected_set = set(bpy.context.selected_objects)
+            # iterate all objects
+            for obj in bpy.context.scene.objects:
+                # use xor to select
+                # in_selected XOR in_group
+                obj.select_set((obj in selected_set) ^ UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()))
+        elif self.selection_type == 'INTERSECT':
+            # like subtract, only iterate selected obj
+            selected = bpy.context.selected_objects[:]
+            for obj in selected:
+                # remove not matched
+                if not UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string()):
                     obj.select_set(False)
 
         return {'FINISHED'}
@@ -40,62 +63,12 @@ class BALLANCE_OT_select_virtools_group(UTILS_virtools_prop.common_group_name_pr
     def draw(self, context):
         layout = self.layout
 
-        row = layout.row()
-        row.prop(self, 'ignore_hide')
-        row.prop(self, 'merge_selection')
+        layout.label(text='Selection Parameters')
+        layout.prop(self, 'selection_type', expand=True, icon_only=True)
 
         layout.separator()
+        layout.label(text='Group Parameters')
         self.parent_draw(layout)
-
-class BALLANCE_OT_filter_virtools_group(UTILS_virtools_prop.common_group_name_props):
-    """Filter objects by Virtools Group."""
-    bl_idname = "ballance.filter_virtools_group"
-    bl_label = "Filter by Virtools Group"
-    bl_options = {'UNDO'}
-
-    reverse_selection: bpy.props.BoolProperty(
-        name="Reverse",
-        description="Reverse operation. Remove matched objects.",
-        default=False,
-    )
-
-    ignore_hide: bpy.props.BoolProperty(
-        name="Ignore Hide Property",
-        description="Select objects without considering visibility.",
-        default=False,
-    )
-
-    def execute(self, context):
-        # make a copy for all objects, to ensure it is not viotile
-        # becuase we need deselect some objects in for statement
-        selected = bpy.context.selected_objects[:]
-        # iterate object
-        for obj in selected:
-            # ignore hidden objects
-            if (not self.ignore_hide) and obj.hide_get() == True:
-                continue
-
-            # check group and decide select
-            is_selected = UTILS_virtools_prop.check_virtools_group_data(obj, self.get_group_name_string())
-            if self.reverse_selection:
-                is_selected = not is_selected
-
-            # select object
-            obj.select_set(is_selected)
-
-        return {'FINISHED'}
-
-    def draw(self, context):
-        layout = self.layout
-
-        row = layout.row()
-        row.prop(self, 'ignore_hide')
-        row.prop(self, 'reverse_selection')
-
-        layout.separator()
-        self.parent_draw(layout)
-
-
 
 class BALLANCE_OT_ctx_set_group(UTILS_virtools_prop.common_group_name_props):
     """Grouping selected objects"""

@@ -159,7 +159,6 @@ classes = (
     PROPS_virtools_material.BALLANCE_PT_virtools_material,
 
     OBJS_group_opers.BALLANCE_OT_select_virtools_group,
-    OBJS_group_opers.BALLANCE_OT_filter_virtools_group,
     OBJS_group_opers.BALLANCE_OT_ctx_set_group,
     OBJS_group_opers.BALLANCE_OT_ctx_unset_group,
     OBJS_group_opers.BALLANCE_OT_ctx_clear_group,
@@ -195,8 +194,7 @@ def menu_func_ballance_select(self, context):
     layout = self.layout
     layout.separator()
     layout.label(text="Ballance")
-    layout.operator(OBJS_group_opers.BALLANCE_OT_select_virtools_group.bl_idname, icon='SELECT_SET')
-    layout.operator(OBJS_group_opers.BALLANCE_OT_filter_virtools_group.bl_idname, icon='FILTER')
+    layout.operator(OBJS_group_opers.BALLANCE_OT_select_virtools_group.bl_idname, icon='RESTRICT_SELECT_OFF')
 def menu_func_ballance_grouping(self, context):
     layout = self.layout
     layout.separator()
