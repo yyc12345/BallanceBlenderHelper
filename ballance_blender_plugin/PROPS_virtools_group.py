@@ -44,9 +44,29 @@ class BALLANCE_OT_rm_virtools_group(bpy.types.Operator):
         UTILS_virtools_prop.remove_virtools_group_data_by_index(obj, int(UTILS_virtools_prop.get_active_virtools_group(obj)))
         return {'FINISHED'}
 
+class BALLANCE_OT_clear_virtools_group(bpy.types.Operator):
+    """Clear All Virtools Group for Active Object."""
+    bl_idname = "ballance.clear_virtools_group"
+    bl_label = "Clear Virtools Group"
+    bl_options = {'UNDO'}
+
+    @classmethod
+    def poll(self, context):
+        return context.object is not None
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_confirm(self, event)
+
+    def execute(self, context):
+        obj = context.object
+        UTILS_virtools_prop.clear_virtools_group_data(obj)
+        return {'FINISHED'}
+
 class BALLANCE_UL_virtools_group(bpy.types.UIList):
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
-        layout.prop(item, 'group_name', icon='GROUP', emboss=False, text="")
+        layout.label(text=item.group_name, translate=False, icon='GROUP')
+        #layout.prop(item, 'group_name', icon='GROUP', emboss=False, text="")
 
 class BALLANCE_PT_virtools_group(bpy.types.Panel):
     """Show Virtools Group Properties."""
@@ -71,3 +91,5 @@ class BALLANCE_PT_virtools_group(bpy.types.Panel):
         col = row.column(align=True)
         col.operator(BALLANCE_OT_add_virtools_group.bl_idname, icon='ADD', text="")
         col.operator(BALLANCE_OT_rm_virtools_group.bl_idname, icon='REMOVE', text="")
+        col.separator()
+        col.operator(BALLANCE_OT_clear_virtools_group.bl_idname, icon='TRASH', text="")

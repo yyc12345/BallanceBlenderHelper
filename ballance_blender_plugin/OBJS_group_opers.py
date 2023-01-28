@@ -169,11 +169,14 @@ class BALLANCE_OT_ctx_clear_group(bpy.types.Operator):
     def poll(self, context):
         return len(bpy.context.selected_objects) != 0
 
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_confirm(self, event)
+
     def execute(self, context):
         # iterate object
         for obj in bpy.context.selected_objects:
             UTILS_virtools_prop.clear_virtools_group_data(obj)
-
-
+        
         return {'FINISHED'}
 

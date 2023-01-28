@@ -150,6 +150,7 @@ classes = (
     UTILS_virtools_prop.BALLANCE_PG_virtools_group,
     PROPS_virtools_group.BALLANCE_OT_add_virtools_group,
     PROPS_virtools_group.BALLANCE_OT_rm_virtools_group,
+    PROPS_virtools_group.BALLANCE_OT_clear_virtools_group,
     PROPS_virtools_group.BALLANCE_UL_virtools_group,
     PROPS_virtools_group.BALLANCE_PT_virtools_group,
     PROPS_virtools_material.BALLANCE_OT_apply_virtools_material,
