@@ -69,6 +69,52 @@ class BALLANCE_OT_auto_grouping(rename_system_props):
 # ========================================== 
 # rename misc funcs
 
+class _RenameErrorType():
+    ERROR = 0
+    WARNING = 1
+    INFO = 2
+
+    @staticmethod
+    def cvt_err_from_int_to_str(err_t):
+        if err_t == _RenameErrorType.ERROR:
+            return "ERROR"
+        elif err_t == _RenameErrorType.WARNING:
+            return "WARNING"
+        elif err_t == _RenameErrorType.INFO:
+            return "INFO"
+        else:
+            raise Exception("Unknow error type.")
+
+class _RenameErrorItem():
+    def __init__(self, err_t, description):
+        self.err_type = err_t
+        self.description = description
+
+    def get_presentation(self):
+        return "[{}]\t{}".format(_RenameErrorType.cvt_err_from_int_to_str(self.err_type), self.description)
+
+class _RenameErrorReporter():
+    def __init__(self):
+        self.err_container: list[_RenameErrorItem] = []
+
+    def add_error(self, description):
+        self.err_container.append(_RenameErrorItem(_RenameErrorType.ERROR, description))
+    def add_warning(self, description):
+        self.err_container.append(_RenameErrorItem(_RenameErrorType.WARNING, description))
+    def add_info(self, description):
+        self.err_container.append(_RenameErrorItem(_RenameErrorType.INFO, description))
+
+    def can_report(self):
+        return len(self.err_container) != 0
+
+    def report(self, header):
+        print(header)
+        for i in self.err_container:
+            print('\t' + i.get_presentation())
+        
+    def clear(self):
+        self.err_container.clear()
+
 class _ObjectBasicType():
     COMPONENT = 0
 
@@ -140,12 +186,12 @@ def _get_sector_from_ckgroup(group_set):
 # YYC Tools Chains name standard is Ballance-compatible name standard.
 # So this functions also serving for `_get_name_info_from_group` function
 # to help get sector field from PC/PR elements. In ordinary call(external call)
-# The final error output should be outputed nromally. But in the call from 
+# The final error output should be outputed normally. But in the call from 
 # `_get_name_info_from_group`, this function should not output any error.
 # So parameter `call_internal` is served for this work. In common it is False
 # to let function output error str normally. But only set it to True in 
 # the call from `_get_name_info_from_group` to disable error output.
-def _get_name_info_from_yyc_name(obj_name, call_internal = False):
+def _get_name_info_from_yyc_name(obj_name, err_reporter: _RenameErrorReporter, call_internal = False):
     
     # check component first
     regex_result = UTILS_constants.rename_regexYYCComponent.match(obj_name)
@@ -191,11 +237,11 @@ def _get_name_info_from_yyc_name(obj_name, call_internal = False):
 
     # only output in external calling
     if not call_internal:
-        print("[ERROR]\t{}:\tName match lost.".format(obj_name))
+        err_reporter.add_error("Name match lost.")
 
     return None
 
-def _get_name_info_from_imengyu_name(obj_name):
+def _get_name_info_from_imengyu_name(obj_name, err_reporter: _RenameErrorReporter):
 
     # check component first
     regex_result = UTILS_constants.rename_regexImengyuComponent.match(obj_name)
@@ -238,10 +284,10 @@ def _get_name_info_from_imengyu_name(obj_name):
     if obj_name.startswith("O_"):
         return _NameInfoHelper(_ObjectBasicType.DECORATION)
 
-    print("[ERROR]\t{}:\tName match lost.".format(obj_name))
+    err_reporter.add_error("Name match lost.")
     return None
 
-def _get_name_info_from_group(obj):
+def _get_name_info_from_group(obj, err_reporter: _RenameErrorReporter):
     group_list = UTILS_virtools_prop.get_virtools_group_data(obj)
     if len(group_list) == 0:
         # name it as a decoration
@@ -262,24 +308,24 @@ def _get_name_info_from_group(obj):
             # these type's data should be gotten from its name
             # use _get_name_info_from_yyc_name to get it
             # _get_name_info_from_yyc_name is Ballance-compatible name standard
-            data = _get_name_info_from_yyc_name(obj.name, call_internal=True)
+            data = _get_name_info_from_yyc_name(obj.name, err_reporter, call_internal=True)
             if data is None:
-                print("[ERROR]\t{}:\tPC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.".format(obj.name))
+                err_reporter.add_error("PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.")
                 return None
             if data.basic_type != _ObjectBasicType.CHECKPOINT and data.basic_type != _ObjectBasicType.RESETPOINT:
                 # check whether it is checkpoint or resetpoint
                 # if not, it mean that we got error data from name
                 # return None instead
-                print("[ERROR]\t{}:\tPC_Checkpoints or PR_Resetpoints detected. But name is illegal.".format(obj.name))
+                err_reporter.add_error("PC_Checkpoints or PR_Resetpoints detected. But name is illegal.")
                 return None
             # otherwise return data
             return data
         else:
-            print("[ERROR]\t{}:\tThe match of Unique Component lost.".format(obj.name))
+            err_reporter.add_error("The match of Unique Component lost.")
             return None
     elif len(set_result) != 0:
         # must be a weird grouping, report it
-        print("[ERROR]\t{}:\tA Multi-grouping Unique Component.".format(obj.name))
+        err_reporter.add_error("A Multi-grouping Unique Component.")
         return None
 
     # distinguish normal elements
@@ -291,7 +337,7 @@ def _get_name_info_from_group(obj):
         gotten_sector = _get_sector_from_ckgroup(group_set)
         if gotten_sector is None:
             # fail to get sector
-            print("[ERROR]\t{}:\tComponent detected. But couldn't get sector from CKGroup data.".format(obj.name))
+            err_reporter.add_error("Component detected. But couldn't get sector from CKGroup data.")
             return None
         
         data = _NameInfoHelper(_ObjectBasicType.COMPONENT)
@@ -300,7 +346,7 @@ def _get_name_info_from_group(obj):
         return data
     elif len(set_result) != 0:
         # must be a weird grouping, report it
-        print("[ERROR]\t{}:\tA Multi-grouping Component.".format(obj.name))
+        err_reporter.add_error("A Multi-grouping Component.")
         return None
 
     # distinguish road
@@ -316,7 +362,7 @@ def _get_name_info_from_group(obj):
         elif len(floor_result) == 0 and len(rail_result) > 0:
             return _NameInfoHelper(_ObjectBasicType.WOOD)
         else:
-            print("[WARNING]\t{}:\tCan't distinguish between Floors and Rails. Suppose it is Floors".format(obj.name))
+            err_reporter.add_warning("Can't distinguish object between Floors and Rails. Suppose it is Floors.")
             return _NameInfoHelper(_ObjectBasicType.FLOOR)
     elif 'Phys_FloorStopper' in group_set:
         return _NameInfoHelper(_ObjectBasicType.STOPPER)
@@ -324,10 +370,10 @@ def _get_name_info_from_group(obj):
         return _NameInfoHelper(_ObjectBasicType.DEPTH_CUBE)
 
     # no matched
-    print("[ERROR]\t{}:\tGroup match lost.".format(obj.name))
+    err_reporter.add_error("Group match lost.")
     return None
 
-def _set_for_yyc_name(obj, name_info):
+def _set_for_yyc_name(obj, name_info, err_reporter: _RenameErrorReporter):
     basic_type = name_info.basic_type
     if basic_type == _ObjectBasicType.DECORATION:
         obj.name = "D_"
@@ -357,7 +403,7 @@ def _set_for_yyc_name(obj, name_info):
         obj.name = "{}_{:0>2d}_".format(name_info.component_type, name_info.sector)
     
 
-def _set_for_imengyu_name(obj, name_info):
+def _set_for_imengyu_name(obj, name_info, err_reporter: _RenameErrorReporter):
     basic_type = name_info.basic_type
     if basic_type == _ObjectBasicType.DECORATION:
         obj.name = "O_"
@@ -388,7 +434,7 @@ def _set_for_imengyu_name(obj, name_info):
     
 # NOTE: the implement of this function are copied from 
 # BallanceVirtoolsHelper/bvh/features/mapping/grouping.cpp
-def _set_for_group(obj, name_info):
+def _set_for_group(obj, name_info, err_reporter: _RenameErrorReporter):
     gps = []
     basic_type = name_info.basic_type
 
@@ -441,23 +487,23 @@ def _set_for_group(obj, name_info):
 # ========================================== 
 # assemble funcs
 
-def _get_data(obj, standard):
+def _get_data(obj, standard, err_reporter: _RenameErrorReporter):
     if standard == _NameStandard.YYC:
-        return _get_name_info_from_yyc_name(obj.name)
+        return _get_name_info_from_yyc_name(obj.name, err_reporter)
     elif standard == _NameStandard.IMENGYU:
-        return _get_name_info_from_imengyu_name(obj.name)
+        return _get_name_info_from_imengyu_name(obj.name, err_reporter)
     elif standard == _NameStandard.CKGROUP:
-        return _get_name_info_from_group(obj)
+        return _get_name_info_from_group(obj, err_reporter)
     else:
         raise Exception("Unknow standard")
 
-def _set_data(obj, name_info, standard):
+def _set_data(obj, name_info, standard, err_reporter: _RenameErrorReporter):
     if standard == _NameStandard.YYC:
-        return _set_for_yyc_name(obj, name_info)
+        return _set_for_yyc_name(obj, name_info, err_reporter)
     elif standard == _NameStandard.IMENGYU:
-        return _set_for_imengyu_name(obj, name_info)
+        return _set_for_imengyu_name(obj, name_info, err_reporter)
     elif standard == _NameStandard.CKGROUP:
-        return _set_for_group(obj, name_info)
+        return _set_for_group(obj, name_info, err_reporter)
     else:
         raise Exception("Unknow standard")
 
@@ -467,23 +513,43 @@ def _rename_core(source_std, dest_std):
         # we do not to do anything
         return
 
+    # create fail counter and error reporter
     failed_obj_counter = 0
     all_obj_counter = 0
+    err_reporter = _RenameErrorReporter()
 
     print('============')
-    print('Rename system report')
+    print('Rename System Report')
     print('------------')
     for obj in _get_selected_objects():
+        # set counter and name
         all_obj_counter += 1
-        info = _get_data(obj, source_std)
+        old_name = new_name = obj.name
+        # get data
+        info = _get_data(obj, source_std, err_reporter)
+        
+        # do operation according to whether getting data successfully
         if info is None:
             failed_obj_counter += 1
-            continue
+        else:
+            _set_data(obj, info, dest_std, err_reporter)
+            # refresh obj name
+            new_name = obj.name
 
-        _set_data(obj, info, dest_std)
+        # report result
+        if err_reporter.can_report():
+            if new_name == old_name:
+                report_header = 'For object "{}"'.format(new_name)
+            else:
+                report_header = 'For object "{}" (Old name: "{}")'.format(new_name, old_name)
+
+            err_reporter.report(report_header)
+        # clear report
+        err_reporter.clear()
+        
 
     print('------------')
-    print('All/failed - {}/{}'.format(all_obj_counter, failed_obj_counter))
+    print('All / Failed - {} / {}'.format(all_obj_counter, failed_obj_counter))
     print('============')
 
     UTILS_functions.show_message_box(
