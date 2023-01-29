@@ -1,3 +1,5 @@
+# all png are binary
+*.png binary
 # our generated mesh should be save as binary
 *.bin binary
 # json is data and not good for human reading(althought I edit it on my own hand.)

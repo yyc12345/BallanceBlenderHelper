@@ -87,7 +87,7 @@ class BALLANCE_MT_ThreeDViewerMenu(bpy.types.Menu):
         layout.operator(MODS_flatten_uv.BALLANCE_OT_flatten_uv.bl_idname)
 
 class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
-    """Add Ballance floor"""
+    """Add Ballance Floor"""
     bl_idname = "BALLANCE_MT_AddFloorMenu"
     bl_label = "Floors"
 
@@ -110,7 +110,7 @@ class BALLANCE_MT_AddFloorMenu(bpy.types.Menu):
             cop.floor_type = item
 
 class BALLANCE_MT_AddRailMenu(bpy.types.Menu):
-    """Add Ballance rail"""
+    """Add Ballance Rail"""
     bl_idname = "BALLANCE_MT_AddRailMenu"
     bl_label = "Rails"
 
@@ -119,6 +119,19 @@ class BALLANCE_MT_AddRailMenu(bpy.types.Menu):
         layout.operator(OBJS_add_rails.BALLANCE_OT_add_rails.bl_idname, text="Rail Section")
         layout.operator(OBJS_add_rails.BALLANCE_OT_add_tunnels.bl_idname, text="Tunnel Section")
 
+class BALLANCE_MT_AddElementsMenu(bpy.types.Menu):
+    """Add Ballance Elements"""
+    bl_idname = "BALLANCE_MT_AddElementsMenu"
+    bl_label = "Elements"
+
+    def draw(self, context):
+        layout = self.layout
+
+        for item in UTILS_constants.bmfile_componentList:
+            cop = layout.operator(
+                OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
+                text=item, icon_value = UTILS_icons_manager.get_element_icon(item))
+            cop.elements_type = item
 
 # ============================================= 
 # blender call system
@@ -141,6 +154,7 @@ classes = (
     OBJS_add_floors.BALLANCE_OT_add_floors,
     BALLANCE_MT_AddFloorMenu,
     BALLANCE_MT_AddRailMenu,
+    BALLANCE_MT_AddElementsMenu,
 
     NAMES_rename_system.BALLANCE_OT_rename_by_group,
     NAMES_rename_system.BALLANCE_OT_convert_name,
@@ -178,9 +192,10 @@ def menu_func_ballance_add(self, context):
     layout.label(text="Ballance")
     layout.menu(BALLANCE_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BALLANCE_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
-    layout.operator_menu_enum(
-        OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
-        "elements_type", icon='MESH_ICOSPHERE', text="Elements")
+    layout.menu(BALLANCE_MT_AddElementsMenu.bl_idname, icon='MESH_ICOSPHERE')
+    #layout.operator_menu_enum(
+    #    OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
+    #    "elements_type", icon='MESH_ICOSPHERE', text="Elements")
 def menu_func_ballance_rename(self, context):
     layout = self.layout
     layout.separator()

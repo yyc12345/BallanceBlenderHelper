@@ -174,7 +174,8 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
             col.prop(self, "expand_length_2")
         col.label(text="Unit size: " + floor_prototype['UnitSize'])
         col.label(text="Expand mode: " + floor_prototype['ExpandType'])
-        grids = col.grid_flow(row_major=True, columns=3)
+        grids = col.grid_flow(row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
+        grids.alignment = 'CENTER'
         grids.separator()
         grids.label(text=UTILS_constants.floor_expandDirectionMap[floor_prototype['InitColumnDirection']][floor_prototype['ExpandType']][0])
         grids.separator()
@@ -193,7 +194,8 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
 
         col.separator()
         col.label(text="Sides")
-        grids = col.grid_flow(row_major=True, columns=3)
+        grids = col.grid_flow(row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
+        grids.alignment = 'CENTER'
         grids.separator()
         grids.prop(self, "use_2d_top")
         grids.separator()
