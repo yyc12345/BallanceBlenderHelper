@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop, UTILS_icons_manager
 
 class BALLANCE_OT_select_virtools_group(UTILS_virtools_prop.common_group_name_props):
     """Select objects by Virtools Group."""
@@ -91,7 +91,10 @@ class BALLANCE_OT_ctx_set_group(UTILS_virtools_prop.common_group_name_props):
 
         # throw a warning if some objects have duplicated group
         if has_duplicated:
-            UTILS_functions.show_message_box(("Some objects have duplicated group name.", "These objects have been omitted.", ), "Duplicated Group", 'ERROR')
+            UTILS_functions.show_message_box(
+                ("Some objects have duplicated group name.", "These objects have been omitted.", ), 
+                "Duplicated Group", UTILS_icons_manager.blender_error_icon
+            )
 
         return {'FINISHED'}
 
@@ -124,7 +127,10 @@ class BALLANCE_OT_ctx_unset_group(UTILS_virtools_prop.common_group_name_props):
 
         # throw a warning if some objects have duplicated group
         if lack_group:
-            UTILS_functions.show_message_box(("Some objects lack specified group name.", "These objects have been omitted.", ), "Lack Group", 'ERROR')
+            UTILS_functions.show_message_box(
+                ("Some objects lack specified group name.", "These objects have been omitted.", ), 
+                "Lack Group", UTILS_icons_manager.blender_error_icon
+            )
 
         return {'FINISHED'}
 

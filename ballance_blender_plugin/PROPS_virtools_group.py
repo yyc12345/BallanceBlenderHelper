@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop, UTILS_icons_manager
 
 class BALLANCE_OT_add_virtools_group(UTILS_virtools_prop.common_group_name_props):
     """Add a Virtools Group for Active Object."""
@@ -15,7 +15,7 @@ class BALLANCE_OT_add_virtools_group(UTILS_virtools_prop.common_group_name_props
         # try adding
         obj = context.object
         if not UTILS_virtools_prop.add_virtools_group_data(obj, self.get_group_name_string()):
-            UTILS_functions.show_message_box(("Group name is duplicated!", ), "Duplicated Name", 'ERROR')
+            UTILS_functions.show_message_box(("Group name is duplicated!", ), "Duplicated Name", UTILS_icons_manager.blender_error_icon)
 
         return {'FINISHED'}
 

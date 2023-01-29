@@ -4,7 +4,7 @@ import struct, shutil
 from bpy_extras import io_utils,node_shader_utils
 from bpy_extras.io_utils import unpack_list
 from bpy_extras.image_utils import load_image
-from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop, UTILS_icons_manager
 
 class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper):
     """Load a Ballance Map File (BM file spec 1.4)"""
@@ -63,6 +63,8 @@ class BALLANCE_OT_import_bm(bpy.types.Operator, bpy_extras.io_utils.ImportHelper
                 prefs.no_component_collection, prefs.external_folder, prefs.temp_texture_folder,
                 self.texture_conflict_strategy, self.material_conflict_strategy, 
                 self.mesh_conflict_strategy, self.object_conflict_strategy)
+
+        self.report({'INFO'}, "BM File Import Finished.")
         return {'FINISHED'}
         
 
@@ -89,7 +91,7 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             # clean temp folder, output error
             UTILS_functions.show_message_box(
                 ("Unsupported BM spec. Expect: {} Gotten: {}".format(UTILS_constants.bmfile_currentVersion, index_gottenVersion), ), 
-                "Unsupported BM spec", 'ERROR')
+                "Unsupported BM spec", UTILS_icons_manager.blender_error_icon)
             findex.close()
             utils_tempFolderObj.cleanup()
             return

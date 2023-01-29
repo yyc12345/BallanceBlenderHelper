@@ -1,7 +1,7 @@
 import bpy,bmesh
 import mathutils
 import bpy.types
-from . import UTILS_functions
+from . import UTILS_functions, UTILS_icons_manager
 
 class BALLANCE_OT_rail_uv(bpy.types.Operator):
     """Create a UV for rail"""
@@ -47,7 +47,7 @@ class BALLANCE_OT_rail_uv(bpy.types.Operator):
 
     def execute(self, context):
         if context.scene.BallanceBlenderPluginProperty.material_picker == None:
-            UTILS_functions.show_message_box(("No specific material", ), "Lost parameter", 'ERROR')
+            UTILS_functions.show_message_box(("No specific material", ), "Lost parameter", UTILS_icons_manager.blender_error_icon)
         else:
             _create_rail_uv(self.uv_type, context.scene.BallanceBlenderPluginProperty.material_picker, self.uv_scale, self.projection_axis)
         return {'FINISHED'}
@@ -175,7 +175,7 @@ def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
     if len(ignoredObj) != 0:
         UTILS_functions.show_message_box(
             ("Following objects are not processed due to they are not suit for this function now: ", ) + tuple(ignoredObj), 
-            "Execution result", 'INFO'
+            "Execution result", UTILS_icons_manager.blender_info_icon
         )
 
 def _tt_reflection_mapping_compute(_point, _n, _refobj):

@@ -2,7 +2,7 @@ import bpy,bmesh,bpy_extras,mathutils
 import pathlib,zipfile,time,os,tempfile,math
 import struct, shutil
 from bpy_extras import io_utils, node_shader_utils
-from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_file_io, UTILS_zip_helper, UTILS_virtools_prop, UTILS_icons_manager
 
 class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper):
     """Save a Ballance Map File (BM file spec 1.4)"""
@@ -34,7 +34,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
 
         if ((self.export_mode == 'COLLECTION' and context.scene.BallanceBlenderPluginProperty.collection_picker is None) or 
             (self.export_mode == 'OBJECT' and context.scene.BallanceBlenderPluginProperty.object_picker is None)):
-            UTILS_functions.show_message_box(("No specific target", ), "Lost parameter", 'ERROR')
+            UTILS_functions.show_message_box(("No specific target", ), "Lost parameter", UTILS_icons_manager.blender_error_icon)
         else:
             prefs = bpy.context.preferences.addons[__package__].preferences
 
@@ -51,6 +51,7 @@ class BALLANCE_OT_export_bm(bpy.types.Operator, bpy_extras.io_utils.ExportHelper
         if in_edit_mode:
             bpy.ops.object.editmode_toggle()
 
+        self.report({'INFO'}, "BM File Export Finished.")
         return {'FINISHED'}
 
     def draw(self, context):

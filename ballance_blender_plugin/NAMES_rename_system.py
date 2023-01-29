@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop, UTILS_icons_manager
 
 class rename_system_props(bpy.types.Operator):
     name_standard: bpy.props.EnumProperty(
@@ -557,6 +557,5 @@ def _rename_core(source_std, dest_std):
         'View console to get more detail',
         'All: {}'.format(all_obj_counter),
         'Failed: {}'.format(failed_obj_counter)),
-        "Info",
-        "INFO"
+        "Info", UTILS_icons_manager.blender_error_icon
     )

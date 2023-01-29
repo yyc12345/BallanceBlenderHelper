@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop
+from . import UTILS_constants, UTILS_functions, UTILS_virtools_prop, UTILS_icons_manager
 
 class BALLANCE_OT_apply_virtools_material(bpy.types.Operator):
     """Apply Virtools Material to Blender Material."""
@@ -19,7 +19,7 @@ class BALLANCE_OT_apply_virtools_material(bpy.types.Operator):
         if mtl_data[0]:
             UTILS_functions.create_material_nodes(mtl, mtl_data)
         else:
-            UTILS_functions.show_message_box(("Virtools Material is not enabled.", ), "Apply Failed", 'ERROR')
+            UTILS_functions.show_message_box(("Virtools Material is not enabled.", ), "Apply Failed", UTILS_icons_manager.blender_error_icon)
 
         return {'FINISHED'}
 
@@ -37,7 +37,7 @@ class BALLANCE_OT_parse_virtools_material(bpy.types.Operator):
         mtl = context.material
         mtl_data = UTILS_functions.parse_material_nodes(mtl)
         if mtl_data is None:
-            UTILS_functions.show_message_box(("Fail to parse Principled BSDF.", ), "Parsing Failed", 'ERROR')
+            UTILS_functions.show_message_box(("Fail to parse Principled BSDF.", ), "Parsing Failed", UTILS_icons_manager.blender_error_icon)
         else:
             UTILS_virtools_prop.set_virtools_material_data(mtl, mtl_data)
 

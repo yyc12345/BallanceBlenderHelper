@@ -3,6 +3,10 @@ import bpy.utils.previews
 import os
 from . import UTILS_constants
 
+blender_info_icon = 'INFO'
+blender_warning_icon = 'ERROR'
+blender_error_icon = 'CANCEL'
+
 # ImagePreviewCollection ccreated by Blender
 floor_icons = None
 # a map. key is block name, value is loaded icon id

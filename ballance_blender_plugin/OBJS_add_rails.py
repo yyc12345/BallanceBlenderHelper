@@ -10,9 +10,11 @@ class BALLANCE_OT_add_rails(bpy.types.Operator):
     rail_type: bpy.props.EnumProperty(
         name="Type",
         description="Rail type",
-        items=(('MONO', "Monorail", ""),
-                ('DOUBLE', "Rail", ""),
-                ),
+        items=(
+            ('MONO', "Monorail", ""),
+            ('DOUBLE', "Rail", ""),
+        ),
+        default='DOUBLE',
     )
 
     rail_radius: bpy.props.FloatProperty(
@@ -38,6 +40,11 @@ class BALLANCE_OT_add_rails(bpy.types.Operator):
             # merge
             firstObj = _merge_two_circle(firstObj, secondObj)
 
+        # rename
+        if self.rail_type == 'DOUBLE':
+            firstObj.name = "A_Rail_"
+        else:
+            firstObj.name = "A_Rail_Mono_"
         # apply 3d cursor
         UTILS_functions.move_to_cursor(firstObj)
 
@@ -89,6 +96,8 @@ class BALLANCE_OT_add_tunnels(bpy.types.Operator):
             # merge
             firstObj = _merge_two_circle(firstObj, secondObj)
 
+        # rename
+        firstObj.name = "A_Rail_Tunnel_"
         # apply 3d cursor
         UTILS_functions.move_to_cursor(firstObj)
 
