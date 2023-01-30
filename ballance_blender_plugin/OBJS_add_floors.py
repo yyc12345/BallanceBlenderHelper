@@ -15,16 +15,16 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
     floor_type: bpy.props.EnumProperty(
         name="Type",
         description="Floor type",
-        items=tuple(
-            # token, display name, descriptions
-            (blk, blk, "") 
-            for blk in UTILS_constants.floor_blockDict.keys()
-        ),
         #items=tuple(
-        #    # token, display name, descriptions, icon, index
-        #    (blk, blk, "", UTILS_icons_manager.get_floor_icon(blk), idx) 
-        #    for idx, blk in enumerate(UTILS_constants.floor_blockDict.keys())
+        #    # token, display name, descriptions
+        #    (blk, blk, "") 
+        #    for blk in UTILS_constants.floor_blockDict.keys()
         #),
+        items=tuple(
+            # token, display name, descriptions, icon, index
+            (blk, blk, "", UTILS_icons_manager.get_floor_icon(blk), idx) 
+            for idx, blk in enumerate(UTILS_constants.floor_blockDict.keys())
+        ),
 
     )
 

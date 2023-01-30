@@ -1,5 +1,5 @@
 import bpy, mathutils
-from . import UTILS_constants, UTILS_functions
+from . import UTILS_constants, UTILS_functions, UTILS_icons_manager
 
 # ================================================= actual add
 
@@ -12,7 +12,12 @@ class BALLANCE_OT_add_components(bpy.types.Operator):
     elements_type: bpy.props.EnumProperty(
         name="Type",
         description="This element type",
-        items=tuple(map(lambda x: (x, x, ""), UTILS_constants.bmfile_componentList)),
+        #items=tuple(map(lambda x: (x, x, ""), UTILS_constants.bmfile_componentList)),
+        items=tuple(
+            # token, display name, descriptions, icon, index
+            (blk, blk, "", UTILS_icons_manager.get_element_icon(blk), idx) 
+            for idx, blk in enumerate(UTILS_constants.bmfile_componentList)
+        ),
     )
 
     attentionElements = ("PC_TwoFlames", "PR_Resetpoint")

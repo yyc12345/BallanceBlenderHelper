@@ -223,7 +223,7 @@ def menu_func_ballance_grouping(self, context):
 
 def register():
     # we need init all icon first
-    UTILS_icons_manager.register_icons()
+    #UTILS_icons_manager.register_icons()
 
     for cls in classes:
         bpy.utils.register_class(cls)
@@ -264,7 +264,7 @@ def unregister():
         bpy.utils.unregister_class(cls)
 
     # we need uninstall all icon after all classes unregister
-    UTILS_icons_manager.unregister_icons()
+    #UTILS_icons_manager.unregister_icons()
     
 if __name__=="__main__":
 	register()

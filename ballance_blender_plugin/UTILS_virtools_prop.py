@@ -1,5 +1,5 @@
 import bpy
-from . import UTILS_constants, UTILS_functions
+from . import UTILS_constants, UTILS_functions, UTILS_icons_manager
 
 class BALLANCE_PG_virtools_material(bpy.types.PropertyGroup):
     enable_virtools_material: bpy.props.BoolProperty(
@@ -92,7 +92,12 @@ class common_group_name_props(bpy.types.Operator):
     group_name: bpy.props.EnumProperty(
         name="Group Name",
         description="Pick vanilla Ballance group name.",
-        items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
+        #items=tuple((x, x, "") for x in UTILS_constants.propsVtGroups_availableGroups),
+        items=tuple(
+            # token, display name, descriptions, icon, index
+            (grp, grp, "", UTILS_icons_manager.get_group_icon(grp), idx) 
+            for idx, grp in enumerate(UTILS_constants.propsVtGroups_availableGroups)
+        ),
     )
 
     custom_group_name: bpy.props.StringProperty(

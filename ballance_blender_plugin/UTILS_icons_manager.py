@@ -15,6 +15,13 @@ floor_icons_map: dict = {}
 element_icons = None
 element_icons_map: dict = {}
 
+group_map_to_element: dict = {
+    "PS_Levelstart": "PS_FourFlames",
+    "PE_Levelende": "PE_Balloon",
+    "PC_Checkpoints": "PC_TwoFlames",
+    "PR_Resetpoints": "PR_Resetpoint"
+}
+
 def register_icons():
     global floor_icons, floor_icons_map
     global element_icons, element_icons_map
@@ -51,3 +58,12 @@ def get_element_icon(element_name: str):
     global element_icons_map
     # default return 0
     return element_icons_map.get(element_name, 0)
+
+def get_group_icon(group_name: str):
+    # try parse string
+    # if not found, return self
+    return get_element_icon(group_map_to_element.get(group_name, group_name))
+
+# no matter how, register icon always
+# and no unregister call
+register_icons()
