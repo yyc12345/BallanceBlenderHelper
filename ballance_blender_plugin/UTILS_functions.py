@@ -116,8 +116,21 @@ def parse_material_nodes(mtl):
 # load component
 
 def load_component(component_id):
-    # get file first
+    # get component name from id
     component_name = UTILS_constants.bmfile_componentList[component_id]
+
+    # create real mesh.
+    # if component mesh is existed, use existed one.
+    (mesh, skip_init) = create_instance_with_option(
+        UTILS_constants.BmfileInfoType.MESH,
+        "BlcBldPlg_EleMesh_" + component_name,
+        'CURRENT'
+    )
+    if skip_init:
+        return mesh
+
+    # mesh is not existing. start to load mesh
+    # get file first
     selected_file = os.path.join(
         os.path.dirname(__file__),
         'meshes',
@@ -126,9 +139,6 @@ def load_component(component_id):
 
     # read file. please note this sector is sync with import_bm's mesh's code. when something change, please change each other.
     fmesh = open(selected_file, 'rb')
-
-    # create real mesh, we don't need to consider name. blender will solve duplicated name
-    mesh = bpy.data.meshes.new('mesh_' + component_name)
     
     vList = []
     vnList = []
@@ -204,6 +214,10 @@ def create_instance_with_option(instance_type, instance_name, instance_opt,
     For object, you should provide `extra_mesh`.    
     For texture, you should provide `extra_texture_path` and `extra_texture_filename`.  
 
+    Value type:
+    `instance_type`: one integer in UTILS_constants.BmfileInfoType
+    `instance_name`: a string of new data block name
+    `instance_opt`: 'RENAME' or 'CURRENT'
     """
 
     def get_instance():

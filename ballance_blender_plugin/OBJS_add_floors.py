@@ -12,6 +12,23 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
     bl_label = "Add floor"
     bl_options = {'REGISTER', 'UNDO'}
 
+    # the updator for default side value
+    def floor_type_updated(self, context):
+        # get floor prototype
+        floor_prototype = UTILS_constants.floor_blockDict[self.floor_type]
+
+        # try sync default value
+        default_sides = floor_prototype['DefaultSideConfig']
+        self.use_2d_top = default_sides['UseTwoDTop']
+        self.use_2d_right = default_sides['UseTwoDRight']
+        self.use_2d_bottom = default_sides['UseTwoDBottom']
+        self.use_2d_left = default_sides['UseTwoDLeft']
+        self.use_3d_top = default_sides['UseThreeDTop']
+        self.use_3d_bottom = default_sides['UseThreeDBottom']
+
+        # blender required
+        return None
+
     floor_type: bpy.props.EnumProperty(
         name="Type",
         description="Floor type",
@@ -25,7 +42,7 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
             (blk, blk, "", UTILS_icons_manager.get_floor_icon(blk), idx) 
             for idx, blk in enumerate(UTILS_constants.floor_blockDict.keys())
         ),
-
+        update=floor_type_updated
     )
 
     expand_length_1 : bpy.props.IntProperty(
@@ -73,8 +90,6 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         name="Bottom face",
         default=True
     )
-
-    previous_floor_type = ''
 
     @classmethod
     def poll(self, context):
@@ -130,27 +145,15 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         UTILS_functions.add_into_scene_and_move_to_cursor(obj)
         return {'FINISHED'}
 
-    
     def invoke(self, context, event):
         # yyc marked. Blumia reported.
         # prepare settings before registing
         # otherwise the mesh will not be created when first run.
         # (do not change any properties)
 
-        # get floor prototype
-        floor_prototype = UTILS_constants.floor_blockDict[self.floor_type]
-
-        # try sync default value
-        if self.previous_floor_type != self.floor_type:
-            self.previous_floor_type = self.floor_type
-
-            default_sides = floor_prototype['DefaultSideConfig']
-            self.use_2d_top = default_sides['UseTwoDTop']
-            self.use_2d_right = default_sides['UseTwoDRight']
-            self.use_2d_bottom = default_sides['UseTwoDBottom']
-            self.use_2d_left = default_sides['UseTwoDLeft']
-            self.use_3d_top = default_sides['UseThreeDTop']
-            self.use_3d_bottom = default_sides['UseThreeDBottom']
+        # yyc marked again.
+        # now I migrate default side value setter to updator of enum property.
+        # nothing need to process in here now.
 
         return self.execute(context)
     

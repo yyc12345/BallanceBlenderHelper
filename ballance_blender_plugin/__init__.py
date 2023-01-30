@@ -127,11 +127,16 @@ class BALLANCE_MT_AddElementsMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
+        layout.label(text="Basic Elements")
         for item in UTILS_constants.bmfile_componentList:
             cop = layout.operator(
                 OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
                 text=item, icon_value = UTILS_icons_manager.get_element_icon(item))
             cop.elements_type = item
+            
+        layout.label(text="Special Elements")
+        layout.operator(OBJS_add_components.BALLANCE_OT_add_components_dup.bl_idname, text="Dup Elements")
+        layout.operator(OBJS_add_components.BALLANCE_OT_add_components_series.bl_idname, text="Elements Series")
 
 # ============================================= 
 # blender call system
@@ -149,6 +154,8 @@ classes = (
     BALLANCE_MT_ThreeDViewerMenu,
 
     OBJS_add_components.BALLANCE_OT_add_components,
+    OBJS_add_components.BALLANCE_OT_add_components_dup,
+    OBJS_add_components.BALLANCE_OT_add_components_series,
     OBJS_add_rails.BALLANCE_OT_add_rails,
     OBJS_add_rails.BALLANCE_OT_add_tunnels,
     OBJS_add_floors.BALLANCE_OT_add_floors,
