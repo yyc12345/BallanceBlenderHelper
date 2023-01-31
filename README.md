@@ -109,26 +109,22 @@ Navigate to `Material Properties` panel, select a material, you can find `Virtoo
 In default, user created material will not enable Virtools Material feature. You need to click checkbox of `Virtools Material` panel to enable or disable it.
 
 After enable Virtools Material, `Basic Parameters` section and `Advanced Parameters` section can be set. Set your material peroperties just like operating in Virtools.  
-Just like its name, `Basic Parameters` is basic material properties. `Advanced Parameters` is mainly related to transparent properties and usually used in the bottom of transparent column.
+Just like its name, `Basic Parameters` is basic material properties. `Advanced Parameters` is mainly related to transparent properties and usually used in the bottom of transparent column.  
+Additionally, `Basic Parameters` section provide a preset function, allowing user to use some preset material settings, which only affect 4 basic colors, just for convenient using.
 
 In `Operation` section, `Apply Virtools Material` will clean all existed Blender material and create a new material graph according to Virtools material properties.  
 And, `Parse from Blender Principled BSDF` will try parsing a Principled BSDF to Virtools material.  
 If your material highly rely on Blender material, please execute `Parse from Blender Principled BSDF` or disable Virtools Material feature before exporting BM file, otherwise material can not be saved correctly.
 
-### Select by Group
+### Select by Virtools Group
 
-Plugin add 2 selection functions according to Virtools Group in Select menu.
+Plugin add a selection function according to Virtools Group in Select menu.
 
-#### Select by Virtools Group
+This function firstly have 5 different selection strategies which is exactly matched with Blender selection method. Just use it like Blender selection (Set, Extend, Subtract, Invert, Intersect).  
+Then, select your group name to start a selection.
 
-Select objects in active collection according to its Virtools Group properties.  
-The hidden object also can be selected if you check `Ignore Hide Property`.  
-Check `Merge Selection` will merge current selection and previous selection.
-
-#### Filter by Virtools Group
-
-Filter current selected object by its Virtools Group properties.  
-Check `Reverse` remove objects matching the requirements, not keep them.
+If you can, using Subtract or Intersect modes would be better than other modes. Because these modes avoid analyzing too many objects.
+For example, first, select a rough range, and then use the Intersect mode to filter objects, which is more efficient than directly using the Start mode to select.
 
 ### Quick Grouping
 

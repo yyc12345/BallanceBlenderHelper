@@ -109,7 +109,8 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 默认情况下，由用户创建的材质不启用Virtools Material，您可以通过点击`Virtools Material`面板的复选框来启用或关闭它。
 
 在启用Virtools Material后，可以在`Basic Parameters`和`Advanced Parameters`中设置材质属性，就像在Virtools中操作一般。  
-`Basic Parameters`是基础材质属性。`Advanced Parameters`则是与透明相关的材质属性，主要用于半透明柱子底部等。
+`Basic Parameters`是基础材质属性。`Advanced Parameters`则是与透明相关的材质属性，主要用于半透明柱子底部等。  
+另外，`Basic Parameters`部分提供了预设功能，允许用户使用一些预设的材质设置，这些设置只影响4种基本颜色，方便使用。
 
 `Operation`中的`Apply Virtools Material`将把Virtools Material应用到Blender材质上。  
 而`Parse from Blender Principled BSDF`将尝试将一个原理化BSDF转换为Virtools材质数据。  
@@ -117,21 +118,13 @@ Ballance 3D是一套简单的用于制图3D相关的轻型工具集合，可以�
 
 ### 按组选择
 
-选择菜单中新增了两项按照Virtools归组数据进行筛选的功能。
+选择菜单中新增了一项按照Virtools归组数据进行筛选的功能。
 
-#### Select by Virtools Group
+该功能首先有5种不同的选择策略，与Blender的选择方法完全匹配（开始、扩选、相减、反转、相交）。只需像Blender选择那样使用它。
+然后，选择你需要的组的名称，然后开始一次选择或筛选。
 
-将对当前活动集合内的物体按照其Virtools Group属性进行选择。  
-勾选`Ignore Hide Property`后，即使是隐藏的物体，也会被筛选。  
-勾选`Merge Selection`，将会把选中的物体合并到当前选定的内容中。
-
-#### Filter by Virtools Group
-
-将会按照Virtools Group属性，过滤当前选中物体。  
-勾选`Reverse`将会反向操作，即去除掉符合条件的物体。
-
-如果可以，请尽可能使用`Filter by Virtools Group`而不是`Select by Virtools Group`。因为这样可以避免分析过多的物体。  
-例如先选定一个大致的范围，然后使用`Filter by Virtools Group`过滤，比直接使用`Select by Virtools Group`效率更高。
+如果可以，请尽可能使用相减或相交模式。因为这样可以避免分析过多的物体。  
+例如先选定一个大致的范围，然后使用相交模式过滤，比直接使用开始模式效率更高。
 
 ### 快速归组
 

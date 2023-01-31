@@ -155,6 +155,9 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
         # now I migrate default side value setter to updator of enum property.
         # nothing need to process in here now.
 
+        # trigger default side props updator
+        self.floor_type_updated(context)
+
         return self.execute(context)
     
 

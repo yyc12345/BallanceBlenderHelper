@@ -119,24 +119,37 @@ class BALLANCE_MT_AddRailMenu(bpy.types.Menu):
         layout.operator(OBJS_add_rails.BALLANCE_OT_add_rails.bl_idname, text="Rail Section")
         layout.operator(OBJS_add_rails.BALLANCE_OT_add_tunnels.bl_idname, text="Tunnel Section")
 
+class BALLANCE_MT_AddNormalElementsMenu(bpy.types.Menu):
+    """Add Ballance Elements"""
+    bl_idname = "BALLANCE_MT_AddNormalElementsMenu"
+    bl_label = "Elements"
+    def draw(self, context):
+        layout = self.layout
+        OBJS_add_components.BALLANCE_OT_add_components.draw_blc_menu(layout)
+class BALLANCE_MT_AddDupElementsMenu(bpy.types.Menu):
+    """Add Ballance Elements"""
+    bl_idname = "BALLANCE_MT_AddDupElementsMenu"
+    bl_label = "Elements"
+    def draw(self, context):
+        layout = self.layout
+        OBJS_add_components.BALLANCE_OT_add_components_dup.draw_blc_menu(layout)
 class BALLANCE_MT_AddElementsMenu(bpy.types.Menu):
     """Add Ballance Elements"""
     bl_idname = "BALLANCE_MT_AddElementsMenu"
     bl_label = "Elements"
-
     def draw(self, context):
         layout = self.layout
 
         layout.label(text="Basic Elements")
-        for item in UTILS_constants.bmfile_componentList:
-            cop = layout.operator(
-                OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
-                text=item, icon_value = UTILS_icons_manager.get_element_icon(item))
-            cop.elements_type = item
-            
-        layout.label(text="Special Elements")
-        layout.operator(OBJS_add_components.BALLANCE_OT_add_components_dup.bl_idname, text="Dup Elements")
-        layout.operator(OBJS_add_components.BALLANCE_OT_add_components_series.bl_idname, text="Elements Series")
+        OBJS_add_components.BALLANCE_OT_add_components.draw_blc_menu(layout)
+        
+        layout.separator()
+        layout.label(text="Duplicated Elements")
+        OBJS_add_components.BALLANCE_OT_add_components_dup.draw_blc_menu(layout)
+
+        layout.separator()
+        layout.label(text="Elements Series")
+        OBJS_add_components.BALLANCE_OT_add_components_series.draw_blc_menu(layout)
 
 # ============================================= 
 # blender call system

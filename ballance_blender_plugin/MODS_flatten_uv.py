@@ -74,13 +74,26 @@ def _real_flatten_uv(mesh, reference_edge, scale_correction):
         if not face.select:
             continue
 
+        # check whether ref edge is legal
         allPoint = len(face.loops)
-
         if allPoint <= reference_edge:
             no_processed_count+=1
             continue
 
         # get correct new corrdinate system
+        # yyc mark:
+        # we use 3 points located in this face to calc 
+        # the base of this local uv corredinate system.
+        # however if this 3 points are set in a line, 
+        # this method will cause a error, zero vector error. 
+        # 
+        # if z axis is zero vector, we will try using face normal instead 
+        # to try getting correct data.
+        # 
+        # zero base is not important. because it will not raise any math exceptio
+        # just a weird uv. user will notice this problem.
+
+        # get point
         p1Relative = reference_edge
         p2Relative = reference_edge + 1
         p3Relative = reference_edge + 2
@@ -93,13 +106,19 @@ def _real_flatten_uv(mesh, reference_edge, scale_correction):
         p2=mathutils.Vector(tuple(face.loops[p2Relative].vert.co[x] for x in range(3)))
         p3=mathutils.Vector(tuple(face.loops[p3Relative].vert.co[x] for x in range(3)))
 
+        # get y axis
         new_y_axis = p2 - p1
         new_y_axis.normalize()
         vec1 = p3 - p2
         vec1.normalize()
 
+        # get z axis
         new_z_axis = new_y_axis.cross(vec1)
         new_z_axis.normalize()
+        if not any(round(v, 7) for v in new_z_axis):
+            new_z_axis = face.normal.normalized()
+
+        # get x axis
         new_x_axis = new_y_axis.cross(new_z_axis)
         new_x_axis.normalize()
 
@@ -109,14 +128,14 @@ def _real_flatten_uv(mesh, reference_edge, scale_correction):
             (0, 1.0, 0),
             (0, 0, 1.0)
         ))
-        origin_base.invert()
+        origin_base.invert_safe()
         new_base = mathutils.Matrix((
             (new_x_axis.x, new_y_axis.x, new_z_axis.x),
             (new_x_axis.y, new_y_axis.y, new_z_axis.y),
             (new_x_axis.z, new_y_axis.z, new_z_axis.z)
         ))
         transition_matrix = origin_base @ new_base
-        transition_matrix.invert()
+        transition_matrix.invert_safe()
 
         # process each face
         for loop_index in range(allPoint):

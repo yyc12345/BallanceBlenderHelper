@@ -71,6 +71,13 @@ class BALLANCE_OT_add_components(common_add_component_props):
         layout.prop(self, "elements_type")
         self.parent_draw(layout, self.elements_type)
 
+    @classmethod
+    def draw_blc_menu(self, layout):
+        for item in UTILS_constants.bmfile_componentList:
+            cop = layout.operator(
+                self.bl_idname, text=item, 
+                icon_value = UTILS_icons_manager.get_element_icon(item))
+            cop.elements_type = item
 
 
 class BALLANCE_OT_add_components_dup(common_add_component_props):
@@ -79,6 +86,10 @@ class BALLANCE_OT_add_components_dup(common_add_component_props):
     bl_label = "Add Duplicated Elements"
     bl_options = {'UNDO'}
 
+    can_duplicated_elements = (
+        'P_Extra_Point', 'P_Modul_18', 'P_Modul_26'
+    )
+
     elements_type: bpy.props.EnumProperty(
         name="Type",
         description="This element type",
@@ -86,9 +97,7 @@ class BALLANCE_OT_add_components_dup(common_add_component_props):
         items=tuple(
             # token, display name, descriptions, icon, index
             (blk, blk, "", UTILS_icons_manager.get_element_icon(blk), idx) 
-            for idx, blk in enumerate(
-                ('P_Extra_Point', 'P_Modul_18', 'P_Modul_26')
-            )
+            for idx, blk in enumerate(can_duplicated_elements)
         ),
     )
 
@@ -125,6 +134,13 @@ class BALLANCE_OT_add_components_dup(common_add_component_props):
         self.parent_draw(layout, self.elements_type)
         layout.prop(self, "elements_dup_times")
 
+    @classmethod
+    def draw_blc_menu(self, layout):
+        for item in self.can_duplicated_elements:
+            cop = layout.operator(
+                self.bl_idname, text=item, 
+                icon_value = UTILS_icons_manager.get_element_icon(item))
+            cop.elements_type = item
 
 
 class BALLANCE_OT_add_components_series(common_add_component_props):
@@ -208,3 +224,11 @@ class BALLANCE_OT_add_components_series(common_add_component_props):
         self.parent_draw(layout, self.elements_type)
         layout.prop(self, "elements_dup_times")
         layout.prop(self, "elements_span")
+
+    @classmethod
+    def draw_blc_menu(self, layout):
+        for key, item in self.supported_series.items():
+            cop = layout.operator(
+                self.bl_idname, text=item[0], 
+                icon_value = UTILS_icons_manager.get_element_icon(item[1]))
+            cop.elements_type = key
