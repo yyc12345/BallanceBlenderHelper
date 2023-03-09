@@ -129,6 +129,10 @@ def _real_flatten_uv(mesh, reference_edge, scale_data: ScaleDataUnion):
                 or (scale_data.ReferencePoint >= allPoint)):    # reference point overflow
                 no_processed_count += 1
                 continue
+        else:
+            if round(scale_data.ScaleSize, 7) == 0.0:   # invalid scale size
+                no_processed_count += 1
+                continue
 
         # ========== get correct new corrdinate system ==========
         # yyc mark:
