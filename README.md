@@ -68,6 +68,10 @@ Note that only convex face is supported. Applying this for a concave face will c
 In the edit mode, select the surface, click Flatten UV, and then scroll the slider to select an edge as a reference.  
 If the generated UV is not attached correctly, such as the FloorSide's band is pasted to the bottom, you can reselect the reference edge and redo the operation until it is correct.
 
+For the UV flatten by plugin, it must have a scale property. For example, the UV scale of normal floor is 5. However, the UV scale of sink floor is slightly larger than 5. Because the sink floor is "sink" in the floor block. There are 2 methods provided by plugin to getting this proper scale number. You can choose one from Scale Mode.  
+The first method is that user specify a direct scale number. You just need select Scale Size in Scale Mode and fill with a proper scale number. This option is frequently used for fill a large borderless floor.  
+The second method is reference point mode. You need specify a reference point and corresponding U component of its UV. Plugin will calculate the scale size automatically. This method is used for expanding a path of floor.
+
 ### Quick Struct Adder
 
 In the add menu, we have added a set of commonly used objects. After adding, the object will move to the 3D cursor.
