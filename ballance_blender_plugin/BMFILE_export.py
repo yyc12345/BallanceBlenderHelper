@@ -202,6 +202,10 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 mesh_usedBlenderMtl = mesh.materials[:]
                 mesh_noMaterial = len(mesh_usedBlenderMtl) == 0
                 for mat in mesh_usedBlenderMtl:
+                    # skip empty mtl slot
+                    if mat is None:
+                        continue
+                    # add into mtl set
                     if mat not in materialSet:
                         materialSet.add(mat)
                         materialList.append(mat)
@@ -212,7 +216,10 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 mesh_vIndex = []
                 for f, f_index in mesh_faceIndexPairs:
                     # confirm material use
-                    if mesh_noMaterial:
+                    # a face without mtl have 2 situations. first is the whole object do not have mtl
+                    # another is this face use an empty mtl slot.
+                    mesh_faceNoMtl = mesh_noMaterial or (mesh_usedBlenderMtl[f.material_index] is None)
+                    if mesh_faceNoMtl:
                         mesh_materialIndex = 0
                     else:
                         mesh_materialIndex = materialList.index(mesh_usedBlenderMtl[f.material_index])
@@ -235,7 +242,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                     mesh_vIndex[0], mesh_vtIndex[0], mesh_vnIndex[0])
 
                     # set used material
-                    UTILS_file_io.write_bool(fmesh, not mesh_noMaterial)
+                    UTILS_file_io.write_bool(fmesh, not mesh_faceNoMtl)
                     UTILS_file_io.write_uint32(fmesh, mesh_materialIndex)
 
                 # free splited normals
