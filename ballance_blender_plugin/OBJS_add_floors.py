@@ -469,13 +469,18 @@ def _load_basic_floor(mesh, floor_type, rotation, height_multiplier, d1, d2, sid
     _virtual_foreach_set(mesh.vertices, "co", global_offset_vec, vecList)
     _virtual_foreach_set(mesh.loops, "vertex_index", global_offset_loops, faceList)
     _virtual_foreach_set(mesh.loops, "normal", global_offset_loops, normalList)
-    _virtual_foreach_set(mesh.uv_layers[0].data, "uv", global_offset_loops, uvList)
+    # Blender 3.5 CHANGED. MeshUVLoop is deprecated and removed in 4.0
+    # See https://wiki.blender.org/wiki/Reference/Release_Notes/3.5/Python_API
+    # use MeshUVLoopLayer.uv[i].vector instead. MeshUVLoopLayer can be fetched from `mesh.uv_layers[i]` or `mesh.uv_layers.active`
+    _virtual_foreach_set(mesh.uv_layers[0].uv, "vector", global_offset_loops, uvList)
 
     cache_counter = 0
     for i in range(len(faceMatList)):
         indCount = faceIndList[i]
         mesh.polygons[i + global_offset_polygons].loop_start = global_offset_loops + cache_counter
-        mesh.polygons[i + global_offset_polygons].loop_total = indCount
+        # Blender 3.6 CHANGED. loop_total is readonly now. the count of consumed vertices is decided by next loop's loop_start
+        # See: https://wiki.blender.org/wiki/Reference/Release_Notes/3.6/Python_API
+        # mesh.polygons[i + global_offset_polygons].loop_total = indCount
         mesh.polygons[i + global_offset_polygons].material_index = faceMatList[i]
         mesh.polygons[i + global_offset_polygons].use_smooth = True
         cache_counter += indCount

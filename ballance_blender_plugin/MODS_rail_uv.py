@@ -141,15 +141,17 @@ def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
                 )
             real_scale = 1.0 / maxLength
 
-        uv_layer = mesh.uv_layers.active.data
+        # Blender 3.5 CHANGED: mesh.uv_layers.active.data -> mesh.uv_layers.active.uv
+        # .uv -> .vector
+        uv_layer = mesh.uv_layers.active.uv
         for poly in mesh.polygons:
             for loop_index in range(poly.loop_start, poly.loop_start + poly.loop_total):
                 # get correspond vec index
                 index = mesh.loops[loop_index].vertex_index
                 if rail_type == 'POINT':
                     # set to 1 point
-                    uv_layer[loop_index].uv[0] = 0
-                    uv_layer[loop_index].uv[1] = 1
+                    uv_layer[loop_index].vector[0] = 0
+                    uv_layer[loop_index].vector[1] = 1
                 elif rail_type == 'SCALE' or rail_type == 'UNIFORM':
                     # following xy -> uv scale
                     # 
@@ -157,16 +159,16 @@ def _create_rail_uv(rail_type, material_pointer, scale_size, projection_axis):
                     # use X axis: Y->U Z->V
                     # use Y axis: X->U Z->V
                     if projection_axis == 'X':
-                        uv_layer[loop_index].uv[0] = vecList[index].co[1] * real_scale
-                        uv_layer[loop_index].uv[1] = vecList[index].co[2] * real_scale
+                        uv_layer[loop_index].vector[0] = vecList[index].co[1] * real_scale
+                        uv_layer[loop_index].vector[1] = vecList[index].co[2] * real_scale
                     elif projection_axis == 'Y':
-                        uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
-                        uv_layer[loop_index].uv[1] = vecList[index].co[2] * real_scale
+                        uv_layer[loop_index].vector[0] = vecList[index].co[0] * real_scale
+                        uv_layer[loop_index].vector[1] = vecList[index].co[2] * real_scale
                     elif projection_axis == 'Z':
-                        uv_layer[loop_index].uv[0] = vecList[index].co[0] * real_scale
-                        uv_layer[loop_index].uv[1] = vecList[index].co[1] * real_scale
+                        uv_layer[loop_index].vector[0] = vecList[index].co[0] * real_scale
+                        uv_layer[loop_index].vector[1] = vecList[index].co[1] * real_scale
                 elif rail_type == 'TT':
-                    (uv_layer[loop_index].uv[0], uv_layer[loop_index].uv[1]) = _tt_reflection_mapping_compute(
+                    (uv_layer[loop_index].vector[0], uv_layer[loop_index].vector[1]) = _tt_reflection_mapping_compute(
                          vecList[index].co,
                          mesh.loops[loop_index].normal,
                          (0.0, 0.0, 0.0)

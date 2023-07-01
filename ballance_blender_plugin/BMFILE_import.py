@@ -260,10 +260,10 @@ def import_bm(context, bmx_filepath, prefs_fncg, prefs_externalTexture, prefs_te
             mesh_target.vertices.foreach_set("co", unpack_list(mesh_vList))
             mesh_target.loops.foreach_set("vertex_index", unpack_list(_flat_vertices_index(mesh_faceList)))
             mesh_target.loops.foreach_set("normal", unpack_list(_flat_vertices_normal(mesh_faceList, mesh_vnList)))
-            mesh_target.uv_layers[0].data.foreach_set("uv", unpack_list(_flat_vertices_uv(mesh_faceList, mesh_vtList)))
+            mesh_target.uv_layers[0].uv.foreach_set("vector", unpack_list(_flat_vertices_uv(mesh_faceList, mesh_vtList))) # Blender 3.5 CHANGED
             for i in range(len(mesh_faceList)):
                 mesh_target.polygons[i].loop_start = i * 3
-                mesh_target.polygons[i].loop_total = 3
+                # mesh_target.polygons[i].loop_total = 3 # Blender 3.6 CHANGED
                 if mesh_faceList[i][9] != -1:
                     mesh_target.polygons[i].material_index = mesh_faceList[i][9]
 

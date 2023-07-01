@@ -110,7 +110,7 @@ def _real_flatten_uv(mesh, reference_edge, scale_data: ScaleDataUnion):
         mesh.uv_layers.new(do_init=False)
 
     bm = bmesh.from_edit_mesh(mesh)
-    uv_lay = bm.loops.layers.uv.active
+    uv_lay = bm.loops.layers.uv.active # NOTE: this is a part of bmesh. not affected by Blender 3.5 CHANGED.
     for face in bm.faces:
         # ========== only process selected face ==========
         if not face.select:

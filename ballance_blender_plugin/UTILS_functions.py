@@ -178,8 +178,7 @@ def load_component(component_id):
     mesh.loops.foreach_set("normal", unpack_list(_flat_component_vertices_normal(faceList, vnList)))
     for i in range(len(faceList)):
         mesh.polygons[i].loop_start = i * 3
-        mesh.polygons[i].loop_total = 3
-
+        # mesh.polygons[i].loop_total = 3 # Blender 3.6 CHANGED
         mesh.polygons[i].use_smooth = True
     
     mesh.validate(clean_customdata=False)

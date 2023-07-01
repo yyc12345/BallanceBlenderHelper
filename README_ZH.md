@@ -17,7 +17,7 @@
 使用的制图链标准以及`meshes`文件夹下的文件的格式可以在[这里](https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md)查找  
 `jsons`文件夹下的，隶属于BMERevenge部分的文件的格式可以在[这里](https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_ZH.md)查找  
 
-支持Blender的原则是支持当前最新的 **LTS** 版本，在最新的LTS版本释出之后会花一些时间迁移插件。当前插件基于**3.3.x**版本
+支持Blender的原则是支持当前最新的 **LTS** 版本，在最新的LTS版本释出之后会花一些时间迁移插件。当前插件基于**3.6.x**版本
 
 ## 安装
 

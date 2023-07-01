@@ -173,14 +173,14 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 mesh_faceIndexPairs = [(face, index) for index, face in enumerate(mesh.polygons)]
                 UTILS_file_io.write_uint32(fmesh, len(mesh_faceIndexPairs) * 3)
                 if mesh.uv_layers.active is not None:
-                    uv_layer = mesh.uv_layers.active.data[:]
+                    uv_layer = mesh.uv_layers.active.uv
                     for f, f_index in mesh_faceIndexPairs:
                         # it should be triangle face, otherwise throw a error
                         if (f.loop_total != 3):
                             raise Exception("Not a triangle", f.poly.loop_total)
 
                         for loop_index in range(f.loop_start, f.loop_start + f.loop_total):
-                            uv = uv_layer[loop_index].uv
+                            uv = uv_layer[loop_index].vector
                             # reverse v
                             UTILS_file_io.write_2vector(fmesh, uv[0], -uv[1])
                 else:
@@ -318,6 +318,8 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
                 # get absolute texture path
                 texture_filepath = io_utils.path_reference(texture.filepath, texture_blenderFilePath, utils_tempTextureFolder,
                                                             'ABSOLUTE', "", None, texture.library)
+                # texture_filepath = bpy.path.abspath(texture.filepath, start=texture_blenderFilePath, library=texture.library)
+
                 # get file name and write it
                 texture_filename = os.path.basename(texture_filepath)
                 UTILS_file_io.write_string(ftexture, texture_filename)

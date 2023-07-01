@@ -17,7 +17,7 @@ Used BM file spec can be found in [there](https://github.com/yyc12345/gist/blob/
 Used tools chain principle and the file format located in `meshes` can be found in [there](https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md) (Chinese only).  
 The format of the files which are under the `jsons` folder and belong to the BMERevenge section, can be found in [here](https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_ZH.md) (Chinese only).
 
-This plugin will continuously support Blender lastest **LTS** version. This plugin will migrate to new version when the new LTS version released. Currently, it based on Blender **3.3.x**.
+This plugin will continuously support Blender lastest **LTS** version. This plugin will migrate to new version when the new LTS version released. Currently, it based on Blender **3.6.x**.
 
 ## Installation
 

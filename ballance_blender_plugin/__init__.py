@@ -3,9 +3,9 @@ bl_info={
 	"description":"Ballance mapping tools for Blender",
 	"author":"yyc12345",
 	"version":(3,2),
-	"blender":(3,3,0),
+	"blender":(3,6,0),
 	"category":"Object",
-	"support":"TESTING",
+	"support":"COMMUNITY",
     "warning": "Please read document before using this plugin.",
     "wiki_url": "https://github.com/yyc12345/BallanceBlenderHelper",
     "tracker_url": "https://github.com/yyc12345/BallanceBlenderHelper/issues"
