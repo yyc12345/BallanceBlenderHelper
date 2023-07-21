@@ -9,7 +9,7 @@
 本插件囊括了Ballance制图中可能会用到的各种功能。对于一些其它插件可以提供的功能，本插件不再重复提供。建议与下列插件合用以取得更好制图效果：
 
 * [BenjaminSauder/SimpleLattice](https://github.com/BenjaminSauder/SimpleLattice)：快速创建晶格以便变形物体。
-* [egtwobits/Mesh Align Plus](https://github.com/egtwobits/mesh_mesh_align_plus)：提供远超Blender原生的对齐功能。
+* [JulienHeijmans/quicksnap](https://github.com/JulienHeijmans/quicksnap)：提供远超Blender原生的对齐功能。
 
 ## 技术信息
 
@@ -21,7 +21,10 @@
 
 ## 安装
 
-将`ballance_blender_plugin`直接复制到Blender插件目录`scripts/addons_contrib`内即可。然后在Blender偏好设置中启用即可（请在第一次安装后或更新插件后配置插件设置）。
+将`ballance_blender_plugin`直接复制到Blender插件目录`scripts/addons`内即可。然后在Blender偏好设置中启用即可（请在第一次安装后或更新插件后配置插件设置）。
+
+> **Note**
+在对标Blender 3.6 LTS的3.3版本之后，您应该将此插件安装在`scripts/addons`中，而不是`scripts/addons_contrib`中，因为Blender不再支持Testing类型插件。 如果您在`scripts/addons_contrib`中仍有旧版本，请在安装新版本**之前删除**它。
 
 ## 功能介绍
 

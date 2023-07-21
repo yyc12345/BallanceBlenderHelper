@@ -9,7 +9,7 @@ The latest commit may not be stable to use, please use the latest commit with gi
 This plugin contain various aspect of Ballance mapping. However, if some features can be easily gotten from other Blender plugin, this plugin will not provide them duplicatedly. We highly recommend that use this plugin with following plugins.
 
 * [BenjaminSauder/SimpleLattice](https://github.com/BenjaminSauder/SimpleLattice): Create lattice quickly to transform object.
-* [egtwobits/Mesh Align Plus](https://github.com/egtwobits/mesh_mesh_align_plus): Provide powerful align functions which far beyond vanilla Blender align function.
+* [JulienHeijmans/quicksnap](https://github.com/JulienHeijmans/quicksnap): Provide powerful align functions which far beyond vanilla Blender align function.
 
 ## Technical Infomation
 
@@ -21,7 +21,10 @@ This plugin will continuously support Blender lastest **LTS** version. This plug
 
 ## Installation
 
-Put `ballance_blender_plugin` into Blender's plugin folder, `scripts/addons_contrib`. Then enable this plugin in Blender's preferences (DO NOT forget to configure this plugin's settings after first installation or updating plugin.).
+Put `ballance_blender_plugin` into Blender's plugin folder, `scripts/addons`. Then enable this plugin in Blender's preferences (DO NOT forget to configure this plugin's settings after first installation or updating plugin.).
+
+> **Note**
+After the version 3.3 supporting Blender 3.6 LTS, you should install this plugin in `scripts/addons`, not `scripts/addons_contrib` due to Blender do not support testing plugin anymore. If you still have old version in `scripts/addons_contrib`, please **DELETE** it **BEFORE** install the new version.
 
 ## Feature Introduction
 
