@@ -134,7 +134,7 @@ class BALLANCE_OT_add_floors(bpy.types.Operator):
                 self.use_3d_bottom),
                 prefs_externalTexture)
         else:
-            raise Exception("Fatal error: unknow floor type.")
+            raise Exception("Fatal error: unknown floor type.")
 
         # normalization mesh
         objmesh.validate(clean_customdata=False)

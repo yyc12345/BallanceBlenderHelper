@@ -83,7 +83,7 @@ class _RenameErrorType():
         elif err_t == _RenameErrorType.INFO:
             return "INFO"
         else:
-            raise Exception("Unknow error type.")
+            raise Exception("Unknown error type.")
 
 class _RenameErrorItem():
     def __init__(self, err_t, description):
@@ -144,7 +144,7 @@ class _NameStandard():
         elif std_str == "IMENGYU":
             return _NameStandard.IMENGYU
         else:
-            raise Exception("Unknow name standard.")
+            raise Exception("Unknown name standard.")
 
 class _NameInfoHelper():
     def __init__(self, _basic_type):
@@ -495,7 +495,7 @@ def _get_data(obj, standard, err_reporter: _RenameErrorReporter):
     elif standard == _NameStandard.CKGROUP:
         return _get_name_info_from_group(obj, err_reporter)
     else:
-        raise Exception("Unknow standard")
+        raise Exception("Unknown standard")
 
 def _set_data(obj, name_info, standard, err_reporter: _RenameErrorReporter):
     if standard == _NameStandard.YYC:
@@ -505,7 +505,7 @@ def _set_data(obj, name_info, standard, err_reporter: _RenameErrorReporter):
     elif standard == _NameStandard.CKGROUP:
         return _set_for_group(obj, name_info, err_reporter)
     else:
-        raise Exception("Unknow standard")
+        raise Exception("Unknown standard")
 
 def _rename_core(source_std, dest_std):
     if source_std == dest_std:
