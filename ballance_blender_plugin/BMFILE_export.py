@@ -75,7 +75,7 @@ def export_bm(context, bmx_filepath, prefs_fncg, opts_exportMode, opts_exportTar
     # do not need check them validation in there. 
     # just collect them.
     if opts_exportMode== "COLLECTION":
-        objectList = opts_exportTarget.objects
+        objectList = opts_exportTarget.all_objects
     else:
         objectList = [opts_exportTarget, ]
 
