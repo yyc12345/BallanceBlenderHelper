@@ -4,5 +4,5 @@
 *.bin binary
 # json is data and not good for human reading(althought I edit it on my own hand.)
 # so set it as binary
-ballance_blender_plugin/json/basic_blocks/*.json    binary
-ballance_blender_plugin/json/derived_blocks/*.json  binary
+bbp_ng/json/basic_blocks/*.json    binary
+bbp_ng/json/derived_blocks/*.json  binary
