@@ -23,6 +23,7 @@ if "bpy" in locals():
 
 #endregion
 
+from . import PROP_virtools_material
 from . import OP_UV_flatten_uv
 
 #region Menu
@@ -54,6 +55,9 @@ def menu_drawer_view3d(self, context):
 g_Classes: tuple[typing.Any, ...] = (
     OP_UV_flatten_uv.BBP_OT_flatten_uv,
     BBP_MT_View3DMenu,
+
+    PROP_virtools_material.BBP_PG_virtools_material,
+    PROP_virtools_material.BBP_PT_virtools_material,
 )
 
 class MenuEntry():
@@ -73,6 +77,9 @@ def register() -> None:
     for cls in g_Classes:
         bpy.utils.register_class(cls)
 
+    # register properties
+    PROP_virtools_material.register_prop()
+
     # add menu drawer
     for entry in g_Menus:
         if entry.mIsAppend:
@@ -84,6 +91,9 @@ def unregister() -> None:
     # remove menu drawer
     for entry in g_Menus:
         entry.mContainerMenu.remove(entry.mMenuDrawer)
+
+    # unregister properties
+    PROP_virtools_material.unregister_prop()
 
     # unregister classes
     for cls in g_Classes:

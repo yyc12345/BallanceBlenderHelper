@@ -1,7 +1,45 @@
 import typing, enum
+from . import UTIL_functions
 
-##! Color with RGBA order.
-VxColor = tuple[float, float, float, float]
+class VxColor():
+    """
+    The Color struct support RGBA.
+    """
+    a: float
+    r: float
+    g: float
+    b: float
+    def __init__(self, _r: float, _g: float, _b: float, _a: float):
+        self.a = _a
+        self.r = _r
+        self.g = _g
+        self.b = _b
+        self.regulate()
+
+    def to_tuple_rgba(self) -> tuple[float, float, float, float]:
+        return (self.r, self.g, self.b, self.a)
+    
+    def to_tuple_rgb(self) -> tuple[float, float, float]:
+        return (self.r, self.g, self.b)
+
+    def from_tuple_rgba(self, val: tuple[float, float, float, float]) -> None:
+        (self.r, self.g, self.b, self.a) = val
+        self.regulate()
+
+    def from_tuple_rgb(self, val: tuple[float, float, float]) -> None:
+        (self.r, self.g, self.b) = val
+        self.a = 1.0
+        self.regulate()
+
+    def clone(self):
+        return VxColor(self.r, self.g, self.b, self.a)
+
+    def regulate(self):
+        self.a = UTIL_functions.clamp_float(self.a, 0.0, 1.0)
+        self.r = UTIL_functions.clamp_float(self.r, 0.0, 1.0)
+        self.g = UTIL_functions.clamp_float(self.g, 0.0, 1.0)
+        self.b = UTIL_functions.clamp_float(self.b, 0.0, 1.0)
+
 
 class VXTEXTURE_BLENDMODE(enum.IntEnum):
     """!
@@ -158,5 +196,5 @@ BlenderEnumPropEntry_t = tuple[str, str, str, str | int, int]
 def generate_blender_enum_prop_entries(enum_data: InheritingIntEnum_t, anno: dict[int, str]) -> tuple[BlenderEnumPropEntry_t, ...]:
     # token, display name, descriptions, icon, index
     return tuple(
-        (member.name, member.name, anno.get(member.value, ""), "", member.value) for member in enum_data
+        (str(member.value), member.name, anno.get(member.value, ""), "", member.value) for member in enum_data
     )
