@@ -57,6 +57,8 @@ g_Classes: tuple[typing.Any, ...] = (
     BBP_MT_View3DMenu,
 
     PROP_virtools_material.BBP_PG_virtools_material,
+    PROP_virtools_material.BBP_OT_apply_virtools_material,
+    PROP_virtools_material.BBP_OT_preset_virtools_material,
     PROP_virtools_material.BBP_PT_virtools_material,
 )
 
