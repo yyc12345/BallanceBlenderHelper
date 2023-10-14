@@ -23,6 +23,7 @@ if "bpy" in locals():
 
 #endregion
 
+from . import UTIL_preferences
 from . import PROP_virtools_material
 from . import OP_UV_flatten_uv
 
@@ -52,14 +53,9 @@ def menu_drawer_view3d(self, context):
 
 #region Register and Unregister.
 
-g_Classes: tuple[typing.Any, ...] = (
+g_BldClasses: tuple[typing.Any, ...] = (
     OP_UV_flatten_uv.BBP_OT_flatten_uv,
     BBP_MT_View3DMenu,
-
-    PROP_virtools_material.BBP_PG_virtools_material,
-    PROP_virtools_material.BBP_OT_apply_virtools_material,
-    PROP_virtools_material.BBP_OT_preset_virtools_material,
-    PROP_virtools_material.BBP_PT_virtools_material,
 )
 
 class MenuEntry():
@@ -70,20 +66,22 @@ class MenuEntry():
         self.mContainerMenu = cont
         self.mIsAppend = is_append
         self.mMenuDrawer = menu_func
-g_Menus: tuple[MenuEntry, ...] = (
+
+g_BldMenus: tuple[MenuEntry, ...] = (
      MenuEntry(bpy.types.VIEW3D_MT_editor_menus, False, menu_drawer_view3d),
 )
 
 def register() -> None:
-    # register all classes
-    for cls in g_Classes:
+    # register module
+    UTIL_preferences.register()
+    PROP_virtools_material.register()
+
+    # register other classes
+    for cls in g_BldClasses:
         bpy.utils.register_class(cls)
 
-    # register properties
-    PROP_virtools_material.register_prop()
-
     # add menu drawer
-    for entry in g_Menus:
+    for entry in g_BldMenus:
         if entry.mIsAppend:
             entry.mContainerMenu.append(entry.mMenuDrawer)
         else:
@@ -91,15 +89,16 @@ def register() -> None:
 
 def unregister() -> None:
     # remove menu drawer
-    for entry in g_Menus:
+    for entry in g_BldMenus:
         entry.mContainerMenu.remove(entry.mMenuDrawer)
 
-    # unregister properties
-    PROP_virtools_material.unregister_prop()
-
-    # unregister classes
-    for cls in g_Classes:
+    # unregister other classes
+    for cls in g_BldClasses:
         bpy.utils.unregister_class(cls)
+
+    # unregister modules
+    PROP_virtools_material.unregister()
+    UTIL_preferences.unregister()
 
 if __name__ == "__main__":
     register()

@@ -742,9 +742,26 @@ class BBP_PT_virtools_material(bpy.types.Panel):
             layout.prop(props, 'z_func')
         
 
+g_BldClasses: tuple[typing.Any, ...] = (
+    # basic property
+    BBP_PG_virtools_material,
+    # 2 operator used in panel
+    BBP_OT_apply_virtools_material,
+    BBP_OT_preset_virtools_material,
+    # panel
+    BBP_PT_virtools_material,
+)
 
-def register_prop():
+def register():
+    for cls in g_BldClasses:
+        bpy.utils.register_class(cls)
+    
+    # add into material metadata
     bpy.types.Material.virtools_material = bpy.props.PointerProperty(type = BBP_PG_virtools_material)
 
-def unregister_prop():
+def unregister():
+    # del from material metadata
     del bpy.types.Material.virtools_material
+
+    for cls in g_BldClasses:
+        bpy.utils.unregister_class(cls)
