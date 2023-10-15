@@ -23,7 +23,7 @@ if "bpy" in locals():
 
 #endregion
 
-from . import UTIL_preferences
+from . import UTIL_preferences, UTIL_file_browser, UTIL_ballance_texture
 from . import PROP_virtools_material
 from . import OP_UV_flatten_uv
 
@@ -74,6 +74,8 @@ g_BldMenus: tuple[MenuEntry, ...] = (
 def register() -> None:
     # register module
     UTIL_preferences.register()
+    UTIL_file_browser.register()
+    UTIL_ballance_texture.register()
     PROP_virtools_material.register()
 
     # register other classes
@@ -98,6 +100,8 @@ def unregister() -> None:
 
     # unregister modules
     PROP_virtools_material.unregister()
+    UTIL_ballance_texture.unregister()
+    UTIL_file_browser.unregister()
     UTIL_preferences.unregister()
 
 if __name__ == "__main__":

@@ -608,6 +608,10 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
     ),
 }
 
+def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPresetType) -> None:
+    preset_data: MaterialPresetData = g_MaterialPresets[preset_type.value]
+    set_raw_virtools_material(mtl, preset_data.mData)
+
 def generate_mtl_presets_for_bl_enumprop() -> tuple[BlenderEnumPropEntry_t, ...]:
     # define 2 assist functions
     def get_display_name(v: int):
@@ -663,14 +667,12 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
         self.layout.prop(self, "preset_type")
     
     def execute(self, context):
-        # get preset data
+        # get essential value
+        mtl: bpy.types.Material = context.material
         expected_preset: MaterialPresetType = MaterialPresetType(int(self.preset_type))
-        preset_data: MaterialPresetData = g_MaterialPresets[expected_preset.value]
         
         # apply preset to material
-        mtl = context.material
-        set_raw_virtools_material(mtl, preset_data.mData)
-        
+        preset_virtools_material(mtl, expected_preset)
         return {'FINISHED'}
 
 #endregion

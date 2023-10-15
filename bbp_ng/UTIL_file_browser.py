@@ -96,3 +96,8 @@ class ImportDirectory(bpy_extras.io_utils.ImportHelper):
     def general_get_directory(self) -> str:
         return self.directory
     
+def register() -> None:
+    pass # nothing to register
+
+def unregister() -> None:
+    pass
