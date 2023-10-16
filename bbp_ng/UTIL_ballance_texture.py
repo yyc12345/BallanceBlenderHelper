@@ -47,10 +47,45 @@ from . import UTIL_preferences, UTIL_functions
 #  if try_filename:
 #      write_external_filename(try_filename)
 #  else:
-#      realpath = UTIL_ballance_texture.save_other_texture(tex, tempfolder)
+#      realpath = UTIL_ballance_texture.generate_other_texture_save_path(tex, tempfolder)
+#      UTIL_ballance_texture.save_other_texture(tex, realpath)
 #      write_filename(realpath)
 #  
 #  ```
+
+#region Assist Functions
+
+def get_ballance_texture_folder() -> str:
+    """!
+    Get Ballance texture folder from preferences.
+
+    @exception BBPException Ballance texture folder is not set in preferences
+
+    @return The path to Ballance texture folder.
+    """
+
+    pref: UTIL_preferences.RawPreferences = UTIL_preferences.get_raw_preferences()
+    if not pref.has_valid_blc_tex_folder():
+        raise UTIL_functions.BBPException("No valid Ballance texture folder in preferences.")
+    
+    return pref.mBallanceTextureFolder
+
+def is_path_equal(path1: str, path2: str) -> bool:
+    """!
+    Check whether 2 path are equal.
+
+    The checker will call os.path.normcase and os.path.normpath in series to regulate the give path.
+
+    @param path1[in] The given absolute path 1
+    @param path2[in] The given absolute path 2
+    @return True if equal.
+    """
+
+    return os.path.normpath(os.path.normcase(path1)) == os.path.normpath(os.path.normcase(path2))
+
+#endregion
+
+#region Ballance Texture Detect Functions
 
 g_ballanceTextureSet = set((
     # "atari.avi",
@@ -136,36 +171,8 @@ g_ballanceTextureSet = set((
     "Wood_Raft.bmp"
 ))
 
-def get_ballance_texture_folder() -> str:
-    """
-    Get Ballance texture folder from preferences.
-
-    @exception BBPException Ballance texture folder is not set in preferences
-
-    @return The path to Ballance texture folder.
-    """
-
-    pref: UTIL_preferences.RawPreferences = UTIL_preferences.get_raw_preferences()
-    if not pref.has_valid_blc_tex_folder():
-        raise UTIL_functions.BBPException("No valid Ballance texture folder in preferences.")
-    
-    return pref.mBallanceTextureFolder
-
-def is_path_equal(path1: str, path2: str) -> bool:
-    """
-    Check whether 2 path are equal.
-
-    The checker will call os.path.normcase and os.path.normpath in series to regulate the give path.
-
-    @param path1[in] The given absolute path 1
-    @param path2[in] The given absolute path 2
-    @return True if equal.
-    """
-
-    return os.path.normpath(os.path.normcase(path1)) == os.path.normpath(os.path.normcase(path2))
-
 def get_ballance_texture_filename(texpath: str) -> str | None:
-    """
+    """!
     Return the filename part for valid Ballance texture path.
 
     If the file name part of given path is not a entry of Ballance texture file name list, function will return None immediately.
@@ -187,8 +194,8 @@ def get_ballance_texture_filename(texpath: str) -> str | None:
 
     return filename
 
-def is_ballance_texture_path(texpath: str) -> bool:
-    """
+def is_ballance_texture_filepath(texpath: str) -> bool:
+    """!
     Check whether the given path is a valid Ballance texture.
 
     Simply call get_ballance_texture_filename() and check whether it return string or None.
@@ -203,7 +210,7 @@ def is_ballance_texture_path(texpath: str) -> bool:
     return get_ballance_texture_filename(texpath) is not None
 
 def get_texture_filepath(tex: bpy.types.Image) -> str:
-    """
+    """!
     Get the file path referenced by the given texture.
 
     This function will try getting the referenced file path of given texture, including packed or not packed texture.
@@ -229,22 +236,26 @@ def get_texture_filepath(tex: bpy.types.Image) -> str:
     return absfilepath
     
 def is_ballance_texture(tex: bpy.types.Image) -> bool:
-    """
+    """!
     Check whether the provided image is Ballance texture according to its referenced file path.
 
-    A simply calling combination of get_texture_filepath and is_ballance_texture_path
+    A simply calling combination of get_texture_filepath and is_ballance_texture_filepath
 
     @exception BBPException Ballance texture folder is not set in preferences
 
     @param tex[in] The texture to check.
     @return True if it is Ballance texture.
-    @see get_texture_filepath, is_ballance_texture_path
+    @see get_texture_filepath, is_ballance_texture_filepath
     """
     
-    return is_ballance_texture_path(get_texture_filepath(tex))
+    return is_ballance_texture_filepath(get_texture_filepath(tex))
+
+#endregion
+
+#region Texture Load & Save
 
 def load_ballance_texture(texname: str) -> bpy.types.Image:
-    """
+    """!
     Load Ballance texture.
 
     + The returned image may be redirected to a existing image according to its file path, because all Ballance textures are shared.
@@ -266,7 +277,7 @@ def load_ballance_texture(texname: str) -> bpy.types.Image:
     return bpy.data.images.load(filepath, check_existing = True)
 
 def load_other_texture(texname: str) -> bpy.types.Image:
-    """
+    """!
     Load the Texture which is not a part of Ballance texture.
 
     This function is different with load_ballance_texture(). It can be seen as the opposition of load_ballance_texture().
@@ -291,21 +302,35 @@ def load_other_texture(texname: str) -> bpy.types.Image:
     # return image
     return ret
 
-def save_other_texture(tex: bpy.types.Image, file_folder: str) -> str:
-    """
-    Save the texture which is not a part of Ballance texture.
+def generate_other_texture_save_path(tex: bpy.types.Image, file_folder: str) -> str:
+    """!
+    Generate the path to saved file.
 
-    This function is the reverse operation of other 2 loading functions. Frequently used when exporting something.
-    This function accept textures which is packed or not packed in blender file.
+    This function first get file name from texture, then combine it with given dest file folder, 
+    and return it.
+    Frequently used with save_other_texture to create its parameter.
 
     @param tex[in] The saving texture
     @param filepath[in] The absolute path to the folder where the texture will be saved.
     @return The path to saved file.
     """
+    return os.path.join(file_folder, os.path.basename(get_texture_filepath(tex)))
 
-    filepath: os.path.join(file_folder, os.path.basename(get_texture_filepath(tex)))
+def save_other_texture(tex: bpy.types.Image, filepath: str) -> str:
+    """!
+    Save the texture which is not a part of Ballance texture.
+
+    This function is frequently used when exporting something.
+    Usually used to save the texture loaded by load_other_texture, because the texture loaded by load_ballance_texture do not need save.
+    This function accept textures which is packed or not packed in blender file.
+
+    @param tex[in] The saving texture
+    @param filepath[in] The absolute path to saving file.
+    """
+
     tex.save(filepath)
-    return filepath
+
+#endregion
 
 def register() -> None:
     pass # nothing to register
