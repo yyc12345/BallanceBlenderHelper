@@ -1,6 +1,12 @@
 import typing, enum
 from . import UTIL_functions
 
+ConstVxVector2 = tuple[float, float]
+ConstVxVector3 = tuple[float, float, float]
+ConstVxVector4 = tuple[float, float, float, float]
+
+ConstVxColorRGBA = tuple[float, float, float, float]
+ConstVxColorRGB = tuple[float, float, float]
 class VxColor():
     """
     The Color struct support RGBA.
