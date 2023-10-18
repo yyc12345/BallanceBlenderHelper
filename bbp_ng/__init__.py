@@ -23,8 +23,8 @@ if "bpy" in locals():
 
 #endregion
 
-from . import UTIL_preferences, UTIL_file_browser, UTIL_ballance_texture
-from . import PROP_virtools_material
+from . import PROP_preferences, PROP_virtools_material
+from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv
 
 #region Menu
@@ -45,8 +45,18 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
 
 MenuDrawer_t = typing.Callable[[typing.Any, typing.Any], None]
 
+def menu_drawer_import(self, context):
+    layout: bpy.types.UILayout = self.layout
+    layout.operator(OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname, text = "Ballance Map (.bmx)")
+    layout.operator(OP_IMPORT_virtools.BBP_OT_import_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
+
+def menu_drawer_export(self, context):
+    layout: bpy.types.UILayout = self.layout
+    layout.operator(OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname, text = "Ballance Map (.bmx)")
+    layout.operator(OP_EXPORT_virtools.BBP_OT_export_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
+
 def menu_drawer_view3d(self, context):
-    layout = self.layout
+    layout: bpy.types.UILayout = self.layout
     layout.menu(BBP_MT_View3DMenu.bl_idname)
 
 #endregion
@@ -54,7 +64,6 @@ def menu_drawer_view3d(self, context):
 #region Register and Unregister.
 
 g_BldClasses: tuple[typing.Any, ...] = (
-    OP_UV_flatten_uv.BBP_OT_flatten_uv,
     BBP_MT_View3DMenu,
 )
 
@@ -69,14 +78,21 @@ class MenuEntry():
 
 g_BldMenus: tuple[MenuEntry, ...] = (
      MenuEntry(bpy.types.VIEW3D_MT_editor_menus, False, menu_drawer_view3d),
+     MenuEntry(bpy.types.TOPBAR_MT_file_import, True, menu_drawer_import),
+     MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
 )
 
 def register() -> None:
     # register module
-    UTIL_preferences.register()
-    UTIL_file_browser.register()
-    UTIL_ballance_texture.register()
+    PROP_preferences.register()
     PROP_virtools_material.register()
+
+    OP_IMPORT_bmfile.register()
+    OP_EXPORT_bmfile.register()
+    OP_IMPORT_virtools.register()
+    OP_EXPORT_virtools.register()
+
+    OP_UV_flatten_uv.register()
 
     # register other classes
     for cls in g_BldClasses:
@@ -99,10 +115,15 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_UV_flatten_uv.unregister()
+
+    OP_EXPORT_virtools.unregister()
+    OP_IMPORT_virtools.unregister()
+    OP_EXPORT_bmfile.unregister()
+    OP_IMPORT_bmfile.unregister()
+
     PROP_virtools_material.unregister()
-    UTIL_ballance_texture.unregister()
-    UTIL_file_browser.unregister()
-    UTIL_preferences.unregister()
+    PROP_preferences.unregister()
 
 if __name__ == "__main__":
     register()

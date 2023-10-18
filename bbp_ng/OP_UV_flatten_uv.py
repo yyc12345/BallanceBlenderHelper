@@ -1,12 +1,12 @@
 import bpy, mathutils, bmesh
 
-class FlattenParamBySize():
+class _FlattenParamBySize():
     mScaleSize: float
 
     def __init__(self, scale_size: float) -> None:
         self.mScaleSize = scale_size
 
-class FlattenParamByRefPoint():
+class _FlattenParamByRefPoint():
     mReferencePoint: int
     mReferenceUV: float
 
@@ -14,21 +14,21 @@ class FlattenParamByRefPoint():
         self.mReferencePoint = ref_point
         self.mReferenceUV = ref_point_uv
 
-class FlattenParam():
+class _FlattenParam():
     mUseRefPoint: bool
-    mParamData: FlattenParamBySize | FlattenParamByRefPoint
+    mParamData: _FlattenParamBySize | _FlattenParamByRefPoint
 
-    def __init__(self, use_ref_point: bool, data: FlattenParamBySize | FlattenParamByRefPoint) -> None:
+    def __init__(self, use_ref_point: bool, data: _FlattenParamBySize | _FlattenParamByRefPoint) -> None:
         self.mUseRefPoint = use_ref_point
         self.mParamData = data
 
     @classmethod
     def CreateByScaleSize(cls, scale_num: float):
-        return cls(False, FlattenParamBySize(scale_num))
+        return cls(False, _FlattenParamBySize(scale_num))
 
     @classmethod
     def CreateByRefPoint(cls, ref_point: int, ref_point_uv: float):
-        return cls(True, FlattenParamByRefPoint(ref_point, ref_point_uv))
+        return cls(True, _FlattenParamByRefPoint(ref_point, ref_point_uv))
 
 class BBP_OT_flatten_uv(bpy.types.Operator):
     """Flatten selected face UV. Only works for convex face"""
@@ -97,12 +97,12 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
     def execute(self, context):
         # construct scale data
         if self.scale_mode == 'NUM':
-            scale_data: FlattenParam = FlattenParam.CreateByScaleSize(self.scale_number)
+            scale_data: _FlattenParam = _FlattenParam.CreateByScaleSize(self.scale_number)
         else:
-            scale_data: FlattenParam = FlattenParam.CreateByRefPoint(self.reference_point, self.reference_uv)
+            scale_data: _FlattenParam = _FlattenParam.CreateByRefPoint(self.reference_point, self.reference_uv)
 
         # do flatten uv and report
-        no_processed_count = real_flatten_uv(bpy.context.active_object.data,
+        no_processed_count = _real_flatten_uv(bpy.context.active_object.data,
                                               self.reference_edge, scale_data)
         if no_processed_count != 0:
             print("[Flatten UV] {} faces are not be processed correctly because process failed."
@@ -127,8 +127,8 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             layout.prop(self, "reference_point")
             layout.prop(self, "reference_uv")
 
-def real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
-                     scale_data: FlattenParam) -> int:
+def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
+                     scale_data: _FlattenParam) -> int:
     no_processed_count: int = 0
 
     # if no uv, create it
@@ -271,3 +271,9 @@ def real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
     # sync the result to view port
     bmesh.update_edit_mesh(mesh)
     return no_processed_count
+
+def register() -> None:
+    bpy.utils.register_class(BBP_OT_flatten_uv)
+
+def unregister() -> None:
+    bpy.utils.unregister_class(BBP_OT_flatten_uv)

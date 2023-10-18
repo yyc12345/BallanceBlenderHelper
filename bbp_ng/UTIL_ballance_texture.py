@@ -1,6 +1,6 @@
 import bpy, bpy_extras
 import os, typing
-from . import UTIL_preferences, UTIL_functions
+from . import PROP_preferences, UTIL_functions
 
 ## Ballance Texture Usage
 #  The aim of this module is to make sure every Ballance texture only have 1 instance in Blender as much as we can 
@@ -55,7 +55,7 @@ from . import UTIL_preferences, UTIL_functions
 
 #region Assist Functions
 
-def get_ballance_texture_folder() -> str:
+def _get_ballance_texture_folder() -> str:
     """!
     Get Ballance texture folder from preferences.
 
@@ -64,13 +64,13 @@ def get_ballance_texture_folder() -> str:
     @return The path to Ballance texture folder.
     """
 
-    pref: UTIL_preferences.RawPreferences = UTIL_preferences.get_raw_preferences()
+    pref: PROP_preferences.RawPreferences = PROP_preferences.get_raw_preferences()
     if not pref.has_valid_blc_tex_folder():
         raise UTIL_functions.BBPException("No valid Ballance texture folder in preferences.")
     
     return pref.mBallanceTextureFolder
 
-def is_path_equal(path1: str, path2: str) -> bool:
+def _is_path_equal(path1: str, path2: str) -> bool:
     """!
     Check whether 2 path are equal.
 
@@ -189,8 +189,8 @@ def get_ballance_texture_filename(texpath: str) -> str | None:
     if filename not in g_ballanceTextureSet: return None
 
     # if file name matched, check whether it located in ballance texture folder
-    probe: str = os.path.join(get_ballance_texture_folder(), filename)
-    if not is_path_equal(probe, texpath): return None
+    probe: str = os.path.join(_get_ballance_texture_folder(), filename)
+    if not _is_path_equal(probe, texpath): return None
 
     return filename
 
@@ -228,7 +228,7 @@ def get_texture_filepath(tex: bpy.types.Image) -> str:
 
     # resolve image path
     absfilepath: str = bpy_extras.io_utils.path_reference(
-        tex.filepath, bpy.data.filepath, get_ballance_texture_folder(),
+        tex.filepath, bpy.data.filepath, _get_ballance_texture_folder(),
         'ABSOLUTE', "", None, None
     )
 
@@ -273,7 +273,7 @@ def load_ballance_texture(texname: str) -> bpy.types.Image:
     
     # load image
     # check existing image in any case. because we need make sure ballance texture is unique.
-    filepath: str = os.path.join(get_ballance_texture_folder(), texname)
+    filepath: str = os.path.join(_get_ballance_texture_folder(), texname)
     return bpy.data.images.load(filepath, check_existing = True)
 
 def load_other_texture(texname: str) -> bpy.types.Image:
@@ -331,9 +331,3 @@ def save_other_texture(tex: bpy.types.Image, filepath: str) -> str:
     tex.save(filepath)
 
 #endregion
-
-def register() -> None:
-    pass # nothing to register
-
-def unregister() -> None:
-    pass

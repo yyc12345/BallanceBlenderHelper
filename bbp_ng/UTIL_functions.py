@@ -1,3 +1,4 @@
+import bpy
 import math, typing
 
 class BBPException(Exception):
@@ -53,3 +54,19 @@ def limit_iterator(it: typing.Iterator[_TLimitIterator], limit_count: int) -> ty
         # It is okey because it naturally stop the iteration of this generator.
         yield next(it)
         counter += 1
+
+def message_box(message: tuple[str], title: str, icon: str):
+    """
+    Show a message box in Blender. Non-block mode.
+
+    @param message[in] The text this message box displayed. Each item in this param will show as a single line.
+    @param title[in] Message box title text.
+    @param icon[in] The icon this message box displayed.
+    """
+    def draw(self, context: bpy.types.Context):
+        layout = self.layout
+        for item in message:
+            layout.label(text=item, translate=False)
+
+    bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
+

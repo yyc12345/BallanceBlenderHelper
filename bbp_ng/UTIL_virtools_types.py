@@ -76,17 +76,17 @@ class VxColor():
         self.a = _a
         self.regulate()
 
-    def to_tuple_rgba(self) -> tuple[float, float, float, float]:
+    def to_tuple_rgba(self) -> ConstVxColorRGBA:
         return (self.r, self.g, self.b, self.a)
     
-    def to_tuple_rgb(self) -> tuple[float, float, float]:
+    def to_tuple_rgb(self) -> ConstVxColorRGB:
         return (self.r, self.g, self.b)
 
-    def from_tuple_rgba(self, val: tuple[float, float, float, float]) -> None:
+    def from_tuple_rgba(self, val: ConstVxColorRGBA) -> None:
         (self.r, self.g, self.b, self.a) = val
         self.regulate()
 
-    def from_tuple_rgb(self, val: tuple[float, float, float]) -> None:
+    def from_tuple_rgb(self, val: ConstVxColorRGB) -> None:
         (self.r, self.g, self.b) = val
         self.a = 1.0
         self.regulate()

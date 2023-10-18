@@ -33,31 +33,31 @@ class FaceData():
     def is_indices_legal(self) -> bool:
         return len(self.mIndices) >= 3
 
-def flat_vxvector3(it: typing.Iterator[UTIL_virtools_types.VxVector3]) -> typing.Iterator[float]:
+def _flat_vxvector3(it: typing.Iterator[UTIL_virtools_types.VxVector3]) -> typing.Iterator[float]:
     for entry in it:
         yield entry.x
         yield entry.y
         yield entry.z
 
-def flat_vxvector2(it: typing.Iterator[UTIL_virtools_types.VxVector2]) -> typing.Iterator[float]:
+def _flat_vxvector2(it: typing.Iterator[UTIL_virtools_types.VxVector2]) -> typing.Iterator[float]:
     for entry in it:
         yield entry.x
         yield entry.y
 
-def flat_face_nml_index(nml_idx: array.array, nml_array: array.array) -> typing.Iterator[float]:
+def _flat_face_nml_index(nml_idx: array.array, nml_array: array.array) -> typing.Iterator[float]:
     for idx in nml_idx:
         pos: int = idx * 3
         yield nml_array[pos]
         yield nml_array[pos + 1]
         yield nml_array[pos + 2]
 
-def flat_face_uv_index(uv_idx: array.array, uv_array: array.array) -> typing.Iterator[float]:
+def _flat_face_uv_index(uv_idx: array.array, uv_array: array.array) -> typing.Iterator[float]:
     for idx in uv_idx:
         pos: int = idx * 2
         yield uv_array[pos]
         yield uv_array[pos + 1]
 
-def nest_custom_split_normal(nml_idx: array.array, nml_array: array.array) -> typing.Iterator[UTIL_virtools_types.ConstVxVector3]:
+def _nest_custom_split_normal(nml_idx: array.array, nml_array: array.array) -> typing.Iterator[UTIL_virtools_types.ConstVxVector3]:
     for idx in nml_idx:
         pos: int = idx * 3
         yield (nml_array[pos], nml_array[pos + 1], nml_array[pos + 2])
@@ -161,11 +161,11 @@ class MeshWriter():
         
         # add vertex data
         prev_vertex_pos_count: int = len(self.__mVertexPos)
-        self.__mVertexPos.extend(flat_vxvector3(data.mVertexPosition))
+        self.__mVertexPos.extend(_flat_vxvector3(data.mVertexPosition))
         prev_vertex_nml_count: int = len(self.__mVertexNormal)
-        self.__mVertexNormal.extend(flat_vxvector3(data.mVertexNormal))
+        self.__mVertexNormal.extend(_flat_vxvector3(data.mVertexNormal))
         prev_vertex_uv_count: int = len(self.__mVertexUV)
-        self.__mVertexUV.extend(flat_vxvector2(data.mVertexUV))
+        self.__mVertexUV.extend(_flat_vxvector2(data.mVertexUV))
         
         # add material slot data and create mtl remap
         mtl_remap: list[int] = []
@@ -203,7 +203,6 @@ class MeshWriter():
         if self.is_valid():
             # write mesh
             self.__write_mesh()
-
             # reset mesh
             self.__mAssocMesh = None
 
@@ -236,11 +235,11 @@ class MeshWriter():
         self.__mAssocMesh.loops.foreach_set('vertex_index', self.__mFacePosIndices)
         # add face vertex nml by function
         self.__mAssocMesh.loops.foreach_set('normal',
-            list(flat_face_nml_index(self.__mFaceNmlIndices, self.__mVertexNormal))
+            list(_flat_face_nml_index(self.__mFaceNmlIndices, self.__mVertexNormal))
         )
         # add face vertex uv by function
         self.__mAssocMesh.uv_layers[0].uv.foreach_set('vector',
-            list(flat_face_uv_index(self.__mFaceUvIndices, self.__mVertexUV))
+            list(_flat_face_uv_index(self.__mFaceUvIndices, self.__mVertexUV))
         )   # NOTE: blender 3.5 changed. UV must be visited by .uv, not the .data
 
         # iterate face to set face data
@@ -271,7 +270,7 @@ class MeshWriter():
 
         # set custom split normal data
         self.__mAssocMesh.normals_split_custom_set(
-            tuple(nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
+            tuple(_nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
         )
         # enable auto smooth. it is IMPORTANT
         self.__mAssocMesh.use_auto_smooth = True
@@ -285,13 +284,5 @@ class MeshWriter():
         # clear mtl slot because clear_geometry will not do this.
         self.__mAssocMesh.materials.clear()
         
-
-
 class MeshUVModifier():
-    pass
-
-def register() -> None:
-    pass # nothing to register
-
-def unregister() -> None:
     pass
