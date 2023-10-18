@@ -5,8 +5,62 @@ ConstVxVector2 = tuple[float, float]
 ConstVxVector3 = tuple[float, float, float]
 ConstVxVector4 = tuple[float, float, float, float]
 
+class VxVector2():
+    x: float
+    y: float
+
+    def __init__(self, _x: float = 0.0, _y: float = 0.0):
+        self.x = _x
+        self.y = _y
+
+    def from_const(self, cv: ConstVxVector2) -> None:
+        (self.x, self.y, ) = cv
+
+    def to_const(self) -> ConstVxVector2:
+        return (self.x, self.y, )
+
+    # uv just need inverse y (aka. v) factor.
+
+    def to_blender_uv(self) -> None:
+        self.y = -self.y
+
+    def to_virtools_uv(self) -> None:
+        self.y = -self.y
+
+
+class VxVector3():
+    x: float
+    y: float
+    z: float
+
+    def __init__(self, _x: float = 0.0, _y: float = 0.0, _z: float = 0.0):
+        self.x = _x
+        self.y = _y
+        self.z = _z
+
+    def from_const(self, cv: ConstVxVector3) -> None:
+        (self.x, self.y, self.z) = cv
+
+    def to_const(self) -> ConstVxVector3:
+        return (self.x, self.y, self.z)
+
+    # both position and normal convertion just swap y and z factor.
+
+    def to_blender_pos(self) -> None:
+        self.y, self.z = self.z, self.y
+
+    def to_virtools_pos(self) -> None:
+        self.y, self.z = self.z, self.y
+
+    def to_blender_nml(self) -> None:
+        self.y, self.z = self.z, self.y
+
+    def to_virtools_nml(self) -> None:
+        self.y, self.z = self.z, self.y
+
 ConstVxColorRGBA = tuple[float, float, float, float]
 ConstVxColorRGB = tuple[float, float, float]
+
 class VxColor():
     """
     The Color struct support RGBA.
