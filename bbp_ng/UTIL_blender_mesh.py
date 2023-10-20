@@ -1,4 +1,4 @@
-import bpy, bmesh
+import bpy, bmesh, mathutils
 import typing, array, collections
 from . import UTIL_functions, UTIL_virtools_types
 
@@ -92,7 +92,7 @@ class TemporaryMesh():
         if self.__mTempMesh is None: return False
         return True
     
-    def dispose(self):
+    def dispose(self) -> None:
         if self.is_valid():
             self.__mTempMesh = None
             self.__mBindingObject.to_mesh_clear()
@@ -103,6 +103,41 @@ class TemporaryMesh():
             raise UTIL_functions.BBPException('try calling invalid TemporaryMesh.')
         return self.__mTempMesh
 
+class MeshUVModFaceDescriptor():
+    __mBMeshFace: bmesh.types.BMFace
+    __mBMeshUVLayers: bmesh.types.BMLayerItem
+
+    def __init__(self, bm_uv_layers: bmesh.types.BMLayerItem):
+        self.__mBMeshFace = None
+        self.__mBMeshUVLayers = bm_uv_layers
+
+    def _set_internal_face_data(self, bm_face: bmesh.types.BMFace):
+        """
+        Only should be called by MeshUVModifier.
+        """
+        self.__mBMeshFace = bm_face
+
+    def is_face_selected(self) -> bool:
+        return self.__mBMeshFace.select
+    
+    def get_face_normal(self) -> UTIL_virtools_types.ConstVxVector3:
+        return (self.__mBMeshFace.normal.x, self.__mBMeshFace.normal.y, self.__mBMeshFace.normal.z)
+    
+    def get_face_vertex_count(self) -> int:
+        return len(self.__mBMeshFace.loops)
+    
+    def get_face_vertex_pos_by_index(self, index: int) -> UTIL_virtools_types.ConstVxVector3:
+        if index < 0 or index >= len(self.__mBMeshFace.loops):
+            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
+
+        v: mathutils = self.__mBMeshFace.verts[index].co
+        return (v.x, v.y, v.z)
+    
+    def set_face_vertex_uv_by_index(self, index: int, v: UTIL_virtools_types.ConstVxVector2) -> None:
+        if index < 0 or index >= len(self.__mBMeshFace.loops):
+            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
+
+        self.__mBMeshFace.loops[index][self.__mBMeshUVLayers].uv = (v[0], v[1])
 
 #endregion
 
@@ -114,8 +149,6 @@ class MeshReader():
     """
     
     __mAssocMesh: bpy.types.Mesh | None ##< The binding mesh for this reader. None if this reader is invalid.
-    
-    
     
     def __init__(self, assoc_mesh: bpy.types.Mesh):
         self.__mAssocMesh = assoc_mesh
@@ -134,7 +167,7 @@ class MeshReader():
     def __exit__(self, exc_type, exc_value, traceback):
         self.dispose()
     
-    def dispose(self):
+    def dispose(self) -> None:
         if self.is_valid():
             # reset mesh
             self.__mAssocMesh.free_normals_split()
@@ -493,4 +526,57 @@ class MeshWriter():
         self.__mAssocMesh.materials.clear()
 
 class MeshUVModifier():
-    pass
+    
+    __mMeshFromEdit: bool ##< Decide how we get BMesh
+    __mAssocMesh: bpy.types.Mesh | None
+    __mBMesh: bmesh.types.BMesh
+
+    def __init__(self, mesh: bpy.types.Mesh, is_from_edit: bool):
+        self.__mMeshFromEdit = is_from_edit
+        self.__mAssocMesh = mesh
+
+        if self.is_valid():
+            # load mesh with different strategy
+            if self.__mMeshFromEdit:
+                self.__mBMesh = bmesh.from_edit_mesh(self.__mAssocMesh)
+            else:
+                self.__mBMesh = bmesh.new()
+                self.__mBMesh.from_mesh(self.__mAssocMesh)
+
+    def is_valid(self) -> bool:
+        return self.__mAssocMesh is not None
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.dispose()
+    
+    def dispose(self) -> None:
+        if self.is_valid():
+            # sync mesh with different strategy
+            if self.__mMeshFromEdit:
+                bmesh.update_edit_mesh(self.__mAssocMesh, False, False)
+            else:
+                self.__mBMesh.to_mesh(self.__mAssocMesh)
+            
+            # free variable
+            self.__mBMesh.free()
+            self.__mAssocMesh = None
+    
+    def get_face_count(self) -> int:
+        if not self.is_valid():
+            raise UTIL_functions.BBPException('try to call an invalid MeshUVModifier.')
+        
+        return len(self.__mBMesh.faces)
+    
+    def get_face(self) -> typing.Iterator[MeshUVModFaceDescriptor]:
+        if not self.is_valid():
+            raise UTIL_functions.BBPException('try to call an invalid MeshUVModifier.')
+        
+        # verify() will return existing one or create new one if not existing.
+        uv_layer: bmesh.types.BMLayerCollection = self.__mBMesh.loops.layers.uv
+        cache: MeshUVModFaceDescriptor = MeshUVModFaceDescriptor(uv_layer.verify())
+        for face in self.__mBMesh.faces:
+            cache._set_internal_face_data(face)
+            yield cache
