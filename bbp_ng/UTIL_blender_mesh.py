@@ -103,6 +103,58 @@ class TemporaryMesh():
             raise UTIL_functions.BBPException('try calling invalid TemporaryMesh.')
         return self.__mTempMesh
 
+class FaceForModifyingUV():
+    """
+    This class do not have invalid mesh exception checker.
+    Because MeshUVModifier will make sure this sub class will not throw any error
+    """
+
+    __mMeshVertices: bpy.types.MeshVertices
+    __mMeshUVs: bpy.types.MeshUVLoopLayer
+    __mMeshLoops: bpy.types.MeshLoops
+    __mMeshPolygon: bpy.types.MeshPolygon
+
+    def __init__(self, mesh: bpy.types.Mesh):
+        self.__mMeshVertices = mesh.vertices
+        self.__mMeshUVs = mesh.uv_layers.active
+        self.__mMeshLoops = mesh.loops
+
+    def _set_face(self, poly: bpy.types.MeshPolygon) -> None:
+        """
+        Only should be called by MeshUVModifier
+        """
+        self.__mMeshPolygon = poly
+
+    def is_face_selected(self) -> bool:
+        return self.__mMeshPolygon.select
+    
+    def get_face_normal(self) -> UTIL_virtools_types.ConstVxVector3:
+        nml: mathutils.Vector = self.__mMeshPolygon.normal
+        return (nml.x, nml.y, nml.z)
+    
+    def get_face_vertex_count(self) -> int:
+        return self.__mMeshPolygon.loop_total
+    
+    def get_face_vertex_pos_by_index(self, index: int) -> UTIL_virtools_types.ConstVxVector3:
+        if index < 0 or index >= self.__mMeshPolygon.loop_total:
+            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
+
+        v: mathutils.Vector = self.__mMeshVertices[self.__mMeshPolygon.loop_start + index].co
+        return (v.x, v.y, v.z)
+    
+    def get_face_vertex_nml_by_index(self, index: int) -> UTIL_virtools_types.ConstVxVector3:
+        if index < 0 or index >= self.__mMeshPolygon.loop_total:
+            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
+
+        v: mathutils.Vector = self.__mMeshLoops[self.__mMeshPolygon.loop_start + index].normal
+        return (v.x, v.y, v.z)
+
+    def set_face_vertex_uv_by_index(self, index: int, v: UTIL_virtools_types.ConstVxVector2) -> None:
+        if index < 0 or index >= self.__mMeshPolygon.loop_total:
+            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
+
+        self.__mMeshUVs.uv[self.__mMeshPolygon.loop_start + index].vector = (v[0], v[1])
+
 #endregion
 
 class MeshReader():
@@ -490,28 +542,22 @@ class MeshWriter():
         self.__mAssocMesh.materials.clear()
 
 class MeshUVModifier():
+    """
     
-    __mMeshFromEdit: bool ##< Decide how we get BMesh
+    """
+    
     __mAssocMesh: bpy.types.Mesh | None
-    __mBMesh: bmesh.types.BMesh
-    __mBMeshUVLayers: bmesh.types.BMLayerItem
 
-    def __init__(self, mesh: bpy.types.Mesh, is_from_edit: bool):
-        self.__mMeshFromEdit = is_from_edit
+    def __init__(self, mesh: bpy.types.Mesh):
         self.__mAssocMesh = mesh
 
         if self.is_valid():
-            # load mesh with different strategy
-            if self.__mMeshFromEdit:
-                self.__mBMesh = bmesh.from_edit_mesh(self.__mAssocMesh)
-            else:
-                self.__mBMesh = bmesh.new()
-                self.__mBMesh.from_mesh(self.__mAssocMesh)
+            # make sure there is a exist uv layer for editing
+            if self.__mAssocMesh.uv_layers.active is None:
+                self.__mAssocMesh.uv_layers.new(do_init = False)
 
-            # load uv layer
-            # verify() will return existing one or create new one if not existing.
-            uv_layers: bmesh.types.BMLayerCollection = self.__mBMesh.loops.layers.uv
-            self.__mBMeshUVLayers = uv_layers.verify()
+            # split face normal
+            self.__mAssocMesh.calc_normals_split()
 
     def is_valid(self) -> bool:
         return self.__mAssocMesh is not None
@@ -524,51 +570,22 @@ class MeshUVModifier():
     
     def dispose(self) -> None:
         if self.is_valid():
-            # sync mesh with different strategy
-            if self.__mMeshFromEdit:
-                bmesh.update_edit_mesh(self.__mAssocMesh, False, False)
-            else:
-                self.__mBMesh.to_mesh(self.__mAssocMesh)
-            
+            # free split normal
+            self.__mAssocMesh.free_normals_split()
             # free variable
-            self.__mBMesh.free()
             self.__mAssocMesh = None
     
     def get_face_count(self) -> int:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshUVModifier.')
         
-        return len(self.__mBMesh.faces)
+        return len(self.__mAssocMesh.polygons)
     
-    def get_face(self) -> typing.Iterator[bmesh.types.BMFace]:
+    def get_face(self) -> typing.Iterator[FaceForModifyingUV]:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshUVModifier.')
         
-        for face in self.__mBMesh.faces:
-            yield face
-
-    # we don't need check any validation for following face functions
-    # functions will only failed when providing invalid face.
-
-    def is_face_selected(self, face: bmesh.types.BMFace) -> bool:
-        return face.select
-    
-    def get_face_normal(self, face: bmesh.types.BMFace) -> UTIL_virtools_types.ConstVxVector3:
-        return (face.normal.x, face.normal.y, face.normal.z)
-    
-    def get_face_vertex_count(self, face: bmesh.types.BMFace) -> int:
-        return len(face.loops)
-    
-    def get_face_vertex_pos_by_index(self, face: bmesh.types.BMFace, index: int) -> UTIL_virtools_types.ConstVxVector3:
-        if index < 0 or index >= len(face.loops):
-            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
-
-        v: mathutils = face.verts[index].co
-        return (v.x, v.y, v.z)
-    
-    def set_face_vertex_uv_by_index(self, face: bmesh.types.BMFace, index: int, v: UTIL_virtools_types.ConstVxVector2) -> None:
-        if index < 0 or index >= len(face.loops):
-            raise UTIL_functions.BBPException('invalid index for getting face vertex position.')
-
-        face.loops[index][self.__mBMeshUVLayers].uv = (v[0], v[1])
-
+        cache: FaceForModifyingUV = FaceForModifyingUV(self.__mAssocMesh)
+        for poly in self.__mAssocMesh.polygons:
+            cache._set_face(poly)
+            yield cache
