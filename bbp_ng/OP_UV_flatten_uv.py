@@ -1,4 +1,7 @@
 import bpy, mathutils, bmesh
+from . import UTIL_virtools_types
+
+#region Param Struct
 
 class _FlattenParamBySize():
     mScaleSize: float
@@ -29,6 +32,8 @@ class _FlattenParam():
     @classmethod
     def CreateByRefPoint(cls, ref_point: int, ref_point_uv: float):
         return cls(True, _FlattenParamByRefPoint(ref_point, ref_point_uv))
+
+#endregion
 
 class BBP_OT_flatten_uv(bpy.types.Operator):
     """Flatten selected face UV. Only works for convex face"""
@@ -102,8 +107,15 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             scale_data: _FlattenParam = _FlattenParam.CreateByRefPoint(self.reference_point, self.reference_uv)
 
         # do flatten uv and report
-        no_processed_count = _real_flatten_uv(bpy.context.active_object.data,
-                                              self.reference_edge, scale_data)
+        # sync data first
+        # ref: https://blender.stackexchange.com/questions/218086/data-vertices-returns-an-empty-collection-in-edit-mode
+        this_obj: bpy.types.Object = bpy.context.active_object
+        this_obj.update_from_editmode()
+        no_processed_count = _real_flatten_uv(
+            this_obj.data, 
+            self.reference_edge, 
+            scale_data
+        )
         if no_processed_count != 0:
             print("[Flatten UV] {} faces are not be processed correctly because process failed."
                 .format(no_processed_count))
@@ -127,39 +139,72 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             layout.prop(self, "reference_point")
             layout.prop(self, "reference_uv")
 
-def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
-                     scale_data: _FlattenParam) -> int:
+#region Real Worker Functions
+
+def _set_face_vertex_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem, idx: int, uv: UTIL_virtools_types.ConstVxVector2) -> None:
+    """
+    Help function to set UV data for face.
+
+    @param face[in] The face to be set.
+    @param uv_layer[in] The corresponding uv layer. Hint: it was gotten from BMesh.loops.layers.uv.verify()
+    @param idx[in] The index of trying setting vertex.
+    @param uv[in] The set UV data
+    """
+    face.loops[idx][uv_layer].uv = uv
+
+def _get_face_vertex_pos(face: bmesh.types.BMFace, idx: int) -> UTIL_virtools_types.ConstVxVector3:
+    """
+    Help function to get vertex position from face by provided index.
+    No index overflow checker. Caller must make sure the provided index is not overflow.
+
+    @param face[in] Bmesh face struct.
+    @param idx[in] The index of trying getting vertex.
+    @return The gotten vertex position.
+    """
+    v: mathutils.Vector = face.loops[idx].vert.co
+    return (v[0], v[1], v[2])
+
+def _circular_clamp_index(v: int, vmax: int) -> int:
+    """
+    Circular clamp face vertex index.
+    Used by _real_flatten_uv.
+
+    @param v[in] The index to clamp
+    @param vmax[in] The count of used face vertex. At least 3.
+    @return The circular clamped value ranging from 0 to vmax.
+    """
+    return v % vmax
+
+def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int, scale_data: _FlattenParam) -> int:
     no_processed_count: int = 0
 
-    # if no uv, create it
-    if mesh.uv_layers.active is None:
-        mesh.uv_layers.new(do_init = False)
-
-    # create bmesh
+    # create bmesh modifier
     bm: bmesh.types.BMesh = bmesh.from_edit_mesh(mesh)
-    # NOTE: Blender 3.5 change mesh underlying data struct. 
-    # Originally this section also need to be update ad Blender 3.5 style
-    # But this is a part of bmesh. This struct is not changed so we don't need update it.
-    uv_lay: bmesh.types.BMLayerItem = bm.loops.layers.uv.active
+    # use verify() to make sure there is a uv layer to write data
+    # verify() will return existing one or create one if no layer existing.
+    uv_layers: bmesh.types.BMLayerCollection = bm.loops.layers.uv
+    uv_layer: bmesh.types.BMLayerItem = uv_layers.verify()
 
+    # process each face
     face: bmesh.types.BMFace
     for face in bm.faces:
-        # ========== only process selected face ==========
+        # ===== check requirement =====
+        # check whether face selected
+        # only process selected face
         if not face.select:
             continue
 
-        # ========== resolve reference edge and point ==========
+        # ===== resolve reference edge and point =====
         # check reference validation
-        allPoint: int = len(face.loops)
-        if reference_edge >= allPoint:  # reference edge overflow
+        all_point: int = len(face.loops)
+        if reference_edge >= all_point: # reference edge overflow
             no_processed_count += 1
             continue
 
         # check scale validation
         if scale_data.mUseRefPoint:
             if ((scale_data.mParamData.mReferencePoint <= 1)  # reference point too low
-                    or (scale_data.mParamData.mReferencePoint
-                        >= allPoint)):  # reference point overflow
+                or (scale_data.mParamData.mReferencePoint >= all_point)):  # reference point overflow
                 no_processed_count += 1
                 continue
         else:
@@ -181,20 +226,10 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
         # just a weird uv. user will notice this problem.
 
         # get point
-        p1Relative: int = reference_edge
-        p2Relative: int = reference_edge + 1
-        p3Relative: int = reference_edge + 2
-        if p2Relative >= allPoint:
-            p2Relative -= allPoint
-        if p3Relative >= allPoint:
-            p3Relative -= allPoint
-
-        p1: mathutils.Vector = mathutils.Vector(
-            tuple(face.loops[p1Relative].vert.co[x] for x in range(3)))
-        p2: mathutils.Vector = mathutils.Vector(
-            tuple(face.loops[p2Relative].vert.co[x] for x in range(3)))
-        p3: mathutils.Vector = mathutils.Vector(
-            tuple(face.loops[p3Relative].vert.co[x] for x in range(3)))
+        pidx_start: int = _circular_clamp_index(reference_edge, all_point)
+        p1: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_start))
+        p2: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(reference_edge + 1, all_point)))
+        p3: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(reference_edge + 2, all_point)))
 
         # get y axis
         new_y_axis: mathutils.Vector = p2 - p1
@@ -205,8 +240,7 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
         # get z axis
         new_z_axis: mathutils.Vector = new_y_axis.cross(vec1)
         new_z_axis.normalize()
-        if not any(round(v, 7) for v in new_z_axis
-                   ):  # if z is a zero vector, use face normal instead
+        if not any(round(v, 7) for v in new_z_axis):  # if z is a zero vector, use face normal instead
             new_z_axis = face.normal.normalized()
 
         # get x axis
@@ -228,25 +262,24 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
         transition_matrix: mathutils.Matrix = origin_base @ new_base
         transition_matrix.invert_safe()
 
-        # ========== rescale correction ==========
+        # ===== rescale correction =====
+        rescale: float = 0.0
         if scale_data.mUseRefPoint:
             # ref point method
             # get reference point from loop
-            refpRelative: int = p1Relative + scale_data.mParamData.mReferencePoint
-            if refpRelative >= allPoint:
-                refpRelative -= allPoint
-            pRef: mathutils.Vector = mathutils.Vector(tuple(face.loops[refpRelative].vert.co[x] for x in range(3))) - p1
+            pidx_refp: int = _circular_clamp_index(pidx_start + scale_data.mParamData.mReferencePoint, all_point)
+            pref: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_refp)) - p1
 
             # calc its U component
-            vec_u: float = abs((transition_matrix @ pRef).x)
+            vec_u: float = abs((transition_matrix @ pref).x)
             if round(vec_u, 7) == 0.0:
-                rescale: float = 1.0  # fallback. rescale = 1 will not affect anything
+                rescale = 1.0  # fallback. rescale = 1 will not affect anything
             else:
-                rescale: float = scale_data.mParamData.mReferenceUV / vec_u
+                rescale = scale_data.mParamData.mReferenceUV / vec_u
         else:
             # scale size method
             # apply rescale directly
-            rescale: float = 1.0 / scale_data.mParamData.mScaleSize
+            rescale = 1.0 / scale_data.mParamData.mScaleSize
 
         # construct matrix
         # we only rescale U component (X component)
@@ -260,17 +293,18 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int,
         rescale_transition_matrix: mathutils.Matrix = scale_matrix @ transition_matrix
 
         # ========== process each face ==========
-        for loop_index in range(allPoint):
-            pp: mathutils.Vector = mathutils.Vector(tuple(face.loops[loop_index].vert.co[x] for x in range(3))) - p1
+        for idx in range(all_point):
+            pp: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, idx)) - p1
             ppuv: mathutils.Vector = rescale_transition_matrix @ pp
 
             # u and v component has been calculated properly. no extra process needed.
             # just get abs for the u component
-            face.loops[loop_index][uv_lay].uv = (abs(ppuv.x), ppuv.y)
+            _set_face_vertex_uv(face, uv_layer, idx, (abs(ppuv.x), ppuv.y))
 
-    # sync the result to view port
-    bmesh.update_edit_mesh(mesh)
+    # return process result
     return no_processed_count
+
+#endregion
 
 def register() -> None:
     bpy.utils.register_class(BBP_OT_flatten_uv)

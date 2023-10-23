@@ -25,7 +25,7 @@ if "bpy" in locals():
 
 from . import PROP_preferences, PROP_virtools_material
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
-from . import OP_UV_flatten_uv
+from . import OP_UV_flatten_uv, OP_UV_rail_uv
 
 #region Menu
 
@@ -38,8 +38,8 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
-
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
+        layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
 
 # ===== Menu Drawer =====
 
@@ -92,6 +92,7 @@ def register() -> None:
     OP_IMPORT_virtools.register()
     OP_EXPORT_virtools.register()
 
+    OP_UV_rail_uv.register()
     OP_UV_flatten_uv.register()
 
     # register other classes
@@ -116,6 +117,7 @@ def unregister() -> None:
 
     # unregister modules
     OP_UV_flatten_uv.unregister()
+    OP_UV_rail_uv.unregister()
 
     OP_EXPORT_virtools.unregister()
     OP_IMPORT_virtools.unregister()
