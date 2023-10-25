@@ -4,15 +4,15 @@ from . import UTIL_virtools_types, UTIL_icons_manager, UTIL_functions
 
 #region Material Pointer Property Resolver
 
-class BBPRailUVPatch(bpy.types.PropertyGroup):
+class BBP_PG_patch_rail_uv(bpy.types.PropertyGroup):
     rail_mtl: bpy.props.PointerProperty(
         name = "Material",
         description = "The material used for rail",
         type = bpy.types.Material,
     )
 
-def get_rail_uv_patch() -> BBPRailUVPatch:
-    return bpy.context.scene.bbp_rail_uv_patch
+def get_rail_uv_patch() -> BBP_PG_patch_rail_uv:
+    return bpy.context.scene.bbp_patch_rail_uv
 
 def get_raw_rail_uv_patch() -> bpy.types.Material:
     return get_rail_uv_patch().rail_mtl
@@ -201,13 +201,13 @@ def _create_rail_uv(meshes: typing.Iterable[bpy.types.Mesh], mtl: bpy.types.Mate
 
 def register() -> None:
     # register patch first
-    bpy.utils.register_class(BBPRailUVPatch)
-    bpy.types.Scene.bbp_rail_uv_patch = bpy.props.PointerProperty(type = BBPRailUVPatch)
+    bpy.utils.register_class(BBP_PG_patch_rail_uv)
+    bpy.types.Scene.bbp_patch_rail_uv = bpy.props.PointerProperty(type = BBP_PG_patch_rail_uv)
 
     bpy.utils.register_class(BBP_OT_rail_uv)
 
 def unregister() -> None:
-    del bpy.types.Scene.bbp_rail_uv_patch
+    del bpy.types.Scene.bbp_patch_rail_uv
 
     bpy.utils.unregister_class(BBP_OT_rail_uv)
 
