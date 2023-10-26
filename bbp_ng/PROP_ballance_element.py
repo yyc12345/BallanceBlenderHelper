@@ -1,6 +1,6 @@
 import bpy
-import os, typing, enum
-from . import UTIL_functions, UTIL_blender_mesh
+import os, typing, enum, array
+from . import UTIL_functions, UTIL_file_io, UTIL_blender_mesh, UTIL_virtools_types
 
 #region Raw Elements Operations
 
@@ -86,10 +86,96 @@ def get_ballance_elements() -> bpy.types.CollectionProperty:
 
 #endregion
 
-#region
+#region Element Loader
 
-def load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
+def _save_element(mesh: bpy.types.Mesh, filename: str) -> None:
+    # todo: if we need add element placeholder save operator, 
+    # write this function and call this function in operator.
     pass
+
+def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
+    # resolve mesh path
+    element_name: str | None = get_ballance_element_name(element_id)
+    if element_name is None:
+        raise UTIL_functions.BBPException('invalid element id in _load_element()')
+    
+    element_filename: str = os.path.join(
+        os.path.dirname(__file__),
+        "meshes",
+        element_name + '.bin'
+    )
+
+    # open file and read
+    with open(element_filename, 'rb') as fmesh:
+        # prepare container
+        vpos: array.array = array.array('f')
+        vnml: array.array = array.array('f')
+        face: array.array = array.array('L')
+
+        # read data
+        # position is vector3
+        vpos_count = UTIL_file_io.read_uint32(fmesh)
+        vpos.extend(UTIL_file_io.read_float_array(fmesh, vpos_count * 3))
+        # normal is vector3
+        vnml_count = UTIL_file_io.read_uint32(fmesh)
+        vnml.extend(UTIL_file_io.read_float_array(fmesh, vnml_count * 3))
+        # each face use 6 uint32 to describe, 
+        # they are: pos1, nml1, pos2, nml2, pos3, nml3. 
+        # each item is a 0 based index refering to corresponding list
+        face_count = UTIL_file_io.read_uint32(fmesh)
+        face.extend(UTIL_file_io.read_uint32_array(fmesh, face_count * 6))
+
+        # open mesh writer and write data
+        with UTIL_blender_mesh.MeshWriter(mesh) as writer:
+            # prepare writer essential function
+            mesh_part: UTIL_blender_mesh.MeshWriter.MeshWriterPartData = UTIL_blender_mesh.MeshWriter.MeshWriterPartData()
+            def vpos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
+                for i in range(vpos_count):
+                    idx: int = i * 3
+                    v.x = vpos[idx]
+                    v.y = vpos[idx + 1]
+                    v.z = vpos[idx + 2]
+                    yield v
+            mesh_part.mVertexPosition = vpos_iterator()
+            def vnml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
+                for i in range(vnml_count):
+                    idx: int = i * 3
+                    v.x = vnml[idx]
+                    v.y = vnml[idx + 1]
+                    v.z = vnml[idx + 2]
+                    yield v
+            mesh_part.mVertexNormal = vnml_iterator()
+            def vuv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
+                v: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
+                yield v
+            mesh_part.mVertexUV = vuv_iterator()
+            def mtl_iterator() -> typing.Iterator[bpy.types.Material]:
+                pass
+            mesh_part.mMaterial = mtl_iterator()
+            def face_iterator() -> typing.Iterator[UTIL_blender_mesh.FaceData]:
+                # create face data with 3 placeholder
+                f: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData([UTIL_blender_mesh.FaceVertexData() for i in range(3)])
+                for i in range(face_count):
+                    idx: int = i * 6
+                    f.mIndices[0].mPosIdx = face[idx]
+                    f.mIndices[0].mNmlIdx = face[idx + 1]
+                    f.mIndices[1].mPosIdx = face[idx + 2]
+                    f.mIndices[1].mNmlIdx = face[idx + 3]
+                    f.mIndices[2].mPosIdx = face[idx + 4]
+                    f.mIndices[2].mNmlIdx = face[idx + 5]
+                    yield f
+            mesh_part.mFace = face_iterator()
+
+            writer.add_part(mesh_part)
+
+        # end of with writer
+        # write mesh data
+
+    # end of with fmesh
+    # close file
+
 
 #endregion
 
@@ -154,7 +240,7 @@ class BallanceElementsHelper():
             raise UTIL_functions.BBPException('invalid element id')
         new_mesh: bpy.types.Mesh = bpy.data.meshes.new(get_ballance_element_name(element_id))
 
-        load_element(new_mesh, element_id)
+        _load_element(new_mesh, element_id)
         self.__mElementMap[element_id] = new_mesh
         return new_mesh
 
@@ -199,7 +285,7 @@ def reset_ballance_elements() -> None:
         if eleid is None or item.mesh_ptr is None:
             invalid_idx.append(index)
         else:
-            load_element(item.mesh_ptr, eleid)
+            _load_element(item.mesh_ptr, eleid)
 
         # inc counter
         index += 1

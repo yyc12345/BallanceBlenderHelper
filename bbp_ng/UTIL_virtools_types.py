@@ -1,3 +1,4 @@
+import mathutils
 import typing, enum
 from . import UTIL_functions
 
@@ -100,6 +101,85 @@ class VxColor():
         self.g = UTIL_functions.clamp_float(self.g, 0.0, 1.0)
         self.b = UTIL_functions.clamp_float(self.b, 0.0, 1.0)
 
+class VxMatrix():
+    """
+    The Matrix representation.
+    The bracket statement exactly equal with Virtools.
+    """
+    __mData: list[list[float]]
+
+    def __init__(self):
+        # init array
+        self.__mData = [[0] * 4 for i in range(4)]
+        # set to identy
+        self.reset()
+
+    def from_tuple(self, data: tuple[float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float]) -> None:
+        (
+            self.__mData[0][0], self.__mData[0][1], self.__mData[0][2], self.__mData[0][3],
+            self.__mData[1][0], self.__mData[1][1], self.__mData[1][2], self.__mData[1][3],
+            self.__mData[2][0], self.__mData[2][1], self.__mData[2][2], self.__mData[2][3],
+            self.__mData[3][0], self.__mData[3][1], self.__mData[3][2], self.__mData[3][3]
+        ) = data
+
+    def from_blender(self, data_: mathutils.Matrix) -> None:
+        # transposed first
+        data: mathutils.Matrix = data_.transposed()
+        (
+            self.__mData[0][0], self.__mData[0][1], self.__mData[0][2], self.__mData[0][3],
+            self.__mData[1][0], self.__mData[1][1], self.__mData[1][2], self.__mData[1][3],
+            self.__mData[2][0], self.__mData[2][1], self.__mData[2][2], self.__mData[2][3],
+            self.__mData[3][0], self.__mData[3][1], self.__mData[3][2], self.__mData[3][3]
+        ) = (
+            data[0][0], data[0][1], data[0][2], data[0][3],
+            data[1][0], data[1][1], data[1][2], data[1][3],
+            data[2][0], data[2][1], data[2][2], data[2][3],
+            data[3][0], data[3][1], data[3][2], data[3][3]
+        )
+
+    def to_tuple(self) -> tuple[float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float]:
+        return (
+            self.__mData[0][0], self.__mData[0][1], self.__mData[0][2], self.__mData[0][3],
+            self.__mData[1][0], self.__mData[1][1], self.__mData[1][2], self.__mData[1][3],
+            self.__mData[2][0], self.__mData[2][1], self.__mData[2][2], self.__mData[2][3],
+            self.__mData[3][0], self.__mData[3][1], self.__mData[3][2], self.__mData[3][3]
+        )
+    
+    def to_tuple(self) -> mathutils.Matrix:
+        data: mathutils.Matrix = mathutils.Matrix(
+            (self.__mData[0][0], self.__mData[0][1], self.__mData[0][2], self.__mData[0][3]),
+            (self.__mData[1][0], self.__mData[1][1], self.__mData[1][2], self.__mData[1][3]),
+            (self.__mData[2][0], self.__mData[2][1], self.__mData[2][2], self.__mData[2][3]),
+            (self.__mData[3][0], self.__mData[3][1], self.__mData[3][2], self.__mData[3][3]),
+        )
+        # transpose self
+        data.transpose()
+        return data
+
+    def reset(self) -> None:
+        # reset to identy
+        for i in range(4):
+            for j in range(4):
+                self.__mData[i][j] = 0.0
+        
+        self.__mData[0][0] = 1.0
+        self.__mData[1][1] = 1.0
+        self.__mData[2][2] = 1.0
+        self.__mData[3][3] = 1.0
+
+    def __swap_row_column(self) -> None:
+        # swap column 1 and 2
+        for i in range(4):
+            self.__mData[i][1], self.__mData[i][2] = self.__mData[i][2], self.__mData[i][1]
+        # swap row 1 and 2
+        for i in range(4):
+            self.__mData[1][i], self.__mData[2][i] = self.__mData[2][i], self.__mData[1][i]
+
+    def to_virtools_matrix(self) -> None:
+        self.__swap_row_column()
+
+    def to_blender_matrix(self) -> None:
+        self.__swap_row_column()
 
 class VXTEXTURE_BLENDMODE(enum.IntEnum):
     """!
