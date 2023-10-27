@@ -81,8 +81,8 @@ class BBP_PG_ballance_element(bpy.types.PropertyGroup):
         type = bpy.types.Mesh
     )
 
-def get_ballance_elements() -> bpy.types.CollectionProperty:
-    return bpy.context.scene.ballance_elements
+def get_ballance_elements(scene: bpy.types.Scene) -> bpy.types.CollectionProperty:
+    return scene.ballance_elements
 
 #endregion
 
@@ -151,9 +151,7 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
                 v: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
                 yield v
             mesh_part.mVertexUV = vuv_iterator()
-            def mtl_iterator() -> typing.Iterator[bpy.types.Material]:
-                pass
-            mesh_part.mMaterial = mtl_iterator()
+            mesh_part.mMaterial = iter(tuple())
             def face_iterator() -> typing.Iterator[UTIL_blender_mesh.FaceData]:
                 # create face data with 3 placeholder
                 f: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData([UTIL_blender_mesh.FaceVertexData() for i in range(3)])
@@ -191,13 +189,14 @@ class BallanceElementsHelper():
     This class should only have 1 instance at the same time. This class support `with` syntax to achieve this.
     This class frequently used in importing stage to create element placeholder.
     """
-
     __mSingletonMutex: typing.ClassVar[bool] = False
     __mIsValid: bool
+    __mAssocScene: bpy.types.Scene
     __mElementMap: dict[int, bpy.types.Mesh]
 
-    def __init__(self):
+    def __init__(self, assoc: bpy.types.Scene):
         self.__mElementMap = {}
+        self.__mAssocScene = assoc
 
         # check singleton
         if BallanceElementsHelper.__mSingletonMutex:
@@ -223,7 +222,7 @@ class BallanceElementsHelper():
             # write to ballance elements property and reset validation
             self.__write_to_ballance_elements()
             self.__mIsValid = False
-            self.__mSingletonMutex = False
+            BallanceElementsHelper.__mSingletonMutex = False
     
     def get_element(self, element_id: int) -> bpy.types.Mesh:
         if not self.is_valid():
@@ -245,7 +244,7 @@ class BallanceElementsHelper():
         return new_mesh
 
     def __write_to_ballance_elements(self) -> None:
-        elements: bpy.types.CollectionProperty = get_ballance_elements()
+        elements: bpy.types.CollectionProperty = get_ballance_elements(self.__mAssocScene)
         elements.clear()
 
         for eleid, elemesh in self.__mElementMap.items():
@@ -258,7 +257,7 @@ class BallanceElementsHelper():
             item.mesh_ptr = elemesh
 
     def __read_from_ballance_element(self) -> None:
-        elements: bpy.types.CollectionProperty = get_ballance_elements()
+        elements: bpy.types.CollectionProperty = get_ballance_elements(self.__mAssocScene)
         self.__mElementMap.clear()
 
         item: BBP_PG_ballance_element
@@ -271,9 +270,9 @@ class BallanceElementsHelper():
             # add into map
             self.__mElementMap[mesh_id] = item.mesh_ptr
 
-def reset_ballance_elements() -> None:
+def reset_ballance_elements(scene: bpy.types.Scene) -> None:
     invalid_idx: list[int] = []
-    elements: bpy.types.CollectionProperty = get_ballance_elements()
+    elements: bpy.types.CollectionProperty = get_ballance_elements(scene)
 
     # re-load all elements
     index: int = 0
@@ -302,8 +301,8 @@ def reset_ballance_elements() -> None:
 class BBP_UL_ballance_elements(bpy.types.UIList):
     def draw_item(self, context, layout: bpy.types.UILayout, data, item: BBP_PG_ballance_element, icon, active_data, active_propname):
         if item.element_name != "" and item.mesh_ptr is not None:
-            layout.label(text = item.element_name)
-            layout.label(text = item.mesh_ptr, icon = 'MESH_DATA')
+            layout.label(text = item.element_name, translate = False)
+            layout.label(text = item.mesh_ptr, translate = False, icon = 'MESH_DATA')
 
 class BBP_OT_reset_ballance_elements(bpy.types.Operator):
     """Reset all Meshes of Loaded Ballance Elements to Original Geometry."""
@@ -316,7 +315,7 @@ class BBP_OT_reset_ballance_elements(bpy.types.Operator):
         return context.scene is not None
     
     def execute(self, context):
-        reset_ballance_elements()
+        reset_ballance_elements(context.scene)
         return {'FINISHED'}
 
 class BBP_PT_ballance_elements(bpy.types.Panel):

@@ -77,7 +77,7 @@ g_Annotation_VXCMPFUNC: dict[int, AnnotationData] = {
 
 InheritingIntEnum_t = typing.TypeVar('InheritingIntEnum_t',  bound = enum.IntEnum)
 BlenderEnumPropEntry_t = tuple[str, str, str, str | int, int]
-def generate_vt_enums_for_bl_enumprop(enum_data: type[InheritingIntEnum_t], anno: dict[int, AnnotationData]) -> tuple[BlenderEnumPropEntry_t, ...]:
+def _generate_vt_enums_for_bl_enumprop(enum_data: type[InheritingIntEnum_t], anno: dict[int, AnnotationData]) -> tuple[BlenderEnumPropEntry_t, ...]:
     # define 2 assist functions
     def get_display_name(v: int, fallback: str):
         entry: AnnotationData | None = anno.get(v, None)
@@ -273,7 +273,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_BLENDMODE,
             g_Annotation_VXTEXTURE_BLENDMODE
         ),
@@ -283,7 +283,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
@@ -293,7 +293,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
@@ -303,7 +303,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_ADDRESSMODE,
             g_Annotation_VXTEXTURE_ADDRESSMODE
         ),
@@ -313,7 +313,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
@@ -323,7 +323,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
@@ -333,7 +333,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXFILL_MODE,
             g_Annotation_VXFILL_MODE
         ),
@@ -343,7 +343,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXSHADE_MODE,
             g_Annotation_VXSHADE_MODE
         ),
@@ -387,7 +387,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
@@ -397,7 +397,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = _generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
@@ -612,7 +612,7 @@ def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPrese
     preset_data: MaterialPresetData = g_MaterialPresets[preset_type.value]
     set_raw_virtools_material(mtl, preset_data.mData)
 
-def generate_mtl_presets_for_bl_enumprop() -> tuple[BlenderEnumPropEntry_t, ...]:
+def _generate_mtl_presets_for_bl_enumprop() -> tuple[BlenderEnumPropEntry_t, ...]:
     # define 2 assist functions
     def get_display_name(v: int):
         entry: MaterialPresetData | None = g_MaterialPresets.get(v, None)
@@ -652,7 +652,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     preset_type: bpy.props.EnumProperty(
         name = "Preset",
         description = "The preset which you want to apply.",
-        items = generate_mtl_presets_for_bl_enumprop(),
+        items = _generate_mtl_presets_for_bl_enumprop(),
     )
     
     @classmethod
@@ -755,8 +755,10 @@ g_BldClasses: tuple[typing.Any, ...] = (
 )
 
 def register():
-    for cls in g_BldClasses:
-        bpy.utils.register_class(cls)
+    bpy.utils.register_class(BBP_PG_virtools_material)
+    bpy.utils.register_class(BBP_OT_apply_virtools_material)
+    bpy.utils.register_class(BBP_OT_preset_virtools_material)
+    bpy.utils.register_class(BBP_PT_virtools_material)
     
     # add into material metadata
     bpy.types.Material.virtools_material = bpy.props.PointerProperty(type = BBP_PG_virtools_material)
@@ -765,5 +767,7 @@ def unregister():
     # del from material metadata
     del bpy.types.Material.virtools_material
 
-    for cls in g_BldClasses:
-        bpy.utils.unregister_class(cls)
+    bpy.utils.unregister_class(BBP_PT_virtools_material)
+    bpy.utils.unregister_class(BBP_OT_preset_virtools_material)
+    bpy.utils.unregister_class(BBP_OT_apply_virtools_material)
+    bpy.utils.unregister_class(BBP_PG_virtools_material)
