@@ -37,23 +37,9 @@ def clamp_int(v: int, min_val: int, max_val: int) -> int:
     elif (v > max_val): return max_val
     else: return v
 
-
-_TLimitIterator = typing.TypeVar('_TLimitIterator')
-def limit_iterator(it: typing.Iterator[_TLimitIterator], limit_count: int) -> typing.Iterator[_TLimitIterator]:
-    """!
-    A generator wrapper for another generator to make sure the length of the given generator output entries 
-    is not greater (<= less equal) than given number.
-
-    @param it[in] A iterator need to be limited. Use iter(ls) if your passing value is not a generator (eg. tuple, list)
-    @param limit_count[in] The count to limit. Must be a positive number. Can be 0.
-    @return A generator with limited length. Use tuple(ret) if you just want to convert it to a tuple.
-    """
-    counter: int = 0
-    while counter < limit_count:
-        # if no elements in given iterator, StopIteration will raise. 
-        # It is okey because it naturally stop the iteration of this generator.
-        yield next(it)
-        counter += 1
+def virtools_name_regulator(name: str | None) -> str:
+    if name: return name
+    else: return 'annoymous'
 
 def message_box(message: tuple[str], title: str, icon: str):
     """
