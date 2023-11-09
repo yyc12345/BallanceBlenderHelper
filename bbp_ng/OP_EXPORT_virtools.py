@@ -1,5 +1,6 @@
 import bpy
 from . import PROP_preferences, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh
+from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile):
     """Export Virtools File"""
@@ -9,7 +10,9 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
 
     @classmethod
     def poll(self, context):
-        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+        return (
+            PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+            and bmap.is_bmap_available())
     
     def execute(self, context):
         UTIL_functions.message_box((self.general_get_filename(), ), 'Export Virtools File Path', 'INFO')
@@ -17,7 +20,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         return {'FINISHED'}
     
     def draw(self, context):
-        layout = self.layout
+        pass
 
 def register() -> None:
     bpy.utils.register_class(BBP_OT_export_virtools)

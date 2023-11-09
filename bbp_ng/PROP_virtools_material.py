@@ -213,7 +213,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultAmbient.to_tuple_rgb()
+        default = RawVirtoolsMaterial.cDefaultAmbient.to_const_rgb()
     )
     
     diffuse: bpy.props.FloatVectorProperty(
@@ -223,7 +223,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultDiffuse.to_tuple_rgba()
+        default = RawVirtoolsMaterial.cDefaultDiffuse.to_const_rgba()
     )
     
     specular: bpy.props.FloatVectorProperty(
@@ -233,7 +233,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultSpecular.to_tuple_rgb()
+        default = RawVirtoolsMaterial.cDefaultSpecular.to_const_rgb()
     )
     
     emissive: bpy.props.FloatVectorProperty(
@@ -243,7 +243,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultEmissive.to_tuple_rgb()
+        default = RawVirtoolsMaterial.cDefaultEmissive.to_const_rgb()
     )
     
     specular_power: bpy.props.FloatProperty(
@@ -267,7 +267,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_tuple_rgba()
+        default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_const_rgba()
     )
     
     texture_blend_mode: bpy.props.EnumProperty(
@@ -448,14 +448,14 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
 def set_raw_virtools_material(mtl: bpy.types.Material, rawdata: RawVirtoolsMaterial) -> None:
     props: BBP_PG_virtools_material = get_virtools_material(mtl)
     
-    props.diffuse = rawdata.mDiffuse.to_tuple_rgba()
-    props.ambient = rawdata.mAmbient.to_tuple_rgb()
-    props.specular = rawdata.mSpecular.to_tuple_rgb()
-    props.emissive = rawdata.mEmissive.to_tuple_rgb()
+    props.diffuse = rawdata.mDiffuse.to_const_rgba()
+    props.ambient = rawdata.mAmbient.to_const_rgb()
+    props.specular = rawdata.mSpecular.to_const_rgb()
+    props.emissive = rawdata.mEmissive.to_const_rgb()
     props.specular_power = rawdata.mSpecularPower
     
     props.texture = rawdata.mTexture
-    props.texture_border_color = rawdata.mTextureBorderColor.to_tuple_rgba()
+    props.texture_border_color = rawdata.mTextureBorderColor.to_const_rgba()
     
     props.texture_blend_mode = str(rawdata.mTextureBlendMode.value)
     props.texture_min_mode = str(rawdata.mTextureMinMode.value)
@@ -493,9 +493,9 @@ def apply_to_blender_material(mtl: bpy.types.Material):
     mtl.node_tree.links.new(bnode.outputs[0], mnode.inputs[0])
     
     # set basic colors
-    mtl.metallic = sum(rawdata.mAmbient.to_tuple_rgb()) / 3
-    mtl.diffuse_color = rawdata.mDiffuse.to_tuple_rgba()
-    mtl.specular_color = rawdata.mSpecular.to_tuple_rgb()
+    mtl.metallic = sum(rawdata.mAmbient.to_const_rgb()) / 3
+    mtl.diffuse_color = rawdata.mDiffuse.to_const_rgba()
+    mtl.specular_color = rawdata.mSpecular.to_const_rgb()
     mtl.specular_intensity = rawdata.mSpecularPower
     
     # set some alpha data

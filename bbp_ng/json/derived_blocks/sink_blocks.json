@@ -1,0 +1,397 @@
+[
+    {
+        "Type": "SinkFloor",
+        "BindingDisplayTexture": "SinkFloor.png",
+        "UnitSize": "Small",
+        "ExpandType": "Column",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "d1, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R180",
+                "SideSync": "2dBottom;False;2dTop;2dRight;3dTop;3dBottom",
+                "StartPosition": "d1, (2.5*1), 0",
+                "ExpandParam": "d1, 0"
+            }
+        ]
+    },
+    {
+        "Type": "SinkFloorTerminal",
+        "BindingDisplayTexture": "SinkFloorTerminal.png",
+        "UnitSize": "Small",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R270",
+                "SideSync": "2dRight;2dBottom;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    },
+    {
+        "Type": "Sink1x1",
+        "BindingDisplayTexture": "Sink1x1.png",
+        "UnitSize": "Small",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": true,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R90",
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R180",
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R270",
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    },
+    {
+        "Type": "SinkPlatform",
+        "BindingDisplayTexture": "SinkPlatform.png",
+        "UnitSize": "Small",
+        "ExpandType": "Freedom",
+        "InitColumnDirection": "PositiveY",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": true,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "Flat",
+                "Rotation": "R0",
+                "SideSync": "False;False;False;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), -0.7",
+                "ExpandParam": "d1, d2"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R0",
+                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "d2, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R90",
+                "SideSync": "False;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*1), 0",
+                "ExpandParam": "d1, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R180",
+                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1) +d2, (2.5*2) +d1, 0",
+                "ExpandParam": "d2, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R270",
+                "SideSync": "False;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1) +d1, 0",
+                "ExpandParam": "d1, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R90",
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R180",
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*2) +d1, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R270",
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*2) +d1, 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    },
+    {
+        "Type": "RibbonPlatform",
+        "BindingDisplayTexture": "RibbonPlatform.png",
+        "UnitSize": "Small",
+        "ExpandType": "Freedom",
+        "InitColumnDirection": "PositiveY",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": true,
+            "UseTwoDBottom": true,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "Flat",
+                "Rotation": "R0",
+                "SideSync": "False;False;False;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), -0.7",
+                "ExpandParam": "d1, d2"
+            },
+            {
+                "Type": "RibbonBorder",
+                "Rotation": "R0",
+                "SideSync": "False;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "d2, 0"
+            },
+            {
+                "Type": "RibbonBorder",
+                "Rotation": "R90",
+                "SideSync": "False;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*1), 0",
+                "ExpandParam": "d1, 0"
+            },
+            {
+                "Type": "RibbonBorder",
+                "Rotation": "R180",
+                "SideSync": "False;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*1) +d2, (2.5*2) +d1, 0",
+                "ExpandParam": "d2, 0"
+            },
+            {
+                "Type": "RibbonBorder",
+                "Rotation": "R270",
+                "SideSync": "False;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1) +d1, 0",
+                "ExpandParam": "d1, 0"
+            },
+            {
+                "Type": "RibbonOutterCorner",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "RibbonOutterCorner",
+                "Rotation": "R90",
+                "SideSync": "2dLeft;False;False;2dBottom;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "RibbonOutterCorner",
+                "Rotation": "R180",
+                "SideSync": "2dBottom;False;False;2dRight;3dTop;3dBottom",
+                "StartPosition": "(2.5*2) +d2, (2.5*2) +d1, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "RibbonOutterCorner",
+                "Rotation": "R270",
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*2) +d1, 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    },
+    {
+        "Type": "SinkLConnector",
+        "BindingDisplayTexture": "SinkLConnector.png",
+        "UnitSize": "Small",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": false,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": true,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkOutterCorner",
+                "Rotation": "R0",
+                "SideSync": "2dTop;False;False;2dLeft;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R0",
+                "SideSync": "False;False;2dBottom;2dLeft;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R0",
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R270",
+                "SideSync": "2dRight;False;False;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    },
+    {
+        "Type": "SinkTConnector",
+        "BindingDisplayTexture": "SinkTConnector.png",
+        "UnitSize": "Small",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": true,
+            "UseTwoDRight": false,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": false,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R270",
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R0",
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkBorder",
+                "Rotation": "R270",
+                "SideSync": "2dRight;False;2dLeft;2dTop;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0",
+                "ExpandParam": "1, 0"
+            }
+        ]
+    },
+    {
+        "Type": "SinkCrossroad",
+        "BindingDisplayTexture": "SinkCrossroad.png",
+        "UnitSize": "Small",
+        "ExpandType": "Static",
+        "InitColumnDirection": "PositiveX",
+        "DefaultSideConfig": {
+            "UseTwoDTop": false,
+            "UseTwoDRight": false,
+            "UseTwoDBottom": false,
+            "UseTwoDLeft": false,
+            "UseThreeDTop": true,
+            "UseThreeDBottom": false
+        },
+        "SmashedBlocks": [
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R0",
+                "SideSync": "False;2dRight;2dBottom;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R90",
+                "SideSync": "False;2dTop;2dRight;False;3dTop;3dBottom",
+                "StartPosition": "0, (2.5*1), 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R180",
+                "SideSync": "False;2dLeft;2dTop;False;3dTop;3dBottom",
+                "StartPosition": "0, 0, 0",
+                "ExpandParam": "0, 0"
+            },
+            {
+                "Type": "SinkInnerCorner",
+                "Rotation": "R270",
+                "SideSync": "False;2dBottom;2dLeft;False;3dTop;3dBottom",
+                "StartPosition": "(2.5*1), 0, 0",
+                "ExpandParam": "0, 0"
+            }
+        ]
+    }
+]

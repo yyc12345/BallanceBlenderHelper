@@ -1,3 +1,7 @@
+# My Ban
+bbp_ng/PyBMap/*.dll
+bbp_ng/PyBMap/*.pdb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

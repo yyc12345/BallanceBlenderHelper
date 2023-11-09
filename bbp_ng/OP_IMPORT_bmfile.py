@@ -6,7 +6,7 @@ class BBP_OT_import_bmfile(bpy.types.Operator, UTIL_file_browser.ImportBmxFile):
     bl_idname = "bbp.import_bmfile"
     bl_label = "Import BM (Ballance Map) File"
     bl_options = {'PRESET', 'UNDO'}
-
+    
     @classmethod
     def poll(self, context):
         return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
