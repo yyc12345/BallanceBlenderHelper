@@ -77,11 +77,12 @@ def _import_virtools_textures(
 
         for vttexture in reader.get_textures():
             # if this image is raw data, save it in external folder before loading
+            # the attribute of raw data saving is the file path is not absolute path
             texpath_to_load: str = vttexture.get_file_name()
-            if vttexture.get_save_options() == UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA:
+            if not os.path.isabs(texpath_to_load):
                 texpath_to_load = os.path.join(
                     rawdata_temp,
-                    os.path.basename(vttexture.get_file_name())
+                    os.path.basename(texpath_to_load)
                 )
                 vttexture.save_image(texpath_to_load)
 
