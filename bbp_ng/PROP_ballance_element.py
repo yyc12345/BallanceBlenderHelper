@@ -128,7 +128,7 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
         # open mesh writer and write data
         with UTIL_blender_mesh.MeshWriter(mesh) as writer:
             # prepare writer essential function
-            mesh_part: UTIL_blender_mesh.MeshWriter.MeshWriterPartData = UTIL_blender_mesh.MeshWriter.MeshWriterPartData()
+            mesh_part: UTIL_blender_mesh.MeshWriterIngredient = UTIL_blender_mesh.MeshWriterIngredient()
             def vpos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
                 v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
                 for i in range(vpos_count):
@@ -154,7 +154,9 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
             mesh_part.mMaterial = iter(tuple())
             def face_iterator() -> typing.Iterator[UTIL_blender_mesh.FaceData]:
                 # create face data with 3 placeholder
-                f: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData([UTIL_blender_mesh.FaceVertexData() for i in range(3)])
+                f: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData(
+                    [UTIL_blender_mesh.FaceVertexData() for i in range(3)]
+                )
                 for i in range(face_count):
                     idx: int = i * 6
                     f.mIndices[0].mPosIdx = face[idx]
@@ -166,7 +168,7 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
                     yield f
             mesh_part.mFace = face_iterator()
 
-            writer.add_part(mesh_part)
+            writer.add_ingredient(mesh_part)
 
         # end of with writer
         # write mesh data

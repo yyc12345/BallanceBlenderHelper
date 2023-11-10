@@ -74,7 +74,7 @@ def read_world_materix(fs: _FileReader_t, mat: UTIL_virtools_types.VxMatrix) -> 
     mat.from_tuple(struct.unpack("<16f", fs.read(16 * 4)))
 
 def read_color(fs: _FileReader_t, target: UTIL_virtools_types.VxColor) -> None:
-    target.from_tuple_rgb(struct.unpack("fff", fs.read(3 * 4)))
+    target.from_const_rgb(struct.unpack("fff", fs.read(3 * 4)))
 
 def read_uint32_array(fs: _FileReader_t, count: int) -> tuple[int, ...]:
     fmt: struct.Struct = struct.Struct('<' + str(count) + 'I')

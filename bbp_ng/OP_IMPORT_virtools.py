@@ -1,6 +1,6 @@
 import bpy
 from bpy_extras.wm_utils.progress_report import ProgressReport
-import tempfile, os
+import tempfile, os, typing
 from . import PROP_preferences
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
 from . import PROP_ballance_element, PROP_virtools_group, PROP_virtools_material
@@ -37,6 +37,8 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
 def _import_virtools(file_name_: str, encodings_: tuple[str]) -> None:
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
+        print(f'Virtools Engine Temp: {vt_temp_folder}')
+
         # create virtools reader context
         with bmap.BMFileReader(
             file_name_, 
@@ -48,7 +50,7 @@ def _import_virtools(file_name_: str, encodings_: tuple[str]) -> None:
             with ProgressReport(wm = bpy.context.window_manager) as progress:
                 # import textures
                 texture_cret_map: dict[bmap.BMTexture, bpy.types.Image] = _import_virtools_textures(
-                    reader, progress, texture_cret_map)
+                    reader, progress)
                 # import materials
                 material_cret_map: dict[bmap.BMMaterial, bpy.types.Material] = _import_virtools_materials(
                     reader, progress, texture_cret_map)
@@ -71,6 +73,7 @@ def _import_virtools_textures(
 
     # create another temp folder for raw data virtools texture importing
     with tempfile.TemporaryDirectory() as rawdata_temp:
+        print(f'Texture Raw Data Temp: {rawdata_temp}')
 
         for vttexture in reader.get_textures():
             # if this image is raw data, save it in external folder before loading
@@ -174,8 +177,78 @@ def _import_virtools_meshes(
     progress.enter_substeps(reader.get_material_count(), "Loading Meshes")
 
     for vtmesh in reader.get_meshs():
+        # create mesh
+        mesh: bpy.types.Mesh = bpy.data.meshes.new(
+            UTIL_functions.virtools_name_regulator(vtmesh.get_name())
+        )
+
+        # open mesh writer
+        with UTIL_blender_mesh.MeshWriter(mesh) as meshoper:
+            # construct data provider
+            data_prov: UTIL_blender_mesh.MeshWriterIngredient = UTIL_blender_mesh.MeshWriterIngredient()
+
+            # constructor data itor
+            def pos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                for v in vtmesh.get_vertex_positions():
+                    UTIL_virtools_types.vxvector3_conv_co(v)
+                    yield v
+            def nml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                for v in vtmesh.get_vertex_normals():
+                    UTIL_virtools_types.vxvector3_conv_co(v)
+                    yield v
+            def uv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
+                for v in vtmesh.get_vertex_uvs():
+                    UTIL_virtools_types.vxvector2_conv_co(v)
+                    yield v
+            def face_iterator() -> typing.Iterator[UTIL_blender_mesh.FaceData]:
+                face: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData(
+                    [UTIL_blender_mesh.FaceVertexData() for i in range(3)]
+                )
+
+                findices_itor = vtmesh.get_face_indices()
+                fmtl_itor = vtmesh.get_face_material_slot_indexs()
+                for _ in range(vtmesh.get_face_count()):
+                    # set indices data
+                    vtindices = next(findices_itor)
+                    face.mIndices[0].mPosIdx = vtindices.i1
+                    face.mIndices[0].mNmlIdx = vtindices.i1
+                    face.mIndices[0].mUvIdx = vtindices.i1
+                    face.mIndices[1].mPosIdx = vtindices.i2
+                    face.mIndices[1].mNmlIdx = vtindices.i2
+                    face.mIndices[1].mUvIdx = vtindices.i2
+                    face.mIndices[2].mPosIdx = vtindices.i3
+                    face.mIndices[2].mNmlIdx = vtindices.i3
+                    face.mIndices[2].mUvIdx = vtindices.i3
+                    # swap indices
+                    face.conv_co()
+
+                    # set mtl data
+                    vtmtl = next(fmtl_itor)
+                    face.mMtlIdx = vtmtl
+
+                    # return
+                    yield face
+            def mtl_iterator() -> typing.Iterator[bpy.types.Material]:
+                for vtmtl in vtmesh.get_material_slots():
+                    if vtmtl:
+                        yield material_cret_map.get(vtmtl, None)
+                    else:
+                        yield None
+
+            # assign to data provider
+            data_prov.mVertexPosition = pos_iterator()
+            data_prov.mVertexNormal = nml_iterator()
+            data_prov.mVertexUV = uv_iterator()
+            data_prov.mFace = face_iterator()
+            data_prov.mMaterial = mtl_iterator()
+
+            # add part
+            meshoper.add_ingredient(data_prov)
+
+        # end of mesh writer
+
         # add into map and step
-        #mesh_cret_map[vtmaterial] = mtl
+        mesh_cret_map[vtmesh] = mesh
         progress.step()
 
     # leave progress and return
@@ -191,9 +264,30 @@ def _import_virtools_3dobjects(
     obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object] = {}
     progress.enter_substeps(reader.get_material_count(), "Loading 3dObjects")
 
+    # get some essential blender data
+    blender_view_layer = bpy.context.view_layer
+    blender_collection = blender_view_layer.active_layer_collection.collection
+
     for vt3dobj in reader.get_3dobjects():
+        # create 3d object with mesh
+        obj3d: bpy.types.Object = bpy.data.objects.new(
+            UTIL_functions.virtools_name_regulator(vt3dobj.get_name()),
+            mesh_cret_map.get(vt3dobj.get_current_mesh(), None)
+        )
+
+        # link to collection
+        blender_collection.objects.link(obj3d)
+
+        # set world matrix
+        vtmat = vt3dobj.get_world_matrix()
+        UTIL_virtools_types.vxmatrix_conv_co(vtmat)
+        obj3d.matrix_world = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
+
+        # set visibility
+        obj3d.hide_set(not vt3dobj.get_visibility())
+
         # add into map and step
-        #obj3d_cret_map[vtmaterial] = mtl
+        obj3d_cret_map[vt3dobj] = obj3d
         progress.step()
 
     # leave progress and return
@@ -205,16 +299,48 @@ def _import_virtools_groups(
         progress: ProgressReport, 
         obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object]
         ) -> dict[bmap.BM3dObject, bpy.types.Object]:
+    # we need iterate all groups to construct a reversed map
+    # to indicate which groups should this 3dobject be grouped into.
+    reverse_map: dict[bmap.BM3dObject, set[str]] = {}
+
     # prepare progress
     progress.enter_substeps(reader.get_material_count(), "Loading Groups")
 
     for vtgroup in reader.get_groups():
-        # add into map and step
-        #obj3d_cret_map[vtmaterial] = mtl
+        # if this group do not have name, skip it
+        group_name: str | None = vtgroup.get_name()
+        if group_name is None: continue
+
+        for item in vtgroup.get_objects():
+            # get or create set
+            objgroups: set[str] = reverse_map.get(item, None)
+            if objgroups is None:
+                objgroups = set()
+                reverse_map[item] = objgroups
+
+            # add into list
+            objgroups.add(group_name)
+            
+        # step
         progress.step()
 
     # leave progress
     progress.leave_substeps()
+
+    # now we can assign 3dobject group data by reverse map
+    progress.enter_substeps(reader.get_material_count(), "Applying Groups")
+    for mapk, mapv in reverse_map.items():
+        # check object
+        assoc_obj = obj3d_cret_map.get(mapk, None)
+        if assoc_obj is None: continue
+
+        # assign group
+        with PROP_virtools_group.VirtoolsGroupsHelper(assoc_obj) as gpoper:
+            gpoper.clear_all_groups()
+            gpoper.add_groups(mapv)
+
+    progress.leave_substeps()
+
 
 def register() -> None:
     bpy.utils.register_class(BBP_OT_import_virtools)

@@ -413,14 +413,14 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
     props: BBP_PG_virtools_material = get_virtools_material(mtl)
     rawdata: RawVirtoolsMaterial = RawVirtoolsMaterial()
     
-    rawdata.mDiffuse.from_tuple_rgba(props.diffuse)
-    rawdata.mAmbient.from_tuple_rgb(props.ambient)
-    rawdata.mSpecular.from_tuple_rgb(props.specular)
-    rawdata.mEmissive.from_tuple_rgb(props.emissive)
+    rawdata.mDiffuse.from_const_rgba(props.diffuse)
+    rawdata.mAmbient.from_const_rgb(props.ambient)
+    rawdata.mSpecular.from_const_rgb(props.specular)
+    rawdata.mEmissive.from_const_rgb(props.emissive)
     rawdata.mSpecularPower = props.specular_power
     
     rawdata.mTexture = props.texture
-    rawdata.mTextureBorderColor.from_tuple_rgba(props.texture_border_color)
+    rawdata.mTextureBorderColor.from_const_rgba(props.texture_border_color)
     
     rawdata.mTextureBlendMode = UTIL_virtools_types.VXTEXTURE_BLENDMODE(int(props.texture_blend_mode))
     rawdata.mTextureMinMode = UTIL_virtools_types.VXTEXTURE_FILTERMODE(int(props.texture_min_mode))

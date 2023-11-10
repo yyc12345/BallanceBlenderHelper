@@ -32,9 +32,42 @@ class FaceData():
     def __init__(self, indices: tuple[FaceVertexData] | list[FaceVertexData] = tuple(), mtlidx: int = 0):
         self.mIndices = indices
         self.mMtlIdx = mtlidx
+
+    def conv_co(self) -> None:
+        """
+        Change indice order between Virtools and Blender
+        """
+        if isinstance(self.mIndices, list):
+            self.mIndices.reverse()
+        elif isinstance(self.mIndices, tuple):
+            self.mIndices = self.mIndices[::-1]
+        else:
+            raise UTIL_functions.BBPException('invalid indices container.')
     
     def is_indices_legal(self) -> bool:
         return len(self.mIndices) >= 3
+
+class MeshWriterIngredient():
+    mVertexPosition: typing.Iterator[UTIL_virtools_types.VxVector3] | None
+    mVertexNormal: typing.Iterator[UTIL_virtools_types.VxVector3] | None
+    mVertexUV: typing.Iterator[UTIL_virtools_types.VxVector2] | None
+    mFace: typing.Iterator[FaceData] | None
+    mMaterial: typing.Iterator[bpy.types.Material] | None
+    
+    def __init__(self):
+        self.mVertexPosition = None
+        self.mVertexNormal = None
+        self.mVertexUV = None
+        self.mFace = None
+        self.mMaterial = None
+    
+    def is_valid(self) -> bool:
+        if self.mVertexPosition is None: return False
+        if self.mVertexNormal is None: return False
+        if self.mVertexUV is None: return False
+        if self.mFace is None: return False
+        if self.mMaterial is None: return False
+        return True
 
 def _flat_vxvector3(it: typing.Iterator[UTIL_virtools_types.VxVector3]) -> typing.Iterator[float]:
     for entry in it:
@@ -268,7 +301,7 @@ class MeshReader():
             pass
         
     def __triangulate_mesh(self) -> None:
-        bm = bmesh.new()
+        bm: bmesh.types.BMesh = bmesh.new()
         bm.from_mesh(self.__mAssocMesh)
         bmesh.ops.triangulate(bm, faces = bm.faces)
         bm.to_mesh(self.__mAssocMesh)
@@ -280,28 +313,6 @@ class MeshWriter():
     If face do not have UV becuase it doesn't have material, you at least create 1 UV vector, eg. (0, 0),
     then refer it to all face uv.
     """
-    
-    class MeshWriterPartData():
-        mVertexPosition: typing.Iterator[UTIL_virtools_types.VxVector3] | None
-        mVertexNormal: typing.Iterator[UTIL_virtools_types.VxVector3] | None
-        mVertexUV: typing.Iterator[UTIL_virtools_types.VxVector2] | None
-        mFace: typing.Iterator[FaceData] | None
-        mMaterial: typing.Iterator[bpy.types.Material] | None
-        
-        def __init__(self):
-            self.mVertexPosition = None
-            self.mVertexNormal = None
-            self.mVertexUV = None
-            self.mFace = None
-            self.mMaterial = None
-        
-        def is_valid(self) -> bool:
-            if self.mVertexPosition is None: return False
-            if self.mVertexNormal is None: return False
-            if self.mVertexUV is None: return False
-            if self.mFace is None: return False
-            if self.mMaterial is None: return False
-            return True
     
     __mAssocMesh: bpy.types.Mesh | None ##< The binding mesh for this writer. None if this writer is invalid.
     
@@ -365,25 +376,25 @@ class MeshWriter():
             # reset mesh
             self.__mAssocMesh = None
     
-    def add_part(self, data: MeshWriterPartData):
+    def add_ingredient(self, data: MeshWriterIngredient):
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshWriter.')
         if not data.is_valid():
             raise UTIL_functions.BBPException('invalid mesh part data.')
         
         # add vertex data
-        prev_vertex_pos_count: int = len(self.__mVertexPos)
+        prev_vertex_pos_count: int = len(self.__mVertexPos) // 3
         self.__mVertexPos.extend(_flat_vxvector3(data.mVertexPosition))
-        prev_vertex_nml_count: int = len(self.__mVertexNormal)
+        prev_vertex_nml_count: int = len(self.__mVertexNormal) // 3
         self.__mVertexNormal.extend(_flat_vxvector3(data.mVertexNormal))
-        prev_vertex_uv_count: int = len(self.__mVertexUV)
+        prev_vertex_uv_count: int = len(self.__mVertexUV) // 2
         self.__mVertexUV.extend(_flat_vxvector2(data.mVertexUV))
         
         # add material slot data and create mtl remap
         mtl_remap: list[int] = []
         for mtl in data.mMaterial:
             idx: int | None = self.__mMtlSlotMap.get(mtl, None)
-            if idx:
+            if idx is not None:
                 mtl_remap.append(idx)
             else:
                 self.__mMtlSlotMap[mtl] = len(self.__mMtlSlot)
@@ -405,7 +416,7 @@ class MeshWriter():
             
             # add face mtl with remap
             mtl_idx: int = face.mMtlIdx
-            if mtl_idx < 0 or mtl_idx > len(mtl_remap):
+            if mtl_idx < 0 or mtl_idx >= len(mtl_remap):
                 # fall back. add 0
                 self.__mFaceMtlIdx.append(0)
             else:
@@ -423,7 +434,7 @@ class MeshWriter():
             self.__mAssocMesh.materials.append(mtl)
         
         # add corresponding count for vertex position
-        self.__mAssocMesh.vertices.add(len(self.__mVertexPos))
+        self.__mAssocMesh.vertices.add(len(self.__mVertexPos) // 3)
         # add loops data, it is the sum count of indices
         # we use face pos indices size to get it
         self.__mAssocMesh.loops.add(len(self.__mFacePosIndices))
