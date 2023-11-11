@@ -1,15 +1,11 @@
 import bpy
 import typing, enum
 from . import UTIL_virtools_types, UTIL_functions
+from . import PROP_virtools_texture
 
 #region Enums Annotations
 
-class AnnotationData():
-    mDisplayName: str
-    mDescription: str
-    def __init__(self, display_name: str, description: str):
-        self.mDisplayName = display_name
-        self.mDescription = description
+from .UTIL_functions import AnnotationData, BlenderEnumPropEntry_t, generate_vt_enums_for_bl_enumprop
 
 g_Annotation_VXTEXTURE_BLENDMODE: dict[int, AnnotationData] = {
     UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECAL.value: AnnotationData("Decal", "Texture replace any material information "),
@@ -74,25 +70,6 @@ g_Annotation_VXCMPFUNC: dict[int, AnnotationData] = {
     UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATEREQUAL.value: AnnotationData("Greater Equal", "Accept if value if greater or equal current value. "),
     UTIL_virtools_types.VXCMPFUNC.VXCMP_ALWAYS.value: AnnotationData("Always", "Always accept the test. "),
 }
-
-InheritingIntEnum_t = typing.TypeVar('InheritingIntEnum_t',  bound = enum.IntEnum)
-BlenderEnumPropEntry_t = tuple[str, str, str, str | int, int]
-def _generate_vt_enums_for_bl_enumprop(enum_data: type[InheritingIntEnum_t], anno: dict[int, AnnotationData]) -> tuple[BlenderEnumPropEntry_t, ...]:
-    # define 2 assist functions
-    def get_display_name(v: int, fallback: str):
-        entry: AnnotationData | None = anno.get(v, None)
-        if entry: return entry.mDisplayName
-        else: return fallback
-    
-    def get_description(v: int, fallback: str):
-        entry: AnnotationData | None = anno.get(v, None)
-        if entry: return entry.mDescription
-        else: return fallback
-    
-    # token, display name, descriptions, icon, index
-    return tuple(
-        (str(member.value), get_display_name(member.value, member.name), get_description(member.value, ""), "", member.value) for member in enum_data
-    )
 
 #endregion
 
@@ -273,7 +250,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_BLENDMODE,
             g_Annotation_VXTEXTURE_BLENDMODE
         ),
@@ -283,7 +260,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
@@ -293,7 +270,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
@@ -303,7 +280,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXTEXTURE_ADDRESSMODE,
             g_Annotation_VXTEXTURE_ADDRESSMODE
         ),
@@ -313,7 +290,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
@@ -323,7 +300,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
@@ -333,7 +310,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXFILL_MODE,
             g_Annotation_VXFILL_MODE
         ),
@@ -343,7 +320,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXSHADE_MODE,
             g_Annotation_VXSHADE_MODE
         ),
@@ -387,7 +364,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
@@ -397,7 +374,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
-        items = _generate_vt_enums_for_bl_enumprop(
+        items = generate_vt_enums_for_bl_enumprop(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
@@ -715,6 +692,12 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         layout.separator()
         layout.label(text="Texture Parameters")
         layout.prop(props, 'texture', emboss = True)
+        if props.texture is not None:
+            
+            # if we have texture, we show its virtools texture data
+            PROP_virtools_texture.draw_virtools_texture(props.texture, layout)
+            layout.separator()
+
         layout.prop(props, 'texture_blend_mode')
         layout.prop(props, 'texture_min_mode')
         layout.prop(props, 'texture_mag_mode')
@@ -743,17 +726,6 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         if props.enable_z_write:
             layout.prop(props, 'z_func')
         
-
-g_BldClasses: tuple[typing.Any, ...] = (
-    # basic property
-    BBP_PG_virtools_material,
-    # 2 operator used in panel
-    BBP_OT_apply_virtools_material,
-    BBP_OT_preset_virtools_material,
-    # panel
-    BBP_PT_virtools_material,
-)
-
 def register():
     bpy.utils.register_class(BBP_PG_virtools_material)
     bpy.utils.register_class(BBP_OT_apply_virtools_material)

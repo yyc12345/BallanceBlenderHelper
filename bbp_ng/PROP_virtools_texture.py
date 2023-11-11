@@ -1,0 +1,138 @@
+import bpy
+import typing
+from . import UTIL_virtools_types, UTIL_functions
+
+#region Anno Data
+
+from .UTIL_functions import AnnotationData, generate_vt_enums_for_bl_enumprop
+
+g_Annotation_CK_TEXTURE_SAVEOPTIONS: dict[int, AnnotationData] = {
+    UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA.value: AnnotationData("Raw Data", "Save raw data inside file. The bitmap is saved in a raw 32 bit per pixel format. "),
+    UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL.value: AnnotationData("External", "Store only the file name for the texture. The bitmap file must be present in the bitmap paths when loading the composition. "),
+    UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_IMAGEFORMAT.value: AnnotationData("Image Format", "Save using format specified. The bitmap data will be converted to the specified format by the correspondant bitmap plugin and saved inside file. "),
+    UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_USEGLOBAL.value: AnnotationData("Use Global", "Use Global settings, that is the settings given with CKContext::SetGlobalImagesSaveOptions. (Not valid when using CKContext::SetImagesSaveOptions). "),
+    UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_INCLUDEORIGINALFILE.value: AnnotationData("Include Original File", "Insert original image file inside CMO file. The bitmap file that was used originally for the texture or sprite will be append to the composition file and extracted when the file is loaded. "),
+}
+
+g_Annotation_VX_PIXELFORMAT: dict[int, AnnotationData] = {
+    UTIL_virtools_types.VX_PIXELFORMAT._32_ARGB8888.value: AnnotationData("_32_ARGB8888", "32-bit ARGB pixel format with alpha "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_RGB888.value: AnnotationData("_32_RGB888", "32-bit RGB pixel format without alpha "),
+    UTIL_virtools_types.VX_PIXELFORMAT._24_RGB888.value: AnnotationData("_24_RGB888", "24-bit RGB pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_RGB565.value: AnnotationData("_16_RGB565", "16-bit RGB pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_RGB555.value: AnnotationData("_16_RGB555", "16-bit RGB pixel format (5 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB1555.value: AnnotationData("_16_ARGB1555", "16-bit ARGB pixel format (5 bits per color + 1 bit for alpha) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB4444.value: AnnotationData("_16_ARGB4444", "16-bit ARGB pixel format (4 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._8_RGB332.value: AnnotationData("_8_RGB332", "8-bit  RGB pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._8_ARGB2222.value: AnnotationData("_8_ARGB2222", "8-bit  ARGB pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_ABGR8888.value: AnnotationData("_32_ABGR8888", "32-bit ABGR pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_RGBA8888.value: AnnotationData("_32_RGBA8888", "32-bit RGBA pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_BGRA8888.value: AnnotationData("_32_BGRA8888", "32-bit BGRA pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_BGR888.value: AnnotationData("_32_BGR888", "32-bit BGR pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._24_BGR888.value: AnnotationData("_24_BGR888", "24-bit BGR pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_BGR565.value: AnnotationData("_16_BGR565", "16-bit BGR pixel format "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_BGR555.value: AnnotationData("_16_BGR555", "16-bit BGR pixel format (5 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_ABGR1555.value: AnnotationData("_16_ABGR1555", "16-bit ABGR pixel format (5 bits per color + 1 bit for alpha) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_ABGR4444.value: AnnotationData("_16_ABGR4444", "16-bit ABGR pixel format (4 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._DXT1.value: AnnotationData("_DXT1", "S3/DirectX Texture Compression 1 "),
+    UTIL_virtools_types.VX_PIXELFORMAT._DXT2.value: AnnotationData("_DXT2", "S3/DirectX Texture Compression 2 "),
+    UTIL_virtools_types.VX_PIXELFORMAT._DXT3.value: AnnotationData("_DXT3", "S3/DirectX Texture Compression 3 "),
+    UTIL_virtools_types.VX_PIXELFORMAT._DXT4.value: AnnotationData("_DXT4", "S3/DirectX Texture Compression 4 "),
+    UTIL_virtools_types.VX_PIXELFORMAT._DXT5.value: AnnotationData("_DXT5", "S3/DirectX Texture Compression 5 "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_V8U8.value: AnnotationData("_16_V8U8", "16-bit Bump Map format format (8 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_V16U16.value: AnnotationData("_32_V16U16", "32-bit Bump Map format format (16 bits per color) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._16_L6V5U5.value: AnnotationData("_16_L6V5U5", "16-bit Bump Map format format with luminance "),
+    UTIL_virtools_types.VX_PIXELFORMAT._32_X8L8V8U8.value: AnnotationData("_32_X8L8V8U8", "32-bit Bump Map format format with luminance "),
+    UTIL_virtools_types.VX_PIXELFORMAT._8_ABGR8888_CLUT.value: AnnotationData("_8_ABGR8888_CLUT", "8 bits indexed CLUT (ABGR) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._8_ARGB8888_CLUT.value: AnnotationData("_8_ARGB8888_CLUT", "8 bits indexed CLUT (ARGB) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._4_ABGR8888_CLUT.value: AnnotationData("_4_ABGR8888_CLUT", "4 bits indexed CLUT (ABGR) "),
+    UTIL_virtools_types.VX_PIXELFORMAT._4_ARGB8888_CLUT.value: AnnotationData("_4_ARGB8888_CLUT", "4 bits indexed CLUT (ARGB) "),
+}
+
+#endregion
+
+class RawVirtoolsTexture():
+    
+    # Instance Member Declarations
+    
+    mSaveOptions: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS
+    mVideoFormat: UTIL_virtools_types.VX_PIXELFORMAT
+
+    # Default Value Declarations
+    
+    cDefaultSaveOptions: typing.ClassVar[UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS] = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA
+    cDefaultVideoFormat: typing.ClassVar[UTIL_virtools_types.VX_PIXELFORMAT] = UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB1555
+
+    def __init__(self, **kwargs):
+        # assign default value for each component
+        self.mSaveOptions = kwargs.get('mSaveOptions', RawVirtoolsTexture.cDefaultSaveOptions)
+        self.mVideoFormat = kwargs.get('mVideoFormat', RawVirtoolsTexture.cDefaultVideoFormat)
+    
+class BBP_PG_virtools_texture(bpy.types.PropertyGroup):
+
+    save_options: bpy.props.EnumProperty(
+        name = "Save Options",
+        description = "When saving a composition textures or sprites can be kept as reference to external files or converted to a given format and saved inside the composition file.",
+        items = UTIL_functions.generate_vt_enums_for_bl_enumprop(
+            UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
+            g_Annotation_CK_TEXTURE_SAVEOPTIONS
+        ),
+        default = RawVirtoolsTexture.cDefaultSaveOptions.value
+    )
+    
+    video_format: bpy.props.EnumProperty(
+        name = "Video Format",
+        description = "The desired surface pixel format in video memory.",
+        items = UTIL_functions.generate_vt_enums_for_bl_enumprop(
+            UTIL_virtools_types.VX_PIXELFORMAT,
+            g_Annotation_VX_PIXELFORMAT
+        ),
+        default = RawVirtoolsTexture.cDefaultVideoFormat.value
+    )
+    
+
+#region Getter Setter
+
+def get_virtools_texture(img: bpy.types.Image) -> BBP_PG_virtools_texture:
+    return img.virtools_texture
+
+def get_raw_virtools_texture(img: bpy.types.Image) -> RawVirtoolsTexture:
+    props: BBP_PG_virtools_texture = get_virtools_texture(img)
+    rawdata: RawVirtoolsTexture = RawVirtoolsTexture()
+    
+    rawdata.cDefaultSaveOptions = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS(int(props.save_options))
+    rawdata.mVideoFormat = UTIL_virtools_types.VX_PIXELFORMAT(int(props.video_format))
+    return rawdata
+
+def set_raw_virtools_texture(img: bpy.types.Image, rawdata: RawVirtoolsTexture) -> None:
+    props: BBP_PG_virtools_texture = get_virtools_texture(img)
+    
+    props.save_options = str(rawdata.mSaveOptions.value)
+    props.video_format = str(rawdata.mVideoFormat.value)
+
+#endregion
+
+#region Drawer
+
+# because Image do not have its unique properties window
+# so we only can draw virtools texture properties in other window
+# we provide various function to help draw property
+
+def draw_virtools_texture(img: bpy.types.Image, layout: bpy.types.UILayout):
+    props: BBP_PG_virtools_texture = get_virtools_texture(img)
+    
+    layout.prop(props, 'save_options')
+    layout.prop(props, 'video_format')
+
+#endregion
+
+def register():
+    bpy.utils.register_class(BBP_PG_virtools_texture)
+    
+    # add into image metadata
+    bpy.types.Image.virtools_texture = bpy.props.PointerProperty(type = BBP_PG_virtools_texture)
+
+def unregister():
+    # del from image metadata
+    del bpy.types.Image.virtools_texture
+
+    bpy.utils.unregister_class(BBP_PG_virtools_texture)

@@ -52,7 +52,7 @@ class MeshWriterIngredient():
     mVertexNormal: typing.Iterator[UTIL_virtools_types.VxVector3] | None
     mVertexUV: typing.Iterator[UTIL_virtools_types.VxVector2] | None
     mFace: typing.Iterator[FaceData] | None
-    mMaterial: typing.Iterator[bpy.types.Material] | None
+    mMaterial: typing.Iterator[bpy.types.Material | None] | None
     
     def __init__(self):
         self.mVertexPosition = None
@@ -241,7 +241,7 @@ class MeshReader():
         
         return len(self.__mAssocMesh.materials)
 
-    def get_material_slot(self) -> typing.Iterator[bpy.types.Material]:
+    def get_material_slot(self) -> typing.Iterator[bpy.types.Material | None]:
         """
         @remark This generator may return None if this slot do not link to may material.
         """
@@ -338,11 +338,11 @@ class MeshWriter():
     
     ## Material Slot.
     #  Each item is unique make sure by __mMtlSlotMap
-    __mMtlSlot: list[bpy.types.Material]
+    __mMtlSlot: list[bpy.types.Material | None]
     ## The map to make sure every item in __mMtlSlot is unique.
     #  Key is bpy.types.Material
     #  Value is key's index in __mMtlSlot.
-    __mMtlSlotMap: dict[bpy.types.Material, int]
+    __mMtlSlotMap: dict[bpy.types.Material | None, int]
     
     def __init__(self, assoc_mesh: bpy.types.Mesh):
         self.__mAssocMesh = assoc_mesh

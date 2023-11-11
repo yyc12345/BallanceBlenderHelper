@@ -1,5 +1,5 @@
 import bpy
-import typing
+import typing, enum
 from . import UTIL_functions
 
 #region Virtools Groups Define & Help Class
@@ -133,60 +133,61 @@ class VirtoolsGroupsHelper():
 
 #region Preset Group Names
 
-_g_VirtoolsGroupsPreset: tuple[str] = (
-    "Sector_01",
-    "Sector_02",
-    "Sector_03",
-    "Sector_04",
-    "Sector_05",
-    "Sector_06",
-    "Sector_07",
-    "Sector_08",
+class VirtoolsGroupsPreset(enum.Enum):
+    Sector_01 = "Sector_01"
+    Sector_02 = "Sector_02"
+    Sector_03 = "Sector_03"
+    Sector_04 = "Sector_04"
+    Sector_05 = "Sector_05"
+    Sector_06 = "Sector_06"
+    Sector_07 = "Sector_07"
+    Sector_08 = "Sector_08"
     
-    "P_Extra_Life",
-    "P_Extra_Point",
-    "P_Trafo_Paper",
-    "P_Trafo_Stone",
-    "P_Trafo_Wood",
-    "P_Ball_Paper",
-    "P_Ball_Stone",
-    "P_Ball_Wood",
-    "P_Box",
-    "P_Dome",
-    "P_Modul_01",
-    "P_Modul_03",
-    "P_Modul_08",
-    "P_Modul_17",
-    "P_Modul_18",
-    "P_Modul_19",
-    "P_Modul_25",
-    "P_Modul_26",
-    "P_Modul_29",
-    "P_Modul_30",
-    "P_Modul_34",
-    "P_Modul_37",
-    "P_Modul_41",
+    P_Extra_Life = "P_Extra_Life"
+    P_Extra_Point = "P_Extra_Point"
+    P_Trafo_Paper = "P_Trafo_Paper"
+    P_Trafo_Stone = "P_Trafo_Stone"
+    P_Trafo_Wood = "P_Trafo_Wood"
+    P_Ball_Paper = "P_Ball_Paper"
+    P_Ball_Stone = "P_Ball_Stone"
+    P_Ball_Wood = "P_Ball_Wood"
+    P_Box = "P_Box"
+    P_Dome = "P_Dome"
+    P_Modul_01 = "P_Modul_01"
+    P_Modul_03 = "P_Modul_03"
+    P_Modul_08 = "P_Modul_08"
+    P_Modul_17 = "P_Modul_17"
+    P_Modul_18 = "P_Modul_18"
+    P_Modul_19 = "P_Modul_19"
+    P_Modul_25 = "P_Modul_25"
+    P_Modul_26 = "P_Modul_26"
+    P_Modul_29 = "P_Modul_29"
+    P_Modul_30 = "P_Modul_30"
+    P_Modul_34 = "P_Modul_34"
+    P_Modul_37 = "P_Modul_37"
+    P_Modul_41 = "P_Modul_41"
     
-    "PS_Levelstart",
-    "PE_Levelende",
-    "PC_Checkpoints",
-    "PR_Resetpoints",
+    PS_Levelstart = "PS_Levelstart"
+    PE_Levelende = "PE_Levelende"
+    PC_Checkpoints = "PC_Checkpoints"
+    PR_Resetpoints = "PR_Resetpoints"
     
-    "Sound_HitID_01",
-    "Sound_RollID_01",
-    "Sound_HitID_02",
-    "Sound_RollID_02",
-    "Sound_HitID_03",
-    "Sound_RollID_03",
+    Sound_HitID_01 = "Sound_HitID_01"
+    Sound_RollID_01 = "Sound_RollID_01"
+    Sound_HitID_02 = "Sound_HitID_02"
+    Sound_RollID_02 = "Sound_RollID_02"
+    Sound_HitID_03 = "Sound_HitID_03"
+    Sound_RollID_03 = "Sound_RollID_03"
     
-    "DepthTestCubes",
+    DepthTestCubes = "DepthTestCubes"
     
-    "Phys_Floors",
-    "Phys_FloorRails",
-    "Phys_FloorStopper",
+    Phys_Floors = "Phys_Floors"
+    Phys_FloorRails = "Phys_FloorRails"
+    Phys_FloorStopper = "Phys_FloorStopper"
     
-    "Shadow"
-)
+    Shadow = "Shadow"
+
+_g_VtGrpPresetValues: tuple[str] = tuple(map(lambda x: x.value, VirtoolsGroupsPreset))
 
 class SharedGroupNameInputProperties():
     group_name_source: bpy.props.EnumProperty(
@@ -202,7 +203,7 @@ class SharedGroupNameInputProperties():
         description="Pick vanilla Ballance group name.",
         items=tuple(
             # token, display name, descriptions, icon, index
-            (str(idx), grp, "", "", idx) for idx, grp in enumerate(_g_VirtoolsGroupsPreset)
+            (str(idx), grp, "", "", idx) for idx, grp in enumerate(_g_VtGrpPresetValues)
         ),
     )
     
@@ -223,7 +224,7 @@ class SharedGroupNameInputProperties():
         if self.group_name_source == 'CUSTOM':
             return self.custom_group_name
         else:
-            return _g_VirtoolsGroupsPreset[int(self.preset_group_name)]
+            return _g_VtGrpPresetValues[int(self.preset_group_name)]
 
 #endregion
 

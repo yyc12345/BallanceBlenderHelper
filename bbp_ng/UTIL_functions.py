@@ -1,5 +1,5 @@
 import bpy
-import math, typing
+import math, typing, enum
 
 class BBPException(Exception):
     """
@@ -56,3 +56,33 @@ def message_box(message: tuple[str], title: str, icon: str):
 
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
 
+#region Virtools Enums Annotation Help
+
+class AnnotationData():
+    mDisplayName: str
+    mDescription: str
+    def __init__(self, display_name: str, description: str):
+        self.mDisplayName = display_name
+        self.mDescription = description
+
+InheritingIntEnum_t = typing.TypeVar('InheritingIntEnum_t',  bound = enum.IntEnum)
+BlenderEnumPropEntry_t = tuple[str, str, str, str | int, int]
+def generate_vt_enums_for_bl_enumprop(enum_data: type[InheritingIntEnum_t], anno: dict[int, AnnotationData]) -> tuple[BlenderEnumPropEntry_t, ...]:
+    # define 2 assist functions
+    def get_display_name(v: int, fallback: str):
+        entry: AnnotationData | None = anno.get(v, None)
+        if entry: return entry.mDisplayName
+        else: return fallback
+    
+    def get_description(v: int, fallback: str):
+        entry: AnnotationData | None = anno.get(v, None)
+        if entry: return entry.mDescription
+        else: return fallback
+    
+    # token, display name, descriptions, icon, index
+    return tuple(
+        (str(member.value), get_display_name(member.value, member.name), get_description(member.value, ""), "", member.value) for member in enum_data
+    )
+
+
+#endregion
