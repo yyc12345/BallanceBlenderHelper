@@ -480,15 +480,15 @@ class MeshWriter():
         # validate mesh.
         # it is IMPORTANT that do NOT delete custom data
         # because we need use these data to set custom split normal later
-        validation_err: bool = self.__mAssocMesh.validate(clean_customdata = False)
+        self.__mAssocMesh.validate(clean_customdata = False)
         # update mesh without mesh calc
         self.__mAssocMesh.update(calc_edges = False, calc_edges_loose = False)
         
         # set custom split normal data
-        # if the validate() change the mesh, skip this and output error.
-        # this should not happend in normal case, 
-        # just a stupid patch for "线框Level1.Level.NMO" loading.
-        if not validation_err:
+        # if the validate() change the mesh, skip this and output error. 
+        # this change is detected by the loops count changes, not the return value of validate(). because only the changes of loops can let following throw errors.
+        # this should not happend in normal case, just a stupid patch for "线框Level1.Level.NMO" loading.
+        if len(self.__mAssocMesh.loops) == len(self.__mFacePosIndices):
             self.__mAssocMesh.normals_split_custom_set(
                 tuple(_nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
             )
