@@ -32,7 +32,7 @@ class FaceData():
     def __init__(self, indices: tuple[FaceVertexData] | list[FaceVertexData] = tuple(), mtlidx: int = 0):
         self.mIndices = indices
         self.mMtlIdx = mtlidx
-
+    
     def conv_co(self) -> None:
         """
         Change indice order between Virtools and Blender
@@ -93,10 +93,14 @@ def _flat_face_uv_index(uv_idx: array.array, uv_array: array.array) -> typing.It
         yield uv_array[pos]
         yield uv_array[pos + 1]
 
-def _nest_custom_split_normal(nml_idx: array.array, nml_array: array.array) -> typing.Iterator[UTIL_virtools_types.ConstVxVector3]:
-    for idx in nml_idx:
-        pos: int = idx * 3
-        yield (nml_array[pos], nml_array[pos + 1], nml_array[pos + 2])
+def _nest_custom_split_normal(nml_array: array.array) -> typing.Iterator[UTIL_virtools_types.ConstVxVector3]:
+    # following statement create a iterator for normals array by `iter(nml_array)`
+    # then triple it, because iterator is a reference type, so 3 items of this tuple is pointed to the same iterator and share the same iteration progress.
+    # then use star macro to pass it to zip, it will cause zip receive 3 params pointing to the same iterator.
+    # now zip() will call 3 param‘s __next__() function from left to right.
+    # zip will get following iteration result because all iterator are the same one: (0, 1, 2), (3, 4, 5) and etc (number is index to corresponding value).
+    # finally, use tuple to expand it to a tuple, not a generator.
+    return tuple(zip(*(iter(nml_array), ) * 3))
 
 class TemporaryMesh():
     """
@@ -179,7 +183,7 @@ class MeshReader():
     def get_vertex_position(self) -> typing.Iterator[UTIL_virtools_types.VxVector3]:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
-
+        
         cache: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
         for vec in self.__mAssocMesh.vertices:
             cache.x = vec.co.x
@@ -197,14 +201,14 @@ class MeshReader():
     def get_vertex_normal(self) -> typing.Iterator[UTIL_virtools_types.VxVector3]:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
-
+        
         cache: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
         for nml in self.__mAssocMesh.loops:
             cache.x = nml.normal.x
             cache.y = nml.normal.y
             cache.z = nml.normal.z
             yield cache
-
+    
     def get_vertex_uv_count(self) -> int:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
@@ -217,11 +221,11 @@ class MeshReader():
         else:
             # otherwise return its size, also equaling with face count * 3 in theory
             return len(self.__mAssocMesh.uv_layers.active.uv)
-
+    
     def get_vertex_uv(self) -> typing.Iterator[UTIL_virtools_types.VxVector2]:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
-
+        
         cache: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
         if self.__mAssocMesh.uv_layers.active is None:
             # create a fake one
@@ -234,13 +238,13 @@ class MeshReader():
                 cache.x = uv.vector.x
                 cache.y = uv.vector.y
                 yield cache
-
+    
     def get_material_slot_count(self) -> int:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
         
         return len(self.__mAssocMesh.materials)
-
+    
     def get_material_slot(self) -> typing.Iterator[bpy.types.Material | None]:
         """
         @remark This generator may return None if this slot do not link to may material.
@@ -250,20 +254,20 @@ class MeshReader():
         
         for mtl in self.__mAssocMesh.materials:
             yield mtl
-
+    
     def get_face_count(self) -> int:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
         
         return len(self.__mAssocMesh.polygons)
-
+    
     def get_face(self) -> typing.Iterator[FaceData]:
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
         
         # detect whether we have material
         no_mtl: bool = self.get_material_slot_count() == 0
-
+        
         # use list as indices container for convenient adding and deleting.
         cache: FaceData = FaceData([], 0)
         for face in self.__mAssocMesh.polygons:
@@ -274,7 +278,7 @@ class MeshReader():
                 cache.mMtlIdx = 0
             else:
                 cache.mMtlIdx = face.material_index
-
+            
             # resize indices
             self.__resize_face_data_indices(cache.mIndices, face.loop_total)
             # set indices
@@ -282,10 +286,10 @@ class MeshReader():
                 cache.mIndices[i].mPosIdx = self.__mAssocMesh.loops[face.loop_start + i].vertex_index
                 cache.mIndices[i].mNmlIdx = face.loop_start + i
                 cache.mIndices[i].mUvIdx = face.loop_start + i
-
+            
             # return value
             yield cache
-
+    
     def __resize_face_data_indices(self, ls: list[FaceVertexData], expected_size: int) -> None:
         diff: int = expected_size - len(ls)
         if diff > 0:
@@ -299,7 +303,7 @@ class MeshReader():
         else:
             # no count diff, pass
             pass
-        
+    
     def __triangulate_mesh(self) -> None:
         bm: bmesh.types.BMesh = bmesh.new()
         bm.from_mesh(self.__mAssocMesh)
@@ -432,7 +436,7 @@ class MeshWriter():
         # push material data
         for mtl in self.__mMtlSlot:
             self.__mAssocMesh.materials.append(mtl)
-
+        
         # add corresponding count for vertex position
         self.__mAssocMesh.vertices.add(len(self.__mVertexPos) // 3)
         # add loops data, it is the sum count of indices
@@ -451,21 +455,21 @@ class MeshWriter():
         self.__mAssocMesh.loops.foreach_set('vertex_index', self.__mFacePosIndices)
         # add face vertex nml by function
         self.__mAssocMesh.loops.foreach_set('normal',
-            list(_flat_face_nml_index(self.__mFaceNmlIndices, self.__mVertexNormal))
+            tuple(_flat_face_nml_index(self.__mFaceNmlIndices, self.__mVertexNormal))
         )
         # add face vertex uv by function
         self.__mAssocMesh.uv_layers.active.uv.foreach_set('vector',
-            list(_flat_face_uv_index(self.__mFaceUvIndices, self.__mVertexUV))
+            tuple(_flat_face_uv_index(self.__mFaceUvIndices, self.__mVertexUV))
         )   # NOTE: blender 3.5 changed. UV must be visited by .uv, not the .data
         
         # iterate face to set face data
-        fVertexIdx: int = 0
+        f_vertex_idx: int = 0
         for fi in range(len(self.__mFaceVertexCount)):
             # set start loop
             # NOTE: blender 3.6 changed. Loop setting in polygon do not need set loop_total any more.
             # the loop_total will be auto calculated by the next loop_start.
             # loop_total become read-only
-            self.__mAssocMesh.polygons[fi].loop_start = fVertexIdx
+            self.__mAssocMesh.polygons[fi].loop_start = f_vertex_idx
             
             # set material index
             self.__mAssocMesh.polygons[fi].material_index = self.__mFaceMtlIdx[fi]
@@ -475,7 +479,7 @@ class MeshWriter():
             self.__mAssocMesh.polygons[fi].use_smooth = True
             
             # inc vertex idx
-            fVertexIdx += self.__mFaceVertexCount[fi]
+            f_vertex_idx += self.__mFaceVertexCount[fi]
         
         # validate mesh.
         # it is IMPORTANT that do NOT delete custom data
@@ -485,18 +489,20 @@ class MeshWriter():
         self.__mAssocMesh.update(calc_edges = False, calc_edges_loose = False)
         
         # set custom split normal data
-        # if the validate() change the mesh, skip this and output error. 
-        # this change is detected by the loops count changes, not the return value of validate(). because only the changes of loops can let following throw errors.
-        # this should not happend in normal case, just a stupid patch for "线框Level1.Level.NMO" loading.
-        if len(self.__mAssocMesh.loops) == len(self.__mFacePosIndices):
-            self.__mAssocMesh.normals_split_custom_set(
-                tuple(_nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
-            )
-            # enable auto smooth. it is IMPORTANT
-            self.__mAssocMesh.use_auto_smooth = True
-        else:
-            print(f'The custom normals of mesh "{self.__mAssocMesh.name}" can not be assigned because validate() changes the mesh. Check your mesh data first!')
-    
+        # this operation must copy preserved normal data from loops, not the array data in this class,
+        # because the validate() may change the mesh and if change happended, an error will occur when applying normals (not matched loops count).
+        # this should not happend in normal case, for testing, please load "Level_1.NMO" (Ballance Level 1).
+        
+        # copy data from loops preserved in validate().
+        loops_normals = array.array('f', [0.0] * (len(self.__mAssocMesh.loops) * 3))
+        self.__mAssocMesh.loops.foreach_get('normal', loops_normals)
+        # apply data
+        self.__mAssocMesh.normals_split_custom_set(
+            tuple(_nest_custom_split_normal(loops_normals))
+        )
+        # enable auto smooth. it is IMPORTANT
+        self.__mAssocMesh.use_auto_smooth = True
+
     def __clear_mesh(self):
         if not self.is_valid():
             raise UTIL_functions.BBPException('try to call an invalid MeshWriter.')
