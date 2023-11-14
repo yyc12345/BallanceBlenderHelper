@@ -465,15 +465,28 @@ def apply_to_blender_material(mtl: bpy.types.Material):
         mtl.node_tree.nodes.remove(node)
     
     # create ballance-style blender material
+    # for sockets name, see `bpy_extras.node_shader_utils` for more infos
     bnode: bpy.types.ShaderNodeBsdfPrincipled = mtl.node_tree.nodes.new(type = "ShaderNodeBsdfPrincipled")
     mnode: bpy.types.ShaderNodeOutputMaterial = mtl.node_tree.nodes.new(type = "ShaderNodeOutputMaterial")
-    mtl.node_tree.links.new(bnode.outputs[0], mnode.inputs[0])
+    mtl.node_tree.links.new(bnode.outputs["BSDF"], mnode.inputs["Surface"])
     
     # set basic colors
-    mtl.metallic = sum(rawdata.mAmbient.to_const_rgb()) / 3
-    mtl.diffuse_color = rawdata.mDiffuse.to_const_rgba()
+    metallic_value = sum(rawdata.mAmbient.to_const_rgb()) / 3
+    mtl.metallic = metallic_value
+    bnode.inputs["Metallic"].default_value = metallic_value
+
+    diffuse_value = rawdata.mDiffuse.to_const_rgba()
+    mtl.diffuse_color = diffuse_value
+    bnode.inputs["Base Color"].default_value = diffuse_value
+
     mtl.specular_color = rawdata.mSpecular.to_const_rgb()
+
+    bnode.inputs["Emission"].default_value = rawdata.mEmissive.to_const_rgba()
+
     mtl.specular_intensity = rawdata.mSpecularPower
+    bnode.inputs["Specular"].default_value = UTIL_functions.clamp_float(
+        rawdata.mSpecularPower, 0.0, 1.0
+    )
     
     # set some alpha data
     mtl.use_backface_culling = not rawdata.mEnableTwoSided
@@ -484,13 +497,13 @@ def apply_to_blender_material(mtl: bpy.types.Material):
         # basic texture setter
         inode: bpy.types.ShaderNodeTexImage = mtl.node_tree.nodes.new(type = "ShaderNodeTexImage")
         inode.image = rawdata.mTexture
-        mtl.node_tree.links.new(inode.outputs[0], bnode.inputs[0])
+        mtl.node_tree.links.new(inode.outputs["Color"], bnode.inputs["Base Color"])
 
         # todo: sync texture mapping config here
         
         # link alpha if necessary
         if rawdata.mEnableAlphaBlend:
-            mtl.node_tree.links.new(inode.outputs[1], bnode.inputs[21])
+            mtl.node_tree.links.new(inode.outputs["Alpha"], bnode.inputs["Alpha"])
             
 #endregion
 
@@ -693,10 +706,10 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         layout.label(text="Texture Parameters")
         layout.prop(props, 'texture', emboss = True)
         if props.texture is not None:
-            
-            # if we have texture, we show its virtools texture data
-            PROP_virtools_texture.draw_virtools_texture(props.texture, layout)
-            layout.separator()
+            # have texture, show texture settings and enclosed by a border.
+            boxlayout = layout.box()
+            boxlayout.label(text="Virtools Texture Settings")
+            PROP_virtools_texture.draw_virtools_texture(props.texture, boxlayout)
 
         layout.prop(props, 'texture_blend_mode')
         layout.prop(props, 'texture_min_mode')

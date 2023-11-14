@@ -432,7 +432,7 @@ class MeshWriter():
         # push material data
         for mtl in self.__mMtlSlot:
             self.__mAssocMesh.materials.append(mtl)
-        
+
         # add corresponding count for vertex position
         self.__mAssocMesh.vertices.add(len(self.__mVertexPos) // 3)
         # add loops data, it is the sum count of indices
@@ -480,16 +480,22 @@ class MeshWriter():
         # validate mesh.
         # it is IMPORTANT that do NOT delete custom data
         # because we need use these data to set custom split normal later
-        self.__mAssocMesh.validate(clean_customdata = False)
+        validation_err: bool = self.__mAssocMesh.validate(clean_customdata = False)
         # update mesh without mesh calc
         self.__mAssocMesh.update(calc_edges = False, calc_edges_loose = False)
         
         # set custom split normal data
-        self.__mAssocMesh.normals_split_custom_set(
-            tuple(_nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
-        )
-        # enable auto smooth. it is IMPORTANT
-        self.__mAssocMesh.use_auto_smooth = True
+        # if the validate() change the mesh, skip this and output error.
+        # this should not happend in normal case, 
+        # just a stupid patch for "线框Level1.Level.NMO" loading.
+        if not validation_err:
+            self.__mAssocMesh.normals_split_custom_set(
+                tuple(_nest_custom_split_normal(self.__mFaceNmlIndices, self.__mVertexNormal))
+            )
+            # enable auto smooth. it is IMPORTANT
+            self.__mAssocMesh.use_auto_smooth = True
+        else:
+            print(f'The custom normals of mesh "{self.__mAssocMesh.name}" can not be assigned because validate() changes the mesh. Check your mesh data first!')
     
     def __clear_mesh(self):
         if not self.is_valid():
