@@ -23,7 +23,7 @@ if "bpy" in locals():
 
 #endregion
 
-from . import PROP_preferences, PROP_virtools_material, PROP_virtools_texture, PROP_ballance_element, PROP_virtools_group
+from . import PROP_preferences, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_ballance_element, PROP_virtools_group
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 
@@ -87,6 +87,7 @@ def register() -> None:
     PROP_preferences.register()
     PROP_virtools_material.register()
     PROP_virtools_texture.register()
+    PROP_virtools_mesh.register()
     PROP_ballance_element.register()
     PROP_virtools_group.register()
 
@@ -129,6 +130,7 @@ def unregister() -> None:
 
     PROP_virtools_group.unregister()
     PROP_ballance_element.unregister()
+    PROP_virtools_mesh.unregister()
     PROP_virtools_texture.unregister()
     PROP_virtools_material.unregister()
     PROP_preferences.unregister()

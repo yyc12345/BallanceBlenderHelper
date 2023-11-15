@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh
-from . import PROP_ballance_element, PROP_virtools_group, PROP_virtools_material, PROP_virtools_texture
+from . import PROP_ballance_element, PROP_virtools_group, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile):
@@ -76,25 +76,32 @@ def _import_virtools_textures(
         print(f'Texture Raw Data Temp: {rawdata_temp}')
 
         for vttexture in reader.get_textures():
-            # if this image is raw data, save it in external folder before loading
-            # the attribute of raw data saving is the file path is not absolute path
-            texpath_to_load: str = vttexture.get_file_name()
-            if not os.path.isabs(texpath_to_load):
-                texpath_to_load = os.path.join(
-                    rawdata_temp,
-                    os.path.basename(texpath_to_load)
-                )
-                vttexture.save_image(texpath_to_load)
-
-            # detect whether it is ballance texture and load
-            try_blc_tex: str | None = PROP_virtools_texture.get_ballance_texture_filename(texpath_to_load)
             tex: bpy.types.Image
-            if try_blc_tex:
-                # load as ballance texture
-                tex = PROP_virtools_texture.load_ballance_texture(try_blc_tex)
+            texpath_to_load: str | None = vttexture.get_file_name()
+
+            # if no assoc file path (what? but it is real happended)
+            # this is invalid image, create a blank image instead
+            if texpath_to_load is None:
+                tex = bpy.data.images.new("", 1, 1)
             else:
-                # load as other textures
-                tex = PROP_virtools_texture.load_other_texture(texpath_to_load)
+                # if this image is raw data, save it in external folder before loading
+                # the attribute of raw data saving is the file path is not absolute path
+                if not os.path.isabs(texpath_to_load):
+                    texpath_to_load = os.path.join(
+                        rawdata_temp,
+                        os.path.basename(texpath_to_load)
+                    )
+                    vttexture.save_image(texpath_to_load)
+
+                # detect whether it is ballance texture and load
+                try_blc_tex: str | None = PROP_virtools_texture.get_ballance_texture_filename(texpath_to_load)
+                
+                if try_blc_tex:
+                    # load as ballance texture
+                    tex = PROP_virtools_texture.load_ballance_texture(try_blc_tex)
+                else:
+                    # load as other textures
+                    tex = PROP_virtools_texture.load_other_texture(texpath_to_load)
 
             # rename and insert it to map
             tex.name = UTIL_functions.virtools_name_regulator(vttexture.get_name())
@@ -247,6 +254,11 @@ def _import_virtools_meshes(
             meshoper.add_ingredient(data_prov)
 
         # end of mesh writer
+
+        # set other mesh settings
+        mesh_settings: PROP_virtools_mesh.RawVirtoolsMesh = PROP_virtools_mesh.RawVirtoolsMesh()
+        mesh_settings.mLitMode = vtmesh.get_lit_mode()
+        PROP_virtools_mesh.set_raw_virtools_mesh(mesh, mesh_settings)
 
         # add into map and step
         mesh_cret_map[vtmesh] = mesh

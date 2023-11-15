@@ -1,5 +1,6 @@
 import bpy
 import os, typing, enum, array
+from . import PROP_virtools_mesh
 from . import UTIL_functions, UTIL_file_io, UTIL_blender_mesh, UTIL_virtools_types
 
 #region Raw Elements Operations
@@ -136,6 +137,8 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
                     v.x = vpos[idx]
                     v.y = vpos[idx + 1]
                     v.z = vpos[idx + 2]
+                    # conv co
+                    UTIL_virtools_types.vxvector3_conv_co(v)
                     yield v
             mesh_part.mVertexPosition = vpos_iterator()
             def vnml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
@@ -145,9 +148,12 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
                     v.x = vnml[idx]
                     v.y = vnml[idx + 1]
                     v.z = vnml[idx + 2]
+                    # conv co
+                    UTIL_virtools_types.vxvector3_conv_co(v)
                     yield v
             mesh_part.mVertexNormal = vnml_iterator()
             def vuv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
+                # no uv, no need to conv co
                 v: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
                 yield v
             mesh_part.mVertexUV = vuv_iterator()
@@ -165,6 +171,8 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
                     f.mIndices[1].mNmlIdx = face[idx + 3]
                     f.mIndices[2].mPosIdx = face[idx + 4]
                     f.mIndices[2].mNmlIdx = face[idx + 5]
+                    # conv co
+                    f.conv_co()
                     yield f
             mesh_part.mFace = face_iterator()
 
@@ -172,6 +180,12 @@ def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
 
         # end of with writer
         # write mesh data
+
+        # set other mesh settings
+        # generated mesh always use lit mode.
+        mesh_settings: PROP_virtools_mesh.RawVirtoolsMesh = PROP_virtools_mesh.RawVirtoolsMesh()
+        mesh_settings.mLitMode = UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH
+        PROP_virtools_mesh.set_raw_virtools_mesh(mesh, mesh_settings)
 
     # end of with fmesh
     # close file
