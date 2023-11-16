@@ -23,7 +23,7 @@ if "bpy" in locals():
 
 #endregion
 
-from . import PROP_preferences, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_ballance_element, PROP_virtools_group
+from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_ballance_element, PROP_virtools_group
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 
@@ -85,6 +85,8 @@ g_BldMenus: tuple[MenuEntry, ...] = (
 def register() -> None:
     # register module
     PROP_preferences.register()
+    PROP_ptrprop_resolver.register()
+
     PROP_virtools_material.register()
     PROP_virtools_texture.register()
     PROP_virtools_mesh.register()
@@ -133,6 +135,8 @@ def unregister() -> None:
     PROP_virtools_mesh.unregister()
     PROP_virtools_texture.unregister()
     PROP_virtools_material.unregister()
+    
+    PROP_ptrprop_resolver.unregister()
     PROP_preferences.unregister()
 
 if __name__ == "__main__":

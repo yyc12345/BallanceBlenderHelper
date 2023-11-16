@@ -1,26 +1,7 @@
 import bpy, bmesh, mathutils
 import typing
+from . import PROP_ptrprop_resolver
 from . import UTIL_virtools_types, UTIL_icons_manager, UTIL_functions
-
-#region Material Pointer Property Resolver
-
-class BBP_PG_patch_rail_uv(bpy.types.PropertyGroup):
-    rail_mtl: bpy.props.PointerProperty(
-        name = "Material",
-        description = "The material used for rail",
-        type = bpy.types.Material,
-    )
-
-def get_rail_uv_patch() -> BBP_PG_patch_rail_uv:
-    return bpy.context.scene.bbp_patch_rail_uv
-
-def get_raw_rail_uv_patch() -> bpy.types.Material:
-    return get_rail_uv_patch().rail_mtl
-
-def draw_rail_uv_patch(layout: bpy.types.UILayout) -> None:
-    layout.prop(get_rail_uv_patch(), 'rail_mtl')
-
-#endregion
 
 class BBP_OT_rail_uv(bpy.types.Operator):
     """Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"""
@@ -38,7 +19,7 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def execute(self, context):
         # check material
-        mtl: bpy.types.Material = get_raw_rail_uv_patch()
+        mtl: bpy.types.Material = PROP_ptrprop_resolver.get_rail_uv_material()
         if mtl is None:
             UTIL_functions.message_box(
                 ("No specific material", ), 
@@ -53,7 +34,7 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def draw(self, context):
         layout: bpy.types.UILayout = self.layout
-        draw_rail_uv_patch(layout)
+        PROP_ptrprop_resolver.draw_rail_uv_material(layout)
 
 #region Real Worker Functions
 
@@ -200,14 +181,8 @@ def _create_rail_uv(meshes: typing.Iterable[bpy.types.Mesh], mtl: bpy.types.Mate
 #endregion
 
 def register() -> None:
-    # register patch first
-    bpy.utils.register_class(BBP_PG_patch_rail_uv)
-    bpy.types.Scene.bbp_patch_rail_uv = bpy.props.PointerProperty(type = BBP_PG_patch_rail_uv)
-
     bpy.utils.register_class(BBP_OT_rail_uv)
 
 def unregister() -> None:
-    del bpy.types.Scene.bbp_patch_rail_uv
-
     bpy.utils.unregister_class(BBP_OT_rail_uv)
 

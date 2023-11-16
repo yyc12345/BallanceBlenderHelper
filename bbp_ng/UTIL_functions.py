@@ -1,5 +1,5 @@
 import bpy
-import math, typing, enum
+import math, typing, enum, sys
 
 class BBPException(Exception):
     """
@@ -84,5 +84,18 @@ def generate_vt_enums_for_bl_enumprop(enum_data: type[InheritingIntEnum_t], anno
         (str(member.value), get_display_name(member.value, member.name), get_description(member.value, ""), "", member.value) for member in enum_data
     )
 
+#endregion
+
+#region Default Encoding of BMap
+
+# Use semicolon split each encodings. Support Western European and Simplified Chinese in default.
+
+g_PyBMapDefaultEncoding: str
+if sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
+    # See: https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+    g_PyBMapDefaultEncoding = "1252;936"
+else:
+    # See: https://www.gnu.org/software/libiconv/
+    g_PyBMapDefaultEncoding = "CP1252;CP936"
 
 #endregion

@@ -1,22 +1,16 @@
 import bpy
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
-from . import PROP_preferences
+from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh
-from . import PROP_ballance_element, PROP_virtools_group, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh
 from .PyBMap import bmap_wrapper as bmap
 
-class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile):
+class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams):
     """Import Virtools File"""
     bl_idname = "bbp.import_virtools"
     bl_label = "Import Virtools File"
     bl_options = {'PRESET', 'UNDO'}
-
-    vt_encodings: bpy.props.StringProperty(
-        name = "Encodings",
-        description = "The encoding list used by Virtools engine to resolve object name. Use `;` to split multiple encodings",
-        default = "1252"
-    )
 
     @classmethod
     def poll(self, context):
@@ -25,15 +19,21 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
             and bmap.is_bmap_available())
     
     def execute(self, context):
-        # get encoding, split it by `;` and strip blank chars.
-        encodings: str = self.vt_encodings
         _import_virtools(
             self.general_get_filename(),
-            tuple(map(lambda x: x.strip(), encodings.split(';')))
+            self.general_get_vt_encodings()
         )
         self.report({'INFO'}, "Virtools File Importing Finished.")
         return {'FINISHED'}
     
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text = 'Conflict Options')
+        self.draw_import_params(layout)
+        layout.separator()
+        layout.label(text = 'Virtools Params')
+        self.draw_virtools_params(layout)
+
 def _import_virtools(file_name_: str, encodings_: tuple[str]) -> None:
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
