@@ -236,7 +236,7 @@ def _import_virtools_meshes(
 
                     # return
                     yield face
-            def mtl_iterator() -> typing.Iterator[bpy.types.Material]:
+            def mtl_iterator() -> typing.Iterator[bpy.types.Material | None]:
                 for vtmtl in vtmesh.get_material_slots():
                     if vtmtl:
                         yield material_cret_map.get(vtmtl, None)

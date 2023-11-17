@@ -28,12 +28,14 @@ class VirtoolsGroupsHelper():
     """
     __mSingletonMutex: typing.ClassVar[bool] = False
     __mIsValid: bool
+    __mNoChange: bool ##< A bool indicate whether any change happended during lifetime. If no change, skip the writing when exiting.
     __mAssocObj: bpy.types.Object
     __mGroupsSet: set[str]
     
     def __init__(self, assoc: bpy.types.Object):
         self.__mGroupsSet = set()
         self.__mAssocObj = assoc
+        self.__mNoChange = True
         
         # check singleton
         if VirtoolsGroupsHelper.__mSingletonMutex:
@@ -56,8 +58,10 @@ class VirtoolsGroupsHelper():
     
     def dispose(self) -> None:
         if self.is_valid():
+            # if have changes,
             # write to ballance elements property and reset validation
-            self.__write_to_virtools_groups()
+            if not self.__mNoChange:
+                self.__write_to_virtools_groups()
             self.__mIsValid = False
             VirtoolsGroupsHelper.__mSingletonMutex = False
     
@@ -67,18 +71,22 @@ class VirtoolsGroupsHelper():
     
     def add_group(self, gname: str) -> None:
         self.__check_valid()
+        self.__mNoChange = False
         self.__mGroupsSet.add(gname)
     
     def add_groups(self, gnames: typing.Iterable[str]) -> None:
         self.__check_valid()
+        self.__mNoChange = False
         self.__mGroupsSet.update(gnames)
     
     def remove_group(self, gname: str) -> None:
         self.__check_valid()
+        self.__mNoChange = False
         self.__mGroupsSet.discard(gname)
     
     def remove_groups(self, gnames: typing.Iterable[str]) -> None:
         self.__check_valid()
+        self.__mNoChange = False
         for gname in gnames:
             self.__mGroupsSet.discard(gname)
     
@@ -103,6 +111,7 @@ class VirtoolsGroupsHelper():
     
     def clear_all_groups(self):
         self.__check_valid()
+        self.__mNoChange = False
         self.__mGroupsSet.clear()
     
     def __write_to_virtools_groups(self) -> None:

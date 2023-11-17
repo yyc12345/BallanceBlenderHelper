@@ -36,7 +36,7 @@ class BallanceElementType(enum.IntEnum):
 
 _g_ElementCount: int = len(BallanceElementType)
 _g_ElementNameIdMap: dict[str, int] = dict((entry.name, entry.value) for entry in BallanceElementType)
-_g_ElementIdNameMap: dict[str, int] = dict((entry.value, entry.name) for entry in BallanceElementType)
+_g_ElementIdNameMap: dict[int, str] = dict((entry.value, entry.name) for entry in BallanceElementType)
 
 def get_ballance_element_id(name: str) -> int | None:
     """
@@ -47,7 +47,7 @@ def get_ballance_element_id(name: str) -> int | None:
     """
     return _g_ElementNameIdMap.get(name, None)
 
-def get_ballance_element_name(id: int) -> int | None:
+def get_ballance_element_name(id: int) -> str | None:
     """
     Get Ballance element name by its ID
 
@@ -250,10 +250,10 @@ class BallanceElementsHelper():
             return mesh
 
         # if no existing one, create new one
-        new_mesh_name: str | None = get_ballance_element_id(element_id)
+        new_mesh_name: str | None = get_ballance_element_name(element_id)
         if new_mesh_name is None: 
             raise UTIL_functions.BBPException('invalid element id')
-        new_mesh: bpy.types.Mesh = bpy.data.meshes.new(get_ballance_element_name(element_id))
+        new_mesh: bpy.types.Mesh = bpy.data.meshes.new(new_mesh_name)
 
         _load_element(new_mesh, element_id)
         self.__mElementMap[element_id] = new_mesh
