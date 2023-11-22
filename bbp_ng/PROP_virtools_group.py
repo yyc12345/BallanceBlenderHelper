@@ -1,6 +1,6 @@
 import bpy
 import typing, enum
-from . import UTIL_functions
+from . import UTIL_functions, UTIL_icons_manager
 
 #region Virtools Groups Define & Help Class
 
@@ -198,6 +198,35 @@ class VirtoolsGroupsPreset(enum.Enum):
 
 _g_VtGrpPresetValues: tuple[str] = tuple(map(lambda x: x.value, VirtoolsGroupsPreset))
 
+## Some of group names are not matched with icon name
+#  So we create a convertion map to convert them.
+_g_GroupIconNameConvMap: dict[str, str] = {
+    "PS_Levelstart": "PS_FourFlames",
+    "PE_Levelende": "PE_Balloon",
+    "PC_Checkpoints": "PC_TwoFlames",
+    "PR_Resetpoints": "PR_Resetpoint",
+
+    "Sound_HitID_01": "SoundID_01",
+    "Sound_RollID_01": "SoundID_01",
+    "Sound_HitID_02": "SoundID_02",
+    "Sound_RollID_02": "SoundID_02",
+    "Sound_HitID_03": "SoundID_03",
+    "Sound_RollID_03": "SoundID_03"
+}
+def _get_group_icon_by_name(gp_name: str) -> int:
+    # try converting group name
+    # if not found, return self
+    gp_name = _g_GroupIconNameConvMap.get(gp_name, gp_name)
+    
+    # get from extra group icon first
+    value: int | None = UTIL_icons_manager.get_group_icon(gp_name)
+    if value is not None: return value
+
+    # if failed, get from element. if still failed, return empty icon
+    value = UTIL_icons_manager.get_element_icon(gp_name)
+    if value is not None: return value
+    else: return UTIL_icons_manager.get_empty_icon()
+
 class SharedGroupNameInputProperties():
     group_name_source: bpy.props.EnumProperty(
         name = "Group Name Source",
@@ -212,7 +241,7 @@ class SharedGroupNameInputProperties():
         description="Pick vanilla Ballance group name.",
         items=tuple(
             # token, display name, descriptions, icon, index
-            (str(idx), grp, "", "", idx) for idx, grp in enumerate(_g_VtGrpPresetValues)
+            (str(idx), grp, "", _get_group_icon_by_name(grp), idx) for idx, grp in enumerate(_g_VtGrpPresetValues)
         ),
     )
     

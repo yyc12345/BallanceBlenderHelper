@@ -23,6 +23,12 @@ if "bpy" in locals():
 
 #endregion
 
+# we must load icons manager first
+# and register it
+from . import UTIL_icons_manager
+UTIL_icons_manager.register()
+
+# then load other modules
 from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_ballance_element, PROP_virtools_group
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
