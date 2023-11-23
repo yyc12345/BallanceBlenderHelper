@@ -270,7 +270,7 @@ class SharedGroupNameInputProperties():
 
 class BBP_UL_virtools_groups(bpy.types.UIList):
     def draw_item(self, context, layout: bpy.types.UILayout, data, item: BBP_PG_virtools_group, icon, active_data, active_propname):
-        layout.label(text = item.group_name, translate = False, icon = 'GROUP')
+        layout.label(text = item.group_name, translate = False, icon_value = _get_group_icon_by_name(item.group_name))
 
 class BBP_OT_add_virtools_groups(bpy.types.Operator, SharedGroupNameInputProperties):
     """Add a Virtools Group for Active Object."""

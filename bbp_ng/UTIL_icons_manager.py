@@ -8,9 +8,9 @@ class BlenderPresetIcons(enum.Enum):
 
 #region Custom Icons Helper
 
-_g_SupportedImageExts: set[str] = (
+_g_SupportedImageExts: set[str] = set((
     '.png',
-)
+))
 
 _g_IconsManager: bpy.utils.previews.ImagePreviewCollection | None = None
 
