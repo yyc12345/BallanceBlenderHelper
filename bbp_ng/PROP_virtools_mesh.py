@@ -4,11 +4,9 @@ from . import UTIL_functions, UTIL_virtools_types
 
 # Annotation
 
-from .UTIL_functions import AnnotationData, BlenderEnumPropEntry_t
-
-g_Annotation_VXMESH_LITMODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXMESH_LITMODE.VX_PRELITMESH.value: AnnotationData("Prelit", "Lighting use color information store with vertices "),
-    UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH.value: AnnotationData("Lit", "Lighting is done by renderer using normals and face material information. "),
+g_Annotation_VXMESH_LITMODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXMESH_LITMODE.VX_PRELITMESH.value: UTIL_virtools_types.EnumAnnotation("Prelit", "Lighting use color information store with vertices "),
+    UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH.value: UTIL_virtools_types.EnumAnnotation("Lit", "Lighting is done by renderer using normals and face material information. "),
 }
 
 # Raw Data
@@ -29,11 +27,11 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
     lit_mode: bpy.props.EnumProperty(
         name = "Lit Mode",
         description = "Lighting mode of the mesh.",
-        items = UTIL_functions.generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXMESH_LITMODE,
             g_Annotation_VXMESH_LITMODE
         ),
-        default = RawVirtoolsMesh.cDefaultLitMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMesh.cDefaultLitMode)
     )
     
 # Getter Setter
@@ -45,14 +43,14 @@ def get_raw_virtools_mesh(mesh: bpy.types.Mesh) -> RawVirtoolsMesh:
     props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
     rawdata: RawVirtoolsMesh = RawVirtoolsMesh()
 
-    rawdata.mLitMode = UTIL_virtools_types.VXMESH_LITMODE(int(props.lit_mode))
+    rawdata.mLitMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXMESH_LITMODE, props.lit_mode)
 
     return rawdata
 
 def set_raw_virtools_mesh(mesh: bpy.types.Mesh, rawdata: RawVirtoolsMesh) -> None:
     props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
 
-    props.lit_mode = str(rawdata.mLitMode.value)
+    props.lit_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mLitMode)
 
 # Display Panel
 

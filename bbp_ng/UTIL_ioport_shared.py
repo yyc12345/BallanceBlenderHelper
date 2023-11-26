@@ -1,6 +1,6 @@
 import bpy
 import enum
-from . import UTIL_functions
+from . import UTIL_virtools_types
 from . import PROP_ptrprop_resolver
 
 ## Intent
@@ -92,7 +92,7 @@ class VirtoolsParams():
     vt_encodings: bpy.props.StringProperty(
         name = "Encodings",
         description = "The encoding list used by Virtools engine to resolve object name. Use `;` to split multiple encodings",
-        default = UTIL_functions.g_PyBMapDefaultEncoding
+        default = UTIL_virtools_types.g_PyBMapDefaultEncoding
     )
 
     def draw_virtools_params(self, layout: bpy.types.UILayout) -> None:

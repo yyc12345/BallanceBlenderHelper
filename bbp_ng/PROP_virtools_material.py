@@ -5,70 +5,68 @@ from . import PROP_virtools_texture
 
 #region Enums Annotations
 
-from .UTIL_functions import AnnotationData, BlenderEnumPropEntry_t, generate_vt_enums_for_bl_enumprop
-
-g_Annotation_VXTEXTURE_BLENDMODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECAL.value: AnnotationData("Decal", "Texture replace any material information "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATE.value: AnnotationData("Modulate", "Texture and material are combine. Alpha information of the texture replace material alpha component. "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECALALPHA.value: AnnotationData("Decal Alpha", "Alpha information in the texture specify how material and texture are combined. Alpha information of the texture replace material alpha component. "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEALPHA.value: AnnotationData("Modulate Alpha", "Alpha information in the texture specify how material and texture are combined "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECALMASK.value: AnnotationData("Decal Mask", ""),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEMASK.value: AnnotationData("Modulate Mask", ""),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_COPY.value: AnnotationData("Copy", "Equivalent to DECAL "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_ADD.value: AnnotationData("Add", ""),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DOTPRODUCT3.value: AnnotationData("Dot Product 3", "Perform a Dot Product 3 between texture (normal map) and a referential vector given in VXRENDERSTATE_TEXTUREFACTOR. "),
-    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MAX.value: AnnotationData("Max", ""),
+g_Annotation_VXTEXTURE_BLENDMODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECAL.value: UTIL_virtools_types.EnumAnnotation("Decal", "Texture replace any material information "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATE.value: UTIL_virtools_types.EnumAnnotation("Modulate", "Texture and material are combine. Alpha information of the texture replace material alpha component. "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECALALPHA.value: UTIL_virtools_types.EnumAnnotation("Decal Alpha", "Alpha information in the texture specify how material and texture are combined. Alpha information of the texture replace material alpha component. "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEALPHA.value: UTIL_virtools_types.EnumAnnotation("Modulate Alpha", "Alpha information in the texture specify how material and texture are combined "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DECALMASK.value: UTIL_virtools_types.EnumAnnotation("Decal Mask", ""),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEMASK.value: UTIL_virtools_types.EnumAnnotation("Modulate Mask", ""),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_COPY.value: UTIL_virtools_types.EnumAnnotation("Copy", "Equivalent to DECAL "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_ADD.value: UTIL_virtools_types.EnumAnnotation("Add", ""),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_DOTPRODUCT3.value: UTIL_virtools_types.EnumAnnotation("Dot Product 3", "Perform a Dot Product 3 between texture (normal map) and a referential vector given in VXRENDERSTATE_TEXTUREFACTOR. "),
+    UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MAX.value: UTIL_virtools_types.EnumAnnotation("Max", ""),
 }
-g_Annotation_VXTEXTURE_FILTERMODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_NEAREST.value: AnnotationData("Nearest", "No Filter "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR.value: AnnotationData("Linear", "Bilinear Interpolation "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_MIPNEAREST.value: AnnotationData("Mip Nearest", "Mip mapping "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_MIPLINEAR.value: AnnotationData("Mip Linear", "Mip Mapping with Bilinear interpolation "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEARMIPNEAREST.value: AnnotationData("Linear Mip Nearest", "Mip Mapping with Bilinear interpolation between mipmap levels. "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEARMIPLINEAR.value: AnnotationData("Linear Mip Linear", "Trilinear Filtering "),
-    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_ANISOTROPIC.value: AnnotationData("Anisotropic", "Anisotropic filtering "),
+g_Annotation_VXTEXTURE_FILTERMODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_NEAREST.value: UTIL_virtools_types.EnumAnnotation("Nearest", "No Filter "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR.value: UTIL_virtools_types.EnumAnnotation("Linear", "Bilinear Interpolation "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_MIPNEAREST.value: UTIL_virtools_types.EnumAnnotation("Mip Nearest", "Mip mapping "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_MIPLINEAR.value: UTIL_virtools_types.EnumAnnotation("Mip Linear", "Mip Mapping with Bilinear interpolation "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEARMIPNEAREST.value: UTIL_virtools_types.EnumAnnotation("Linear Mip Nearest", "Mip Mapping with Bilinear interpolation between mipmap levels. "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEARMIPLINEAR.value: UTIL_virtools_types.EnumAnnotation("Linear Mip Linear", "Trilinear Filtering "),
+    UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_ANISOTROPIC.value: UTIL_virtools_types.EnumAnnotation("Anisotropic", "Anisotropic filtering "),
 }
-g_Annotation_VXBLEND_MODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ZERO.value: AnnotationData("Zero", "Blend factor is (0, 0, 0, 0). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ONE.value: AnnotationData("One", "Blend factor is (1, 1, 1, 1). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCCOLOR.value: AnnotationData("Src Color", "Blend factor is (Rs, Gs, Bs, As). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCCOLOR.value: AnnotationData("Inv Src Color", "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA.value: AnnotationData("Src Alpha", "Blend factor is (As, As, As, As). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA.value: AnnotationData("Inv Src Alpha", "Blend factor is (1-As, 1-As, 1-As, 1-As). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_DESTALPHA.value: AnnotationData("Dest Alpha", "Blend factor is (Ad, Ad, Ad, Ad). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVDESTALPHA.value: AnnotationData("Inv Dest Alpha", "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_DESTCOLOR.value: AnnotationData("Dest Color", "Blend factor is (Rd, Gd, Bd, Ad). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVDESTCOLOR.value: AnnotationData("Inv Dest Color", "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad). "),
-    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHASAT.value: AnnotationData("Src Alpha Sat", "Blend factor is (f, f, f, 1); f = min(As, 1-Ad). "),
-    #UTIL_virtools_types.VXBLEND_MODE.VXBLEND_BOTHSRCALPHA.value: AnnotationData("Both Src Alpha", "Source blend factor is (As, As, As, As) and destination blend factor is (1-As, 1-As, 1-As, 1-As) "),
-    #UTIL_virtools_types.VXBLEND_MODE.VXBLEND_BOTHINVSRCALPHA.value: AnnotationData("Both Inv Src Alpha", "Source blend factor is (1-As, 1-As, 1-As, 1-As) and destination blend factor is (As, As, As, As) "),
+g_Annotation_VXBLEND_MODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ZERO.value: UTIL_virtools_types.EnumAnnotation("Zero", "Blend factor is (0, 0, 0, 0). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ONE.value: UTIL_virtools_types.EnumAnnotation("One", "Blend factor is (1, 1, 1, 1). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCCOLOR.value: UTIL_virtools_types.EnumAnnotation("Src Color", "Blend factor is (Rs, Gs, Bs, As). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCCOLOR.value: UTIL_virtools_types.EnumAnnotation("Inv Src Color", "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA.value: UTIL_virtools_types.EnumAnnotation("Src Alpha", "Blend factor is (As, As, As, As). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA.value: UTIL_virtools_types.EnumAnnotation("Inv Src Alpha", "Blend factor is (1-As, 1-As, 1-As, 1-As). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_DESTALPHA.value: UTIL_virtools_types.EnumAnnotation("Dest Alpha", "Blend factor is (Ad, Ad, Ad, Ad). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVDESTALPHA.value: UTIL_virtools_types.EnumAnnotation("Inv Dest Alpha", "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_DESTCOLOR.value: UTIL_virtools_types.EnumAnnotation("Dest Color", "Blend factor is (Rd, Gd, Bd, Ad). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVDESTCOLOR.value: UTIL_virtools_types.EnumAnnotation("Inv Dest Color", "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad). "),
+    UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHASAT.value: UTIL_virtools_types.EnumAnnotation("Src Alpha Sat", "Blend factor is (f, f, f, 1); f = min(As, 1-Ad). "),
+    #UTIL_virtools_types.VXBLEND_MODE.VXBLEND_BOTHSRCALPHA.value: UTIL_virtools_types.EnumAnnotation("Both Src Alpha", "Source blend factor is (As, As, As, As) and destination blend factor is (1-As, 1-As, 1-As, 1-As) "),
+    #UTIL_virtools_types.VXBLEND_MODE.VXBLEND_BOTHINVSRCALPHA.value: UTIL_virtools_types.EnumAnnotation("Both Inv Src Alpha", "Source blend factor is (1-As, 1-As, 1-As, 1-As) and destination blend factor is (As, As, As, As) "),
 }
-g_Annotation_VXTEXTURE_ADDRESSMODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSWRAP.value: AnnotationData("Wrap", "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "),
-    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSMIRROR.value: AnnotationData("Mirror", "Texture coordinates outside the range [0..1] are flipped evenly. "),
-    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSCLAMP.value: AnnotationData("Clamp", "Texture coordinates greater than 1.0 are set to 1.0, and values less than 0.0 are set to 0.0. "),
-    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSBORDER.value: AnnotationData("Border", "When texture coordinates are greater than 1.0 or less than 0.0  texture is set to a color defined in CKMaterial::SetTextureBorderColor. "),
-    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSMIRRORONCE.value: AnnotationData("Mirror Once", " "),
+g_Annotation_VXTEXTURE_ADDRESSMODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSWRAP.value: UTIL_virtools_types.EnumAnnotation("Wrap", "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "),
+    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSMIRROR.value: UTIL_virtools_types.EnumAnnotation("Mirror", "Texture coordinates outside the range [0..1] are flipped evenly. "),
+    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSCLAMP.value: UTIL_virtools_types.EnumAnnotation("Clamp", "Texture coordinates greater than 1.0 are set to 1.0, and values less than 0.0 are set to 0.0. "),
+    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSBORDER.value: UTIL_virtools_types.EnumAnnotation("Border", "When texture coordinates are greater than 1.0 or less than 0.0  texture is set to a color defined in CKMaterial::SetTextureBorderColor. "),
+    UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSMIRRORONCE.value: UTIL_virtools_types.EnumAnnotation("Mirror Once", " "),
 }
-g_Annotation_VXFILL_MODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXFILL_MODE.VXFILL_POINT.value: AnnotationData("Point", "Vertices rendering "),
-    UTIL_virtools_types.VXFILL_MODE.VXFILL_WIREFRAME.value: AnnotationData("Wireframe", "Edges rendering "),
-    UTIL_virtools_types.VXFILL_MODE.VXFILL_SOLID.value: AnnotationData("Solid", "Face rendering "),
+g_Annotation_VXFILL_MODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXFILL_MODE.VXFILL_POINT.value: UTIL_virtools_types.EnumAnnotation("Point", "Vertices rendering "),
+    UTIL_virtools_types.VXFILL_MODE.VXFILL_WIREFRAME.value: UTIL_virtools_types.EnumAnnotation("Wireframe", "Edges rendering "),
+    UTIL_virtools_types.VXFILL_MODE.VXFILL_SOLID.value: UTIL_virtools_types.EnumAnnotation("Solid", "Face rendering "),
 }
-g_Annotation_VXSHADE_MODE: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_FLAT.value: AnnotationData("Flat", "Flat Shading "),
-    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_GOURAUD.value: AnnotationData("Gouraud", "Gouraud Shading "),
-    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_PHONG.value: AnnotationData("Phong", "Phong Shading (Not yet supported by most implementation) "),
+g_Annotation_VXSHADE_MODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_FLAT.value: UTIL_virtools_types.EnumAnnotation("Flat", "Flat Shading "),
+    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_GOURAUD.value: UTIL_virtools_types.EnumAnnotation("Gouraud", "Gouraud Shading "),
+    UTIL_virtools_types.VXSHADE_MODE.VXSHADE_PHONG.value: UTIL_virtools_types.EnumAnnotation("Phong", "Phong Shading (Not yet supported by most implementation) "),
 }
-g_Annotation_VXCMPFUNC: dict[int, AnnotationData] = {
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_NEVER.value: AnnotationData("Never", "Always fail the test. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_LESS.value: AnnotationData("Less", "Accept if value if less than current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_EQUAL.value: AnnotationData("Equal", "Accept if value if equal than current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL.value: AnnotationData("Less Equal", "Accept if value if less or equal than current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER.value: AnnotationData("Greater", "Accept if value if greater than current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_NOTEQUAL.value: AnnotationData("Not Equal", "Accept if value if different than current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATEREQUAL.value: AnnotationData("Greater Equal", "Accept if value if greater or equal current value. "),
-    UTIL_virtools_types.VXCMPFUNC.VXCMP_ALWAYS.value: AnnotationData("Always", "Always accept the test. "),
+g_Annotation_VXCMPFUNC: dict[int, UTIL_virtools_types.EnumAnnotation] = {
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_NEVER.value: UTIL_virtools_types.EnumAnnotation("Never", "Always fail the test. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_LESS.value: UTIL_virtools_types.EnumAnnotation("Less", "Accept if value if less than current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_EQUAL.value: UTIL_virtools_types.EnumAnnotation("Equal", "Accept if value if equal than current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL.value: UTIL_virtools_types.EnumAnnotation("Less Equal", "Accept if value if less or equal than current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER.value: UTIL_virtools_types.EnumAnnotation("Greater", "Accept if value if greater than current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_NOTEQUAL.value: UTIL_virtools_types.EnumAnnotation("Not Equal", "Accept if value if different than current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATEREQUAL.value: UTIL_virtools_types.EnumAnnotation("Greater Equal", "Accept if value if greater or equal current value. "),
+    UTIL_virtools_types.VXCMPFUNC.VXCMP_ALWAYS.value: UTIL_virtools_types.EnumAnnotation("Always", "Always accept the test. "),
 }
 
 #endregion
@@ -250,81 +248,81 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXTEXTURE_BLENDMODE,
             g_Annotation_VXTEXTURE_BLENDMODE
         ),
-        default = RawVirtoolsMaterial.cDefaultTextureBlendMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode)
     )
     
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
-        default = RawVirtoolsMaterial.cDefaultTextureMinMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode)
     )
     
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXTEXTURE_FILTERMODE,
             g_Annotation_VXTEXTURE_FILTERMODE
         ),
-        default = RawVirtoolsMaterial.cDefaultTextureMagMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode)
     )
     
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXTEXTURE_ADDRESSMODE,
             g_Annotation_VXTEXTURE_ADDRESSMODE
         ),
-        default = RawVirtoolsMaterial.cDefaultTextureAddressMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode)
     )
     
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
-        default = RawVirtoolsMaterial.cDefaultSourceBlend.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend)
     )
     
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXBLEND_MODE,
             g_Annotation_VXBLEND_MODE
         ),
-        default = RawVirtoolsMaterial.cDefaultDestBlend.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultDestBlend)
     )
     
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXFILL_MODE,
             g_Annotation_VXFILL_MODE
         ),
-        default = RawVirtoolsMaterial.cDefaultFillMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultFillMode)
     )
     
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXSHADE_MODE,
             g_Annotation_VXSHADE_MODE
         ),
-        default = RawVirtoolsMaterial.cDefaultShadeMode.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultShadeMode)
     )
     
     enable_alpha_test: bpy.props.BoolProperty(
@@ -364,21 +362,21 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
-        default = RawVirtoolsMaterial.cDefaultAlphaFunc.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc)
     )
     
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
-        items = generate_vt_enums_for_bl_enumprop(
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXCMPFUNC,
             g_Annotation_VXCMPFUNC
         ),
-        default = RawVirtoolsMaterial.cDefaultZFunc.value
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultZFunc)
     )
 
 #region Getter Setter
@@ -399,15 +397,15 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
     rawdata.mTexture = props.texture
     rawdata.mTextureBorderColor.from_const_rgba(props.texture_border_color)
     
-    rawdata.mTextureBlendMode = UTIL_virtools_types.VXTEXTURE_BLENDMODE(int(props.texture_blend_mode))
-    rawdata.mTextureMinMode = UTIL_virtools_types.VXTEXTURE_FILTERMODE(int(props.texture_min_mode))
-    rawdata.mTextureMagMode = UTIL_virtools_types.VXTEXTURE_FILTERMODE(int(props.texture_mag_mode))
-    rawdata.mTextureAddressMode = UTIL_virtools_types.VXTEXTURE_ADDRESSMODE(int(props.texture_address_mode))
+    rawdata.mTextureBlendMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_BLENDMODE, props.texture_blend_mode)
+    rawdata.mTextureMinMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_FILTERMODE, props.texture_min_mode)
+    rawdata.mTextureMagMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_FILTERMODE, props.texture_mag_mode)
+    rawdata.mTextureAddressMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_ADDRESSMODE, props.texture_address_mode)
     
-    rawdata.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE(int(props.source_blend))
-    rawdata.mDestBlend = UTIL_virtools_types.VXBLEND_MODE(int(props.dest_blend))
-    rawdata.mFillMode = UTIL_virtools_types.VXFILL_MODE(int(props.fill_mode))
-    rawdata.mShadeMode = UTIL_virtools_types.VXSHADE_MODE(int(props.shade_mode))
+    rawdata.mSourceBlend = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXBLEND_MODE, props.source_blend)
+    rawdata.mDestBlend = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXBLEND_MODE, props.dest_blend)
+    rawdata.mFillMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXFILL_MODE, props.fill_mode)
+    rawdata.mShadeMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXSHADE_MODE, props.shade_mode)
     
     rawdata.mEnableAlphaTest = props.enable_alpha_test
     rawdata.mEnableAlphaBlend = props.enable_alpha_blend
@@ -416,8 +414,8 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
     rawdata.mEnableTwoSided = props.enable_two_sided
     
     rawdata.mAlphaRef = props.alpha_ref
-    rawdata.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC(int(props.alpha_func))
-    rawdata.mZFunc = UTIL_virtools_types.VXCMPFUNC(int(props.z_func))
+    rawdata.mAlphaFunc = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXCMPFUNC, props.alpha_func)
+    rawdata.mZFunc = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXCMPFUNC, props.z_func)
     
     rawdata.regulate()
     return rawdata
@@ -434,15 +432,15 @@ def set_raw_virtools_material(mtl: bpy.types.Material, rawdata: RawVirtoolsMater
     props.texture = rawdata.mTexture
     props.texture_border_color = rawdata.mTextureBorderColor.to_const_rgba()
     
-    props.texture_blend_mode = str(rawdata.mTextureBlendMode.value)
-    props.texture_min_mode = str(rawdata.mTextureMinMode.value)
-    props.texture_mag_mode = str(rawdata.mTextureMagMode.value)
-    props.texture_address_mode = str(rawdata.mTextureAddressMode.value)
+    props.texture_blend_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureBlendMode)
+    props.texture_min_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureMinMode)
+    props.texture_mag_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureMagMode)
+    props.texture_address_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureAddressMode)
     
-    props.source_blend = str(rawdata.mSourceBlend.value)
-    props.dest_blend = str(rawdata.mDestBlend.value)
-    props.fill_mode = str(rawdata.mFillMode.value)
-    props.shade_mode = str(rawdata.mShadeMode.value)
+    props.source_blend = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mSourceBlend)
+    props.dest_blend = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mDestBlend)
+    props.fill_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mFillMode)
+    props.shade_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mShadeMode)
     
     props.enable_alpha_test = rawdata.mEnableAlphaTest
     props.enable_alpha_blend = rawdata.mEnableAlphaBlend
@@ -451,8 +449,8 @@ def set_raw_virtools_material(mtl: bpy.types.Material, rawdata: RawVirtoolsMater
     props.enable_two_sided = rawdata.mEnableTwoSided
     
     props.alpha_ref = rawdata.mAlphaRef
-    props.alpha_func = str(rawdata.mAlphaFunc.value)
-    props.z_func = str(rawdata.mZFunc.value)
+    props.alpha_func = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mAlphaFunc)
+    props.z_func = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mZFunc)
 
 def apply_to_blender_material(mtl: bpy.types.Material):
     # get raw material data
@@ -603,17 +601,37 @@ def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPrese
     preset_data: MaterialPresetData = g_MaterialPresets[preset_type.value]
     set_raw_virtools_material(mtl, preset_data.mData)
 
-def _generate_mtl_presets_for_bl_enumprop() -> tuple[BlenderEnumPropEntry_t, ...]:
-    # define 2 assist functions
-    def get_display_name(v: int):
+class _MtlPresetEnumPropHelper():
+    """
+    Operate like UTIL_virtools_types.EnumPropHelper
+    """
+
+    @staticmethod
+    def __get_name(v: MaterialPresetType) -> str:
         entry: MaterialPresetData | None = g_MaterialPresets.get(v, None)
         if entry: return entry.mDisplayName
         else: return ""
+
+    @staticmethod
+    def generate_items() -> tuple[tuple, ...]:
+        # token, display name, descriptions, icon, index
+        return tuple(
+            (
+                str(member.value), 
+                _MtlPresetEnumPropHelper.__get_name(member), 
+                "", 
+                "", 
+                member.value
+            ) for member in MaterialPresetType
+        )
     
-    # token, display name, descriptions, icon, index
-    return tuple(
-        (str(member.value), get_display_name(member.value), "", "", member.value) for member in MaterialPresetType
-    )
+    @staticmethod
+    def get_selection(prop: str) -> MaterialPresetType:
+        return MaterialPresetType(int(prop))
+    
+    @staticmethod
+    def to_selection(val: MaterialPresetType) -> str:
+        return str(val.value)
 
 #endregion
 
@@ -643,7 +661,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     preset_type: bpy.props.EnumProperty(
         name = "Preset",
         description = "The preset which you want to apply.",
-        items = _generate_mtl_presets_for_bl_enumprop(),
+        items = _MtlPresetEnumPropHelper.generate_items(),
     )
     
     @classmethod
@@ -660,7 +678,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     def execute(self, context):
         # get essential value
         mtl: bpy.types.Material = context.material
-        expected_preset: MaterialPresetType = MaterialPresetType(int(self.preset_type))
+        expected_preset: MaterialPresetType = _MtlPresetEnumPropHelper.get_selection(self.preset_type)
         
         # apply preset to material
         preset_virtools_material(mtl, expected_preset)

@@ -1,5 +1,5 @@
 import mathutils
-import typing
+import typing, sys
 
 # extract all declarations in PyBMap
 from .PyBMap.virtools_types import *
@@ -75,3 +75,80 @@ def vxmatrix_to_blender(self: VxMatrix) -> mathutils.Matrix:
 
 #endregion
 
+#region Blender EnumProperty Creation
+
+class EnumAnnotation():
+    mDisplayName: str
+    mDescription: str
+    def __init__(self, display_name: str, description: str):
+        self.mDisplayName = display_name
+        self.mDescription = description
+
+class EnumPropHelper():
+    """
+    These class contain all functions related to EnumProperty creation for Virtools Enums
+    """
+
+    _TIntEnumChildrenVar = typing.TypeVar('_TIntEnumChildrenVar',  bound = enum.IntEnum) ##< Mean a variable of IntEnum's children
+    _TIntEnumChildren = type[_TIntEnumChildrenVar] ##< Mean the type self which is IntEnum's children.
+    _TAnnoDict = dict[int, EnumAnnotation]
+
+    @staticmethod
+    def __get_name(v: _TIntEnumChildrenVar, anno: _TAnnoDict):
+        entry: EnumAnnotation | None = anno.get(v, None)
+        if entry is not None: return entry.mDisplayName
+        else: return v.name
+
+    @staticmethod
+    def __get_desc(v: _TIntEnumChildrenVar, anno: _TAnnoDict):
+        entry: EnumAnnotation | None = anno.get(v, None)
+        if entry is not None: return entry.mDescription
+        else: return ""
+
+    @staticmethod
+    def generate_items(enum_data: _TIntEnumChildren, anno: _TAnnoDict) -> tuple[tuple, ...]:
+        """
+        Generate a tuple which can be applied to Blender EnumProperty's "items".
+        """
+        # token, display name, descriptions, icon, index
+        return tuple(
+            (
+                str(member.value), 
+                EnumPropHelper.__get_name(member, anno), 
+                EnumPropHelper.__get_desc(member, anno), 
+                "", 
+                member.value
+            ) for member in enum_data
+        )
+    
+    @staticmethod
+    def get_selection(enum_define: _TIntEnumChildren, prop: str) -> _TIntEnumChildrenVar:
+        # prop will return identifier which is defined as the string type of int value.
+        # so we parse it to int and then parse it to enum type.
+        return enum_define(int(prop))
+    
+    @staticmethod
+    def to_selection(val: _TIntEnumChildrenVar) -> str:
+        # like get_selection, we need get it int value, then convert it to string as the indetifier of enum props
+        # them enum property will accept it.
+        return str(val.value)
+
+#endregion
+
+#region Virtools Blender Bridge Funcs & Vars
+
+def virtools_name_regulator(name: str | None) -> str:
+    if name: return name
+    else: return 'annoymous'
+
+## Default Encoding for PyBMap
+#  Use semicolon split each encodings. Support Western European and Simplified Chinese in default.
+g_PyBMapDefaultEncoding: str
+if sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
+    # See: https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+    g_PyBMapDefaultEncoding = "1252;936"
+else:
+    # See: https://www.gnu.org/software/libiconv/
+    g_PyBMapDefaultEncoding = "CP1252;CP936"
+
+#endregion

@@ -104,7 +104,7 @@ def _import_virtools_textures(
                     tex = UTIL_ballance_texture.load_other_texture(texpath_to_load)
 
             # rename and insert it to map
-            tex.name = UTIL_functions.virtools_name_regulator(vttexture.get_name())
+            tex.name = UTIL_virtools_types.virtools_name_regulator(vttexture.get_name())
             texture_cret_map[vttexture] = tex
 
             # inc steps
@@ -162,7 +162,7 @@ def _import_virtools_materials(
 
         # create mtl and apply it
         mtl: bpy.types.Material = bpy.data.materials.new(
-            UTIL_functions.virtools_name_regulator(vtmaterial.get_name())
+            UTIL_virtools_types.virtools_name_regulator(vtmaterial.get_name())
         )
         PROP_virtools_material.set_raw_virtools_material(mtl, rawmtl)
         PROP_virtools_material.apply_to_blender_material(mtl)
@@ -187,7 +187,7 @@ def _import_virtools_meshes(
     for vtmesh in reader.get_meshs():
         # create mesh
         mesh: bpy.types.Mesh = bpy.data.meshes.new(
-            UTIL_functions.virtools_name_regulator(vtmesh.get_name())
+            UTIL_virtools_types.virtools_name_regulator(vtmesh.get_name())
         )
 
         # open mesh writer
@@ -284,7 +284,7 @@ def _import_virtools_3dobjects(
     for vt3dobj in reader.get_3dobjects():
         # create 3d object with mesh
         obj3d: bpy.types.Object = bpy.data.objects.new(
-            UTIL_functions.virtools_name_regulator(vt3dobj.get_name()),
+            UTIL_virtools_types.virtools_name_regulator(vt3dobj.get_name()),
             mesh_cret_map.get(vt3dobj.get_current_mesh(), None)
         )
 

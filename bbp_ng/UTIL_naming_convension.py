@@ -18,9 +18,6 @@ class _RenameErrorItem():
         self.mErrType = err_t
         self.mDescription = description
 
-    def get_presentation(self):
-        return "[{}]\t{}".format(_RenameErrorType.cvt_err_from_int_to_str(self.err_type), self.description)
-
 class _RenameErrorReporter():
     mErrList: list[_RenameErrorItem]
 
@@ -129,6 +126,19 @@ class _NamingConventionProfile():
         self.mParseFct = parse_fct
         self.mSetFct = set_fct
 
+    def __eq__(self, obj: object) -> bool:
+        if isinstance(obj, self.__class__):
+            if obj.mNameFct != self.mNameFct: return False
+            if obj.mDescFct != self.mDescFct: return False
+            if obj.mParseFct != self.mParseFct: return False
+            if obj.mSetFct != self.mSetFct: return False
+            return True
+        else:
+            return False
+
+    def __hash__(self) -> int:
+        return hash((self.mNameFct, self.mDescFct, self.mParseFct, self.mSetFct))
+
 #endregion
 
 #region Naming Convention Declaration
@@ -191,7 +201,7 @@ class _ImengyuConvention():
 
 #region Nameing Convention Register
 
-## The native naming convention is Virtools Group
+## The native naming convention is 
 #  We treat it as naming convention because we want use a universal interface to process naming converting.
 #  So Virtools Group can no be seen as a naming convention, but we treat it like naming convention in code.
 #  The "native" mean this is 
@@ -206,8 +216,50 @@ _g_NamingConventions: tuple[_NamingConventionProfile, ...] = (
     _ImengyuConvention.register(),
 )
 
+class _EnumPropHelper():
+    """
+    Operate like UTIL_virtools_types.EnumPropHelper
+    Return the identifier (index) of naming convention.
+    """
+
+    @staticmethod
+    def generate_items() -> tuple[tuple, ...]:
+        # create a function to filter Virtools Group profile 
+        # and return index at the same time
+        def naming_convention_iter() -> typing.Iterator[tuple[int, _NamingConventionProfile]]:
+            for i in range(len(_g_NamingConventions)):
+                profile: _NamingConventionProfile = _g_NamingConventions[i]
+                if profile != _g_NativeNamingConvention:
+                    yield (i, profile)
+
+        # token, display name, descriptions, icon, index
+        return tuple(
+            (
+                str(idx), 
+                item.mNameFct(), 
+                item.mDescFct(), 
+                "", 
+                idx
+            ) for idx, item in naming_convention_iter()
+        )
+    
+    @staticmethod
+    def get_selection(prop: str) -> int:
+        return int(prop)
+    
+    @staticmethod
+    def to_selection(val: int) -> str:
+        return str(val)
+    
+    @staticmethod
+    def get_virtools_group_identifier() -> int:
+        return _g_NamingConventions.index(_g_NativeNamingConvention)
+
 #endregion
 
+def name_convention_core(src_ident: int, dst_ident: int) -> None:
+    # no convert needed
+    if src_ident == dst_ident: return
 
 
 
