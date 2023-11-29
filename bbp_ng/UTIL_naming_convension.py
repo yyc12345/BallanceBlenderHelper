@@ -1,6 +1,6 @@
 import bpy
 import typing, enum
-from . import UTIL_functions
+from . import UTIL_functions, UTIL_icons_manager
 from . import PROP_virtools_group
 
 #region Rename Error Reporter
@@ -20,9 +20,11 @@ class _RenameErrorItem():
 
 class _RenameErrorReporter():
     mErrList: list[_RenameErrorItem]
+    mOldName: str
 
     def __init__(self):
         self.mErrList = []
+        self.mOldName = ""
 
     def add_error(self, description: str):
         self.mErrList.append(_RenameErrorItem(_RenameErrorType.ERROR, description))
@@ -31,13 +33,26 @@ class _RenameErrorReporter():
     def add_info(self, description: str):
         self.mErrList.append(_RenameErrorItem(_RenameErrorType.INFO, description))
 
-    def need_report(self):
-        return len(self.mErrList) != 0
-    def report(self, header: str):
-        print(header)
+    def begin_object(self, obj: bpy.types.Object) -> None:
+        # assign old name
+        self.mOldName = obj.name
+    def end_object(self, obj:bpy.types.Object) -> None:
+        # if error list is empty, no need to report
+        if len(self.mErrList) == 0: return
+
+        # output header
+        # if new name is different with old name, output both of them
+        new_name: str = obj.name
+        if self.mOldName == new_name:
+            print(f'For object "{new_name}"')
+        else:
+            print(f'For object "{new_name}" (Old name: "{self.mOldName}")')
+
+        # output error list with indent
         for item in self.mErrList:
             print('\t' + _RenameErrorReporter.__erritem_to_string(item))
-    def clear(self):
+
+        # clear error list for next object
         self.mErrList.clear()
 
     @staticmethod
@@ -112,8 +127,8 @@ class _BallanceObjectInfo():
 class _NamingConventionProfile():
     _TNameFct = typing.Callable[[], str]
     _TDescFct = typing.Callable[[], str]
-    _TParseFct = typing.Callable[[bpy.types.Object, _RenameErrorReporter], _BallanceObjectInfo]
-    _TSetFct = typing.Callable[[bpy.types.Object,_BallanceObjectInfo, _RenameErrorReporter], None]
+    _TParseFct = typing.Callable[[bpy.types.Object, _RenameErrorReporter], _BallanceObjectInfo | None]
+    _TSetFct = typing.Callable[[bpy.types.Object,_BallanceObjectInfo, _RenameErrorReporter], bool]
 
     mNameFct: _TNameFct
     mDescFct: _TDescFct
@@ -145,12 +160,12 @@ class _NamingConventionProfile():
 
 class _VirtoolsGroupConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo:
-        pass
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+        return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> None:
-        pass
+    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+        return False
 
     @staticmethod
     def register() -> _NamingConventionProfile:
@@ -163,12 +178,12 @@ class _VirtoolsGroupConvention():
 
 class _YYCToolchainConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo:
-        pass
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+        return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> None:
-        pass
+    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+        return False
 
     @staticmethod
     def register() -> _NamingConventionProfile:
@@ -181,12 +196,12 @@ class _YYCToolchainConvention():
 
 class _ImengyuConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo:
-        pass
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+        return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> None:
-        pass
+    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+        return False
 
     @staticmethod
     def register() -> _NamingConventionProfile:
@@ -257,13 +272,54 @@ class _EnumPropHelper():
 
 #endregion
 
-def name_convention_core(src_ident: int, dst_ident: int) -> None:
+def name_convention_core(src_ident: int, dst_ident: int, objs: typing.Iterable[bpy.types.Object]) -> None:
     # no convert needed
     if src_ident == dst_ident: return
 
+    # get convert profile
+    src: _NamingConventionProfile = _g_NamingConventions[src_ident]
+    dst: _NamingConventionProfile = _g_NamingConventions[dst_ident]
 
+    # create reporter and success counter
+    failed_obj_counter: int = 0
+    all_obj_counter: int = 0
+    err_reporter: _RenameErrorReporter = _RenameErrorReporter()
 
+    # print console report header
+    print('============')
+    print('Rename Report')
+    print('------------')
 
+    # start converting
+    for obj in objs:
+        # inc counter all
+        all_obj_counter += 1
+        # begin object processing
+        err_reporter.begin_object(obj)
+        # parsing from src and set by dst
+        # inc failed counter if failed
+        obj_info: _BallanceObjectInfo | None= src.mParseFct(obj, err_reporter)
+        if obj_info is not None:
+            ret: bool = dst.mSetFct(obj, obj_info, err_reporter)
+            if not ret: failed_obj_counter += 1
+        else:
+            failed_obj_counter += 1
+        # end object processing and output err list
+        err_reporter.end_object(obj)
 
+    # print console report tail
+    print('------------')
+    print(f'All / Failed - {all_obj_counter} / {failed_obj_counter}')
+    print('============')
 
+    # popup blender window to notice user
+    UTIL_functions.message_box(
+        (
+            'View console to get more detail.',
+            f'All: {all_obj_counter}',
+            f'Failed: {failed_obj_counter}',
+        ),
+        "Rename Report", 
+        UTIL_icons_manager.BlenderPresetIcons.Info.value
+    )
 

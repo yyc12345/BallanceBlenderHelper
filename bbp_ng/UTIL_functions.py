@@ -37,7 +37,7 @@ def clamp_int(v: int, min_val: int, max_val: int) -> int:
     elif (v > max_val): return max_val
     else: return v
 
-def message_box(message: tuple[str], title: str, icon: str):
+def message_box(message: tuple[str, ...], title: str, icon: str):
     """
     Show a message box in Blender. Non-block mode.
 
