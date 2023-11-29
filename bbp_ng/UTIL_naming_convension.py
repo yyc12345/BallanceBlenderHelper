@@ -70,7 +70,7 @@ class _RenameErrorReporter():
 
 #region Naming Convention Used Types
 
-class _BallanceObjectType(enum.IntEnum):
+class BallanceObjectType(enum.IntEnum):
     COMPONENT = enum.auto()
 
     FLOOR = enum.auto()
@@ -88,8 +88,8 @@ class _BallanceObjectType(enum.IntEnum):
 
     DECORATION = enum.auto()
 
-class _BallanceObjectInfo():
-    mBasicType: _BallanceObjectType
+class BallanceObjectInfo():
+    mBasicType: BallanceObjectType
 
     ## Only available for COMPONENT basic type
     mComponentType: str | None
@@ -99,36 +99,36 @@ class _BallanceObjectInfo():
     #  In CHECKPOINT, RESETPOINT mode, the sector actually is the suffix number of these objects' name. So checkpoint starts with 1, not 0.
     mSector: int | None
 
-    def __init__(self, basic_type: _BallanceObjectType):
+    def __init__(self, basic_type: BallanceObjectType):
         self.mBasicType = basic_type
 
     @classmethod
     def create_from_component(cls, comp_type: str, sector: int):
-        inst = cls(_BallanceObjectType.COMPONENT)
+        inst = cls(BallanceObjectType.COMPONENT)
         inst.mComponentType = comp_type
         inst.mSector = sector
         return inst
     
     @classmethod
     def create_from_checkpoint(cls, sector: int):
-        inst = cls(_BallanceObjectType.CHECKPOINT)
+        inst = cls(BallanceObjectType.CHECKPOINT)
         inst.mSector = sector
         return inst
     @classmethod
     def create_from_resetpoint(cls, sector: int):
-        inst = cls(_BallanceObjectType.RESETPOINT)
+        inst = cls(BallanceObjectType.RESETPOINT)
         inst.mSector = sector
         return inst
 
     @classmethod
-    def create_from_others(cls, basic_type: _BallanceObjectType):
+    def create_from_others(cls, basic_type: BallanceObjectType):
         return cls(basic_type)
 
 class _NamingConventionProfile():
     _TNameFct = typing.Callable[[], str]
     _TDescFct = typing.Callable[[], str]
-    _TParseFct = typing.Callable[[bpy.types.Object, _RenameErrorReporter], _BallanceObjectInfo | None]
-    _TSetFct = typing.Callable[[bpy.types.Object,_BallanceObjectInfo, _RenameErrorReporter], bool]
+    _TParseFct = typing.Callable[[bpy.types.Object, _RenameErrorReporter | None], BallanceObjectInfo | None]
+    _TSetFct = typing.Callable[[bpy.types.Object,BallanceObjectInfo, _RenameErrorReporter | None], bool]
 
     mNameFct: _TNameFct
     mDescFct: _TDescFct
@@ -141,30 +141,17 @@ class _NamingConventionProfile():
         self.mParseFct = parse_fct
         self.mSetFct = set_fct
 
-    def __eq__(self, obj: object) -> bool:
-        if isinstance(obj, self.__class__):
-            if obj.mNameFct != self.mNameFct: return False
-            if obj.mDescFct != self.mDescFct: return False
-            if obj.mParseFct != self.mParseFct: return False
-            if obj.mSetFct != self.mSetFct: return False
-            return True
-        else:
-            return False
-
-    def __hash__(self) -> int:
-        return hash((self.mNameFct, self.mDescFct, self.mParseFct, self.mSetFct))
-
 #endregion
 
 #region Naming Convention Declaration
 
 class _VirtoolsGroupConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
         return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
         return False
 
     @staticmethod
@@ -178,11 +165,11 @@ class _VirtoolsGroupConvention():
 
 class _YYCToolchainConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
         return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
         return False
 
     @staticmethod
@@ -196,11 +183,11 @@ class _YYCToolchainConvention():
 
 class _ImengyuConvention():
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter) -> _BallanceObjectInfo | None:
+    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
         return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: _BallanceObjectInfo, reporter: _RenameErrorReporter) -> bool:
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
         return False
 
     @staticmethod
@@ -216,20 +203,29 @@ class _ImengyuConvention():
 
 #region Nameing Convention Register
 
-## The native naming convention is 
-#  We treat it as naming convention because we want use a universal interface to process naming converting.
-#  So Virtools Group can no be seen as a naming convention, but we treat it like naming convention in code.
-#  The "native" mean this is 
-_g_NativeNamingConvention: _NamingConventionProfile = _VirtoolsGroupConvention.register()
-
 ## All available naming conventions
 #  Each naming convention should have a identifier for visiting them.
 #  The identifier is its index in this tuple.
-_g_NamingConventions: tuple[_NamingConventionProfile, ...] = (
-    _VirtoolsGroupConvention.register(),
-    _YYCToolchainConvention.register(),
-    _ImengyuConvention.register(),
-)
+_g_NamingConventions: list[_NamingConventionProfile] = []
+def _register_naming_convention_with_index(profile: _NamingConventionProfile) -> int:
+    global _g_NamingConventions
+    ret: int = len(_g_NamingConventions)
+    _g_NamingConventions.append(profile)
+    return ret
+
+# register native and default one and others
+# but only native one and default one need keep its index
+# 
+# The native naming convention is Virtools Group
+# We treat it as naming convention because we want use a universal interface to process naming converting.
+# So Virtools Group can no be seen as a naming convention, but we treat it like naming convention in code.
+# The "native" mean this is 
+# 
+# The default fallback naming convention is YYC toolchain
+# 
+_g_NativeNamingConventionIndex: int = _register_naming_convention_with_index(_VirtoolsGroupConvention.register())
+_g_DefaultNamingConventionIndex: int = _register_naming_convention_with_index(_YYCToolchainConvention.register())
+_register_naming_convention_with_index(_ImengyuConvention.register())
 
 class _EnumPropHelper():
     """
@@ -242,10 +238,9 @@ class _EnumPropHelper():
         # create a function to filter Virtools Group profile 
         # and return index at the same time
         def naming_convention_iter() -> typing.Iterator[tuple[int, _NamingConventionProfile]]:
-            for i in range(len(_g_NamingConventions)):
-                profile: _NamingConventionProfile = _g_NamingConventions[i]
-                if profile != _g_NativeNamingConvention:
-                    yield (i, profile)
+            for idx, item in enumerate(_g_NamingConventions):
+                if idx != _g_NativeNamingConventionIndex:
+                    yield (idx, item)
 
         # token, display name, descriptions, icon, index
         return tuple(
@@ -268,11 +263,21 @@ class _EnumPropHelper():
     
     @staticmethod
     def get_virtools_group_identifier() -> int:
-        return _g_NamingConventions.index(_g_NativeNamingConvention)
+        return _g_NativeNamingConventionIndex
+    
+    @staticmethod
+    def get_default_naming_identifier() -> int:
+        return _g_DefaultNamingConventionIndex
 
 #endregion
 
-def name_convention_core(src_ident: int, dst_ident: int, objs: typing.Iterable[bpy.types.Object]) -> None:
+def name_setter_core(ident: int, info: BallanceObjectInfo, obj: bpy.types.Object) -> None:
+    # get profile
+    profile: _NamingConventionProfile = _g_NamingConventions[ident]
+    # set name. don't care whether success.
+    profile.mSetFct(obj, info, None)
+
+def name_converting_core(src_ident: int, dst_ident: int, objs: typing.Iterable[bpy.types.Object]) -> None:
     # no convert needed
     if src_ident == dst_ident: return
 
@@ -298,7 +303,7 @@ def name_convention_core(src_ident: int, dst_ident: int, objs: typing.Iterable[b
         err_reporter.begin_object(obj)
         # parsing from src and set by dst
         # inc failed counter if failed
-        obj_info: _BallanceObjectInfo | None= src.mParseFct(obj, err_reporter)
+        obj_info: BallanceObjectInfo | None= src.mParseFct(obj, err_reporter)
         if obj_info is not None:
             ret: bool = dst.mSetFct(obj, obj_info, err_reporter)
             if not ret: failed_obj_counter += 1
