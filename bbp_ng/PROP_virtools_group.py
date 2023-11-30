@@ -109,7 +109,11 @@ class VirtoolsGroupsHelper():
                 return True
         return False
     
-    def clear_all_groups(self):
+    def iterate_groups(self) -> typing.Iterator[str]:
+        self.__check_valid()
+        return iter(self.__mGroupsSet)
+
+    def clear_groups(self):
         self.__check_valid()
         self.__mNoChange = False
         self.__mGroupsSet.clear()
@@ -342,7 +346,7 @@ class BBP_OT_clear_virtools_groups(bpy.types.Operator):
     
     def execute(self, context):
         with VirtoolsGroupsHelper(context.object) as hlp:
-            hlp.clear_all_groups()
+            hlp.clear_groups()
         return {'FINISHED'}
 
 class BBP_PT_virtools_groups(bpy.types.Panel):

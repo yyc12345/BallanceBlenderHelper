@@ -292,7 +292,7 @@ def _import_virtools_3dobjects(
         blender_collection.objects.link(obj3d)
 
         # set world matrix
-        vtmat = vt3dobj.get_world_matrix()
+        vtmat: UTIL_virtools_types.VxMatrix = vt3dobj.get_world_matrix()
         UTIL_virtools_types.vxmatrix_conv_co(vtmat)
         obj3d.matrix_world = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
 
@@ -349,7 +349,7 @@ def _import_virtools_groups(
 
         # assign group
         with PROP_virtools_group.VirtoolsGroupsHelper(assoc_obj) as gpoper:
-            gpoper.clear_all_groups()
+            gpoper.clear_groups()
             gpoper.add_groups(mapv)
 
     progress.leave_substeps()
