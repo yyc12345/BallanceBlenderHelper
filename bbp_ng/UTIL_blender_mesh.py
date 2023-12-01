@@ -24,12 +24,12 @@ class FaceVertexData():
 
 class FaceData():
     ## @remark List or tuple. List is convenient for adding and removing
-    mIndices: tuple[FaceVertexData] | list[FaceVertexData]
+    mIndices: tuple[FaceVertexData, ...] | list[FaceVertexData]
     ## Face used material slot index
     #  @remark If material slot is empty, or this face do not use material, set this value to 0.
     mMtlIdx: int
     
-    def __init__(self, indices: tuple[FaceVertexData] | list[FaceVertexData] = tuple(), mtlidx: int = 0):
+    def __init__(self, indices: tuple[FaceVertexData, ...] | list[FaceVertexData] = tuple(), mtlidx: int = 0):
         self.mIndices = indices
         self.mMtlIdx = mtlidx
     

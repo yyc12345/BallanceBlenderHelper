@@ -57,6 +57,11 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         self.draw_virtools_params(layout)
         layout.prop(self, 'compress_level')
 
+_TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
+_TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
+_TMaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
+_TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
+
 def _export_virtools(file_name_: str, encodings_: tuple[str], compress_level_: int, export_objects: tuple[bpy.types.Object, ...]) -> None:
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
@@ -71,13 +76,19 @@ def _export_virtools(file_name_: str, encodings_: tuple[str], compress_level_: i
             # prepare progress reporter
             with ProgressReport(wm = bpy.context.window_manager) as progress:
                 # prepare 3dobject
-                obj3d_crets: tuple[tuple[bpy.types.Object, bmap.BM3dObject], ...] = _prepare_virtools_3dobjects(
+                obj3d_crets: tuple[_TObj3dPair, ...] = _prepare_virtools_3dobjects(
                     writer, progress, export_objects)
                 # export group and 3dobject by prepared 3dobject
                 _export_virtools_groups(writer, progress, obj3d_crets)
-                mesh_crets: tuple[tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh], ...] = _export_virtools_3dobjects(
+                mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
                     writer, progress, obj3d_crets)
-                
+                # export mesh
+                material_crets: tuple[_TMaterialPair, ...] = _export_virtools_meshes(
+                    writer, progress, mesh_crets)
+                # export material
+                texture_crets: tuple[_TTexturePair, ...] = _export_virtools_materials(
+                    writer, progress, material_crets)
+
 
                 # save document
                 _save_virtools_document(
@@ -87,12 +98,12 @@ def _prepare_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
         export_objects: tuple[bpy.types.Object]
-        ) -> tuple[tuple[bpy.types.Object, bmap.BM3dObject], ...]:
+        ) -> tuple[_TObj3dPair, ...]:
     # this function only create equvalent entries in virtools engine and do not export anything
     # because _export_virtools_3dobjects() and _export_virtools_groups() are need use the return value of this function
 
     # create 3dobject hashset and result
-    obj3d_crets: list[tuple[bpy.types.Object, bmap.BM3dObject]] = []
+    obj3d_crets: list[_TObj3dPair] = []
     obj3d_cret_set: set[bpy.types.Object] = set()
     # start saving
     progress.enter_substeps(len(export_objects), "Creating 3dObjects")
@@ -116,7 +127,7 @@ def _prepare_virtools_3dobjects(
 def _export_virtools_groups(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        obj3d_crets: tuple[tuple[bpy.types.Object, bmap.BM3dObject], ...]
+        obj3d_crets: tuple[_TObj3dPair, ...]
         ) -> None:
     # create virtools group
     group_cret_map: dict[str, bmap.BMGroup] = {}
@@ -146,10 +157,10 @@ def _export_virtools_groups(
 def _export_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        obj3d_crets: tuple[tuple[bpy.types.Object, bmap.BM3dObject], ...]
-        ) -> tuple[tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh], ...]:
+        obj3d_crets: tuple[_TObj3dPair, ...]
+        ) -> tuple[_TMeshPair, ...]:
     # create virtools mesh
-    mesh_crets: list[tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]] = []
+    mesh_crets: list[_TMeshPair] = []
     mesh_cret_map: dict[bpy.types.Mesh, bmap.BMMesh] = {}
     # start saving
     progress.enter_substeps(len(obj3d_crets), "Saving 3dObjects")
@@ -187,7 +198,143 @@ def _export_virtools_3dobjects(
 
     # leave progress and return
     progress.leave_substeps()
+    return tuple(mesh_crets)
 
+def _export_virtools_meshes(
+        writer: bmap.BMFileWriter,
+        progress: ProgressReport,
+        mesh_crets: tuple[_TMeshPair, ...]
+        ) -> tuple[_TMaterialPair, ...]:
+    # create virtools mesh
+    material_crets: list[_TMaterialPair] = []
+    material_cret_map: dict[bpy.types.Material, bmap.BMMaterial] = {}
+    # start saving
+    progress.enter_substeps(len(mesh_crets), "Saving Meshes")
+
+    # iterate meshes
+    for obj3d, mesh, vtmesh in mesh_crets:
+        # we need use temporary mesh function to visit triangulated meshes
+        # so we ignore mesh factor and use obj3d to create temp mesh to get data
+        # open temp mesh helper
+        with UTIL_blender_mesh.TemporaryMesh(obj3d) as tempmesh:
+            # sync mesh name, lit mode
+            vtmesh.set_name(mesh.name)
+            mesh_settings: PROP_virtools_mesh.RawVirtoolsMesh = PROP_virtools_mesh.get_raw_virtools_mesh(mesh)
+            vtmesh.set_lit_mode(mesh_settings.mLitMode)
+
+            # sync mesh main data
+            # open mesh visitor
+            with UTIL_blender_mesh.MeshReader(tempmesh.get_temp_mesh()) as mesh_visitor:
+                # construct data provider
+                def pos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                    for v in mesh_visitor.get_vertex_position():
+                        UTIL_virtools_types.vxvector3_conv_co(v)
+                        yield v
+                def nml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+                    for v in mesh_visitor.get_vertex_normal():
+                        UTIL_virtools_types.vxvector3_conv_co(v)
+                        yield v
+                def uv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
+                    for v in mesh_visitor.get_vertex_uv():
+                        UTIL_virtools_types.vxvector2_conv_co(v)
+                        yield v
+
+                # construct mtl slot
+                def mtl_iterator() -> typing.Iterator[bmap.BMMaterial | None]:
+                    for mtl in mesh_visitor.get_material_slot():
+                        if mtl is None: yield None
+                        else:
+                            # get existing one or create new one
+                            vtmaterial: bmap.BMMaterial | None = material_cret_map.get(mtl, None)
+                            if vtmaterial is None:
+                                vtmaterial = writer.create_material()
+                                material_crets.append((mtl, vtmaterial))
+                                material_cret_map[mtl] = vtmaterial
+                            # yield data
+                            yield vtmaterial
+
+                def face_idx_iterator(idx_type: int) -> typing.Iterator[UTIL_virtools_types.CKFaceIndices]:
+                    data: UTIL_virtools_types.CKFaceIndices = UTIL_virtools_types.CKFaceIndices()
+                    for fidx in mesh_visitor.get_face():
+                        # swap indices
+                        fidx.conv_co()
+                        # set data by specific index
+                        match(idx_type):
+                            case 0:  data.i1, data.i2, data.i3 = fidx.mIndices[0].mPosIdx, fidx.mIndices[1].mPosIdx, fidx.mIndices[2].mPosIdx
+                            case 1:  data.i1, data.i2, data.i3 = fidx.mIndices[0].mNmlIdx, fidx.mIndices[1].mNmlIdx, fidx.mIndices[2].mNmlIdx
+                            case 2:  data.i1, data.i2, data.i3 = fidx.mIndices[0].mUvIdx, fidx.mIndices[1].mUvIdx, fidx.mIndices[2].mUvIdx
+                            case _: raise UTIL_functions.BBPException('invalid index type.')
+                        # yield data
+                        yield data
+                def face_mtl_iterator() -> typing.Iterator[int]:
+                    for fidx in mesh_visitor.get_face():
+                        yield fidx.mMtlIdx
+                
+                # create virtools mesh transition
+                # and write into mesh
+                with bmap.BMMeshTrans() as mesh_trans:
+                    # prepare vertices
+                    mesh_trans.prepare_vertex(
+                        mesh_visitor.get_vertex_position_count(),
+                        pos_iterator()
+                    )
+                    mesh_trans.prepare_normal(
+                        mesh_visitor.get_vertex_normal_count(),
+                        nml_iterator()
+                    )
+                    mesh_trans.prepare_uv(
+                        mesh_visitor.get_vertex_uv_count(),
+                        uv_iterator()
+                    )
+                    # prepare mtl slots
+                    mesh_trans.prepare_mtl_slot(
+                        mesh_visitor.get_material_slot_count(),
+                        mtl_iterator()
+                    )
+                    # prepare face
+                    mesh_trans.prepare_face(
+                        mesh_visitor.get_face_count(),
+                        face_idx_iterator(0),
+                        face_idx_iterator(1),
+                        face_idx_iterator(2),
+                        face_mtl_iterator()
+                    )
+
+                    # parse to vtmesh
+                    mesh_trans.parse(writer, vtmesh)
+
+                # end of mesh trans
+            # end of mesh visitor
+        # end of temp mesh
+
+        # step
+        progress.step()
+
+    # leave progress and return
+    progress.leave_substeps()
+    return tuple(material_crets)
+
+def _export_virtools_materials(
+        writer: bmap.BMFileWriter,
+        progress: ProgressReport,
+        material_crets: tuple[_TMaterialPair, ...]
+        ) -> tuple[_TTexturePair, ...]:
+    # create virtools mesh
+    texture_crets: list[_TTexturePair] = []
+    texture_cret_map: dict[bpy.types.Image, bmap.BMTexture] = {}
+    # start saving
+    progress.enter_substeps(len(material_crets), "Saving Materials")
+
+    for material, vtmaterial in material_crets:
+        # set name
+        vtmaterial.set_name(material.name)
+
+        # step
+        progress.step()
+
+    # leave progress and return
+    progress.leave_substeps()
+    return tuple(texture_crets)
 
 def _save_virtools_document(
         writer: bmap.BMFileWriter,
