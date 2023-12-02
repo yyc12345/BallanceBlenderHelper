@@ -88,7 +88,8 @@ def _export_virtools(file_name_: str, encodings_: tuple[str], compress_level_: i
                 # export material
                 texture_crets: tuple[_TTexturePair, ...] = _export_virtools_materials(
                     writer, progress, material_crets)
-
+                # export texture
+                _export_virtools_textures(writer, progress, texture_crets)
 
                 # save document
                 _save_virtools_document(
@@ -325,9 +326,54 @@ def _export_virtools_materials(
     # start saving
     progress.enter_substeps(len(material_crets), "Saving Materials")
 
-    for material, vtmaterial in material_crets:
+    for mtl, vtmaterial in material_crets:
         # set name
-        vtmaterial.set_name(material.name)
+        vtmaterial.set_name(mtl.name)
+
+        # get raw mtl
+        rawmtl: PROP_virtools_material.RawVirtoolsMaterial = PROP_virtools_material.get_raw_virtools_material(mtl)
+
+        # apply vt material
+        vtmaterial.set_diffuse(rawmtl.mDiffuse)
+        vtmaterial.set_ambient(rawmtl.mAmbient)
+        vtmaterial.set_specular(rawmtl.mSpecular)
+        vtmaterial.set_emissive(rawmtl.mEmissive)
+        vtmaterial.set_specular_power(rawmtl.mSpecularPower)
+
+        # apply assoc texture
+        if rawmtl.mTexture is not None:
+            # create or get new one vt texture
+            vttexture: bmap.BMTexture | None = texture_cret_map.get(rawmtl.mTexture, None)
+            if vttexture is None:
+                vttexture = writer.create_texture()
+                texture_cret_map[rawmtl.mTexture] = vttexture
+                texture_crets.append((rawmtl.mTexture, vttexture))
+            # assign texture
+            vtmaterial.set_texture(vttexture)
+        else:
+            vtmaterial.set_texture(None)
+        
+        vtmaterial.set_texture_border_color(rawmtl.mTextureBorderColor)
+
+        vtmaterial.set_texture_blend_mode(rawmtl.mTextureBlendMode)
+        vtmaterial.set_texture_min_mode(rawmtl.mTextureMinMode)
+        vtmaterial.set_texture_mag_mode(rawmtl.mTextureMagMode)
+        vtmaterial.set_texture_address_mode(rawmtl.mTextureAddressMode)
+
+        vtmaterial.set_source_blend(rawmtl.mSourceBlend)
+        vtmaterial.set_dest_blend(rawmtl.mDestBlend)
+        vtmaterial.set_fill_mode(rawmtl.mFillMode)
+        vtmaterial.set_shade_mode(rawmtl.mShadeMode)
+
+        vtmaterial.set_alpha_test_enabled(rawmtl.mEnableAlphaTest)
+        vtmaterial.set_alpha_blend_enabled(rawmtl.mEnableAlphaBlend)
+        vtmaterial.set_perspective_correction_enabled(rawmtl.mEnablePerspectiveCorrection)
+        vtmaterial.set_z_write_enabled(rawmtl.mEnableZWrite)
+        vtmaterial.set_two_sided_enabled(rawmtl.mEnableTwoSided)
+
+        vtmaterial.set_alpha_ref(rawmtl.mAlphaRef)
+        vtmaterial.set_alpha_func(rawmtl.mAlphaFunc)
+        vtmaterial.set_z_func(rawmtl.mZFunc)
 
         # step
         progress.step()
@@ -335,6 +381,24 @@ def _export_virtools_materials(
     # leave progress and return
     progress.leave_substeps()
     return tuple(texture_crets)
+
+def _export_virtools_textures(
+        writer: bmap.BMFileWriter,
+        progress: ProgressReport,
+        texture_crets: tuple[_TTexturePair, ...]
+        ) -> None:
+    # start saving
+    progress.enter_substeps(len(texture_crets), "Saving Textures")
+
+    for tex, vttexture in texture_crets:
+        # set name
+        vttexture.set_name(tex.name)
+
+        # step
+        progress.step()
+
+    # leave progress and return
+    progress.leave_substeps()
 
 def _save_virtools_document(
         writer: bmap.BMFileWriter,
