@@ -2,13 +2,6 @@ import bpy
 import typing, enum
 from . import UTIL_functions, UTIL_virtools_types
 
-# Annotation
-
-g_Annotation_VXMESH_LITMODE: dict[int, UTIL_virtools_types.EnumAnnotation] = {
-    UTIL_virtools_types.VXMESH_LITMODE.VX_PRELITMESH.value: UTIL_virtools_types.EnumAnnotation("Prelit", "Lighting use color information store with vertices "),
-    UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH.value: UTIL_virtools_types.EnumAnnotation("Lit", "Lighting is done by renderer using normals and face material information. "),
-}
-
 # Raw Data
 
 class RawVirtoolsMesh():
@@ -29,7 +22,7 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
         description = "Lighting mode of the mesh.",
         items = UTIL_virtools_types.EnumPropHelper.generate_items(
             UTIL_virtools_types.VXMESH_LITMODE,
-            g_Annotation_VXMESH_LITMODE
+            UTIL_virtools_types.g_Annotation_VXMESH_LITMODE
         ),
         default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMesh.cDefaultLitMode)
     )

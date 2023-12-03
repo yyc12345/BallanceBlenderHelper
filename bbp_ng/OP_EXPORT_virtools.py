@@ -12,6 +12,21 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     bl_label = "Export Virtools File"
     bl_options = {'PRESET'}
 
+    texture_save_opt: bpy.props.EnumProperty(
+        name = "Global Texture Save Options",
+        description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
+        items = UTIL_virtools_types.EnumPropHelper.generate_items(
+            UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
+            UTIL_virtools_types.g_Annotation_CK_TEXTURE_SAVEOPTIONS
+        ),
+        default = UTIL_virtools_types.EnumPropHelper.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
+    )
+
+    use_compress: bpy.props.BoolProperty(
+        name="Use Compress",
+        default = True,
+    )
+
     compress_level: bpy.props.IntProperty(
         name = "Compress Level",
         description = "The ZLib compress level used by Virtools Engine when saving composition.",
@@ -41,6 +56,8 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
             _export_virtools(
                 self.general_get_filename(),
                 self.general_get_vt_encodings(),
+                UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS, self.texture_save_opt),
+                self.use_compress,
                 self.compress_level,
                 objls
             )
@@ -55,14 +72,26 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         layout.separator()
         layout.label(text = 'Virtools Params')
         self.draw_virtools_params(layout)
-        layout.prop(self, 'compress_level')
+        layout.label(text = 'Global Texture Save Option')
+        layout.prop(self, 'texture_save_opt', text = '')
+        layout.prop(self, 'use_compress')
+        if self.use_compress:
+            layout.prop(self, 'compress_level')
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
 _TMaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
 _TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
 
-def _export_virtools(file_name_: str, encodings_: tuple[str], compress_level_: int, export_objects: tuple[bpy.types.Object, ...]) -> None:
+def _export_virtools(
+        file_name_: str, 
+        encodings_: tuple[str], 
+        texture_save_opt_: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
+        use_compress_: bool,
+        compress_level_: int, 
+        export_objects: tuple[bpy.types.Object, ...]
+    ) -> None:
+
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
         print(f'Virtools Engine Temp: {vt_temp_folder}')
@@ -93,7 +122,7 @@ def _export_virtools(file_name_: str, encodings_: tuple[str], compress_level_: i
 
                 # save document
                 _save_virtools_document(
-                    writer, progress, file_name_, compress_level_)
+                    writer, progress, file_name_, texture_save_opt_, use_compress_, compress_level_)
 
 def _prepare_virtools_3dobjects(
         writer: bmap.BMFileWriter,
@@ -423,11 +452,13 @@ def _save_virtools_document(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
         file_name: str,
+        texture_save_opt: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
+        use_compress: bool,
         compress_level: int
         ) -> None:
     
     progress.enter_substeps(1, "Saving Document")
-    writer.save(file_name, compress_level)
+    writer.save(file_name, texture_save_opt, use_compress, compress_level)
     progress.step()
     progress.leave_substeps()
     
