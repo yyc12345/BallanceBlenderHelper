@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_icons_manager
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams):
@@ -390,12 +390,34 @@ def _export_virtools_textures(
     # start saving
     progress.enter_substeps(len(texture_crets), "Saving Textures")
 
-    for tex, vttexture in texture_crets:
-        # set name
-        vttexture.set_name(tex.name)
+    # create another temp folder for non-ballance texture saving
+    with tempfile.TemporaryDirectory() as nonballance_temp:
+        print(f'Non-Ballance Texture Temp: {nonballance_temp}')
 
-        # step
-        progress.step()
+        for tex, vttexture in texture_crets:
+            # set name
+            vttexture.set_name(tex.name)
+
+            # set texture cfg
+            rawtex: PROP_virtools_texture.RawVirtoolsTexture = PROP_virtools_texture.get_raw_virtools_texture(tex)
+            vttexture.set_save_options(rawtex.mSaveOptions)
+            vttexture.set_video_format(rawtex.mVideoFormat)
+
+            # save core texture
+            # load ballance textures to vt engine from external ref path
+            # load other textures to vt engine from temp folder.
+            # no need to distinguish save options
+            try_filepath: str | None = UTIL_ballance_texture.get_ballance_texture_filename(
+                UTIL_ballance_texture.get_texture_filepath(tex))
+            if try_filepath is None:
+                # non-ballance file, save in temp and change file path to point to it.
+                try_filepath = UTIL_ballance_texture.generate_other_texture_save_path(tex, nonballance_temp)
+                UTIL_ballance_texture.save_other_texture(tex, try_filepath)
+            # load into vt engine
+            vttexture.load_image(try_filepath)
+
+            # step
+            progress.step()
 
     # leave progress and return
     progress.leave_substeps()

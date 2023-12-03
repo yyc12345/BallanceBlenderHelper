@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams):
@@ -102,6 +102,12 @@ def _import_virtools_textures(
                 else:
                     # load as other textures
                     tex = UTIL_ballance_texture.load_other_texture(texpath_to_load)
+
+            # set texture cfg
+            rawtex: PROP_virtools_texture.RawVirtoolsTexture = PROP_virtools_texture.RawVirtoolsTexture()
+            rawtex.mSaveOptions = vttexture.get_save_options()
+            rawtex.mVideoFormat = vttexture.get_video_format()
+            PROP_virtools_texture.set_raw_virtools_texture(tex, rawtex)
 
             # rename and insert it to map
             tex.name = UTIL_virtools_types.virtools_name_regulator(vttexture.get_name())

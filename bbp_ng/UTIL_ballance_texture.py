@@ -15,9 +15,9 @@ from . import UTIL_virtools_types, UTIL_functions
 #  # bmx loading example
 #  bmx_texture = blabla()
 #  if bmx_texture.is_external(): 
-#      tex = PROP_virtools_texture.load_ballance_texture(bmx_texture.filename)
+#      tex = UTIL_ballance_texture.load_ballance_texture(bmx_texture.filename)
 #  else: 
-#      tex = PROP_virtools_texture.load_other_texture(os.path.join(tempfolder, 'Textures', bmx_texture.filename))
+#      tex = UTIL_ballance_texture.load_other_texture(os.path.join(tempfolder, 'Textures', bmx_texture.filename))
 #  texture_process(tex) # process loaded texture
 #  
 #  # nmo loading example
@@ -29,13 +29,13 @@ from . import UTIL_virtools_types, UTIL_functions
 #  if vt_texture.is_original_file() or vt_texture.is_external():
 #      place_to_load = vt_texture.filename
 #  
-#  try_filename = PROP_virtools_texture.get_ballance_texture_filename(place_to_load)
+#  try_filename = UTIL_ballance_texture.get_ballance_texture_filename(place_to_load)
 #  if try_filename:
 #      # load as ballance texture
-#      tex = PROP_virtools_texture.load_ballance_texture(try_filename)
+#      tex = UTIL_ballance_texture.load_ballance_texture(try_filename)
 #  else:
 #      # load as other texture
-#      tex = PROP_virtools_texture.load_other_texture(place_to_load)
+#      tex = UTIL_ballance_texture.load_other_texture(place_to_load)
 #  texture_process(tex) # process loaded texture
 #  
 #  ```
@@ -43,13 +43,13 @@ from . import UTIL_virtools_types, UTIL_functions
 #  ```
 #  # bmx saving example
 #  tex: bpy.types.Image = texture_getter()
-#  try_filename = PROP_virtools_texture.get_ballance_texture_filename(
-#      PROP_virtools_texture.get_texture_filepath(tex))
+#  try_filename = UTIL_ballance_texture.get_ballance_texture_filename(
+#      UTIL_ballance_texture.get_texture_filepath(tex))
 #  if try_filename:
 #      write_external_filename(try_filename)
 #  else:
-#      realpath = PROP_virtools_texture.generate_other_texture_save_path(tex, tempfolder)
-#      PROP_virtools_texture.save_other_texture(tex, realpath)
+#      realpath = UTIL_ballance_texture.generate_other_texture_save_path(tex, tempfolder)
+#      UTIL_ballance_texture.save_other_texture(tex, realpath)
 #      write_filename(realpath)
 #  
 #  ```
@@ -285,7 +285,7 @@ def load_ballance_texture(texname: str) -> bpy.types.Image:
     """
     
     # try getting preset (also check texture name)
-    tex_preset: PROP_virtools_texture.RawVirtoolsTexture = g_BallanceTexturePresets.get(texname, None)
+    tex_preset: PROP_virtools_texture.RawVirtoolsTexture | None = g_BallanceTexturePresets.get(texname, None)
     if tex_preset is None:
         raise UTIL_functions.BBPException("Invalid Ballance texture file name.")
     
@@ -350,6 +350,6 @@ def save_other_texture(tex: bpy.types.Image, filepath: str) -> None:
     @param tex[in] The saving texture
     @param filepath[in] The absolute path to saving file.
     """
-    tex.save(filepath)
+    tex.save(filepath = filepath)
 
 #endregion
