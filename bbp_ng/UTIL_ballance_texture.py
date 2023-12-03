@@ -350,6 +350,7 @@ def save_other_texture(tex: bpy.types.Image, filepath: str) -> None:
     @param tex[in] The saving texture
     @param filepath[in] The absolute path to saving file.
     """
+    # MARK: must use keyword to assign param otherwise blender will throw error.
     tex.save(filepath = filepath)
 
 #endregion
