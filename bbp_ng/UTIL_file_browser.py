@@ -31,6 +31,9 @@ class ImportBallanceImage(bpy_extras.io_utils.ImportHelper):
         options = {'HIDDEN'}
     )
 
+    def general_set_filename(self, filename: str) -> None:
+        self.filepath = filename
+
     def general_get_filename(self) -> str:
         return self.filepath
     

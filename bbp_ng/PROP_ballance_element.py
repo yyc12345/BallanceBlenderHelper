@@ -318,7 +318,7 @@ class BBP_UL_ballance_elements(bpy.types.UIList):
     def draw_item(self, context, layout: bpy.types.UILayout, data, item: BBP_PG_ballance_element, icon, active_data, active_propname):
         if item.element_name != "" and item.mesh_ptr is not None:
             layout.label(text = item.element_name, translate = False)
-            layout.label(text = item.mesh_ptr, translate = False, icon = 'MESH_DATA')
+            layout.label(text = item.mesh_ptr.name, translate = False, icon = 'MESH_DATA')
 
 class BBP_OT_reset_ballance_elements(bpy.types.Operator):
     """Reset all Meshes of Loaded Ballance Elements to Original Geometry."""

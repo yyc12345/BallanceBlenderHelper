@@ -51,3 +51,13 @@ def message_box(message: tuple[str, ...], title: str, icon: str):
             layout.label(text=item, translate=False)
 
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
+
+def move_to_cursor(obj: bpy.types.Object):
+    obj.location = bpy.context.scene.cursor.location
+
+def add_into_scene_and_move_to_cursor(obj: bpy.types.Object):
+    move_to_cursor(obj)
+
+    view_layer = bpy.context.view_layer
+    collection = view_layer.active_layer_collection.collection
+    collection.objects.link(obj)

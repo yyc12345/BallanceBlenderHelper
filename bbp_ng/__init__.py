@@ -32,6 +32,7 @@ UTIL_icons_manager.register()
 from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_ballance_element, PROP_virtools_group
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
+from . import OP_ADDS_component
 
 #region Menu
 
@@ -46,6 +47,43 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout = self.layout
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
+
+class BBP_MT_AddFloorMenu(bpy.types.Menu):
+    """Add Ballance Floor"""
+    bl_idname = "BBP_MT_AddFloorMenu"
+    bl_label = "Floors"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.label(text="Basic floor")
+
+        layout.separator()
+        layout.label(text="Derived floor")
+class BBP_MT_AddRailMenu(bpy.types.Menu):
+    """Add Ballance Rail"""
+    bl_idname = "BBP_MT_AddRailMenu"
+    bl_label = "Rails"
+
+    def draw(self, context):
+        layout = self.layout
+class BBP_MT_AddElementsMenu(bpy.types.Menu):
+    """Add Ballance Elements"""
+    bl_idname = "BBP_MT_AddElementsMenu"
+    bl_label = "Elements"
+    def draw(self, context):
+        layout = self.layout
+
+        layout.label(text="Basic Elements")
+        OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(layout)
+        
+        layout.separator()
+        layout.label(text="Duplicated Elements")
+        #OBJS_add_components.BBP_OT_add_components_dup.draw_blc_menu(layout)
+
+        layout.separator()
+        layout.label(text="Elements Pair")
+        #OBJS_add_components.BBP_OT_add_components_series.draw_blc_menu(layout)
 
 # ===== Menu Drawer =====
 
@@ -65,12 +103,25 @@ def menu_drawer_view3d(self, context):
     layout: bpy.types.UILayout = self.layout
     layout.menu(BBP_MT_View3DMenu.bl_idname)
 
+def menu_drawer_add(self, context):
+    layout: bpy.types.UILayout = self.layout
+    layout.separator()
+    layout.label(text="Ballance")
+    layout.menu(BBP_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
+    layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
+    layout.menu(BBP_MT_AddElementsMenu.bl_idname, icon='MESH_ICOSPHERE')
+    #layout.operator_menu_enum(
+    #    OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
+    #    "elements_type", icon='MESH_ICOSPHERE', text="Elements")
 #endregion
 
 #region Register and Unregister.
 
 g_BldClasses: tuple[typing.Any, ...] = (
     BBP_MT_View3DMenu,
+    BBP_MT_AddFloorMenu,
+    BBP_MT_AddRailMenu,
+    BBP_MT_AddElementsMenu
 )
 
 class MenuEntry():
@@ -86,6 +137,7 @@ g_BldMenus: tuple[MenuEntry, ...] = (
      MenuEntry(bpy.types.VIEW3D_MT_editor_menus, False, menu_drawer_view3d),
      MenuEntry(bpy.types.TOPBAR_MT_file_import, True, menu_drawer_import),
      MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
+     MenuEntry(bpy.types.VIEW3D_MT_add, True, menu_drawer_add),
 )
 
 def register() -> None:
@@ -106,6 +158,7 @@ def register() -> None:
 
     OP_UV_rail_uv.register()
     OP_UV_flatten_uv.register()
+    OP_ADDS_component.register()
 
     # register other classes
     for cls in g_BldClasses:
@@ -128,6 +181,7 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_ADDS_component.unregister()
     OP_UV_flatten_uv.unregister()
     OP_UV_rail_uv.unregister()
 

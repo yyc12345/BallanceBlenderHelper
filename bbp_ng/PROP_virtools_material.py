@@ -1,7 +1,7 @@
 import bpy
 import typing, enum
-from . import UTIL_virtools_types, UTIL_functions
-from . import PROP_virtools_texture
+from . import UTIL_virtools_types, UTIL_functions, UTIL_ballance_texture, UTIL_file_browser
+from . import PROP_virtools_texture, PROP_preferences
 
 class RawVirtoolsMaterial():
     
@@ -616,6 +616,50 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
         preset_virtools_material(mtl, expected_preset)
         return {'FINISHED'}
 
+class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.ImportBallanceImage):
+    """Import and Assign Texture Directly"""
+    bl_idname = "bbp.direct_set_virtools_texture"
+    bl_label = "Import and Assign Texture"
+    bl_options = {'UNDO'}
+    
+    @classmethod
+    def poll(cls, context):
+        # ballance texture order this
+        if not PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder(): return False
+        # we only accept panel executing
+        if context.material is None: return False
+        # ok
+        return True
+    
+    def draw(self, context):
+        pass
+
+    def invoke(self, context, event):
+        # preset tex folder
+        self.general_set_filename(PROP_preferences.get_raw_preferences().mBallanceTextureFolder)
+        return UTIL_file_browser.ImportBallanceImage.invoke(self, context, event)
+    
+    def execute(self, context):
+        # get assoc mtl
+        mtl: bpy.types.Material = context.material
+        rawmtl: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
+
+        # import texture according to whether it is ballance texture
+        texture_filepath: str = self.general_get_filename()
+        try_filepath: str | None = UTIL_ballance_texture.get_ballance_texture_filename(texture_filepath)
+        tex: bpy.types.Image
+        if try_filepath is None:
+            # load as other texture
+            tex = UTIL_ballance_texture.load_other_texture(texture_filepath)
+        else:
+            # load as ballance texture
+            tex = UTIL_ballance_texture.load_ballance_texture(try_filepath)
+        
+        # assign texture
+        rawmtl.mTexture = tex
+        set_raw_virtools_material(mtl, rawmtl)
+        return {'FINISHED'}
+
 #endregion
 
 class BBP_PT_virtools_material(bpy.types.Panel):
@@ -655,7 +699,11 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         
         layout.separator()
         layout.label(text="Texture Parameters")
-        layout.prop(props, 'texture', emboss = True)
+        # texture prop with direct importing
+        sublay = layout.row()
+        sublay.prop(props, 'texture', emboss = True)
+        sublay.operator(BBP_OT_direct_set_virtools_texture.bl_idname, text = '', icon = 'FILEBROWSER')
+        # texture detail
         if props.texture is not None:
             # have texture, show texture settings and enclosed by a border.
             boxlayout = layout.box()
@@ -694,6 +742,7 @@ def register():
     bpy.utils.register_class(BBP_PG_virtools_material)
     bpy.utils.register_class(BBP_OT_apply_virtools_material)
     bpy.utils.register_class(BBP_OT_preset_virtools_material)
+    bpy.utils.register_class(BBP_OT_direct_set_virtools_texture)
     bpy.utils.register_class(BBP_PT_virtools_material)
     
     # add into material metadata
@@ -704,6 +753,7 @@ def unregister():
     del bpy.types.Material.virtools_material
 
     bpy.utils.unregister_class(BBP_PT_virtools_material)
+    bpy.utils.unregister_class(BBP_OT_direct_set_virtools_texture)
     bpy.utils.unregister_class(BBP_OT_preset_virtools_material)
     bpy.utils.unregister_class(BBP_OT_apply_virtools_material)
     bpy.utils.unregister_class(BBP_PG_virtools_material)

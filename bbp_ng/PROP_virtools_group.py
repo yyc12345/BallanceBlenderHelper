@@ -109,14 +109,22 @@ class VirtoolsGroupsHelper():
                 return True
         return False
     
+    def intersect_groups(self, gnames: set[str]) -> set[str]:
+        self.__check_valid()
+        return self.__mGroupsSet.intersection(gnames)
+    
     def iterate_groups(self) -> typing.Iterator[str]:
         self.__check_valid()
         return iter(self.__mGroupsSet)
 
-    def clear_groups(self):
+    def clear_groups(self) -> None:
         self.__check_valid()
         self.__mNoChange = False
         self.__mGroupsSet.clear()
+
+    def get_count(self) -> int:
+        self.__check_valid()
+        return len(self.__mGroupsSet)
     
     def __write_to_virtools_groups(self) -> None:
         groups: bpy.types.CollectionProperty = get_virtools_groups(self.__mAssocObj)

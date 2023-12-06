@@ -5,11 +5,11 @@ from . import UTIL_naming_convension
 class RawPreferences():
     cBallanceTextureFolder: typing.ClassVar[str] = ""
     cNoComponentCollection: typing.ClassVar[str] = ""
-    cDefaultNamingConvention: typing.ClassVar[int] = UTIL_naming_convension._EnumPropHelper.get_default_naming_identifier()
+    cDefaultNamingConvention: typing.ClassVar[UTIL_naming_convension.NamingConvention] = UTIL_naming_convension._EnumPropHelper.get_default_naming_identifier()
 
     mBallanceTextureFolder: str
     mNoComponentCollection: str
-    mDefaultNamingConvention: int
+    mDefaultNamingConvention: UTIL_naming_convension.NamingConvention
 
     def __init__(self, **kwargs):
         self.mBallanceTextureFolder = kwargs.get("mBallanceTextureFolder", "")
