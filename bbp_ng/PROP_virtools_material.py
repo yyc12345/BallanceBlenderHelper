@@ -651,9 +651,13 @@ class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.I
         if try_filepath is None:
             # load as other texture
             tex = UTIL_ballance_texture.load_other_texture(texture_filepath)
+            # set texture props
+            PROP_virtools_texture.set_raw_virtools_texture(tex, PROP_virtools_texture.get_nonballance_texture_preset())
         else:
             # load as ballance texture
             tex = UTIL_ballance_texture.load_ballance_texture(try_filepath)
+            # set texture props
+            PROP_virtools_texture.set_raw_virtools_texture(tex, PROP_virtools_texture.get_ballance_texture_preset(try_filepath))
         
         # assign texture
         rawmtl.mTexture = tex

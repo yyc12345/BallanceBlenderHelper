@@ -1,7 +1,7 @@
 import bpy, bpy_extras
 import typing, os
-from . import PROP_preferences, PROP_virtools_texture
-from . import UTIL_virtools_types, UTIL_functions
+from . import PROP_preferences
+from . import UTIL_functions
 
 ## Ballance Texture Usage
 #  The aim of this module is to make sure every Ballance texture only have 1 instance in Blender as much as we can 
@@ -56,6 +56,90 @@ from . import UTIL_virtools_types, UTIL_functions
 
 #region Ballance Texture Assist Functions
 
+_g_BallanceTextureFileNames: set[str] = set((
+    # "atari.avi",
+    "atari.bmp",
+    "Ball_LightningSphere1.bmp",
+    "Ball_LightningSphere2.bmp",
+    "Ball_LightningSphere3.bmp",
+    "Ball_Paper.bmp",
+    "Ball_Stone.bmp",
+    "Ball_Wood.bmp",
+    "Brick.bmp",
+    "Button01_deselect.tga",
+    "Button01_select.tga",
+    "Button01_special.tga",
+    "Column_beige.bmp",
+    "Column_beige_fade.tga",
+    "Column_blue.bmp",
+    "Cursor.tga",
+    "Dome.bmp",
+    "DomeEnvironment.bmp",
+    "DomeShadow.tga",
+    "ExtraBall.bmp",
+    "ExtraParticle.bmp",
+    "E_Holzbeschlag.bmp",
+    "FloorGlow.bmp",
+    "Floor_Side.bmp",
+    "Floor_Top_Border.bmp",
+    "Floor_Top_Borderless.bmp",
+    "Floor_Top_Checkpoint.bmp",
+    "Floor_Top_Flat.bmp",
+    "Floor_Top_Profil.bmp",
+    "Floor_Top_ProfilFlat.bmp",
+    "Font_1.tga",
+    "Gravitylogo_intro.bmp",
+    "HardShadow.bmp",
+    "Laterne_Glas.bmp",
+    "Laterne_Schatten.tga",
+    "Laterne_Verlauf.tga",
+    "Logo.bmp",
+    "Metal_stained.bmp",
+    "Misc_Ufo.bmp",
+    "Misc_UFO_Flash.bmp",
+    "Modul03_Floor.bmp",
+    "Modul03_Wall.bmp",
+    "Modul11_13_Wood.bmp",
+    "Modul11_Wood.bmp",
+    "Modul15.bmp",
+    "Modul16.bmp",
+    "Modul18.bmp",
+    "Modul18_Gitter.tga",
+    "Modul30_d_Seiten.bmp",
+    "Particle_Flames.bmp",
+    "Particle_Smoke.bmp",
+    "PE_Bal_balloons.bmp",
+    "PE_Bal_platform.bmp",
+    "PE_Ufo_env.bmp",
+    "Pfeil.tga",
+    "P_Extra_Life_Oil.bmp",
+    "P_Extra_Life_Particle.bmp",
+    "P_Extra_Life_Shadow.bmp",
+    "Rail_Environment.bmp",
+    "sandsack.bmp",
+    "SkyLayer.bmp",
+    "Sky_Vortex.bmp",
+    "Stick_Bottom.tga",
+    "Stick_Stripes.bmp",
+    "Target.bmp",
+    "Tower_Roof.bmp",
+    "Trafo_Environment.bmp",
+    "Trafo_FlashField.bmp",
+    "Trafo_Shadow_Big.tga",
+    "Tut_Pfeil01.tga",
+    "Tut_Pfeil_Hoch.tga",
+    "Wolken_intro.tga",
+    "Wood_Metal.bmp",
+    "Wood_MetalStripes.bmp",
+    "Wood_Misc.bmp",
+    "Wood_Nailed.bmp",
+    "Wood_Old.bmp",
+    "Wood_Panel.bmp",
+    "Wood_Plain.bmp",
+    "Wood_Plain2.bmp",
+    "Wood_Raft.bmp",
+))
+
 def _get_ballance_texture_folder() -> str:
     """!
     Get Ballance texture folder from preferences.
@@ -88,106 +172,6 @@ def _is_path_equal(path1: str, path2: str) -> bool:
 
 #region Ballance Texture Detect Functions
 
-g_OpaqueBallanceTexturePreset: PROP_virtools_texture.RawVirtoolsTexture = PROP_virtools_texture.RawVirtoolsTexture(
-    mSaveOptions = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL,
-    mVideoFormat = UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB1555,
-)
-g_TransparentBallanceTexturePreset: PROP_virtools_texture.RawVirtoolsTexture = PROP_virtools_texture.RawVirtoolsTexture(
-    mSaveOptions = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL,
-    mVideoFormat = UTIL_virtools_types.VX_PIXELFORMAT._32_ARGB8888,
-)
-g_NonBallanceTexturePreset: PROP_virtools_texture.RawVirtoolsTexture = PROP_virtools_texture.RawVirtoolsTexture(
-    mSaveOptions = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA,
-    mVideoFormat = UTIL_virtools_types.VX_PIXELFORMAT._32_ARGB8888,
-)
-
-## The preset collection of all Ballance texture.
-#  Key is texture name and can be used as file name checking.
-#  Value is its preset which can be assigned.
-g_BallanceTexturePresets: dict[str, PROP_virtools_texture.RawVirtoolsTexture] = {
-    # "atari.avi": g_TransparentBallanceTexturePreset,
-    "atari.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_LightningSphere1.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_LightningSphere2.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_LightningSphere3.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_Paper.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_Stone.bmp": g_OpaqueBallanceTexturePreset,
-    "Ball_Wood.bmp": g_OpaqueBallanceTexturePreset,
-    "Brick.bmp": g_OpaqueBallanceTexturePreset,
-    "Button01_deselect.tga": g_TransparentBallanceTexturePreset,
-    "Button01_select.tga": g_TransparentBallanceTexturePreset,
-    "Button01_special.tga": g_TransparentBallanceTexturePreset,
-    "Column_beige.bmp": g_OpaqueBallanceTexturePreset,
-    "Column_beige_fade.tga": g_TransparentBallanceTexturePreset,
-    "Column_blue.bmp": g_OpaqueBallanceTexturePreset,
-    "Cursor.tga": g_TransparentBallanceTexturePreset,
-    "Dome.bmp": g_OpaqueBallanceTexturePreset,
-    "DomeEnvironment.bmp": g_OpaqueBallanceTexturePreset,
-    "DomeShadow.tga": g_TransparentBallanceTexturePreset,
-    "ExtraBall.bmp": g_OpaqueBallanceTexturePreset,
-    "ExtraParticle.bmp": g_OpaqueBallanceTexturePreset,
-    "E_Holzbeschlag.bmp": g_OpaqueBallanceTexturePreset,
-    "FloorGlow.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Side.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_Border.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_Borderless.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_Checkpoint.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_Flat.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_Profil.bmp": g_OpaqueBallanceTexturePreset,
-    "Floor_Top_ProfilFlat.bmp": g_OpaqueBallanceTexturePreset,
-    "Font_1.tga": g_TransparentBallanceTexturePreset,
-    "Gravitylogo_intro.bmp": g_OpaqueBallanceTexturePreset,
-    "HardShadow.bmp": g_OpaqueBallanceTexturePreset,
-    "Laterne_Glas.bmp": g_OpaqueBallanceTexturePreset,
-    "Laterne_Schatten.tga": g_TransparentBallanceTexturePreset,
-    "Laterne_Verlauf.tga": g_TransparentBallanceTexturePreset,
-    "Logo.bmp": g_OpaqueBallanceTexturePreset,
-    "Metal_stained.bmp": g_OpaqueBallanceTexturePreset,
-    "Misc_Ufo.bmp": g_OpaqueBallanceTexturePreset,
-    "Misc_UFO_Flash.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul03_Floor.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul03_Wall.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul11_13_Wood.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul11_Wood.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul15.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul16.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul18.bmp": g_OpaqueBallanceTexturePreset,
-    "Modul18_Gitter.tga": g_TransparentBallanceTexturePreset,
-    "Modul30_d_Seiten.bmp": g_OpaqueBallanceTexturePreset,
-    "Particle_Flames.bmp": g_OpaqueBallanceTexturePreset,
-    "Particle_Smoke.bmp": g_OpaqueBallanceTexturePreset,
-    "PE_Bal_balloons.bmp": g_OpaqueBallanceTexturePreset,
-    "PE_Bal_platform.bmp": g_OpaqueBallanceTexturePreset,
-    "PE_Ufo_env.bmp": g_OpaqueBallanceTexturePreset,
-    "Pfeil.tga": g_TransparentBallanceTexturePreset,
-    "P_Extra_Life_Oil.bmp": g_OpaqueBallanceTexturePreset,
-    "P_Extra_Life_Particle.bmp": g_OpaqueBallanceTexturePreset,
-    "P_Extra_Life_Shadow.bmp": g_OpaqueBallanceTexturePreset,
-    "Rail_Environment.bmp": g_OpaqueBallanceTexturePreset,
-    "sandsack.bmp": g_OpaqueBallanceTexturePreset,
-    "SkyLayer.bmp": g_OpaqueBallanceTexturePreset,
-    "Sky_Vortex.bmp": g_OpaqueBallanceTexturePreset,
-    "Stick_Bottom.tga": g_TransparentBallanceTexturePreset,
-    "Stick_Stripes.bmp": g_OpaqueBallanceTexturePreset,
-    "Target.bmp": g_OpaqueBallanceTexturePreset,
-    "Tower_Roof.bmp": g_OpaqueBallanceTexturePreset,
-    "Trafo_Environment.bmp": g_OpaqueBallanceTexturePreset,
-    "Trafo_FlashField.bmp": g_OpaqueBallanceTexturePreset,
-    "Trafo_Shadow_Big.tga": g_TransparentBallanceTexturePreset,
-    "Tut_Pfeil01.tga": g_TransparentBallanceTexturePreset,
-    "Tut_Pfeil_Hoch.tga": g_TransparentBallanceTexturePreset,
-    "Wolken_intro.tga": g_TransparentBallanceTexturePreset,
-    "Wood_Metal.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_MetalStripes.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Misc.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Nailed.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Old.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Panel.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Plain.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Plain2.bmp": g_OpaqueBallanceTexturePreset,
-    "Wood_Raft.bmp": g_OpaqueBallanceTexturePreset,
-}
-
 def get_ballance_texture_filename(texpath: str) -> str | None:
     """!
     Return the filename part for valid Ballance texture path.
@@ -203,7 +187,7 @@ def get_ballance_texture_filename(texpath: str) -> str | None:
     
     # check file name first
     filename: str = os.path.basename(texpath)
-    if filename not in g_BallanceTexturePresets: return None
+    if filename not in _g_BallanceTextureFileNames: return None
 
     # if file name matched, check whether it located in ballance texture folder
     probe: str = os.path.join(_get_ballance_texture_folder(), filename)
@@ -284,9 +268,8 @@ def load_ballance_texture(texname: str) -> bpy.types.Image:
     @return The loaded image.
     """
     
-    # try getting preset (also check texture name)
-    tex_preset: PROP_virtools_texture.RawVirtoolsTexture | None = g_BallanceTexturePresets.get(texname, None)
-    if tex_preset is None:
+    # check texture name
+    if texname not in _g_BallanceTextureFileNames:
         raise UTIL_functions.BBPException("Invalid Ballance texture file name.")
     
     # load image
@@ -294,8 +277,6 @@ def load_ballance_texture(texname: str) -> bpy.types.Image:
     filepath: str = os.path.join(_get_ballance_texture_folder(), texname)
     ret: bpy.types.Image = bpy.data.images.load(filepath, check_existing = True)
 
-    # apply preset and return
-    PROP_virtools_texture.set_raw_virtools_texture(ret, tex_preset)
     return ret
 
 def load_other_texture(texname: str) -> bpy.types.Image:
@@ -321,8 +302,6 @@ def load_other_texture(texname: str) -> bpy.types.Image:
     # then immediately pack it into file.
     ret.pack()
     
-    # apply general non-ballance texture preset and return image
-    PROP_virtools_texture.set_raw_virtools_texture(ret, g_NonBallanceTexturePreset)
     return ret
 
 def generate_other_texture_save_path(tex: bpy.types.Image, file_folder: str) -> str:

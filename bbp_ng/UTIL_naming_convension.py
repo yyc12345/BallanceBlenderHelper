@@ -1,6 +1,6 @@
 import bpy
 import typing, enum, re
-from . import UTIL_functions, UTIL_icons_manager
+from . import UTIL_functions
 from . import PROP_virtools_group
 
 #region Rename Error Reporter
@@ -18,27 +18,84 @@ class _RenameErrorItem():
         self.mErrType = err_t
         self.mDescription = description
 
-class _RenameErrorReporter():
+class RenameErrorReporter():
+    """
+    A basic 'rename error report' using simple prints in console.
+
+    This object can be used as a context manager.
+
+    It supports multiple levels of 'substeps' - you shall always enter at least one substep (because level 0
+    has only one single step, representing the whole 'area' of the progress stuff).
+
+    You should give the object renaming of substeps each time you enter a new one.
+
+    Leaving a substep automatically steps by one the parent level.
+
+    ```
+    with RenameErrorReporter() as reporter:
+        progress.enter_object(obj)
+
+        # process for object with reporter
+        reporter.add_error('fork!')
+
+        progress.leave_object()
+    ```
+    """
+    mAllObjCounter: int
+    mFailedObjCounter: int
+
     mErrList: list[_RenameErrorItem]
     mOldName: str
+    mHasError: bool
 
     def __init__(self):
+        self.mAllObjCounter = 0
+        self.mFailedObjCounter = 0
+        
         self.mErrList = []
         self.mOldName = ""
+        self.mHasError = False
 
     def add_error(self, description: str):
+        self.mHasError = True
         self.mErrList.append(_RenameErrorItem(_RenameErrorType.ERROR, description))
     def add_warning(self, description: str):
         self.mErrList.append(_RenameErrorItem(_RenameErrorType.WARNING, description))
     def add_info(self, description: str):
         self.mErrList.append(_RenameErrorItem(_RenameErrorType.INFO, description))
 
-    def begin_object(self, obj: bpy.types.Object) -> None:
+    def get_all_objs_count(self) -> int: return self.mAllObjCounter
+    def get_failed_objs_count(self) -> int: return self.mFailedObjCounter
+
+    def __enter__(self):
+        # print console report header
+        print('============')
+        print('Rename Report')
+        print('------------')
+        # return self as context
+        return self
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        # print console report tail
+        print('------------')
+        print(f'All / Failed - {self.mAllObjCounter} / {self.mFailedObjCounter}')
+        print('============')
+        # reset variables
+        self.mAllObjCounter = 0
+        self.mFailedObjCounter = 0
+    
+    def enter_object(self, obj: bpy.types.Object) -> None:
+        # inc all counter
+        self.mAllObjCounter += 1
         # assign old name
         self.mOldName = obj.name
-    def end_object(self, obj:bpy.types.Object) -> None:
+    def leave_object(self, obj:bpy.types.Object) -> None:
         # if error list is empty, no need to report
         if len(self.mErrList) == 0: return
+
+        # inc failed if necessary
+        if self.mHasError:
+            self.mFailedObjCounter += 1
 
         # output header
         # if new name is different with old name, output both of them
@@ -50,10 +107,11 @@ class _RenameErrorReporter():
 
         # output error list with indent
         for item in self.mErrList:
-            print('\t' + _RenameErrorReporter.__erritem_to_string(item))
+            print('\t' + RenameErrorReporter.__erritem_to_string(item))
 
         # clear error list for next object
         self.mErrList.clear()
+        self.mHasError = False
 
     @staticmethod
     def __errtype_to_string(err_v: _RenameErrorType) -> str:
@@ -64,7 +122,7 @@ class _RenameErrorReporter():
             case _: raise UTIL_functions.BBPException("Unknown error type.")
     @staticmethod
     def __erritem_to_string(item: _RenameErrorItem) -> str:
-        return f'[{_RenameErrorReporter.__errtype_to_string(item.mErrType)}]\t{item.mDescription}'
+        return f'[{RenameErrorReporter.__errtype_to_string(item.mErrType)}]\t{item.mDescription}'
 
 #endregion
 
@@ -124,21 +182,6 @@ class BallanceObjectInfo():
     def create_from_others(cls, basic_type: BallanceObjectType):
         return cls(basic_type)
 
-class _NamingConventionProfile():
-    _TParseFct = typing.Callable[[bpy.types.Object, _RenameErrorReporter | None], BallanceObjectInfo | None]
-    _TSetFct = typing.Callable[[bpy.types.Object,BallanceObjectInfo, _RenameErrorReporter | None], bool]
-
-    mName: str
-    mDesc: str
-    mParseFct: _TParseFct
-    mSetFct: _TSetFct
-
-    def __init__(self, name: str, desc: str, parse_fct: _TParseFct, set_fct: _TSetFct):
-        self.mName = name
-        self.mDesc = desc
-        self.mParseFct = parse_fct
-        self.mSetFct = set_fct
-
 #endregion
 
 #region Naming Convention Declaration
@@ -183,20 +226,20 @@ _g_BlcWood: set[str] = set((
     PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_02.value,
 ))
 
-class _VirtoolsGroupConvention():
+class VirtoolsGroupConvention():
     cRegexGroupSector: typing.ClassVar[re.Pattern] = re.compile('^Sector_(0[1-8]|[1-9][0-9]{1,2}|9)$')
     cRegexComponent: typing.ClassVar[re.Pattern] = re.compile('^(' + '|'.join(_g_BlcNormalComponents) + ')_(0[1-9]|[1-9][0-9])_.*$')
     cRegexPC: typing.ClassVar[re.Pattern] = re.compile('^PC_TwoFlames_(0[1-7])$')
     cRegexPR: typing.ClassVar[re.Pattern] = re.compile('^PR_Resetpoint_(0[1-8])$')
 
     @staticmethod
-    def __get_pcpr_from_name(name: str, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
-        regex_result = _VirtoolsGroupConvention.cRegexPC.match(name)
+    def __get_pcpr_from_name(name: str, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
+        regex_result = VirtoolsGroupConvention.cRegexPC.match(name)
         if regex_result is not None:
             return BallanceObjectInfo.create_from_checkpoint(
                 int(regex_result.group(1))
             )
-        regex_result = _VirtoolsGroupConvention.cRegexPR.match(name)
+        regex_result = VirtoolsGroupConvention.cRegexPR.match(name)
         if regex_result is not None:
             return BallanceObjectInfo.create_from_resetpoint(
                 int(regex_result.group(1))
@@ -212,7 +255,7 @@ class _VirtoolsGroupConvention():
         counter: int = 0
         last_matched_sector: int = 0
         for i in gps:
-            regex_result = _VirtoolsGroupConvention.cRegexGroupSector.match(i)
+            regex_result = VirtoolsGroupConvention.cRegexGroupSector.match(i)
             if regex_result is not None:
                 last_matched_sector = int(regex_result.group(1))
                 counter += 1
@@ -220,9 +263,8 @@ class _VirtoolsGroupConvention():
         if counter != 1: return None
         else: return last_matched_sector
 
-
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
+    def parse_from_object(obj: bpy.types.Object, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
         # create visitor
         with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
             # if no group, we should consider it is decoration or skylayer
@@ -241,7 +283,7 @@ class _VirtoolsGroupConvention():
                         return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_END)
                     case PROP_virtools_group.VirtoolsGroupsPreset.PC_Checkpoints.value | PROP_virtools_group.VirtoolsGroupsPreset.PR_Resetpoints.value:
                         # these type's data should be gotten from its name
-                        return _VirtoolsGroupConvention.__get_pcpr_from_name(obj.name, reporter)
+                        return VirtoolsGroupConvention.__get_pcpr_from_name(obj.name, reporter)
                     case _:
                         if reporter: reporter.add_error("The match of Unique Component lost.")
                         return None
@@ -255,7 +297,7 @@ class _VirtoolsGroupConvention():
                 # get it
                 # now try get its sector
                 gotten_elements: str = (tuple(inter_gps))[0]
-                gotten_sector: int | None = _VirtoolsGroupConvention.__get_sector_from_groups(gp.iterate_groups())
+                gotten_sector: int | None = VirtoolsGroupConvention.__get_sector_from_groups(gp.iterate_groups())
                 if gotten_sector is None:
                     # fail to get sector
                     if reporter: reporter.add_error("Component detected. But couldn't get sector from CKGroup data.")
@@ -294,7 +336,7 @@ class _VirtoolsGroupConvention():
             return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: RenameErrorReporter | None) -> bool:
         # create visitor
         with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
             # match by basic type
@@ -346,20 +388,11 @@ class _VirtoolsGroupConvention():
                 
         return True
 
+class YYCToolchainConvention():
     @staticmethod
-    def register() -> _NamingConventionProfile:
-        return _NamingConventionProfile(
-            'Virtools Group',
-            'Virtools Group',
-            _VirtoolsGroupConvention.parse_from_object,
-            _VirtoolsGroupConvention.set_to_object
-        )
-
-class _YYCToolchainConvention():
-    @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
+    def parse_from_name(name: str, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
         # check component first
-        regex_result = _VirtoolsGroupConvention.cRegexComponent.match(obj.name)
+        regex_result = VirtoolsGroupConvention.cRegexComponent.match(name)  # use vt one because they are same
         if regex_result is not None:
             return BallanceObjectInfo.create_from_component(
                 regex_result.group(1),
@@ -367,103 +400,105 @@ class _YYCToolchainConvention():
             )
 
         # check PC PR elements
-        regex_result = _VirtoolsGroupConvention.cRegexPC.match(obj.name)
+        regex_result = VirtoolsGroupConvention.cRegexPC.match(name) # use vt one because they are same
         if regex_result is not None:
             return BallanceObjectInfo.create_from_checkpoint(
                 int(regex_result.group(1))
             )
-        regex_result = _VirtoolsGroupConvention.cRegexPR.match(obj.name)
+        regex_result = VirtoolsGroupConvention.cRegexPR.match(name) # use vt one because they are same
         if regex_result is not None:
             return BallanceObjectInfo.create_from_resetpoint(
                 int(regex_result.group(1))
             )
 
         # check other unique elements
-        if obj.name == "PS_FourFlames_01":
+        if name == "PS_FourFlames_01":
             return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_START)
-        if obj.name == "PE_Balloon_01":
+        if name == "PE_Balloon_01":
             return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_END)
 
         # process floors
-        if obj.name.startswith("A_Floor"):
+        if name.startswith("A_Floor"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.FLOOR)
-        if obj.name.startswith("A_Rail"):
+        if name.startswith("A_Rail"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.RAIL)
-        if obj.name.startswith("A_Wood"):
+        if name.startswith("A_Wood"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.WOOD)
-        if obj.name.startswith("A_Stopper"):
+        if name.startswith("A_Stopper"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.STOPPER)
 
         # process others
-        if obj.name.startswith("DepthCubes"):
+        if name.startswith("DepthCubes"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.DEPTH_CUBE)
-        if obj.name.startswith("D_"):
+        if name.startswith("D_"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.DECORATION)
-        if obj.name == 'SkyLayer':
+        if name == 'SkyLayer':
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
         if reporter is not None:
             reporter.add_error("Name match lost.")
         return None
 
+
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
+    def parse_from_object(obj: bpy.types.Object, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
+        return YYCToolchainConvention.parse_from_name(obj.name, reporter)
+        
+    @staticmethod
+    def set_to_name(info: BallanceObjectInfo, reporter: RenameErrorReporter | None) -> str | None:
         match(info.mBasicType):
             case BallanceObjectType.DECORATION:
-                obj.name = 'D_'
+                return 'D_'
             case BallanceObjectType.SKYLAYER:
-                obj.name = 'SkyLayer'
+                return 'SkyLayer'
             
             case BallanceObjectType.LEVEL_START:
-                obj.name = 'PS_FourFlames_01'
+                return 'PS_FourFlames_01'
             case BallanceObjectType.LEVEL_END:
-                obj.name = 'PE_Balloon_01'
+                return 'PE_Balloon_01'
             case BallanceObjectType.CHECKPOINT:
-                obj.name = f'PR_Resetpoint_{info.mSector:0>2d}'
+                return f'PR_Resetpoint_{info.mSector:0>2d}'
             case BallanceObjectType.RESETPOINT:
-                obj.name = f'PC_TwoFlames_{info.mSector:0>2d}'
+                return f'PC_TwoFlames_{info.mSector:0>2d}'
 
             case BallanceObjectType.DEPTH_CUBE:
-                obj.name = 'DepthCubes_'
+                return 'DepthCubes_'
 
             case BallanceObjectType.FLOOR:
-                obj.name = 'A_Floor_'
+                return 'A_Floor_'
             case BallanceObjectType.RAIL:
-                obj.name = 'A_Wood_'
+                return 'A_Wood_'
             case BallanceObjectType.WOOD:
-                obj.name = 'A_Rail_'
+                return 'A_Rail_'
             case BallanceObjectType.STOPPER:
-                obj.name = 'A_Stopper_'
+                return 'A_Stopper_'
 
             case BallanceObjectType.COMPONENT:
-                obj.name = '{}_{:0>2d}_'.format(
+                return '{}_{:0>2d}_'.format(
                     info.mComponentType, info.mSector)
                 
             case _:
                 if reporter is not None:
                     reporter.add_error('No matched info.')
-                return False
+                return None
             
+    @staticmethod
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: RenameErrorReporter | None) -> bool:
+        expect_name: str | None = YYCToolchainConvention.set_to_name(info, reporter)
+        if expect_name is None: return False
+
+        obj.name = expect_name
         return True
 
-    @staticmethod
-    def register() -> _NamingConventionProfile:
-        return _NamingConventionProfile(
-            'YYC Toolchain',
-            'YYC Toolchain name standard.',
-            _YYCToolchainConvention.parse_from_object,
-            _YYCToolchainConvention.set_to_object
-        )
-
-class _ImengyuConvention():
+class ImengyuConvention():
     cRegexComponent: typing.ClassVar[re.Pattern] = re.compile('^(' + '|'.join(_g_BlcNormalComponents) + '):[^:]*:([1-9]|[1-9][0-9])$')
     cRegexPC: typing.ClassVar[re.Pattern] = re.compile('^PC_CheckPoint:([0-9]+)$')
     cRegexPR: typing.ClassVar[re.Pattern] = re.compile('^PR_ResetPoint:([0-9]+)$')
 
     @staticmethod
-    def parse_from_object(obj: bpy.types.Object, reporter: _RenameErrorReporter | None) -> BallanceObjectInfo | None:
+    def parse_from_name(name: str, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
         # check component first
-        regex_result = _ImengyuConvention.cRegexComponent.match(obj.name)
+        regex_result = ImengyuConvention.cRegexComponent.match(name)
         if regex_result is not None:
             return BallanceObjectInfo.create_from_component(
                 regex_result.group(1),
@@ -471,39 +506,39 @@ class _ImengyuConvention():
             )
 
         # check PC PR elements
-        regex_result = _ImengyuConvention.cRegexPC.match(obj.name)
+        regex_result = ImengyuConvention.cRegexPC.match(name)
         if regex_result is not None:
             return BallanceObjectInfo.create_from_checkpoint(
                 int(regex_result.group(1))
             )
-        regex_result = _ImengyuConvention.cRegexPR.match(obj.name)
+        regex_result = ImengyuConvention.cRegexPR.match(name)
         if regex_result is not None:
             return BallanceObjectInfo.create_from_resetpoint(
                 int(regex_result.group(1))
             )
 
         # check other unique elements
-        if obj.name == "PS_LevelStart":
+        if name == "PS_LevelStart":
             return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_START)
-        if obj.name == "PE_LevelEnd":
+        if name == "PE_LevelEnd":
             return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_END)
 
         # process floors
-        if obj.name.startswith("S_Floors"):
+        if name.startswith("S_Floors"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.FLOOR)
-        if obj.name.startswith("S_FloorRails"):
+        if name.startswith("S_FloorRails"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.RAIL)
-        if obj.name.startswith("S_FloorWoods"):
+        if name.startswith("S_FloorWoods"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.WOOD)
-        if obj.name.startswith("S_FloorStopper"):
+        if name.startswith("S_FloorStopper"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.STOPPER)
 
         # process others
-        if obj.name.startswith("DepthTestCubes"):
+        if name.startswith("DepthTestCubes"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.DEPTH_CUBE)
-        if obj.name.startswith("O_"):
+        if name.startswith("O_"):
             return BallanceObjectInfo.create_from_others(BallanceObjectType.DECORATION)
-        if obj.name == 'SkyLayer':
+        if name == 'SkyLayer':
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
         if reporter is not None:
@@ -511,175 +546,57 @@ class _ImengyuConvention():
         return None
 
     @staticmethod
-    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: _RenameErrorReporter | None) -> bool:
+    def parse_from_object(obj: bpy.types.Object, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
+        return ImengyuConvention.parse_from_name(obj.name, reporter)
+
+    @staticmethod
+    def set_to_name(info: BallanceObjectInfo, oldname: str | None, reporter: RenameErrorReporter | None) -> str | None:
         match(info.mBasicType):
             case BallanceObjectType.DECORATION:
-                obj.name = 'O_'
+                return 'O_'
             case BallanceObjectType.SKYLAYER:
-                obj.name = 'SkyLayer'
+                return 'SkyLayer'
             
             case BallanceObjectType.LEVEL_START:
-                obj.name = 'PS_LevelStart'
+                return 'PS_LevelStart'
             case BallanceObjectType.LEVEL_END:
-                obj.name = 'PE_LevelEnd'
+                return 'PE_LevelEnd'
             case BallanceObjectType.CHECKPOINT:
-                obj.name = f'PR_ResetPoint:{info.mSector:d}'
+                return f'PR_ResetPoint:{info.mSector:d}'
             case BallanceObjectType.RESETPOINT:
-                obj.name = f'PC_CheckPoint:{info.mSector:d}'
+                return f'PC_CheckPoint:{info.mSector:d}'
 
             case BallanceObjectType.DEPTH_CUBE:
-                obj.name = 'DepthTestCubes'
+                return 'DepthTestCubes'
 
             case BallanceObjectType.FLOOR:
-                obj.name = 'S_Floors'
+                return 'S_Floors'
             case BallanceObjectType.RAIL:
-                obj.name = 'S_FloorWoods'
+                return 'S_FloorWoods'
             case BallanceObjectType.WOOD:
-                obj.name = 'S_FloorRails'
+                return 'S_FloorRails'
             case BallanceObjectType.STOPPER:
-                obj.name = 'S_FloorStopper'
+                return 'S_FloorStopper'
 
             case BallanceObjectType.COMPONENT:
-                obj.name = '{}:{}:{:d}'.format(
-                    info.mComponentType, obj.name.replace(':', '_'), info.mSector)
+                return '{}:{}:{:d}'.format(
+                    info.mComponentType, 
+                    oldname.replace(':', '_') if oldname is not None else '', 
+                    info.mSector
+                )
                 
             case _:
                 if reporter is not None:
                     reporter.add_error('No matched info.')
-                return False
+                return None
             
+    @staticmethod
+    def set_to_object(obj: bpy.types.Object, info: BallanceObjectInfo, reporter: RenameErrorReporter | None) -> bool:
+        expect_name: str | None = ImengyuConvention.set_to_name(info, obj.name, reporter)
+        if expect_name is None: return False
+
+        obj.name = expect_name
         return True
 
-    @staticmethod
-    def register() -> _NamingConventionProfile:
-        return _NamingConventionProfile(
-            'Imengyu Ballance',
-            'Auto grouping name standard for Imengyu/Ballance.',
-            _ImengyuConvention.parse_from_object,
-            _ImengyuConvention.set_to_object
-        )
 
 #endregion
-
-#region Naming Convention Register
-
-## All available naming conventions
-#  Each naming convention should have a identifier for visiting them.
-#  The identifier is its index in this tuple.
-_g_NamingConventions: list[_NamingConventionProfile] = []
-def _register_naming_convention_with_index(profile: _NamingConventionProfile) -> int:
-    global _g_NamingConventions
-    ret: int = len(_g_NamingConventions)
-    _g_NamingConventions.append(profile)
-    return ret
-
-# register and assign to a enum
-class NamingConvention(enum.IntEnum):
-    VirtoolsGroup = _register_naming_convention_with_index(_VirtoolsGroupConvention.register())
-    YYCToolchain = _register_naming_convention_with_index(_YYCToolchainConvention.register())
-    Imengyu = _register_naming_convention_with_index(_ImengyuConvention.register())
-
-class _EnumPropHelper():
-    """
-    Operate like UTIL_virtools_types.EnumPropHelper
-    Return the identifier (index) of naming convention.
-    """
-
-    @staticmethod
-    def generate_items() -> tuple[tuple, ...]:
-        # create a function to filter Virtools Group profile 
-        # and return index at the same time
-        def naming_convention_iter() -> typing.Iterator[tuple[int, _NamingConventionProfile]]:
-            for item in NamingConvention:
-                if item != NamingConvention.VirtoolsGroup:
-                    yield (item.value, _g_NamingConventions[item.value])
-
-        # token, display name, descriptions, icon, index
-        return tuple(
-            (
-                str(idx), 
-                item.mName, 
-                item.mDesc, 
-                "", 
-                idx
-            ) for idx, item in naming_convention_iter()
-        )
-    
-    @staticmethod
-    def get_selection(prop: str) -> NamingConvention:
-        return NamingConvention(int(prop))
-    
-    @staticmethod
-    def to_selection(val: NamingConvention) -> str:
-        return str(val.value)
-    
-    @staticmethod
-    def get_virtools_group_identifier() -> NamingConvention:
-        # The native naming convention is Virtools Group
-        # We treat it as naming convention because we want use a universal interface to process naming converting.
-        # So Virtools Group can no be seen as a naming convention, but we treat it like naming convention in code.
-        return NamingConvention.VirtoolsGroup
-    
-    @staticmethod
-    def get_default_naming_identifier() -> NamingConvention:
-        # The default fallback naming convention is YYC toolchain
-        return NamingConvention.YYCToolchain
-
-#endregion
-
-def name_setter_core(ident: NamingConvention, info: BallanceObjectInfo, obj: bpy.types.Object) -> None:
-    # get profile
-    profile: _NamingConventionProfile = _g_NamingConventions[ident.value]
-    # set name. don't care whether success.
-    profile.mSetFct(obj, info, None)
-
-def name_converting_core(src_ident: NamingConvention, dst_ident: NamingConvention, objs: typing.Iterable[bpy.types.Object]) -> None:
-    # no convert needed
-    if src_ident == dst_ident: return
-
-    # get convert profile
-    src: _NamingConventionProfile = _g_NamingConventions[src_ident.value]
-    dst: _NamingConventionProfile = _g_NamingConventions[dst_ident.value]
-
-    # create reporter and success counter
-    failed_obj_counter: int = 0
-    all_obj_counter: int = 0
-    err_reporter: _RenameErrorReporter = _RenameErrorReporter()
-
-    # print console report header
-    print('============')
-    print('Rename Report')
-    print('------------')
-
-    # start converting
-    for obj in objs:
-        # inc counter all
-        all_obj_counter += 1
-        # begin object processing
-        err_reporter.begin_object(obj)
-        # parsing from src and set by dst
-        # inc failed counter if failed
-        obj_info: BallanceObjectInfo | None= src.mParseFct(obj, err_reporter)
-        if obj_info is not None:
-            ret: bool = dst.mSetFct(obj, obj_info, err_reporter)
-            if not ret: failed_obj_counter += 1
-        else:
-            failed_obj_counter += 1
-        # end object processing and output err list
-        err_reporter.end_object(obj)
-
-    # print console report tail
-    print('------------')
-    print(f'All / Failed - {all_obj_counter} / {failed_obj_counter}')
-    print('============')
-
-    # popup blender window to notice user
-    UTIL_functions.message_box(
-        (
-            'View console to get more detail.',
-            f'All: {all_obj_counter}',
-            f'Failed: {failed_obj_counter}',
-        ),
-        "Rename Report", 
-        UTIL_icons_manager.BlenderPresetIcons.Info.value
-    )
