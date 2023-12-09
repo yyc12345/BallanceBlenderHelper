@@ -67,23 +67,28 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
-class BBP_MT_AddElementsMenu(bpy.types.Menu):
-    """Add Ballance Elements"""
-    bl_idname = "BBP_MT_AddElementsMenu"
-    bl_label = "Elements"
+class BBP_MT_AddComponentsMenu(bpy.types.Menu):
+    """Add Ballance Components"""
+    bl_idname = "BBP_MT_AddComponentsMenu"
+    bl_label = "Components"
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text="Basic Elements")
+        layout.label(text="Basic Components")
         OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(layout)
         
         layout.separator()
-        layout.label(text="Duplicated Elements")
-        #OBJS_add_components.BBP_OT_add_components_dup.draw_blc_menu(layout)
+        layout.label(text="Nong Components")
+        OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(layout)
 
         layout.separator()
-        layout.label(text="Elements Pair")
-        #OBJS_add_components.BBP_OT_add_components_series.draw_blc_menu(layout)
+        layout.label(text="Series Components")
+        OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(layout)
+        OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(layout)
+
+        layout.separator()
+        layout.label(text="Components Pair")
+        OP_ADDS_component.BBP_OT_add_sector_component_pair.draw_blc_menu(layout)
 
 # ===== Menu Drawer =====
 
@@ -109,10 +114,10 @@ def menu_drawer_add(self, context):
     layout.label(text="Ballance")
     layout.menu(BBP_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
-    layout.menu(BBP_MT_AddElementsMenu.bl_idname, icon='MESH_ICOSPHERE')
+    layout.menu(BBP_MT_AddComponentsMenu.bl_idname, icon='MESH_ICOSPHERE')
     #layout.operator_menu_enum(
     #    OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
-    #    "elements_type", icon='MESH_ICOSPHERE', text="Elements")
+    #    "Components_type", icon='MESH_ICOSPHERE', text="Components")
 #endregion
 
 #region Register and Unregister.
@@ -121,7 +126,7 @@ g_BldClasses: tuple[typing.Any, ...] = (
     BBP_MT_View3DMenu,
     BBP_MT_AddFloorMenu,
     BBP_MT_AddRailMenu,
-    BBP_MT_AddElementsMenu
+    BBP_MT_AddComponentsMenu
 )
 
 class MenuEntry():

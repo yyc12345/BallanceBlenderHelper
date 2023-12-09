@@ -1,4 +1,4 @@
-import bpy
+import bpy, mathutils
 import math, typing, enum, sys
 
 class BBPException(Exception):
@@ -53,11 +53,17 @@ def message_box(message: tuple[str, ...], title: str, icon: str):
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
 
 def move_to_cursor(obj: bpy.types.Object):
-    obj.location = bpy.context.scene.cursor.location
+    # use obj.matrix_world to move, not obj.location because this bug:
+    # https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation
+    # the update of matrix_world after setting location is not immediately.
+    # and calling update() function for view_layer for the translation of each object is not suit for too much objects.
+
+    # obj.location = bpy.context.scene.cursor.location
+    obj.matrix_world = obj.matrix_world @ mathutils.Matrix.Translation(bpy.context.scene.cursor.location - obj.location)
 
 def add_into_scene_and_move_to_cursor(obj: bpy.types.Object):
-    move_to_cursor(obj)
-
     view_layer = bpy.context.view_layer
     collection = view_layer.active_layer_collection.collection
     collection.objects.link(obj)
+
+    move_to_cursor(obj)

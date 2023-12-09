@@ -35,26 +35,48 @@ class BallanceElementType(enum.IntEnum):
     PS_FourFlames = 26
 
 _g_ElementCount: int = len(BallanceElementType)
-_g_ElementNameIdMap: dict[str, int] = dict((entry.name, entry.value) for entry in BallanceElementType)
-_g_ElementIdNameMap: dict[int, str] = dict((entry.value, entry.name) for entry in BallanceElementType)
 
-def get_ballance_element_id(name: str) -> int | None:
+def get_ballance_element_type_from_id(id: int) -> BallanceElementType | None:
     """
-    Get Ballance element ID by its name.
+    Get Ballance element type by its id.
+
+    @param id[in] The id of element
+    @return the type of this Ballance element name distributed by this plugin. or None if providing id is invalid.
+    """
+    try:
+        return BallanceElementType(id)  # https://docs.python.org/zh-cn/3/library/enum.html#enum.EnumType.__call__
+    except ValueError:
+        return None
+
+def get_ballance_element_type_from_name(name: str) -> BallanceElementType | None:
+    """
+    Get Ballance element type by its name.
 
     @param name[in] The name of element
-    @return the ID of this Ballance element name distributed by this plugin. or None if providing name is invalid.
+    @return the type of this Ballance element name distributed by this plugin. or None if providing name is invalid.
     """
-    return _g_ElementNameIdMap.get(name, None)
+    try:
+        return BallanceElementType[name]    # https://docs.python.org/zh-cn/3/library/enum.html#enum.EnumType.__getitem__
+    except KeyError:
+        return None
 
-def get_ballance_element_name(id: int) -> str | None:
+def get_ballance_element_id(ty: BallanceElementType) -> int:
     """
-    Get Ballance element name by its ID
+    Get Ballance element id by its type
 
-    @param id[in] The ID of element
-    @return the name of this Ballance element, or None if ID is invalid.
+    @param ty[in] The type of element
+    @return the id of this Ballance element.
     """
-    return _g_ElementIdNameMap.get(id, None)
+    return ty.value
+
+def get_ballance_element_name(ty: BallanceElementType) -> str:
+    """
+    Get Ballance element name by its type
+
+    @param ty[in] The type of element
+    @return the name of this Ballance element.
+    """
+    return ty.name
 
 def is_ballance_element(name: str) -> bool:
     """
@@ -65,16 +87,16 @@ def is_ballance_element(name: str) -> bool:
     @param name[in] The name of element
     @return True if providing name is Ballance element name.
     """
-    return get_ballance_element_id(name) is not None
+    return get_ballance_element_type_from_name(name) is not None
 
 #endregion
 
 #region Ballance Elements Define & Visitor
 
 class BBP_PG_ballance_element(bpy.types.PropertyGroup):
-    element_name: bpy.props.StringProperty(
-        name = "Element Name",
-        default = ""
+    element_id: bpy.props.IntProperty(
+        name = "Element Id",
+        default = 0
     )
     
     mesh_ptr: bpy.props.PointerProperty(
@@ -94,12 +116,9 @@ def _save_element(mesh: bpy.types.Mesh, filename: str) -> None:
     # write this function and call this function in operator.
     pass
 
-def _load_element(mesh: bpy.types.Mesh, element_id: int) -> None:
+def _load_element(mesh: bpy.types.Mesh, element_type: BallanceElementType) -> None:
     # resolve mesh path
-    element_name: str | None = get_ballance_element_name(element_id)
-    if element_name is None:
-        raise UTIL_functions.BBPException('invalid element id in _load_element()')
-    
+    element_name: str = get_ballance_element_name(element_type)
     element_filename: str = os.path.join(
         os.path.dirname(__file__),
         "meshes",
@@ -208,7 +227,7 @@ class BallanceElementsHelper():
     __mSingletonMutex: typing.ClassVar[bool] = False
     __mIsValid: bool
     __mAssocScene: bpy.types.Scene
-    __mElementMap: dict[int, bpy.types.Mesh]
+    __mElementMap: dict[BallanceElementType, bpy.types.Mesh]
 
     def __init__(self, assoc: bpy.types.Scene):
         self.__mElementMap = {}
@@ -240,36 +259,30 @@ class BallanceElementsHelper():
             self.__mIsValid = False
             BallanceElementsHelper.__mSingletonMutex = False
     
-    def get_element(self, element_id: int) -> bpy.types.Mesh:
+    def get_element(self, element_type: BallanceElementType) -> bpy.types.Mesh:
         if not self.is_valid():
             raise UTIL_functions.BBPException('calling invalid BallanceElementsHelper')
         
         # get exist one
-        mesh: bpy.types.Mesh | None = self.__mElementMap.get(element_id, None)
+        mesh: bpy.types.Mesh | None = self.__mElementMap.get(element_type, None)
         if mesh is not None: 
             return mesh
 
         # if no existing one, create new one
-        new_mesh_name: str | None = get_ballance_element_name(element_id)
-        if new_mesh_name is None: 
-            raise UTIL_functions.BBPException('invalid element id')
+        new_mesh_name: str = get_ballance_element_name(element_type)
         new_mesh: bpy.types.Mesh = bpy.data.meshes.new(new_mesh_name)
 
-        _load_element(new_mesh, element_id)
-        self.__mElementMap[element_id] = new_mesh
+        _load_element(new_mesh, element_type)
+        self.__mElementMap[element_type] = new_mesh
         return new_mesh
 
     def __write_to_ballance_elements(self) -> None:
         elements: bpy.types.CollectionProperty = get_ballance_elements(self.__mAssocScene)
         elements.clear()
 
-        for eleid, elemesh in self.__mElementMap.items():
-            name: str | None = get_ballance_element_name(eleid)
-            if name is None:
-                continue
-
+        for elety, elemesh in self.__mElementMap.items():
             item: BBP_PG_ballance_element = elements.add()
-            item.element_name = name
+            item.element_id = get_ballance_element_id(elety)
             item.mesh_ptr = elemesh
 
     def __read_from_ballance_element(self) -> None:
@@ -280,11 +293,11 @@ class BallanceElementsHelper():
         for item in elements:
             # check requirements
             if item.mesh_ptr is None: continue
-            mesh_id: int | None = get_ballance_element_id(item.element_name)
-            if mesh_id is None: continue
+            element_type: BallanceElementType | None = get_ballance_element_type_from_id(item.element_id)
+            if element_type is None: continue
 
             # add into map
-            self.__mElementMap[mesh_id] = item.mesh_ptr
+            self.__mElementMap[element_type] = item.mesh_ptr
 
 def reset_ballance_elements(scene: bpy.types.Scene) -> None:
     invalid_idx: list[int] = []
@@ -294,13 +307,13 @@ def reset_ballance_elements(scene: bpy.types.Scene) -> None:
     index: int = 0
     item: BBP_PG_ballance_element
     for item in elements:
-        eleid: int | None = get_ballance_element_id(item.element_name)
+        elety: BallanceElementType | None = get_ballance_element_type_from_id(item.element_id)
 
         # load or record invalid entry
-        if eleid is None or item.mesh_ptr is None:
+        if elety is None or item.mesh_ptr is None:
             invalid_idx.append(index)
         else:
-            _load_element(item.mesh_ptr, eleid)
+            _load_element(item.mesh_ptr, elety)
 
         # inc counter
         index += 1
@@ -316,9 +329,13 @@ def reset_ballance_elements(scene: bpy.types.Scene) -> None:
 
 class BBP_UL_ballance_elements(bpy.types.UIList):
     def draw_item(self, context, layout: bpy.types.UILayout, data, item: BBP_PG_ballance_element, icon, active_data, active_propname):
-        if item.element_name != "" and item.mesh_ptr is not None:
-            layout.label(text = item.element_name, translate = False)
-            layout.label(text = item.mesh_ptr.name, translate = False, icon = 'MESH_DATA')
+        # check requirements
+        elety: BallanceElementType | None = get_ballance_element_type_from_id(item.element_id)
+        if elety is None or item.mesh_ptr is None: return
+
+        # draw list item
+        layout.label(text = get_ballance_element_name(elety), translate = False)
+        layout.label(text = item.mesh_ptr.name, translate = False, icon = 'MESH_DATA')
 
 class BBP_OT_reset_ballance_elements(bpy.types.Operator):
     """Reset all Meshes of Loaded Ballance Elements to Original Geometry."""
