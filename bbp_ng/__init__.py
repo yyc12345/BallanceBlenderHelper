@@ -32,7 +32,7 @@ UTIL_icons_manager.register()
 from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_virtools_group, PROP_ballance_element, PROP_bme_material
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
-from . import OP_ADDS_component
+from . import OP_ADDS_component, OP_ADDS_bme
 
 #region Menu
 
@@ -48,18 +48,15 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
 
-class BBP_MT_AddFloorMenu(bpy.types.Menu):
+class BBP_MT_AddBmeMenu(bpy.types.Menu):
     """Add Ballance Floor"""
-    bl_idname = "BBP_MT_AddFloorMenu"
+    bl_idname = "BBP_MT_AddBmeMenu"
     bl_label = "Floors"
 
     def draw(self, context):
         layout = self.layout
-
-        layout.label(text="Basic floor")
-
-        layout.separator()
-        layout.label(text="Derived floor")
+        OP_ADDS_bme.BBP_OT_add_bme_struct.draw_blc_menu(layout)
+        
 class BBP_MT_AddRailMenu(bpy.types.Menu):
     """Add Ballance Rail"""
     bl_idname = "BBP_MT_AddRailMenu"
@@ -67,6 +64,7 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
+        
 class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     """Add Ballance Components"""
     bl_idname = "BBP_MT_AddComponentsMenu"
@@ -112,19 +110,16 @@ def menu_drawer_add(self, context):
     layout: bpy.types.UILayout = self.layout
     layout.separator()
     layout.label(text="Ballance")
-    layout.menu(BBP_MT_AddFloorMenu.bl_idname, icon='MESH_CUBE')
+    layout.menu(BBP_MT_AddBmeMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
     layout.menu(BBP_MT_AddComponentsMenu.bl_idname, icon='MESH_ICOSPHERE')
-    #layout.operator_menu_enum(
-    #    OBJS_add_components.BALLANCE_OT_add_components.bl_idname, 
-    #    "Components_type", icon='MESH_ICOSPHERE', text="Components")
 #endregion
 
 #region Register and Unregister.
 
 g_BldClasses: tuple[typing.Any, ...] = (
     BBP_MT_View3DMenu,
-    BBP_MT_AddFloorMenu,
+    BBP_MT_AddBmeMenu,
     BBP_MT_AddRailMenu,
     BBP_MT_AddComponentsMenu
 )
@@ -165,6 +160,7 @@ def register() -> None:
     OP_UV_rail_uv.register()
     OP_UV_flatten_uv.register()
     OP_ADDS_component.register()
+    OP_ADDS_bme.register()
 
     # register other classes
     for cls in g_BldClasses:
@@ -187,6 +183,7 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_ADDS_bme.unregister()
     OP_ADDS_component.unregister()
     OP_UV_flatten_uv.unregister()
     OP_UV_rail_uv.unregister()
