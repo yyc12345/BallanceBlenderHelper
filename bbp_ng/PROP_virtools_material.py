@@ -456,8 +456,8 @@ class MaterialPresetData():
         self.mDisplayName = display_name
         self.mData = data
 
-g_MaterialPresets: dict[int, MaterialPresetData] = {
-    MaterialPresetType.FloorSide.value: MaterialPresetData(
+_g_MaterialPresets: dict[int, MaterialPresetData] = {
+    MaterialPresetType.FloorSide: MaterialPresetData(
         "Floor Side",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(0.0, 0.0, 0.0),
@@ -467,7 +467,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 0.0
         )
     ),
-    MaterialPresetType.FloorTop.value: MaterialPresetData(
+    MaterialPresetType.FloorTop: MaterialPresetData(
         "Floor Top",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(0.0, 0.0, 0.0),
@@ -477,7 +477,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 100.0
         )
     ),
-    MaterialPresetType.TrafoPaper.value: MaterialPresetData(
+    MaterialPresetType.TrafoPaper: MaterialPresetData(
         "Transform Paper",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(25 / 255.0, 25 / 255.0, 25 / 255.0),
@@ -487,7 +487,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 0.0
         )
     ),
-    MaterialPresetType.TraforWoodStone.value: MaterialPresetData(
+    MaterialPresetType.TraforWoodStone: MaterialPresetData(
         "Transform Stone & Wood",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(25 / 255.0, 25 / 255.0, 25 / 255.0),
@@ -497,7 +497,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 0.0
         )
     ),
-    MaterialPresetType.Rail.value: MaterialPresetData(
+    MaterialPresetType.Rail: MaterialPresetData(
         "Rail",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(0.0, 0.0, 0.0),
@@ -507,7 +507,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 10.0
         )
     ),
-    MaterialPresetType.WoodPath.value: MaterialPresetData(
+    MaterialPresetType.WoodPath: MaterialPresetData(
         "Wood Path",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(2 / 255.0, 2 / 255.0, 2 / 255.0),
@@ -517,7 +517,7 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
             mSpecularPower = 25.0
         )
     ),
-    MaterialPresetType.WoodChip.value: MaterialPresetData(
+    MaterialPresetType.WoodChip: MaterialPresetData(
         "Wood Chip",
         RawVirtoolsMaterial(
             mAmbient = UTIL_virtools_types.VxColor(25 / 255.0, 25 / 255.0, 25 / 255.0),
@@ -529,8 +529,11 @@ g_MaterialPresets: dict[int, MaterialPresetData] = {
     ),
 }
 
+def get_virtools_material_preset(preset_type: MaterialPresetType) -> MaterialPresetData:
+    return _g_MaterialPresets[preset_type]
+
 def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPresetType) -> None:
-    preset_data: MaterialPresetData = g_MaterialPresets[preset_type.value]
+    preset_data: MaterialPresetData = _g_MaterialPresets[preset_type]
     set_raw_virtools_material(mtl, preset_data.mData)
 
 class _MtlPresetEnumPropHelper():
@@ -540,7 +543,7 @@ class _MtlPresetEnumPropHelper():
 
     @staticmethod
     def __get_name(v: MaterialPresetType) -> str:
-        entry: MaterialPresetData | None = g_MaterialPresets.get(v, None)
+        entry: MaterialPresetData | None = _g_MaterialPresets.get(v, None)
         if entry: return entry.mDisplayName
         else: return ""
 

@@ -17,10 +17,10 @@ _g_IconsManager: bpy.utils.previews.ImagePreviewCollection | None = None
 _g_EmptyIcon: int = 0
 _g_IconPrefix: str = "BlcBldPlg_"
 
-_g_FloorIconsMap: dict[str, int] = {}
-_g_FloorIconPrefix: str = _g_IconPrefix + 'Floor_'
-_g_ElementIconsMap: dict[str, int] = {}
-_g_ElementIconPrefix: str = _g_IconPrefix + 'Element_'
+_g_BmeIconsMap: dict[str, int] = {}
+_g_BmeIconPrefix: str = _g_IconPrefix + 'Bme_'
+_g_ComponentIconsMap: dict[str, int] = {}
+_g_ComponentIconPrefix: str = _g_IconPrefix + 'Component_'
 _g_GroupIconsMap: dict[str, int] = {}
 _g_GroupIconPrefix: str = _g_IconPrefix + 'Group_'
 
@@ -55,11 +55,11 @@ def _load_image_folder(
 def get_empty_icon() -> int:
     return _g_EmptyIcon
 
-def get_floor_icon(name: str) -> int | None:
-    return _g_FloorIconsMap.get(name, None)
+def get_bme_icon(name: str) -> int | None:
+    return _g_BmeIconsMap.get(name, None)
 
-def get_element_icon(name: str) -> int | None:
-    return _g_ElementIconsMap.get(name, None)
+def get_component_icon(name: str) -> int | None:
+    return _g_ComponentIconsMap.get(name, None)
 
 def get_group_icon(name: str) -> int | None:
     return _g_GroupIconsMap.get(name, None)
@@ -69,7 +69,7 @@ def get_group_icon(name: str) -> int | None:
 def register():
     global _g_IconsManager
     global _g_EmptyIcon
-    global _g_FloorIconsMap, _g_ElementIconsMap, _g_GroupIconsMap
+    global _g_BmeIconsMap, _g_ComponentIconsMap, _g_GroupIconsMap
 
     # create preview collection and get icon folder
     icons_folder: str = os.path.join(os.path.dirname(__file__), "icons")
@@ -80,18 +80,18 @@ def register():
     _g_IconsManager.load(empty_icon_name, os.path.join(icons_folder, "Empty.png"), 'IMAGE')
     _g_EmptyIcon = _g_IconsManager[empty_icon_name].icon_id
 
-    # load floor, element, group icon
+    # load bme, component, group icon
     _load_image_folder(
-        os.path.join(icons_folder, 'floor'),
+        os.path.join(icons_folder, 'bme'),
         _g_IconsManager,
-        _g_FloorIconsMap,
-        _g_FloorIconPrefix
+        _g_BmeIconsMap,
+        _g_BmeIconPrefix
     )
     _load_image_folder(
-        os.path.join(icons_folder, 'element'),
+        os.path.join(icons_folder, 'component'),
         _g_IconsManager,
-        _g_ElementIconsMap,
-        _g_ElementIconPrefix
+        _g_ComponentIconsMap,
+        _g_ComponentIconPrefix
     )
     _load_image_folder(
         os.path.join(icons_folder, 'group'),
@@ -103,11 +103,11 @@ def register():
 def unregister():
     global _g_IconsManager
     global _g_EmptyIcon
-    global _g_FloorIconsMap, _g_ElementIconsMap, _g_GroupIconsMap
+    global _g_BmeIconsMap, _g_ComponentIconsMap, _g_GroupIconsMap
 
     bpy.utils.previews.remove(_g_IconsManager)
     _g_IconsManager = None
 
-    _g_FloorIconsMap.clear()
-    _g_ElementIconsMap.clear()
+    _g_BmeIconsMap.clear()
+    _g_ComponentIconsMap.clear()
     _g_GroupIconsMap.clear()

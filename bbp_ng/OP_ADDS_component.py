@@ -134,7 +134,7 @@ class EnumPropHelper():
                 str(item.value), 
                 item.name, 
                 "", 
-                UTIL_icons_manager.get_element_icon(PROP_ballance_element.get_ballance_element_name(item)), 
+                UTIL_icons_manager.get_component_icon(PROP_ballance_element.get_ballance_element_name(item)), 
                 item.value
             ) for item in PROP_ballance_element.BallanceElementType
         )
@@ -203,7 +203,7 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
 
             cop = layout.operator(
                 self.bl_idname, text = item_name, 
-                icon_value = UTIL_icons_manager.get_element_icon(item_name)
+                icon_value = UTIL_icons_manager.get_component_icon(item_name)
             )
             cop.component_type = EnumPropHelper.to_selection(item)
 
@@ -239,7 +239,7 @@ class BBP_OT_add_nong_extra_point(bpy.types.Operator, ComponentSectorParam, Comp
     def draw_blc_menu(self, layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_nong_extra_point.bl_idname,
-            icon_value = UTIL_icons_manager.get_element_icon(
+            icon_value = UTIL_icons_manager.get_component_icon(
                 PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.P_Extra_Point)
             )
         )
@@ -286,7 +286,7 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
     def draw_blc_menu(self, layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_tilting_block_series.bl_idname,
-            icon_value = UTIL_icons_manager.get_element_icon(
+            icon_value = UTIL_icons_manager.get_component_icon(
                 PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.P_Modul_41)
             )
         )
@@ -330,7 +330,7 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
     def draw_blc_menu(self, layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_ventilator_series.bl_idname,
-            icon_value = UTIL_icons_manager.get_element_icon(
+            icon_value = UTIL_icons_manager.get_component_icon(
                 PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.P_Modul_18)
             )
         )
@@ -411,7 +411,7 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
     def draw_blc_menu(self, layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_sector_component_pair.bl_idname,
-            icon_value = UTIL_icons_manager.get_element_icon(
+            icon_value = UTIL_icons_manager.get_component_icon(
                 PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.PR_Resetpoint)
             )
         )

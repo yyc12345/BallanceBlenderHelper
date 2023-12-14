@@ -1,0 +1,264 @@
+[
+    {
+        "identifier": "raw_trafo",
+        "showcase": null,
+        "params": [
+            {
+                "field": "trafo_texture",
+                "data": "\"BallWood\""
+            },
+            {
+                "field": "face",
+                "data": "(True, True, True, True, True, True)"
+            }
+        ],
+        "vars": [],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 5, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 5, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 0, -5)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 0, -5)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 5, -5)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 5, -5)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face[0]",
+                "texture": "trafo_texture",
+                "indices": [0, 1, 2, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(0, 0, 1)",
+                    "(0, 0, 1)",
+                    "(0, 0, 1)",
+                    "(0, 0, 1)"
+                ]
+            },
+            {
+                "skip": "not face[1]",
+                "texture": "trafo_texture",
+                "indices": [7, 6, 5, 4],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(0, 0, -1)",
+                    "(0, 0, -1)",
+                    "(0, 0, -1)",
+                    "(0, 0, -1)"
+                ]
+            },
+            {
+                "skip": "not face[2]",
+                "texture": "trafo_texture",
+                "indices": [0, 3, 7, 4],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(-1, 0, 0)",
+                    "(-1, 0, 0)",
+                    "(-1, 0, 0)",
+                    "(-1, 0, 0)"
+                ]
+            },
+            {
+                "skip": "not face[3]",
+                "texture": "trafo_texture",
+                "indices": [5, 6, 2, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(1, 0, 0)",
+                    "(1, 0, 0)",
+                    "(1, 0, 0)",
+                    "(1, 0, 0)"
+                ]
+            },
+            {
+                "skip": "not face[4]",
+                "texture": "trafo_texture",
+                "indices": [4, 5, 1, 0],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)"
+                ]
+            },
+            {
+                "skip": "not face[5]",
+                "texture": "trafo_texture",
+                "indices": [3, 2, 6, 7],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": [
+                    "(1, 0, 0)",
+                    "(1, 0, 0)",
+                    "(1, 0, 0)",
+                    "(1, 0, 0)"
+                ]
+            }
+        ],
+        "instances": []
+    },
+    {
+        "identifier": "wood_trafo",
+        "showcase": {
+            "title": "Wood Trafo",
+            "icon": "WoodTrafo",
+            "cfgs": [
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, True, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallWood\"",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "stone_trafo",
+        "showcase": {
+            "title": "Stone Trafo",
+            "icon": "StoneTrafo",
+            "cfgs": [
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, True, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallStone\"",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "paper_trafo",
+        "showcase": {
+            "title": "Paper Trafo",
+            "icon": "PaperTrafo",
+            "cfgs": [
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, True, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallPaper\"",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

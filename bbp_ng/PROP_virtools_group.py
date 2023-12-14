@@ -234,8 +234,8 @@ def _get_group_icon_by_name(gp_name: str) -> int:
     value: int | None = UTIL_icons_manager.get_group_icon(gp_name)
     if value is not None: return value
 
-    # if failed, get from element. if still failed, return empty icon
-    value = UTIL_icons_manager.get_element_icon(gp_name)
+    # if failed, get from component. if still failed, return empty icon
+    value = UTIL_icons_manager.get_component_icon(gp_name)
     if value is not None: return value
     else: return UTIL_icons_manager.get_empty_icon()
 
