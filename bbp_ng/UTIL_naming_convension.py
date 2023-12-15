@@ -187,43 +187,43 @@ class BallanceObjectInfo():
 #region Naming Convention Declaration
 
 _g_BlcNormalComponents: set[str] = set((
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Extra_Life.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Extra_Point.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Trafo_Paper.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Trafo_Stone.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Trafo_Wood.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Ball_Paper.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Ball_Stone.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Ball_Wood.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Box.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Dome.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_01.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_03.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_08.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_17.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_18.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_19.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_25.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_26.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_29.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_30.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_34.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_37.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.P_Modul_41.value,
+    "P_Extra_Life",
+    "P_Extra_Point",
+    "P_Trafo_Paper",
+    "P_Trafo_Stone",
+    "P_Trafo_Wood",
+    "P_Ball_Paper",
+    "P_Ball_Stone",
+    "P_Ball_Wood",
+    "P_Box",
+    "P_Dome",
+    "P_Modul_01",
+    "P_Modul_03",
+    "P_Modul_08",
+    "P_Modul_17",
+    "P_Modul_18",
+    "P_Modul_19",
+    "P_Modul_25",
+    "P_Modul_26",
+    "P_Modul_29",
+    "P_Modul_30",
+    "P_Modul_34",
+    "P_Modul_37",
+    "P_Modul_41"
 ))
 _g_BlcUniqueComponents: set[str] = set((
-    PROP_virtools_group.VirtoolsGroupsPreset.PS_Levelstart.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.PE_Levelende.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.PC_Checkpoints.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.PR_Resetpoints.value,
+    "PS_Levelstart",
+    "PE_Levelende",
+    "PC_Checkpoints",
+    "PR_Resetpoints"
 ))
 _g_BlcFloor: set[str] = set((
-    PROP_virtools_group.VirtoolsGroupsPreset.Sound_HitID_01.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_01.value,
+    "Sound_HitID_01",
+    "Sound_RollID_01"
 ))
 _g_BlcWood: set[str] = set((
-    PROP_virtools_group.VirtoolsGroupsPreset.Sound_HitID_02.value,
-    PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_02.value,
+    "Sound_HitID_02",
+    "Sound_RollID_02"
 ))
 
 class VirtoolsGroupConvention():
@@ -277,11 +277,11 @@ class VirtoolsGroupConvention():
             if len(inter_gps) == 1:
                 # get it
                 match((tuple(inter_gps))[0]):
-                    case PROP_virtools_group.VirtoolsGroupsPreset.PS_Levelstart.value:
+                    case 'PS_Levelstart':
                         return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_START)
-                    case PROP_virtools_group.VirtoolsGroupsPreset.PE_Levelende.value:
+                    case 'PE_Levelende':
                         return BallanceObjectInfo.create_from_others(BallanceObjectType.LEVEL_END)
-                    case PROP_virtools_group.VirtoolsGroupsPreset.PC_Checkpoints.value | PROP_virtools_group.VirtoolsGroupsPreset.PR_Resetpoints.value:
+                    case 'PC_Checkpoints' | 'PR_Resetpoints':
                         # these type's data should be gotten from its name
                         return VirtoolsGroupConvention.__get_pcpr_from_name(obj.name, reporter)
                     case _:
@@ -312,10 +312,10 @@ class VirtoolsGroupConvention():
                 return None
 
             # distinguish road
-            if gp.contain_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_FloorRails.value):
+            if gp.contain_group('Phys_FloorRails'):
                 # rail
                 return BallanceObjectInfo.create_from_others(BallanceObjectType.RAIL)
-            elif gp.contain_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_Floors.value):
+            elif gp.contain_group('Phys_Floors'):
                 # distinguish it between Floor and Wood
                 floor_result = gp.intersect_groups(_g_BlcFloor)
                 rail_result = gp.intersect_groups(_g_BlcWood)
@@ -326,9 +326,9 @@ class VirtoolsGroupConvention():
                 else:
                     if reporter: reporter.add_warning("Can't distinguish object between Floors and Rails. Suppose it is Floors.")
                     return BallanceObjectInfo.create_from_others(BallanceObjectType.FLOOR)
-            elif gp.contain_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_FloorStopper.value):
+            elif gp.contain_group('Phys_FloorStopper'):
                 return BallanceObjectInfo.create_from_others(BallanceObjectType.STOPPER)
-            elif gp.contain_group(PROP_virtools_group.VirtoolsGroupsPreset.DepthTestCubes.value):
+            elif gp.contain_group('DepthTestCubes'):
                 return BallanceObjectInfo.create_from_others(BallanceObjectType.DEPTH_CUBE)
 
             # no matched
@@ -345,31 +345,31 @@ class VirtoolsGroupConvention():
                 case BallanceObjectType.SKYLAYER: pass  # sky layer do not need group
                 
                 case BallanceObjectType.LEVEL_START:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.PS_Levelstart.value)
+                    gp.add_group('PS_Levelstart')
                 case BallanceObjectType.LEVEL_END:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.PE_Levelende.value)
+                    gp.add_group('PE_Levelende')
                 case BallanceObjectType.CHECKPOINT:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.PC_Checkpoints.value)
+                    gp.add_group('PC_Checkpoints')
                 case BallanceObjectType.RESETPOINT:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.PR_Resetpoints.value)
+                    gp.add_group('PR_Resetpoints')
 
                 case BallanceObjectType.DEPTH_CUBE:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.PE_Levelende.value)
+                    gp.add_group('PE_Levelende')
 
                 case BallanceObjectType.FLOOR:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_Floors.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_HitID_01.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_01.value)
+                    gp.add_group('Phys_Floors')
+                    gp.add_group('Sound_HitID_01')
+                    gp.add_group('Sound_RollID_01')
                 case BallanceObjectType.RAIL:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_FloorRails.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_HitID_02.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_02.value)
+                    gp.add_group('Phys_FloorRails')
+                    gp.add_group('Sound_HitID_02')
+                    gp.add_group('Sound_RollID_02')
                 case BallanceObjectType.WOOD:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_Floors.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_HitID_03.value)
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Sound_RollID_03.value)
+                    gp.add_group('Phys_Floors')
+                    gp.add_group('Sound_HitID_03')
+                    gp.add_group('Sound_RollID_03')
                 case BallanceObjectType.STOPPER:
-                    gp.add_group(PROP_virtools_group.VirtoolsGroupsPreset.Phys_FloorStopper.value)
+                    gp.add_group('Phys_FloorStopper')
 
                 case BallanceObjectType.COMPONENT:
                     # group into component type

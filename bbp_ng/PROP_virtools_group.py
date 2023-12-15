@@ -238,6 +238,13 @@ def _get_group_icon_by_name(gp_name: str) -> int:
     value = UTIL_icons_manager.get_component_icon(gp_name)
     if value is not None: return value
     else: return UTIL_icons_manager.get_empty_icon()
+# blender group name prop helper
+_g_EnumHelper_Group: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+    VirtoolsGroupsPreset,
+    lambda x: x.value,
+    lambda _: '',
+    lambda x: _get_group_icon_by_name(x.value)
+)
 
 class SharedGroupNameInputProperties():
     group_name_source: bpy.props.EnumProperty(
@@ -249,12 +256,9 @@ class SharedGroupNameInputProperties():
     )
     
     preset_group_name: bpy.props.EnumProperty(
-        name="Group Name",
-        description="Pick vanilla Ballance group name.",
-        items=tuple(
-            # token, display name, descriptions, icon, index
-            (str(idx), grp, "", _get_group_icon_by_name(grp), idx) for idx, grp in enumerate(_g_VtGrpPresetValues)
-        ),
+        name = "Group Name",
+        description = "Pick vanilla Ballance group name.",
+        items = _g_EnumHelper_Group.generate_items(),
     )
     
     custom_group_name: bpy.props.StringProperty(
@@ -274,7 +278,7 @@ class SharedGroupNameInputProperties():
         if self.group_name_source == 'CUSTOM':
             return self.custom_group_name
         else:
-            return _g_VtGrpPresetValues[int(self.preset_group_name)]
+            return _g_EnumHelper_Group.get_selection(self.preset_group_name).value
 
 #endregion
 

@@ -67,3 +67,94 @@ def add_into_scene_and_move_to_cursor(obj: bpy.types.Object):
     collection.objects.link(obj)
 
     move_to_cursor(obj)
+
+class EnumPropHelper():
+    """
+    These class contain all functions related to EnumProperty creation for Python Enums
+    """
+
+    # define some type hint
+
+    _TEnumVar = typing.TypeVar('_TEnumVar',  bound = enum.Enum) ##< Mean a variable of enum.Enum's children
+    _TEnum = type[_TEnumVar] ##< Mean the type self which is enum.Enum's children.
+    _TFctName = typing.Callable[[_TEnumVar], str]
+    _TFctDesc = typing.Callable[[_TEnumVar], str]
+    _TFctIcon = typing.Callable[[_TEnumVar], str | int]
+
+    # define class member
+
+    __mTy: _TEnum
+    __mIsIntEnum: bool
+    __mFctName: _TFctName
+    __mFctDesc: _TFctDesc
+    __mFctIcon: _TFctIcon
+
+    def __init__(
+            self, 
+            ty: _TEnum, 
+            fct_name: _TFctName,
+            fct_desc: _TFctDesc,
+            fct_icon: _TFctIcon):
+        # check type
+        if not issubclass(ty, enum.Enum):
+            raise BBPException('invalid type for EnumPropHelper')
+        # assign member
+        self.__mTy = ty
+        self.__mIsIntEnum = issubclass(ty, enum.IntEnum)
+        self.__mFctName = fct_name
+        self.__mFctDesc = fct_desc
+        self.__mFctIcon = fct_icon
+
+    def generate_items(self) -> tuple[tuple[str, str, str, int | str, int], ...]:
+        """
+        Generate a tuple which can be applied to Blender EnumProperty's "items".
+        """
+        # blender enum prop item format:
+        # (token, display name, descriptions, icon, index)
+        if self.__mIsIntEnum:
+            # for intenum, we can use its value as index number directly.
+            # and use the string format of index as blender prop token.
+            return tuple(
+                (
+                    str(member.value), 
+                    self.__mFctName(member), 
+                    self.__mFctDesc(member), 
+                    self.__mFctIcon(member), 
+                    member.value
+                ) for member in self.__mTy
+            )
+        else:
+            # for non-intenum, we need create number index manually for it.
+            # and directly use its value as blender prop token
+            return tuple(
+                (
+                    member.value, 
+                    self.__mFctName(member), 
+                    self.__mFctDesc(member), 
+                    self.__mFctIcon(member), 
+                    idx
+                ) for idx, member in enumerate(self.__mTy)
+            )
+    
+    def get_selection(self, prop: str) -> _TEnumVar:
+        """
+        Return Python enum value from given Blender EnumProp.
+        """
+        # for intenum, param is its string format, we need use int() to convert it first
+        # for non-intenum, param is just its value, we use it directly
+        # then we parse it to python enum type
+        if self.__mIsIntEnum:
+            return self.__mTy(int(prop))
+        else:
+            return self.__mTy(prop)
+    
+    def to_selection(self, val: _TEnumVar) -> str:
+        """
+        Parse Python enum value to Blender EnumProp acceptable string.
+        """
+        # the inversed operation of get_selection().
+        if self.__mIsIntEnum:
+            return str(val.value)
+        else:
+            return val.value
+

@@ -14,17 +14,17 @@ class RawVirtoolsMesh():
         # assign default value for each component
         self.mLitMode = kwargs.get('mLitMode', RawVirtoolsMesh.cDefaultLitMode)
 
+# blender enum prop helper defines
+_g_Helper_VXMESH_LITMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXMESH_LITMODE)
+
 # Blender Property Group
 
 class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
     lit_mode: bpy.props.EnumProperty(
         name = "Lit Mode",
         description = "Lighting mode of the mesh.",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXMESH_LITMODE,
-            UTIL_virtools_types.g_Annotation_VXMESH_LITMODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMesh.cDefaultLitMode)
+        items = _g_Helper_VXMESH_LITMODE.generate_items(),
+        default = _g_Helper_VXMESH_LITMODE.to_selection(RawVirtoolsMesh.cDefaultLitMode)
     )
     
 # Getter Setter
@@ -36,14 +36,14 @@ def get_raw_virtools_mesh(mesh: bpy.types.Mesh) -> RawVirtoolsMesh:
     props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
     rawdata: RawVirtoolsMesh = RawVirtoolsMesh()
 
-    rawdata.mLitMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXMESH_LITMODE, props.lit_mode)
+    rawdata.mLitMode = _g_Helper_VXMESH_LITMODE.get_selection(props.lit_mode)
 
     return rawdata
 
 def set_raw_virtools_mesh(mesh: bpy.types.Mesh, rawdata: RawVirtoolsMesh) -> None:
     props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
 
-    props.lit_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mLitMode)
+    props.lit_mode = _g_Helper_VXMESH_LITMODE.to_selection(rawdata.mLitMode)
 
 # Display Panel
 

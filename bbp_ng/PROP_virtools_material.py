@@ -112,6 +112,18 @@ class RawVirtoolsMaterial():
         # specular power
         self.mSpecularPower = UTIL_functions.clamp_float(self.mSpecularPower, 0.0, 100.0)
 
+#region Blender Enum Prop Helper (Virtools type specified)
+
+_g_Helper_VXTEXTURE_BLENDMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_BLENDMODE)
+_g_Helper_VXTEXTURE_FILTERMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_FILTERMODE)
+_g_Helper_VXTEXTURE_ADDRESSMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_ADDRESSMODE)
+_g_Helper_VXBLEND_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXBLEND_MODE)
+_g_Helper_VXFILL_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXFILL_MODE)
+_g_Helper_VXSHADE_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXSHADE_MODE)
+_g_Helper_VXCMPFUNC: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXCMPFUNC)
+
+#endregion
+
 class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     ambient: bpy.props.FloatVectorProperty(
         name = "Ambient",
@@ -180,81 +192,57 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXTEXTURE_BLENDMODE,
-            UTIL_virtools_types.g_Annotation_VXTEXTURE_BLENDMODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode)
+        items = _g_Helper_VXTEXTURE_BLENDMODE.generate_items(),
+        default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode)
     )
     
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXTEXTURE_FILTERMODE,
-            UTIL_virtools_types.g_Annotation_VXTEXTURE_FILTERMODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode)
+        items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode)
     )
     
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXTEXTURE_FILTERMODE,
-            UTIL_virtools_types.g_Annotation_VXTEXTURE_FILTERMODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode)
+        items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode)
     )
     
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXTEXTURE_ADDRESSMODE,
-            UTIL_virtools_types.g_Annotation_VXTEXTURE_ADDRESSMODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode)
+        items = _g_Helper_VXTEXTURE_ADDRESSMODE.generate_items(),
+        default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode)
     )
     
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXBLEND_MODE,
-            UTIL_virtools_types.g_Annotation_VXBLEND_MODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend)
+        items = _g_Helper_VXBLEND_MODE.generate_items(),
+        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend)
     )
     
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXBLEND_MODE,
-            UTIL_virtools_types.g_Annotation_VXBLEND_MODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultDestBlend)
+        items = _g_Helper_VXBLEND_MODE.generate_items(),
+        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultDestBlend)
     )
     
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXFILL_MODE,
-            UTIL_virtools_types.g_Annotation_VXFILL_MODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultFillMode)
+        items = _g_Helper_VXFILL_MODE.generate_items(),
+        default = _g_Helper_VXFILL_MODE.to_selection(RawVirtoolsMaterial.cDefaultFillMode)
     )
     
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXSHADE_MODE,
-            UTIL_virtools_types.g_Annotation_VXSHADE_MODE
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultShadeMode)
+        items = _g_Helper_VXSHADE_MODE.generate_items(),
+        default = _g_Helper_VXSHADE_MODE.to_selection(RawVirtoolsMaterial.cDefaultShadeMode)
     )
     
     enable_alpha_test: bpy.props.BoolProperty(
@@ -294,21 +282,15 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXCMPFUNC,
-            UTIL_virtools_types.g_Annotation_VXCMPFUNC
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc)
+        items = _g_Helper_VXCMPFUNC.generate_items(),
+        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc)
     )
     
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.VXCMPFUNC,
-            UTIL_virtools_types.g_Annotation_VXCMPFUNC
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(RawVirtoolsMaterial.cDefaultZFunc)
+        items = _g_Helper_VXCMPFUNC.generate_items(),
+        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultZFunc)
     )
 
 #region Getter Setter
@@ -329,15 +311,15 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
     rawdata.mTexture = props.texture
     rawdata.mTextureBorderColor.from_const_rgba(props.texture_border_color)
     
-    rawdata.mTextureBlendMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_BLENDMODE, props.texture_blend_mode)
-    rawdata.mTextureMinMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_FILTERMODE, props.texture_min_mode)
-    rawdata.mTextureMagMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_FILTERMODE, props.texture_mag_mode)
-    rawdata.mTextureAddressMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXTEXTURE_ADDRESSMODE, props.texture_address_mode)
+    rawdata.mTextureBlendMode = _g_Helper_VXTEXTURE_BLENDMODE.get_selection(props.texture_blend_mode)
+    rawdata.mTextureMinMode = _g_Helper_VXTEXTURE_FILTERMODE.get_selection(props.texture_min_mode)
+    rawdata.mTextureMagMode = _g_Helper_VXTEXTURE_FILTERMODE.get_selection(props.texture_mag_mode)
+    rawdata.mTextureAddressMode = _g_Helper_VXTEXTURE_ADDRESSMODE.get_selection(props.texture_address_mode)
     
-    rawdata.mSourceBlend = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXBLEND_MODE, props.source_blend)
-    rawdata.mDestBlend = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXBLEND_MODE, props.dest_blend)
-    rawdata.mFillMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXFILL_MODE, props.fill_mode)
-    rawdata.mShadeMode = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXSHADE_MODE, props.shade_mode)
+    rawdata.mSourceBlend = _g_Helper_VXBLEND_MODE.get_selection(props.source_blend)
+    rawdata.mDestBlend = _g_Helper_VXBLEND_MODE.get_selection(props.dest_blend)
+    rawdata.mFillMode = _g_Helper_VXFILL_MODE.get_selection(props.fill_mode)
+    rawdata.mShadeMode = _g_Helper_VXSHADE_MODE.get_selection(props.shade_mode)
     
     rawdata.mEnableAlphaTest = props.enable_alpha_test
     rawdata.mEnableAlphaBlend = props.enable_alpha_blend
@@ -346,8 +328,8 @@ def get_raw_virtools_material(mtl: bpy.types.Material) -> RawVirtoolsMaterial:
     rawdata.mEnableTwoSided = props.enable_two_sided
     
     rawdata.mAlphaRef = props.alpha_ref
-    rawdata.mAlphaFunc = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXCMPFUNC, props.alpha_func)
-    rawdata.mZFunc = UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.VXCMPFUNC, props.z_func)
+    rawdata.mAlphaFunc = _g_Helper_VXCMPFUNC.get_selection(props.alpha_func)
+    rawdata.mZFunc = _g_Helper_VXCMPFUNC.get_selection(props.z_func)
     
     rawdata.regulate()
     return rawdata
@@ -364,15 +346,15 @@ def set_raw_virtools_material(mtl: bpy.types.Material, rawdata: RawVirtoolsMater
     props.texture = rawdata.mTexture
     props.texture_border_color = rawdata.mTextureBorderColor.to_const_rgba()
     
-    props.texture_blend_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureBlendMode)
-    props.texture_min_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureMinMode)
-    props.texture_mag_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureMagMode)
-    props.texture_address_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mTextureAddressMode)
+    props.texture_blend_mode = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(rawdata.mTextureBlendMode)
+    props.texture_min_mode = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(rawdata.mTextureMinMode)
+    props.texture_mag_mode = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(rawdata.mTextureMagMode)
+    props.texture_address_mode = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(rawdata.mTextureAddressMode)
     
-    props.source_blend = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mSourceBlend)
-    props.dest_blend = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mDestBlend)
-    props.fill_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mFillMode)
-    props.shade_mode = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mShadeMode)
+    props.source_blend = _g_Helper_VXBLEND_MODE.to_selection(rawdata.mSourceBlend)
+    props.dest_blend = _g_Helper_VXBLEND_MODE.to_selection(rawdata.mDestBlend)
+    props.fill_mode = _g_Helper_VXFILL_MODE.to_selection(rawdata.mFillMode)
+    props.shade_mode = _g_Helper_VXSHADE_MODE.to_selection(rawdata.mShadeMode)
     
     props.enable_alpha_test = rawdata.mEnableAlphaTest
     props.enable_alpha_blend = rawdata.mEnableAlphaBlend
@@ -381,8 +363,8 @@ def set_raw_virtools_material(mtl: bpy.types.Material, rawdata: RawVirtoolsMater
     props.enable_two_sided = rawdata.mEnableTwoSided
     
     props.alpha_ref = rawdata.mAlphaRef
-    props.alpha_func = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mAlphaFunc)
-    props.z_func = UTIL_virtools_types.EnumPropHelper.to_selection(rawdata.mZFunc)
+    props.alpha_func = _g_Helper_VXCMPFUNC.to_selection(rawdata.mAlphaFunc)
+    props.z_func = _g_Helper_VXCMPFUNC.to_selection(rawdata.mZFunc)
 
 def apply_to_blender_material(mtl: bpy.types.Material):
     # get raw material data
@@ -536,37 +518,13 @@ def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPrese
     preset_data: MaterialPresetData = _g_MaterialPresets[preset_type]
     set_raw_virtools_material(mtl, preset_data.mData)
 
-class _MtlPresetEnumPropHelper():
-    """
-    Operate like UTIL_virtools_types.EnumPropHelper
-    """
-
-    @staticmethod
-    def __get_name(v: MaterialPresetType) -> str:
-        entry: MaterialPresetData | None = _g_MaterialPresets.get(v, None)
-        if entry: return entry.mDisplayName
-        else: return ""
-
-    @staticmethod
-    def generate_items() -> tuple[tuple, ...]:
-        # token, display name, descriptions, icon, index
-        return tuple(
-            (
-                str(member.value), 
-                _MtlPresetEnumPropHelper.__get_name(member), 
-                "", 
-                "", 
-                member.value
-            ) for member in MaterialPresetType
-        )
-    
-    @staticmethod
-    def get_selection(prop: str) -> MaterialPresetType:
-        return MaterialPresetType(int(prop))
-    
-    @staticmethod
-    def to_selection(val: MaterialPresetType) -> str:
-        return str(val.value)
+# create preset enum blender helper
+_g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+    MaterialPresetType,
+    lambda x: x.name,
+    lambda _: '',
+    lambda _: ''
+)
 
 #endregion
 
@@ -596,7 +554,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     preset_type: bpy.props.EnumProperty(
         name = "Preset",
         description = "The preset which you want to apply.",
-        items = _MtlPresetEnumPropHelper.generate_items(),
+        items = _g_Helper_MtlPreset.generate_items(),
     )
     
     @classmethod
@@ -613,7 +571,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     def execute(self, context):
         # get essential value
         mtl: bpy.types.Material = context.material
-        expected_preset: MaterialPresetType = _MtlPresetEnumPropHelper.get_selection(self.preset_type)
+        expected_preset: MaterialPresetType = _g_Helper_MtlPreset.get_selection(self.preset_type)
         
         # apply preset to material
         preset_virtools_material(mtl, expected_preset)

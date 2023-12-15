@@ -6,6 +6,9 @@ from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blend
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
 from .PyBMap import bmap_wrapper as bmap
 
+# define global tex save opt blender enum prop helper
+_g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
+
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams):
     """Export Virtools File"""
     bl_idname = "bbp.export_virtools"
@@ -15,11 +18,8 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     texture_save_opt: bpy.props.EnumProperty(
         name = "Global Texture Save Options",
         description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
-        items = UTIL_virtools_types.EnumPropHelper.generate_items(
-            UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
-            UTIL_virtools_types.g_Annotation_CK_TEXTURE_SAVEOPTIONS
-        ),
-        default = UTIL_virtools_types.EnumPropHelper.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
+        items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
+        default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
     )
 
     use_compress: bpy.props.BoolProperty(
@@ -56,7 +56,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
             _export_virtools(
                 self.general_get_filename(),
                 self.general_get_vt_encodings(),
-                UTIL_virtools_types.EnumPropHelper.get_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS, self.texture_save_opt),
+                _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.get_selection(self.texture_save_opt),
                 self.use_compress,
                 self.compress_level,
                 objls

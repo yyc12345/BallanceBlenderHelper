@@ -94,7 +94,12 @@ def _check_component_existance(comp_type: PROP_ballance_element.BallanceElementT
     if expect_name in bpy.data.objects: return expect_name
     else: return None
 
-def _general_create_component(comp_type: PROP_ballance_element.BallanceElementType, comp_sector: int, comp_count: int, comp_offset: typing.Callable[[int], mathutils.Matrix]) -> None:
+def _general_create_component(
+        comp_type: PROP_ballance_element.BallanceElementType, 
+        comp_sector: int, 
+        comp_count: int, 
+        comp_offset: typing.Callable[[int], mathutils.Matrix]
+    ) -> None:
     """
     General component creation function.
 
@@ -121,39 +126,23 @@ def _general_create_component(comp_type: PROP_ballance_element.BallanceElementTy
             UTIL_functions.add_into_scene_and_move_to_cursor(obj)
             # move with extra offset by calling offset getter
             obj.matrix_world = obj.matrix_world @ comp_offset(i)
-        
-class EnumPropHelper():
-    """
-    Generate component types for this module's operator
-    """
-    @staticmethod
-    def generate_items() -> tuple[tuple, ...]:
-        # token, display name, descriptions, icon, index
-        return tuple(
-            (
-                str(item.value), 
-                item.name, 
-                "", 
-                UTIL_icons_manager.get_component_icon(PROP_ballance_element.get_ballance_element_name(item)), 
-                item.value
-            ) for item in PROP_ballance_element.BallanceElementType
-        )
-    
-    @staticmethod
-    def get_selection(prop: str) -> PROP_ballance_element.BallanceElementType:
-        # prop will return identifier which is defined as the string type of int value.
-        # so we parse it to int and then parse it to enum type.
-        return PROP_ballance_element.BallanceElementType(int(prop))
-    
-    @staticmethod
-    def to_selection(val: PROP_ballance_element.BallanceElementType) -> str:
-        # like get_selection, we need get it int value, then convert it to string as the indetifier of enum props
-        # them enum property will accept it.
-        return str(val.value)
 
 #endregion
 
 #region Noemal Component Adder
+
+# element enum prop helper
+
+def _get_component_icon_by_name(elename: str):
+    icon: int | None = UTIL_icons_manager.get_component_icon(elename)
+    if icon is None: return UTIL_icons_manager.get_empty_icon()
+    else: return icon
+_g_EnumHelper_Component: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+    PROP_ballance_element.BallanceElementType,
+    lambda x: x.name,
+    lambda x: '',
+    lambda x: _get_component_icon_by_name(PROP_ballance_element.get_ballance_element_name(x)),
+)
 
 class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
     """Add Component"""
@@ -164,7 +153,7 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
     component_type: bpy.props.EnumProperty(
         name = "Type",
         description = "This component type",
-        items = EnumPropHelper.generate_items(),
+        items = _g_EnumHelper_Component.generate_items(),
     )
 
     def invoke(self, context, event):
@@ -177,35 +166,35 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
         layout.prop(self, "component_type")
 
         # only show sector for non-PE/PS component
-        eletype: PROP_ballance_element.BallanceElementType = EnumPropHelper.get_selection(self.component_type)
+        eletype: PROP_ballance_element.BallanceElementType = _g_EnumHelper_Component.get_selection(self.component_type)
         if eletype != PROP_ballance_element.BallanceElementType.PS_FourFlames and eletype != PROP_ballance_element.BallanceElementType.PE_Balloon:
             self.draw_component_sector_params(layout)
 
         # check for some special components and show warning
-        elename: str | None = _check_component_existance(EnumPropHelper.get_selection(self.component_type), self.general_get_component_sector())
+        elename: str | None = _check_component_existance(_g_EnumHelper_Component.get_selection(self.component_type), self.general_get_component_sector())
         if elename is not None:
             layout.label(text = f'Warning: {elename} already exist.')
 
     def execute(self, context):
         # call general creator
         _general_create_component(
-            EnumPropHelper.get_selection(self.component_type),
+            _g_EnumHelper_Component.get_selection(self.component_type),
             self.general_get_component_sector(),
             1,  # only create one
             lambda _: mathutils.Matrix.Identity(4)
         )
         return {'FINISHED'}
 
-    @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
         for item in PROP_ballance_element.BallanceElementType:
             item_name: str = PROP_ballance_element.get_ballance_element_name(item)
 
             cop = layout.operator(
-                self.bl_idname, text = item_name, 
+                BBP_OT_add_component.bl_idname, text = item_name, 
                 icon_value = UTIL_icons_manager.get_component_icon(item_name)
             )
-            cop.component_type = EnumPropHelper.to_selection(item)
+            cop.component_type = _g_EnumHelper_Component.to_selection(item)
 
 #endregion
 
@@ -235,8 +224,8 @@ class BBP_OT_add_nong_extra_point(bpy.types.Operator, ComponentSectorParam, Comp
         )
         return {'FINISHED'}
 
-    @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_nong_extra_point.bl_idname,
             icon_value = UTIL_icons_manager.get_component_icon(
@@ -282,8 +271,8 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
             
         return {'FINISHED'}
 
-    @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_tilting_block_series.bl_idname,
             icon_value = UTIL_icons_manager.get_component_icon(
@@ -326,8 +315,8 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
         
         return {'FINISHED'}
 
-    @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_ventilator_series.bl_idname,
             icon_value = UTIL_icons_manager.get_component_icon(
@@ -407,8 +396,8 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
 
         return {'FINISHED'}
 
-    @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
         layout.operator(
             BBP_OT_add_sector_component_pair.bl_idname,
             icon_value = UTIL_icons_manager.get_component_icon(
