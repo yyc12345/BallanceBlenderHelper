@@ -241,6 +241,8 @@ def _get_group_icon_by_name(gp_name: str) -> int:
 # blender group name prop helper
 _g_EnumHelper_Group: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
     VirtoolsGroupsPreset,
+    lambda x: x.value,  # member is string self
+    lambda x: VirtoolsGroupsPreset(x),   # convert directly because it is StrEnum.
     lambda x: x.value,
     lambda _: '',
     lambda x: _get_group_icon_by_name(x.value)

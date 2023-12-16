@@ -3,6 +3,9 @@ import os, json, enum, typing, math
 from . import PROP_virtools_group, PROP_bme_material
 from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh
 
+## NOTE: Outside caller should use BME struct's unique indetifier to visit each prototype
+#  and drive this class' functions to work.
+
 #region Prototype Visitor
 
 class PrototypeShowcaseCfgsTypes(enum.Enum):
@@ -11,11 +14,18 @@ class PrototypeShowcaseCfgsTypes(enum.Enum):
     String = 'str'
     Face = 'face'
 
+class PrototypeShowcaseTypes(enum.Enum):
+    No = 'none'
+    Floor = 'floor'
+    Rail = 'rail'
+    Wood = 'wood'
+
 TOKEN_IDENTIFIER: str = 'identifier'
 
 TOKEN_SHOWCASE: str = 'showcase'
 TOKEN_SHOWCASE_TITLE: str = 'title'
 TOKEN_SHOWCASE_ICON: str = 'icon'
+TOKEN_SHOWCASE_TYPE: str = 'type'
 TOKEN_SHOWCASE_CFGS: str = 'cfgs'
 TOKEN_SHOWCASE_CFGS_FIELD: str = 'field'
 TOKEN_SHOWCASE_CFGS_TYPE: str = 'type'
@@ -61,13 +71,62 @@ _g_BMEPrototypeIndexMap: dict[str, int] = {}
 for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), 'json')):
     for relfile in walk_files:
         if not relfile.endswith('.json'): continue
-        with open(os.path.join(walk_root, relfile)) as fp:
+        with open(os.path.join(walk_root, relfile), 'r', encoding = 'utf-8') as fp:
             proto: dict[str, typing.Any]
             for proto in json.load(fp):
                 # insert index to map
                 _g_BMEPrototypeIndexMap[proto[TOKEN_IDENTIFIER]] = len(_g_BMEPrototypes)
                 # add into list
                 _g_BMEPrototypes.append(proto)
+
+#endregion
+
+#region Prototype EnumProp Visitor
+
+class EnumPropHelper(UTIL_functions.EnumPropHelper):
+
+    def __init__(self):
+        # init parent class
+        UTIL_functions.EnumPropHelper.__init__(
+            self,
+            self.get_bme_identifiers(),
+            lambda x: x,
+            lambda x: x,
+            lambda x: self.get_bme_showcase_title(x),
+            lambda _: '',
+            lambda x: self.get_bme_showcase_icon(x)
+        )
+
+    def get_bme_identifiers(self) -> tuple[str, ...]:
+        """
+        Get the identifier of prototype which need to be exposed to user.
+        Template prototype is not included.
+        """
+        return tuple(
+            x[TOKEN_IDENTIFIER] # get identifier
+            for x in filter(lambda x: x[TOKEN_SHOWCASE] is not None, _g_BMEPrototypes)  # filter() to filter no showcase template.
+        )
+    
+    def get_bme_showcase_title(self, ident: str) -> str:
+        """
+        Get BME display title by prototype identifier.
+        """
+        # get prototype first
+        proto: dict[str, typing.Any] = _g_BMEPrototypes[_g_BMEPrototypeIndexMap[ident]]
+        # visit title field
+        return proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_TITLE]
+
+    def get_bme_showcase_icon(self, ident: str) -> int:
+        """
+        Get BME icon by prototype's identifier
+        """
+        # get prototype specified icon name
+        proto: dict[str, typing.Any] = _g_BMEPrototypes[_g_BMEPrototypeIndexMap[ident]]
+        icon_name: str = proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_ICON]
+        # get icon from icon manager
+        cache: int | None = UTIL_icons_manager.get_bme_icon(icon_name)
+        if cache is None: return UTIL_icons_manager.get_empty_icon()
+        else: return cache
 
 #endregion
 

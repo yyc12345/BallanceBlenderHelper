@@ -158,6 +158,7 @@
         "showcase": {
             "title": "Wood Trafo",
             "icon": "WoodTrafo",
+            "type": "floor",
             "cfgs": [
                 {
                     "field": "face_",
@@ -194,6 +195,7 @@
         "showcase": {
             "title": "Stone Trafo",
             "icon": "StoneTrafo",
+            "type": "floor",
             "cfgs": [
                 {
                     "field": "face_",
@@ -230,6 +232,7 @@
         "showcase": {
             "title": "Paper Trafo",
             "icon": "PaperTrafo",
+            "type": "floor",
             "cfgs": [
                 {
                     "field": "face_",

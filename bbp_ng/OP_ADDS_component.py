@@ -139,6 +139,8 @@ def _get_component_icon_by_name(elename: str):
     else: return icon
 _g_EnumHelper_Component: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
     PROP_ballance_element.BallanceElementType,
+    lambda x: str(x.value),
+    lambda x: PROP_ballance_element.BallanceElementType(int(x)),
     lambda x: x.name,
     lambda x: '',
     lambda x: _get_component_icon_by_name(PROP_ballance_element.get_ballance_element_name(x)),

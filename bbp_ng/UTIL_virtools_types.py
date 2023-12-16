@@ -200,14 +200,18 @@ class EnumPropHelper(UTIL_functions.EnumPropHelper):
     Virtools type specified Blender EnumProp helper.
     """
     __mAnnotationDict: dict[int, EnumAnnotation]
+    __mEnumTy: type[enum.Enum]
 
-    def __init__(self, ty: UTIL_functions.EnumPropHelper._TEnum):
-        # set self annotation ref
+    def __init__(self, ty: type[enum.Enum]):
+        # set enum type and annotation ref first
+        self.__mEnumTy = ty
         self.__mAnnotationDict = _g_Annotation[ty]
         # init parent data
         UTIL_functions.EnumPropHelper.__init__(
             self,
-            ty,
+            self.__mEnumTy, # enum.Enum it self is iterable
+            lambda x: str(x.value), # convert enum.Enum's value to string
+            lambda x: self.__mEnumTy(int(x)),   # use stored enum type and int() to get enum member
             lambda x: self.__mAnnotationDict[x.value].mDisplayName,
             lambda x: self.__mAnnotationDict[x.value].mDescription,
             lambda _: ''

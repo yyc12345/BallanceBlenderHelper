@@ -1,9 +1,11 @@
 import bpy
 import typing
 from . import PROP_preferences, PROP_virtools_mesh, PROP_virtools_group, PROP_bme_material
-from . import UTIL_functions, UTIL_icons_manager
+from . import UTIL_functions, UTIL_icons_manager, UTIL_bme
 
 #region BME Adder
+
+_g_EnumHelper_BmeStructType: UTIL_bme.EnumPropHelper = UTIL_bme.EnumPropHelper()
 
 class BBP_PG_bme_adder_params(bpy.types.PropertyGroup):
     prop_int: bpy.props.IntProperty(
@@ -59,15 +61,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     bme_struct_type: bpy.props.EnumProperty(
         name = "Type",
         description = "BME struct type",
-        items = (
-            ('TEST1', 'test1', 'test desc1', UTIL_icons_manager.get_empty_icon(), 1),
-            ('TEST2', 'test2', 'test desc2', UTIL_icons_manager.get_empty_icon(), 2),
-        ),
-        #items = tuple(
-        #    # token, display name, descriptions, icon, index
-        #    (blk, blk, "", UTILS_icons_manager.get_floor_icon(blk), idx) 
-        #    for idx, blk in enumerate(UTILS_constants.floor_blockDict.keys())
-        #),
+        items = _g_EnumHelper_BmeStructType.generate_items(),
         update = bme_struct_type_updated
     )
 
@@ -94,12 +88,22 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     def draw(self, context):
         layout = self.layout
         # show type
+        layout.prop(self, 'bme_struct_type')
+        # show type
         for i in self.data_floats:
             layout.prop(i, 'prop_bool')
 
     @classmethod
     def draw_blc_menu(self, layout: bpy.types.UILayout):
-        layout.operator(self.bl_idname)
+        for ident in _g_EnumHelper_BmeStructType.get_bme_identifiers():
+            # draw operator
+            cop = layout.operator(
+                self.bl_idname, 
+                text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
+                icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident)
+            )
+            # and assign its init type value
+            cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
         """         
         for item in PROP_ballance_element.BallanceElementType:
             item_name: str = PROP_ballance_element.get_ballance_element_name(item)

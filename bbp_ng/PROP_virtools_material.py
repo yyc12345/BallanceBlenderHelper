@@ -521,6 +521,8 @@ def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPrese
 # create preset enum blender helper
 _g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
     MaterialPresetType,
+    lambda x: str(x.value),
+    lambda x: MaterialPresetType(int(x)),
     lambda x: x.name,
     lambda _: '',
     lambda _: ''
