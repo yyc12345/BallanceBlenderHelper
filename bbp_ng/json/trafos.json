@@ -8,11 +8,20 @@
                 "data": "\"BallWood\""
             },
             {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
                 "field": "face",
-                "data": "(True, True, True, True, True, True)"
+                "data": "(True, False, True, True, True, True)"
             }
         ],
-        "vars": [],
+        "vars": [
+            {
+                "field": "uv_height",
+                "data": "height / 5.0"
+            }
+        ],
         "vertices": [
             {
                 "skip": "False",
@@ -32,19 +41,19 @@
             },
             {
                 "skip": "False",
-                "data": "(0, 0, -5)"
+                "data": "(0, 0, -height)"
             },
             {
                 "skip": "False",
-                "data": "(5, 0, -5)"
+                "data": "(5, 0, -height)"
             },
             {
                 "skip": "False",
-                "data": "(5, 5, -5)"
+                "data": "(5, 5, -height)"
             },
             {
                 "skip": "False",
-                "data": "(0, 5, -5)"
+                "data": "(0, 5, -height)"
             }
         ],
         "faces": [
@@ -68,7 +77,7 @@
             {
                 "skip": "not face[1]",
                 "texture": "trafo_texture",
-                "indices": [7, 6, 5, 4],
+                "indices": [5, 4, 7, 6],
                 "uvs": [
                     "(0, 0)",
                     "(1, 0)",
@@ -85,12 +94,12 @@
             {
                 "skip": "not face[2]",
                 "texture": "trafo_texture",
-                "indices": [0, 3, 7, 4],
+                "indices": [3, 7, 4, 0],
                 "uvs": [
                     "(0, 0)",
                     "(1, 0)",
-                    "(1, 1)",
-                    "(0, 1)"
+                    "(1, uv_height)",
+                    "(0, uv_height)"
                 ],
                 "normals": [
                     "(-1, 0, 0)",
@@ -102,12 +111,12 @@
             {
                 "skip": "not face[3]",
                 "texture": "trafo_texture",
-                "indices": [5, 6, 2, 1],
+                "indices": [1, 5, 6, 2],
                 "uvs": [
                     "(0, 0)",
                     "(1, 0)",
-                    "(1, 1)",
-                    "(0, 1)"
+                    "(1, uv_height)",
+                    "(0, uv_height)"
                 ],
                 "normals": [
                     "(1, 0, 0)",
@@ -119,12 +128,12 @@
             {
                 "skip": "not face[4]",
                 "texture": "trafo_texture",
-                "indices": [4, 5, 1, 0],
+                "indices": [0, 4, 5, 1],
                 "uvs": [
                     "(0, 0)",
                     "(1, 0)",
-                    "(1, 1)",
-                    "(0, 1)"
+                    "(1, uv_height)",
+                    "(0, uv_height)"
                 ],
                 "normals": [
                     "(0, -1, 0)",
@@ -136,12 +145,12 @@
             {
                 "skip": "not face[5]",
                 "texture": "trafo_texture",
-                "indices": [3, 2, 6, 7],
+                "indices": [2, 6, 7, 3],
                 "uvs": [
                     "(0, 0)",
                     "(1, 0)",
-                    "(1, 1)",
-                    "(0, 1)"
+                    "(1, uv_height)",
+                    "(0, uv_height)"
                 ],
                 "normals": [
                     "(1, 0, 0)",
@@ -161,15 +170,26 @@
             "type": "floor",
             "cfgs": [
                 {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
                     "field": "face_",
                     "type": "face",
                     "title": "Face",
                     "desc": "Whether has some faces.",
-                    "default": "(True, True, True, True, True, True)"
+                    "default": "(True, False, True, True, True, True)"
                 }
             ]
         },
         "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
             {
                 "field": "face",
                 "data": "face_"
@@ -184,6 +204,7 @@
                 "skip": "False",
                 "params": {
                     "trafo_texture": "\"BallWood\"",
+                    "height": "height",
                     "face": "face"
                 },
                 "transform": "ident()"
@@ -198,15 +219,26 @@
             "type": "floor",
             "cfgs": [
                 {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
                     "field": "face_",
                     "type": "face",
                     "title": "Face",
                     "desc": "Whether has some faces.",
-                    "default": "(True, True, True, True, True, True)"
+                    "default": "(True, False, True, True, True, True)"
                 }
             ]
         },
         "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
             {
                 "field": "face",
                 "data": "face_"
@@ -221,6 +253,7 @@
                 "skip": "False",
                 "params": {
                     "trafo_texture": "\"BallStone\"",
+                    "height": "height",
                     "face": "face"
                 },
                 "transform": "ident()"
@@ -235,15 +268,26 @@
             "type": "floor",
             "cfgs": [
                 {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
                     "field": "face_",
                     "type": "face",
                     "title": "Face",
                     "desc": "Whether has some faces.",
-                    "default": "(True, True, True, True, True, True)"
+                    "default": "(True, False, True, True, True, True)"
                 }
             ]
         },
         "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
             {
                 "field": "face",
                 "data": "face_"
@@ -258,6 +302,7 @@
                 "skip": "False",
                 "params": {
                     "trafo_texture": "\"BallPaper\"",
+                    "height": "height",
                     "face": "face"
                 },
                 "transform": "ident()"

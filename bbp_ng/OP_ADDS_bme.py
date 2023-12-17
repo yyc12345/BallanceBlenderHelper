@@ -18,8 +18,8 @@ class BBP_PG_bme_adder_cfgs(bpy.types.PropertyGroup):
     prop_float: bpy.props.FloatProperty(
         name = 'Single Float', description = 'Single Float',
         min = 0.0, max = 1024.0,
-        soft_min = 0.0, soft_max = 64.0,
-        step = 2.5,
+        soft_min = 0.0, soft_max = 512.0,
+        step = 50, # Step is in UI, in [1, 100] (WARNING: actual value is /100). So we choose 50, mean 0.5
         default = 5.0,
     )
     prop_bool: bpy.props.BoolProperty(
@@ -164,25 +164,30 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         self.__internal_update_bme_struct_type()
 
         # start drawing
-        layout = self.layout
+        layout: bpy.types.UILayout = self.layout
         # show type
         layout.prop(self, 'bme_struct_type')
 
         # visit cfgs cache list to show cfg
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
-            # draw title first
-            layout.label(text = cfg.get_title())
+            # create box for cfgs
+            box_layout: bpy.types.UILayout = layout.box()
+
+            # draw title and description first
+            box_layout.label(text = cfg.get_title())
+            box_layout.label(text = cfg.get_desc())
+
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_int', text = '')
+                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_int', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_float', text = '')
+                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_float', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_bool', text = '')
+                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_bool', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face will show a special layout (grid view)
-                    grids = layout.grid_flow(
+                    grids = box_layout.grid_flow(
                         row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
                     grids.alignment = 'CENTER'
                     grids.separator()
@@ -206,16 +211,6 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
             )
             # and assign its init type value
             cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
-        """         
-        for item in PROP_ballance_element.BallanceElementType:
-            item_name: str = PROP_ballance_element.get_ballance_element_name(item)
-
-            cop = layout.operator(
-                self.bl_idname, text = item_name, 
-                icon_value = UTIL_icons_manager.get_component_icon(item_name)
-            )
-            cop.component_type = EnumPropHelper.to_selection(item) 
-        """
 
 #endregion
 
