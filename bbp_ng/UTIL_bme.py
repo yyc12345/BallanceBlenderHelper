@@ -11,7 +11,7 @@ from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh
 class PrototypeShowcaseCfgsTypes(enum.Enum):
     Integer = 'int'
     Float = 'float'
-    String = 'str'
+    Boolean = 'bool'
     Face = 'face'
 
 class PrototypeShowcaseTypes(enum.Enum):
@@ -63,7 +63,7 @@ TOKEN_INSTANCES_TRANSFORM: str = 'transform'
 #region Prototype Loader
 
 ## The list storing BME prototype.
-_g_BMEPrototypes: list = []
+_g_BMEPrototypes: list[dict[str, typing.Any]] = []
 ## The dict. Key is prototype identifier. value is the index of prototype in prototype list.
 _g_BMEPrototypeIndexMap: dict[str, int] = {}
 
@@ -79,54 +79,8 @@ for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__f
                 # add into list
                 _g_BMEPrototypes.append(proto)
 
-#endregion
-
-#region Prototype EnumProp Visitor
-
-class EnumPropHelper(UTIL_functions.EnumPropHelper):
-
-    def __init__(self):
-        # init parent class
-        UTIL_functions.EnumPropHelper.__init__(
-            self,
-            self.get_bme_identifiers(),
-            lambda x: x,
-            lambda x: x,
-            lambda x: self.get_bme_showcase_title(x),
-            lambda _: '',
-            lambda x: self.get_bme_showcase_icon(x)
-        )
-
-    def get_bme_identifiers(self) -> tuple[str, ...]:
-        """
-        Get the identifier of prototype which need to be exposed to user.
-        Template prototype is not included.
-        """
-        return tuple(
-            x[TOKEN_IDENTIFIER] # get identifier
-            for x in filter(lambda x: x[TOKEN_SHOWCASE] is not None, _g_BMEPrototypes)  # filter() to filter no showcase template.
-        )
-    
-    def get_bme_showcase_title(self, ident: str) -> str:
-        """
-        Get BME display title by prototype identifier.
-        """
-        # get prototype first
-        proto: dict[str, typing.Any] = _g_BMEPrototypes[_g_BMEPrototypeIndexMap[ident]]
-        # visit title field
-        return proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_TITLE]
-
-    def get_bme_showcase_icon(self, ident: str) -> int:
-        """
-        Get BME icon by prototype's identifier
-        """
-        # get prototype specified icon name
-        proto: dict[str, typing.Any] = _g_BMEPrototypes[_g_BMEPrototypeIndexMap[ident]]
-        icon_name: str = proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_ICON]
-        # get icon from icon manager
-        cache: int | None = UTIL_icons_manager.get_bme_icon(icon_name)
-        if cache is None: return UTIL_icons_manager.get_empty_icon()
-        else: return cache
+def _get_prototype_by_identifier(ident: str) -> dict[str, typing.Any]:
+    return _g_BMEPrototypes[_g_BMEPrototypeIndexMap[ident]]
 
 #endregion
 
@@ -178,6 +132,85 @@ def _eval_vars(strl: str, params_data: dict[str, typing.Any]) -> typing.Any:
 
 def _eval_others(strl, str, params_vars_data: dict[str, typing.Any]) -> typing.Any:
     return eval(strl, _g_ProgFieldGlobals, params_vars_data)
+
+#endregion
+
+#region Prototype Helper
+
+class PrototypeShowcaseCfgDescriptor():
+    __mRawCfg:  dict[str, str]
+
+    def __init__(self, raw_cfg: dict[str, str]):
+        self.__mRawCfg = raw_cfg
+
+    def get_field(self) -> str: 
+        return self.__mRawCfg[TOKEN_SHOWCASE_CFGS_FIELD]
+
+    def get_type(self) -> PrototypeShowcaseCfgsTypes:
+        return PrototypeShowcaseCfgsTypes(self.__mRawCfg[TOKEN_SHOWCASE_CFGS_TYPE])
+
+    def get_title(self) -> str: 
+        return self.__mRawCfg[TOKEN_SHOWCASE_CFGS_TITLE]
+
+    def get_desc(self) -> str: 
+        return self.__mRawCfg[TOKEN_SHOWCASE_CFGS_DESC]
+
+    def get_default(self) -> typing.Any:
+        return _eval_showcase_cfgs_default(self.__mRawCfg[TOKEN_SHOWCASE_CFGS_DEFAULT])
+
+class EnumPropHelper(UTIL_functions.EnumPropHelper):
+    """
+    The BME specialized Blender EnumProperty helper.
+    """
+
+    def __init__(self):
+        # init parent class
+        UTIL_functions.EnumPropHelper.__init__(
+            self,
+            self.get_bme_identifiers(),
+            lambda x: x,
+            lambda x: x,
+            lambda x: self.get_bme_showcase_title(x),
+            lambda _: '',
+            lambda x: self.get_bme_showcase_icon(x)
+        )
+
+    def get_bme_identifiers(self) -> tuple[str, ...]:
+        """
+        Get the identifier of prototype which need to be exposed to user.
+        Template prototype is not included.
+        """
+        return tuple(
+            x[TOKEN_IDENTIFIER] # get identifier
+            for x in filter(lambda x: x[TOKEN_SHOWCASE] is not None, _g_BMEPrototypes)  # filter() to filter no showcase template.
+        )
+    
+    def get_bme_showcase_title(self, ident: str) -> str:
+        """
+        Get BME display title by prototype identifier.
+        """
+        # get prototype first
+        proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
+        # visit title field
+        return proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_TITLE]
+
+    def get_bme_showcase_icon(self, ident: str) -> int:
+        """
+        Get BME icon by prototype's identifier
+        """
+        # get prototype specified icon name
+        proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
+        icon_name: str = proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_ICON]
+        # get icon from icon manager
+        cache: int | None = UTIL_icons_manager.get_bme_icon(icon_name)
+        if cache is None: return UTIL_icons_manager.get_empty_icon()
+        else: return cache
+
+    def get_bme_showcase_cfgs(self, ident: str) -> typing.Iterator[PrototypeShowcaseCfgDescriptor]:
+        # get prototype first
+        proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
+        # use map to batch create descriptor
+        return map(lambda x: PrototypeShowcaseCfgDescriptor(x), proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_CFGS])
 
 #endregion
 
