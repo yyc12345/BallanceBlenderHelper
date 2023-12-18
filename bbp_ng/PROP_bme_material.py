@@ -106,6 +106,9 @@ def _load_bme_material_preset(mtl: bpy.types.Material, preset_name: str) -> None
     newrawmtl.mTexture = blctex
     PROP_virtools_material.set_raw_virtools_material(mtl, newrawmtl)
 
+    # apply vt mtl to blender mtl
+    PROP_virtools_material.apply_to_blender_material(mtl)
+
 #endregion
 
 #region BME Material Operation Help Class & Functions

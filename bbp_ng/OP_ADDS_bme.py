@@ -156,7 +156,30 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         return self.execute(context)
     
     def execute(self, context):
-        # todo: call general creator
+        # collect cfgs data
+        cfgs: dict[str, typing.Any] = {}
+        for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
+            match(cfg.get_type()):
+                case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
+                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_int
+                case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
+                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_float
+                case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
+                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_bool
+                case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
+                    # face is just 6 bool tuple
+                    cfgs[cfg.get_field()] = tuple(
+                        self.bme_struct_cfgs[cfg_index + i].prop_bool for i in range(6)
+                    )
+
+        # call general creator
+        obj: bpy.types.Object = UTIL_bme.create_bme_struct_wrapper(
+            _g_EnumHelper_BmeStructType.get_selection(self.bme_struct_type),
+            cfgs
+        )
+
+        # move to cursor
+        UTIL_functions.add_into_scene_and_move_to_cursor(obj)
         return {'FINISHED'}
     
     def draw(self, context):

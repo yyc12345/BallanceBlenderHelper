@@ -1,7 +1,7 @@
 import bpy, mathutils
 import os, json, enum, typing, math
 from . import PROP_virtools_group, PROP_bme_material
-from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh
+from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh, UTIL_virtools_types, UTIL_naming_convension
 
 ## NOTE: Outside caller should use BME struct's unique indetifier to visit each prototype
 #  and drive this class' functions to work.
@@ -130,7 +130,7 @@ def _eval_params(strl: str, cfgs_data: dict[str, typing.Any]) -> typing.Any:
 def _eval_vars(strl: str, params_data: dict[str, typing.Any]) -> typing.Any:
     return eval(strl, _g_ProgFieldGlobals, params_data)
 
-def _eval_others(strl, str, params_vars_data: dict[str, typing.Any]) -> typing.Any:
+def _eval_others(strl: str, params_vars_data: dict[str, typing.Any]) -> typing.Any:
     return eval(strl, _g_ProgFieldGlobals, params_vars_data)
 
 #endregion
@@ -216,13 +216,182 @@ class EnumPropHelper(UTIL_functions.EnumPropHelper):
 
 #region Core Creator
 
-def get_bme_struct_cfgs():
-    pass
+def create_bme_struct_wrapper(ident: str, cfgs: dict[str, typing.Any]) -> bpy.types.Object:
+    # get prototype first
+    proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
 
-def create_bme_struct_wrapper():
-    pass
+    # analyse params by given cfgs
+    params: dict[str, typing.Any] = {}
+    for proto_param in proto[TOKEN_PARAMS]:
+        params[proto_param[TOKEN_PARAMS_FIELD]] = _eval_params(proto_param[TOKEN_PARAMS_DATA], cfgs)
 
-def create_bme_struct():
-    pass
+    # create used mesh
+    mesh: bpy.types.Mesh = bpy.data.meshes.new('BMEStruct')
+
+    # create mesh writer and bme mtl helper
+    # recursively calling underlying creation function
+    with UTIL_blender_mesh.MeshWriter(mesh) as writer:
+        with PROP_bme_material.BMEMaterialsHelper(bpy.context.scene) as bmemtl:
+            create_bme_struct(
+                ident,
+                writer,
+                bmemtl,
+                mathutils.Matrix.Identity(4),
+                params
+            )
+
+    # create object and assign prop
+    # get obj info first
+    obj_info: UTIL_naming_convension.BallanceObjectInfo
+    match(PrototypeShowcaseTypes(proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_TYPE])):
+        case PrototypeShowcaseTypes.No:
+            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.DECORATION)
+        case PrototypeShowcaseTypes.Floor:
+            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.FLOOR)
+        case PrototypeShowcaseTypes.Rail:
+            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.RAIL)
+        case PrototypeShowcaseTypes.Wood:
+            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.WOOD)
+    # then get object name
+    obj_name: str | None = UTIL_naming_convension.YYCToolchainConvention.set_to_name(obj_info, None)
+    if obj_name is None: raise UTIL_functions.BBPException('impossible null name')
+    # create object by name
+    obj: bpy.types.Object = bpy.data.objects.new(obj_name, mesh)
+    # assign virtools groups
+    UTIL_naming_convension.VirtoolsGroupConvention.set_to_object(obj, obj_info, None)
+
+    # return object
+    return obj
+
+def create_bme_struct(
+        ident: str, 
+        writer: UTIL_blender_mesh.MeshWriter, 
+        bmemtl: PROP_bme_material.BMEMaterialsHelper,
+        transform: mathutils.Matrix, 
+        params: dict[str, typing.Any]) -> None:
+    # get prototype first
+    proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
+
+    # calc vars by given params
+    # please note i will add entries directly into params dict
+    # but the params dict will not used independently later,
+    # all following use is the union of params and vars dict.
+    # so it is safe.
+    for proto_var in proto[TOKEN_VARS]:
+        params[proto_var[TOKEN_VARS_FIELD]] = _eval_vars(proto_var[TOKEN_VARS_DATA], params)
+
+    # collect valid face and vertices data for following using.
+    # if NOT skip, add into valid list
+    valid_vec_idx: list[int] = []
+    for vec_idx, proto_vec in enumerate(proto[TOKEN_VERTICES]):
+        if not _eval_others(proto_vec[TOKEN_VERTICES_SKIP], params):
+            valid_vec_idx.append(vec_idx)
+    valid_face_idx: list[int] = []
+    for face_idx, proto_face in enumerate(proto[TOKEN_FACES]):
+        if not _eval_others(proto_face[TOKEN_FACES_SKIP], params):
+            valid_face_idx.append(face_idx)
+
+    # create mtl slot remap to help following mesh adding
+    # because mesh writer do not accept string format mtl slot visiting,
+    # it only accept int based mtl slot index.
+    # NOTE: since Python 3.6, the item of builtin dict is ordered by inserting order.
+    # we rely on this to implement following features
+    mtl_remap: dict[str, int] = {}
+    for face_idx in valid_face_idx:
+        # eval mtl name
+        mtl_name: str = _eval_others(proto[TOKEN_FACES][face_idx][TOKEN_FACES_TEXTURE], params)
+        # add into remap if not exist
+        if mtl_name not in mtl_remap:
+            mtl_remap[mtl_name] = len(mtl_remap)
+
+    # prepare mesh part data
+    mesh_part: UTIL_blender_mesh.MeshWriterIngredient = UTIL_blender_mesh.MeshWriterIngredient()
+    def vpos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+        v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
+        for vec_idx in valid_vec_idx:
+            # BME no need to convert co system
+            v.x, v.y, v.z = _eval_others(proto[TOKEN_VERTICES][vec_idx][TOKEN_VERTICES_DATA], params)
+            yield v
+    mesh_part.mVertexPosition = vpos_iterator()
+    def vnml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+        v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
+        for face_idx in valid_face_idx:
+            face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
+            for i in range(len(face_data[TOKEN_FACES_INDICES])):
+                v.x, v.y, v.z = _eval_others(face_data[TOKEN_FACES_NORMALS][i], params)
+                # BME normals need normalize
+                UTIL_virtools_types.vxvector3_normalize(v)
+                yield v
+    mesh_part.mVertexNormal = vnml_iterator()
+    def vuv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
+        v: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
+        for face_idx in valid_face_idx:
+            face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
+            for i in range(len(face_data[TOKEN_FACES_INDICES])):
+                v.x, v.y = _eval_others(face_data[TOKEN_FACES_UVS][i], params)
+                yield v
+    mesh_part.mVertexUV = vuv_iterator()
+    def mtl_iterator() -> typing.Iterator[bpy.types.Material | None]:
+        for mtl_name in mtl_remap.keys():
+            yield bmemtl.get_material(mtl_name)
+    mesh_part.mMaterial = mtl_iterator()
+    def face_iterator() -> typing.Iterator[UTIL_blender_mesh.FaceData]:
+        # create face data with 3 placeholder
+        f: UTIL_blender_mesh.FaceData = UTIL_blender_mesh.FaceData(
+            [UTIL_blender_mesh.FaceVertexData() for i in range(3)]
+        )
+
+        # create a internal counter to count how many indices has been processed
+        # this counter will be used to calc uv and normal index
+        # because these are based on face, not vertex position index.
+        face_counter: int = 0
+
+        # iterate valid face
+        for face_idx in valid_face_idx:
+            # get face data
+            face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
+
+            # calc indices count
+            face_indices: list[int] = face_data[TOKEN_FACES_INDICES]
+            indices_count: int = len(face_indices)
+            # resize face data to fulfill req
+            while len(f.mIndices) > indices_count:
+                f.mIndices.pop()
+            while len(f.mIndices) < indices_count:
+                f.mIndices.append(UTIL_blender_mesh.FaceVertexData())
+
+            # fill the data
+            for i in range(indices_count):
+                # fill vertex position data by indices
+                f.mIndices[i].mPosIdx = face_indices[i]
+                # fill nml and uv based on face index
+                f.mIndices[i].mNmlIdx = face_counter + i
+                f.mIndices[i].mUvIdx = face_counter + i
+
+            # add current face indices count to internal counter
+            face_counter += indices_count
+
+            # return data once
+            yield f
+    mesh_part.mFace = face_iterator()
+    # add part to writer
+    writer.add_ingredient(mesh_part)
+
+    # then we incursively process instance creation
+    for proto_instance in proto[TOKEN_INSTANCES]:
+        # calc instance params
+        instance_params: dict[str, typing.Any] = {}
+        proto_instance_params: dict[str, str] = proto_instance[TOKEN_INSTANCES_PARAMS]
+        for proto_inst_param_field, proto_inst_param_data in proto_instance_params.items():
+            instance_params[proto_inst_param_field] = _eval_others(proto_inst_param_data, params)
+
+        # call recursively
+        create_bme_struct(
+            proto_instance[TOKEN_INSTANCES_IDENTIFIER],
+            writer,
+            bmemtl,
+            _eval_others(proto_instance[TOKEN_INSTANCES_TRANSFORM], params),
+            instance_params
+        )
 
 #endregion
