@@ -2,6 +2,5 @@
 *.png binary
 # our generated mesh should be save as binary
 *.bin binary
-# json is data and not good for human reading(althought I edit it on my own hand.)
-# so set it as binary
-bbp_ng/json/*.json    binary
+# the compressed json data should be binary
+bbp_ng/raw_jsons/*.json    binary

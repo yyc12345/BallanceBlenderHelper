@@ -7,6 +7,8 @@ bbp_ng/PyBMap/*.pdb
 
 bbp_ng/icons/*
 !bbp_ng/icons/.gitkeep
+bbp_ng/jsons/*
+!bbp_ng/jsons/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
