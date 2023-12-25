@@ -68,7 +68,7 @@ _g_BMEPrototypes: list[dict[str, typing.Any]] = []
 _g_BMEPrototypeIndexMap: dict[str, int] = {}
 
 # the core loader
-for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), 'json')):
+for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), 'jsons')):
     for relfile in walk_files:
         if not relfile.endswith('.json'): continue
         with open(os.path.join(walk_root, relfile), 'r', encoding = 'utf-8') as fp:

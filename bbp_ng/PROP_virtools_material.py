@@ -1,5 +1,5 @@
 import bpy
-import typing, enum
+import typing, enum, copy
 from . import UTIL_virtools_types, UTIL_functions, UTIL_ballance_texture, UTIL_file_browser
 from . import PROP_virtools_texture, PROP_preferences
 
@@ -515,8 +515,17 @@ def get_virtools_material_preset(preset_type: MaterialPresetType) -> MaterialPre
     return _g_MaterialPresets[preset_type]
 
 def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPresetType) -> None:
-    preset_data: MaterialPresetData = _g_MaterialPresets[preset_type]
-    set_raw_virtools_material(mtl, preset_data.mData)
+    # get preset raw mtl member first
+    # but we need create a shallow copy for it first.
+    preset_data: RawVirtoolsMaterial = copy.copy(_g_MaterialPresets[preset_type].mData)
+    # the we get texture setting from now texture
+    now_data: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
+    # change preset texture to current texture
+    # because we do not want to change texture by preset.
+    # also this is the reason why i need do a shallow copy for preset data
+    preset_data.mTexture = now_data.mTexture
+    # apply preset
+    set_raw_virtools_material(mtl, preset_data)
 
 # create preset enum blender helper
 _g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(

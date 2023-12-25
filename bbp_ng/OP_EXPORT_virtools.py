@@ -1,6 +1,6 @@
 import bpy
 from bpy_extras.wm_utils.progress_report import ProgressReport
-import tempfile, os, typing
+import tempfile, os, typing, re
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_icons_manager
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
@@ -164,15 +164,18 @@ def _export_virtools_groups(
     # start saving
     progress.enter_substeps(len(obj3d_crets), "Saving Groups")
 
+    # create group exporting helper
+    group_cret_guard: VirtoolsGroupCreationGuard = VirtoolsGroupCreationGuard(writer)
+
     for obj3d, vtobj3d in obj3d_crets:
         # open group visitor
         with PROP_virtools_group.VirtoolsGroupsHelper(obj3d) as gp_visitor:
             for gp_name in gp_visitor.iterate_groups():
-                # get group or create new group
+                # get group or create new group from guard
                 vtgroup: bmap.BMGroup | None = group_cret_map.get(gp_name, None)
                 if vtgroup is None:
-                    vtgroup = writer.create_group()
-                    vtgroup.set_name(gp_name)
+                    # note: no need to set name, guard has set it.
+                    vtgroup = group_cret_guard.create_group(gp_name)
                     group_cret_map[gp_name] = vtgroup
                 
                 # group this object
@@ -462,6 +465,72 @@ def _save_virtools_document(
     progress.step()
     progress.leave_substeps()
     
+class VirtoolsGroupCreationGuard():
+    """
+    This class is designed for ensure that the created sector group is successive.
+
+    Due to the design of Ballance, Ballance rely on checking the existance of Sector_XX to get how many sectors this map have.
+    Thus if there are no component in a sector, it still need to create a empty Sector_XX group, otherwise the game will crash
+    or be ended at a accident sector.
+    
+    This class hook the operation of Virtools group creation and check all Sector group creation.
+    Create essential group to make Sector_XX group successive.
+    Thus all group creation in this module should be passed by this class.
+    """
+    cRegexGroupSector: typing.ClassVar[re.Pattern] = re.compile('^Sector_(0[1-8]|[1-9][0-9]{1,2}|9)$')
+
+    @staticmethod
+    def __get_group_index(group_name: str) -> int | None:
+        """
+        Return the sector index of group name if it is. Otherwise None.
+        """
+        regex_result = VirtoolsGroupCreationGuard.cRegexGroupSector.match(group_name)
+        if regex_result is not None:
+            return int(regex_result.group(1))
+        else:
+            return None
+        
+    @staticmethod
+    def __get_group_name(group_index: int) -> str:
+        """
+        Output Sector group name by given sector index
+        """
+        if group_index == 9:
+           return 'Sector_9'
+        else:
+            return f'Sector_{group_index:0>2d}'
+
+    __mWriter: bmap.BMFileWriter
+    __mSectors: list[bmap.BMGroup]
+
+    def __init__(self, assoc_writer: bmap.BMFileWriter):
+        self.__mWriter = assoc_writer
+        self.__mSectors = []
+
+    def create_group(self, group_name: str) -> bmap.BMGroup:
+        """
+        The hooked group creation function.
+
+        Please note the passed group name argument is just for name checking.
+        This function will set group name for you, not like BMFileWriter.create_group() operated.
+        """
+        # check whether it is sector group
+        # note: the return sector index is 1 based, not 0
+        sector_idx: int | None = VirtoolsGroupCreationGuard.__get_group_index(group_name)
+        # if it is regular group, return normal creation
+        if sector_idx is None:
+            gp: bmap.BMGroup = self.__mWriter.create_group()
+            gp.set_name(group_name)
+            return gp
+        
+        # get from sector cahce list
+        # enlarge sector cache list if it is not fulfilled given sector index
+        while sector_idx > len(self.__mSectors):
+            gp: bmap.BMGroup = self.__mWriter.create_group()
+            self.__mSectors.append(gp)
+            gp.set_name(self.__get_group_name(len(self.__mSectors)))
+        # return ordered sector from sector caches
+        return self.__mSectors[sector_idx - 1]
 
 def register() -> None:
     bpy.utils.register_class(BBP_OT_export_virtools)

@@ -78,6 +78,7 @@ class BBP_MT_AddComponentsMenu(bpy.types.Menu):
         layout.separator()
         layout.label(text="Nong Components")
         OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(layout)
+        OP_ADDS_component.BBP_OT_add_nong_ventilator.draw_blc_menu(layout)
 
         layout.separator()
         layout.label(text="Series Components")

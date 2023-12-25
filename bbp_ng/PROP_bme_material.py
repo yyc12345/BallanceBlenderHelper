@@ -1,5 +1,5 @@
 import bpy
-import typing, enum
+import typing, enum, copy
 from . import PROP_virtools_material, PROP_virtools_texture
 from . import UTIL_ballance_texture, UTIL_functions
 
@@ -91,21 +91,19 @@ def _load_bme_material_preset(mtl: bpy.types.Material, preset_name: str) -> None
     # get preset first
     preset: _BMEMaterialPreset = _g_BMEMaterialPresets[preset_name]
 
-    # apply raw data first
-    PROP_virtools_material.set_raw_virtools_material(mtl, preset.mRawMtl)
+    # get raw mtl and do a shallow copy
+    # because we will change something later. but do not want to affect preset self.
+    raw_mtl: PROP_virtools_material.RawVirtoolsMaterial = copy.copy(preset.mRawMtl)
 
     # load ballance texture
     blctex: bpy.types.Image = UTIL_ballance_texture.load_ballance_texture(preset.mTexName)
     # apply texture props
     PROP_virtools_texture.set_raw_virtools_texture(blctex, PROP_virtools_texture.get_ballance_texture_preset(preset.mTexName))
+    # set loaded texture to shallow copied raw mtl
+    raw_mtl.mTexture = blctex
 
-    # because preset's rawmtl is const, we can not change it directly
-    # so we need change its texture by triving it again as a new rawmtl
-    # after we got ballance texture
-    newrawmtl: PROP_virtools_material.RawVirtoolsMaterial = PROP_virtools_material.get_raw_virtools_material(mtl)
-    newrawmtl.mTexture = blctex
-    PROP_virtools_material.set_raw_virtools_material(mtl, newrawmtl)
-
+    # set raw mtl
+    PROP_virtools_material.set_raw_virtools_material(mtl, raw_mtl)
     # apply vt mtl to blender mtl
     PROP_virtools_material.apply_to_blender_material(mtl)
 

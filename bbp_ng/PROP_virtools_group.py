@@ -270,7 +270,7 @@ class SharedGroupNameInputProperties():
     )
     
     def draw_group_name_input(self, layout: bpy.types.UILayout) -> None:
-        layout.prop(self, 'group_name_source', expand=True)
+        layout.prop(self, 'group_name_source', expand = True)
         if (self.group_name_source == 'CUSTOM'):
             layout.prop(self, 'custom_group_name')
         else:

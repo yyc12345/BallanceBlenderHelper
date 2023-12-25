@@ -235,6 +235,74 @@ class BBP_OT_add_nong_extra_point(bpy.types.Operator, ComponentSectorParam, Comp
             )
         )
 
+class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, ComponentCountParam):
+    """Add Nong Ventilator"""
+    bl_idname = "bbp.add_nong_ventilator"
+    bl_label = "Nong Ventilator"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    ventilator_count_source: bpy.props.EnumProperty(
+        name = "Ventilator Count Source",
+        items = (
+            ('DEFINED', "Predefined", "Pre-defined ventilator count."),
+            ('CUSTOM', "Custom", "User specified ventilator count."),
+        ),
+    )
+    
+    preset_vetilator_count: bpy.props.EnumProperty(
+        name = "Preset Count",
+        description = "Pick preset ventilator count.",
+        items = (
+            # (token, display name, descriptions, icon, index)
+            ('PAPER', 'Paper', 'The ventilator count (1) can push paper ball up.'),
+            ('WOOD', 'Wood', 'The ventilator count (6) can push wood ball up.'),
+            ('STONE', 'Stone', 'The ventilator count (32) can push stone ball up.'),
+        ),
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        # draw sector settings
+        self.draw_component_sector_params(layout)
+
+        # draw count settings by different source
+        layout.label(text = 'Count')
+        layout.prop(self, 'ventilator_count_source', expand = True)
+        if (self.ventilator_count_source == 'CUSTOM'):
+            self.draw_component_count_params(layout)
+        else:
+            layout.prop(self, 'preset_vetilator_count')
+        
+    def execute(self, context):
+        # get ventilator count
+        count: int = 0
+        if (self.ventilator_count_source == 'CUSTOM'):
+            count = self.general_get_component_count()
+        else:
+            match(self.preset_vetilator_count):
+                case 'PAPER': count = 1
+                case 'WOOD': count = 6
+                case 'STONE': count = 32
+                case _: raise UTIL_functions.BBPException('invalid enumprop data')
+                
+        # create elements without any move
+        _general_create_component(
+            PROP_ballance_element.BallanceElementType.P_Modul_18,
+            self.general_get_component_sector(),
+            count,
+            lambda _: mathutils.Matrix.Identity(4)
+        )
+        return {'FINISHED'}
+
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
+        layout.operator(
+            BBP_OT_add_nong_ventilator.bl_idname,
+            icon_value = UTIL_icons_manager.get_component_icon(
+                PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.P_Modul_18)
+            )
+        )
+
 #endregion
 
 #region Series Comp Adder
@@ -412,6 +480,7 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
 def register():
     bpy.utils.register_class(BBP_OT_add_component)
     bpy.utils.register_class(BBP_OT_add_nong_extra_point)
+    bpy.utils.register_class(BBP_OT_add_nong_ventilator)
     bpy.utils.register_class(BBP_OT_add_tilting_block_series)
     bpy.utils.register_class(BBP_OT_add_ventilator_series)
     bpy.utils.register_class(BBP_OT_add_sector_component_pair)
@@ -420,5 +489,6 @@ def unregister():
     bpy.utils.unregister_class(BBP_OT_add_sector_component_pair)
     bpy.utils.unregister_class(BBP_OT_add_ventilator_series)
     bpy.utils.unregister_class(BBP_OT_add_tilting_block_series)
+    bpy.utils.unregister_class(BBP_OT_add_nong_ventilator)
     bpy.utils.unregister_class(BBP_OT_add_nong_extra_point)
     bpy.utils.unregister_class(BBP_OT_add_component)
