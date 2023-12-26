@@ -47,7 +47,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     #  In this internal cache list updator, check "outdated" flag first, if cache is outdated, update and reset flag.
     #  Otherwise do nothing.
     #  
-    # Reference: https://docs.blender.org/api/current/bpy.props.html#update-example
+    #  Reference: https://docs.blender.org/api/current/bpy.props.html#update-example
 
     ## Compromise used "outdated" flag.
     outdated_flag: bpy.props.BoolProperty(

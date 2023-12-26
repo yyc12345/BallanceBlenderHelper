@@ -33,6 +33,8 @@ TOKEN_SHOWCASE_CFGS_TITLE: str = 'title'
 TOKEN_SHOWCASE_CFGS_DESC: str = 'desc'
 TOKEN_SHOWCASE_CFGS_DEFAULT: str = 'default'
 
+TOKEN_SKIP: str = 'skip'
+
 TOKEN_PARAMS: str = 'params'
 TOKEN_PARAMS_FIELD: str = 'field'
 TOKEN_PARAMS_DATA: str = 'data'
@@ -126,6 +128,9 @@ def _eval_showcase_cfgs_default(strl: str) -> typing.Any:
 
 def _eval_params(strl: str, cfgs_data: dict[str, typing.Any]) -> typing.Any:
     return eval(strl, _g_ProgFieldGlobals, cfgs_data)
+
+def _eval_skip(strl: str, params_data: dict[str, typing.Any]) -> typing.Any:
+    return eval(strl, _g_ProgFieldGlobals, params_data)
 
 def _eval_vars(strl: str, params_data: dict[str, typing.Any]) -> typing.Any:
     return eval(strl, _g_ProgFieldGlobals, params_data)
@@ -272,6 +277,10 @@ def create_bme_struct(
     # get prototype first
     proto: dict[str, typing.Any] = _get_prototype_by_identifier(ident)
 
+    # check whether skip the whole struct before cal vars
+    if _eval_skip(proto[TOKEN_SKIP], params) == True:
+        return
+
     # calc vars by given params
     # please note i will add entries directly into params dict
     # but the params dict will not used independently later,
@@ -307,20 +316,34 @@ def create_bme_struct(
     # prepare mesh part data
     mesh_part: UTIL_blender_mesh.MeshWriterIngredient = UTIL_blender_mesh.MeshWriterIngredient()
     def vpos_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+        bv: mathutils.Vector = mathutils.Vector((0, 0, 0))
         v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
         for vec_idx in valid_vec_idx:
             # BME no need to convert co system
-            v.x, v.y, v.z = _eval_others(proto[TOKEN_VERTICES][vec_idx][TOKEN_VERTICES_DATA], params)
+            # but it need mul with transform matrix
+            bv.x, bv.y, bv.z = _eval_others(proto[TOKEN_VERTICES][vec_idx][TOKEN_VERTICES_DATA], params)
+            bv = transform @ bv
+            # yield result
+            v.x, v.y, v.z = bv.x, bv.y, bv.z
             yield v
     mesh_part.mVertexPosition = vpos_iterator()
     def vnml_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector3]:
+        # calc normal used transform first
+        # ref: https://zhuanlan.zhihu.com/p/96717729
+        nml_transform: mathutils.Matrix = transform.inverted_safe().transposed()
+        # prepare vars
+        bv: mathutils.Vector = mathutils.Vector((0, 0, 0))
         v: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
         for face_idx in valid_face_idx:
             face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
             for i in range(len(face_data[TOKEN_FACES_INDICES])):
-                v.x, v.y, v.z = _eval_others(face_data[TOKEN_FACES_NORMALS][i], params)
-                # BME normals need normalize
-                UTIL_virtools_types.vxvector3_normalize(v)
+                # BME normals need transform by matrix first,
+                bv.x, bv.y, bv.z = _eval_others(face_data[TOKEN_FACES_NORMALS][i], params)
+                bv = nml_transform @ bv
+                # then normalize it
+                bv.normalize()
+                # yield result
+                v.x, v.y, v.z = bv.x, bv.y, bv.z
                 yield v
     mesh_part.mVertexNormal = vnml_iterator()
     def vuv_iterator() -> typing.Iterator[UTIL_virtools_types.VxVector2]:
@@ -328,6 +351,7 @@ def create_bme_struct(
         for face_idx in valid_face_idx:
             face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
             for i in range(len(face_data[TOKEN_FACES_INDICES])):
+                # BME uv do not need any extra process
                 v.x, v.y = _eval_others(face_data[TOKEN_FACES_UVS][i], params)
                 yield v
     mesh_part.mVertexUV = vuv_iterator()
@@ -390,7 +414,7 @@ def create_bme_struct(
             proto_instance[TOKEN_INSTANCES_IDENTIFIER],
             writer,
             bmemtl,
-            _eval_others(proto_instance[TOKEN_INSTANCES_TRANSFORM], params),
+            transform @ _eval_others(proto_instance[TOKEN_INSTANCES_TRANSFORM], params),
             instance_params
         )
 

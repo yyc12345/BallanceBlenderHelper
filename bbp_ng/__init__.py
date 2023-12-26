@@ -33,13 +33,14 @@ from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, P
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 from . import OP_ADDS_component, OP_ADDS_bme
+from . import OP_OBJECT_legacy_align
 
 #region Menu
 
 # ===== Menu Defines =====
 
 class BBP_MT_View3DMenu(bpy.types.Menu):
-    """Ballance 3D operators"""
+    """Ballance 3D Operators"""
     bl_idname = "BBP_MT_View3DMenu"
     bl_label = "Ballance"
 
@@ -47,6 +48,7 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout = self.layout
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
+        layout.operator(OP_OBJECT_legacy_align.BBP_OT_legacy_align.bl_idname)
 
 class BBP_MT_AddBmeMenu(bpy.types.Menu):
     """Add Ballance Floor"""
@@ -163,6 +165,8 @@ def register() -> None:
     OP_ADDS_component.register()
     OP_ADDS_bme.register()
 
+    OP_OBJECT_legacy_align.register()
+
     # register other classes
     for cls in g_BldClasses:
         bpy.utils.register_class(cls)
@@ -184,6 +188,8 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_OBJECT_legacy_align.unregister()
+
     OP_ADDS_bme.unregister()
     OP_ADDS_component.unregister()
     OP_UV_flatten_uv.unregister()

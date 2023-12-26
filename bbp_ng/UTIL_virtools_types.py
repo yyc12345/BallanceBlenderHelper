@@ -27,14 +27,6 @@ def vxvector3_conv_co(self: VxVector3) -> None:
     """
     self.y, self.z = self.z, self.y
 
-def vxvector3_normalize(self: VxVector3) -> None:
-    """
-    Normalize given Vector
-    """
-    cache: mathutils.Vector = mathutils.Vector((self.x, self.y, self.z))
-    cache.normalize()
-    self.x, self.y, self.z = cache.x, cache.y, cache.z
-
 #endregion
 
 #region VxMatrix Patch
