@@ -1,0 +1,202 @@
+[
+    {
+        "identifier": "raw_floor_side",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "length",
+                "data": "5.0"
+            },
+            {
+                "field": "is_left_sink",
+                "data": "False"
+            },
+            {
+                "field": "is_right_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "height <= (0.7 if (is_left_sink or is_right_sink) else 0.0) or length == 0.0",
+        "vars": [
+            {
+                "field": "skip_long_side",
+                "data": "height <= 5.0"
+            },
+            {
+                "field": "skip_short_side",
+                "data": "height > 5.0"
+            },
+            {
+                "field": "uv_height",
+                "data": "height / 5.0"
+            },
+            {
+                "field": "uv_length",
+                "data": "length / 5.0"
+            },
+            {
+                "field": "left_sink",
+                "data": "0.7 if is_left_sink else 0.0"
+            },
+            {
+                "field": "right_sink",
+                "data": "0.7 if is_right_sink else 0.0"
+            },
+            {
+                "field": "uv_left_sink",
+                "data": "left_sink / 5.0"
+            },
+            {
+                "field": "uv_right_sink",
+                "data": "right_sink / 5.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "(0, 0, -left_sink)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, 0, -right_sink)"
+            },
+            {
+                "skip": "skip_long_side",
+                "data": "(0, 0, -5.0)"
+            },
+            {
+                "skip": "skip_long_side",
+                "data": "(length, 0, -5.0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 0, -height)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, 0, -height)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "skip_short_side",
+                "texture": "\"FloorSide\"",
+                "indices": [0, 2, 3, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height - uv_left_sink, 0)",
+                    "(uv_height - uv_right_sink, uv_length)",
+                    "(0, uv_length)"
+                ],
+                "normals": [
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)"
+                ]
+            },
+            {
+                "skip": "skip_long_side",
+                "texture": "\"LightingFloorTopBorder\"",
+                "indices": [0, 2, 3, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(1 - uv_left_sink, 0)",
+                    "(1 - uv_left_sink, uv_length)",
+                    "(0, uv_length)"
+                ],
+                "normals": [
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)"
+                ]
+            },
+            {
+                "skip": "skip_long_side",
+                "texture": "\"LightingFloorTopBorderless\"",
+                "indices": [2, 4, 5, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height - 1.0, 0)",
+                    "(uv_height - 1.0, uv_length)",
+                    "(0, uv_length)"
+                ],
+                "normals": [
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)",
+                    "(0, -1, 0)"
+                ]
+            }
+        ],
+        "instances": []
+    },
+    {
+        "identifier": "floor_bottom",
+        "showcase": null,
+        "params": [
+            {
+                "field": "length",
+                "data": "5.0"
+            },
+            {
+                "field": "width",
+                "data": "5.0"
+            }
+        ],
+        "skip": "length == 0.0 or width == 0.0",
+        "vars": [
+            {
+                "field": "uv_length",
+                "data": "length / 5.0"
+            },
+            {
+                "field": "uv_width",
+                "data": "width / 5.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, width, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, width, 0)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "False",
+                "texture": "\"FloorTopBorderless\"",
+                "indices": [0, 1, 3, 2],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_width, 0)",
+                    "(uv_width, uv_length)",
+                    "(0, uv_length)"
+                ],
+                "normals": [
+                    "(0, 0, -1)",
+                    "(0, 0, -1)",
+                    "(0, 0, -1)",
+                    "(0, 0, -1)"
+                ]
+            }
+        ],
+        "instances": []
+    }
+]

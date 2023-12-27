@@ -293,11 +293,11 @@ def create_bme_struct(
     # if NOT skip, add into valid list
     valid_vec_idx: list[int] = []
     for vec_idx, proto_vec in enumerate(proto[TOKEN_VERTICES]):
-        if not _eval_others(proto_vec[TOKEN_VERTICES_SKIP], params):
+        if _eval_others(proto_vec[TOKEN_VERTICES_SKIP], params) == False:
             valid_vec_idx.append(vec_idx)
     valid_face_idx: list[int] = []
     for face_idx, proto_face in enumerate(proto[TOKEN_FACES]):
-        if not _eval_others(proto_face[TOKEN_FACES_SKIP], params):
+        if _eval_others(proto_face[TOKEN_FACES_SKIP], params) == False:
             valid_face_idx.append(face_idx)
 
     # create mtl slot remap to help following mesh adding
@@ -395,6 +395,10 @@ def create_bme_struct(
             # add current face indices count to internal counter
             face_counter += indices_count
 
+            # fill texture data
+            mtl_name: str = _eval_others(face_data[TOKEN_FACES_TEXTURE], params)
+            f.mMtlIdx = mtl_remap[mtl_name]
+
             # return data once
             yield f
     mesh_part.mFace = face_iterator()
@@ -403,6 +407,10 @@ def create_bme_struct(
 
     # then we incursively process instance creation
     for proto_instance in proto[TOKEN_INSTANCES]:
+        # check whether skip this instance
+        if _eval_others(proto_instance[TOKEN_INSTANCES_SKIP], params) == True:
+            continue
+
         # calc instance params
         instance_params: dict[str, typing.Any] = {}
         proto_instance_params: dict[str, str] = proto_instance[TOKEN_INSTANCES_PARAMS]
@@ -414,6 +422,7 @@ def create_bme_struct(
             proto_instance[TOKEN_INSTANCES_IDENTIFIER],
             writer,
             bmemtl,
+            # left-mul transform, because self transform should be applied first, the apply parent's transform
             transform @ _eval_others(proto_instance[TOKEN_INSTANCES_TRANSFORM], params),
             instance_params
         )

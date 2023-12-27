@@ -16,6 +16,7 @@
                 "data": "(True, False, True, True, True, True)"
             }
         ],
+        "skip": "False",
         "vars": [
             {
                 "field": "uv_height",
@@ -75,7 +76,7 @@
                 ]
             },
             {
-                "skip": "not face[1]",
+                "skip": "(not face[1]) or height == 0.0",
                 "texture": "trafo_texture",
                 "indices": [5, 4, 7, 6],
                 "uvs": [
@@ -92,7 +93,7 @@
                 ]
             },
             {
-                "skip": "not face[2]",
+                "skip": "(not face[2]) or height == 0.0",
                 "texture": "trafo_texture",
                 "indices": [3, 7, 4, 0],
                 "uvs": [
@@ -109,7 +110,7 @@
                 ]
             },
             {
-                "skip": "not face[3]",
+                "skip": "(not face[3]) or height == 0.0",
                 "texture": "trafo_texture",
                 "indices": [1, 5, 6, 2],
                 "uvs": [
@@ -126,7 +127,7 @@
                 ]
             },
             {
-                "skip": "not face[4]",
+                "skip": "(not face[4]) or height == 0.0",
                 "texture": "trafo_texture",
                 "indices": [0, 4, 5, 1],
                 "uvs": [
@@ -143,7 +144,7 @@
                 ]
             },
             {
-                "skip": "not face[5]",
+                "skip": "(not face[5]) or height == 0.0",
                 "texture": "trafo_texture",
                 "indices": [2, 6, 7, 3],
                 "uvs": [
@@ -195,6 +196,7 @@
                 "data": "face_"
             }
         ],
+        "skip": "False",
         "vars": [],
         "vertices": [],
         "faces": [],
@@ -244,6 +246,7 @@
                 "data": "face_"
             }
         ],
+        "skip": "False",
         "vars": [],
         "vertices": [],
         "faces": [],
@@ -293,6 +296,7 @@
                 "data": "face_"
             }
         ],
+        "skip": "False",
         "vars": [],
         "vertices": [],
         "faces": [],
