@@ -301,6 +301,8 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int, scale_data: _Fla
             # just get abs for the u component
             _set_face_vertex_uv(face, uv_layer, idx, (abs(ppuv.x), ppuv.y))
 
+    # show the updates in the viewport
+    bmesh.update_edit_mesh(mesh)
     # return process result
     return no_processed_count
 

@@ -33,7 +33,7 @@ from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, P
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 from . import OP_ADDS_component, OP_ADDS_bme
-from . import OP_OBJECT_legacy_align
+from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group
 
 #region Menu
 
@@ -46,9 +46,15 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
+        layout.label(text = 'UV', icon = 'UV')
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
+        layout.separator()
+        layout.label(text = 'Align', icon = 'SNAP_ON')
         layout.operator(OP_OBJECT_legacy_align.BBP_OT_legacy_align.bl_idname)
+        layout.separator()
+        layout.label(text = 'Select', icon = 'SELECT_SET')
+        layout.operator(OP_OBJECT_virtools_group.BBP_OT_select_object_by_virtools_group.bl_idname)
 
 class BBP_MT_AddBmeMenu(bpy.types.Menu):
     """Add Ballance Floor"""
@@ -95,27 +101,44 @@ class BBP_MT_AddComponentsMenu(bpy.types.Menu):
 
 MenuDrawer_t = typing.Callable[[typing.Any, typing.Any], None]
 
-def menu_drawer_import(self, context):
+def menu_drawer_import(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.operator(OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname, text = "Ballance Map (.bmx)")
     layout.operator(OP_IMPORT_virtools.BBP_OT_import_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
 
-def menu_drawer_export(self, context):
+def menu_drawer_export(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.operator(OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname, text = "Ballance Map (.bmx)")
     layout.operator(OP_EXPORT_virtools.BBP_OT_export_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
 
-def menu_drawer_view3d(self, context):
+def menu_drawer_view3d(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.menu(BBP_MT_View3DMenu.bl_idname)
 
-def menu_drawer_add(self, context):
+def menu_drawer_add(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
     layout.label(text="Ballance")
     layout.menu(BBP_MT_AddBmeMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
     layout.menu(BBP_MT_AddComponentsMenu.bl_idname, icon='MESH_ICOSPHERE')
+
+def menu_drawer_grouping(self, context) -> None:
+    layout: bpy.types.UILayout = self.layout
+    layout.separator()
+
+    # NOTE: because outline context may change operator context
+    # so it will cause no popup window when click operator in outline.
+    # thus we create a sub layout and set its operator context as 'INVOKE_DEFAULT'
+    # thus, all operators can pop up normally.
+    col = layout.column()
+    col.operator_context = 'INVOKE_DEFAULT'
+
+    col.label(text="Virtools Group")
+    col.operator(OP_OBJECT_virtools_group.BBP_OT_add_objects_virtools_group.bl_idname, icon = 'ADD', text = "Group into...")
+    col.operator(OP_OBJECT_virtools_group.BBP_OT_rm_objects_virtools_group.bl_idname, icon = 'REMOVE', text = "Ungroup from...")
+    col.operator(OP_OBJECT_virtools_group.BBP_OT_clear_objects_virtools_group.bl_idname, icon = 'TRASH', text = "Clear All Groups")
+
 #endregion
 
 #region Register and Unregister.
@@ -141,6 +164,10 @@ g_BldMenus: tuple[MenuEntry, ...] = (
      MenuEntry(bpy.types.TOPBAR_MT_file_import, True, menu_drawer_import),
      MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
      MenuEntry(bpy.types.VIEW3D_MT_add, True, menu_drawer_add),
+
+    # register double (for 2 menus)
+     MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_grouping),
+     MenuEntry(bpy.types.OUTLINER_MT_object, True, menu_drawer_grouping),
 )
 
 def register() -> None:
@@ -166,6 +193,7 @@ def register() -> None:
     OP_ADDS_bme.register()
 
     OP_OBJECT_legacy_align.register()
+    OP_OBJECT_virtools_group.register()
 
     # register other classes
     for cls in g_BldClasses:
@@ -188,6 +216,7 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_OBJECT_virtools_group.unregister()
     OP_OBJECT_legacy_align.unregister()
 
     OP_ADDS_bme.unregister()

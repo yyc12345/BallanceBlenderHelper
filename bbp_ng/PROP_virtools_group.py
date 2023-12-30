@@ -290,7 +290,7 @@ class BBP_UL_virtools_groups(bpy.types.UIList):
     def draw_item(self, context, layout: bpy.types.UILayout, data, item: BBP_PG_virtools_group, icon, active_data, active_propname):
         layout.label(text = item.group_name, translate = False, icon_value = _get_group_icon_by_name(item.group_name))
 
-class BBP_OT_add_virtools_groups(bpy.types.Operator, SharedGroupNameInputProperties):
+class BBP_OT_add_virtools_group(bpy.types.Operator, SharedGroupNameInputProperties):
     """Add a Virtools Group for Active Object."""
     bl_idname = "bbp.add_virtools_groups"
     bl_label = "Add to Virtools Groups"
@@ -313,7 +313,7 @@ class BBP_OT_add_virtools_groups(bpy.types.Operator, SharedGroupNameInputPropert
     def draw(self, context):
         self.draw_group_name_input(self.layout)
 
-class BBP_OT_rm_virtools_groups(bpy.types.Operator):
+class BBP_OT_rm_virtools_group(bpy.types.Operator):
     """Remove a Virtools Group for Active Object."""
     bl_idname = "bbp.rm_virtools_groups"
     bl_label = "Remove from Virtools Groups"
@@ -389,8 +389,8 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
         )
         
         col = row.column(align=True)
-        col.operator(BBP_OT_add_virtools_groups.bl_idname, icon='ADD', text="")
-        col.operator(BBP_OT_rm_virtools_groups.bl_idname, icon='REMOVE', text="")
+        col.operator(BBP_OT_add_virtools_group.bl_idname, icon='ADD', text="")
+        col.operator(BBP_OT_rm_virtools_group.bl_idname, icon='REMOVE', text="")
         col.separator()
         col.operator(BBP_OT_clear_virtools_groups.bl_idname, icon='TRASH', text="")
 
@@ -400,8 +400,8 @@ def register():
     # register all classes
     bpy.utils.register_class(BBP_PG_virtools_group)
     bpy.utils.register_class(BBP_UL_virtools_groups)
-    bpy.utils.register_class(BBP_OT_add_virtools_groups)
-    bpy.utils.register_class(BBP_OT_rm_virtools_groups)
+    bpy.utils.register_class(BBP_OT_add_virtools_group)
+    bpy.utils.register_class(BBP_OT_rm_virtools_group)
     bpy.utils.register_class(BBP_OT_clear_virtools_groups)
     bpy.utils.register_class(BBP_PT_virtools_groups)
     
@@ -416,7 +416,7 @@ def unregister():
     
     bpy.utils.unregister_class(BBP_PT_virtools_groups)
     bpy.utils.unregister_class(BBP_OT_clear_virtools_groups)
-    bpy.utils.unregister_class(BBP_OT_rm_virtools_groups)
-    bpy.utils.unregister_class(BBP_OT_add_virtools_groups)
+    bpy.utils.unregister_class(BBP_OT_rm_virtools_group)
+    bpy.utils.unregister_class(BBP_OT_add_virtools_group)
     bpy.utils.unregister_class(BBP_UL_virtools_groups)
     bpy.utils.unregister_class(BBP_PG_virtools_group)
