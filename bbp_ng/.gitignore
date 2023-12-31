@@ -1,14 +1,14 @@
 # My Ban
-bbp_ng/PyBMap/*.dll
-bbp_ng/PyBMap/*.so
-bbp_ng/PyBMap/*.dylib
-bbp_ng/PyBMap/*.bin
-bbp_ng/PyBMap/*.pdb
+PyBMap/*.dll
+PyBMap/*.so
+PyBMap/*.dylib
+PyBMap/*.bin
+PyBMap/*.pdb
 
-bbp_ng/icons/*
-!bbp_ng/icons/.gitkeep
-bbp_ng/jsons/*
-!bbp_ng/jsons/.gitkeep
+icons/*
+!icons/.gitkeep
+jsons/*
+!jsons/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

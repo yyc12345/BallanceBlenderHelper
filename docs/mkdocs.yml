@@ -1,0 +1,48 @@
+site_name: Ballance Blender Plugin Manual
+site_description: 'The user manual of Ballance Blender Plugin'
+site_author: 'yyc12345'
+site_url: 'https://yyc12345.github.io/BallanceBlenderHelper/'
+copyright: 'Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.'
+
+nav:
+  - 「    」: 'index.md'
+  - English:
+    - 'Start': 'en/index.md'
+  - 简体中文:
+    - '开始': 'zh-cn/index.md'
+
+theme:
+  name: readthedocs
+  locale: en
+  include_homepage_in_sidebar: false
+
+plugins: []
+
+extra:
+  alternate:
+    - name: English
+      link: /BallanceBlenderHelper/en/home
+      lang: en
+    - name: 简体中文
+      link: /BallanceBlenderHelper/zh-cn/home
+      lang: zh
+
+markdown_extensions:
+  - admonition
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
