@@ -29,10 +29,10 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
     def draw(self, context):
         layout = self.layout
         layout.label(text = 'Conflict Options')
-        self.draw_import_params(layout)
+        self.draw_import_params(layout.box())
         layout.separator()
         layout.label(text = 'Virtools Params')
-        self.draw_virtools_params(layout)
+        self.draw_virtools_params(layout.box())
 
 def _import_virtools(file_name_: str, encodings_: tuple[str]) -> None:
     # create temp folder

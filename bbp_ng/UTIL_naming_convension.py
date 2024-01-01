@@ -373,7 +373,8 @@ class VirtoolsGroupConvention():
 
                 case BallanceObjectType.COMPONENT:
                     # group into component type
-                    gp.add_group(info.mComponentType)
+                    # use typing.cast() to force linter accept it because None is impossible
+                    gp.add_group(typing.cast(str, info.mComponentType))
 
                     # group to sector
                     if info.mSector == 9:

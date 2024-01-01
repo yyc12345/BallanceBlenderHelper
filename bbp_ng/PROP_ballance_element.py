@@ -1,7 +1,7 @@
 import bpy
 import os, typing, enum, array
 from . import PROP_virtools_mesh
-from . import UTIL_functions, UTIL_file_io, UTIL_blender_mesh, UTIL_virtools_types
+from . import UTIL_functions, UTIL_file_io, UTIL_blender_mesh, UTIL_virtools_types, UTIL_icons_manager
 
 #region Raw Elements Operations
 
@@ -349,6 +349,12 @@ class BBP_OT_reset_ballance_elements(bpy.types.Operator):
     
     def execute(self, context):
         reset_ballance_elements(context.scene)
+        # show a window to let user know, not silence
+        UTIL_functions.message_box(
+            ('Reset OK.', ),
+            "Reset Result",
+            UTIL_icons_manager.BlenderPresetIcons.Info.value
+        )
         return {'FINISHED'}
 
 class BBP_PT_ballance_elements(bpy.types.Panel):

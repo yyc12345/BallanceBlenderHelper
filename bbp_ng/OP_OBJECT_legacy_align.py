@@ -82,8 +82,21 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         if self.apply_flag == True: return
         self.apply_flag = True
 
-        # add a new entry in history
-        self.align_history.add()
+        # check whether add new entry
+        # if no selected axis, this alignment is invalid
+        entry: BBP_PG_legacy_align_history = self.align_history[-1]
+        if entry.align_x == True or entry.align_y == True or entry.align_z == True:
+            # valid one
+            # add a new entry in history
+            self.align_history.add()
+        else:
+            # invalid one
+            # reset all data to default
+            entry.align_x = False
+            entry.align_y = False
+            entry.align_z = False
+            entry.current_align_mode = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter)
+            entry.target_align_mode = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter)
 
         # reset hinder
         self.recursive_hinder = False
@@ -142,7 +155,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         col = layout.column()
 
         # show axis
-        col.label(text="Align Axis")
+        col.label(text="Align Axis (Multi-selection)")
         row = col.row()
         row.prop(entry, "align_x", toggle = 1)
         row.prop(entry, "align_y", toggle = 1)
@@ -152,12 +165,17 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         col.separator()
         col.label(text = 'Current Object (Active Object)')
         col.prop(entry, "current_align_mode", expand = True)
-        col.label(text = 'Target Objects (Other Objects)')
+        col.label(text = 'Target Objects (Selected Objects)')
         col.prop(entry, "target_align_mode", expand = True)
 
         # show apply button
         col.separator()
-        col.prop(self, 'apply_flag', text = 'Apply', icon = 'CHECKMARK', toggle = 1)
+        conditional_disable_area = col.column()
+        # only allow Apply when there is a selected axis
+        conditional_disable_area.enabled = entry.align_x == True or entry.align_y == True or entry.align_z == True
+        # show apply and counter
+        conditional_disable_area.prop(self, 'apply_flag', text = 'Apply', icon = 'CHECKMARK', toggle = 1)
+        conditional_disable_area.label(text = f'Total {len(self.align_history) - 1} applied alignments')
 
 #region Core Functions
 

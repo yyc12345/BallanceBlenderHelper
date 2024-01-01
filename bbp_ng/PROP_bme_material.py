@@ -1,7 +1,7 @@
 import bpy
 import typing, enum, copy
 from . import PROP_virtools_material, PROP_virtools_texture
-from . import UTIL_ballance_texture, UTIL_functions
+from . import UTIL_ballance_texture, UTIL_functions, UTIL_icons_manager
 
 #region BME Material Presets
 
@@ -239,6 +239,12 @@ class BBP_OT_reset_bme_materials(bpy.types.Operator):
     
     def execute(self, context):
         reset_bme_materials(context.scene)
+        # show a window to let user know, not silence
+        UTIL_functions.message_box(
+            ('Reset OK.', ),
+            "Reset Result",
+            UTIL_icons_manager.BlenderPresetIcons.Info.value
+        )
         return {'FINISHED'}
 
 class BBP_PT_bme_materials(bpy.types.Panel):

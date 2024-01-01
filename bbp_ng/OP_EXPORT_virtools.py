@@ -68,15 +68,21 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     def draw(self, context):
         layout = self.layout
         layout.label(text = 'Export Target')
-        self.draw_export_params(layout)
+        self.draw_export_params(layout.box())
+
         layout.separator()
         layout.label(text = 'Virtools Params')
-        self.draw_virtools_params(layout)
-        layout.label(text = 'Global Texture Save Option')
-        layout.prop(self, 'texture_save_opt', text = '')
-        layout.prop(self, 'use_compress')
+        box = layout.box()
+        self.draw_virtools_params(box)
+
+        box.separator()
+        box.label(text = 'Global Texture Save Option')
+        box.prop(self, 'texture_save_opt', text = '')
+
+        box.separator()
+        box.prop(self, 'use_compress')
         if self.use_compress:
-            layout.prop(self, 'compress_level')
+            box.prop(self, 'compress_level')
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]

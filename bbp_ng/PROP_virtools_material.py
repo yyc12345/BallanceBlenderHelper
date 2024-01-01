@@ -656,8 +656,9 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         props: BBP_PG_virtools_material = get_virtools_material(context.material)
         
         # draw operator
-        layout.operator(BBP_OT_preset_virtools_material.bl_idname, icon="PRESET")
-        layout.operator(BBP_OT_apply_virtools_material.bl_idname, icon="NODETREE")
+        row = layout.row()
+        row.operator(BBP_OT_preset_virtools_material.bl_idname, text = 'Preset', icon = "PRESET")
+        row.operator(BBP_OT_apply_virtools_material.bl_idname, text = 'Apply', icon = "NODETREE")
 
         # draw data
         layout.label(text="Color Parameters")

@@ -103,12 +103,12 @@ MenuDrawer_t = typing.Callable[[typing.Any, typing.Any], None]
 
 def menu_drawer_import(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
-    layout.operator(OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname, text = "Ballance Map (.bmx)")
+    #layout.operator(OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname, text = "Ballance Map (.bmx)")
     layout.operator(OP_IMPORT_virtools.BBP_OT_import_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
 
 def menu_drawer_export(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
-    layout.operator(OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname, text = "Ballance Map (.bmx)")
+    #layout.operator(OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname, text = "Ballance Map (.bmx)")
     layout.operator(OP_EXPORT_virtools.BBP_OT_export_virtools.bl_idname, text = "Virtools File (.nmo/.cmo/.vmo) (experimental)")
 
 def menu_drawer_view3d(self, context) -> None:
