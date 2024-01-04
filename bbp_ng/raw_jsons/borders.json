@@ -20,10 +20,6 @@
                 "data": "False"
             },
             {
-                "field": "border_texture",
-                "data": "\"FloorTopBorderless\""
-            },
-            {
                 "field": "is_ribbon",
                 "data": "False"
             }
@@ -45,26 +41,26 @@
         ],
         "vertices": [
             {
-                "skip": "False",
+                "skip": "not face[0]",
                 "data": "(0, 0, 0)"
             },
             {
-                "skip": "False",
+                "skip": "not face[0]",
                 "data": "(0, 2.5, -sink)"
             },
             {
-                "skip": "False",
+                "skip": "not face[0]",
                 "data": "(length, 0, 0)"
             },
             {
-                "skip": "False",
+                "skip": "not face[0]",
                 "data": "(length, 2.5, -sink)"
             }
         ],
         "faces": [
             {
                 "skip": "not face[0]",
-                "texture": "border_texture",
+                "texture": "(\"FloorTopFlat\" if is_ribbon else \"FloorTopProfil\") if is_sink else \"FloorTopBorder\"",
                 "indices": [0, 2, 3, 1],
                 "uvs": [
                     "(0, 0)",
@@ -193,7 +189,6 @@
                     "height": "height",
                     "face": "face",
                     "is_sink": "False",
-                    "border_texture": "\"FloorTopBorder\"",
                     "is_ribbon": "False"
                 },
                 "transform": "ident()"
@@ -257,7 +252,6 @@
                     "height": "height",
                     "face": "face",
                     "is_sink": "True",
-                    "border_texture": "\"FloorTopProfil\"",
                     "is_ribbon": "False"
                 },
                 "transform": "ident()"
@@ -321,7 +315,6 @@
                     "height": "height",
                     "face": "face",
                     "is_sink": "True",
-                    "border_texture": "\"FloorTopFlat\"",
                     "is_ribbon": "True"
                 },
                 "transform": "ident()"
