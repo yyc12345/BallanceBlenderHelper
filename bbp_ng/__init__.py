@@ -32,7 +32,7 @@ UTIL_icons_manager.register()
 from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_virtools_group, PROP_ballance_element, PROP_bme_material
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
-from . import OP_ADDS_component, OP_ADDS_bme
+from . import OP_ADDS_component, OP_ADDS_bme, OP_ADDS_rail
 from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_naming_convention
 
 #region Menu
@@ -72,6 +72,16 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
+
+        layout.label(text = "Sections")
+        layout.operator(OP_ADDS_rail.BBP_OT_add_monorail_section.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
+
+        layout.separator()
+        layout.label(text = "Straight Rails")
+        layout.operator(OP_ADDS_rail.BBP_OT_add_straight_monorail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
         
 class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     """Add Ballance Components"""
@@ -80,21 +90,21 @@ class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text="Basic Components")
+        layout.label(text = "Basic Components")
         OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(layout)
         
         layout.separator()
-        layout.label(text="Nong Components")
+        layout.label(text = "Nong Components")
         OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_nong_ventilator.draw_blc_menu(layout)
 
         layout.separator()
-        layout.label(text="Series Components")
+        layout.label(text = "Series Components")
         OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(layout)
 
         layout.separator()
-        layout.label(text="Components Pair")
+        layout.label(text = "Components Pair")
         OP_ADDS_component.BBP_OT_add_sector_component_pair.draw_blc_menu(layout)
 
 # ===== Menu Drawer =====
@@ -206,6 +216,7 @@ def register() -> None:
     OP_UV_flatten_uv.register()
     OP_ADDS_component.register()
     OP_ADDS_bme.register()
+    OP_ADDS_rail.register()
 
     OP_OBJECT_legacy_align.register()
     OP_OBJECT_virtools_group.register()
@@ -236,6 +247,7 @@ def unregister() -> None:
     OP_OBJECT_virtools_group.unregister()
     OP_OBJECT_legacy_align.unregister()
 
+    OP_ADDS_rail.unregister()
     OP_ADDS_bme.unregister()
     OP_ADDS_component.unregister()
     OP_UV_flatten_uv.unregister()

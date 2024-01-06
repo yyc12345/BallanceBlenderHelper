@@ -1,7 +1,7 @@
 import bpy
 import typing
-from . import PROP_preferences, PROP_virtools_mesh, PROP_virtools_group, PROP_bme_material
-from . import UTIL_functions, UTIL_icons_manager, UTIL_bme
+from . import PROP_preferences
+from . import UTIL_functions, UTIL_bme
 
 #region BME Adder
 

@@ -468,9 +468,9 @@ class YYCToolchainConvention():
             case BallanceObjectType.FLOOR:
                 return 'A_Floor_'
             case BallanceObjectType.RAIL:
-                return 'A_Wood_'
-            case BallanceObjectType.WOOD:
                 return 'A_Rail_'
+            case BallanceObjectType.WOOD:
+                return 'A_Wood_'
             case BallanceObjectType.STOPPER:
                 return 'A_Stopper_'
 
