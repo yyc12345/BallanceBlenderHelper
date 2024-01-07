@@ -74,14 +74,13 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
         layout = self.layout
 
         layout.label(text = "Sections")
-        layout.operator(OP_ADDS_rail.BBP_OT_add_monorail_section.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
 
         layout.separator()
-        layout.label(text = "Straight Rails")
-        layout.operator(OP_ADDS_rail.BBP_OT_add_straight_monorail.bl_idname)
+        layout.label(text = "Rails")
         layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_screw_rail.bl_idname)
         
 class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     """Add Ballance Components"""
