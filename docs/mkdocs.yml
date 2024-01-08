@@ -10,6 +10,10 @@ nav:
     - 'Start': 'en/index.md'
   - 简体中文:
     - '开始': 'zh-cn/index.md'
+    - '安装插件': 'zh-cn/install-plugin.md'
+    - '配置插件': 'zh-cn/configure-plugin.md'
+    - '编译与分发插件': 'zh-cn/compile-distribute-plugin.md'
+    - '技术信息': 'zh-cn/tech-infos.md'
 
 theme:
   name: readthedocs

@@ -13,8 +13,8 @@ Ballance Blender Plugin（后文简称BBP）是一款关注Ballance自制地图�
 
 ## 入门
 
-* 安装插件
-* 配置插件
+* [安装插件](./install-plugin.md)
+* [配置插件](./configure-plugin.md)
 
 ## 基础
 
@@ -28,7 +28,8 @@ Ballance Blender Plugin（后文简称BBP）是一款关注Ballance自制地图�
 
 ## 进阶
 
-* 编译与分发插件
+* [编译与分发插件](./compile-distribute-plugin.md)
+* [技术信息](./tech-infos.md)
 
 !!! info "这些并不是全部"
     本手册只记录有关此插件的相关操作，并不会在此说明如何制作一份Ballance地图。如需详细了解如何利用Blender和BBP制作Ballance地图，请在Bilibili或YouTube上搜索相关内容。
