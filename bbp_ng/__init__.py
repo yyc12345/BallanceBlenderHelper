@@ -73,14 +73,20 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text = "Sections")
+        layout.label(text = "Sections", icon = 'MESH_CIRCLE')
         layout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
 
         layout.separator()
-        layout.label(text = "Rails")
+        layout.label(text = "Straight Rails", icon = 'IPO_CONSTANT')
         layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_screw_rail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_side_rail.bl_idname)
+
+        layout.separator()
+        layout.label(text = "Curve Rails", icon = 'MOD_SCREW')
+        layout.operator(OP_ADDS_rail.BBP_OT_add_arc_rail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_spiral_rail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_side_spiral_rail.bl_idname)
         
 class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     """Add Ballance Components"""
