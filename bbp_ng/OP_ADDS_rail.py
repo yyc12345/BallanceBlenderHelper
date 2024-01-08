@@ -50,9 +50,15 @@ class SharedRailSectionInputProperty():
 
         @param force_monorail[in] Force this draw method for monorail if True, or for rail if False. Accept None if you want user to choose it.
         """
+        # draw title
+        layout = layout.box()
+        layout.label(text = 'Section')
+
         if force_monorail is None:
             # show picker to allow user pick
-            layout.prop(self, 'rail_type', expand = True)
+            # force it show horizontal
+            row = layout.row()
+            row.prop(self, 'rail_type', expand = True)
             # show radius
             layout.prop(self, "rail_radius")
             # show span for rail
@@ -92,6 +98,9 @@ class SharedRailCapInputProperty():
     ) # type: ignore
 
     def draw_rail_cap_input(self, layout: bpy.types.UILayout) -> None:
+        # draw title
+        layout = layout.box()
+        layout.label(text = 'Cap')
         row = layout.row()
         row.prop(self, "rail_start_cap", toggle = 1)
         row.prop(self, "rail_end_cap", toggle = 1)
@@ -116,6 +125,9 @@ class SharedStraightRailInputProperty():
     ) # type: ignore
 
     def draw_straight_rail_input(self, layout: bpy.types.UILayout) -> None:
+        # draw title
+        layout = layout.box()
+        layout.label(text = 'Straight Rail')
         layout.prop(self, "rail_length")
 
     def general_get_rail_length(self) -> float:
@@ -162,6 +174,10 @@ class SharedScrewRailInputProperty():
     ) # type: ignore
 
     def draw_screw_rail_input(self, layout: bpy.types.UILayout, show_for_screw: bool) -> None:
+        # draw title
+        layout = layout.box()
+        layout.label(text = 'Screw Rail')
+
         if show_for_screw:
             # screw do not need angle property
             layout.prop(self, "rail_screw_screw")
@@ -374,6 +390,11 @@ def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], No
     mesh: bpy.types.Mesh = bpy.data.meshes.new('Rail')
     bm.to_mesh(mesh)
     bm.free()
+    
+    # setup smooth for mesh
+    mesh.use_auto_smooth = True
+    mesh.auto_smooth_angle = math.radians(50)
+    mesh.shade_smooth()
 
     # create object and assoc with it
     # create info first

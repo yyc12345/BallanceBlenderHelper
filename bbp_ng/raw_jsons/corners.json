@@ -75,11 +75,7 @@
                     "(NXNY_uv, 0)",
                     "(PXPY_uv, 0)"
                 ],
-                "normals": [
-                    "(0, PXPY_sink - NXNY_sink, 2.5)",
-                    "(0, PXPY_sink - NXNY_sink, 2.5)",
-                    "(0, PXPY_sink - NXNY_sink, 2.5)"
-                ]
+                "normals": null
             },
             {
                 "skip": "not face[0]",
@@ -90,11 +86,7 @@
                     "(PXPY_uv, 0)",
                     "(NXNY_uv, 0)"
                 ],
-                "normals": [
-                    "(PXPY_sink - NXNY_sink, 0, 2.5)",
-                    "(PXPY_sink - NXNY_sink, 0, 2.5)",
-                    "(PXPY_sink - NXNY_sink, 0, 2.5)"
-                ]
+                "normals": null
             }
         ],
         "instances": [

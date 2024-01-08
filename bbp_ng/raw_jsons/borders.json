@@ -68,12 +68,7 @@
                     "(uv_border_texture, uv_length)",
                     "(uv_border_texture, 0)"
                 ],
-                "normals": [
-                    "(0, sink, 2.5)",
-                    "(0, sink, 2.5)",
-                    "(0, sink, 2.5)",
-                    "(0, sink, 2.5)"
-                ]
+                "normals": null
             }
         ],
         "instances": [
