@@ -13,9 +13,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ng
+  
+      - name: Install MkDocs
+        run: |
+          echo 'mkdocs' > requirements.txt
+          echo 'pymdown-extensions' >> requirements.txt
 
       - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+        uses: mhausenblas/mkdocs-deploy-gh-pages@nomaterial
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CONFIG_FILE: docs/mkdocs.yml
