@@ -80,6 +80,7 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
         layout.separator()
         layout.label(text = "Straight Rails", icon = 'IPO_CONSTANT')
         layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
+        layout.operator(OP_ADDS_rail.BBP_OT_add_transition_rail.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_side_rail.bl_idname)
 
         layout.separator()

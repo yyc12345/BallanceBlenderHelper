@@ -197,6 +197,31 @@ class BBP_OT_add_straight_rail(SharedRailSectionInputProperty, SharedRailCapInpu
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
 
+class BBP_OT_add_transition_rail(SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
+    """Add Transition Rail"""
+    bl_idname = "bbp.add_transition_rail"
+    bl_label = "Transition Rail"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        _rail_creator_wrapper(
+            lambda bm: _create_transition_rail(
+                bm,
+                c_DefaultRailRadius, c_DefaultRailSpan,
+                self.general_get_rail_length(),
+                self.general_get_rail_start_cap(), self.general_get_rail_end_cap()
+            )
+        )
+        return {'FINISHED'}
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text = 'Transition Rail')
+        self.draw_straight_rail_input(layout)
+        layout.separator()
+        layout.label(text = 'Rail Cap')
+        self.draw_rail_cap_input(layout)
+
 class BBP_OT_add_side_rail(SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
     """Add Side Rail"""
     bl_idname = "bbp.add_side_rail"
@@ -357,7 +382,8 @@ def _bmesh_extrude(bm: bmesh.types.BMesh, start_edges: list[bmesh.types.BMEdge],
     ret: dict[str, typing.Any] = bmesh.ops.extrude_edge_only(
         bm,
         edges = start_edges, 
-        use_normal_flip = False, use_select_history = False
+        use_normal_flip = True, # NOTE: flip normal according to test result.
+        use_select_history = False
     )
 
     # get end edges
@@ -404,7 +430,20 @@ def _bmesh_screw(
     del ret
     return list(filter(lambda x: isinstance(x, bmesh.types.BMEdge), geom_last))
 
+def _bmesh_smooth_all_edges(bm: bmesh.types.BMesh) -> None:
+    """
+    Resrt all edges to smooth. Call this before calling edge cap function.
+    """
+    # reset all edges to smooth
+    edge: bmesh.types.BMEdge
+    for edge in bm.edges:
+        edge.smooth = True
+
 def _bmesh_cap(bm: bmesh.types.BMesh, edges: list[bmesh.types.BMEdge]) -> None:
+    """
+    Cap given edges. And mark it as sharp edge.
+    Please reset all edges to smooth one before calling this.
+    """
     # fill holes
     bmesh.ops.triangle_fill(
         bm,
@@ -412,19 +451,10 @@ def _bmesh_cap(bm: bmesh.types.BMesh, edges: list[bmesh.types.BMEdge]) -> None:
         edges = edges
         # no pass to normal.
     )
-
-def _bmesh_mark_sharp(bm: bmesh.types.BMesh, edges: typing.Iterable[list[bmesh.types.BMEdge]]) -> None:
-    # Ref: https://blender.stackexchange.com/questions/41351/is-there-a-way-to-select-edges-marked-as-sharp-via-python/41352#41352
-
-    # reset all edges to smooth
-    edge: bmesh.types.BMEdge
-    for edge in bm.edges:
-        edge.smooth = True
-
-    # and only set sharp for specified edges
-    for subedges in edges:
-        for edge in subedges:
-            edge.smooth = False
+    
+    # and only set sharp for cap's edges
+    for edge in edges:
+        edge.smooth = False
 
 #endregion
 
@@ -569,14 +599,45 @@ def _create_straight_rail(
         bm, start_edges, mathutils.Vector((0, rail_length, 0))
     )
 
+    # smooth geometry
+    _bmesh_smooth_all_edges(bm)
+
     # cap start and end edges if needed
     if rail_start_cap:
         _bmesh_cap(bm, start_edges)
     if rail_end_cap:
         _bmesh_cap(bm, end_edges)
 
-    # mark sharp
-    _bmesh_mark_sharp(bm, (start_edges, end_edges, ))
+def _create_transition_rail(
+        bm: bmesh.types.BMesh,
+        rail_radius: float, rail_span: float,
+        rail_length: float,
+        rail_start_cap: bool, rail_end_cap: bool) -> None:
+    """
+    Add a transition rail.
+
+    The original point is same as `_add_transition_section()`.
+    The start terminal of this straight will be placed in XZ panel.
+    The expand direction is +Y.
+    """
+    # create section first
+    _create_transition_section(bm, rail_radius, rail_span)
+
+    # get start edges
+    start_edges: list[bmesh.types.BMEdge] = bm.edges[:]
+    # extrude and get end edges
+    end_edges: list[bmesh.types.BMEdge] = _bmesh_extrude(
+        bm, start_edges, mathutils.Vector((0, rail_length, 0))
+    )
+
+    # smooth geometry
+    _bmesh_smooth_all_edges(bm)
+
+    # cap start and end edges if needed
+    if rail_start_cap:
+        _bmesh_cap(bm, start_edges)
+    if rail_end_cap:
+        _bmesh_cap(bm, end_edges)
 
 def _create_screw_rail(
         bm: bmesh.types.BMesh, 
@@ -608,13 +669,14 @@ def _create_screw_rail(
         rail_screw_screw
     )
 
+    # smooth geometry
+    _bmesh_smooth_all_edges(bm)
+
     # cap start and end edges if needed
     if rail_start_cap:
         _bmesh_cap(bm, start_edges)
     if rail_end_cap:
         _bmesh_cap(bm, end_edges)
-
-    _bmesh_mark_sharp(bm, (start_edges, end_edges, ))
 
 #endregion
 
@@ -623,6 +685,7 @@ def register():
     bpy.utils.register_class(BBP_OT_add_transition_section)
 
     bpy.utils.register_class(BBP_OT_add_straight_rail)
+    bpy.utils.register_class(BBP_OT_add_transition_rail)
     bpy.utils.register_class(BBP_OT_add_side_rail)
 
     bpy.utils.register_class(BBP_OT_add_arc_rail)
@@ -636,6 +699,7 @@ def unregister():
     bpy.utils.unregister_class(BBP_OT_add_arc_rail)
 
     bpy.utils.unregister_class(BBP_OT_add_side_rail)
+    bpy.utils.unregister_class(BBP_OT_add_transition_rail)
     bpy.utils.unregister_class(BBP_OT_add_straight_rail)
 
     bpy.utils.unregister_class(BBP_OT_add_transition_section)
