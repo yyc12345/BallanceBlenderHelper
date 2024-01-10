@@ -120,6 +120,7 @@ _g_ProgFieldGlobals: dict[str, typing.Any] = {
     # my custom matrix functions
     'move': lambda x, y, z: mathutils.Matrix.Translation((x, y, z)),
     'rot': lambda x, y, z: mathutils.Matrix.LocRotScale(None, mathutils.Euler((math.radians(x), math.radians(y), math.radians(z)), 'XYZ'), None),
+    'scale': lambda x, y, z: mathutils.Matrix.LocRotScale(None, None, (x, y, z)),
     'ident': lambda: mathutils.Matrix.Identity(4),
 }
 

@@ -1,0 +1,270 @@
+[
+    {
+        "identifier": "raw_floor_transition_part",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face_part",
+                "data": "(True, False, False)"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [
+            {
+                "skip": "not face_part[0]",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "not face_part[0]",
+                "data": "(5, 0, 0)"
+            },
+            {
+                "skip": "not face_part[0]",
+                "data": "(0, 2.5, -0.7)"
+            },
+            {
+                "skip": "not face_part[0]",
+                "data": "(5, 5, 0)"
+            },
+            {
+                "skip": "not face_part[0]",
+                "data": "(0, 5, 0)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face_part[0]",
+                "texture": "\"FloorTopProfilFlat\"",
+                "indices": [0, 1, 2],
+                "uvs": [
+                    "(0, 1)",
+                    "(0, 0)",
+                    "(0.5, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "not face_part[0]",
+                "texture": "\"FloorTopProfilFlat\"",
+                "indices": [3, 2, 1],
+                "uvs": [
+                    "(1, 0)",
+                    "(0.5, 1)",
+                    "(0, 0)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "not face_part[0]",
+                "texture": "\"FloorTopProfilFlat\"",
+                "indices": [2, 3, 4],
+                "uvs": [
+                    "(0.5, 1)",
+                    "(1, 0)",
+                    "(1, 1)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": [
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face_part[1]",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "True"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face_part[1]",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "True",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(0, 2.5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face_part[2]",
+                "params": {
+                    "height": "height",
+                    "length": "5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_transition",
+        "showcase": {
+            "title": "Transition",
+            "icon": "Transition",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_transition_part",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face_part": "(face[0], face[2], face[3])"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[5]",
+                "params": {
+                    "height": "height",
+                    "length": "5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "floor_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_narrow_transition",
+        "showcase": {
+            "title": "Narrow Transition",
+            "icon": "NarrowTransition",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_transition_part",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face_part": "(face[0], face[2], face[3])"
+                },
+                "transform": "scale(0.5, 1, 1)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[5]",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(2.5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "floor_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "2.5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    }
+]

@@ -101,7 +101,7 @@
                 "uvs": [
                     "(0, 0)",
                     "(1 - uv_left_sink, 0)",
-                    "(1 - uv_left_sink, uv_length)",
+                    "(1 - uv_right_sink, uv_length)",
                     "(0, uv_length)"
                 ],
                 "normals": null
