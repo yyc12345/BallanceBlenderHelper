@@ -1,37 +1,58 @@
 import bpy, mathutils, bmesh
-from . import UTIL_virtools_types
+import typing, enum
+from . import UTIL_virtools_types, UTIL_functions
 
 #region Param Struct
 
-class _FlattenParamBySize():
+class FlattenMethod(enum.IntEnum):
+    # The legacy flatten uv mode. Only just do space convertion for each individual faces.
+    Raw = enum.auto()
+    # The floor specified flatten uv.
+    # This method will make sure the continuity in V axis in uv when flatten uv.
+    # Only support rectangle faces.
+    Floor = enum.auto()
+    # The wood specified flatten uv.
+    # Similar floor, but it will force all horizontal uv edge parallel with U axis.
+    # Not only V axis, but also U axis' continuity will been make sure.
+    Wood = enum.auto()
+
+class FlattenParam():
+    mReferenceEdge: int
+    mUseRefPoint: bool
+    mFlattenMethod: FlattenMethod
+
     mScaleSize: float
 
-    def __init__(self, scale_size: float) -> None:
-        self.mScaleSize = scale_size
-
-class _FlattenParamByRefPoint():
     mReferencePoint: int
     mReferenceUV: float
 
-    def __init__(self, ref_point: int, ref_point_uv: float) -> None:
-        self.mReferencePoint = ref_point
-        self.mReferenceUV = ref_point_uv
-
-class _FlattenParam():
-    mUseRefPoint: bool
-    mParamData: _FlattenParamBySize | _FlattenParamByRefPoint
-
-    def __init__(self, use_ref_point: bool, data: _FlattenParamBySize | _FlattenParamByRefPoint) -> None:
+    def __init__(self, use_ref_point: bool, reference_edge: int, flatten_method: FlattenMethod) -> None:
+        self.mReferenceEdge = reference_edge
         self.mUseRefPoint = use_ref_point
-        self.mParamData = data
+        self.mFlattenMethod = flatten_method
+
+    def is_valid(self) -> bool:
+        """Check whether flatten params is valid"""
+        if self.mUseRefPoint:
+            # ref point should be great than 1.
+            # because 0 and 1 is located at the same line with reference edge.
+            return self.mReferencePoint > 1
+        else:
+            # zero scale size make no sense.
+            return round(self.mScaleSize, 7) != 0.0
 
     @classmethod
-    def CreateByScaleSize(cls, scale_num: float):
-        return cls(False, _FlattenParamBySize(scale_num))
+    def create_by_scale_size(cls, reference_edge: int, flatten_method: FlattenMethod, scale_num: float):
+        val = cls(False, reference_edge, flatten_method)
+        val.mScaleSize = scale_num
+        return val
 
     @classmethod
-    def CreateByRefPoint(cls, ref_point: int, ref_point_uv: float):
-        return cls(True, _FlattenParamByRefPoint(ref_point, ref_point_uv))
+    def create_by_ref_point(cls, reference_edge: int, flatten_method: FlattenMethod, ref_point: int, ref_point_uv: float):
+        val = cls(True, reference_edge, flatten_method)
+        val.mReferencePoint = ref_point
+        val.mReferenceUV = ref_point_uv
+        return val
 
 #endregion
 
@@ -45,48 +66,55 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         name = "Reference Edge",
         description = "The references edge of UV.\nIt will be placed in V axis.",
         min = 0,
-        soft_min = 0,
-        soft_max = 3,
+        soft_min = 0, soft_max = 3,
         default = 0,
-    )
+    ) # type: ignore
+
+    flatten_method: bpy.props.EnumProperty(
+        name = "Flatten Method",
+        items = [
+            ('RAW', "Raw", "Legacy flatten UV."),
+            ('FLOOR', "Floor", "Floor specified flatten UV."),
+            ('WOOD', "Wood", "Wood specified flatten UV."),
+        ],
+        default = 'RAW'
+    ) # type: ignore
 
     scale_mode: bpy.props.EnumProperty(
         name = "Scale Mode",
-        items = (
+        items = [
             ('NUM', "Scale Size", "Scale UV with specific number."),
             ('REF', "Ref. Point", "Scale UV with Reference Point feature."),
-        ),
-    )
+        ],
+        default = 'NUM'
+    ) # type: ignore
 
     scale_number: bpy.props.FloatProperty(
         name = "Scale Size",
         description = "The size which will be applied for scale.",
         min = 0,
-        soft_min = 0,
-        soft_max = 5,
+        soft_min = 0, soft_max = 5,
         default = 5.0,
-        step = 0.1,
+        step = 10,
         precision = 1,
-    )
+    ) # type: ignore
 
     reference_point: bpy.props.IntProperty(
         name = "Reference Point",
         description = "The references point of UV.\nIt's U component will be set to the number specified by Reference Point UV.\nThis point index is related to the start point of reference edge.",
         min = 2,  # 0 and 1 is invalid. we can not order the reference edge to be set on the outside of uv axis
-        soft_min = 2,
-        soft_max = 3,
+        soft_min = 2, soft_max = 3,
         default = 2,
-    )
+    ) # type: ignore
 
     reference_uv: bpy.props.FloatProperty(
         name = "Reference Point UV",
         description = "The U component which should be applied to references point in UV.",
-        soft_min = 0,
-        soft_max = 1,
+        soft_min = 0, soft_max = 1,
         default = 0.5,
-        step = 0.1,
+        step = 10,
         precision = 2,
-    )
+    ) # type: ignore
 
     @classmethod
     def poll(cls, context):
@@ -101,35 +129,39 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
 
     def execute(self, context):
         # construct scale data
+        flatten_method_: FlattenMethod
+        match(self.flatten_method):
+            case 'RAW': flatten_method_ = FlattenMethod.Raw
+            case 'FLOOR': flatten_method_ = FlattenMethod.Floor
+            case 'WOOD': flatten_method_ = FlattenMethod.Wood
+            case _: return {'CANCELLED'}
+
+        flatten_param_: FlattenParam
         if self.scale_mode == 'NUM':
-            scale_data: _FlattenParam = _FlattenParam.CreateByScaleSize(self.scale_number)
+            flatten_param_ = FlattenParam.create_by_scale_size(self.reference_edge, flatten_method_, self.scale_number)
         else:
-            scale_data: _FlattenParam = _FlattenParam.CreateByRefPoint(self.reference_point, self.reference_uv)
+            flatten_param_ = FlattenParam.create_by_ref_point(self.reference_edge, flatten_method_, self.reference_point, self.reference_uv)
+        if not flatten_param_.is_valid():
+            return {'CANCELLED'}
 
         # do flatten uv and report
-        # sync data first
-        # ref: https://blender.stackexchange.com/questions/218086/data-vertices-returns-an-empty-collection-in-edit-mode
-        this_obj: bpy.types.Object = bpy.context.active_object
-        this_obj.update_from_editmode()
-        no_processed_count = _real_flatten_uv(
-            this_obj.data, 
-            self.reference_edge, 
-            scale_data
-        )
-        if no_processed_count != 0:
-            print("[Flatten UV] {} faces are not be processed correctly because process failed."
-                .format(no_processed_count))
-            
+        failed: int = _flatten_uv_wrapper(bpy.context.active_object.data, flatten_param_)
+        if failed != 0:
+            print(f'[Flatten UV] {failed} faces are not be processed correctly because process failed.')
         return {'FINISHED'}
 
     def draw(self, context):
         layout = self.layout
         layout.emboss = 'NORMAL'
+        layout.label(text = "Flatten Method")
+        sublayout = layout.row()
+        sublayout.prop(self, "flatten_method", expand = True)
         layout.prop(self, "reference_edge")
 
         layout.separator()
         layout.label(text = "Scale Mode")
-        layout.prop(self, "scale_mode", expand = True)
+        sublayout = layout.row()
+        sublayout.prop(self, "scale_mode", expand = True)
 
         layout.separator()
         layout.label(text = "Scale Config")
@@ -139,7 +171,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             layout.prop(self, "reference_point")
             layout.prop(self, "reference_uv")
 
-#region Real Worker Functions
+#region BMesh Visitor Helper
 
 def _set_face_vertex_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem, idx: int, uv: UTIL_virtools_types.ConstVxVector2) -> None:
     """
@@ -151,6 +183,18 @@ def _set_face_vertex_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerI
     @param uv[in] The set UV data
     """
     face.loops[idx][uv_layer].uv = uv
+
+def _get_face_vertex_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem, idx: int) -> UTIL_virtools_types.ConstVxVector2:
+    """
+    Help function to get UV data for face.
+
+    @param face[in] The face to be set.
+    @param uv_layer[in] The corresponding uv layer. Hint: it was gotten from BMesh.loops.layers.uv.verify()
+    @param idx[in] The index of trying setting vertex.
+    @return The UV data
+    """
+    v: mathutils.Vector = face.loops[idx][uv_layer].uv
+    return (v[0], v[1])
 
 def _get_face_vertex_pos(face: bmesh.types.BMFace, idx: int) -> UTIL_virtools_types.ConstVxVector3:
     """
@@ -175,9 +219,11 @@ def _circular_clamp_index(v: int, vmax: int) -> int:
     """
     return v % vmax
 
-def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int, scale_data: _FlattenParam) -> int:
-    no_processed_count: int = 0
+#endregion
 
+#region Real Worker Functions
+
+def _flatten_uv_wrapper(mesh: bpy.types.Mesh, flatten_param: FlattenParam) -> int:
     # create bmesh modifier
     bm: bmesh.types.BMesh = bmesh.from_edit_mesh(mesh)
     # use verify() to make sure there is a uv layer to write data
@@ -185,126 +231,146 @@ def _real_flatten_uv(mesh: bpy.types.Mesh, reference_edge: int, scale_data: _Fla
     uv_layers: bmesh.types.BMLayerCollection = bm.loops.layers.uv
     uv_layer: bmesh.types.BMLayerItem = uv_layers.verify()
 
-    # process each face
-    face: bmesh.types.BMFace
-    for face in bm.faces:
-        # ===== check requirement =====
-        # check whether face selected
-        # only process selected face
-        if not face.select:
-            continue
-
-        # ===== resolve reference edge and point =====
-        # check reference validation
-        all_point: int = len(face.loops)
-        if reference_edge >= all_point: # reference edge overflow
-            no_processed_count += 1
-            continue
-
-        # check scale validation
-        if scale_data.mUseRefPoint:
-            if ((scale_data.mParamData.mReferencePoint <= 1)  # reference point too low
-                or (scale_data.mParamData.mReferencePoint >= all_point)):  # reference point overflow
-                no_processed_count += 1
-                continue
-        else:
-            if round(scale_data.mParamData.mScaleSize, 7) == 0.0:  # invalid scale size
-                no_processed_count += 1
-                continue
-
-        # ========== get correct new corrdinate system ==========
-        # yyc mark:
-        # we use 3 points located in this face to calc
-        # the base of this local uv corredinate system.
-        # however if this 3 points are set in a line,
-        # this method will cause a error, zero vector error.
-        #
-        # if z axis is zero vector, we will try using face normal instead
-        # to try getting correct data.
-        #
-        # zero base is not important. because it will not raise any math exception
-        # just a weird uv. user will notice this problem.
-
-        # get point
-        pidx_start: int = _circular_clamp_index(reference_edge, all_point)
-        p1: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_start))
-        p2: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(reference_edge + 1, all_point)))
-        p3: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(reference_edge + 2, all_point)))
-
-        # get y axis
-        new_y_axis: mathutils.Vector = p2 - p1
-        new_y_axis.normalize()
-        vec1: mathutils.Vector = p3 - p2
-        vec1.normalize()
-
-        # get z axis
-        new_z_axis: mathutils.Vector = new_y_axis.cross(vec1)
-        new_z_axis.normalize()
-        if not any(round(v, 7) for v in new_z_axis):  # if z is a zero vector, use face normal instead
-            new_z_axis = face.normal.normalized()
-
-        # get x axis
-        new_x_axis: mathutils.Vector = new_y_axis.cross(new_z_axis)
-        new_x_axis.normalize()
-
-        # construct rebase matrix
-        origin_base: mathutils.Matrix = mathutils.Matrix((
-            (1.0, 0, 0), 
-            (0, 1.0, 0), 
-            (0, 0, 1.0)
-        ))
-        origin_base.invert_safe()
-        new_base: mathutils.Matrix = mathutils.Matrix((
-            (new_x_axis.x, new_y_axis.x,  new_z_axis.x), 
-            (new_x_axis.y, new_y_axis.y, new_z_axis.y),
-            (new_x_axis.z, new_y_axis.z, new_z_axis.z)
-        ))
-        transition_matrix: mathutils.Matrix = origin_base @ new_base
-        transition_matrix.invert_safe()
-
-        # ===== rescale correction =====
-        rescale: float = 0.0
-        if scale_data.mUseRefPoint:
-            # ref point method
-            # get reference point from loop
-            pidx_refp: int = _circular_clamp_index(pidx_start + scale_data.mParamData.mReferencePoint, all_point)
-            pref: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_refp)) - p1
-
-            # calc its U component
-            vec_u: float = abs((transition_matrix @ pref).x)
-            if round(vec_u, 7) == 0.0:
-                rescale = 1.0  # fallback. rescale = 1 will not affect anything
-            else:
-                rescale = scale_data.mParamData.mReferenceUV / vec_u
-        else:
-            # scale size method
-            # apply rescale directly
-            rescale = 1.0 / scale_data.mParamData.mScaleSize
-
-        # construct matrix
-        # we only rescale U component (X component)
-        # and constant 5.0 scale for V component (Y component)
-        scale_matrix: mathutils.Matrix = mathutils.Matrix((
-            (rescale, 0, 0), 
-            (0, 1.0 / 5.0, 0), 
-            (0, 0, 1.0)
-        ))
-        # order can not be changed. we order do transition first, then scale it.
-        rescale_transition_matrix: mathutils.Matrix = scale_matrix @ transition_matrix
-
-        # ========== process each face ==========
-        for idx in range(all_point):
-            pp: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, idx)) - p1
-            ppuv: mathutils.Vector = rescale_transition_matrix @ pp
-
-            # u and v component has been calculated properly. no extra process needed.
-            # just get abs for the u component
-            _set_face_vertex_uv(face, uv_layer, idx, (abs(ppuv.x), ppuv.y))
+    # invoke core
+    failed: int
+    match(flatten_param.mFlattenMethod):
+        case FlattenMethod.Raw:
+            failed = _raw_flatten_uv(bm, uv_layer, flatten_param)
+        case FlattenMethod.Floor:
+            failed = _floor_flatten_uv(bm, uv_layer, flatten_param)
+        case FlattenMethod.Wood:
+            failed = _wood_flatten_uv(bm, uv_layer, flatten_param)
 
     # show the updates in the viewport
     bmesh.update_edit_mesh(mesh)
     # return process result
-    return no_processed_count
+    return failed
+
+def _raw_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
+    # failed counter
+    failed: int = 0
+    # raw flatten uv always use zero offset
+    c_ZeroOffset: mathutils.Vector = mathutils.Vector((0, 0))
+
+    # process each face
+    face: bmesh.types.BMFace
+    for face in bm.faces:
+        # check requirement
+        # skip not selected face
+        if not face.select: continue
+        # skip the face that not fufill reference edge requirement
+        edge_count: int = len(face.loops)
+        if flatten_param.mReferenceEdge >= edge_count:
+            failed += 1
+            continue
+        # skip ref point overflow when using ref point mode
+        if flatten_param.mUseRefPoint and (flatten_param.mReferencePoint >= edge_count):
+            failed += 1
+            continue
+
+        # process this face
+        _flatten_face_uv(face, uv_layer, flatten_param, c_ZeroOffset)
+
+    return failed
+
+def _floor_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
+    return 0
+
+def _wood_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
+    return 0
+
+def _flatten_face_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam, offset: mathutils.Vector) -> None:
+    # ========== get correct new corrdinate system ==========
+    # yyc mark:
+    # we use 3 points located in this face to calc
+    # the base of this local uv corredinate system.
+    # however if this 3 points are set in a line,
+    # this method will cause a error, zero vector error.
+    #
+    # if z axis is zero vector, we will try using face normal instead
+    # to try getting correct data.
+    #
+    # zero base is not important. because it will not raise any math exception
+    # just a weird uv. user will notice this problem.
+
+    # get point
+    all_point: int = len(face.loops)
+    pidx_start: int = _circular_clamp_index(flatten_param.mReferenceEdge, all_point)
+    p1: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_start))
+    p2: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(flatten_param.mReferenceEdge + 1, all_point)))
+    p3: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, _circular_clamp_index(flatten_param.mReferenceEdge + 2, all_point)))
+
+    # get y axis
+    new_y_axis: mathutils.Vector = p2 - p1
+    new_y_axis.normalize()
+    vec1: mathutils.Vector = p3 - p2
+    vec1.normalize()
+
+    # get z axis
+    new_z_axis: mathutils.Vector = new_y_axis.cross(vec1)
+    new_z_axis.normalize()
+    if not any(round(v, 7) for v in new_z_axis):  # if z is a zero vector, use face normal instead
+        new_z_axis = typing.cast(mathutils.Vector, face.normal).normalized()
+
+    # get x axis
+    new_x_axis: mathutils.Vector = new_y_axis.cross(new_z_axis)
+    new_x_axis.normalize()
+
+    # construct rebase matrix
+    origin_base: mathutils.Matrix = mathutils.Matrix((
+        (1.0, 0, 0), 
+        (0, 1.0, 0), 
+        (0, 0, 1.0)
+    ))
+    origin_base.invert_safe()
+    new_base: mathutils.Matrix = mathutils.Matrix((
+        (new_x_axis.x, new_y_axis.x,  new_z_axis.x), 
+        (new_x_axis.y, new_y_axis.y, new_z_axis.y),
+        (new_x_axis.z, new_y_axis.z, new_z_axis.z)
+    ))
+    transition_matrix: mathutils.Matrix = typing.cast(mathutils.Matrix, origin_base @ new_base)
+    transition_matrix.invert_safe()
+
+    # ===== rescale correction =====
+    rescale: float = 0.0
+    if flatten_param.mUseRefPoint:
+        # ref point method
+        # get reference point from loop
+        pidx_refp: int = _circular_clamp_index(pidx_start + flatten_param.mReferencePoint, all_point)
+        pref: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, pidx_refp)) - p1
+
+        # calc its U component
+        vec_u: float = abs(typing.cast(mathutils.Vector, transition_matrix @ pref).x)
+        if round(vec_u, 7) == 0.0:
+            rescale = 1.0  # fallback. rescale = 1 will not affect anything
+        else:
+            rescale = flatten_param.mReferenceUV / vec_u
+    else:
+        # scale size method
+        # apply rescale directly
+        rescale = 1.0 / flatten_param.mScaleSize
+
+    # construct matrix
+    # we only rescale U component (X component)
+    # and constant 5.0 scale for V component (Y component)
+    scale_matrix: mathutils.Matrix = mathutils.Matrix((
+        (rescale, 0, 0), 
+        (0, 1.0 / 5.0, 0), 
+        (0, 0, 1.0)
+    ))
+    # order can not be changed. we order do transition first, then scale it.
+    rescale_transition_matrix: mathutils.Matrix = typing.cast(mathutils.Matrix, scale_matrix @ transition_matrix)
+
+    # ========== process each face ==========
+    for idx in range(all_point):
+        # compute uv
+        pp: mathutils.Vector = mathutils.Vector(_get_face_vertex_pos(face, idx)) - p1
+        ppuv: mathutils.Vector = typing.cast(mathutils.Vector, rescale_transition_matrix @ pp)
+        # u and v component has been calculated properly. no extra process needed.
+        # just get abs for the u component
+        ppuv.x = abs(ppuv.x)
+        # add offset and assign to uv
+        _set_face_vertex_uv(face, uv_layer, idx, (ppuv.x + offset.x, ppuv.y + offset.y))
 
 #endregion
 
