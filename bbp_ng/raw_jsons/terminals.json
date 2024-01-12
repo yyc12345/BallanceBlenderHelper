@@ -1,0 +1,150 @@
+[
+    {
+        "identifier": "raw_floor_terminal",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, False, True, True)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[2], face[3], face[4], False)",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "False"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[5], False, face[2], face[3])",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "False"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_terminal",
+        "showcase": {
+            "title": "Normal Floor Terminal",
+            "icon": "NormalFloorTerminal",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_terminal",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_terminal",
+        "showcase": {
+            "title": "Sink Floor Terminal",
+            "icon": "SinkFloorTerminal",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_terminal",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

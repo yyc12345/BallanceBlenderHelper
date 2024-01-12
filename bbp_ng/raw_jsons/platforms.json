@@ -1,0 +1,371 @@
+[
+    {
+        "identifier": "raw_floor_platform",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "length",
+                "data": "5.0"
+            },
+            {
+                "field": "width",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, True, True, True)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            },
+            {
+                "field": "is_ribbon",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[4], False, face[3], False)",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(5 + length, 0, 0) @ rot(0, 0, -270)"
+            },
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[3], False, face[5], False)",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(5 + length, 5 + width, 0) @ rot(0, 0, -180)"
+            },
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[5], False, face[2], False)",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(0, 5 + width, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "raw_floor_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[2], False, face[4], False)",
+                    "is_sink": "is_sink",
+                    "is_inner": "False",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "width": "width",
+                    "face": "(face[0], face[1], False, False, False, False)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(2.5, 2.5, 0)"
+            },
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "face": "(face[0], face[1], False, False, face[4], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(2.5, 0, 0)"
+            },
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width",
+                    "face": "(face[0], face[1], False, False, face[2], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(0, 2.5 + width, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "face": "(face[0], face[1], False, False, face[5], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(2.5 + length, 5 + width, 0) @ rot(0, 0, -180)"
+            },
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width",
+                    "face": "(face[0], face[1], False, False, face[3], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(5 + length, 2.5, 0) @ rot(0, 0, -270)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_platform",
+        "showcase": {
+            "title": "Normal Platform",
+            "icon": "NormalPlatform",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_platform",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "width": "width",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False",
+                    "is_ribbon": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_platform",
+        "showcase": {
+            "title": "Sink Platform",
+            "icon": "SinkPlatform",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_platform",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "width": "width",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True",
+                    "is_ribbon": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_ribbon_platform",
+        "showcase": {
+            "title": "Ribbon Platform",
+            "icon": "RibbonPlatform",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_platform",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "width": "width",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True",
+                    "is_ribbon": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

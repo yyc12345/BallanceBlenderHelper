@@ -1,0 +1,547 @@
+[
+    {
+        "identifier": "floor_wide_straight",
+        "showcase": {
+            "title": "Wide Floor",
+            "icon": "WideFloor",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of wide floor.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "height": "height",
+                    "face": "(face[0], face[1], face[2], face[3], face[4], False)"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "height": "height",
+                    "face": "(face[0], face[1], face[3], face[2], face[5], False)"
+                },
+                "transform": "move(length, 5 + width, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "width": "width",
+                    "face": "(face[0], face[1], face[2], face[3], False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(0, 2.5, 0)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_wide_terminal",
+        "showcase": {
+            "title": "Wide Floor Terminal",
+            "icon": "WideFloorTerminal",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "floor_sink_outter_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[5], False, face[2], face[5])"
+                },
+                "transform": "move(0, 5 + width, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_sink_outter_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[2], face[5], face[4], False)"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width",
+                    "face": "(face[0], face[1], False, False, face[2], face[5])"
+                },
+                "transform": "move(0, 2.5 + width, 0) @ rot(0, 0, -90)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_wide_l_crossing",
+        "showcase": {
+            "title": "Wide Floor L Crossing",
+            "icon": "WideLCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "width_h_",
+                    "type": "float",
+                    "title": "Horizontal Width",
+                    "desc": "The horizontal floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "width_v_",
+                    "type": "float",
+                    "title": "Vertical Width",
+                    "desc": "The vertical floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "width_h",
+                "data": "width_h_"
+            },
+            {
+                "field": "width_v",
+                "data": "width_v_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "floor_sink_outter_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], face[2], False, face[4], False)"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "length": "2.5 + width_h",
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[3], face[4], False)"
+                },
+                "transform": "move(2.5, 0, 0)"
+            },
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "length": "2.5 + width_v",
+                    "height": "height",
+                    "face": "(face[0], face[1], face[5], False, face[2], False)"
+                },
+                "transform": "move(0, 5 + width_v, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[3], False, face[5])"
+                },
+                "transform": "move(2.5 + width_h, 2.5 + width_v, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width_h + 2.5",
+                    "width": "width_v",
+                    "face": "(face[0], face[1], False, face[3], False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5, 2.5, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width_h",
+                    "width": "2.5",
+                    "face": "(face[0], face[1], False, False, False, face[5])",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5, 2.5 + width_v, 0)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_wide_t_crossing",
+        "showcase": {
+            "title": "Wide Floor T Crossing",
+            "icon": "WideTCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "width_h_",
+                    "type": "float",
+                    "title": "Horizontal Width",
+                    "desc": "The horizontal floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "width_v_",
+                    "type": "float",
+                    "title": "Vertical Width",
+                    "desc": "The vertical floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "width_h",
+                "data": "width_h_"
+            },
+            {
+                "field": "width_v",
+                "data": "width_v_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "floor_sink_border",
+                "skip": "False",
+                "params": {
+                    "length": "5 + width_v",
+                    "height": "height",
+                    "face": "(face[0], face[1], face[5], face[4], face[2], False)"
+                },
+                "transform": "move(0, 5 + width_v, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[4], False, face[3])"
+                },
+                "transform": "move(2.5 + width_h, 2.5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[3], False, face[5])"
+                },
+                "transform": "move(2.5 + width_h, 2.5 + width_v, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width_h",
+                    "width": "5 + width_v",
+                    "face": "(face[0], face[1], False, False, face[4], face[5])",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5, 0, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "width": "width_v",
+                    "face": "(face[0], face[1], False, face[3], False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5 + width_h, 2.5, 0)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_wide_x_crossing",
+        "showcase": {
+            "title": "Wide Floor X Crossing",
+            "icon": "WideXCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "width_h_",
+                    "type": "float",
+                    "title": "Horizontal Width",
+                    "desc": "The horizontal floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "width_v_",
+                    "type": "float",
+                    "title": "Vertical Width",
+                    "desc": "The vertical floor width of wide floor.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "width_h",
+                "data": "width_h_"
+            },
+            {
+                "field": "width_v",
+                "data": "width_v_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[5], False, face[2])"
+                },
+                "transform": "move(2.5, 2.5 + width_v, 0) @ rot(0, 0, -270)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[2], False, face[4])"
+                },
+                "transform": "move(2.5, 2.5, 0) @ rot(0, 0, -180)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[4], False, face[3])"
+                },
+                "transform": "move(2.5 + width_h, 2.5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_sink_inner_corner",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], face[1], False, face[3], False, face[5])"
+                },
+                "transform": "move(2.5 + width_h, 2.5 + width_v, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "width_h",
+                    "width": "5 + width_v",
+                    "face": "(face[0], face[1], False, False, face[4], face[5])",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5, 0, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "width": "width_v",
+                    "face": "(face[0], face[1], False, face[3], False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5 + width_h, 2.5, 0)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "width": "width_v",
+                    "face": "(face[0], face[1], face[2], False, False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(0, 2.5, 0)"
+            }
+        ]
+    }
+]
