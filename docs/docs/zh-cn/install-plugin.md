@@ -36,11 +36,11 @@ BBP对Blender支持的原则是支持当前最新的 **LTS** 版本，在最新�
 
 ## 安装插件
 
-开启Blender，选择`编辑 - 偏好设置`，在打开的窗口中转到`插件`选项卡，点击`安装`按钮，选择刚刚下载完毕的ZIP压缩包，即可安装完成。若没有在列表中看到可选择刷新按钮或重启Blender。
+开启Blender，选择`Edit - Preferences`，在打开的窗口中转到`Add-ons`选项卡，点击`Install...`按钮，选择刚刚下载完毕的ZIP压缩包，即可安装完成。若没有在列表中看到可选择刷新按钮或重启Blender。
 
 您也可以选择手动安装插件（如果上述安装方法失败了的话），转到`Blender/3.6/scripts/addons`，将下载好的ZIP压缩包内容解压到此文件夹下，启动Blender，即可在插件列表中找到BBP。
 
-BBP插件位于`社区`类别下，名称为`Object: Ballance Blender Plugin`，找到后勾选名称左侧的勾即可启用插件。插件安装成功后的偏好设置页面如下图所示。
+BBP插件位于`Community`类别下，名称为`Object: Ballance Blender Plugin`，找到后勾选名称左侧的勾即可启用插件。插件安装成功后的偏好设置页面如下图所示。
 
 ![](../imgs/config-plugin.png)
 

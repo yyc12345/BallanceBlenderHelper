@@ -12,7 +12,17 @@ nav:
     - '开始': 'zh-cn/index.md'
     - '安装插件': 'zh-cn/install-plugin.md'
     - '配置插件': 'zh-cn/configure-plugin.md'
+    - 'Virtools属性': 'zh-cn/virtools-properties.md'
+    - '导入导出Virtools文档': 'zh-cn/import-export-virtools.md'
+    - '按组操作': 'zh-cn/group-operations.md'
+    - '传统对齐': 'zh-cn/legacy-align.md'
+    - '命名规则': 'zh-cn/naming-convention.md'
+    - 'UV贴图': 'zh-cn/uv-mapping.md'
+    - '添加路面': 'zh-cn/bme-adder.md'
+    - '添加钢轨': 'zh-cn/rail-adder.md'
+    - '添加机关': 'zh-cn/component-adder.md'
     - '编译与分发插件': 'zh-cn/compile-distribute-plugin.md'
+    - '报告问题': 'zh-cn/report-bugs.md'
     - '技术信息': 'zh-cn/tech-infos.md'
 
 theme:

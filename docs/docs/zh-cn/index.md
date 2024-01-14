@@ -16,19 +16,22 @@ Ballance Blender Plugin（后文简称BBP）是一款关注Ballance自制地图�
 * [安装插件](./install-plugin.md)
 * [配置插件](./configure-plugin.md)
 
-## 基础
+## 特性
 
-* Virtools属性
-* 导入导出Virtools文档
-* 按组操作
-* 高级贴图
-* 添加预制结构
-* 添加钢轨
-* 添加机关
+* [Virtools属性](./virtools-properties.md)
+* [导入导出Virtools文档](./import-export-virtools.md)
+* [按组操作](./group-operations.md)
+* [传统对齐](./legacy-align.md)
+* [命名规则](./naming-convention.md)
+* [UV贴图](./uv-mapping.md)
+* [添加路面](./bme-adder.md)
+* [添加钢轨](./rail-adder.md)
+* [添加机关](./component-adder.md)
 
-## 进阶
+## 其它
 
 * [编译与分发插件](./compile-distribute-plugin.md)
+* [报告问题](./report-bugs.md)
 * [技术信息](./tech-infos.md)
 
 !!! info "这些并不是全部"

@@ -7,7 +7,7 @@
 
 ## 打开配置面板
 
-开启Blender，选择`编辑 - 偏好设置`，在打开的窗口中转到`插件`选项卡，在`社区`分类下找到BBP插件，名称为`Object: Ballance Blender Plugin`。请确保其左侧的勾已被选中，代表插件已被启用。点击勾左侧的三角箭头展开插件详细信息，如图所示，进入配置面板。
+开启Blender，选择`Edit - Preferences`，在打开的窗口中转到`Add-ons`选项卡，在`Community`分类下找到BBP插件，名称为`Object: Ballance Blender Plugin`。请确保其左侧的勾已被选中，代表插件已被启用。点击勾左侧的三角箭头展开插件详细信息，如图所示，进入配置面板。
 
 ![](../imgs/config-plugin.png)
 
