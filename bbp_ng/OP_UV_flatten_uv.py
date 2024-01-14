@@ -1,5 +1,5 @@
 import bpy, mathutils, bmesh
-import typing, enum
+import typing, enum, collections
 from . import UTIL_virtools_types, UTIL_functions
 
 #region Param Struct
@@ -7,11 +7,11 @@ from . import UTIL_virtools_types, UTIL_functions
 class FlattenMethod(enum.IntEnum):
     # The legacy flatten uv mode. Only just do space convertion for each individual faces.
     Raw = enum.auto()
-    # The floor specified flatten uv.
+    # The floor specific flatten uv.
     # This method will make sure the continuity in V axis in uv when flatten uv.
     # Only support rectangle faces.
     Floor = enum.auto()
-    # The wood specified flatten uv.
+    # The wood specific flatten uv.
     # Similar floor, but it will force all horizontal uv edge parallel with U axis.
     # Not only V axis, but also U axis' continuity will been make sure.
     Wood = enum.auto()
@@ -74,8 +74,8 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         name = "Flatten Method",
         items = [
             ('RAW', "Raw", "Legacy flatten UV."),
-            ('FLOOR', "Floor", "Floor specified flatten UV."),
-            ('WOOD', "Wood", "Wood specified flatten UV."),
+            ('FLOOR', "Floor", "Floor specific flatten UV."),
+            ('WOOD', "Wood", "Wood specific flatten UV."),
         ],
         default = 'RAW'
     ) # type: ignore
@@ -236,10 +236,8 @@ def _flatten_uv_wrapper(mesh: bpy.types.Mesh, flatten_param: FlattenParam) -> in
     match(flatten_param.mFlattenMethod):
         case FlattenMethod.Raw:
             failed = _raw_flatten_uv(bm, uv_layer, flatten_param)
-        case FlattenMethod.Floor:
-            failed = _floor_flatten_uv(bm, uv_layer, flatten_param)
-        case FlattenMethod.Wood:
-            failed = _wood_flatten_uv(bm, uv_layer, flatten_param)
+        case FlattenMethod.Floor | FlattenMethod.Wood:
+            failed = _specific_flatten_uv(bm, uv_layer, flatten_param)
 
     # show the updates in the viewport
     bmesh.update_edit_mesh(mesh)
@@ -273,11 +271,126 @@ def _raw_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, fl
 
     return failed
 
-def _floor_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
-    return 0
+def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
+    # failed counter
+    failed: int = 0
 
-def _wood_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam) -> int:
-    return 0
+    # reset selected face's tag to False to indicate these face is not processed
+    face: bmesh.types.BMFace
+    for face in bm.faces:
+        if face.select:
+            face.tag = False
+    
+    # prepare a function to check whether face is valid
+    def face_validator(f: bmesh.types.BMFace) -> bool:
+        # a valid face must be
+        # selected, not processed, and should be rectangle
+        return f.select and (not f.tag) and (len(f.loops) == 4)
+    # prepare face getter which will be used when stack is empty
+    face_getter: typing.Iterator[bmesh.types.BMFace] = filter(
+        lambda f: face_validator(f), 
+        typing.cast(typing.Iterable[bmesh.types.BMFace], bm.faces)
+    )
+    # prepare a neighbor getter.
+    # this function will help finding the valid neighbor of specified face
+    # `loop_idx` is the index of loop getting from given face.
+    # `exp_loop_idx` is the expected index of neighbor loop in neighbor face.
+    def face_neighbor_getter(f: bmesh.types.BMFace, loop_idx: int, exp_loop_idx: int) -> bmesh.types.BMFace | None:
+        # get this face's loop
+        this_loop: bmesh.types.BMLoop = f.loops[loop_idx]
+        # check requirement for this loop
+        # this edge should be shared exactly by 2 faces.
+        # 
+        # Manifold: For a mesh to be manifold, every edge must have exactly two adjacent faces.
+        # Ref: https://github.com/rlguy/Blender-FLIP-Fluids/wiki/Manifold-Meshes
+        if not this_loop.edge.is_manifold:
+            return None
+
+        # get neighbor loop
+        neighbor_loop: bmesh.types.BMLoop = this_loop.link_loop_radial_next
+        # get neighbor face and check it
+        neighbor_f: bmesh.types.BMFace = neighbor_loop.face
+        if not face_validator(neighbor_f):
+            return None
+
+        # check expected neighbor index
+        if neighbor_loop != neighbor_f.loops[exp_loop_idx]:
+            return None
+
+        # all check done, return face
+        return neighbor_f
+    # prepare face stack.
+    # NOTE: all face inserted into this stack should be marked as processed first.
+    face_stack: collections.deque[tuple[bmesh.types.BMFace, mathutils.Vector]] = collections.deque()
+    # start process faces
+    while True:
+        # if no item in face stack, pick one from face getter and mark it as processed
+        # if face getter failed, it mean that no more face, exit.
+        if len(face_stack) == 0:
+            try:
+                f = next(face_getter)
+                f.tag = True
+                face_stack.append((f, mathutils.Vector((0, 0))))
+            except StopIteration:
+                break
+
+        # pick one face from stack and process it
+        (face, face_offset) = face_stack.pop()
+        _flatten_face_uv(face, uv_layer, flatten_param, face_offset)
+        print(face_offset)
+
+        # get 4 point uv because we need use them later
+        # NOTE: 4 uv point following this order
+        #  +-----------+
+        #  |(1)        |(2)
+        #  |           |
+        #  |(0)        |(3)
+        #  +-----------+
+        # So the loop index is
+        #        (1)
+        #  +---------->+
+        #  ^           |
+        #  |(0)        |(2)
+        #  |           v
+        #  +<----------+
+        #        (3)
+        ind0 = _circular_clamp_index(flatten_param.mReferenceEdge, 4)
+        ind1 = _circular_clamp_index(flatten_param.mReferenceEdge + 1, 4)
+        ind2 = _circular_clamp_index(flatten_param.mReferenceEdge + 2, 4)
+        ind3 = _circular_clamp_index(flatten_param.mReferenceEdge + 3, 4)
+        uv0 = _get_face_vertex_uv(face, uv_layer, ind0)
+        uv1 = _get_face_vertex_uv(face, uv_layer, ind1)
+        uv2 = _get_face_vertex_uv(face, uv_layer, ind2)
+        uv3 = _get_face_vertex_uv(face, uv_layer, ind3)
+
+        # insert horizontal neighbor if we are wood flatten uv
+        if flatten_param.mFlattenMethod == FlattenMethod.Wood:
+            # first, make its uv geometry to rectangle from a trapezium.
+            # get the average U factor from its right edge.
+            # and make top + bottom uv edge be parallel with U axis by using left edge V factor.
+            average_u = (uv2[0] + uv3[0]) / 2
+            uv2 = (average_u, uv1[1])
+            uv3 = (average_u, uv0[1])
+            _set_face_vertex_uv(face, uv_layer, ind2, uv2)
+            _set_face_vertex_uv(face, uv_layer, ind3, uv3)
+
+            # then, try getting its right neighbor
+            r_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind2, ind0)
+            if r_face is not None:
+                # mark it as processed
+                r_face.tag = True
+                # insert face with extra horizontal offset.
+                face_stack.append((r_face, mathutils.Vector((uv3[0], uv3[1]))))
+
+        # insert vertical neighbor
+        t_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind1, ind3)
+        if t_face is not None:
+            # mark it as processed
+            t_face.tag = True
+            # insert face with extra vertical offset.
+            face_stack.append((t_face, mathutils.Vector((uv1[0], uv1[1]))))
+
+    return failed
 
 def _flatten_face_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem, flatten_param: FlattenParam, offset: mathutils.Vector) -> None:
     # ========== get correct new corrdinate system ==========
