@@ -24,6 +24,7 @@ BBP内置了一系列自定义图标，以及其组件BME需要的用于描述�
 
 * `bbp_ng/raw_icons`：原始图片文件夹。
 * `bbp_ng/raw_jsons`：原始JSON文件夹。
+* `bbp_ng/tools`：编译用工具。
 * `bbp_ng/.style.yapf`：代码风格描述文件
 * `bbp_ng/.gitignore`：gitignore
 * `bbp_ng/icons/.gitkeep`：文件夹占位符
