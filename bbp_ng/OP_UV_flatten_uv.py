@@ -283,9 +283,27 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
     
     # prepare a function to check whether face is valid
     def face_validator(f: bmesh.types.BMFace) -> bool:
+        # specify use external failed counter
+        nonlocal failed
         # a valid face must be
         # selected, not processed, and should be rectangle
-        return f.select and (not f.tag) and (len(f.loops) == 4)
+        # we check selection first
+        if not f.select or f.tag: return False
+        # then check tag. if tag == True, it mean this face has been processed.
+        if f.tag: return False
+        # now this face can be processed, we need check whether it is rectangle
+        if len(f.loops) == 4:
+            # yes it is rectangle
+            return True
+        else:
+            # no, it is not rectangle
+            # we need mark it tag as True to prevent any possible recursive checking
+            # because it definately can not be processed in future.
+            f.tag = True
+            # then we report this face failed
+            failed = failed + 1
+            # return false
+            return False
     # prepare face getter which will be used when stack is empty
     face_getter: typing.Iterator[bmesh.types.BMFace] = filter(
         lambda f: face_validator(f), 
@@ -337,7 +355,6 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
         # pick one face from stack and process it
         (face, face_offset) = face_stack.pop()
         _flatten_face_uv(face, uv_layer, flatten_param, face_offset)
-        print(face_offset)
 
         # get 4 point uv because we need use them later
         # NOTE: 4 uv point following this order
