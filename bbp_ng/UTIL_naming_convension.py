@@ -460,9 +460,9 @@ class YYCToolchainConvention():
             case BallanceObjectType.LEVEL_END:
                 return 'PE_Balloon_01'
             case BallanceObjectType.CHECKPOINT:
-                return f'PR_Resetpoint_{info.mSector:0>2d}'
+                return f'PR_TwoFlames_{info.mSector:0>2d}'
             case BallanceObjectType.RESETPOINT:
-                return f'PC_TwoFlames_{info.mSector:0>2d}'
+                return f'PC_Resetpoint_{info.mSector:0>2d}'
 
             case BallanceObjectType.DEPTH_CUBE:
                 return 'DepthCubes_'

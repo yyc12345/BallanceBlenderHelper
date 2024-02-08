@@ -1,8 +1,5 @@
 # 按组操作
 
-!!! info "制作中..."
-    手册的这部分还在制作当中。稍安勿躁。
-
 ## 按组选择
 
 `Ballance - Select by Virtools Group`提供了一种按照Virtools归组数据进行筛选的功能。

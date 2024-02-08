@@ -1,8 +1,5 @@
 # Ballance Blender Plugin用户手册
 
-!!! info "制作中..."
-    手册的这部分还在制作当中。稍安勿躁。
-
 欢迎来到Ballance Blender Plugin，一个自由开源的Ballance地图创作套件的用户手册。
 
 Ballance Blender Plugin（后文简称BBP）是一款关注Ballance自制地图创建的插件。它提供了相当丰富的功能，从制图新手到老手，均可利用此插件创作Ballance自制地图。BBP提供了导入导出Ballance地图所用格式的功能，并为Ballance地图创作量身打造了一系列便利的功能：对于新手，可以借助预制路块快速拼接完成一张地图；对于老手，也提供了构建复杂结构所需的贴图工具。
