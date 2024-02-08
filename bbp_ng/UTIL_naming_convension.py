@@ -360,6 +360,8 @@ class VirtoolsGroupConvention():
                     gp.add_group('Phys_Floors')
                     gp.add_group('Sound_HitID_01')
                     gp.add_group('Sound_RollID_01')
+                    # floor type also need group into shadow group.
+                    gp.add_group('Shadow')
                 case BallanceObjectType.RAIL:
                     gp.add_group('Phys_FloorRails')
                     gp.add_group('Sound_HitID_02')
