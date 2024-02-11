@@ -12,7 +12,7 @@ class ComponentSectorParam():
         min = 1, max = 999,
         soft_min = 1, soft_max = 8,
         default = 1,
-    )
+    ) # type: ignore
 
     def general_get_component_sector(self) -> int:
         return self.component_sector
@@ -27,7 +27,7 @@ class ComponentCountParam():
         min = 1, max = 64,
         soft_min = 1, soft_max = 32,
         default = 1,
-    )
+    ) # type: ignore
 
     def general_get_component_count(self) -> int:
         return self.component_count
@@ -94,38 +94,61 @@ def _check_component_existance(comp_type: PROP_ballance_element.BallanceElementT
     if expect_name in bpy.data.objects: return expect_name
     else: return None
 
-def _general_create_component(
-        comp_type: PROP_ballance_element.BallanceElementType, 
-        comp_sector: int, 
-        comp_count: int, 
-        comp_offset: typing.Callable[[int], mathutils.Matrix]
-    ) -> None:
+class _GeneralComponentCreator():
     """
-    General component creation function.
+    The assist class for general component creation function.
+    Because we need select all created component, thus we need collect all created object into a list.
+    This is the reason why we create this class.
+    """
 
-    @param comp_type[in] The component type created.
-    @param comp_sector[in] The sector param which passed to other functions. For non-sector component, pass any number.
-    @param comp_count[in] The count of created component. For single component creation, please pass 1.
-    @param comp_offset[in] The function pointer which receive 1 argument indicating the index of object which we want to get its offset.
-        You can pass `lambda _: mathutils.Matrix.Identity(4)` to get zero offset for every items.
-        You can pass `lambda _: mathutils.Matrix( xxx )` to get same offset for every items.
-        You can pass `lambda i: mathutils.Matrix( func(i) )` to get index based offset for each items.
-        The offset is the offset to the origin point, not the previous object.
-    """
-    # get element info first
-    ele_info: UTIL_naming_convension.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
-    # create blc element context
-    with PROP_ballance_element.BallanceElementsHelper(bpy.context.scene) as creator:
-        # object creation counter
-        for i in range(comp_count):
-            # get mesh from element context, and create with empty name first. we assign name later.
-            obj: bpy.types.Object = bpy.data.objects.new('', creator.get_element(comp_type))
-            # assign virtools group, object name by we gotten element info.
-            _set_component_by_info(obj, ele_info)
-            # add into scene and move to cursor
-            UTIL_functions.add_into_scene_and_move_to_cursor(obj)
-            # move with extra offset by calling offset getter
-            obj.matrix_world = obj.matrix_world @ comp_offset(i)
+    ## The list storing all created component within this creation.
+    __mObjList: list[bpy.types.Object]
+
+    def __init__(self):
+        self.__mObjList = []
+            
+    def create_component(self,
+            comp_type: PROP_ballance_element.BallanceElementType, 
+            comp_sector: int, 
+            comp_count: int, 
+            comp_offset: typing.Callable[[int], mathutils.Matrix]
+        ) -> None:
+        """
+        General component creation function.
+
+        @param comp_type[in] The component type created.
+        @param comp_sector[in] The sector param which passed to other functions. For non-sector component, pass any number.
+        @param comp_count[in] The count of created component. For single component creation, please pass 1.
+        @param comp_offset[in] The function pointer which receive 1 argument indicating the index of object which we want to get its offset.
+            You can pass `lambda _: mathutils.Matrix.Identity(4)` to get zero offset for every items.
+            You can pass `lambda _: mathutils.Matrix( xxx )` to get same offset for every items.
+            You can pass `lambda i: mathutils.Matrix( func(i) )` to get index based offset for each items.
+            The offset is the offset to the origin point, not the previous object.
+        @return The created component instance.
+        """
+        # get element info first
+        ele_info: UTIL_naming_convension.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
+        # create blc element context
+        with PROP_ballance_element.BallanceElementsHelper(bpy.context.scene) as creator:
+            # object creation counter
+            for i in range(comp_count):
+                # get mesh from element context, and create with empty name first. we assign name later.
+                obj: bpy.types.Object = bpy.data.objects.new('', creator.get_element(comp_type))
+                # assign virtools group, object name by we gotten element info.
+                _set_component_by_info(obj, ele_info)
+                # add into scene and move to cursor
+                UTIL_functions.add_into_scene_and_move_to_cursor(obj)
+                # move with extra offset by calling offset getter
+                obj.matrix_world = obj.matrix_world @ comp_offset(i)
+                # put into created object list
+                self.__mObjList.append(obj)
+
+    def finish_component(self) -> None:
+        """
+        Finish up component creation.
+        Just deselect all objects and select all created components.
+        """
+        UTIL_functions.select_certain_objects(tuple(self.__mObjList))
 
 #endregion
 
@@ -156,7 +179,7 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
         name = "Type",
         description = "This component type",
         items = _g_EnumHelper_Component.generate_items(),
-    )
+    ) # type: ignore
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -179,12 +202,14 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
 
     def execute(self, context):
         # call general creator
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             _g_EnumHelper_Component.get_selection(self.component_type),
             self.general_get_component_sector(),
             1,  # only create one
             lambda _: mathutils.Matrix.Identity(4)
         )
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod
@@ -218,12 +243,14 @@ class BBP_OT_add_nong_extra_point(bpy.types.Operator, ComponentSectorParam, Comp
         # calc percent first
         percent: float = 1.0 / self.general_get_component_count()
         # create elements
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             PROP_ballance_element.BallanceElementType.P_Extra_Point,
             self.general_get_component_sector(),
             self.general_get_component_count(),
             lambda i: mathutils.Matrix.Rotation(percent * i * math.pi * 2, 4, 'Z')
         )
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod
@@ -243,22 +270,22 @@ class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, Compo
 
     ventilator_count_source: bpy.props.EnumProperty(
         name = "Ventilator Count Source",
-        items = (
+        items = [
             ('DEFINED', "Predefined", "Pre-defined ventilator count."),
             ('CUSTOM', "Custom", "User specified ventilator count."),
-        ),
-    )
+        ], 
+    ) # type: ignore
     
     preset_vetilator_count: bpy.props.EnumProperty(
         name = "Preset Count",
         description = "Pick preset ventilator count.",
-        items = (
+        items = [
             # (token, display name, descriptions, icon, index)
             ('PAPER', 'Paper', 'The ventilator count (1) can push paper ball up.'),
             ('WOOD', 'Wood', 'The ventilator count (6) can push wood ball up.'),
             ('STONE', 'Stone', 'The ventilator count (32) can push stone ball up.'),
-        ),
-    )
+        ],
+    ) # type: ignore
 
     def draw(self, context):
         layout = self.layout
@@ -286,12 +313,14 @@ class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, Compo
                 case _: raise UTIL_functions.BBPException('invalid enumprop data')
                 
         # create elements without any move
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             PROP_ballance_element.BallanceElementType.P_Modul_18,
             self.general_get_component_sector(),
             count,
             lambda _: mathutils.Matrix.Identity(4)
         )
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod
@@ -319,7 +348,7 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
         min = 0.0, max = 100.0,
         soft_min = 0.0, soft_max = 12.0,
         default = 6.0022,
-    )
+    ) # type: ignore
 
     def draw(self, context):
         layout = self.layout
@@ -332,13 +361,14 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
         # get span first
         span: float = self.component_span
         # create elements
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             PROP_ballance_element.BallanceElementType.P_Modul_41,
             self.general_get_component_sector(),
             self.general_get_component_count(),
             lambda i: mathutils.Matrix.Translation(mathutils.Vector((span * i, 0.0, 0.0)))  # move with extra delta in x axis
         )
-            
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod
@@ -363,7 +393,7 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
         min = 0.0, max = 100.0,
         soft_min = 0.0, soft_max = 50.0,
         default = (0.0, 0.0, 15.0),
-    )
+    ) # type: ignore
 
     def draw(self, context):
         layout = self.layout
@@ -376,13 +406,14 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
         # get translation first
         translation: mathutils.Vector = mathutils.Vector(self.component_translation)
         # create elements
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             PROP_ballance_element.BallanceElementType.P_Modul_18,
             self.general_get_component_sector(),
             self.general_get_component_count(),
             lambda i: mathutils.Matrix.Translation(i * translation)  # move with extra translation
         )
-        
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod
@@ -450,20 +481,21 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
 
         # add elements
         # create checkpoint
-        _general_create_component(
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
             checkp_ty,
             checkp_sector,
             1,  # only create one
             lambda _: mathutils.Matrix.Identity(4)
         )
         # create resetpoint
-        _general_create_component(
+        creator.create_component(
             resetp_ty,
             resetp_sector,
             1,  # only create one
             lambda _: mathutils.Matrix.Translation(mathutils.Vector((0.0, 0.0, resetp_offset))) # apply resetpoint offset
         )
-
+        creator.finish_component()
         return {'FINISHED'}
 
     @staticmethod

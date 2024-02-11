@@ -68,6 +68,18 @@ def add_into_scene_and_move_to_cursor(obj: bpy.types.Object):
 
     move_to_cursor(obj)
 
+def select_certain_objects(objs: tuple[bpy.types.Object, ...]) -> None:
+    # deselect all objects first
+    bpy.ops.object.select_all(action = 'DESELECT')
+    # if no objects, return
+    if len(objs) == 0: return
+
+    # set selection for each object
+    for obj in objs:
+        obj.select_set(True)
+    # select first object as active object
+    bpy.context.view_layer.objects.active = objs[0]
+
 class EnumPropHelper():
     """
     These class contain all functions related to EnumProperty, including generating `items`, 

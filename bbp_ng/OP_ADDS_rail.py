@@ -492,6 +492,8 @@ def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], No
 
     # move to cursor
     UTIL_functions.add_into_scene_and_move_to_cursor(obj)
+    # select created object
+    UTIL_functions.select_certain_objects((obj, ))
     
     # return rail
     return obj

@@ -14,18 +14,18 @@ class BBP_PG_bme_adder_cfgs(bpy.types.PropertyGroup):
         soft_min = 0, soft_max = 32,
         step = 1,
         default = 1,
-    )
+    ) # type: ignore
     prop_float: bpy.props.FloatProperty(
         name = 'Single Float', description = 'Single Float',
         min = 0.0, max = 1024.0,
         soft_min = 0.0, soft_max = 512.0,
         step = 50, # Step is in UI, in [1, 100] (WARNING: actual value is /100). So we choose 50, mean 0.5
         default = 5.0,
-    )
+    ) # type: ignore
     prop_bool: bpy.props.BoolProperty(
         name = 'Single Bool', description = 'Single Bool',
         default = True
-    )
+    ) # type: ignore
 
 class BBP_OT_add_bme_struct(bpy.types.Operator):
     """Add BME Struct"""
@@ -55,7 +55,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         description = "Internal flag.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = False
-    )
+    ) # type: ignore
 
     ## A BME struct cfgs descriptor cache list
     #  Not only the descriptor self, also the cfg associated index in bme_struct_cfgs
@@ -133,13 +133,13 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         description = "BME struct type",
         items = _g_EnumHelper_BmeStructType.generate_items(),
         update = bme_struct_type_updated
-    )
+    ) # type: ignore
     
     bme_struct_cfgs : bpy.props.CollectionProperty(
         name = "Cfgs",
         description = "Cfg collection.",
         type = BBP_PG_bme_adder_cfgs,
-    )
+    ) # type: ignore
     
     @classmethod
     def poll(self, context):
@@ -180,6 +180,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
         # move to cursor
         UTIL_functions.add_into_scene_and_move_to_cursor(obj)
+        # select created object
+        UTIL_functions.select_certain_objects((obj, ))
         return {'FINISHED'}
     
     def draw(self, context):
