@@ -21,9 +21,9 @@ BBP还在Blender的其它菜单提供了对Virtools组的访问，具体内容�
 
 可以在`Virtools Material`面板中设置材质属性，就像在Virtools中操作一般。`Virtools Material`面板中所有的材质参数均为Virtools中材质参数的映射，将准确地反映到最后保存的Virtools文档中。
 
-`Virtools Material`面板提供了预设功能，点击顶部的`Preset`按钮即可开始进行预设。预设功能允许用户使用一些预设的材质设置，例如路面顶面，侧面的材质数据等，方便使用。需要注意的是，使用预设不会影响材质的贴图选项，当应用预设后，您仍然需要手动设置材质的贴图。
+`Virtools Material`面板提供了预设功能，点击顶部的`Preset`按钮即可开始进行预设。预设功能允许用户使用一些预设的材质设置，例如路面顶面，侧面的材质数据等，方便使用。需要注意的是，使用预设不会影响材质的贴图选项，当应用预设后，你仍然需要手动设置材质的贴图。
 
-`Virtools Material`面板同样提供把`Virtools Material`面板中的材质数据反应到Blender材质上的功能，以在Blender中获得可视的效果。点击顶部的`Apply`按钮即可执行此功能。当您在Blender中保存Virtools文档时，Virtools文档中的材质数据将从`Virtools Material`面板中指定的数值获取，而不会从Blender材质中获取。这意味一个正确的材质设置过程是：先在`Virtools Material`面板中编辑材质参数，然后使用`Apply`按钮将其反映到Blender材质上，而不是直接去编辑Blender材质。
+`Virtools Material`面板同样提供把`Virtools Material`面板中的材质数据反应到Blender材质上的功能，以在Blender中获得可视的效果。点击顶部的`Apply`按钮即可执行此功能。当你在Blender中保存Virtools文档时，Virtools文档中的材质数据将从`Virtools Material`面板中指定的数值获取，而不会从Blender材质中获取。这意味一个正确的材质设置过程是：先在`Virtools Material`面板中编辑材质参数，然后使用`Apply`按钮将其反映到Blender材质上，而不是直接去编辑Blender材质。
 
 TODO: 添加有关贴图选择按钮的帮助内容
 
@@ -32,3 +32,9 @@ TODO: 添加有关贴图选择按钮的帮助内容
 TODO...
 
 ![](../imgs/virtools-texture.png)
+
+## Virtools网格
+
+TODO...
+
+![](../imgs/virtools-mesh.png)

@@ -36,6 +36,6 @@ BBP内置了一系列自定义图标，以及其组件BME需要的用于描述�
 
 ## 生成帮助文档
 
-虽然本项目会利用GitHub Page功能提供帮助文档，但有时您可能需要提供帮助文档的离线版本，本节将会介绍如何生成离线版本的帮助文档。
+虽然本项目会利用GitHub Page功能提供帮助文档，但有时你可能需要提供帮助文档的离线版本，本节将会介绍如何生成离线版本的帮助文档。
 
-首先您需要通过pip安装`mkdocs`和`pymdown-extensions`。然后转到`docs`文件夹下，运行`mkdocs build --no-directory-urls`。运行命令后得到一个名为`site`的文件夹，其中就是可以离线浏览的帮助文档。
+首先你需要通过pip安装`mkdocs`和`pymdown-extensions`。然后转到`docs`文件夹下，运行`mkdocs build --no-directory-urls`。运行命令后得到一个名为`site`的文件夹，其中就是可以离线浏览的帮助文档。
