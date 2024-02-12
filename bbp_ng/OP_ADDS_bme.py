@@ -239,10 +239,10 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_bme_adder_cfgs)
     bpy.utils.register_class(BBP_OT_add_bme_struct)
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_add_bme_struct)
     bpy.utils.unregister_class(BBP_PG_bme_adder_cfgs)

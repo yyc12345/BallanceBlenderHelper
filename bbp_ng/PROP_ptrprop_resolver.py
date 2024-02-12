@@ -42,10 +42,10 @@ def get_export_object() -> bpy.types.Object:
 def draw_export_object(layout: bpy.types.UILayout) -> None:
     layout.prop(get_ptrprop_resolver(), 'export_object')
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_ptrprop_resolver)
     bpy.types.Scene.bbp_ptrprop_resolver = bpy.props.PointerProperty(type = BBP_PG_ptrprop_resolver)
 
-def unregister():
+def unregister() -> None:
     del bpy.types.Scene.bbp_ptrprop_resolver
     bpy.utils.unregister_class(BBP_PG_ptrprop_resolver)

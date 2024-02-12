@@ -393,7 +393,7 @@ class BBP_PT_ballance_elements(bpy.types.Panel):
 
 #endregion
 
-def register():
+def register() -> None:
     # register all classes
     bpy.utils.register_class(BBP_PG_ballance_element)
     bpy.utils.register_class(BBP_UL_ballance_elements)
@@ -404,7 +404,7 @@ def register():
     bpy.types.Scene.ballance_elements = bpy.props.CollectionProperty(type = BBP_PG_ballance_element)
     bpy.types.Scene.active_ballance_elements = bpy.props.IntProperty()
 
-def unregister():
+def unregister() -> None:
     # del from scene metadata
     del bpy.types.Scene.active_ballance_elements
     del bpy.types.Scene.ballance_elements

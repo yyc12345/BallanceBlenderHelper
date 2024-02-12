@@ -264,10 +264,10 @@ def _get_object_ref_point(obj: bpy.types.Object, corners: tuple[mathutils.Vector
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_legacy_align_history)
     bpy.utils.register_class(BBP_OT_legacy_align)
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_legacy_align)
     bpy.utils.unregister_class(BBP_PG_legacy_align_history)

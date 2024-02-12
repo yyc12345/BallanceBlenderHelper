@@ -183,14 +183,14 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_OT_select_object_by_virtools_group)
 
     bpy.utils.register_class(BBP_OT_add_objects_virtools_group)
     bpy.utils.register_class(BBP_OT_rm_objects_virtools_group)
     bpy.utils.register_class(BBP_OT_clear_objects_virtools_group)
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_clear_objects_virtools_group)
     bpy.utils.unregister_class(BBP_OT_rm_objects_virtools_group)
     bpy.utils.unregister_class(BBP_OT_add_objects_virtools_group)

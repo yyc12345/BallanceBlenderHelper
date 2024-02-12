@@ -509,7 +509,7 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_OT_add_component)
     bpy.utils.register_class(BBP_OT_add_nong_extra_point)
     bpy.utils.register_class(BBP_OT_add_nong_ventilator)
@@ -517,7 +517,7 @@ def register():
     bpy.utils.register_class(BBP_OT_add_ventilator_series)
     bpy.utils.register_class(BBP_OT_add_sector_component_pair)
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_add_sector_component_pair)
     bpy.utils.unregister_class(BBP_OT_add_ventilator_series)
     bpy.utils.unregister_class(BBP_OT_add_tilting_block_series)

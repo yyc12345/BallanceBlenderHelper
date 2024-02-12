@@ -396,7 +396,7 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
 
 #endregion
 
-def register():
+def register() -> None:
     # register all classes
     bpy.utils.register_class(BBP_PG_virtools_group)
     bpy.utils.register_class(BBP_UL_virtools_groups)
@@ -409,7 +409,7 @@ def register():
     bpy.types.Object.virtools_groups = bpy.props.CollectionProperty(type = BBP_PG_virtools_group)
     bpy.types.Object.active_virtools_groups = bpy.props.IntProperty()
 
-def unregister():
+def unregister() -> None:
     # del from scene metadata
     del bpy.types.Scene.active_virtools_groups
     del bpy.types.Scene.virtools_groups

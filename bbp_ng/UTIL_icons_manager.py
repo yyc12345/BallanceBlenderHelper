@@ -66,7 +66,7 @@ def get_group_icon(name: str) -> int | None:
 
 #endregion
 
-def register():
+def register() -> None:
     global _g_IconsManager
     global _g_EmptyIcon
     global _g_BmeIconsMap, _g_ComponentIconsMap, _g_GroupIconsMap
@@ -100,7 +100,7 @@ def register():
         _g_GroupIconPrefix
     )
 
-def unregister():
+def unregister() -> None:
     global _g_IconsManager
     global _g_EmptyIcon
     global _g_BmeIconsMap, _g_ComponentIconsMap, _g_GroupIconsMap

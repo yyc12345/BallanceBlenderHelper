@@ -682,7 +682,7 @@ def _create_screw_rail(
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_OT_add_rail_section)
     bpy.utils.register_class(BBP_OT_add_transition_section)
 
@@ -695,7 +695,7 @@ def register():
     bpy.utils.register_class(BBP_OT_add_side_spiral_rail)
 
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_add_side_spiral_rail)
     bpy.utils.unregister_class(BBP_OT_add_spiral_rail)
     bpy.utils.unregister_class(BBP_OT_add_arc_rail)

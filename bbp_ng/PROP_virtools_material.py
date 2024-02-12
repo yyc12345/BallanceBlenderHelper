@@ -1,5 +1,5 @@
 import bpy
-import typing, enum, copy
+import typing, enum, copy, os
 from . import UTIL_virtools_types, UTIL_functions, UTIL_ballance_texture, UTIL_file_browser
 from . import PROP_virtools_texture, PROP_preferences
 
@@ -133,7 +133,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         max = 1.0,
         size = 3,
         default = RawVirtoolsMaterial.cDefaultAmbient.to_const_rgb()
-    )
+    ) # type: ignore
     
     diffuse: bpy.props.FloatVectorProperty(
         name = "Diffuse",
@@ -143,7 +143,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         max = 1.0,
         size = 4,
         default = RawVirtoolsMaterial.cDefaultDiffuse.to_const_rgba()
-    )
+    ) # type: ignore
     
     specular: bpy.props.FloatVectorProperty(
         name = "Specular",
@@ -153,7 +153,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         max = 1.0,
         size = 3,
         default = RawVirtoolsMaterial.cDefaultSpecular.to_const_rgb()
-    )
+    ) # type: ignore
     
     emissive: bpy.props.FloatVectorProperty(
         name = "Emissive",
@@ -163,7 +163,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         max = 1.0,
         size = 3,
         default = RawVirtoolsMaterial.cDefaultEmissive.to_const_rgb()
-    )
+    ) # type: ignore
     
     specular_power: bpy.props.FloatProperty(
         name = "Power",
@@ -171,13 +171,13 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 100.0,
         default = RawVirtoolsMaterial.cDefaultSpecularPower
-    )
+    ) # type: ignore
     
     texture: bpy.props.PointerProperty(
         type = bpy.types.Image,
         name = "Texture",
         description = "Texture of the material"
-    )
+    ) # type: ignore
     
     texture_border_color: bpy.props.FloatVectorProperty(
         name = "Border Color",
@@ -187,89 +187,89 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         max = 1.0,
         size = 4,
         default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_const_rgba()
-    )
+    ) # type: ignore
     
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
         items = _g_Helper_VXTEXTURE_BLENDMODE.generate_items(),
         default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode)
-    )
+    ) # type: ignore
     
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
         default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode)
-    )
+    ) # type: ignore
     
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
         default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode)
-    )
+    ) # type: ignore
     
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
         items = _g_Helper_VXTEXTURE_ADDRESSMODE.generate_items(),
         default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode)
-    )
+    ) # type: ignore
     
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
         default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend)
-    )
+    ) # type: ignore
     
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
         default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultDestBlend)
-    )
+    ) # type: ignore
     
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
         items = _g_Helper_VXFILL_MODE.generate_items(),
         default = _g_Helper_VXFILL_MODE.to_selection(RawVirtoolsMaterial.cDefaultFillMode)
-    )
+    ) # type: ignore
     
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
         items = _g_Helper_VXSHADE_MODE.generate_items(),
         default = _g_Helper_VXSHADE_MODE.to_selection(RawVirtoolsMaterial.cDefaultShadeMode)
-    )
+    ) # type: ignore
     
     enable_alpha_test: bpy.props.BoolProperty(
         name = "Alpha Test",
         description = "Whether the alpha test is enabled",
         default = RawVirtoolsMaterial.cDefaultEnableAlphaTest
-    )
+    ) # type: ignore
     enable_alpha_blend: bpy.props.BoolProperty(
         name = "Blend",
         description = "Whether alpha blending is enabled or not.",
         default = RawVirtoolsMaterial.cDefaultEnableAlphaBlend
-    )
+    ) # type: ignore
     enable_perspective_correction: bpy.props.BoolProperty(
         name = "Perspective Correction",
         description = "Whether texture perspective correction is enabled",
         default = RawVirtoolsMaterial.cDefaultEnablePerspectiveCorrection
-    )
+    ) # type: ignore
     enable_z_write: bpy.props.BoolProperty(
         name = "Z-Buffer Write",
         description = "Whether writing in ZBuffer is enabled.",
         default = RawVirtoolsMaterial.cDefaultEnableZWrite
-    )
+    ) # type: ignore
     enable_two_sided: bpy.props.BoolProperty(
         name = "Both Sided",
         description = "Whether the material is both sided or not",
         default = RawVirtoolsMaterial.cDefaultEnableTwoSided
-    )
+    ) # type: ignore
     
     alpha_ref: bpy.props.IntProperty(
         name = "Alpha Ref Value",
@@ -277,21 +277,21 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0,
         max = 255,
         default = RawVirtoolsMaterial.cDefaultAlphaRef
-    )
+    ) # type: ignore
     
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
         default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc)
-    )
+    ) # type: ignore
     
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
         default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultZFunc)
-    )
+    ) # type: ignore
 
 #region Getter Setter
 
@@ -539,6 +539,330 @@ _g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelp
 
 #endregion
 
+#region Fix Material
+
+def fix_material(mtl: bpy.types.Material) -> bool:
+    """!
+    Fix single Blender material.
+
+    @remark The implementation of this function is copied from BallanceVirtoolsHelper/bvh/features/mapping/bmfile_fix_texture.cpp
+
+    @param mtl[in] The blender material need to be processed.
+    @return True if we do a fix, otherwise return False.
+    """
+    # prepare return value first
+    ret: bool = False
+
+    # get raw mtl from this blender mtl first
+    rawmtl: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
+    # if no associated texture, return
+    if rawmtl.mTexture is None: return ret
+
+    # get associated texture name
+    # we do not check whether it is ballance texture here, because the texture might be packed.
+    # packed ballance texture is not recognised as a valid ballance texture.
+    filename: str = os.path.basename(UTIL_ballance_texture.get_texture_filepath(rawmtl.mTexture))
+
+    # preset some field for raw mtl
+    # first, we need store its as opaque mode
+    rawmtl.mEnableAlphaTest = False
+    rawmtl.mEnableAlphaBlend = False
+    rawmtl.mEnableTwoSided = False
+    # and z write must be enabled in default
+    rawmtl.mEnableZWrite = True
+    rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+    rawmtl.mAmbient.from_const_rgb
+
+    # route filename
+    match(filename):
+        # case 'atari.avi': pass
+        # case 'atari.bmp': pass
+        # case 'Ball_LightningSphere1.bmp': pass
+        # case 'Ball_LightningSphere2.bmp': pass
+        # case 'Ball_LightningSphere3.bmp': pass
+        case 'Ball_Paper.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        case 'Ball_Stone.bmp' | 'Ball_Wood.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((60 / 255.0, 60 / 255.0, 60 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        case 'Brick.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        # case 'Button01_deselect.tga': pass
+        # case 'Button01_select.tga': pass
+        # case 'Button01_special.tga': pass
+        case 'Column_beige.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((233 / 255.0, 233 / 255.0, 233 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((80 / 255.0, 80 / 255.0, 80 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        case 'Column_beige_fade.tga':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((233 / 255.0, 233 / 255.0, 233 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((80 / 255.0, 80 / 255.0, 80 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+
+            rawmtl.mEnableAlphaTest = False
+            rawmtl.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER
+            rawmtl.mAlphaRef = 1
+            rawmtl.mEnableAlphaBlend = True
+            rawmtl.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA
+            rawmtl.mDestBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA
+            rawmtl.mEnableZWrite = True
+            rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+            ret = True
+        case 'Column_blue.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((209 / 255.0, 209 / 255.0, 209 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((150 / 255.0, 150 / 255.0, 150 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((80 / 255.0, 80 / 255.0, 80 / 255.0))
+            rawmtl.mSpecularPower = 31.0
+            ret = True
+        # case 'Cursor.tga': pass
+        # case 'Dome.bmp': pass
+        # case 'DomeEnvironment.bmp': pass
+        # case 'DomeShadow.tga': pass
+        # case 'ExtraBall.bmp': pass
+        # case 'ExtraParticle.bmp': pass
+        case 'E_Holzbeschlag.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((186 / 255.0, 186 / 255.0, 186 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((65 / 255.0, 65 / 255.0, 65 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        # case 'FloorGlow.bmp': pass
+        case 'Floor_Side.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((122 / 255.0, 122 / 255.0, 122 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mEmissive.from_const_rgb((104 / 255.0, 104 / 255.0, 104 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        case 'Floor_Top_Border.bmp' | 'Floor_Top_Borderless.bmp' | 'Floor_Top_Checkpoint.bmp' | 'Floor_Top_Flat.bmp' | 'Floor_Top_Profil.bmp' | 'Floor_Top_ProfilFlat.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((80 / 255.0, 80 / 255.0, 80 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mSpecularPower = 100.0
+            ret = True
+        # case 'Font_1.tga': pass
+        # case 'Gravitylogo_intro.bmp': pass
+        # case 'HardShadow.bmp': pass
+        case 'Laterne_Glas.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        case 'Laterne_Schatten.tga':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecularPower = 0.0
+
+            rawmtl.mEnableAlphaTest = True
+            rawmtl.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER
+            rawmtl.mAlphaRef = 1
+            rawmtl.mEnableAlphaBlend = True
+            rawmtl.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA
+            rawmtl.mDestBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA
+            rawmtl.mEnableZWrite = True
+            rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+            ret = True
+        case 'Laterne_Verlauf.tga':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mSpecular.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mEmissive.from_const_rgb((59 / 255.0, 59 / 255.0, 59 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+
+            rawmtl.mEnableAlphaTest = True
+            rawmtl.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER
+            rawmtl.mAlphaRef = 1
+            rawmtl.mEnableAlphaBlend = True
+            rawmtl.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA
+            rawmtl.mDestBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA
+            rawmtl.mEnableZWrite = True
+            rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+            rawmtl.mEnableTwoSided = True
+            ret = True
+        # case 'Logo.bmp': pass
+        case 'Metal_stained.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((65 / 255.0, 65 / 255.0, 65 / 255.0))
+            rawmtl.mSpecularPower = 25.0
+            ret = True
+        # case 'Misc_Ufo.bmp': pass
+        # case 'Misc_UFO_Flash.bmp': pass
+        # case 'Modul03_Floor.bmp': pass
+        # case 'Modul03_Wall.bmp': pass
+        case 'Modul11_13_Wood.bmp':
+            rawmtl.mAmbient.from_const_rgb((9 / 255.0, 9 / 255.0, 9 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((70 / 255.0, 70 / 255.0, 70 / 255.0))
+            rawmtl.mSpecularPower = 50.0
+            ret = True
+        case 'Modul11_Wood.bmp':
+            rawmtl.mAmbient.from_const_rgb((9 / 255.0, 9 / 255.0, 9 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((50 / 255.0, 50 / 255.0, 50 / 255.0))
+            rawmtl.mSpecularPower = 50.0
+            ret = True
+        case 'Modul15.bmp':
+            rawmtl.mAmbient.from_const_rgb((16 / 255.0, 16 / 255.0, 16 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((70 / 255.0, 70 / 255.0, 70 / 255.0))
+            rawmtl.mSpecularPower = 100.0
+            ret = True
+        case 'Modul16.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((85 / 255.0, 85 / 255.0, 85 / 255.0))
+            rawmtl.mSpecularPower = 100.0
+            ret = True
+        case 'Modul18.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mSpecularPower = 25.0
+            ret = True
+        case 'Modul18_Gitter.tga':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mSpecularPower = 25.0
+
+            rawmtl.mEnableAlphaTest = True
+            rawmtl.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER
+            rawmtl.mAlphaRef = 1
+            rawmtl.mEnableAlphaBlend = True
+            rawmtl.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA
+            rawmtl.mDestBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA
+            rawmtl.mEnableZWrite = True
+            rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+            ret = True
+        # case 'Modul30_d_Seiten.bmp': pass
+        # case 'Particle_Flames.bmp': pass
+        # case 'Particle_Smoke.bmp': pass
+        # case 'PE_Bal_balloons.bmp': pass
+        # case 'PE_Bal_platform.bmp': pass
+        # case 'PE_Ufo_env.bmp': pass
+        # case 'Pfeil.tga': pass
+        # case 'P_Extra_Life_Oil.bmp': pass
+        # case 'P_Extra_Life_Particle.bmp': pass
+        # case 'P_Extra_Life_Shadow.bmp': pass
+        case 'Rail_Environment.bmp':
+            rawmtl.mAmbient.from_const_rgb((0.0, 0.0, 0.0))
+            rawmtl.mDiffuse.from_const_rgb((100 / 255.0, 118 / 255.0, 133 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((210 / 255.0, 210 / 255.0, 210 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((124 / 255.0, 134 / 255.0, 150 / 255.0))
+            rawmtl.mSpecularPower = 10.0
+            ret = True
+        # case 'sandsack.bmp': pass
+        # case 'SkyLayer.bmp': pass
+        # case 'Sky_Vortex.bmp': pass
+        case 'Stick_Bottom.tga':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((100 / 255.0, 118 / 255.0, 133 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((210 / 255.0, 210 / 255.0, 210 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((124 / 255.0, 134 / 255.0, 150 / 255.0))
+            rawmtl.mSpecularPower = 13.0
+
+            rawmtl.mEnableAlphaTest = False
+            rawmtl.mAlphaFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_GREATER
+            rawmtl.mAlphaRef = 1
+            rawmtl.mEnableAlphaBlend = True
+            rawmtl.mSourceBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_SRCALPHA
+            rawmtl.mDestBlend = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_INVSRCALPHA
+            rawmtl.mEnableZWrite = True
+            rawmtl.mZFunc = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
+            ret = True
+        case 'Stick_Stripes.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((106 / 255.0, 106 / 255.0, 106 / 255.0))
+            rawmtl.mSpecularPower = 13.0
+            ret = True
+        # case 'Target.bmp': pass
+        case 'Tower_Roof.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((218 / 255.0, 218 / 255.0, 218 / 255.0))
+            rawmtl.mSpecular.from_const_rgb((64 / 255.0, 64 / 255.0, 64 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((103 / 255.0, 103 / 255.0, 103 / 255.0))
+            rawmtl.mSpecularPower = 100.0
+            ret = True
+        # case 'Trafo_Environment.bmp': pass
+        # case 'Trafo_FlashField.bmp': pass
+        # case 'Trafo_Shadow_Big.tga': pass
+        # case 'Tut_Pfeil01.tga': pass
+        # case 'Tut_Pfeil_Hoch.tga': pass
+        # case 'Wolken_intro.tga': pass
+        case 'Wood_Metal.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((229 / 255.0, 229 / 255.0, 229 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((40 / 255.0, 40 / 255.0, 40 / 255.0))
+            rawmtl.mSpecularPower = 0.0
+            ret = True
+        # case 'Wood_MetalStripes.bmp': pass
+        # case 'Wood_Misc.bmp': pass
+        # case 'Wood_Nailed.bmp': pass
+        # case 'Wood_Old.bmp': pass
+        case 'Wood_Panel.bmp':
+            rawmtl.mAmbient.from_const_rgb((2 / 255.0, 2 / 255.0, 2 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((59 / 255.0, 59 / 255.0, 59 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((30 / 255.0, 30 / 255.0, 30 / 255.0))
+            rawmtl.mSpecularPower = 25.0
+            ret = True
+        # case 'Wood_Plain.bmp': pass
+        case 'Wood_Plain2.bmp':
+            rawmtl.mAmbient.from_const_rgb((25 / 255.0, 25 / 255.0, 25 / 255.0))
+            rawmtl.mDiffuse.from_const_rgb((1.0, 1.0, 1.0))
+            rawmtl.mSpecular.from_const_rgb((100 / 255.0, 100 / 255.0, 100 / 255.0))
+            rawmtl.mEmissive.from_const_rgb((50 / 255.0, 50 / 255.0, 50 / 255.0))
+            rawmtl.mSpecularPower = 50.0
+            ret = True
+        # case 'Wood_Raft.bmp': pass
+        case _: pass    # no mathed
+
+    # if changed, set to blender mtl
+    if ret:
+        set_raw_virtools_material(mtl, rawmtl)
+
+    # return result
+    return ret
+
+#endregion
+
 #region Operators
 
 class BBP_OT_apply_virtools_material(bpy.types.Operator):
@@ -556,6 +880,37 @@ class BBP_OT_apply_virtools_material(bpy.types.Operator):
         apply_to_blender_material(mtl)
         return {'FINISHED'}
 
+class BBP_OT_fix_single_material(bpy.types.Operator):
+    """Fix Active Materials by Its Referred Ballance Texture Name."""
+    bl_idname = "bbp.fix_single_material"
+    bl_label = "Fix Material"
+    bl_options = {'UNDO'}
+    
+    @classmethod
+    def poll(cls, context):
+        if context.material is None: return False
+        if not PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder(): return False
+        return True
+    
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_confirm(self, event)
+    
+    def execute(self, context):
+        # get mtl and try to fix
+        mtl: bpy.types.Material = context.material
+        ret: bool = fix_material(mtl)
+
+        # if suc, apply to blender mtl and show info
+        if ret:
+            apply_to_blender_material(mtl)
+            self.report({'INFO'}, 'Fix done.')
+        else:
+            # otherwise report warning
+            self.report({'WARNING'}, 'This material is not suit for fixer.')
+
+        return {'FINISHED'}
+
 class BBP_OT_preset_virtools_material(bpy.types.Operator):
     """Preset Virtools Material with Original Ballance Data."""
     bl_idname = "bbp.preset_virtools_material"
@@ -566,7 +921,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
         name = "Preset",
         description = "The preset which you want to apply.",
         items = _g_Helper_MtlPreset.generate_items(),
-    )
+    ) # type: ignore
     
     @classmethod
     def poll(cls, context):
@@ -586,6 +941,8 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
         
         # apply preset to material
         preset_virtools_material(mtl, expected_preset)
+        # and apply to blender
+        apply_to_blender_material(mtl)
         return {'FINISHED'}
 
 class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.ImportBallanceImage):
@@ -659,6 +1016,7 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         row = layout.row()
         row.operator(BBP_OT_preset_virtools_material.bl_idname, text = 'Preset', icon = "PRESET")
         row.operator(BBP_OT_apply_virtools_material.bl_idname, text = 'Apply', icon = "NODETREE")
+        row.operator(BBP_OT_fix_single_material.bl_idname, text = '', icon = "MODIFIER")
 
         # draw data
         layout.label(text="Color Parameters")
@@ -715,9 +1073,10 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         if props.enable_z_write:
             layout.prop(props, 'z_func')
         
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_material)
     bpy.utils.register_class(BBP_OT_apply_virtools_material)
+    bpy.utils.register_class(BBP_OT_fix_single_material)
     bpy.utils.register_class(BBP_OT_preset_virtools_material)
     bpy.utils.register_class(BBP_OT_direct_set_virtools_texture)
     bpy.utils.register_class(BBP_PT_virtools_material)
@@ -725,12 +1084,13 @@ def register():
     # add into material metadata
     bpy.types.Material.virtools_material = bpy.props.PointerProperty(type = BBP_PG_virtools_material)
 
-def unregister():
+def unregister() -> None:
     # del from material metadata
     del bpy.types.Material.virtools_material
 
     bpy.utils.unregister_class(BBP_PT_virtools_material)
     bpy.utils.unregister_class(BBP_OT_direct_set_virtools_texture)
     bpy.utils.unregister_class(BBP_OT_preset_virtools_material)
+    bpy.utils.unregister_class(BBP_OT_fix_single_material)
     bpy.utils.unregister_class(BBP_OT_apply_virtools_material)
     bpy.utils.unregister_class(BBP_PG_virtools_material)

@@ -89,12 +89,12 @@ def _rename_core(
             UTIL_icons_manager.BlenderPresetIcons.Info.value
         )
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_OT_regulate_objects_name)
     bpy.utils.register_class(BBP_OT_auto_grouping)
     bpy.utils.register_class(BBP_OT_convert_to_imengyu)
 
-def unregister():
+def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_convert_to_imengyu)
     bpy.utils.unregister_class(BBP_OT_auto_grouping)
     bpy.utils.unregister_class(BBP_OT_regulate_objects_name)

@@ -283,7 +283,7 @@ class BBP_PT_bme_materials(bpy.types.Panel):
 
 #endregion
 
-def register():
+def register() -> None:
     # register all classes
     bpy.utils.register_class(BBP_PG_bme_material)
     bpy.utils.register_class(BBP_UL_bme_materials)
@@ -294,7 +294,7 @@ def register():
     bpy.types.Scene.bme_materials = bpy.props.CollectionProperty(type = BBP_PG_bme_material)
     bpy.types.Scene.active_bme_materials = bpy.props.IntProperty()
 
-def unregister():
+def unregister() -> None:
     # del from scene metadata
     del bpy.types.Scene.active_bme_materials
     del bpy.types.Scene.bme_materials

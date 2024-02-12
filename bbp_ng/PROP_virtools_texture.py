@@ -192,13 +192,13 @@ def get_nonballance_texture_preset() -> RawVirtoolsTexture:
 
 #endregion
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_texture)
     
     # add into image metadata
     bpy.types.Image.virtools_texture = bpy.props.PointerProperty(type = BBP_PG_virtools_texture)
 
-def unregister():
+def unregister() -> None:
     # del from image metadata
     del bpy.types.Image.virtools_texture
 

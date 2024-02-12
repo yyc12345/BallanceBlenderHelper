@@ -69,14 +69,14 @@ class BBP_PT_virtools_mesh(bpy.types.Panel):
 
 # Register
 
-def register():
+def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_mesh)
     bpy.utils.register_class(BBP_PT_virtools_mesh)
 
     # add into mesh metadata
     bpy.types.Mesh.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
 
-def unregister():
+def unregister() -> None:
     # remove from metadata
     del bpy.types.Mesh.virtools_mesh
 
