@@ -6,7 +6,7 @@ from . import UTIL_virtools_types, UTIL_icons_manager, UTIL_functions
 class BBP_OT_rail_uv(bpy.types.Operator):
     """Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"""
     bl_idname = "bbp.rail_uv"
-    bl_label = "Create Rail UV"
+    bl_label = "Rail UV"
     bl_options = {'UNDO'}
 
     @classmethod

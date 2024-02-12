@@ -437,10 +437,13 @@ def _flatten_face_uv(face: bmesh.types.BMFace, uv_layer: bmesh.types.BMLayerItem
     vec1.normalize()
 
     # get z axis
-    new_z_axis: mathutils.Vector = new_y_axis.cross(vec1)
+    new_z_axis: mathutils.Vector = vec1.cross(new_y_axis)
     new_z_axis.normalize()
-    if not any(round(v, 7) for v in new_z_axis):  # if z is a zero vector, use face normal instead
+    # if z is a zero vector, use face normal instead
+    # please note we need use inverted face normal.
+    if not any(round(v, 7) for v in new_z_axis):
         new_z_axis = typing.cast(mathutils.Vector, face.normal).normalized()
+        new_z_axis.negate()
 
     # get x axis
     new_x_axis: mathutils.Vector = new_y_axis.cross(new_z_axis)
