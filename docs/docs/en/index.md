@@ -1,7 +1,7 @@
 # Ballance Blender Plugin User Manual
 
-!!! info "Work in Progress"
-    This part of manual still work in progress.
+!!! info "May Outdated"
+    This document has been translated from other languages and may not always be up to date.
 
 Welcome to the Ballance Blender Plugin, the user manual for the free and open source Ballance map creation suite.
 
@@ -13,22 +13,26 @@ Therefore, choosing Blender with BBP for mapping is not only choosing freedom an
 
 ## Getting Started
 
-* Installing Plugin
-* Configuring Plugin
+* [Install Plugin](./install-plugin.md)
+* [Configure Plugin](./configure-plugin.md)
 
-## Basics
+## Features
 
-* Virtools Properties
-* Importing and Exporting Virtools Documents
-* Operating by Groups
-* Advanced UV
-* Adding Prefabricated Structures
-* Adding Rails
-* Adding Components
+* [Virtools Properties](./virtools-properties.md)
+* [Import and Export Virtools Document](./import-export-virtools.md)
+* [Group Operation](./group-operations.md)
+* [Legacy Alignment](./legacy-align.md)
+* [Naming Convention](./naming-convention.md)
+* [UV Mapping](./uv-mapping.md)
+* [Add Floor](./bme-adder.md)
+* [Add Rail](./rail-adder.md)
+* [Add Component](./component-adder.md)
 
-## Advanced
+## Misc
 
-* Compiling and distributing plugins
+* [Compile and Distribute Plugin](./compile-distribute-plugin.md)
+* [Report Issue](./report-bugs.md)
+* [Technical Information](./tech-infos.md)
 
 !!! info "These are not all"
     This manual only documents the relevant operations regarding this plugin and does not explain how to make a Ballance map here. For detailed information on how to make a Ballance map with Blender and BBP, please search for content on Bilibili or YouTube.

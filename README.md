@@ -4,4 +4,4 @@
 
 BBP NG, abbr **B**allance **B**lender **P**lugin **N**ext **G**eneration.
 
-For an introduction to this plugin, installing it, compiling it, reporting bugs, etc., see the GitHub Page for this project: https://yyc12345.github.io/BallanceBlenderHelper
+For an introduction to this plugin, installing it, compiling it, reporting bugs, etc., see the GitHub Page of this project: https://yyc12345.github.io/BallanceBlenderHelper
