@@ -2,17 +2,17 @@ name: Publish docs via GitHub Pages
 on:
   push:
     branches:
-      - ng
+      - master
 
 jobs:
   build:
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ng
+      - name: Checkout master
         uses: actions/checkout@v4
         with:
-          ref: ng
+          ref: master
   
       - name: Install MkDocs
         run: |
