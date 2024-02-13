@@ -16,6 +16,23 @@ class FlattenMethod(enum.IntEnum):
     # Not only V axis, but also U axis' continuity will been make sure.
     Wood = enum.auto()
 
+class NeighborType(enum.IntEnum):
+    """
+    NeighborType is used by special flatten uv to describe the direction of neighbor.
+
+    Normally we find neighbor by +V, +U direction (in UV world), these neighbors are "forward" neighbors and marked as Forward.
+    But if we try finding neighbor by -V, -U direction, we call these neighbors are "backward" neighbors,
+    and marked as VerticalBackward or HorizontalBackward by its direction.
+
+    The UV of Backward neighbor need to be processed specially so we need distinguish them with Forward neighbors.
+    """
+    # +V, +U direction neighbor.
+    Forward = enum.auto()
+    # -V direction neighbor.
+    VerticalBackward = enum.auto()
+    # -U direction neighbor.
+    HorizontalBackward = enum.auto()
+
 class FlattenParam():
     mReferenceEdge: int
     mUseRefPoint: bool
@@ -283,21 +300,20 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
     
     # prepare a function to check whether face is valid
     def face_validator(f: bmesh.types.BMFace) -> bool:
-        # specify use external failed counter
+        # specify using external failed counter
         nonlocal failed
         # a valid face must be
         # selected, not processed, and should be rectangle
         # we check selection first
-        if not f.select or f.tag: return False
         # then check tag. if tag == True, it mean this face has been processed.
-        if f.tag: return False
+        if not f.select or f.tag: return False
         # now this face can be processed, we need check whether it is rectangle
         if len(f.loops) == 4:
             # yes it is rectangle
             return True
         else:
             # no, it is not rectangle
-            # we need mark it tag as True to prevent any possible recursive checking
+            # we need mark its tag as True to prevent any possible recursive checking
             # because it definately can not be processed in future.
             f.tag = True
             # then we report this face failed
@@ -339,7 +355,7 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
         return neighbor_f
     # prepare face stack.
     # NOTE: all face inserted into this stack should be marked as processed first.
-    face_stack: collections.deque[tuple[bmesh.types.BMFace, mathutils.Vector]] = collections.deque()
+    face_stack: collections.deque[tuple[bmesh.types.BMFace, mathutils.Vector, NeighborType]] = collections.deque()
     # start process faces
     while True:
         # if no item in face stack, pick one from face getter and mark it as processed
@@ -348,12 +364,12 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
             try:
                 f = next(face_getter)
                 f.tag = True
-                face_stack.append((f, mathutils.Vector((0, 0))))
+                face_stack.append((f, mathutils.Vector((0, 0)), NeighborType.Forward))
             except StopIteration:
                 break
 
         # pick one face from stack and process it
-        (face, face_offset) = face_stack.pop()
+        (face, face_offset, face_backward) = face_stack.pop()
         _flatten_face_uv(face, uv_layer, flatten_param, face_offset)
 
         # get 4 point uv because we need use them later
@@ -380,9 +396,9 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
         uv2 = _get_face_vertex_uv(face, uv_layer, ind2)
         uv3 = _get_face_vertex_uv(face, uv_layer, ind3)
 
-        # insert horizontal neighbor if we are wood flatten uv
+        # correct rectangle shape when in wood mode
         if flatten_param.mFlattenMethod == FlattenMethod.Wood:
-            # first, make its uv geometry to rectangle from a trapezium.
+            # make its uv geometry to rectangle from a trapezium.
             # get the average U factor from its right edge.
             # and make top + bottom uv edge be parallel with U axis by using left edge V factor.
             average_u = (uv2[0] + uv3[0]) / 2
@@ -390,22 +406,67 @@ def _specific_flatten_uv(bm: bmesh.types.BMesh, uv_layer: bmesh.types.BMLayerIte
             uv3 = (average_u, uv0[1])
             _set_face_vertex_uv(face, uv_layer, ind2, uv2)
             _set_face_vertex_uv(face, uv_layer, ind3, uv3)
-
-            # then, try getting its right neighbor
+        
+        # do backward correction
+        # in backward mode, we can not know how many space backward one will occupied,
+        # thus we can not pass it by offset because we don't know the offset,
+        # so we only can patch it after computing its real size.
+        if face_backward != NeighborType.Forward:
+            if face_backward == NeighborType.VerticalBackward:
+                # in vertical backward patch,
+                # minus self height for all uv.
+                self_height: float = uv1[1] - uv0[1]
+                uv0 = (uv0[0], uv0[1] - self_height)
+                uv1 = (uv1[0], uv1[1] - self_height)
+                uv2 = (uv2[0], uv2[1] - self_height)
+                uv3 = (uv3[0], uv3[1] - self_height)
+            if face_backward == NeighborType.HorizontalBackward:
+                # in horizontal backward patch, minus self width for all uv.
+                # because we have process rectangle shape issue before this,
+                # so we can pick uv2 or uv3 to get width directly.
+                self_width: float = uv3[0] - uv0[0]
+                uv0 = (uv0[0] - self_width, uv0[1])
+                uv1 = (uv1[0] - self_width, uv1[1])
+                uv2 = (uv2[0] - self_width, uv2[1])
+                uv3 = (uv3[0] - self_width, uv3[1])
+            # set modified uv to geometry
+            _set_face_vertex_uv(face, uv_layer, ind0, uv0)
+            _set_face_vertex_uv(face, uv_layer, ind1, uv1)
+            _set_face_vertex_uv(face, uv_layer, ind2, uv2)
+            _set_face_vertex_uv(face, uv_layer, ind3, uv3)
+            
+        # insert horizontal neighbor only in wood mode.
+        if flatten_param.mFlattenMethod == FlattenMethod.Wood:
+            # insert right neighbor (forward)
             r_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind2, ind0)
             if r_face is not None:
                 # mark it as processed
                 r_face.tag = True
                 # insert face with extra horizontal offset.
-                face_stack.append((r_face, mathutils.Vector((uv3[0], uv3[1]))))
+                face_stack.append((r_face, mathutils.Vector((uv3[0], uv3[1])), NeighborType.Forward))
+            # insert left neighbor (backward)
+            # swap the index param of neighbor getter
+            l_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind0, ind2)
+            if l_face is not None:
+                l_face.tag = True
+                # pass origin pos, and order backward correction
+                face_stack.append((l_face, mathutils.Vector((uv0[0], uv0[1])), NeighborType.HorizontalBackward))
 
         # insert vertical neighbor
+        # insert top neighbor (forward)
         t_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind1, ind3)
         if t_face is not None:
             # mark it as processed
             t_face.tag = True
             # insert face with extra vertical offset.
-            face_stack.append((t_face, mathutils.Vector((uv1[0], uv1[1]))))
+            face_stack.append((t_face, mathutils.Vector((uv1[0], uv1[1])), NeighborType.Forward))
+        # insert bottom neighbor (backward)
+        # swap the index param of neighbor getter
+        b_face: bmesh.types.BMFace | None = face_neighbor_getter(face, ind3, ind1)
+        if b_face is not None:
+            b_face.tag = True
+            # pass origin pos, and order backward correction
+            face_stack.append((b_face, mathutils.Vector((uv0[0], uv0[1])), NeighborType.VerticalBackward))
 
     return failed
 
