@@ -380,6 +380,64 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
             )
         )
 
+class BBP_OT_add_swing_series(bpy.types.Operator, ComponentSectorParam, ComponentCountParam):
+    """Add Swing Series"""
+    bl_idname = "bbp.add_swing_series"
+    bl_label = "Swing Series"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    component_span: bpy.props.FloatProperty(
+        name = "Span",
+        description = "The distance between each swing",
+        min = 0.0, max = 100.0,
+        soft_min = 0.0, soft_max = 30.0,
+        default = 15.0,
+    ) # type: ignore
+
+    staggered_swing: bpy.props.BoolProperty(
+        name = 'Staggered', 
+        description = 'Whether place Swing staggered. Staggered Swing accept any ball however Non-Staggered Swing only accept Wood and Paper ball.',
+        default = True
+    ) # type: ignore
+
+    def draw(self, context):
+        layout = self.layout
+        self.draw_component_sector_params(layout)
+        self.draw_component_count_params(layout)
+        layout.prop(self, 'component_span')
+        layout.prop(self, 'staggered_swing')
+
+    def execute(self, context):
+        # create objects and move it by delta
+        # get span first
+        span: float = self.component_span
+        staggered: bool = self.staggered_swing
+        # create elements
+        creator: _GeneralComponentCreator = _GeneralComponentCreator()
+        creator.create_component(
+            PROP_ballance_element.BallanceElementType.P_Modul_08,
+            self.general_get_component_sector(),
+            self.general_get_component_count(),
+            lambda i: mathutils.Matrix.LocRotScale(
+                # move with extra delta in x axis
+                mathutils.Vector((span * i, 0.0, 0.0)),
+                # and rotate 90 degree for even one if staggered placement.
+                mathutils.Euler((0, 0, math.radians(180) if (staggered and (i % 2 == 0)) else 0)),
+                None
+            )
+        )
+        creator.finish_component()
+        return {'FINISHED'}
+
+    @staticmethod
+    def draw_blc_menu(layout: bpy.types.UILayout):
+        layout.operator(
+            BBP_OT_add_swing_series.bl_idname,
+            icon_value = UTIL_icons_manager.get_component_icon(
+                PROP_ballance_element.get_ballance_element_name(PROP_ballance_element.BallanceElementType.P_Modul_08)
+            )
+        )
+
 class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, ComponentCountParam):
     """Add Ventilator Series"""
     bl_idname = "bbp.add_ventilator_series"
@@ -514,12 +572,14 @@ def register() -> None:
     bpy.utils.register_class(BBP_OT_add_nong_extra_point)
     bpy.utils.register_class(BBP_OT_add_nong_ventilator)
     bpy.utils.register_class(BBP_OT_add_tilting_block_series)
+    bpy.utils.register_class(BBP_OT_add_swing_series)
     bpy.utils.register_class(BBP_OT_add_ventilator_series)
     bpy.utils.register_class(BBP_OT_add_sector_component_pair)
 
 def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_add_sector_component_pair)
     bpy.utils.unregister_class(BBP_OT_add_ventilator_series)
+    bpy.utils.unregister_class(BBP_OT_add_swing_series)
     bpy.utils.unregister_class(BBP_OT_add_tilting_block_series)
     bpy.utils.unregister_class(BBP_OT_add_nong_ventilator)
     bpy.utils.unregister_class(BBP_OT_add_nong_extra_point)

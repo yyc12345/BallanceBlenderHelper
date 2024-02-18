@@ -111,6 +111,7 @@ class BBP_MT_AddComponentsMenu(bpy.types.Menu):
         layout.separator()
         layout.label(text = "Series Components")
         OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(layout)
+        OP_ADDS_component.BBP_OT_add_swing_series.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(layout)
 
         layout.separator()
