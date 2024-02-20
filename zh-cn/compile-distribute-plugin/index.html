@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/compile-distribute-plugin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>编译与分发插件 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u7f16\u8bd1\u4e0e\u5206\u53d1\u63d2\u4ef6";
+        var mkdocs_page_input_path = "zh-cn/compile-distribute-plugin.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/compile-distribute-plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">编译与分发插件</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#libcmobmap">编译LibCmo与BMap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#json">生成缩略图和压缩JSON</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">打包</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">生成帮助文档</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">编译与分发插件</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">编译与分发插件</h1>
+<p>本页面将指导你编译插件以及分发它。</p>
+<h2 id="libcmobmap">编译LibCmo与BMap</h2>
+<p>BBP的Virtools文件原生导入导出功能依赖BMap以及其Python绑定PyBMap来实现。为了分发插件，我们需要首先编译BMap及其前置LibCmo。而在编译前，你需要先确认你需要的BMap版本。因为BBP并不总是使用最新的BMap，例如你正在编译一个旧版的BBP，其显然不可能依赖最新的BMap。BMap也在不断升级中，其提供的功能也在不断变化，不同版本的BMap是不兼容的。BBP通常会在发布时写明其所用的BMap版本，如果BBP没有指出，你可能需要寻找与BBP发布时最近的BMap版本来编译。</p>
+<p>在明确版本后，你需要访问<a href="https://github.com/yyc12345/libcmo21">LibCmo位于GitHub的存储库</a>。然后克隆项目，使用Git命令转到对应版本（或者直接下载对应版本的源码）。然后按照LibCmo的编译手册编译得到BMap。在Windows上，你通常会得到<code>BMap.dll</code>和<code>BMap.pdb</code>这两个文件。而在Linux上，则会是<code>BMap.so</code>。</p>
+<p>然后我们需要配置PyBMap。PyBMap是随LibCmo一起提供的。请按照PyBMap的手册，将编译得到的二进制BMap库，和PyBMap结合在一起。即完成PyBMap配置。</p>
+<p>然后我们需要将配置好的PyBMap拷贝到本项目的<code>bbp_ng/PyBMap</code>下即可完成此步。</p>
+<h2 id="json">生成缩略图和压缩JSON</h2>
+<p>BBP内置了一系列自定义图标，以及其组件BME需要的用于描述结构的JSON文件。通过批量生成缩略图和压缩JSON的操作，可以减小这些部分的大小，使得其适合在Blender中加载，也更方便分发。</p>
+<p>转到<code>bbp_ng/tools</code>文件夹下，运行<code>python3 build_icons.py</code>将批量生成缩略图（此功能需要PIL库，请提前通过pip安装）。其实际上是将<code>bbp_ng/raw_icons</code>目录下的原始图片生成对应的缩略图并存储于<code>bbp_ng/icons</code>文件夹下。运行<code>python3 build_jsons.py</code>将压缩JSON。其实际上是将<code>bbp_ng/raw_jsons</code>目录下的原始JSON文件读取，压缩，再写入到<code>bbp_ng/jsons</code>文件夹下。</p>
+<h2 id="_2">打包</h2>
+<p>将<code>bbp_ng</code>文件夹压缩成ZIP文件即可完成打包工作。需要注意的是下列文件或文件夹不应被打包：</p>
+<ul>
+<li><code>bbp_ng/raw_icons</code>：原始图片文件夹。</li>
+<li><code>bbp_ng/raw_jsons</code>：原始JSON文件夹。</li>
+<li><code>bbp_ng/tools</code>：编译用工具。</li>
+<li><code>bbp_ng/.style.yapf</code>：代码风格描述文件</li>
+<li><code>bbp_ng/.gitignore</code>：gitignore</li>
+<li><code>bbp_ng/icons/.gitkeep</code>：文件夹占位符</li>
+<li><code>bbp_ng/jsons/.gitkeep</code>：文件夹占位符</li>
+</ul>
+<p>打包后的ZIP文件打开后如果有且只有<code>bbp_ng</code>一个文件夹，则代表打包成功。切勿直接将<code>bbp_ng</code> <strong>内部的文件</strong> 直接打包到ZIP文件中。</p>
+<p>这样打包后的ZIP文件既可以直接通过Blender插件的安装功能直接安装，也可以解压在插件目录下完成安装。</p>
+<h2 id="_3">生成帮助文档</h2>
+<p>虽然本项目会利用GitHub Page功能提供帮助文档，但有时你可能需要提供帮助文档的离线版本，本节将会介绍如何生成离线版本的帮助文档。</p>
+<p>首先你需要通过pip安装<code>mkdocs</code>和<code>pymdown-extensions</code>。然后转到<code>docs</code>文件夹下，运行<code>mkdocs build --no-directory-urls</code>。运行命令后得到一个名为<code>site</code>的文件夹，其中就是可以离线浏览的帮助文档。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../component-adder/" class="btn btn-neutral float-left" title="添加机关"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../report-bugs/" class="btn btn-neutral float-right" title="报告问题">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../report-bugs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
