@@ -364,12 +364,12 @@ class VirtoolsGroupConvention():
                     gp.add_group('Shadow')
                 case BallanceObjectType.RAIL:
                     gp.add_group('Phys_FloorRails')
-                    gp.add_group('Sound_HitID_02')
-                    gp.add_group('Sound_RollID_02')
-                case BallanceObjectType.WOOD:
-                    gp.add_group('Phys_Floors')
                     gp.add_group('Sound_HitID_03')
                     gp.add_group('Sound_RollID_03')
+                case BallanceObjectType.WOOD:
+                    gp.add_group('Phys_Floors')
+                    gp.add_group('Sound_HitID_02')
+                    gp.add_group('Sound_RollID_02')
                 case BallanceObjectType.STOPPER:
                     gp.add_group('Phys_FloorStopper')
 
@@ -460,9 +460,9 @@ class YYCToolchainConvention():
             case BallanceObjectType.LEVEL_END:
                 return 'PE_Balloon_01'
             case BallanceObjectType.CHECKPOINT:
-                return f'PR_TwoFlames_{info.mSector:0>2d}'
+                return f'PC_TwoFlames_{info.mSector:0>2d}'
             case BallanceObjectType.RESETPOINT:
-                return f'PC_Resetpoint_{info.mSector:0>2d}'
+                return f'PR_Resetpoint_{info.mSector:0>2d}'
 
             case BallanceObjectType.DEPTH_CUBE:
                 return 'DepthCubes_'
