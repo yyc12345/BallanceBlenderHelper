@@ -405,14 +405,14 @@ def register() -> None:
     bpy.utils.register_class(BBP_OT_clear_virtools_groups)
     bpy.utils.register_class(BBP_PT_virtools_groups)
     
-    # add into scene metadata
+    # add into object metadata
     bpy.types.Object.virtools_groups = bpy.props.CollectionProperty(type = BBP_PG_virtools_group)
     bpy.types.Object.active_virtools_groups = bpy.props.IntProperty()
 
 def unregister() -> None:
-    # del from scene metadata
-    del bpy.types.Scene.active_virtools_groups
-    del bpy.types.Scene.virtools_groups
+    # del from object metadata
+    del bpy.types.Object.active_virtools_groups
+    del bpy.types.Object.virtools_groups
     
     bpy.utils.unregister_class(BBP_PT_virtools_groups)
     bpy.utils.unregister_class(BBP_OT_clear_virtools_groups)
