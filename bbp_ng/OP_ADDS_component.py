@@ -1,7 +1,7 @@
 import bpy, mathutils
 import math, typing
 from . import UTIL_functions, UTIL_icons_manager, UTIL_naming_convension
-from . import PROP_ballance_element, PROP_virtools_group
+from . import PROP_ballance_element, PROP_virtools_group, PROP_ballance_map_info
 
 #region Param Help Classes
 
@@ -128,6 +128,7 @@ class _GeneralComponentCreator():
         """
         # get element info first
         ele_info: UTIL_naming_convension.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
+        
         # create blc element context
         with PROP_ballance_element.BallanceElementsHelper(bpy.context.scene) as creator:
             # object creation counter
@@ -142,6 +143,27 @@ class _GeneralComponentCreator():
                 obj.matrix_world = obj.matrix_world @ comp_offset(i)
                 # put into created object list
                 self.__mObjList.append(obj)
+
+        # enlarge scene sector field for non-PS (start point) PE (end point) component
+        # read from scene and create var for enlarged sector count
+        map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
+        enlarged_sector: int
+        # check component type to get enlarged value
+        match(ele_info.mBasicType):
+            case UTIL_naming_convension.BallanceObjectType.COMPONENT:
+                enlarged_sector = comp_sector
+            case UTIL_naming_convension.BallanceObjectType.CHECKPOINT:
+                # checkpoint 1 means that there is sector 2, so we plus 1 for it.
+                enlarged_sector = comp_sector + 1
+            case UTIL_naming_convension.BallanceObjectType.RESETPOINT:
+                enlarged_sector = comp_sector
+            case _:
+                # this component is not a sector based component
+                # so we do not change it (use original value)
+                enlarged_sector = map_info.mSectorCount
+        # enlarge it
+        map_info.mSectorCount = max(map_info.mSectorCount, enlarged_sector)
+        PROP_ballance_map_info.set_raw_ballance_map_info(bpy.context.scene, map_info)
 
     def finish_component(self) -> None:
         """

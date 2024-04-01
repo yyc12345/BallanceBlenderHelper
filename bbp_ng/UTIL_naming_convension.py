@@ -184,6 +184,42 @@ class BallanceObjectInfo():
 
 #endregion
 
+#region Sector Extractor
+
+_g_RegexBlcSectorGroup: re.Pattern = re.compile('^Sector_(0[1-8]|[1-9][0-9]{1,2}|9)$')
+
+def extract_sector_from_name(group_name: str) -> int | None:
+    """
+    A convenient function to extract sector index from given group name.
+    This function also supports 999 sector plugin.
+
+    Not only in this module, but also in outside modules, this function is vary used to extract sector index info.
+
+    Function return the index extracted, or None if given group name is not a valid sector group.
+    The valid sector index is range from 1 to 999 (inclusive)
+    """
+    regex_result = _g_RegexBlcSectorGroup.match(group_name)
+    if regex_result is not None:
+        return int(regex_result.group(1))
+    else:
+        return None
+
+def build_name_from_sector_index(sector_index: int) -> str:
+    """
+    A convenient function to build Ballance recognizable sector group name.
+    This function also supports 999 sector plugin.
+
+    This function also is used in this module or other modules outside.
+    
+    Function return a sector name string. It basically the reverse operation of `extract_sector_from_name`.
+    """
+    if sector_index == 9:
+        return 'Sector_9'
+    else:
+        return f'Sector_{sector_index:0>2d}'
+
+#endregion
+
 #region Naming Convention Declaration
 
 _g_BlcNormalComponents: set[str] = set((
@@ -227,7 +263,6 @@ _g_BlcWood: set[str] = set((
 ))
 
 class VirtoolsGroupConvention():
-    cRegexGroupSector: typing.ClassVar[re.Pattern] = re.compile('^Sector_(0[1-8]|[1-9][0-9]{1,2}|9)$')
     cRegexComponent: typing.ClassVar[re.Pattern] = re.compile('^(' + '|'.join(_g_BlcNormalComponents) + ')_(0[1-9]|[1-9][0-9])_.*$')
     cRegexPC: typing.ClassVar[re.Pattern] = re.compile('^PC_TwoFlames_(0[1-7])$')
     cRegexPR: typing.ClassVar[re.Pattern] = re.compile('^PR_Resetpoint_(0[1-8])$')
@@ -255,9 +290,9 @@ class VirtoolsGroupConvention():
         counter: int = 0
         last_matched_sector: int = 0
         for i in gps:
-            regex_result = VirtoolsGroupConvention.cRegexGroupSector.match(i)
+            regex_result: int | None = extract_sector_from_name(i)
             if regex_result is not None:
-                last_matched_sector = int(regex_result.group(1))
+                last_matched_sector = regex_result
                 counter += 1
                 
         if counter != 1: return None
@@ -377,12 +412,8 @@ class VirtoolsGroupConvention():
                     # group into component type
                     # use typing.cast() to force linter accept it because None is impossible
                     gp.add_group(typing.cast(str, info.mComponentType))
-
                     # group to sector
-                    if info.mSector == 9:
-                        gp.add_group('Sector_9')
-                    else:
-                        gp.add_group(f'Sector_{info.mSector:0>2d}')
+                    gp.add_group(build_name_from_sector_index(typing.cast(int, info.mSector)))
 
                 case _:
                     if reporter is not None:

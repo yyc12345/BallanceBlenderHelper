@@ -2,8 +2,8 @@ import bpy
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
-from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
+from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_naming_convension
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_ballance_map_info
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams):
@@ -344,10 +344,12 @@ def _import_virtools_groups(
         reader: bmap.BMFileReader, 
         progress: ProgressReport, 
         obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object]
-        ) -> dict[bmap.BM3dObject, bpy.types.Object]:
+        ) -> None:
     # we need iterate all groups to construct a reversed map
     # to indicate which groups should this 3dobject be grouped into.
     reverse_map: dict[bmap.BM3dObject, set[str]] = {}
+    # sector counter to record the maximum sector we have processed.
+    sector_count: int = 1
 
     # prepare progress
     progress.enter_substeps(reader.get_material_count(), "Loading Groups")
@@ -357,6 +359,12 @@ def _import_virtools_groups(
         group_name: str | None = vtgroup.get_name()
         if group_name is None: continue
 
+        # try extracting sector info
+        potential_sector_count: int | None = UTIL_naming_convension.extract_sector_from_name(group_name)
+        if potential_sector_count is not None:
+            sector_count = max(sector_count, potential_sector_count)
+
+        # creating map
         for item in vtgroup.get_objects():
             # get or create set
             objgroups: set[str] = reverse_map.get(item, None)
@@ -369,6 +377,11 @@ def _import_virtools_groups(
             
         # step
         progress.step()
+
+    # assign to ballance map info according to gotten sector count
+    map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
+    map_info.mSectorCount = max(map_info.mSectorCount, sector_count)
+    PROP_ballance_map_info.set_raw_ballance_map_info(bpy.context.scene, map_info)
 
     # leave progress
     progress.leave_substeps()

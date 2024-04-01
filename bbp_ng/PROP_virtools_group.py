@@ -8,7 +8,7 @@ class BBP_PG_virtools_group(bpy.types.PropertyGroup):
     group_name: bpy.props.StringProperty(
         name = "Group Name",
         default = ""
-    )
+    ) # type: ignore
 
 def get_virtools_groups(obj: bpy.types.Object) -> bpy.types.CollectionProperty:
     return obj.virtools_groups
