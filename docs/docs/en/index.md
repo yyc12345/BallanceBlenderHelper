@@ -19,6 +19,7 @@ Therefore, choosing Blender with BBP for mapping is not only choosing freedom an
 ## Features
 
 * [Virtools Properties](./virtools-properties.md)
+* [Ballance Properties](./ballance-properties.md)
 * [Import and Export Virtools Document](./import-export-virtools.md)
 * [Group Operation](./group-operations.md)
 * [Legacy Alignment](./legacy-align.md)

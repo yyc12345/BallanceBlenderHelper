@@ -16,6 +16,7 @@ Ballance Blender Plugin（后文简称BBP）是一款关注Ballance自制地图�
 ## 特性
 
 * [Virtools属性](./virtools-properties.md)
+* [Ballance属性](./ballance-properties.md)
 * [导入导出Virtools文档](./import-export-virtools.md)
 * [按组操作](./group-operations.md)
 * [传统对齐](./legacy-align.md)
