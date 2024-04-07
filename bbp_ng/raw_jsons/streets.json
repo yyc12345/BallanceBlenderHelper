@@ -47,7 +47,7 @@
                     "is_sink": "is_sink",
                     "is_ribbon": "False"
                 },
-                "transform": "move(length, 5, 0) @ rot(0, 0, 180)"
+                "transform": "move(0, 5, 0) @ scale(1, -1, 1)"
             }
         ]
     },

@@ -344,6 +344,12 @@ def create_bme_struct(
         cache_bv = typing.cast(mathutils.Vector, transform @ cache_bv)
         # get result
         prebuild_vec_data.append((cache_bv.x, cache_bv.y, cache_bv.z))
+
+    # Check whether given transform is mirror matrix
+    # because mirror matrix will reverse triangle indice order.
+    # If matrix is mirror matrix, we need reverse it again in following procession,
+    # including getting uv, calculating normal and providing face data.
+    mirror_matrix: bool = _is_mirror_matrix(transform)
     
     # prepare mesh part data
     mesh_part: UTIL_blender_mesh.MeshWriterIngredient = UTIL_blender_mesh.MeshWriterIngredient()
@@ -370,7 +376,12 @@ def create_bme_struct(
             if face_nml_data is None:
                 # nml is null, we need compute by ourselves
                 # get first 3 entries in indices list as the compution ref
-                face_indices_data: list[int] = face_data[TOKEN_FACES_INDICES]
+                # please note that we may need reverse it
+                face_indices_data: list[int]
+                if mirror_matrix:
+                    face_indices_data = face_data[TOKEN_FACES_INDICES][::-1]
+                else:
+                    face_indices_data = face_data[TOKEN_FACES_INDICES][:]
                 # compute it by getting vertices info from prebuild vertices data
                 # because the normals is computed from transformed vertices
                 # so no need to correct its by normal transform.
@@ -399,7 +410,9 @@ def create_bme_struct(
         v: UTIL_virtools_types.VxVector2 = UTIL_virtools_types.VxVector2()
         for face_idx in valid_face_idx:
             face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
-            for i in range(len(face_data[TOKEN_FACES_INDICES])):
+            # iterate uv list considering mirror matrix
+            indices_count: int = len(face_data[TOKEN_FACES_INDICES])
+            for i in (range(indices_count)[::-1] if mirror_matrix else range(indices_count)):
                 # BME uv do not need any extra process
                 v.x, v.y = _eval_others(face_data[TOKEN_FACES_UVS][i], params)
                 yield v
@@ -424,8 +437,13 @@ def create_bme_struct(
             # get face data
             face_data: dict[str, typing.Any] = proto[TOKEN_FACES][face_idx]
             
+            # get face indices considering the mirror matrix
+            face_indices: list[int]
+            if mirror_matrix:
+                face_indices = face_data[TOKEN_FACES_INDICES][::-1]
+            else:
+                face_indices = face_data[TOKEN_FACES_INDICES][:]
             # calc indices count
-            face_indices: list[int] = face_data[TOKEN_FACES_INDICES]
             indices_count: int = len(face_indices)
             # resize face data to fulfill req
             while len(f.mIndices) > indices_count:
@@ -499,5 +517,18 @@ def _compute_normals(
     corss_mul.normalize()
     return (corss_mul.x, corss_mul.y, corss_mul.z)
 
+def _is_mirror_matrix(mat: mathutils.Matrix) -> bool:
+    """
+    Reflection matrix (aka. mirror matrix) is a special scaling matrix.
+    In this matrix, 1 or 3 scaling factor is minus number.
+
+    Mirror matrix will cause the inverse of triangle indice order.
+    So we need detect it and re-reverse when creating bm struct.
+    This function can detect whether given matrix is mirror matrix.
+
+    Reference: https://zhuanlan.zhihu.com/p/96717729
+    """
+    return mat.is_negative
+    #return mat.to_3x3().determinant() < 0
 
 #endregion

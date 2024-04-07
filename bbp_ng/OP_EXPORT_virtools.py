@@ -20,19 +20,26 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
         items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
         default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
-    )
+    ) # type: ignore
 
     use_compress: bpy.props.BoolProperty(
         name="Use Compress",
+        description = "Whether use ZLib to compress result when saving composition.",
         default = True,
-    )
+    ) # type: ignore
 
     compress_level: bpy.props.IntProperty(
         name = "Compress Level",
         description = "The ZLib compress level used by Virtools Engine when saving composition.",
         min = 1, max = 9,
         default = 5,
-    )
+    ) # type: ignore
+
+    successive_sector: bpy.props.BoolProperty(
+        name="Successive Sector",
+        description = "Whether order exporter to use document specified sector count to make sure sector is successive.",
+        default = True,
+    ) # type: ignore
 
     @classmethod
     def poll(self, context):
@@ -59,6 +66,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
                 _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.get_selection(self.texture_save_opt),
                 self.use_compress,
                 self.compress_level,
+                self.successive_sector,
                 objls
             )
 
@@ -86,8 +94,11 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
 
         # show sector info to notice user
         layout.separator()
+        layout.label(text = 'Ballance Params')
+        box = layout.box()
         map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
-        layout.label(text = f'Map Sectors: {map_info.mSectorCount}')
+        box.prop(self, 'successive_sector')
+        box.label(text = f'Map Sectors: {map_info.mSectorCount}')
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
@@ -100,6 +111,7 @@ def _export_virtools(
         texture_save_opt_: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
         use_compress_: bool,
         compress_level_: int, 
+        successive_sector_: bool,
         export_objects: tuple[bpy.types.Object, ...]
     ) -> None:
 
@@ -119,7 +131,7 @@ def _export_virtools(
                 obj3d_crets: tuple[_TObj3dPair, ...] = _prepare_virtools_3dobjects(
                     writer, progress, export_objects)
                 # export group and 3dobject by prepared 3dobject
-                _export_virtools_groups(writer, progress, obj3d_crets)
+                _export_virtools_groups(writer, progress, successive_sector_, obj3d_crets)
                 mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
                     writer, progress, obj3d_crets)
                 # export mesh
@@ -168,6 +180,7 @@ def _prepare_virtools_3dobjects(
 def _export_virtools_groups(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
+        successive_sector: bool,
         obj3d_crets: tuple[_TObj3dPair, ...]
         ) -> None:
     # create virtools group
@@ -175,7 +188,7 @@ def _export_virtools_groups(
     # start saving
     progress.enter_substeps(len(obj3d_crets), "Saving Groups")
 
-    # create sector group first
+    # create sector group first if user ordered
     # This step is designed for ensure that the created sector group is successive.
     # 
     # Due to the design of Ballance, Ballance rely on checking the existance of Sector_XX to get how many sectors this map have.
@@ -183,14 +196,16 @@ def _export_virtools_groups(
     # or be ended at a accident sector.
     # 
     # So we create all needed sector group in here to make sure exported virtools file can be read by Ballancde correctly.
-    map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
-    for i in range(map_info.mSectorCount):
-        gp_name: str = UTIL_naming_convension.build_name_from_sector_index(i + 1)
-        vtgroup: bmap.BMGroup | None = group_cret_map.get(gp_name, None)
-        if vtgroup is None:
-            vtgroup = writer.create_group()
-            vtgroup.set_name(gp_name)
-            group_cret_map[gp_name] = vtgroup
+    if successive_sector:
+        map_info: PROP_ballance_map_info.RawBallanceMapInfo
+        map_info = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
+        for i in range(map_info.mSectorCount):
+            gp_name: str = UTIL_naming_convension.build_name_from_sector_index(i + 1)
+            vtgroup: bmap.BMGroup | None = group_cret_map.get(gp_name, None)
+            if vtgroup is None:
+                vtgroup = writer.create_group()
+                vtgroup.set_name(gp_name)
+                group_cret_map[gp_name] = vtgroup
 
     for obj3d, vtobj3d in obj3d_crets:
         # open group visitor
