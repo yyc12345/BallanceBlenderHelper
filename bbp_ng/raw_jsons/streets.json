@@ -43,7 +43,7 @@
                 "params": {
                     "length": "length",
                     "height": "height",
-                    "face": "(face[0], face[1], face[3], face[2], face[5], False)",
+                    "face": "(face[0], face[1], face[2], face[3], face[5], False)",
                     "is_sink": "is_sink",
                     "is_ribbon": "False"
                 },
