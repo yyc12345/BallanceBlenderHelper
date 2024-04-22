@@ -80,6 +80,16 @@ def select_certain_objects(objs: tuple[bpy.types.Object, ...]) -> None:
     # select first object as active object
     bpy.context.view_layer.objects.active = objs[0]
 
+def is_in_object_mode() -> bool:
+    # get active object from context
+    obj = bpy.context.active_object
+
+    # if there is no active object, we think it is in object mode
+    if obj is None: return True
+
+    # simply check active object mode
+    return obj.mode == 'OBJECT'
+
 class EnumPropHelper():
     """
     These class contain all functions related to EnumProperty, including generating `items`, 

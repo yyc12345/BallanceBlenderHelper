@@ -43,25 +43,25 @@ class BBP_PG_legacy_align_history(bpy.types.PropertyGroup):
     align_x: bpy.props.BoolProperty(
         name = "X Position",
         default = False,
-    )
+    ) # type: ignore
     align_y: bpy.props.BoolProperty(
         name = "Y Position",
         default = False,
-    )
+    ) # type: ignore
     align_z: bpy.props.BoolProperty(
         name = "Z Position",
         default = False,
-    )
+    ) # type: ignore
     current_align_mode: bpy.props.EnumProperty(
         name = "Current Object (Active Object)",
         items = _g_EnumHelper_AlignMode.generate_items(),
         default = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter),
-    )
+    ) # type: ignore
     target_align_mode: bpy.props.EnumProperty(
         name = "Target Objects (Other Objects)",
         items = _g_EnumHelper_AlignMode.generate_items(),
         default = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter),
-    )
+    ) # type: ignore
 
 #endregion
 
@@ -109,21 +109,21 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = True, # default True value to make it as a "light" button, not a grey one.
         update = apply_flag_updated,
-    )
+    ) # type: ignore
     recursive_hinder: bpy.props.BoolProperty(
         name = "Recursive Hinder",
         description = "An internal flag to prevent the loop calling to apply_flags's updator.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = False,
-    )
+    ) # type: ignore
     align_history : bpy.props.CollectionProperty(
         name = "Historys",
         description = "Align history.",
         type = BBP_PG_legacy_align_history,
-    )
+    ) # type: ignore
     
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return _check_align_requirement()
 
     def invoke(self, context, event):
@@ -180,10 +180,13 @@ class BBP_OT_legacy_align(bpy.types.Operator):
 #region Core Functions
 
 def _check_align_requirement() -> bool:
+    # if we are not in object mode, do not do legacy align
+    if not UTIL_functions.is_in_object_mode():
+        return False
+    
     # check current obj
     if bpy.context.active_object is None:
         return False
-
     # check target obj with filter of current obj
     length = len(bpy.context.selected_objects)
     if bpy.context.active_object in bpy.context.selected_objects:

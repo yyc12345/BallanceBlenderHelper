@@ -38,7 +38,11 @@ class BBP_OT_select_object_by_virtools_group(bpy.types.Operator, PROP_virtools_g
         description = "Selection mode",
         items = _g_EnumHelper_SelectMode.generate_items(),
         default = _g_EnumHelper_SelectMode.to_selection(SelectMode.Intersect)
-    )
+    ) # type: ignore
+
+    @classmethod
+    def poll(cls, context):
+        return UTIL_functions.is_in_object_mode()
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -119,7 +123,7 @@ class BBP_OT_add_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.
     bl_options = {'UNDO'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return len(bpy.context.selected_objects) != 0
 
     def invoke(self, context, event):
@@ -131,6 +135,7 @@ class BBP_OT_add_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.
         for obj in bpy.context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.add_group(group_name)
+        self.report({'INFO'}, "Grouping objects successfully.")
         return {'FINISHED'}
 
     def draw(self, context):
@@ -143,7 +148,7 @@ class BBP_OT_rm_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.S
     bl_options = {'UNDO'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return len(bpy.context.selected_objects) != 0
 
     def invoke(self, context, event):
@@ -155,6 +160,7 @@ class BBP_OT_rm_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.S
         for obj in bpy.context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.remove_group(group_name)
+        self.report({'INFO'}, "Ungrouping objects successfully.")
         return {'FINISHED'}
 
     def draw(self, context):
@@ -167,7 +173,7 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
     bl_options = {'UNDO'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return len(bpy.context.selected_objects) != 0
 
     def invoke(self, context, event):
@@ -179,6 +185,7 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
         for obj in bpy.context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.clear_groups()
+        self.report({'INFO'}, "Clear objects groups successfully.")
         return {'FINISHED'}
 
 #endregion

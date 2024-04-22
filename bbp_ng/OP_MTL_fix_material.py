@@ -1,4 +1,5 @@
 import bpy
+from . import UTIL_functions
 from . import PROP_virtools_material, PROP_preferences
 
 class BBP_OT_fix_all_material(bpy.types.Operator):
@@ -9,7 +10,9 @@ class BBP_OT_fix_all_material(bpy.types.Operator):
     
     @classmethod
     def poll(cls, context):
-        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+        # only enable this when plugin have a valid ballance texture folder
+        # and we are in object mode
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder() and UTIL_functions.is_in_object_mode()
     
     def invoke(self, context, event):
         wm = context.window_manager
