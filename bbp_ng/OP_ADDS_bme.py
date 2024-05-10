@@ -1,4 +1,4 @@
-import bpy
+import bpy, mathutils
 import typing
 from . import PROP_preferences
 from . import UTIL_functions, UTIL_bme
@@ -43,7 +43,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     #  So these is the solution about generating cache list according to the change of bme struct type.
     #  First, update function will only set a "outdated" flag for operator which is a pre-registered Blender property.
     #  The "outdated" flags is not showen and not saved.
-    #  Then call a internal cache list update function at the begin of `invoke` and `draw`.
+    #  Then call a internal cache list update function at the begin of `invoke`, `execute` and `draw`.
     #  In this internal cache list updator, check "outdated" flag first, if cache is outdated, update and reset flag.
     #  Otherwise do nothing.
     #  
@@ -141,8 +141,35 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         type = BBP_PG_bme_adder_cfgs,
     ) # type: ignore
     
+    ## Extra transform for good "what you see is what you gotten".
+    #  Extra transform will be added after moving this object to cursor.
+    extra_translation: bpy.props.FloatVectorProperty(
+        name = "Extra Translation",
+        description = "The extra translation applied to object after moving to cursor.",
+        size = 3,
+        subtype = 'TRANSLATION',
+        step = 50, # same step as the float entry of BBP_PG_bme_adder_cfgs
+        default = (0.0, 0.0, 0.0)
+    ) # type: ignore
+    extra_rotation: bpy.props.FloatVectorProperty(
+        name = "Extra Rotation",
+        description = "The extra rotation applied to object after moving to cursor.",
+        size = 3,
+        subtype = 'EULER',
+        step = 100, # We choosen 100, mean 1. Sync with property window.
+        default = (0.0, 0.0, 0.0)
+    ) # type: ignore
+    extra_scale: bpy.props.FloatVectorProperty(
+        name = "Extra Scale",
+        description = "The extra scale applied to object after moving to cursor.",
+        size = 3,
+        subtype = 'XYZ',
+        step = 1, # We choosen 1, mean 0.01. Sync with property window.
+        default = (1.0, 1.0, 1.0)
+    ) # type: ignore
+
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
     
     def invoke(self, context, event):
@@ -156,6 +183,9 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         return self.execute(context)
     
     def execute(self, context):
+        # call internal updator
+        self.__internal_update_bme_struct_type()
+
         # collect cfgs data
         cfgs: dict[str, typing.Any] = {}
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
@@ -178,8 +208,14 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
             cfgs
         )
 
-        # move to cursor
+        # add into scene and move to cursor
         UTIL_functions.add_into_scene_and_move_to_cursor(obj)
+        # add extra transform
+        obj.matrix_world = obj.matrix_world @ mathutils.Matrix.LocRotScale(
+            mathutils.Vector(self.extra_translation),
+            mathutils.Euler(self.extra_rotation, 'XYZ'),
+            mathutils.Vector(self.extra_scale)
+        )
         # select created object
         UTIL_functions.select_certain_objects((obj, ))
         return {'FINISHED'}
@@ -194,6 +230,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         layout.prop(self, 'bme_struct_type')
 
         # visit cfgs cache list to show cfg
+        layout.label(text = "Prototype Configurations:")
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # create box for cfgs
             box_layout: bpy.types.UILayout = layout.box()
@@ -225,12 +262,28 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
                     grids.prop(self.bme_struct_cfgs[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
                     grids.separator()
 
+        # show extra transform props
+        # forcely order that each one are placed horizontally
+        layout.label(text = "Extra Transform:")
+        # translation
+        layout.label(text = 'Translation')
+        hbox_layout: bpy.types.UILayout = layout.row()
+        hbox_layout.prop(self, 'extra_translation', text = '')
+        # rotation
+        layout.label(text = 'Rotation')
+        hbox_layout = layout.row()
+        hbox_layout.prop(self, 'extra_rotation', text = '')
+        # scale
+        layout.label(text = 'Scale')
+        hbox_layout = layout.row()
+        hbox_layout.prop(self, 'extra_scale', text = '')
+
     @classmethod
-    def draw_blc_menu(self, layout: bpy.types.UILayout):
+    def draw_blc_menu(cls, layout: bpy.types.UILayout):
         for ident in _g_EnumHelper_BmeStructType.get_bme_identifiers():
             # draw operator
             cop = layout.operator(
-                self.bl_idname,
+                cls.bl_idname,
                 text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
                 icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident)
             )
