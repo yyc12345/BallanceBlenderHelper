@@ -173,6 +173,10 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
     
     def invoke(self, context, event):
+        # reset extra transform to identy
+        self.extra_translation = (0.0, 0.0, 0.0)
+        self.extra_rotation = (0.0, 0.0, 0.0)
+        self.extra_scale = (1.0, 1.0, 1.0)
         # create internal list
         self.bme_struct_cfg_index_cache = []
         # trigger default bme struct type updator
