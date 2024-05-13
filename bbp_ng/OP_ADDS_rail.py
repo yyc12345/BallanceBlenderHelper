@@ -33,6 +33,50 @@ c_SideSpiralRailScrew: float = 3.6
 
 #region Operator Helpers
 
+class SharedExtraTransform():
+    """
+    This class is served for all rail creation which allow user 
+    provide extra transform after moving created rail to cursor.
+    For "what you look is what you gotten" experience, this extra transform is essential.
+    """
+
+    extra_translation: bpy.props.FloatVectorProperty(
+        name = "Extra Translation",
+        description = "The extra translation applied to object after moving to cursor.",
+        size = 3,
+        subtype = 'TRANSLATION',
+        step = 50, # same step as the float entry of BBP_PG_bme_adder_cfgs
+        default = (0.0, 0.0, 0.0)
+    ) # type: ignore
+    extra_rotation: bpy.props.FloatVectorProperty(
+        name = "Extra Rotation",
+        description = "The extra rotation applied to object after moving to cursor.",
+        size = 3,
+        subtype = 'EULER',
+        step = 100, # We choosen 100, mean 1. Sync with property window.
+        default = (0.0, 0.0, 0.0)
+    ) # type: ignore
+
+    def draw_extra_transform_input(self, layout: bpy.types.UILayout) -> None:
+        # show extra transform props
+        # forcely order that each one are placed horizontally
+        layout.label(text = "Extra Transform:")
+        # translation
+        layout.label(text = 'Translation')
+        row = layout.row()
+        row.prop(self, 'extra_translation', text = '')
+        # rotation
+        layout.label(text = 'Rotation')
+        row = layout.row()
+        row.prop(self, 'extra_rotation', text = '')
+
+    def general_get_extra_transform(self) -> mathutils.Matrix:
+        return mathutils.Matrix.LocRotScale(
+            mathutils.Vector(self.extra_translation),
+            mathutils.Euler(self.extra_rotation, 'XYZ'),
+            mathutils.Vector((1.0, 1.0, 1.0)) # no scale
+        )
+
 class SharedRailSectionInputProperty():
     """
     This class is served for user to pick the transition type of rail.
@@ -147,7 +191,8 @@ class BBP_OT_add_rail_section(SharedRailSectionInputProperty, bpy.types.Operator
             lambda bm: _create_rail_section(
                 bm, self.general_get_is_monorail(), 
                 c_DefaultRailRadius, c_DefaultRailSpan
-            )
+            ),
+            mathutils.Matrix.Identity(4)
         )
         return {'FINISHED'}
 
@@ -163,7 +208,8 @@ class BBP_OT_add_transition_section(bpy.types.Operator):
 
     def execute(self, context):
         _rail_creator_wrapper(
-            lambda bm: _create_transition_section(bm, c_DefaultRailRadius, c_DefaultRailSpan)
+            lambda bm: _create_transition_section(bm, c_DefaultRailRadius, c_DefaultRailSpan),
+            mathutils.Matrix.Identity(4)
         )
         return {'FINISHED'}
 
@@ -171,7 +217,7 @@ class BBP_OT_add_transition_section(bpy.types.Operator):
         layout = self.layout
         layout.label(text = 'No Options Available')
 
-class BBP_OT_add_straight_rail(SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_straight_rail(SharedExtraTransform, SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
     """Add Straight Rail"""
     bl_idname = "bbp.add_straight_rail"
     bl_label = "Straight Rail"
@@ -184,7 +230,8 @@ class BBP_OT_add_straight_rail(SharedRailSectionInputProperty, SharedRailCapInpu
                 self.general_get_is_monorail(), c_DefaultRailRadius, c_DefaultRailSpan,
                 self.general_get_rail_length(), 0,
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -196,8 +243,10 @@ class BBP_OT_add_straight_rail(SharedRailSectionInputProperty, SharedRailCapInpu
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
-class BBP_OT_add_transition_rail(SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_transition_rail(SharedExtraTransform, SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
     """Add Transition Rail"""
     bl_idname = "bbp.add_transition_rail"
     bl_label = "Transition Rail"
@@ -210,7 +259,8 @@ class BBP_OT_add_transition_rail(SharedRailCapInputProperty, SharedStraightRailI
                 c_DefaultRailRadius, c_DefaultRailSpan,
                 self.general_get_rail_length(),
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -221,8 +271,10 @@ class BBP_OT_add_transition_rail(SharedRailCapInputProperty, SharedStraightRailI
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
-class BBP_OT_add_side_rail(SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_side_rail(SharedExtraTransform, SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
     """Add Side Rail"""
     bl_idname = "bbp.add_side_rail"
     bl_label = "Side Rail"
@@ -246,7 +298,8 @@ class BBP_OT_add_side_rail(SharedRailCapInputProperty, SharedStraightRailInputPr
                 self.general_get_rail_length(), 
                 c_NormalSideRailAngle if self.side_rail_type == 'NORMAL' else c_StoneSideRailAngle,
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -258,8 +311,10 @@ class BBP_OT_add_side_rail(SharedRailCapInputProperty, SharedStraightRailInputPr
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
-class BBP_OT_add_arc_rail(SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_arc_rail(SharedExtraTransform, SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
     """Add Arc Rail"""
     bl_idname = "bbp.add_arc_rail"
     bl_label = "Arc Rail"
@@ -281,7 +336,8 @@ class BBP_OT_add_arc_rail(SharedRailSectionInputProperty, SharedRailCapInputProp
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap(),
                 math.degrees(self.rail_screw_angle), 0, 1,  # blender passed value is in radians
                 self.general_get_rail_screw_steps(), self.general_get_rail_screw_radius()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -294,8 +350,10 @@ class BBP_OT_add_arc_rail(SharedRailSectionInputProperty, SharedRailCapInputProp
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
-class BBP_OT_add_spiral_rail(SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
     """Add Spiral Rail"""
     bl_idname = "bbp.add_spiral_rail"
     bl_label = "Spiral Rail"
@@ -323,7 +381,8 @@ class BBP_OT_add_spiral_rail(SharedRailCapInputProperty, SharedScrewRailInputPro
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap(),
                 360, self.rail_screw_screw, self.rail_screw_iterations,
                 self.general_get_rail_screw_steps(), self.general_get_rail_screw_radius()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -336,8 +395,10 @@ class BBP_OT_add_spiral_rail(SharedRailCapInputProperty, SharedScrewRailInputPro
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
-class BBP_OT_add_side_spiral_rail(SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
+class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedScrewRailInputProperty, bpy.types.Operator):
     """Add Side Spiral Rail"""
     bl_idname = "bbp.add_side_spiral_rail"
     bl_label = "Side Spiral Rail"
@@ -360,7 +421,8 @@ class BBP_OT_add_side_spiral_rail(SharedRailSectionInputProperty, SharedRailCapI
                 self.general_get_rail_start_cap(), self.general_get_rail_end_cap(),
                 360, c_SideSpiralRailScrew, self.rail_screw_iterations,
                 self.general_get_rail_screw_steps(), self.general_get_rail_screw_radius()
-            )
+            ),
+            self.general_get_extra_transform()
         )
         return {'FINISHED'}
 
@@ -372,6 +434,8 @@ class BBP_OT_add_side_spiral_rail(SharedRailSectionInputProperty, SharedRailCapI
         layout.separator()
         layout.label(text = 'Rail Cap')
         self.draw_rail_cap_input(layout)
+        layout.separator()
+        self.draw_extra_transform_input(layout)
 
 #endregion
 
@@ -460,7 +524,7 @@ def _bmesh_cap(bm: bmesh.types.BMesh, edges: list[bmesh.types.BMEdge]) -> None:
 
 #region Real Rail Creators
 
-def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], None]) -> bpy.types.Object:
+def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], None], extra_transform: mathutils.Matrix) -> bpy.types.Object:
     # create mesh first
     bm: bmesh.types.BMesh = bmesh.new()
 
@@ -492,6 +556,8 @@ def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], No
 
     # move to cursor
     UTIL_functions.add_into_scene_and_move_to_cursor(obj)
+    # add extra transform
+    obj.matrix_world = obj.matrix_world @ extra_transform
     # select created object
     UTIL_functions.select_certain_objects((obj, ))
     

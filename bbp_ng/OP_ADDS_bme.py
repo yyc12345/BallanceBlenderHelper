@@ -159,14 +159,6 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         step = 100, # We choosen 100, mean 1. Sync with property window.
         default = (0.0, 0.0, 0.0)
     ) # type: ignore
-    extra_scale: bpy.props.FloatVectorProperty(
-        name = "Extra Scale",
-        description = "The extra scale applied to object after moving to cursor.",
-        size = 3,
-        subtype = 'XYZ',
-        step = 1, # We choosen 1, mean 0.01. Sync with property window.
-        default = (1.0, 1.0, 1.0)
-    ) # type: ignore
 
     @classmethod
     def poll(cls, context):
@@ -218,7 +210,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         obj.matrix_world = obj.matrix_world @ mathutils.Matrix.LocRotScale(
             mathutils.Vector(self.extra_translation),
             mathutils.Euler(self.extra_rotation, 'XYZ'),
-            mathutils.Vector(self.extra_scale)
+            mathutils.Vector((1.0, 1.0, 1.0)) # no scale
         )
         # select created object
         UTIL_functions.select_certain_objects((obj, ))
@@ -277,10 +269,6 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         layout.label(text = 'Rotation')
         hbox_layout = layout.row()
         hbox_layout.prop(self, 'extra_rotation', text = '')
-        # scale
-        layout.label(text = 'Scale')
-        hbox_layout = layout.row()
-        hbox_layout.prop(self, 'extra_scale', text = '')
 
     @classmethod
     def draw_blc_menu(cls, layout: bpy.types.UILayout):
