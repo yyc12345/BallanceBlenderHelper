@@ -1,0 +1,55 @@
+# Full context are copied from https://docs.blender.org/manual/en/dev/extensions/getting_started.html
+# Please note any update of this manifest
+
+schema_version = "1.0.0"
+
+# Example of manifest file for a Blender extension
+# Change the values according to your extension
+id = "bbp_ng"
+version = "4.0.0"
+name = "Ballance Blender Plugin"
+tagline = "The specialized add-on served for creating custom game map in Ballance game"
+maintainer = "yyc12345 <yyc12321@outlook.com>"
+# Supported types: "add-on", "theme"
+type = "add-on"
+
+# Optional: add-ons can list which resources they will require:
+# * "files" (for access of any filesystem operations)
+# * "network" (for internet access)
+# * "clipboard" (to read and/or write the system clipboard)
+# * "camera" (to capture photos and videos)
+# * "microphone" (to capture audio)
+permissions = ["files"]
+
+# Optional link to documentation, support, source files, etc
+website = "https://github.com/yyc12345/BallanceBlenderHelper"
+
+# Optional list defined by Blender and server, see:
+# https://docs.blender.org/manual/en/dev/extensions/tags.html
+tags = ["Object", "Mesh", "UV", "Import-Export"]
+
+blender_version_min = "4.2.0"
+# Optional: maximum supported Blender version
+# blender_version_max = "5.1.0"
+
+# License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
+# https://docs.blender.org/manual/en/dev/extensions/licenses.html
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+# Optional: required by some licenses.
+# copyright = [
+#   "2002-2024 Developer Name",
+#   "1998 Company Name",
+# ]
+
+# Optional list of supported platforms. If ommitted, the extension will be available in all operating systems.
+platforms = ["windows-amd64", "linux-x86_64"]
+# Supported platforms: "windows-amd64", "macos-arm64", "linux-x86_64", "windows-arm64", "macos-x86_64"
+
+# Optional: bundle 3rd party Python modules.
+# https://docs.blender.org/manual/en/dev/extensions/python_wheels.html
+# wheels = [
+#   "./wheels/hexdump-3.3-py3-none-any.whl",
+#   "./wheels/jsmin-3.0.1-py3-none-any.whl"
+# ]

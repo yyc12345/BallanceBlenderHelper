@@ -10,6 +10,8 @@ bl_info = {
     "doc_url": "https://github.com/yyc12345/BallanceBlenderHelper",
     "tracker_url": "https://github.com/yyc12345/BallanceBlenderHelper/issues"
 }
+# TODO: this bl_info may be outdated since Blender 4.2 LTS.
+# Delete it when adapting to Blender 4.2 and use blender_manifest.toml instead.
 
 #region Reload and Import
 
