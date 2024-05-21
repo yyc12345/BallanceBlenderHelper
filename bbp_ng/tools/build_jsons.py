@@ -14,7 +14,7 @@ def compress_json(src_file: str, dst_file: str) -> None:
 
 def create_compressed_jsons() -> None:
     # get folder path
-    root_folder: str = os.path.dirname(os.path.dirname(__file__))
+    root_folder: str = common.get_plugin_folder()
 
     # prepare handler
     def folder_handler(src_folder: str, dst_folder: str) -> None:

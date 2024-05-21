@@ -15,7 +15,7 @@ def resize_image(src_file: str, dst_file: str) -> None:
 
 def create_thumbnails() -> None:
     # get folder path
-    root_folder: str = os.path.dirname(os.path.dirname(__file__))
+    root_folder: str = common.get_plugin_folder()
 
     # prepare handler
     def folder_handler(src_folder: str, dst_folder: str) -> None:
