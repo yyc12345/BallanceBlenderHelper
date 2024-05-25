@@ -156,7 +156,7 @@ class SharedScrewRailInputProperty():
     rail_screw_steps: bpy.props.IntProperty(
         name = "Steps",
         description = "The segment count per iteration. More segment, more smooth but lower performance.",
-        default = 16,
+        default = 28,
         min = 1,
     ) # type: ignore
 

@@ -107,8 +107,8 @@ class TemporaryMesh():
     
     """
     
-    __mBindingObject: bpy.types.Object | None
-    __mTempMesh: bpy.types.Mesh | None
+    __mBindingObject: bpy.types.Object
+    __mTempMesh: bpy.types.Mesh
     
     def __init__(self, binding_obj: bpy.types.Object):
         self.__mBindingObject = binding_obj
@@ -149,7 +149,7 @@ class MeshReader():
     A helper class TemporaryMesh can help you do this.
     """
     
-    __mAssocMesh: bpy.types.Mesh | None ##< The binding mesh for this reader. None if this reader is invalid.
+    __mAssocMesh: bpy.types.Mesh ##< The binding mesh for this reader. None if this reader is invalid.
     
     def __init__(self, assoc_mesh: bpy.types.Mesh):
         self.__mAssocMesh = assoc_mesh
@@ -318,7 +318,7 @@ class MeshWriter():
     then refer it to all face uv.
     """
     
-    __mAssocMesh: bpy.types.Mesh | None ##< The binding mesh for this writer. None if this writer is invalid.
+    __mAssocMesh: bpy.types.Mesh ##< The binding mesh for this writer. None if this writer is invalid.
     
     __mVertexPos: array.array ##< Array item is float(f). Length must be an integer multiple of 3.
     __mVertexNormal: array.array ##< Array item is float(f). Length must be an integer multiple of 3.
