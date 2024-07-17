@@ -1,18 +1,3 @@
-bl_info = {
-    "name": "Ballance Blender Plugin",
-    "description": "Ballance mapping tools for Blender",
-    "author": "yyc12345",
-    "version": (4, 0),
-    "blender": (3, 6, 0),
-    "category": "Object",
-    "support": "COMMUNITY",
-    "warning": "Please read document before using this plugin.",
-    "doc_url": "https://github.com/yyc12345/BallanceBlenderHelper",
-    "tracker_url": "https://github.com/yyc12345/BallanceBlenderHelper/issues"
-}
-# TODO: this bl_info may be outdated since Blender 4.2 LTS.
-# Delete it when adapting to Blender 4.2 and use blender_manifest.toml instead.
-
 #region Reload and Import
 
 # import core lib
