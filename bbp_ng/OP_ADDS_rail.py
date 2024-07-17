@@ -537,8 +537,6 @@ def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], No
     bm.free()
     
     # setup smooth for mesh
-    mesh.use_auto_smooth = True
-    mesh.auto_smooth_angle = math.radians(50)
     mesh.shade_smooth()
 
     # create object and assoc with it

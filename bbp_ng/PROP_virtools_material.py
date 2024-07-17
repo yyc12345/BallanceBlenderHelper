@@ -403,7 +403,14 @@ def apply_to_blender_material(mtl: bpy.types.Material):
     
     # set some alpha data
     mtl.use_backface_culling = not rawdata.mEnableTwoSided
-    mtl.blend_method = 'BLEND' if rawdata.mEnableAlphaBlend else 'OPAQUE'
+    if rawdata.mEnableAlphaBlend:
+        # In old format: mtl.blend_method = 'BLEND'
+        mtl.surface_render_method = 'BLENDED'
+        mtl.use_raytrace_refraction = True
+    else:
+        # In old format: mtl.blend_method = 'OPAQUE'
+        mtl.surface_render_method = 'DITHERED'
+        mtl.use_raytrace_refraction = False
 
     # set texture
     if rawdata.mTexture is not None:

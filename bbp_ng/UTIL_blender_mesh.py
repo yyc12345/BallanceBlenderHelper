@@ -157,7 +157,6 @@ class MeshReader():
         # triangulate temp mesh
         if self.is_valid():
             self.__triangulate_mesh()
-            self.__mAssocMesh.calc_normals_split()
     
     def is_valid(self) -> bool:
         return self.__mAssocMesh is not None
@@ -171,7 +170,6 @@ class MeshReader():
     def dispose(self) -> None:
         if self.is_valid():
             # reset mesh
-            self.__mAssocMesh.free_normals_split()
             self.__mAssocMesh = None
     
     def get_vertex_position_count(self) -> int:
@@ -203,10 +201,10 @@ class MeshReader():
             raise UTIL_functions.BBPException('try to call an invalid MeshReader.')
         
         cache: UTIL_virtools_types.VxVector3 = UTIL_virtools_types.VxVector3()
-        for nml in self.__mAssocMesh.loops:
-            cache.x = nml.normal.x
-            cache.y = nml.normal.y
-            cache.z = nml.normal.z
+        for nml in self.__mAssocMesh.corner_normals:
+            cache.x = nml.vector.x
+            cache.y = nml.vector.y
+            cache.z = nml.vector.z
             yield cache
     
     def get_vertex_uv_count(self) -> int:
@@ -446,8 +444,6 @@ class MeshWriter():
         self.__mAssocMesh.polygons.add(len(self.__mFaceVertexCount))
         # create uv layer
         self.__mAssocMesh.uv_layers.new(do_init = False)
-        # split normals, it is IMPORTANT
-        self.__mAssocMesh.create_normals_split()
         
         # add vertex position data
         self.__mAssocMesh.vertices.foreach_set('co', self.__mVertexPos)
@@ -500,8 +496,6 @@ class MeshWriter():
         self.__mAssocMesh.normals_split_custom_set(
             tuple(_nest_custom_split_normal(loops_normals))
         )
-        # enable auto smooth. it is IMPORTANT
-        self.__mAssocMesh.use_auto_smooth = True
 
     def __clear_mesh(self):
         if not self.is_valid():
