@@ -397,7 +397,7 @@ def apply_to_blender_material(mtl: bpy.types.Material):
     # bnode.inputs["Emission"].default_value = rawdata.mEmissive.to_const_rgba()
 
     mtl.specular_intensity = rawdata.mSpecularPower
-    bnode.inputs["Specular"].default_value = UTIL_functions.clamp_float(
+    bnode.inputs["Specular IOR Level"].default_value = UTIL_functions.clamp_float(
         rawdata.mSpecularPower, 0.0, 1.0
     )
     
