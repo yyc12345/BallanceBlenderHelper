@@ -346,6 +346,9 @@ class MeshWriter():
     #  Value is key's index in __mMtlSlot.
     __mMtlSlotMap: dict[bpy.types.Material | None, int]
     
+    ## The attribute name storing temporary normals data inside mesh.
+    __cTempNormalAttrName: typing.ClassVar[str] = 'temp_custom_normals'
+
     def __init__(self, assoc_mesh: bpy.types.Mesh):
         self.__mAssocMesh = assoc_mesh
         
@@ -449,8 +452,14 @@ class MeshWriter():
         self.__mAssocMesh.vertices.foreach_set('co', self.__mVertexPos)
         # add face vertex pos index data
         self.__mAssocMesh.loops.foreach_set('vertex_index', self.__mFacePosIndices)
-        # add face vertex nml by function
-        self.__mAssocMesh.loops.foreach_set('normal',
+        # add face vertex nml by function via mesh custom attribute
+        # NOTE: Blender 4.0 / 4.1 changed. I copy these code from FBX Importer.
+        temp_normal_attribute: bpy.types.FloatVectorAttribute
+        temp_normal_attribute = typing.cast(
+            bpy.types.FloatVectorAttribute,
+            self.__mAssocMesh.attributes.new(MeshWriter.__cTempNormalAttrName, 'FLOAT_VECTOR', 'CORNER')
+        )
+        temp_normal_attribute.data.foreach_set('vector',
             tuple(_flat_face_nml_index(self.__mFaceNmlIndices, self.__mVertexNormal))
         )
         # add face vertex uv by function
@@ -490,11 +499,21 @@ class MeshWriter():
         # this should not happend in normal case, for testing, please load "Level_1.NMO" (Ballance Level 1).
         
         # copy data from loops preserved in validate().
+        # NOTE: Blender 4.0 / 4.1 changed. I copy these code from FBX Importer.
         loops_normals = array.array('f', [0.0] * (len(self.__mAssocMesh.loops) * 3))
-        self.__mAssocMesh.loops.foreach_get('normal', loops_normals)
+        temp_normal_attribute = typing.cast(
+            bpy.types.FloatVectorAttribute, 
+            self.__mAssocMesh.attributes[MeshWriter.__cTempNormalAttrName]
+        )
+        temp_normal_attribute.data.foreach_get("vector", loops_normals)
         # apply data
         self.__mAssocMesh.normals_split_custom_set(
             tuple(_nest_custom_split_normal(loops_normals))
+        )
+        self.__mAssocMesh.attributes.remove(
+            # MARK: idk why I need fucking get this attribute again.
+            # But if I were not, this function must raise bullshit exception!
+            self.__mAssocMesh.attributes[MeshWriter.__cTempNormalAttrName]
         )
 
     def __clear_mesh(self):
