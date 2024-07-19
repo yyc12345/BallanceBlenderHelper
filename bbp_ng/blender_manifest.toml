@@ -8,32 +8,25 @@ schema_version = "1.0.0"
 id = "bbp_ng"
 version = "4.0.0"
 name = "Ballance Blender Plugin"
-tagline = "The specialized add-on served for creating custom game map in Ballance game"
+tagline = "The specialized add-on served for creating game map of Ballance"
 maintainer = "yyc12345 <yyc12321@outlook.com>"
 # Supported types: "add-on", "theme"
 type = "add-on"
-
-# Optional: add-ons can list which resources they will require:
-# * "files" (for access of any filesystem operations)
-# * "network" (for internet access)
-# * "clipboard" (to read and/or write the system clipboard)
-# * "camera" (to capture photos and videos)
-# * "microphone" (to capture audio)
-permissions = ["files"]
 
 # Optional link to documentation, support, source files, etc
 website = "https://github.com/yyc12345/BallanceBlenderHelper"
 
 # Optional list defined by Blender and server, see:
-# https://docs.blender.org/manual/en/dev/extensions/tags.html
+# https://docs.blender.org/manual/en/dev/advanced/extensions/tags.html
 tags = ["Object", "Mesh", "UV", "Import-Export"]
 
 blender_version_min = "4.2.0"
-# Optional: maximum supported Blender version
+# # Optional: Blender version that the extension does not support, earlier versions are supported.
+# # This can be omitted and defined later on the extensions platform if an issue is found.
 # blender_version_max = "5.1.0"
 
 # License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
-# https://docs.blender.org/manual/en/dev/extensions/licenses.html
+# https://docs.blender.org/manual/en/dev/advanced/extensions/licenses.html
 license = [
   "SPDX:GPL-3.0-or-later",
 ]
@@ -43,13 +36,46 @@ license = [
 #   "1998 Company Name",
 # ]
 
-# Optional list of supported platforms. If ommitted, the extension will be available in all operating systems.
-platforms = ["windows-amd64", "windows-x64", "linux-x86_64", "linux-x64"]
-# Supported platforms: "windows-amd64", "macos-arm64", "linux-x86_64", "windows-arm64", "macos-x86_64"
+# Optional list of supported platforms. If omitted, the extension will be available in all operating systems.
+platforms = ["windows-x64", "linux-x64"]
+# Supported platforms: "windows-x64", "macos-arm64", "linux-x64", "windows-arm64", "macos-x64"
 
 # Optional: bundle 3rd party Python modules.
-# https://docs.blender.org/manual/en/dev/extensions/python_wheels.html
+# https://docs.blender.org/manual/en/dev/advanced/extensions/python_wheels.html
 # wheels = [
 #   "./wheels/hexdump-3.3-py3-none-any.whl",
-#   "./wheels/jsmin-3.0.1-py3-none-any.whl"
+#   "./wheels/jsmin-3.0.1-py3-none-any.whl",
 # ]
+
+# Optional: add-ons can list which resources they will require:
+# * files (for access of any filesystem operations)
+# * network (for internet access)
+# * clipboard (to read and/or write the system clipboard)
+# * camera (to capture photos and videos)
+# * microphone (to capture audio)
+#
+# If using network, remember to also check `bpy.app.online_access`
+# https://docs.blender.org/manual/en/dev/advanced/extensions/addons.html#internet-access
+#
+# For each permission it is important to also specify the reason why it is required.
+# Keep this a single short sentence without a period (.) at the end.
+# For longer explanations use the documentation or detail page.
+
+[permissions]
+# network = "Need to sync motion-capture data to server"
+files = "Import/export Virtools file from/to disk"
+# clipboard = "Copy and paste bone transforms"
+
+# Optional: build settings.
+# https://docs.blender.org/manual/en/dev/advanced/extensions/command_line_arguments.html#command-line-args-extension-build
+[build]
+paths_exclude_pattern = [
+  "__pycache__/", # Python runtime cache
+  ".style.yapf", # Python code style
+  "*.gitkeep", # Git directory keeper
+  ".gitignore", # Git Ignore File
+  "*.md", # Useless document.
+  "/raw_jsons", # Raw JSONs.
+  "/raw_icons", # Raw Icons.
+  "/tools", # Assistant tools.
+]

@@ -20,7 +20,11 @@ BBP内置了一系列自定义图标，以及其组件BME需要的用于描述�
 
 ## 打包
 
-将`bbp_ng`文件夹压缩成ZIP文件即可完成打包工作。需要注意的是下列文件或文件夹不应被打包：
+从Blender 4.2 LTS开始，插件使用Blender自带的打包功能进行打包。
+
+假定在项目根目录下执行命令，最终输出文件为`redist/bbp_ng.zip`，那么在命令行窗口中执行`blender --command extension build --source-dir bbp_ng --output-filepath redist/bbp_ng.zip`命令即可完成打包。其中`blender`为Blender的可执行程序。
+
+Blender会根据`blender_manifest.toml`的指示，在排除下列文件的情况下将插件打包：
 
 * `bbp_ng/raw_icons`：原始图片文件夹。
 * `bbp_ng/raw_jsons`：原始JSON文件夹。
@@ -29,10 +33,6 @@ BBP内置了一系列自定义图标，以及其组件BME需要的用于描述�
 * `bbp_ng/.gitignore`：gitignore
 * `bbp_ng/icons/.gitkeep`：文件夹占位符
 * `bbp_ng/jsons/.gitkeep`：文件夹占位符
-
-打包后的ZIP文件打开后如果有且只有`bbp_ng`一个文件夹，则代表打包成功。切勿直接将`bbp_ng` **内部的文件** 直接打包到ZIP文件中。
-
-这样打包后的ZIP文件既可以直接通过Blender插件的安装功能直接安装，也可以解压在插件目录下完成安装。
 
 ## 生成帮助文档
 
