@@ -1,3 +1,2 @@
 # disable distribution build folder
 redist/
-!redist/.gitkeep

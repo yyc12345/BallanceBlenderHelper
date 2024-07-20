@@ -1,7 +1,7 @@
 # Ballance Blender Plugin User Manual
 
 !!! info "May Outdated"
-    This document has been translated from other languages and may not always be up to date.
+    This document is translated from other languages and may not always be up to date.
 
 Welcome to the Ballance Blender Plugin, the user manual for the free and open source Ballance map creation suite.
 

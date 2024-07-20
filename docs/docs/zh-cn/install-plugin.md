@@ -18,7 +18,7 @@ BBP对Blender支持的原则是支持当前最新的 **LTS** 版本，在最新�
 
 你只需要先在Blender中关闭插件（把插件名前面的勾取消），然后再删除这些文件夹（如果它们存在的话）即可完全卸载插件。路径中的`<Blender>`指代你的Blender安装位置。路径中的`3.6`和`4.2`是你安装的Blender的版本号，需要根据你安装的版本进行调整，后续出现的版本号也按此理解。
 
-!!! warning "不能使用Blender的插件卸载功能"
+!!! warning "不应使用Blender的插件卸载功能"
     不能使用Blender插件页面的插件卸载功能卸载BBP，因为BBP只要被Blender加载（无论是否启用），都会将Virtools文件读写库BMap加载进Blender。若在Blender运行期间删除，会出现拒绝访问错误。因此您必须在关闭Blender后手动删除插件目录。
 
     如果您实在无法确定插件安装到了哪里，可以在Blender的偏好设置中的插件页面里找到`File`属性，其指向文件所在的文件夹就是要删除的文件夹。
@@ -46,11 +46,11 @@ BBP对Blender支持的原则是支持当前最新的 **LTS** 版本，在最新�
 
 ## 安装插件
 
-开启Blender，选择`Edit - Preferences`，在打开的窗口中转到`Add-ons`选项卡，点击窗口右上方的箭头，然后点击`Install from Disk...`按钮，选择刚刚下载完毕的ZIP压缩包，即可安装完成。若没有在列表中看到可选择刷新按钮或重启Blender。
+开启Blender，选择`Edit - Preferences`，在打开的窗口中转到`Add-ons`选项卡，点击窗口右上方的箭头，然后点击`Install from Disk...`按钮，选择刚刚下载完毕的ZIP压缩包，即可安装完成。若没有在列表中看到可点击刷新按钮或重启Blender。
 
 你也可以选择手动安装插件（如果上述安装方法失败了的话），转到`%APPDATA%/Blender Foundation/Blender/4.2/extensions/user_default`，创建一个名为`bbp_ng`的文件夹并进入，将下载好的ZIP压缩包内容解压到此文件夹下，启动Blender，即可在插件列表中找到BBP。
 
-BBP插件在列表中的名称为`Ballance Blender Plugin`，找到后勾选名称左侧的勾即可启用插件。插件安装成功后的偏好设置页面如下图所示。
+BBP插件在列表中的名称为`Ballance Blender Plugin`，找到后勾选名称左侧的勾即可启用插件。插件安装成功后的偏好设置窗口如下图所示。
 
 ![](../imgs/config-plugin.png)
 
