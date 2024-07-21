@@ -44,7 +44,7 @@ In addition, you can also get this plugin in the mapping tutorial web disk provi
 !!! warning “Do not download this repository directly for use”
     Please do not download this project's repository directly for use. First of all, because the latest commit is not guaranteed to be stable and available. The second reason is that this project contains some C++ code that needs to be compiled, and must be compiled before it can be used. See [Compile and Distribute Plugin](./compile-distribute-plugin.md) for more information.
 
-## Installing Plugin
+## Install Plugin
 
 Open Blender, click `Edit - Preferences`, in the window that opens go to the `Add-ons` tab, click on the arrow at the top right of the window and then click on the `Install from Disk.... ` button, select the ZIP archive you just downloaded, and the installation will be completed. If you don't see it in the list you can click the Refresh button or restart Blender.
 

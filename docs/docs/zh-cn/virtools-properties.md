@@ -20,7 +20,7 @@ BBP还在Blender的其它菜单提供了对Virtools组的访问，具体内容�
 
 `Virtools Material`面板提供了预设功能，点击顶部的`Preset`按钮即可开始进行预设。预设功能允许用户使用一些预设的材质设置，例如路面顶面，侧面的材质数据等，方便使用。需要注意的是，使用预设不会影响材质的贴图选项，当应用预设后，你仍然需要手动设置材质的贴图。
 
-`Virtools Material`面板同样提供把`Virtools Material`面板中的材质数据反应到Blender材质上的功能，以在Blender中获得可视的效果。点击顶部的`Apply`按钮即可执行此功能。当你在Blender中保存Virtools文档时，Virtools文档中的材质数据将从`Virtools Material`面板中指定的数值获取，而不会从Blender材质中获取。这意味一个正确的材质设置过程是：先在`Virtools Material`面板中编辑材质参数，然后使用`Apply`按钮将其反映到Blender材质上，而不是直接去编辑Blender材质。
+`Virtools Material`面板同样提供把`Virtools Material`面板中的材质数据转换到Blender材质上的功能，以在Blender中获得可视的效果。点击顶部的`Apply`按钮即可执行此功能。当你在Blender中保存Virtools文档时，Virtools文档中的材质数据将从`Virtools Material`面板中指定的数值获取，而不会从Blender材质中获取。这意味一个正确的材质设置过程是：先在`Virtools Material`面板中编辑材质参数，然后使用`Apply`按钮将其转换到Blender材质上，而不是直接去编辑Blender材质。
 
 `Virtools Material`面板提供了材质修复功能，这个功能来源于[Ballance Virtools Plugin](https://github.com/yyc12345/BallanceVirtoolsHelper)。材质修复按钮位于`Preset`按钮和`Apply`按钮的右侧，是一个带有扳手图标的按钮。点击后需要再次确认才能使用，防止误操作。材质修复功能会根据当前材质引用的贴图文件的文件名判定它是哪一种类型的材质，再根据我们预设的修复设定（从游戏中获取）将其他参数修改得符合视觉要求。这通常用于一些游戏中看起来材质错误的物体的修复，例如发黑的Stopper等。
 
@@ -29,7 +29,7 @@ BBP还在Blender的其它菜单提供了对Virtools组的访问，具体内容�
 
     全局材质修复功能点击后也需再次确认才能使用，以防止误操作。
 
-`Virtools Material`面板中的Texture（贴图）属性不仅可以通过点击它来选择文档内的材质，还可以通过点击右侧的文件夹按钮打开贴图文件浏览器，直接从文件系统中选择你想要的贴图（比从Shading菜单中选取更加快速）。文件浏览器默认位于Ballance的Texture目录下，以方便Ballance材质的选取。
+`Virtools Material`面板中的Texture（贴图）属性不仅可以通过点击它来选择文档内的贴图，还可以通过点击右侧的文件夹按钮打开贴图文件浏览器，直接从文件系统中选择你想要的贴图（比从Shading菜单中选取更加快速）。文件浏览器默认位于Ballance的Texture目录下，以方便Ballance材质的选取。
 
 ## Virtools贴图
 
@@ -43,7 +43,7 @@ BBP插件为所有Blender贴图（实际上是Image）添加了新的属性，�
 
 * External：外部存储，文件只存储引用的文件名。所有Ballance原生贴图都应该使用此模式。
 * Raw Data：原始数据，贴图存储在文件内，缺点是会导致文件很大。所有非原生Ballance贴图都应该使用此模式。
-* Use Global：使用全局设定。除非是正在修改地图，否则我们不建议使用此方式。我们建议在这里就明确指定各个贴图的存储方式，而不要使用全局值。全局设定在导出Virtools文档时被确定下来。
+* Use Global：使用全局设定。除非是你正在修改一张已经存在地图，否则我们不建议使用此方式。我们建议在这里就明确指定各个贴图的存储方式，而不要使用全局值。全局设定在导出Virtools文档时被确定下来。
 
 而Video Format表示贴图在Virtools中的渲染模式，常用的模式有这几种：
 
