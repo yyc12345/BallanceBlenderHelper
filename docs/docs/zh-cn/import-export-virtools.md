@@ -25,7 +25,7 @@ Conflict Options（冲突解决选项）章节指示了当导入器遇到物体�
 * CP1252（非Windows下）：Ballance所用的西欧编码
 * CP936（非Windows下）：中文默认编码
 
-编码属性非常重要，如果设置了错误的编码，导入Blender的各类物体的名称会出现不可认知的情况
+编码属性非常重要，如果设置了错误的编码，导入Blender的各类物体的名称会出现不可认知的情况。
 
 !!! warning "编码是一个平台相关的设定"
     根据BBP的Virtools文档导入模块使用的底层库LibCmo的实现，编码属性是一个平台相关的设定。在Windows下，这里需要填写的是[Windows代码页](https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers)数字。而在其它操作系统下，LibCmo使用iconv进行字符编码解码，因此需要使用合法的[iconv编码标识符](https://www.gnu.org/software/libiconv/)。
