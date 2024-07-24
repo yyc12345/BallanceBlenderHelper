@@ -7,7 +7,7 @@
 ![](../imgs/naming-convention.png)
 
 本插件目前支持两种命名标准。  
-其一为技术信息章节已经阐述的制图链标准，在本插件中的名称为`YYC Tools Chains`。  
+其一为[技术信息](./tech-infos.md)章节阐述的制图链标准，在本插件中的名称为`YYC Tools Chains`。  
 其二为[Imengyu/Ballance](https://github.com/imengyu/Ballance)所用命名标准，在本插件中的名称为`Imengyu Ballance`。
 
 这些功能最终只会展示成功与否的一个概括性消息。如果你需要详细查看某个物体为什么不能转换，请点击`Window - Toggle System Console`，插件在那里有更详细的输出。

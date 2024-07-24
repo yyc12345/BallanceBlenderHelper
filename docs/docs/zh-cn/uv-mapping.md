@@ -15,7 +15,7 @@
 
 沿边沿贴图是BBP插件的最重要的功能，最强大的功能，同时也是最难以理解的功能。它广泛应用于自定义结构或一行路面，木板的UV的设置。3D视图中的菜单`Ballance - Flatten UV`提供的就是沿边沿贴图功能。它只能在 **编辑模式** 下工作，因此你需要进入编辑模式（并同时进入面选择模式，因为沿边沿贴图是按面操作的）才能使用它。
 
-沿边沿贴图通常与[选择循环面](https://docs.blender.org/manual/en/3.6/modeling/meshes/selecting/loops.html)，[选择最短路径](https://docs.blender.org/manual/en/3.6/modeling/meshes/selecting/linked.html#bpy-ops-mesh-shortest-path-select)等功能一起使用。你需要先选择一系列面，例如一系列连续的Ballance路面侧边，然后点击`Ballance - Flatten UV`开始进行沿边沿贴图。
+沿边沿贴图通常与[选择循环面](https://docs.blender.org/manual/en/4.2/modeling/meshes/selecting/loops.html)，[选择最短路径](https://docs.blender.org/manual/en/4.2/modeling/meshes/selecting/linked.html#bpy-ops-mesh-shortest-path-select)等功能一起使用。你需要先选择一系列面，例如一系列连续的Ballance路面侧边，然后点击`Ballance - Flatten UV`开始进行沿边沿贴图。
 
 沿边沿贴图的配置界面如下图所示，左侧是Scale Size（缩放数值）模式，右侧是Ref. Point（参考点）模式，我们稍后会说明这两个模式的区别。
 
@@ -23,14 +23,14 @@
 
 沿边沿贴图顾名思义，其含义就是沿着某条边进行UV贴图。具体的操作就是利用线性代数的方法，使用过渡矩阵，将顶点的三维坐标转换到一个新的坐标系下。在这个新的坐标系中：
 
-* 原点是Reference Edge（参考边）指定的标号的顶点，如下图所示。下图在UV和3D中用黄色字体标识了面的顶点序号，图中的Reference Edge为1，则当前面中顶点序号为1的顶点作为新坐标系的原点。
+* 原点是Reference Edge（参考边）指定的序号的顶点，如下图所示。下图在UV和3D中用黄色字体标识了面的顶点序号，图中的Reference Edge为1，则当前面中顶点序号为1的顶点作为新坐标系的原点。
 * Y轴（即V轴，XYZ对应UVW，后续不再注释）为Reference Edge指定的顶点到下一个顶点的连线，即顶点1到顶点2的边，也就是序号为1的边，如下图所示，下图UV和3D中用紫色字体标识了面的边序号。边1是以顶点1为起始点，顶点2为终点的一个向量。它有方向性，是向量，用作坐标轴时需要归一化。
 * Z轴则是通过Reference Edge指定的边（在这里是边1）和其下一条相邻边（在这里是边2）做叉乘并归一化得出。如果发生三点共线，叉乘出零向量的情况，则会尝试使用面的法线数据取而代之。
 * X轴由之前计算出的Y轴和Z轴做叉乘并归一化后得出。新坐标系下的XYZ仍然需要满足右手坐标系的要求。
 
 ![](../imgs/flatten-uv-mechanism.png)
 
-建立完新坐标系并构建完过渡矩阵后并将每一个顶点都转换到新坐标系下后，我们便可丢弃Z分量，将XY映射到UV上，并同时将处于-U轴侧的顶点镜像到+U轴侧，这也是Flatten UV不支持凹多边形的原因。做镜像的原因是为了防止UV映射出错，例如上图中，路面侧边贴图的上沿花纹位于V轴，如果我们将上图中UV顶点沿V轴翻转（你可以试一试加深理解），则会导致最终贴图显示不符合我们预期，即Reference Edge指定的边并不显示路面侧边花纹。
+建立完新坐标系并构建完过渡矩阵后并将每一个顶点都转换到新坐标系下后，我们便可丢弃Z分量，将XY映射到UV上，并同时将处于-U轴侧的顶点镜像到+U轴侧，这也是Flatten UV不支持凹多边形的原因。做镜像的原因是为了防止UV映射出错，例如上图中，路面侧边贴图的上沿花纹位于V轴，如果我们将上图中UV顶点沿V轴翻转（你可以试一试以加深理解），则会导致最终贴图显示不符合我们预期，即Reference Edge指定的边并不显示路面侧边花纹。
 
 !!! info "Reference Edge的实指"
     Reference Edge实际上指代的就是那条需要被贴靠到V轴上的边的序号。又因为这条边具有方向性，同时也就决定了新坐标系中的原点。
