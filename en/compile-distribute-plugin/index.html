@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/compile-distribute-plugin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Compile and Distribute Plugin - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Compile and Distribute Plugin";
+        var mkdocs_page_input_path = "en/compile-distribute-plugin.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/compile-distribute-plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Compile and Distribute Plugin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#compiling-libcmo-with-bmap">Compiling LibCmo with BMap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generate-thumbnails-and-compress-json">Generate Thumbnails and Compress JSON</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#packaging">Packaging</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generating-help-documentation">Generating Help Documentation</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Compile and Distribute Plugin</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="compile-and-distribute-plugin">Compile and Distribute Plugin</h1>
+<p>This page will guide you in compiling the plugin as well as distributing it.</p>
+<h2 id="compiling-libcmo-with-bmap">Compiling LibCmo with BMap</h2>
+<p>BBP's Virtools file native import/export functionality relies on BMap and its Python binding PyBMap. In order to distribute the plugin, we need to first compile BMap and its predecessor LibCmo, and before doing so, you need to check the version of BMap you need. Because BBP doesn't always use the latest version of BMap, e.g. if you're compiling an older version of BBP, it's obviously not possible to rely on the latest version of BMap. BMap is constantly being upgraded, and the functionality it provides is constantly changing, and different versions of BMap are incompatible. BBP usually states the version of BMap it uses at the time of release, but if BBP doesn't point it out, you may need to look for the most recent version of BMap that compiles with the version of BBP at the time of its release.</p>
+<p>After specifying the version, you need to visit <a href="https://github.com/yyc12345/libcmo21">LibCmo GitHub repository</a>. Then clone the project and use the Git command to go to the corresponding version (or just download the source code of the corresponding version). Then follow LibCmo's compilation manual to compile to get BMap. on Windows, you'll usually get the files <code>BMap.dll</code> and <code>BMap.pdb</code>. On Linux, it will be <code>BMap.so</code>.</p>
+<p>Then we need to configure PyBMap, which comes with LibCmo. Please follow the manual of PyBMap to combine the compiled binary BMap library with PyBMap. That is to complete the PyBMap configuration.</p>
+<p>Then we need to copy the configured PyBMap to our project under <code>bbp_ng/PyBMap</code> to complete this step.</p>
+<h2 id="generate-thumbnails-and-compress-json">Generate Thumbnails and Compress JSON</h2>
+<p>BBP comes with a built-in set of custom icons, as well as the JSON files needed by its component BME to describe the structure. By batch generating thumbnails and compressing JSON operations, the size of these parts can be reduced, making them suitable for loading in Blender and easier to distribute.</p>
+<p>Go to the <code>bbp_ng/tools</code> folder and run <code>python3 build_icons.py</code> which will batch generate thumbnails (this requires the PIL library, please install it via pip in advance). It actually generates thumbnails from the original images in the <code>bbp_ng/raw_icons</code> directory and stores them in the <code>bbp_ng/icons</code> folder. Running <code>python3 build_jsons.py</code> will compress the JSON, which actually reads, compresses, and writes the raw JSON files from the <code>bbp_ng/raw_jsons</code> directory into the <code>bbp_ng/jsons</code> folder.</p>
+<h2 id="packaging">Packaging</h2>
+<p>Starting from Blender 4.2 LTS, plugins are packaged using Blender's own packaging feature.</p>
+<p>Assuming that the final output file is <code>redist/bbp_ng.zip</code>. If you are in the root directory of the project, execute the <code>blender --command extension build --source-dir bbp_ng --output-filepath redist/bbp_ ng.zip</code> command in a command line window to finish packaging. Please note <code>blender</code> is the executable Blender program.</p>
+<p>Blender will package the plugin according to the instructions in <code>blender_manifest.toml</code> with the following files excluded:</p>
+<ul>
+<li><code>bbp_ng/raw_icons</code>: raw thumbnail folder.</li>
+<li><code>bbp_ng/raw_jsons</code>: raw JSON folder.</li>
+<li><code>bbp_ng/tools</code>: tools for compiling.</li>
+<li><code>bbp_ng/.style.yapf</code>: code style description file.</li>
+<li><code>bbp_ng/.gitignore</code>: gitignore</li>
+<li><code>bbp_ng/icons/.gitkeep</code>: folder placeholder</li>
+<li><code>bbp_ng/jsons/.gitkeep</code>: folder placeholder</li>
+</ul>
+<h2 id="generating-help-documentation">Generating Help Documentation</h2>
+<p>Although this project will utilize the GitHub Page feature to provide help documentation, sometimes you may need to provide an offline version of the help documentation, this section will explain how to generate an offline version of the help documentation.</p>
+<p>First you need to install <code>mkdocs</code> and <code>pymdown-extensions</code> via pip. Then go to the <code>docs</code> folder and run <code>mkdocs build --no-directory-urls</code>. After running the command you get a folder called <code>site</code>, which is the help documentation that can be viewed offline.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../component-adder/" class="btn btn-neutral float-left" title="Add Component"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../report-bugs/" class="btn btn-neutral float-right" title="Report Issue">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../report-bugs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
