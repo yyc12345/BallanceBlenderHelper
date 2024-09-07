@@ -136,6 +136,14 @@ class BBP_OT_legacy_align(bpy.types.Operator):
     def execute(self, context):
         # get processed objects
         (current_obj, target_objs) = _prepare_objects()
+        # INFO: YYC MARK:
+        # This statement is VERY IMPORTANT.
+        # If this statement is not presented, Blender will return identity matrix
+        # when getting world matrix from Object since the second execution of this function.
+        # It seems that Blender fail to read restored value from a new execution.
+        # Additionally, this statement only can be placed in there.
+        # If you place it at the end of this function, it doesn't work.
+        context.view_layer.update()
         # iterate history to align objects
         entry: BBP_PG_legacy_align_history
         for entry in self.align_history:
@@ -212,56 +220,52 @@ def _align_objects(
     # if no align, skip
     if not (align_x or align_y or align_z):
         return
-
+    
     # calc current object data
-    current_obj_bbox: tuple[mathutils.Vector] = tuple(current_obj.matrix_world @ mathutils.Vector(corner) for corner in current_obj.bound_box)
-    current_obj_ref: mathutils.Vector = _get_object_ref_point(current_obj, current_obj_bbox, current_mode)
+    current_obj_ref: mathutils.Vector = _get_object_ref_point(current_obj, current_mode)
 
     # process each target obj
     for target_obj in target_objs:
         # calc target object data
-        target_obj_bbox: tuple[mathutils.Vector] = tuple(target_obj.matrix_world @ mathutils.Vector(corner) for corner in target_obj.bound_box)
-        target_obj_ref: mathutils.Vector = _get_object_ref_point(target_obj, target_obj_bbox, target_mode)
-        # do align
-        if align_x:
-            target_obj.location.x += current_obj_ref.x - target_obj_ref.x
-        if align_y:
-            target_obj.location.y += current_obj_ref.y - target_obj_ref.y
-        if align_z:
-            target_obj.location.z += current_obj_ref.z - target_obj_ref.z
+        target_obj_ref: mathutils.Vector = _get_object_ref_point(target_obj, target_mode)
+        # build translation transform
+        target_obj_translation: mathutils.Vector = current_obj_ref - target_obj_ref
+        if not align_x: target_obj_translation.x = 0
+        if not align_y: target_obj_translation.y = 0
+        if not align_z: target_obj_translation.z = 0
+        # target_obj.location += target_obj_translation
+        target_obj_translation_matrix: mathutils.Matrix = mathutils.Matrix.Translation(target_obj_translation)
+        # apply translation transform to left side (add into original matrix)
+        target_obj.matrix_world = target_obj_translation_matrix @ target_obj.matrix_world
 
-def _get_object_ref_point(obj: bpy.types.Object, corners: tuple[mathutils.Vector], mode: AlignMode) -> mathutils.Vector:
+    bpy.context.scene.update_tag
+
+def _get_object_ref_point(obj: bpy.types.Object, mode: AlignMode) -> mathutils.Vector:
     ref_pos: mathutils.Vector = mathutils.Vector((0, 0, 0))
+    
+    # calc bounding box data
+    corners: tuple[mathutils.Vector] = tuple(obj.matrix_world @ mathutils.Vector(corner) for corner in obj.bound_box)
+    bbox_min_corner: mathutils.Vector = mathutils.Vector((0, 0, 0))
+    bbox_min_corner.x = min((vec.x for vec in corners))
+    bbox_min_corner.y = min((vec.y for vec in corners))
+    bbox_min_corner.z = min((vec.z for vec in corners))
+    bbox_max_corner: mathutils.Vector = mathutils.Vector((0, 0, 0))
+    bbox_max_corner.x = max((vec.x for vec in corners))
+    bbox_max_corner.y = max((vec.y for vec in corners))
+    bbox_max_corner.z = max((vec.z for vec in corners))
 
+    # return value by given align mode
     match(mode):
         case AlignMode.Min:
-            ref_pos.x = min((vec.x for vec in corners))
-            ref_pos.y = min((vec.y for vec in corners))
-            ref_pos.z = min((vec.z for vec in corners))
+            ref_pos = bbox_min_corner
         case AlignMode.Max:
-            ref_pos.x = max((vec.x for vec in corners))
-            ref_pos.y = max((vec.y for vec in corners))
-            ref_pos.z = max((vec.z for vec in corners))
+            ref_pos = bbox_max_corner
         case AlignMode.BBoxCenter:
-            max_vec_cache: mathutils.Vector = mathutils.Vector((0, 0, 0))
-            min_vec_cache: mathutils.Vector = mathutils.Vector((0, 0, 0))
-
-            min_vec_cache.x = min((vec.x for vec in corners))
-            min_vec_cache.y = min((vec.y for vec in corners))
-            min_vec_cache.z = min((vec.z for vec in corners))
-            max_vec_cache.x = max((vec.x for vec in corners))
-            max_vec_cache.y = max((vec.y for vec in corners))
-            max_vec_cache.z = max((vec.z for vec in corners))
-
-            ref_pos.x = (max_vec_cache.x + min_vec_cache.x) / 2
-            ref_pos.y = (max_vec_cache.y + min_vec_cache.y) / 2
-            ref_pos.z = (max_vec_cache.z + min_vec_cache.z) / 2
+            ref_pos = (bbox_max_corner + bbox_min_corner) / 2
         case AlignMode.AxisCenter:
-            ref_pos.x = obj.location.x
-            ref_pos.y = obj.location.y
-            ref_pos.z = obj.location.z
+            ref_pos = obj.matrix_world.translation
         case _:
-            raise UTIL_functions.BBPException('inpossible align mode.')
+            raise UTIL_functions.BBPException('impossible align mode.')
 
     return ref_pos
 
