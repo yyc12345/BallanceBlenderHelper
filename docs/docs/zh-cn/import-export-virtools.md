@@ -20,15 +20,18 @@ Conflict Options（冲突解决选项）章节指示了当导入器遇到物体�
 
 众所周知，Virtools使用基于系统的多字节字符编码来处理文档，因而很容易出现所谓乱码问题。Blender本身不会出现乱码问题，然而如果我们不能以正确的编码读取Virtools文档，则当Virtools文档被导入Blender时，其中存储的字符仍然可能会呈现乱码状态。Virtools Params（Virtools参数）章节的Encodings（编码）属性用于指定读取Virtools文档的编码。可以指定多个编码，多个编码之间用`;`（分号）分隔。下面列出一些常用的编码：
 
-* 1252（Windows下）：Ballance所用的西欧编码
-* 936（Windows下）：中文Windows系统默认编码
-* CP1252（非Windows下）：Ballance所用的西欧编码
-* CP936（非Windows下）：中文默认编码
+* cp1252：Ballance所用的西欧编码
+* gb2312：中文Windows系统默认编码
 
-编码属性非常重要，如果设置了错误的编码，导入Blender的各类物体的名称会出现不可认知的情况。
+编码属性非常重要，如果设置了错误的编码，导入Blender的各类物体的名称会出现不可认知的情况，又或者会导致程序出错。
 
-!!! warning "编码是一个平台相关的设定"
-    根据BBP的Virtools文档导入模块使用的底层库LibCmo的实现，编码属性是一个平台相关的设定。在Windows下，这里需要填写的是[Windows代码页](https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers)数字。而在其它操作系统下，LibCmo使用iconv进行字符编码解码，因此需要使用合法的[iconv编码标识符](https://www.gnu.org/software/libiconv/)。
+!!! info "有哪些编码可以使用？"
+    自BBP 4.1版本后，我们使用编码的名字基本上就是照抄Python的编码名。大多数Python中常用的编码名都有映射，只有一些特别罕见的编码没有支持，对于具体支持的编码则需要查看源码。有关Python支持的编码，请查看[Python相关文档](https://docs.python.org/3/library/codecs.html#standard-encodings)。编码名不区分大小写。
+
+!!! warning "从旧版本迁移的警告"
+    自BBP 4.1版本开始，BBP的Virtools文档导入模块使用的底层库LibCmo版本号提升为0.2。在此版本前，编码属性是一个平台相关的设定。在Windows下，这里需要填写的是[Windows代码页](https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers)数字。而在其它操作系统下，LibCmo使用iconv进行字符编码解码，因此需要使用合法的[iconv编码标识符](https://www.gnu.org/software/libiconv/)。
+
+    这一切在LibCmo 0.2后发生了改变，从这个版本开始，LibCmo采用了类似Python的统一编码名。它是平台无关的，你不再需要检查你正在使用的操作系统是Windows还是Linux，所有平台的编码字符均为相同的字符串。这也就意味着如果您之前自定义过编码设置，你需要注意将他们转换到新的统一编码名，因为旧的编码名可能在统一编码名下没有对应映射，例如之前在Windows上指定的`1252`，在新的统一编码名下应当被书写为`cp1252`，原编码在新系统下无法被正确识别。
 
 ## 导出Virtools文档
 

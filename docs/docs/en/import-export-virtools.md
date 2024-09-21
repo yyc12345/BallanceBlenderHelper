@@ -20,15 +20,18 @@ The default values for the options in the Conflict Options section are the solut
 
 It is well known that Virtools uses a system-based multi-byte character encoding to process documents, and is therefore prone to what is known as garbling; Blender itself does not suffer from garbling, however, if we do not read a Virtools document with the correct encoding, the characters stored in it may still appear garbled when the Virtools document is imported into Blender. The Encodings property in the Virtools Params section specifies the encodings for reading Virtools documents. Multiple encodings can be specified, separated by a `;` (semicolon). Some common encodings are listed below:
 
-* 1252 (Windows only): Western European encoding used by Ballance.
-* 936 (Windows only): the default encoding for Chinese Windows system.
-* CP1252 (non-Windows): Western European encoding used by Ballance.
-* CP936 (non-Windows): the default encoding for Chinese Windows system.
+* cp1252: Western European encoding used by Ballance.
+* gb2312: The default encoding for Chinese Windows system.
 
-The encoding attribute is very important, if you set the wrong encoding, the names of the various objects imported into Blender will be unrecognizable.
+The encoding attribute is very important. If the wrong encoding is set, the names of the various objects imported into Blender will be unrecognizable, or will cause the program to make an error.
 
-!!! warning "Encoding is a platform dependent setting"
-    According to the implementation of LibCmo, the underlying library used by BBP's Virtools documentation for the import module, the encoding attribute is a platform dependent setting. Under Windows, the [Windows Code Page](https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers) number is required here. Under other operating systems, LibCmo uses iconv for character encoding and decoding, so you need to use the legal [Iconv Encoding Identifier](https://www.gnu.org/software/libiconv/).
+!!! info "What encodings are available?"
+    Since BBP version 4.1, the names of the encodings we use are basically just copied from the Python encoding names. Most of the commonly used encoding names in Most of the commonly used encoding names in Python are mapped, with only a few particularly rare encodings unsupported, and for specific supported encodings it is necessary to check the source code. See [Python documentation](https://docs.python.org/3/library/codecs.html#standard-encodings) for information on Python's supported encodings. Encodings are not case-sensitive.
+
+!!! warning "Warning about migration from older versions"
+    Starting with BBP version 4.1, the version number of LibCmo, the underlying library used by BBP's Virtools document import module, has been bumped to 0.2. Before this version, the encoding attribute was a platform-dependent setting. Under Windows, the [Windows Code Page](https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers) number is required here. Under other operating systems, LibCmo uses iconv for character encoding decoding, so the legal [iconv encoding identifier](hhttps://www.gnu.org/software/libiconv/) is required.
+
+    This all changed with LibCmo 0.2, from which LibCmo uses Python-like universal encoding names. It is platform-independent, you no longer need to check whether the operating system you are using is Windows or Linux, the encoded characters are the same string for all platforms. This also means that if you have customized your encoding settings before, you need to be careful to convert them to the new universal encoding name, because the old encoding name may not have a corresponding mapping under the universal encoding name system, for example, `1252` specified on Windows before should be written as `cp1252` under the new universal encoding name, and the original encoding name won't be recognized correctly on the new system.
 
 ## Export Virtools File
 
