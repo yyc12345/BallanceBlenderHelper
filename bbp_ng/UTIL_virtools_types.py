@@ -227,12 +227,9 @@ def virtools_name_regulator(name: str | None) -> str:
 
 ## Default Encoding for PyBMap
 #  Use semicolon split each encodings. Support Western European and Simplified Chinese in default.
-g_PyBMapDefaultEncoding: str
-if sys.platform.startswith('win32') or sys.platform.startswith('cygwin'):
-    # See: https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
-    g_PyBMapDefaultEncoding = "1252;936"
-else:
-    # See: https://www.gnu.org/software/libiconv/
-    g_PyBMapDefaultEncoding = "CP1252;CP936"
+#  Since LibCmo 0.2, the encoding name of LibCmo become universal encoding which is platfoorm independent.
+#  So no need set it according to different platform.
+#  Use universal encoding name (like Python).
+g_PyBMapDefaultEncoding: str = 'cp1252;gb2312'
 
 #endregion

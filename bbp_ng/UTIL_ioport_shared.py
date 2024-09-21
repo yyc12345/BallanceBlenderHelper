@@ -128,28 +128,28 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process texture name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Current),
-    )
+    ) # type: ignore
 
     material_conflict_strategy: bpy.props.EnumProperty(
         name = "Material Name Conflict",
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process material name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-    )
+    ) # type: ignore
 
     mesh_conflict_strategy: bpy.props.EnumProperty(
         name = "Mesh Name Conflict",
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process mesh name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-    )
+    ) # type: ignore
 
     object_conflict_strategy: bpy.props.EnumProperty(
         name = "Object Name Conflict",
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process object name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-    )
+    ) # type: ignore
 
     def draw_import_params(self, layout: bpy.types.UILayout) -> None:
         layout.label(text = 'Object Name Conflict')
@@ -188,7 +188,7 @@ class ExportParams():
             ('COLLECTION', "Collection", "Export a collection", 'OUTLINER_COLLECTION', 0),
             ('OBJECT', "Object", "Export an object", 'OBJECT_DATA', 1),
         ),
-    )
+    ) # type: ignore
 
     def draw_export_params(self, layout: bpy.types.UILayout) -> None:
         # make prop expand horizontaly, not vertical.
@@ -221,7 +221,7 @@ class VirtoolsParams():
         name = "Encodings",
         description = "The encoding list used by Virtools engine to resolve object name. Use `;` to split multiple encodings",
         default = UTIL_virtools_types.g_PyBMapDefaultEncoding
-    )
+    ) # type: ignore
 
     def draw_virtools_params(self, layout: bpy.types.UILayout) -> None:
         layout.label(text = 'Encodings')
