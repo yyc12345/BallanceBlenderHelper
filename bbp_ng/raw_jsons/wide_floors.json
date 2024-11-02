@@ -147,7 +147,7 @@
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[5], False, face[2], face[5])"
+                    "face": "(face[0], face[1], face[5], False, face[2], face[3])"
                 },
                 "transform": "move(0, 5 + width, 0) @ rot(0, 0, -90)"
             },
@@ -156,7 +156,7 @@
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[2], face[5], face[4], False)"
+                    "face": "(face[0], face[1], face[2], face[3], face[4], False)"
                 },
                 "transform": "ident()"
             },
@@ -166,7 +166,7 @@
                 "params": {
                     "height": "height",
                     "length": "width",
-                    "face": "(face[0], face[1], False, False, face[2], face[5])"
+                    "face": "(face[0], face[1], False, False, face[2], face[3])"
                 },
                 "transform": "move(0, 2.5 + width, 0) @ rot(0, 0, -90)"
             }
