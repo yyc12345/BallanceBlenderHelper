@@ -3,43 +3,14 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_icons_manager, UTIL_naming_convension
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_ballance_map_info
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
 from .PyBMap import bmap_wrapper as bmap
 
-# define global tex save opt blender enum prop helper
-_g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
-
-class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams):
+class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
     """Export Virtools File"""
     bl_idname = "bbp.export_virtools"
     bl_label = "Export Virtools File"
     bl_options = {'PRESET'}
-
-    texture_save_opt: bpy.props.EnumProperty(
-        name = "Global Texture Save Options",
-        description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
-        items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
-        default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
-    ) # type: ignore
-
-    use_compress: bpy.props.BoolProperty(
-        name="Use Compress",
-        description = "Whether use ZLib to compress result when saving composition.",
-        default = True,
-    ) # type: ignore
-
-    compress_level: bpy.props.IntProperty(
-        name = "Compress Level",
-        description = "The ZLib compress level used by Virtools Engine when saving composition.",
-        min = 1, max = 9,
-        default = 5,
-    ) # type: ignore
-
-    successive_sector: bpy.props.BoolProperty(
-        name="Successive Sector",
-        description = "Whether order exporter to use document specified sector count to make sure sector is successive.",
-        default = True,
-    ) # type: ignore
 
     @classmethod
     def poll(self, context):
@@ -58,15 +29,26 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
             )
             return {'CANCELLED'}
 
+        # check texture save option to prevent real stupid user.
+        texture_save_opt = self.general_get_texture_save_opt()
+        if texture_save_opt == UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_USEGLOBAL:
+            UTIL_functions.message_box(
+                ('You can not specify "Use Global" as global texture save option!', ), 
+                'Wrong Parameters', 
+                UTIL_icons_manager.BlenderPresetIcons.Error.value
+            )
+            return {'CANCELLED'}
+
         # start exporting
         with UTIL_ioport_shared.ExportEditModeBackup() as editmode_guard:
             _export_virtools(
                 self.general_get_filename(),
                 self.general_get_vt_encodings(),
-                _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.get_selection(self.texture_save_opt),
-                self.use_compress,
-                self.compress_level,
-                self.successive_sector,
+                texture_save_opt,
+                self.general_get_use_compress(),
+                self.general_get_compress_level(),
+                self.general_get_successive_sector(),
+                self.general_get_successive_sector_count(),
                 objls
             )
 
@@ -75,30 +57,9 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Export Target')
-        self.draw_export_params(layout.box())
-
-        layout.separator()
-        layout.label(text = 'Virtools Params')
-        box = layout.box()
-        self.draw_virtools_params(box)
-
-        box.separator()
-        box.label(text = 'Global Texture Save Option')
-        box.prop(self, 'texture_save_opt', text = '')
-
-        box.separator()
-        box.prop(self, 'use_compress')
-        if self.use_compress:
-            box.prop(self, 'compress_level')
-
-        # show sector info to notice user
-        layout.separator()
-        layout.label(text = 'Ballance Params')
-        box = layout.box()
-        map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
-        box.prop(self, 'successive_sector')
-        box.label(text = f'Map Sectors: {map_info.mSectorCount}')
+        self.draw_export_params(layout)
+        self.draw_virtools_params(layout, False)
+        self.draw_ballance_params(layout, False)
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
@@ -112,6 +73,7 @@ def _export_virtools(
         use_compress_: bool,
         compress_level_: int, 
         successive_sector_: bool,
+        successive_sector_count_: int,
         export_objects: tuple[bpy.types.Object, ...]
     ) -> None:
 
@@ -131,7 +93,7 @@ def _export_virtools(
                 obj3d_crets: tuple[_TObj3dPair, ...] = _prepare_virtools_3dobjects(
                     writer, progress, export_objects)
                 # export group and 3dobject by prepared 3dobject
-                _export_virtools_groups(writer, progress, successive_sector_, obj3d_crets)
+                _export_virtools_groups(writer, progress, successive_sector_, successive_sector_count_, obj3d_crets)
                 mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
                     writer, progress, obj3d_crets)
                 # export mesh
@@ -181,6 +143,7 @@ def _export_virtools_groups(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
         successive_sector: bool,
+        successive_sector_count: int,
         obj3d_crets: tuple[_TObj3dPair, ...]
         ) -> None:
     # create virtools group
@@ -197,9 +160,7 @@ def _export_virtools_groups(
     # 
     # So we create all needed sector group in here to make sure exported virtools file can be read by Ballancde correctly.
     if successive_sector:
-        map_info: PROP_ballance_map_info.RawBallanceMapInfo
-        map_info = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
-        for i in range(map_info.mSectorCount):
+        for i in range(successive_sector_count):
             gp_name: str = UTIL_naming_convension.build_name_from_sector_index(i + 1)
             vtgroup: bmap.BMGroup | None = group_cret_map.get(gp_name, None)
             if vtgroup is None:

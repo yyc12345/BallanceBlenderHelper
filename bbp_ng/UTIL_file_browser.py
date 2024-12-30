@@ -29,7 +29,7 @@ class ImportBallanceImage(bpy_extras.io_utils.ImportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "*.bmp;*.tga",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
 
     def general_set_filename(self, filename: str) -> None:
         self.filepath = filename
@@ -44,7 +44,7 @@ class ImportBmxFile(bpy_extras.io_utils.ImportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "*.bmx",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
 
     def general_get_filename(self) -> str:
         return self.filepath
@@ -56,7 +56,7 @@ class ExportBmxFile(bpy_extras.io_utils.ExportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "*.bmx",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
 
     def general_get_filename(self) -> str:
         return self.filepath
@@ -68,7 +68,7 @@ class ImportVirtoolsFile(bpy_extras.io_utils.ImportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "*.nmo;*.cmo;*.vmo",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
 
     def general_get_filename(self) -> str:
         return self.filepath
@@ -80,7 +80,7 @@ class ExportVirtoolsFile(bpy_extras.io_utils.ExportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "*.nmo",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
 
     def general_get_filename(self) -> str:
         return self.filepath
@@ -94,7 +94,7 @@ class ImportDirectory(bpy_extras.io_utils.ImportHelper):
     filter_glob: bpy.props.StringProperty(
         default = "",
         options = {'HIDDEN'}
-    )
+    ) # type: ignore
     
     def general_get_directory(self) -> str:
         return self.directory

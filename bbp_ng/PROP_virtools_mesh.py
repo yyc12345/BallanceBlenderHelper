@@ -25,7 +25,7 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
         description = "Lighting mode of the mesh.",
         items = _g_Helper_VXMESH_LITMODE.generate_items(),
         default = _g_Helper_VXMESH_LITMODE.to_selection(RawVirtoolsMesh.cDefaultLitMode)
-    )
+    ) # type: ignore
     
 # Getter Setter
 

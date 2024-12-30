@@ -73,12 +73,12 @@ class BBP_PG_bme_material(bpy.types.PropertyGroup):
     bme_material_name: bpy.props.StringProperty(
         name = "Name",
         default = ""
-    )
+    ) # type: ignore
     
     material_ptr: bpy.props.PointerProperty(
         name = "Material",
         type = bpy.types.Material
-    )
+    ) # type: ignore
 
 def get_bme_materials(scene: bpy.types.Scene) -> bpy.types.CollectionProperty:
     return scene.bme_materials

@@ -6,7 +6,7 @@ from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blend
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_ballance_map_info
 from .PyBMap import bmap_wrapper as bmap
 
-class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams):
+class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
     """Import Virtools File"""
     bl_idname = "bbp.import_virtools"
     bl_label = "Import Virtools File"
@@ -29,11 +29,9 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Conflict Options')
-        self.draw_import_params(layout.box())
-        layout.separator()
-        layout.label(text = 'Virtools Params')
-        self.draw_virtools_params(layout.box())
+        self.draw_import_params(layout)
+        self.draw_virtools_params(layout, True)
+        self.draw_ballance_params(layout, True)
 
 def _import_virtools(file_name_: str, encodings_: tuple[str], resolver: UTIL_ioport_shared.ConflictResolver) -> None:
     # create temp folder

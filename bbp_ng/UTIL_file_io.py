@@ -2,6 +2,10 @@ import bpy, mathutils
 import struct, os, io, typing
 from . import UTIL_virtools_types
 
+## MARK:
+#  This module may be deprecated because the host refering this module, 
+#  BM file import and export is no longer existing.
+
 _FileWriter_t = io.BufferedWriter
 _FileReader_t = io.BufferedReader
 
@@ -31,10 +35,10 @@ def write_float(fs: _FileWriter_t, fl: float) -> None:
     fs.write(struct.pack("<f", fl))
 
 def write_world_matrix(fs: _FileWriter_t, mat: UTIL_virtools_types.VxMatrix) -> None:
-    fs.write(struct.pack("<16f", *mat.to_tuple()))
+    fs.write(struct.pack("<16f", *mat.to_const()))
 
 def write_color(fs: _FileWriter_t, colors: UTIL_virtools_types.VxColor) -> None:
-    fs.write(struct.pack("<fff", *colors.to_tuple_rgb()))
+    fs.write(struct.pack("<fff", *colors.to_const_rgb()))
 
 def write_uint32_array(fs: _FileWriter_t, vals: typing.Iterable[int], count: int) -> None:
     fs.write(struct.pack('<' + str(count) + 'I', *vals))
@@ -67,11 +71,11 @@ def read_string(fs: _FileReader_t) -> str:
     count = read_uint32(fs)
     return fs.read(count * 4).decode("utf_32_le")
 
-def read_bool(fs: _FileReader_t) -> None:
+def read_bool(fs: _FileReader_t) -> bool:
     return read_uint8(fs) != 0
 
 def read_world_materix(fs: _FileReader_t, mat: UTIL_virtools_types.VxMatrix) -> None:
-    mat.from_tuple(struct.unpack("<16f", fs.read(16 * 4)))
+    mat.from_const(struct.unpack("<16f", fs.read(16 * 4)))
 
 def read_color(fs: _FileReader_t, target: UTIL_virtools_types.VxColor) -> None:
     target.from_const_rgb(struct.unpack("fff", fs.read(3 * 4)))

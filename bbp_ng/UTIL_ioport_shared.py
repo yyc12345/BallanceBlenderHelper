@@ -1,7 +1,7 @@
 import bpy
 import enum, typing
 from . import UTIL_virtools_types, UTIL_functions
-from . import PROP_ptrprop_resolver
+from . import PROP_ptrprop_resolver, PROP_ballance_map_info
 
 ## Intent
 #  Some importer or exporter may share same properties.
@@ -152,14 +152,20 @@ class ImportParams():
     ) # type: ignore
 
     def draw_import_params(self, layout: bpy.types.UILayout) -> None:
-        layout.label(text = 'Object Name Conflict')
-        layout.prop(self, 'object_conflict_strategy', text = '')
-        layout.label(text = 'Mesh Name Conflict')
-        layout.prop(self, 'mesh_conflict_strategy', text = '')
-        layout.label(text = 'Material Name Conflict')
-        layout.prop(self, 'material_conflict_strategy', text = '')
-        layout.label(text = 'Texture Name Conflict')
-        layout.prop(self, 'texture_conflict_strategy', text = '')
+        header: bpy.types.UILayout
+        body: bpy.types.UILayout
+        header, body = layout.panel("BBP_PT_ioport_shared_import_params", default_closed=False)
+        header.label(text = 'Import Parameters')
+        if body is None: return
+
+        body.label(text = 'Object Name Conflict')
+        body.prop(self, 'object_conflict_strategy', text = '')
+        body.label(text = 'Mesh Name Conflict')
+        body.prop(self, 'mesh_conflict_strategy', text = '')
+        body.label(text = 'Material Name Conflict')
+        body.prop(self, 'material_conflict_strategy', text = '')
+        body.label(text = 'Texture Name Conflict')
+        body.prop(self, 'texture_conflict_strategy', text = '')
 
     def general_get_texture_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.texture_conflict_strategy)
@@ -191,16 +197,22 @@ class ExportParams():
     ) # type: ignore
 
     def draw_export_params(self, layout: bpy.types.UILayout) -> None:
+        header: bpy.types.UILayout
+        body: bpy.types.UILayout
+        header, body = layout.panel("BBP_PT_ioport_shared_export_params", default_closed=False)
+        header.label(text = 'Export Parameters')
+        if body is None: return
+
         # make prop expand horizontaly, not vertical.
-        sublayout = layout.row()
+        horizon_body = body.row()
         # draw switch
-        sublayout.prop(self, "export_mode", expand = True)
+        horizon_body.prop(self, "export_mode", expand = True)
 
         # draw picker
         if self.export_mode == 'COLLECTION':
-            PROP_ptrprop_resolver.draw_export_collection(layout)
+            PROP_ptrprop_resolver.draw_export_collection(body)
         elif self.export_mode == 'OBJECT':
-            PROP_ptrprop_resolver.draw_export_object(layout)
+            PROP_ptrprop_resolver.draw_export_object(body)
 
     def general_get_export_objects(self) -> tuple[bpy.types.Object] | None:
         """
@@ -216,6 +228,9 @@ class ExportParams():
             if obj is None: return None
             else: return (obj, )
 
+# define global tex save opt blender enum prop helper
+_g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
+
 class VirtoolsParams():
     vt_encodings: bpy.props.StringProperty(
         name = "Encodings",
@@ -223,11 +238,95 @@ class VirtoolsParams():
         default = UTIL_virtools_types.g_PyBMapDefaultEncoding
     ) # type: ignore
 
-    def draw_virtools_params(self, layout: bpy.types.UILayout) -> None:
-        layout.label(text = 'Encodings')
-        layout.prop(self, 'vt_encodings', text = '')
+    texture_save_opt: bpy.props.EnumProperty(
+        name = "Global Texture Save Options",
+        description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
+        items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
+        default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
+    ) # type: ignore
+
+    use_compress: bpy.props.BoolProperty(
+        name="Use Compress",
+        description = "Whether use ZLib to compress result when saving composition.",
+        default = True,
+    ) # type: ignore
+
+    compress_level: bpy.props.IntProperty(
+        name = "Compress Level",
+        description = "The ZLib compress level used by Virtools Engine when saving composition.",
+        min = 1, max = 9,
+        default = 5,
+    ) # type: ignore
+
+    def draw_virtools_params(self, layout: bpy.types.UILayout, is_importer: bool) -> None:
+        header: bpy.types.UILayout
+        body: bpy.types.UILayout
+        header, body = layout.panel("BBP_PT_ioport_shared_virtools_params", default_closed=False)
+        header.label(text = 'Virtools Parameters')
+        if body is None: return
+
+        # draw encodings
+        body.label(text = 'Encodings')
+        body.prop(self, 'vt_encodings', text = '')
+
+        # following field are only valid in exporter
+        if not is_importer:
+            body.separator()
+            body.label(text = 'Global Texture Save Options')
+            body.prop(self, 'texture_save_opt', text = '')
+
+            body.separator()
+            body.prop(self, 'use_compress')
+            if self.use_compress:
+                body.prop(self, 'compress_level')
+
 
     def general_get_vt_encodings(self) -> tuple[str]:
         # get encoding, split it by `;` and strip blank chars.
         encodings: str = self.vt_encodings
         return tuple(map(lambda x: x.strip(), encodings.split(';')))
+
+    def general_get_texture_save_opt(self) -> UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS:
+        return _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.get_selection(self.texture_save_opt)
+
+    def general_get_use_compress(self) -> bool:
+        return self.use_compress
+
+    def general_get_compress_level(self) -> int:
+        return self.compress_level
+    
+class BallanceParams():
+    successive_sector: bpy.props.BoolProperty(
+        name="Successive Sector",
+        description = "Whether order exporter to use document specified sector count to make sure sector is successive.",
+        default = True,
+    ) # type: ignore
+
+    def draw_ballance_params(self, layout: bpy.types.UILayout, is_importer: bool) -> None:
+        # ballance params only presented in exporter.
+        # so if we are in impoerter, we skip the whole function
+        # because we don't want to create an empty panel.
+        if is_importer: return
+
+        header: bpy.types.UILayout
+        body: bpy.types.UILayout
+        header, body = layout.panel("BBP_PT_ioport_shared_ballance_params", default_closed=False)
+        header.label(text = 'Ballance Parameters')
+        if body is None: return
+
+        map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
+        body.prop(self, 'successive_sector')
+        body.label(text = f'Map Sectors: {map_info.mSectorCount}')
+
+    def general_get_successive_sector(self) -> bool:
+        return self.successive_sector
+
+    def general_get_successive_sector_count(self) -> int:
+        # if user do not pick successive sector, return a random int directly.
+        if not self.general_get_successive_sector():
+            return 0
+        
+        # otherwise fetch user specified sector number
+        map_info: PROP_ballance_map_info.RawBallanceMapInfo
+        map_info = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
+        return map_info.mSectorCount

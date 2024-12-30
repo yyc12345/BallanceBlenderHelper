@@ -10,19 +10,19 @@ class BBP_PG_ptrprop_resolver(bpy.types.PropertyGroup):
         name = "Material",
         description = "The material used for rail",
         type = bpy.types.Material,
-    )
+    ) # type: ignore
     
     export_collection: bpy.props.PointerProperty(
         type = bpy.types.Collection,
         name = "Collection",
         description = "The collection exported. Nested collections allowed."
-    )
+    ) # type: ignore
     
     export_object: bpy.props.PointerProperty(
         type = bpy.types.Object,
         name = "Object",
         description = "The object exported"
-    )
+    ) # type: ignore
 
 def get_ptrprop_resolver() -> BBP_PG_ptrprop_resolver:
     return bpy.context.scene.bbp_ptrprop_resolver

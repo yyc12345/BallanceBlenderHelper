@@ -24,13 +24,13 @@ class BBPPreferences(bpy.types.AddonPreferences):
         description = "The path to folder which will be used by this plugin to get external Ballance texture.",
         subtype='DIR_PATH',
         default = RawPreferences.cBallanceTextureFolder,
-    )
+    ) # type: ignore
     
     no_component_collection: bpy.props.StringProperty(
         name = "No Component Collection",
         description = "(Import) The object which stored in this collectiion will not be saved as component. (Export) All forced no component objects will be stored in this collection",
         default = RawPreferences.cNoComponentCollection,
-    )
+    ) # type: ignore
     
     def draw(self, context):
         layout = self.layout

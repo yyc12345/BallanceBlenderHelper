@@ -255,19 +255,19 @@ class SharedGroupNameInputProperties():
             ('DEFINED', "Predefined", "Pre-defined group name."),
             ('CUSTOM', "Custom", "User specified group name."),
         ),
-    )
+    ) # type: ignore
     
     preset_group_name: bpy.props.EnumProperty(
         name = "Group Name",
         description = "Pick vanilla Ballance group name.",
         items = _g_EnumHelper_Group.generate_items(),
-    )
+    ) # type: ignore
     
     custom_group_name: bpy.props.StringProperty(
         name = "Custom Group Name",
         description = "Input your custom group name.",
         default = "",
-    )
+    ) # type: ignore
     
     def draw_group_name_input(self, layout: bpy.types.UILayout) -> None:
         layout.prop(self, 'group_name_source', expand = True)

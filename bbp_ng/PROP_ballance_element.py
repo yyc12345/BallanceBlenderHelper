@@ -97,12 +97,12 @@ class BBP_PG_ballance_element(bpy.types.PropertyGroup):
     element_id: bpy.props.IntProperty(
         name = "Element Id",
         default = 0
-    )
+    ) # type: ignore
     
     mesh_ptr: bpy.props.PointerProperty(
         name = "Mesh",
         type = bpy.types.Mesh
-    )
+    ) # type: ignore
 
 def get_ballance_elements(scene: bpy.types.Scene) -> bpy.types.CollectionProperty:
     return scene.ballance_elements
