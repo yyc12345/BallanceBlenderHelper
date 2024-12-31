@@ -1,15 +1,15 @@
-# My Ban
-PyBMap/*.dll
-PyBMap/*.so
-PyBMap/*.dylib
-PyBMap/*.bin
-PyBMap/*.pdb
+## ===== Personal =====
+# Do not include PyBMap in this repository.
+# Order build fetch it manually.
+PyBMap/
 
+# Disable generated icons and jsons but keep the directory hierarchy.
 icons/*
 !icons/.gitkeep
 jsons/*
 !jsons/.gitkeep
 
+## ===== Python =====
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

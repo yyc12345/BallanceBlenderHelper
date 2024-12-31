@@ -94,7 +94,7 @@ class RawVirtoolsMaterial():
         self.mTextureBorderColor = kwargs.get('mTextureBorderColor', RawVirtoolsMaterial.cDefaultTextureBorderColor).clone()
         self.mAlphaRef = kwargs.get('mAlphaRef', RawVirtoolsMaterial.cDefaultAlphaRef)
     
-    def regulate(self):
+    def regulate(self) -> None:
         # regulate colors
         self.mDiffuse.regulate()
         self.mAmbient.regulate()
@@ -1017,7 +1017,9 @@ class BBP_PT_virtools_material(bpy.types.Panel):
     def draw(self, context):
         # get layout and target
         layout = self.layout
-        props: BBP_PG_virtools_material = get_virtools_material(context.material)
+        mtl: bpy.types.Material = context.material
+        props: BBP_PG_virtools_material = get_virtools_material(mtl)
+        rawdata: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
         
         # draw operator
         row = layout.row()
@@ -1046,7 +1048,7 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         sublay.prop(props, 'texture', emboss = True)
         sublay.operator(BBP_OT_direct_set_virtools_texture.bl_idname, text = '', icon = 'FILEBROWSER')
         # texture detail
-        if props.texture is not None:
+        if rawdata.mTexture is not None:
             # have texture, show texture settings and enclosed by a border.
             boxlayout = layout.box()
             boxlayout.label(text="Virtools Texture Settings")
@@ -1057,27 +1059,27 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         layout.prop(props, 'texture_mag_mode')
         layout.prop(props, 'texture_address_mode')
         layout.prop(props, 'enable_perspective_correction')
-        if (int(props.texture_address_mode) == UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSBORDER.value):
+        if rawdata.mTextureAddressMode == UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSBORDER:
             layout.prop(props, 'texture_border_color')
         
         layout.separator()
         layout.label(text="Alpha Test Parameters")
         layout.prop(props, 'enable_alpha_test')
-        if props.enable_alpha_test:
+        if rawdata.mEnableAlphaTest:
             layout.prop(props, 'alpha_func')
             layout.prop(props, 'alpha_ref')
         
         layout.separator()
         layout.label(text="Alpha Blend Parameters")
         layout.prop(props, 'enable_alpha_blend')
-        if props.enable_alpha_blend:
+        if rawdata.mEnableAlphaBlend:
             layout.prop(props, 'source_blend')
             layout.prop(props, 'dest_blend')
         
         layout.separator()
         layout.label(text="Z Write Parameters")
         layout.prop(props, 'enable_z_write')
-        if props.enable_z_write:
+        if rawdata.mEnableZWrite:
             layout.prop(props, 'z_func')
         
 def register() -> None:

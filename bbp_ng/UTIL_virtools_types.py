@@ -189,6 +189,12 @@ _g_Annotation: dict[type, dict[int, EnumAnnotation]] = {
         VX_PIXELFORMAT._4_ABGR8888_CLUT.value: EnumAnnotation("4 Bits ABGR8888 CLUT", "4 bits indexed CLUT (ABGR) "),
         VX_PIXELFORMAT._4_ARGB8888_CLUT.value: EnumAnnotation("4 Bits ARGB8888 CLUT", "4 bits indexed CLUT (ARGB) "),
     },
+    VXLIGHT_TYPE: {
+        VXLIGHT_TYPE.VX_LIGHTPOINT.value: EnumAnnotation("Point", "The Light is a point of light "),
+        VXLIGHT_TYPE.VX_LIGHTSPOT.value: EnumAnnotation("Spot", "The light is a spotlight "),
+        VXLIGHT_TYPE.VX_LIGHTDIREC.value: EnumAnnotation("Directional", "The light is directional light : Lights comes from an infinite point so only direction of light can be given "),
+        #VXLIGHT_TYPE.VX_LIGHTPARA.value: EnumAnnotation("Lightpara", "Obsolete, do not use "),
+    },
     VXMESH_LITMODE: {
         VXMESH_LITMODE.VX_PRELITMESH.value: EnumAnnotation("Prelit", "Lighting use color information store with vertices "),
         VXMESH_LITMODE.VX_LITMESH.value: EnumAnnotation("Lit", "Lighting is done by renderer using normals and face material information. "),
