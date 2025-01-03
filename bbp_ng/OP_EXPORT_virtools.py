@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_icons_manager, UTIL_naming_convension
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
@@ -62,6 +62,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         self.draw_ballance_params(layout, False)
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
+_TLightPair = tuple[bpy.types.Object, bpy.types.Light, bmap.BMTargetLight]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
 _TMaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
 _TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
@@ -89,11 +90,15 @@ def _export_virtools(
 
             # prepare progress reporter
             with ProgressReport(wm = bpy.context.window_manager) as progress:
-                # prepare 3dobject
-                obj3d_crets: tuple[_TObj3dPair, ...] = _prepare_virtools_3dobjects(
-                    writer, progress, export_objects)
-                # export group and 3dobject by prepared 3dobject
+                # prepare 3dobject and light
+                obj3d_crets: tuple[_TObj3dPair, ...]
+                light_crets: tuple[_TLightPair, ...]
+                (obj3d_crets, light_crets) = _prepare_virtools_3dobjects(writer, progress, export_objects)
+                # export group according to prepared 3dobject
                 _export_virtools_groups(writer, progress, successive_sector_, successive_sector_count_, obj3d_crets)
+                # export prepared light
+                _export_virtools_light(writer, progress, light_crets)
+                # export prepared 3dobject
                 mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
                     writer, progress, obj3d_crets)
                 # export mesh
@@ -112,32 +117,53 @@ def _export_virtools(
 def _prepare_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        export_objects: tuple[bpy.types.Object]
-        ) -> tuple[_TObj3dPair, ...]:
+        export_objects: tuple[bpy.types.Object, ...]
+        ) -> tuple[tuple[_TObj3dPair, ...], tuple[_TLightPair, ...]]:
     # this function only create equvalent entries in virtools engine and do not export anything
     # because _export_virtools_3dobjects() and _export_virtools_groups() are need use the return value of this function
+    # 
+    # at the same time, due to the difference of light object between virtools and blender,
+    # we also need extract exported lights and create equvalent entries in virtools for them.
 
     # create 3dobject hashset and result
     obj3d_crets: list[_TObj3dPair] = []
     obj3d_cret_set: set[bpy.types.Object] = set()
+    # create light hashset and result
+    light_crets: list[_TLightPair] = []
+    light_cret_set: set[bpy.types.Object] = set()
     # start saving
-    progress.enter_substeps(len(export_objects), "Creating 3dObjects")
+    progress.enter_substeps(len(export_objects), "Creating 3dObjects and Lights")
 
+    # iterate exported object list
     for obj3d in export_objects:
-        if obj3d not in obj3d_cret_set:
-            # add into set
-            obj3d_cret_set.add(obj3d)
-            # create virtools instance
-            vtobj3d: bmap.BM3dObject = writer.create_3dobject()
-            # add into result list
-            obj3d_crets.append((obj3d, vtobj3d))
+        # only accept mesh object and light object
+        # all of other objects will be discard.
+        match(obj3d.type):
+            case 'MESH':
+                # mesh object
+                if obj3d not in obj3d_cret_set:
+                    # add into set
+                    obj3d_cret_set.add(obj3d)
+                    # create virtools instance
+                    vtobj3d: bmap.BM3dObject = writer.create_3dobject()
+                    # add into result list
+                    obj3d_crets.append((obj3d, vtobj3d))
+            case 'LIGHT':
+                # light object
+                if obj3d not in light_cret_set:
+                    # add into set
+                    light_cret_set.add(obj3d)
+                    # create virtools instance
+                    vtlight: bmap.BMTargetLight = writer.create_target_light()
+                    # add into result list
+                    light_crets.append((obj3d, typing.cast(bpy.types.Light, obj3d.data), vtlight))
         
         # step progress no matter whether create new one
         progress.step()
 
     # leave progress and return
     progress.leave_substeps()
-    return tuple(obj3d_crets)
+    return (tuple(obj3d_crets), tuple(light_crets))
 
 def _export_virtools_groups(
         writer: bmap.BMFileWriter,
@@ -188,6 +214,50 @@ def _export_virtools_groups(
     # leave progress and return
     progress.leave_substeps()
 
+def _export_virtools_light(
+        writer: bmap.BMFileWriter,
+        progress: ProgressReport,
+        light_crets: tuple[_TLightPair, ...]
+        ) -> None:
+    # start saving
+    progress.enter_substeps(0, "Saving Lights")
+    
+    for obj3d, light, vtlight in light_crets:
+        # set name
+        vtlight.set_name(obj3d.name)
+
+        # setup 3d entity parts
+        # set world matrix
+        # TODO: fix light direction matrix issue.
+        vtmat: UTIL_virtools_types.VxMatrix = UTIL_virtools_types.VxMatrix()
+        UTIL_virtools_types.vxmatrix_from_blender(vtmat, obj3d.matrix_world)
+        UTIL_virtools_types.vxmatrix_conv_co(vtmat)
+        vtlight.set_world_matrix(vtmat)
+        # set visibility
+        vtlight.set_visibility(not obj3d.hide_get())
+
+        # setup light data
+        rawlight: PROP_virtools_light.RawVirtoolsLight = PROP_virtools_light.get_raw_virtools_light(light)
+
+        vtlight.set_type(rawlight.mType)
+        vtlight.set_color(rawlight.mColor)
+
+        vtlight.set_constant_attenuation(rawlight.mConstantAttenuation)
+        vtlight.set_linear_attenuation(rawlight.mLinearAttenuation)
+        vtlight.set_quadratic_attenuation(rawlight.mQuadraticAttenuation)
+
+        vtlight.set_range(rawlight.mRange)
+
+        vtlight.set_hot_spot(rawlight.mHotSpot)
+        vtlight.set_falloff(rawlight.mFalloff)
+        vtlight.set_falloff_shape(rawlight.mFalloffShape)
+
+        # step
+        progress.step()
+
+    # leave progress and return
+    progress.leave_substeps()
+
 def _export_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
@@ -204,7 +274,7 @@ def _export_virtools_3dobjects(
         vtobj3d.set_name(obj3d.name)
 
         # check mesh
-        mesh: bpy.types.Mesh | None = obj3d.data
+        mesh: bpy.types.Mesh | None = typing.cast(bpy.types.Mesh | None, obj3d.data)
         if mesh is not None:
             # get existing vt mesh or create new one
             vtmesh: bmap.BMMesh | None = mesh_cret_map.get(mesh, None)
@@ -335,7 +405,7 @@ def _export_virtools_meshes(
                     )
 
                     # parse to vtmesh
-                    mesh_trans.parse(writer, vtmesh)
+                    mesh_trans.parse(vtmesh)
 
                 # end of mesh trans
             # end of mesh visitor

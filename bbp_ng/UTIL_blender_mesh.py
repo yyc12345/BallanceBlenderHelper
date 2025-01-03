@@ -104,7 +104,11 @@ def _nest_custom_split_normal(nml_array: array.array) -> typing.Iterator[UTIL_vi
 
 class TemporaryMesh():
     """
-    
+    Create a temporary mesh for convenient exporting.
+    When exporting mesh, we need triangulate it first.
+    We create a temporary mesh to hold the triangulated mesh result.
+    So that original object will not be affected and keep its original geometry.
+    Please note passed bpy.types.Object must be Mesh Object.
     """
     
     __mBindingObject: bpy.types.Object
