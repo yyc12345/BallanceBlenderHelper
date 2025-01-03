@@ -1,4 +1,4 @@
-import bpy
+import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
@@ -381,10 +381,10 @@ def _import_virtools_lights(
             # add into scene
             UTIL_functions.add_into_scene(light_3dobj)
             # set world matrix
-            # TODO: fix light direction
             vtmat: UTIL_virtools_types.VxMatrix = vtlight.get_world_matrix()
             UTIL_virtools_types.vxmatrix_conv_co(vtmat)
-            light_3dobj.matrix_world = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
+            bldmat: mathutils.Matrix = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
+            light_3dobj.matrix_world = UTIL_virtools_types.bldmatrix_patch_light_obj(bldmat)
             # set visibility
             light_3dobj.hide_set(not vtlight.get_visibility())
 

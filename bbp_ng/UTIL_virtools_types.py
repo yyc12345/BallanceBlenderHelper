@@ -1,5 +1,5 @@
 import mathutils
-import typing, sys
+import typing, math
 from . import UTIL_functions
 
 # extract all declarations in PyBMap
@@ -45,6 +45,7 @@ def vxmatrix_conv_co(self: VxMatrix) -> None:
 def vxmatrix_from_blender(self: VxMatrix, data_: mathutils.Matrix) -> None:
     """
     Set matrix by blender matrix.
+    Please note there is no corrdinate system convertion between 
     """
     # transposed first
     data: mathutils.Matrix = data_.transposed()
@@ -73,6 +74,39 @@ def vxmatrix_to_blender(self: VxMatrix) -> mathutils.Matrix:
     # transpose self
     data.transpose()
     return data
+
+## Hints about Light Matrix
+#  There is a slight difference between Virtools and Blender.
+#  In blender, the default direction of all directional light (spot and sun) are Down (-Z).
+#  Hoewver, in Virtools, the default direction of all directional light (spot and directional) are Forward (+Z).
+#  
+#  As brief view, in Blender coordinate system, you can see that we got Blender default light direction
+#  from Virtools default light direction by rotating it around X-axis with -90 degree
+#  (the positive rotation direction is decided by right hand priniciple).
+#  
+#  So, if the object we importing is a light, we need add a special transform matrix ahead of world matrix
+#  to correct the light default direction first.
+#  When exporting, just do a reverse operation.
+
+def bldmatrix_patch_light_obj(data: mathutils.Matrix) -> mathutils.Matrix:
+    """
+    Add patch for light world matrix to correct its direction.
+    This function is usually used when importing light.
+    """
+    # we multiple a matrix which represent a 90 degree roration in X-axis.
+    # right multiple means that it will apply to light first, before apply the matrix gotten from virtools.
+    return data @ mathutils.Matrix.Rotation(math.radians(90), 4, 'X')
+
+def bldmatrix_restore_light_obj(data: mathutils.Matrix) -> mathutils.Matrix:
+    """
+    The reverse operation of bldmatrix_patch_light_mat().
+    This function is usually used when exporting light.
+    """
+    # as the reverse operation, we need right mutiple a reversed matrix of the matrix
+    # which represent a 90 degree roration in X-axis to remove the matrix we added in patch step.
+    # however, the reverse matrix of 90 degree X-axis rotation is just NEGATUIVE 90 degree X-axis rotation.
+    # so we simply right multiple it.
+    return data @ mathutils.Matrix.Rotation(math.radians(-90), 4, 'X')
 
 #endregion
 

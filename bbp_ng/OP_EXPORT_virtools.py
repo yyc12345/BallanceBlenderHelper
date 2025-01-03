@@ -1,4 +1,4 @@
-import bpy
+import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
@@ -228,9 +228,9 @@ def _export_virtools_light(
 
         # setup 3d entity parts
         # set world matrix
-        # TODO: fix light direction matrix issue.
         vtmat: UTIL_virtools_types.VxMatrix = UTIL_virtools_types.VxMatrix()
-        UTIL_virtools_types.vxmatrix_from_blender(vtmat, obj3d.matrix_world)
+        bldmat: mathutils.Matrix = UTIL_virtools_types.bldmatrix_restore_light_obj(obj3d.matrix_world)
+        UTIL_virtools_types.vxmatrix_from_blender(vtmat, bldmat)
         UTIL_virtools_types.vxmatrix_conv_co(vtmat)
         vtlight.set_world_matrix(vtmat)
         # set visibility
