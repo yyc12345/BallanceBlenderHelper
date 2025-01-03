@@ -196,16 +196,18 @@ class ImportParams():
         header.label(text = 'Import Parameters')
         if body is None: return
 
-        body.label(text = 'Object Name Conflict')
-        body.prop(self, 'object_conflict_strategy', text = '')
-        body.label(text = 'Light Name Conflict')
-        body.prop(self, 'light_conflict_strategy', text = '')
-        body.label(text = 'Mesh Name Conflict')
-        body.prop(self, 'mesh_conflict_strategy', text = '')
-        body.label(text = 'Material Name Conflict')
-        body.prop(self, 'material_conflict_strategy', text = '')
-        body.label(text = 'Texture Name Conflict')
-        body.prop(self, 'texture_conflict_strategy', text = '')
+        body.label(text = 'Name Conflict Strategy')
+        grid = body.grid_flow(row_major = False, columns = 2)
+        grid.label(text = 'Object', icon = 'CUBE')
+        grid.label(text = 'Light', icon = 'LIGHT')
+        grid.label(text = 'Mesh', icon = 'MESH_DATA')
+        grid.label(text = 'Material', icon = 'MATERIAL')
+        grid.label(text = 'Texture', icon = 'TEXTURE')
+        grid.prop(self, 'object_conflict_strategy', text = '')
+        grid.prop(self, 'light_conflict_strategy', text = '')
+        grid.prop(self, 'mesh_conflict_strategy', text = '')
+        grid.prop(self, 'material_conflict_strategy', text = '')
+        grid.prop(self, 'texture_conflict_strategy', text = '')
 
     def general_get_texture_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.texture_conflict_strategy)
@@ -320,6 +322,7 @@ class VirtoolsParams():
             body.prop(self, 'texture_save_opt', text = '')
 
             body.separator()
+            body.label(text = 'Compression')
             body.prop(self, 'use_compress')
             if self.use_compress:
                 body.prop(self, 'compress_level')
