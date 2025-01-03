@@ -8,7 +8,7 @@ class BBP_OT_import_bmfile(bpy.types.Operator, UTIL_file_browser.ImportBmxFile, 
     bl_options = {'PRESET', 'UNDO'}
     
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
     
     def execute(self, context):

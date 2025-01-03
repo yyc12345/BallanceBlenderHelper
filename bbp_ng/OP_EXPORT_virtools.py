@@ -13,7 +13,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     bl_options = {'PRESET'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return (
             PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
             and bmap.is_bmap_available())

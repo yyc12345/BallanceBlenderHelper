@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_naming_convension
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_ballance_map_info
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light, PROP_ballance_map_info
 from .PyBMap import bmap_wrapper as bmap
 
 class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
@@ -13,7 +13,7 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
     bl_options = {'PRESET', 'UNDO'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return (
             PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
             and bmap.is_bmap_available())
@@ -59,6 +59,8 @@ def _import_virtools(file_name_: str, encodings_: tuple[str], resolver: UTIL_iop
                 # import 3dobjects
                 obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object] = _import_virtools_3dobjects(
                     reader, progress, resolver, mesh_cret_map)
+                # import light
+                _import_virtools_lights(reader, progress, resolver)
                 # import groups
                 _import_virtools_groups(reader, progress, obj3d_cret_map)
 
@@ -200,7 +202,7 @@ def _import_virtools_meshes(
         ) -> dict[bmap.BMMesh, bpy.types.Mesh]:
     # create map and prepare progress
     mesh_cret_map: dict[bmap.BMMesh, bpy.types.Mesh] = {}
-    progress.enter_substeps(reader.get_material_count(), "Loading Meshes")
+    progress.enter_substeps(reader.get_mesh_count(), "Loading Meshes")
 
     for vtmesh in reader.get_meshs():
         # create mesh
@@ -296,11 +298,7 @@ def _import_virtools_3dobjects(
         ) -> dict[bmap.BM3dObject, bpy.types.Object]:
     # create map and prepare progress
     obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object] = {}
-    progress.enter_substeps(reader.get_material_count(), "Loading 3dObjects")
-
-    # get some essential blender data
-    blender_view_layer = bpy.context.view_layer
-    blender_collection = blender_view_layer.active_layer_collection.collection
+    progress.enter_substeps(reader.get_3dobject_count(), "Loading 3dObjects")
 
     for vt3dobj in reader.get_3dobjects():
         # get virtools binding mesh data first
@@ -314,8 +312,8 @@ def _import_virtools_3dobjects(
 
         # setup if necessary
         if init_obj3d:
-            # link to collection
-            blender_collection.objects.link(obj3d)
+            # add into scene
+            UTIL_functions.add_into_scene(obj3d)
 
             # set world matrix
             vtmat: UTIL_virtools_types.VxMatrix = vt3dobj.get_world_matrix()
@@ -338,6 +336,61 @@ def _import_virtools_3dobjects(
     progress.leave_substeps()
     return obj3d_cret_map
 
+def _import_virtools_lights(
+        reader: bmap.BMFileReader, 
+        progress: ProgressReport,
+        resolver: UTIL_ioport_shared.ConflictResolver
+        ) -> None:
+    # prepare progress
+    progress.enter_substeps(reader.get_target_light_count(), "Loading Lights")
+
+    # please note light is slightly different between virtools and blender.
+    # in virtools, light is the sub class of 3d entity.
+    # it means that virtools use class inheritance to implement light.
+    # however, in blender, light is the data property of object.
+    # comparing with normal mesh object, it just replace the data property of object to a light.
+    # so in blender, light is implemented as a data struct attached to object.
+    # thus we can reuse light data for multiple objects but virtools can not.
+    # in virtools, every light are individual objects.
+    for vtlight in reader.get_target_lights():
+        # create light data block and 3d object together
+        (light_3dobj, light, init_light) = resolver.create_light(
+            UTIL_virtools_types.virtools_name_regulator(vtlight.get_name())
+        )
+
+        if init_light:
+            # setup light data block
+            rawlight: PROP_virtools_light.RawVirtoolsLight = PROP_virtools_light.RawVirtoolsLight()
+            rawlight.mType = vtlight.get_type()
+            rawlight.mColor = vtlight.get_color()
+
+            rawlight.mConstantAttenuation = vtlight.get_constant_attenuation()
+            rawlight.mLinearAttenuation = vtlight.get_linear_attenuation()
+            rawlight.mQuadraticAttenuation = vtlight.get_quadratic_attenuation()
+
+            rawlight.mRange = vtlight.get_range()
+
+            rawlight.mHotSpot = vtlight.get_hot_spot()
+            rawlight.mFalloff = vtlight.get_falloff()
+            rawlight.mFalloffShape = vtlight.get_falloff_shape()
+
+            PROP_virtools_light.set_raw_virtools_light(light, rawlight)
+            PROP_virtools_light.apply_to_blender_light(light)
+
+            # setup light associated 3d object
+            # add into scene
+            UTIL_functions.add_into_scene(light_3dobj)
+            # set world matrix
+            # TODO: fix light direction
+            vtmat: UTIL_virtools_types.VxMatrix = vtlight.get_world_matrix()
+            UTIL_virtools_types.vxmatrix_conv_co(vtmat)
+            light_3dobj.matrix_world = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
+            # set visibility
+            light_3dobj.hide_set(not vtlight.get_visibility())
+
+    # leave progress
+    progress.leave_substeps()
+
 def _import_virtools_groups(
         reader: bmap.BMFileReader, 
         progress: ProgressReport, 
@@ -350,7 +403,7 @@ def _import_virtools_groups(
     sector_count: int = 1
 
     # prepare progress
-    progress.enter_substeps(reader.get_material_count(), "Loading Groups")
+    progress.enter_substeps(reader.get_group_count(), "Loading Groups")
 
     for vtgroup in reader.get_groups():
         # if this group do not have name, skip it
@@ -365,7 +418,7 @@ def _import_virtools_groups(
         # creating map
         for item in vtgroup.get_objects():
             # get or create set
-            objgroups: set[str] = reverse_map.get(item, None)
+            objgroups: set[str] | None = reverse_map.get(item, None)
             if objgroups is None:
                 objgroups = set()
                 reverse_map[item] = objgroups
@@ -385,7 +438,7 @@ def _import_virtools_groups(
     progress.leave_substeps()
 
     # now we can assign 3dobject group data by reverse map
-    progress.enter_substeps(reader.get_material_count(), "Applying Groups")
+    progress.enter_substeps(len(reverse_map), "Applying Groups")
     for mapk, mapv in reverse_map.items():
         # check object
         assoc_obj = obj3d_cret_map.get(mapk, None)
@@ -396,6 +449,10 @@ def _import_virtools_groups(
             gpoper.clear_groups()
             gpoper.add_groups(mapv)
 
+        # step
+        progress.step()
+
+    # leave progress
     progress.leave_substeps()
 
 

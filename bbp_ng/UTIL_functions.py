@@ -52,6 +52,11 @@ def message_box(message: tuple[str, ...], title: str, icon: str):
 
     bpy.context.window_manager.popup_menu(draw, title = title, icon = icon)
 
+def add_into_scene(obj: bpy.types.Object):
+    view_layer = bpy.context.view_layer
+    collection = view_layer.active_layer_collection.collection
+    collection.objects.link(obj)
+
 def move_to_cursor(obj: bpy.types.Object):
     # use obj.matrix_world to move, not obj.location because this bug:
     # https://blender.stackexchange.com/questions/27667/incorrect-matrix-world-after-transformation
@@ -62,10 +67,7 @@ def move_to_cursor(obj: bpy.types.Object):
     obj.matrix_world = obj.matrix_world @ mathutils.Matrix.Translation(bpy.context.scene.cursor.location - obj.location)
 
 def add_into_scene_and_move_to_cursor(obj: bpy.types.Object):
-    view_layer = bpy.context.view_layer
-    collection = view_layer.active_layer_collection.collection
-    collection.objects.link(obj)
-
+    add_into_scene(obj)
     move_to_cursor(obj)
 
 def select_certain_objects(objs: tuple[bpy.types.Object, ...]) -> None:

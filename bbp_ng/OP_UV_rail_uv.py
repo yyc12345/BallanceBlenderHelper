@@ -10,7 +10,7 @@ class BBP_OT_rail_uv(bpy.types.Operator):
     bl_options = {'UNDO'}
 
     @classmethod
-    def poll(self, context):
+    def poll(cls, context):
         return _check_rail_target()
 
     def invoke(self, context, event):

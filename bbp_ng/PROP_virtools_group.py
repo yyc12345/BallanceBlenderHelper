@@ -297,7 +297,7 @@ class BBP_OT_add_virtools_group(bpy.types.Operator, SharedGroupNameInputProperti
     bl_options = {'UNDO'}
     
     @classmethod
-    def poll(self, context: bpy.types.Context):
+    def poll(cls, context: bpy.types.Context):
         return context.object is not None
     
     def invoke(self, context, event):
@@ -324,7 +324,7 @@ class BBP_OT_rm_virtools_group(bpy.types.Operator):
     #  Then pass it to helper.
     
     @classmethod
-    def poll(self, context: bpy.types.Context):
+    def poll(cls, context: bpy.types.Context):
         if context.object is None:
             return False
         
@@ -351,7 +351,7 @@ class BBP_OT_clear_virtools_groups(bpy.types.Operator):
     bl_options = {'UNDO'}
     
     @classmethod
-    def poll(self, context: bpy.types.Context):
+    def poll(cls, context: bpy.types.Context):
         return context.object is not None
     
     def invoke(self, context, event):

@@ -67,20 +67,31 @@ class ConflictResolver():
     """
     
     __mObjectStrategy: ConflictStrategy
+    __mLightStrategy: ConflictStrategy
     __mMeshStrategy: ConflictStrategy
     __mMaterialStrategy: ConflictStrategy
     __mTextureStrategy: ConflictStrategy
 
-    def __init__(self, obj_strategy: ConflictStrategy, mesh_strategy: ConflictStrategy, mtl_strategy: ConflictStrategy, tex_strategy: ConflictStrategy):
+    def __init__(self, 
+            obj_strategy: ConflictStrategy, 
+            light_strategy: ConflictStrategy, 
+            mesh_strategy: ConflictStrategy, 
+            mtl_strategy: ConflictStrategy, 
+            tex_strategy: ConflictStrategy):
         self.__mObjectStrategy = obj_strategy
+        self.__mLightStrategy = light_strategy
         self.__mMeshStrategy = mesh_strategy
         self.__mMaterialStrategy = mtl_strategy
         self.__mTextureStrategy = tex_strategy
 
-    def create_object(self, name: str, data: bpy.types.Mesh) -> tuple[bpy.types.Object, bool]:
+    def create_object(self, name: str, data: bpy.types.Mesh | None) -> tuple[bpy.types.Object, bool]:
         """
         Create object according to conflict strategy.
-        `data` will only be applied when creating new object (no existing instance or strategy order rename)
+        `data` will only be applied when creating new object (no existing instance or strategy order rename).
+
+        Please note this function is only used to create mesh 3d object.
+        If you want to create light object, please use other functions provided by this class.
+        The 3d object and data block of light is created together.
         """
         if self.__mObjectStrategy == ConflictStrategy.Current:
             old: bpy.types.Object | None = bpy.data.objects.get(name, None)
@@ -88,6 +99,26 @@ class ConflictResolver():
                 return (old, False)
         return (bpy.data.objects.new(name, data), True)
     
+    def create_light(self, name: str) -> tuple[bpy.types.Object, bpy.types.Light, bool]:
+        """
+        Create light data block and associated 3d object.
+
+        If conflict strategy is "Current", we try fetch 3d object with given name first,
+        then check whether it is light.
+        If no given name object or this object is not light, we create a new one,
+        otherwise return old one.
+        """
+        if self.__mLightStrategy == ConflictStrategy.Current:
+            old_obj: bpy.types.Object | None = bpy.data.objects.get(name, None)
+            if old_obj is not None and old_obj.type == 'LIGHT':
+                return (old_obj, typing.cast(bpy.types.Light, old_obj.data), False)
+        # create new object.
+        # if object or light name is conflict, rename it directly without considering conflict strategy.
+        # create light with default point light type
+        new_light: bpy.types.Light = bpy.data.lights.new(name, 'POINT')
+        new_obj: bpy.types.Object = bpy.data.objects.new(name, new_light)
+        return (new_obj, new_light, True)
+
     def create_mesh(self, name: str) -> tuple[bpy.types.Mesh, bool]:
         if self.__mMeshStrategy == ConflictStrategy.Current:
             old: bpy.types.Mesh | None = bpy.data.meshes.get(name, None)
@@ -144,6 +175,13 @@ class ImportParams():
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
     ) # type: ignore
 
+    light_conflict_strategy: bpy.props.EnumProperty(
+        name = "Light Name Conflict",
+        items = _g_EnumHelper_ConflictStrategy.generate_items(),
+        description = "Define how to process light name conflict",
+        default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+    ) # type: ignore
+
     object_conflict_strategy: bpy.props.EnumProperty(
         name = "Object Name Conflict",
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
@@ -160,6 +198,8 @@ class ImportParams():
 
         body.label(text = 'Object Name Conflict')
         body.prop(self, 'object_conflict_strategy', text = '')
+        body.label(text = 'Light Name Conflict')
+        body.prop(self, 'light_conflict_strategy', text = '')
         body.label(text = 'Mesh Name Conflict')
         body.prop(self, 'mesh_conflict_strategy', text = '')
         body.label(text = 'Material Name Conflict')
@@ -176,12 +216,16 @@ class ImportParams():
     def general_get_mesh_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.mesh_conflict_strategy)
 
+    def general_get_light_conflict_strategy(self) -> ConflictStrategy:
+        return _g_EnumHelper_ConflictStrategy.get_selection(self.light_conflict_strategy)
+
     def general_get_object_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.object_conflict_strategy)
 
     def general_get_conflict_resolver(self) -> ConflictResolver:
         return ConflictResolver(
             self.general_get_object_conflict_strategy(),
+            self.general_get_light_conflict_strategy(),
             self.general_get_mesh_conflict_strategy(),
             self.general_get_material_conflict_strategy(),
             self.general_get_texture_conflict_strategy()
