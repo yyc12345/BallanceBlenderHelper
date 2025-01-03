@@ -50,6 +50,7 @@ class BBP_OT_select_object_by_virtools_group(bpy.types.Operator, PROP_virtools_g
 
     def execute(self, context):
         _select_object_by_virtools_group(
+            context,
             self.general_get_group_name(),
             _g_EnumHelper_SelectMode.get_selection(self.selection_mode)
         )
@@ -65,17 +66,17 @@ class BBP_OT_select_object_by_virtools_group(bpy.types.Operator, PROP_virtools_g
         layout.label(text='Group Parameters')
         self.draw_group_name_input(layout)
 
-def _select_object_by_virtools_group(group_name: str, mode: SelectMode) -> None:
+def _select_object_by_virtools_group(context: bpy.types.Context, group_name: str, mode: SelectMode) -> None:
     match(mode):
         case SelectMode.Set:
             # iterate all objects and directly set
-            for obj in bpy.context.scene.objects:
+            for obj in context.scene.objects:
                 # check group and decide whether select this obj
                 with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                     obj.select_set(gp.contain_group(group_name))
         case SelectMode.Extend:
             # also iterate all objects
-            for obj in bpy.context.scene.objects:
+            for obj in context.scene.objects:
                 # but only increase selection, for selected object, skip check
                 if obj.select_get(): continue
                 # if not selected, check whether add it.
@@ -86,7 +87,7 @@ def _select_object_by_virtools_group(group_name: str, mode: SelectMode) -> None:
             # subtract only involving selected item. so we get selected objest first
             # and copy it (because we need modify it)
             # and iterate it to reduce useless operations
-            selected = bpy.context.selected_objects[:]
+            selected = context.selected_objects[:]
             for obj in selected:
                 # remove matched only
                 with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
@@ -94,16 +95,16 @@ def _select_object_by_virtools_group(group_name: str, mode: SelectMode) -> None:
                         obj.select_set(False)
         case SelectMode.Difference:
             # construct a selected obj set for convenient operations
-            selected_set = set(bpy.context.selected_objects)
+            selected_set = set(context.selected_objects)
             # iterate all objects
-            for obj in bpy.context.scene.objects:
+            for obj in context.scene.objects:
                 with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                     # use xor to select
                     # in_selected XOR in_group
                     obj.select_set((obj in selected_set) ^ gp.contain_group(group_name))
         case SelectMode.Intersect:
             # like subtract, only iterate selected obj
-            selected = bpy.context.selected_objects[:]
+            selected = context.selected_objects[:]
             for obj in selected:
                 # but remove not matched
                 with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
@@ -124,7 +125,7 @@ class BBP_OT_add_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.
 
     @classmethod
     def poll(cls, context):
-        return len(bpy.context.selected_objects) != 0
+        return len(context.selected_objects) != 0
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -132,7 +133,7 @@ class BBP_OT_add_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.
 
     def execute(self, context):
         group_name: str = self.general_get_group_name()
-        for obj in bpy.context.selected_objects:
+        for obj in context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.add_group(group_name)
         self.report({'INFO'}, "Grouping objects successfully.")
@@ -149,7 +150,7 @@ class BBP_OT_rm_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.S
 
     @classmethod
     def poll(cls, context):
-        return len(bpy.context.selected_objects) != 0
+        return len(context.selected_objects) != 0
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -157,7 +158,7 @@ class BBP_OT_rm_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.S
 
     def execute(self, context):
         group_name: str = self.general_get_group_name()
-        for obj in bpy.context.selected_objects:
+        for obj in context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.remove_group(group_name)
         self.report({'INFO'}, "Ungrouping objects successfully.")
@@ -174,7 +175,7 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        return len(bpy.context.selected_objects) != 0
+        return len(context.selected_objects) != 0
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -182,7 +183,7 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
 
     def execute(self, context):
         # iterate object
-        for obj in bpy.context.selected_objects:
+        for obj in context.selected_objects:
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
                 gp.clear_groups()
         self.report({'INFO'}, "Clear objects groups successfully.")

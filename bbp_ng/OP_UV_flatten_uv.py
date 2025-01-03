@@ -135,7 +135,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-        obj = bpy.context.active_object
+        obj = context.active_object
         if obj is None:
             return False
         if obj.type != 'MESH':
@@ -162,7 +162,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             return {'CANCELLED'}
 
         # do flatten uv and report
-        failed: int = _flatten_uv_wrapper(bpy.context.active_object.data, flatten_param_)
+        failed: int = _flatten_uv_wrapper(context.active_object.data, flatten_param_)
         if failed != 0:
             print(f'[Flatten UV] {failed} faces are not be processed correctly because process failed.')
         return {'FINISHED'}
