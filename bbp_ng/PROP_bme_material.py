@@ -63,6 +63,11 @@ _g_BMEMaterialPresets: dict[str, _BMEMaterialPreset] = {
         'Ball_Wood.bmp', 
         PROP_virtools_material.get_virtools_material_preset(PROP_virtools_material.MaterialPresetType.TraforWoodStone).mData
     ),
+
+    'Rail': _BMEMaterialPreset(
+        'Rail_Environment.bmp', 
+        PROP_virtools_material.get_virtools_material_preset(PROP_virtools_material.MaterialPresetType.Rail).mData
+    ),
 }
 
 #endregion

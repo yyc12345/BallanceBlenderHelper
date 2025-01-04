@@ -1,6 +1,7 @@
 import bpy, bmesh, mathutils, math
 import typing
 from . import UTIL_functions, UTIL_naming_convension
+from . import PROP_bme_material
 
 ## Const Value Hint:
 #  Default Rail Radius: 0.35 (in measure)
@@ -162,8 +163,9 @@ class SharedScrewRailInputProperty():
 
     rail_screw_radius: bpy.props.FloatProperty(
         name = "Radius",
-        description = "The screw radius. Minus radius will flip the built screw.",
+        description = "The screw radius.",
         default = 5,
+        min = 0,
         unit = 'LENGTH'
     ) # type: ignore
 
@@ -441,7 +443,10 @@ class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputPr
 
 #region BMesh Operations Helper
 
-def _bmesh_extrude(bm: bmesh.types.BMesh, start_edges: list[bmesh.types.BMEdge], direction: mathutils.Vector) -> list[bmesh.types.BMEdge]:
+def _bmesh_extrude(
+        bm: bmesh.types.BMesh, 
+        start_edges: list[bmesh.types.BMEdge], 
+        direction: mathutils.Vector) -> list[bmesh.types.BMEdge]:
     # extrude
     ret: dict[str, typing.Any] = bmesh.ops.extrude_edge_only(
         bm,
@@ -485,7 +490,7 @@ def _bmesh_screw(
         space = mathutils.Matrix.Identity(4),
         steps = steps * iterations,
         use_merge = False,
-        use_normal_flip = True, # NOTE: flip nml according to real test result
+        use_normal_flip = True, # NOTE: flip normal according to test result.
         use_duplicate = False
     )
 
@@ -538,6 +543,12 @@ def _rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], No
     
     # setup smooth for mesh
     mesh.shade_smooth()
+
+    # setup default material
+    with PROP_bme_material.BMEMaterialsHelper(bpy.context.scene) as bmemtl:
+        mesh.materials.clear()
+        mesh.materials.append(bmemtl.get_material('Rail'))
+        mesh.validate_material_indices()
 
     # create object and assoc with it
     # create info first
@@ -662,7 +673,9 @@ def _create_straight_rail(
     start_edges: list[bmesh.types.BMEdge] = bm.edges[:]
     # extrude and get end edges
     end_edges: list[bmesh.types.BMEdge] = _bmesh_extrude(
-        bm, start_edges, mathutils.Vector((0, rail_length, 0))
+        bm, 
+        start_edges, 
+        mathutils.Vector((0, rail_length, 0))
     )
 
     # smooth geometry
@@ -693,7 +706,9 @@ def _create_transition_rail(
     start_edges: list[bmesh.types.BMEdge] = bm.edges[:]
     # extrude and get end edges
     end_edges: list[bmesh.types.BMEdge] = _bmesh_extrude(
-        bm, start_edges, mathutils.Vector((0, rail_length, 0))
+        bm, 
+        start_edges, 
+        mathutils.Vector((0, rail_length, 0))
     )
 
     # smooth geometry
