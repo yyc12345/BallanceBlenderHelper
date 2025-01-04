@@ -220,7 +220,7 @@ def _export_virtools_light(
         light_crets: tuple[_TLightPair, ...]
         ) -> None:
     # start saving
-    progress.enter_substeps(0, "Saving Lights")
+    progress.enter_substeps(len(light_crets), "Saving Lights")
     
     for obj3d, light, vtlight in light_crets:
         # set name
