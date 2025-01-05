@@ -22,7 +22,7 @@ from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 from . import OP_MTL_fix_material
 from . import OP_ADDS_component, OP_ADDS_bme, OP_ADDS_rail
-from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_naming_convention
+from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_snoop_group_then_to_mesh, OP_OBJECT_naming_convention
 
 #region Menu
 
@@ -148,6 +148,12 @@ def menu_drawer_grouping(self, context) -> None:
     col.operator(OP_OBJECT_virtools_group.BBP_OT_rm_objects_virtools_group.bl_idname, icon = 'REMOVE', text = "Ungroup from...")
     col.operator(OP_OBJECT_virtools_group.BBP_OT_clear_objects_virtools_group.bl_idname, icon = 'TRASH', text = "Clear All Groups")
 
+def menu_drawer_snoop_then_conv(self, context) -> None:
+    layout: bpy.types.UILayout = self.layout
+    layout.separator()
+    layout.label(text = "Ballance")
+    layout.operator(OP_OBJECT_snoop_group_then_to_mesh.BBP_OT_snoop_group_then_to_mesh.bl_idname, icon = 'OUTLINER_OB_MESH')
+
 def menu_drawer_naming_convention(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
@@ -187,6 +193,8 @@ g_BldMenus: tuple[MenuEntry, ...] = (
      MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
      MenuEntry(bpy.types.VIEW3D_MT_add, True, menu_drawer_add),
 
+     MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_snoop_then_conv),
+
     # register double (for 2 menus)
      MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_grouping),
      MenuEntry(bpy.types.OUTLINER_MT_object, True, menu_drawer_grouping),
@@ -224,6 +232,7 @@ def register() -> None:
 
     OP_OBJECT_legacy_align.register()
     OP_OBJECT_virtools_group.register()
+    OP_OBJECT_snoop_group_then_to_mesh.register()
     OP_OBJECT_naming_convention.register()
 
     # register other classes
@@ -248,6 +257,7 @@ def unregister() -> None:
 
     # unregister modules
     OP_OBJECT_naming_convention.unregister()
+    OP_OBJECT_snoop_group_then_to_mesh.unregister()
     OP_OBJECT_virtools_group.unregister()
     OP_OBJECT_legacy_align.unregister()
 

@@ -377,7 +377,13 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
     
     def draw(self, context):
         layout = self.layout
-        target = bpy.context.active_object
+        target = typing.cast(bpy.types.Object, context.active_object)
+
+        # notify on non-mesh object
+        if target.type != 'MESH':
+            layout.label(text = 'Virtools Group is invalid on non-mesh object!', icon = 'ERROR')
+
+        # draw main body
         
         row = layout.row()
         row.template_list(
