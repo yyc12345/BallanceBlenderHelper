@@ -27,15 +27,10 @@ class BBP_OT_snoop_group_then_to_mesh(bpy.types.Operator):
             if bevel_obj is None: continue
 
             # copy bevel object group info into current object
-            # MARK: VirtoolsGroupsHelper is self-mutex.
-            # we only can operate one VirtoolsGroupsHelper at the same time.
-            # so we extract bevel object group infos then apply to target later.
-            group_infos: tuple[str, ...]
-            with PROP_virtools_group.VirtoolsGroupsHelper(bevel_obj) as bevel_gp:
-                group_infos = tuple(bevel_gp.iterate_groups())
             with PROP_virtools_group.VirtoolsGroupsHelper(obj) as this_gp:
                 this_gp.clear_groups()
-                this_gp.add_groups(group_infos)
+                with PROP_virtools_group.VirtoolsGroupsHelper(bevel_obj) as bevel_gp:
+                    this_gp.add_groups(bevel_gp.iterate_groups())
 
         # convert all selected object to mesh 
         # no matter the success of copying virtools group infos and whether selected object is curve

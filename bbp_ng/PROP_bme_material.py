@@ -85,8 +85,8 @@ class BBP_PG_bme_material(bpy.types.PropertyGroup):
         type = bpy.types.Material
     ) # type: ignore
 
-def get_bme_materials(scene: bpy.types.Scene) -> bpy.types.CollectionProperty:
-    return scene.bme_materials
+def get_bme_materials(scene: bpy.types.Scene) -> UTIL_functions.CollectionVisitor[BBP_PG_bme_material]:
+    return UTIL_functions.CollectionVisitor(scene.bme_materials)
 
 #endregion
 
@@ -126,7 +126,7 @@ class BMEMaterialsHelper():
     This class should only have 1 instance at the same time. This class support `with` syntax to achieve this.
     This class frequently used in creating BME meshes.
     """
-    __mSingletonMutex: typing.ClassVar[bool] = False
+    __mSingletonMutex: typing.ClassVar[UTIL_functions.TinyMutex[bpy.types.Scene]] = UTIL_functions.TinyMutex()
     __mIsValid: bool
     __mAssocScene: bpy.types.Scene
     __mMaterialMap: dict[str, bpy.types.Material]
@@ -134,14 +134,11 @@ class BMEMaterialsHelper():
     def __init__(self, assoc: bpy.types.Scene):
         self.__mMaterialMap = {}
         self.__mAssocScene = assoc
+        self.__mIsValid = False
 
         # check singleton
-        if BMEMaterialsHelper.__mSingletonMutex:
-            self.__mIsValid = False
-            raise UTIL_functions.BBPException('BMEMaterialsHelper is mutex.')
-        
+        BMEMaterialsHelper.__mSingletonMutex.lock(self.__mAssocScene)
         # set validation and read ballance elements property
-        BMEMaterialsHelper.__mSingletonMutex = True
         self.__mIsValid = True
         self.__read_from_bme_materials()
 
@@ -159,7 +156,7 @@ class BMEMaterialsHelper():
             # write to ballance elements property and reset validation
             self.__write_to_bme_materials()
             self.__mIsValid = False
-            BMEMaterialsHelper.__mSingletonMutex = False
+            BMEMaterialsHelper.__mSingletonMutex.unlock(self.__mAssocScene)
     
     def get_material(self, preset_name: str) -> bpy.types.Material:
         if not self.is_valid():
@@ -179,7 +176,7 @@ class BMEMaterialsHelper():
         return new_mtl
 
     def __write_to_bme_materials(self) -> None:
-        mtls: bpy.types.CollectionProperty = get_bme_materials(self.__mAssocScene)
+        mtls = get_bme_materials(self.__mAssocScene)
         mtls.clear()
 
         for preset_name, mtl in self.__mMaterialMap.items():
@@ -188,10 +185,9 @@ class BMEMaterialsHelper():
             item.material_ptr = mtl
 
     def __read_from_bme_materials(self) -> None:
-        mtls: bpy.types.CollectionProperty = get_bme_materials(self.__mAssocScene)
+        mtls = get_bme_materials(self.__mAssocScene)
         self.__mMaterialMap.clear()
 
-        item: BBP_PG_bme_material
         for item in mtls:
             # check requirements
             if item.material_ptr is None: continue
@@ -200,7 +196,7 @@ class BMEMaterialsHelper():
 
 def reset_bme_materials(scene: bpy.types.Scene) -> None:
     invalid_idx: list[int] = []
-    mtls: bpy.types.CollectionProperty = get_bme_materials(scene)
+    mtls = get_bme_materials(scene)
 
     # re-load all elements
     index: int = 0

@@ -104,8 +104,8 @@ class BBP_PG_ballance_element(bpy.types.PropertyGroup):
         type = bpy.types.Mesh
     ) # type: ignore
 
-def get_ballance_elements(scene: bpy.types.Scene) -> bpy.types.CollectionProperty:
-    return scene.ballance_elements
+def get_ballance_elements(scene: bpy.types.Scene) -> UTIL_functions.CollectionVisitor[BBP_PG_ballance_element]:
+    return UTIL_functions.CollectionVisitor(scene.ballance_elements)
 
 #endregion
 
@@ -224,7 +224,7 @@ class BallanceElementsHelper():
     This class should only have 1 instance at the same time. This class support `with` syntax to achieve this.
     This class frequently used in importing stage to create element placeholder.
     """
-    __mSingletonMutex: typing.ClassVar[bool] = False
+    __mSingletonMutex: typing.ClassVar[UTIL_functions.TinyMutex[bpy.types.Scene]] = UTIL_functions.TinyMutex()
     __mIsValid: bool
     __mAssocScene: bpy.types.Scene
     __mElementMap: dict[BallanceElementType, bpy.types.Mesh]
@@ -232,14 +232,11 @@ class BallanceElementsHelper():
     def __init__(self, assoc: bpy.types.Scene):
         self.__mElementMap = {}
         self.__mAssocScene = assoc
+        self.__mIsValid = False
 
         # check singleton
-        if BallanceElementsHelper.__mSingletonMutex:
-            self.__mIsValid = False
-            raise UTIL_functions.BBPException('BallanceElementsHelper is mutex.')
-        
+        BallanceElementsHelper.__mSingletonMutex.lock(self.__mAssocScene)
         # set validation and read ballance elements property
-        BallanceElementsHelper.__mSingletonMutex = True
         self.__mIsValid = True
         self.__read_from_ballance_element()
 
@@ -257,7 +254,7 @@ class BallanceElementsHelper():
             # write to ballance elements property and reset validation
             self.__write_to_ballance_elements()
             self.__mIsValid = False
-            BallanceElementsHelper.__mSingletonMutex = False
+            BallanceElementsHelper.__mSingletonMutex.unlock(self.__mAssocScene)
     
     def get_element(self, element_type: BallanceElementType) -> bpy.types.Mesh:
         if not self.is_valid():
@@ -276,8 +273,16 @@ class BallanceElementsHelper():
         self.__mElementMap[element_type] = new_mesh
         return new_mesh
 
+    def reset_elements(self) -> None:
+        if not self.is_valid():
+            raise UTIL_functions.BBPException('calling invalid BallanceElementsHelper')
+        
+        # reload all items
+        for elety, elemesh in self.__mElementMap.items():
+            _load_element(elemesh, elety)
+
     def __write_to_ballance_elements(self) -> None:
-        elements: bpy.types.CollectionProperty = get_ballance_elements(self.__mAssocScene)
+        elements = get_ballance_elements(self.__mAssocScene)
         elements.clear()
 
         for elety, elemesh in self.__mElementMap.items():
@@ -286,10 +291,9 @@ class BallanceElementsHelper():
             item.mesh_ptr = elemesh
 
     def __read_from_ballance_element(self) -> None:
-        elements: bpy.types.CollectionProperty = get_ballance_elements(self.__mAssocScene)
+        elements = get_ballance_elements(self.__mAssocScene)
         self.__mElementMap.clear()
 
-        item: BBP_PG_ballance_element
         for item in elements:
             # check requirements
             if item.mesh_ptr is None: continue
@@ -298,30 +302,6 @@ class BallanceElementsHelper():
 
             # add into map
             self.__mElementMap[element_type] = item.mesh_ptr
-
-def reset_ballance_elements(scene: bpy.types.Scene) -> None:
-    invalid_idx: list[int] = []
-    elements: bpy.types.CollectionProperty = get_ballance_elements(scene)
-
-    # re-load all elements
-    index: int = 0
-    item: BBP_PG_ballance_element
-    for item in elements:
-        elety: BallanceElementType | None = get_ballance_element_type_from_id(item.element_id)
-
-        # load or record invalid entry
-        if elety is None or item.mesh_ptr is None:
-            invalid_idx.append(index)
-        else:
-            _load_element(item.mesh_ptr, elety)
-
-        # inc counter
-        index += 1
-
-    # remove invalid one with reversed order
-    invalid_idx.reverse()
-    for idx in invalid_idx:
-        elements.remove(idx)
 
 #endregion
 
@@ -348,7 +328,8 @@ class BBP_OT_reset_ballance_elements(bpy.types.Operator):
         return context.scene is not None
     
     def execute(self, context):
-        reset_ballance_elements(context.scene)
+        with BallanceElementsHelper(context.scene) as helper:
+            helper.reset_elements()
         # show a window to let user know, not silence
         UTIL_functions.message_box(
             ('Reset OK.', ),

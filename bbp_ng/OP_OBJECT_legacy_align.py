@@ -84,11 +84,13 @@ class BBP_OT_legacy_align(bpy.types.Operator):
 
         # check whether add new entry
         # if no selected axis, this alignment is invalid
-        entry: BBP_PG_legacy_align_history = self.align_history[-1]
+        histories: UTIL_functions.CollectionVisitor[BBP_PG_legacy_align_history]
+        histories = UTIL_functions.CollectionVisitor(self.align_history)
+        entry: BBP_PG_legacy_align_history = histories[-1]
         if entry.align_x == True or entry.align_y == True or entry.align_z == True:
             # valid one
             # add a new entry in history
-            self.align_history.add()
+            histories.add()
         else:
             # invalid one
             # reset all data to default
@@ -127,9 +129,11 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         return _check_align_requirement()
 
     def invoke(self, context, event):
+        histories: UTIL_functions.CollectionVisitor[BBP_PG_legacy_align_history]
+        histories = UTIL_functions.CollectionVisitor(self.align_history)
         # clear history and add 1 entry for following functions
-        self.align_history.clear()
-        self.align_history.add()
+        histories.clear()
+        histories.add()
         # run execute() function
         return self.execute(context)
     
@@ -145,8 +149,9 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         # If you place it at the end of this function, it doesn't work.
         context.view_layer.update()
         # iterate history to align objects
-        entry: BBP_PG_legacy_align_history
-        for entry in self.align_history:
+        histories: UTIL_functions.CollectionVisitor[BBP_PG_legacy_align_history]
+        histories = UTIL_functions.CollectionVisitor(self.align_history)
+        for entry in histories:
             _align_objects(
                 current_obj, target_objs,
                 entry.align_x, entry.align_y, entry.align_z,
@@ -157,7 +162,9 @@ class BBP_OT_legacy_align(bpy.types.Operator):
 
     def draw(self, context):
         # get last entry in history to show
-        entry: BBP_PG_legacy_align_history = self.align_history[-1]
+        histories: UTIL_functions.CollectionVisitor[BBP_PG_legacy_align_history]
+        histories = UTIL_functions.CollectionVisitor(self.align_history)
+        entry: BBP_PG_legacy_align_history = histories[-1]
 
         layout = self.layout
         col = layout.column()
@@ -183,7 +190,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         conditional_disable_area.enabled = entry.align_x == True or entry.align_y == True or entry.align_z == True
         # show apply and counter
         conditional_disable_area.prop(self, 'apply_flag', text = 'Apply', icon = 'CHECKMARK', toggle = 1)
-        conditional_disable_area.label(text = f'Total {len(self.align_history) - 1} applied alignments')
+        conditional_disable_area.label(text = f'Total {len(histories) - 1} applied alignments')
 
 #region Core Functions
 

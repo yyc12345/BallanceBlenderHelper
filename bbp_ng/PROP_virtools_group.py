@@ -10,8 +10,8 @@ class BBP_PG_virtools_group(bpy.types.PropertyGroup):
         default = ""
     ) # type: ignore
 
-def get_virtools_groups(obj: bpy.types.Object) -> bpy.types.CollectionProperty:
-    return obj.virtools_groups
+def get_virtools_groups(obj: bpy.types.Object) -> UTIL_functions.CollectionVisitor[BBP_PG_virtools_group]:
+    return UTIL_functions.CollectionVisitor(obj.virtools_groups)
 
 def get_active_virtools_groups(obj: bpy.types.Object) -> int:
     return obj.active_virtools_groups
@@ -26,7 +26,7 @@ class VirtoolsGroupsHelper():
     All Virtools group operations should be done by this class.
     Do NOT manipulate object's Virtools group properties directly.
     """
-    __mSingletonMutex: typing.ClassVar[bool] = False
+    __mSingletonMutex: typing.ClassVar[UTIL_functions.TinyMutex[bpy.types.Object]] = UTIL_functions.TinyMutex()
     __mIsValid: bool
     __mNoChange: bool ##< A bool indicate whether any change happended during lifetime. If no change, skip the writing when exiting.
     __mAssocObj: bpy.types.Object
@@ -36,14 +36,11 @@ class VirtoolsGroupsHelper():
         self.__mGroupsSet = set()
         self.__mAssocObj = assoc
         self.__mNoChange = True
+        self.__mIsValid = False
         
         # check singleton
-        if VirtoolsGroupsHelper.__mSingletonMutex:
-            self.__mIsValid = False
-            raise UTIL_functions.BBPException('VirtoolsGroupsHelper is mutex.')
-        
+        VirtoolsGroupsHelper.__mSingletonMutex.lock(self.__mAssocObj)
         # set validation and read ballance elements property
-        VirtoolsGroupsHelper.__mSingletonMutex = True
         self.__mIsValid = True
         self.__read_from_virtools_groups()
     
@@ -63,7 +60,7 @@ class VirtoolsGroupsHelper():
             if not self.__mNoChange:
                 self.__write_to_virtools_groups()
             self.__mIsValid = False
-            VirtoolsGroupsHelper.__mSingletonMutex = False
+            VirtoolsGroupsHelper.__mSingletonMutex.unlock(self.__mAssocObj)
     
     def __check_valid(self) -> None:
         if not self.is_valid():
@@ -127,7 +124,7 @@ class VirtoolsGroupsHelper():
         return len(self.__mGroupsSet)
     
     def __write_to_virtools_groups(self) -> None:
-        groups: bpy.types.CollectionProperty = get_virtools_groups(self.__mAssocObj)
+        groups = get_virtools_groups(self.__mAssocObj)
         sel: int = get_active_virtools_groups(self.__mAssocObj)
         groups.clear()
         
@@ -143,10 +140,9 @@ class VirtoolsGroupsHelper():
         set_active_virtools_groups(self.__mAssocObj, sel)
     
     def __read_from_virtools_groups(self) -> None:
-        groups: bpy.types.CollectionProperty = get_virtools_groups(self.__mAssocObj)
+        groups = get_virtools_groups(self.__mAssocObj)
         self.__mGroupsSet.clear()
         
-        item: BBP_PG_virtools_group
         for item in groups:
             self.__mGroupsSet.add(item.group_name)
 
@@ -306,7 +302,8 @@ class BBP_OT_add_virtools_group(bpy.types.Operator, SharedGroupNameInputProperti
     
     def execute(self, context):
         # add group
-        with VirtoolsGroupsHelper(context.object) as hlp:
+        obj = typing.cast(bpy.types.Object, context.object)
+        with VirtoolsGroupsHelper(obj) as hlp:
             hlp.add_group(self.general_get_group_name())
         return {'FINISHED'}
     
@@ -335,8 +332,9 @@ class BBP_OT_rm_virtools_group(bpy.types.Operator):
     
     def execute(self, context):
         # get selected group name first
-        obj = context.object
-        item: BBP_PG_virtools_group = get_virtools_groups(obj)[get_active_virtools_groups(obj)]
+        obj = typing.cast(bpy.types.Object, context.object)
+        groups = get_virtools_groups(obj)
+        item = groups[get_active_virtools_groups(obj)]
         gname: str = item.group_name
         # then delete it
         with VirtoolsGroupsHelper(obj) as hlp:
@@ -359,7 +357,8 @@ class BBP_OT_clear_virtools_groups(bpy.types.Operator):
         return wm.invoke_confirm(self, event)
     
     def execute(self, context):
-        with VirtoolsGroupsHelper(context.object) as hlp:
+        obj = typing.cast(bpy.types.Object, context.object)
+        with VirtoolsGroupsHelper(obj) as hlp:
             hlp.clear_groups()
         return {'FINISHED'}
 
@@ -384,7 +383,6 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
             layout.label(text = 'Virtools Group is invalid on non-mesh object!', icon = 'ERROR')
 
         # draw main body
-        
         row = layout.row()
         row.template_list(
             "BBP_UL_virtools_groups", "", 

@@ -96,27 +96,29 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
 
         # init data collection
+        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # clear first
-        self.bme_struct_cfgs.clear()
+        adder_cfgs_visitor.clear()
         # create enough entries specified by gotten cfgs
         for _ in range(max(counter_int, counter_float, counter_bool)):
-            self.bme_struct_cfgs.add()
+            adder_cfgs_visitor.add()
 
         # assign default value
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    self.bme_struct_cfgs[cfg_index].prop_int = cfg.get_default()
+                    adder_cfgs_visitor[cfg_index].prop_int = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    self.bme_struct_cfgs[cfg_index].prop_float = cfg.get_default()
+                    adder_cfgs_visitor[cfg_index].prop_float = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    self.bme_struct_cfgs[cfg_index].prop_bool = cfg.get_default()
+                    adder_cfgs_visitor[cfg_index].prop_bool = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face is just 6 bool
                     default_values: tuple[bool, ...] = cfg.get_default()
                     for i in range(6):
-                        self.bme_struct_cfgs[cfg_index + i].prop_bool = default_values[i]
+                        adder_cfgs_visitor[cfg_index + i].prop_bool = default_values[i]
 
         # reset outdated flag
         self.outdated_flag = False
@@ -182,20 +184,23 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         # call internal updator
         self.__internal_update_bme_struct_type()
 
+        # create cfg visitor
+        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # collect cfgs data
         cfgs: dict[str, typing.Any] = {}
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_int
+                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_int
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_float
+                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_float
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    cfgs[cfg.get_field()] = self.bme_struct_cfgs[cfg_index].prop_bool
+                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_bool
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face is just 6 bool tuple
                     cfgs[cfg.get_field()] = tuple(
-                        self.bme_struct_cfgs[cfg_index + i].prop_bool for i in range(6)
+                        adder_cfgs_visitor[cfg_index + i].prop_bool for i in range(6)
                     )
 
         # call general creator
@@ -225,6 +230,9 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         # show type
         layout.prop(self, 'bme_struct_type')
 
+        # create cfg visitor
+        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # visit cfgs cache list to show cfg
         layout.label(text = "Prototype Configurations:")
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
@@ -238,24 +246,24 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_int', text = '')
+                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_int', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_float', text = '')
+                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_float', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    box_layout.prop(self.bme_struct_cfgs[cfg_index], 'prop_bool', text = '')
+                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_bool', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face will show a special layout (grid view)
                     grids = box_layout.grid_flow(
                         row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
                     grids.alignment = 'CENTER'
                     grids.separator()
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 0], 'prop_bool', text = 'Top') # top
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 2], 'prop_bool', text = 'Front') # front
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 4], 'prop_bool', text = 'Left') # left
+                    grids.prop(adder_cfgs_visitor[cfg_index + 0], 'prop_bool', text = 'Top') # top
+                    grids.prop(adder_cfgs_visitor[cfg_index + 2], 'prop_bool', text = 'Front') # front
+                    grids.prop(adder_cfgs_visitor[cfg_index + 4], 'prop_bool', text = 'Left') # left
                     grids.label(text = '', icon = 'CUBE')   # show a 3d cube as icon
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 5], 'prop_bool', text = 'Right') # right
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 3], 'prop_bool', text = 'Back') # back
-                    grids.prop(self.bme_struct_cfgs[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
+                    grids.prop(adder_cfgs_visitor[cfg_index + 5], 'prop_bool', text = 'Right') # right
+                    grids.prop(adder_cfgs_visitor[cfg_index + 3], 'prop_bool', text = 'Back') # back
+                    grids.prop(adder_cfgs_visitor[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
                     grids.separator()
 
         # show extra transform props

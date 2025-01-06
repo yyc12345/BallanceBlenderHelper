@@ -173,3 +173,99 @@ class EnumPropHelper():
         # call to_str fct ptr
         return self.__mFctToStr(val)
 
+#region Blender Collection Visitor
+
+_TPropertyGroup = typing.TypeVar('_TPropertyGroup', bound = bpy.types.PropertyGroup)
+
+class CollectionVisitor(typing.Generic[_TPropertyGroup]):
+    """
+    This is a patch class for Blender collection property.
+    Blender collcetion property lack essential type hint and document.
+    So I create a wrapper for my personal use to reduce type hint errors raised by my linter.
+    """
+
+    __mSrcProp: bpy.types.CollectionProperty
+
+    def __init__(self, src_prop: bpy.types.CollectionProperty):
+        self.__mSrcProp = src_prop
+
+    def add(self) -> _TPropertyGroup:
+        """!
+        @brief Adds a new item to the collection.
+        @return The instance of newly created item.
+        """
+        return self.__mSrcProp.add()
+
+    def remove(self, index: int) -> None:
+        """!
+        @brief Removes the item at the specified index from the collection.
+        @param[in] index The index of the item to remove.
+        """
+        self.__mSrcProp.remove(index)
+
+    def move(self, from_index: int, to_index: int) -> None:
+        """!
+        @brief Moves an item from one index to another within the collection.
+        @param[in] from_index The current index of the item to move.
+        @param[in] to_index The target index where the item should be moved.
+        """
+        self.__mSrcProp.move(from_index, to_index)
+
+    def clear(self) -> None:
+        """!
+        @brief Clears all items from the collection.
+        """
+        self.__mSrcProp.clear()
+
+    def __len__(self) -> int:
+        return self.__mSrcProp.__len__()
+    def __getitem__(self, index: int | str) -> _TPropertyGroup:
+        return self.__mSrcProp.__getitem__(index)
+    def __setitem__(self, index: int | str, value: _TPropertyGroup) -> None:
+        self.__mSrcProp.__setitem__(index, value)
+    def __delitem__(self, index: int | str) -> None:
+        self.__mSrcProp.__delitem__(index)
+    def __iter__(self) -> typing.Iterator[_TPropertyGroup]:
+        return self.__mSrcProp.__iter__()
+    def __contains__(self, item: _TPropertyGroup) -> bool:
+        return self.__mSrcProp.__contains__(item)
+
+#endregion
+
+#region Tiny Mutex for With Context
+
+_TMutexObject = typing.TypeVar('_TMutexObject')
+
+class TinyMutex(typing.Generic[_TMutexObject]):
+    """
+    In this plugin, some class have "with" context feature.
+    However, it is essential to block any futher visiting if some "with" context are operating on some object.
+    This is the reason why this tiny mutex is designed.
+
+    Please note this class is not a real MUTEX.
+    We just want to make sure the resources only can be visited by one "with" context.
+    So it doesn't matter that we do not use lock before operating something.
+    """
+
+    __mProtectedObjects: set[_TMutexObject]
+
+    def __init__(self):
+        self.__mProtectedObjects = set()
+
+    def lock(self, obj: _TMutexObject) -> None:
+        if obj in self.__mProtectedObjects:
+            raise BBPException('It is not allowed that operate multiple "with" contexts on a single object.')
+        self.__mProtectedObjects.add(obj)
+
+    def try_lock(self, obj: _TMutexObject) -> bool:
+        if obj in self.__mProtectedObjects:
+            return False
+        self.__mProtectedObjects.add(obj)
+        return True
+
+    def unlock(self, obj: _TMutexObject) -> None:
+        if obj not in self.__mProtectedObjects:
+            raise BBPException('It is not allowed that unlock an non-existent object.')
+        self.__mProtectedObjects.remove(obj)
+
+#endregion
