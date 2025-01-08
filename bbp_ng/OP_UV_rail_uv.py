@@ -19,7 +19,7 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def execute(self, context):
         # check material
-        mtl: bpy.types.Material = PROP_ptrprop_resolver.get_rail_uv_material()
+        mtl: bpy.types.Material = PROP_ptrprop_resolver.PtrPropResolver.get_rail_uv_material()
         if mtl is None:
             UTIL_functions.message_box(
                 ("No specific material", ), 
@@ -34,7 +34,7 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def draw(self, context):
         layout: bpy.types.UILayout = self.layout
-        PROP_ptrprop_resolver.draw_rail_uv_material(layout)
+        PROP_ptrprop_resolver.PtrPropResolver.draw_rail_uv_material(layout)
 
 #region Real Worker Functions
 

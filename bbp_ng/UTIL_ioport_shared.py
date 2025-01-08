@@ -256,21 +256,21 @@ class ExportParams():
 
         # draw picker
         if self.export_mode == 'COLLECTION':
-            PROP_ptrprop_resolver.draw_export_collection(body)
+            PROP_ptrprop_resolver.PtrPropResolver.draw_export_collection(body)
         elif self.export_mode == 'OBJECT':
-            PROP_ptrprop_resolver.draw_export_object(body)
+            PROP_ptrprop_resolver.PtrPropResolver.draw_export_object(body)
 
     def general_get_export_objects(self) -> tuple[bpy.types.Object] | None:
         """
         Return resolved exported objects or None if no selection.
         """
         if self.export_mode == 'COLLECTION':
-            col: bpy.types.Collection = PROP_ptrprop_resolver.get_export_collection()
+            col: bpy.types.Collection = PROP_ptrprop_resolver.PtrPropResolver.get_export_collection()
             if col is None: return None
             else:
                 return tuple(col.all_objects)
         else:
-            obj: bpy.types.Object = PROP_ptrprop_resolver.get_export_object()
+            obj: bpy.types.Object = PROP_ptrprop_resolver.PtrPropResolver.get_export_object()
             if obj is None: return None
             else: return (obj, )
 
@@ -314,6 +314,7 @@ class VirtoolsParams():
         # draw encodings
         body.label(text = 'Encodings')
         body.prop(self, 'vt_encodings', text = '')
+        PROP_ptrprop_resolver.PtrPropResolver.draw_ioport_encodings(body)
 
         # following field are only valid in exporter
         if not is_importer:
