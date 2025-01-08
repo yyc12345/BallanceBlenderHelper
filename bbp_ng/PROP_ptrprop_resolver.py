@@ -1,6 +1,6 @@
 import bpy
 from bpy.types import Context, Event
-from . import UTIL_functions
+from . import UTIL_functions, UTIL_virtools_types
 
 ## Intent
 #  Operator is not allowed to register Pointer Properties.
@@ -45,15 +45,15 @@ class BBP_PG_ptrprop_resolver(bpy.types.PropertyGroup):
 
 #endregion
 
-def get_ptrprop_resolver() -> BBP_PG_ptrprop_resolver:
-    return bpy.context.scene.bbp_ptrprop_resolver
+def get_ptrprop_resolver(scene: bpy.types.Scene) -> BBP_PG_ptrprop_resolver:
+    return scene.bbp_ptrprop_resolver
 
-def get_ioport_encodings() -> UTIL_functions.CollectionVisitor[BBP_PG_bmap_encoding]:
-    return UTIL_functions.CollectionVisitor(get_ptrprop_resolver().ioport_encodings)
-def get_active_ioport_encoding() -> int:
-    return get_ptrprop_resolver().active_ioport_encodings
-def set_active_ioport_encoding(val: int) -> None:
-    get_ptrprop_resolver().active_ioport_encodings = val
+def get_ioport_encodings(scene: bpy.types.Scene) -> UTIL_functions.CollectionVisitor[BBP_PG_bmap_encoding]:
+    return UTIL_functions.CollectionVisitor(get_ptrprop_resolver(scene).ioport_encodings)
+def get_active_ioport_encoding(scene: bpy.types.Scene) -> int:
+    return get_ptrprop_resolver(scene).active_ioport_encodings
+def set_active_ioport_encoding(scene: bpy.types.Scene, val: int) -> None:
+    get_ptrprop_resolver(scene).active_ioport_encodings = val
 
 #region Blender Operator Defines for Encodings
 
@@ -68,7 +68,7 @@ class BBP_OT_add_ioport_encodings(bpy.types.Operator):
         return True
 
     def execute(self, context):
-        encodings = get_ioport_encodings()
+        encodings = get_ioport_encodings(context.scene)
         encodings.add()
         return {'FINISHED'}
 
@@ -80,13 +80,19 @@ class BBP_OT_rm_ioport_encodings(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
-        encodings = get_ioport_encodings()
-        index = get_active_ioport_encoding()
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
         return index >= 0 and index < len(encodings)
 
     def execute(self, context):
-        encodings = get_ioport_encodings()
-        encodings.remove(get_active_ioport_encoding())
+        # delete selected item
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
+        encodings.remove(index)
+        # try to correct selected item
+        if index >= len(encodings): index = len(encodings) - 1
+        if index < 0: index = 0
+        set_active_ioport_encoding(context.scene, index)
         return {'FINISHED'}
 
 class BBP_OT_up_ioport_encodings(bpy.types.Operator):
@@ -97,15 +103,15 @@ class BBP_OT_up_ioport_encodings(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
-        encodings = get_ioport_encodings()
-        index = get_active_ioport_encoding()
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
         return index >= 1 and index < len(encodings)
 
     def execute(self, context):
-        encodings = get_ioport_encodings()
-        index = get_active_ioport_encoding()
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
         encodings.move(index, index - 1)
-        set_active_ioport_encoding(index - 1)
+        set_active_ioport_encoding(context.scene, index - 1)
         return {'FINISHED'}
 
 class BBP_OT_down_ioport_encodings(bpy.types.Operator):
@@ -116,15 +122,15 @@ class BBP_OT_down_ioport_encodings(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
-        encodings = get_ioport_encodings()
-        index = get_active_ioport_encoding()
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
         return index >= 0 and index < len(encodings) - 1
 
     def execute(self, context):
-        encodings = get_ioport_encodings()
-        index = get_active_ioport_encoding()
+        encodings = get_ioport_encodings(context.scene)
+        index = get_active_ioport_encoding(context.scene)
         encodings.move(index, index + 1)
-        set_active_ioport_encoding(index + 1)
+        set_active_ioport_encoding(context.scene, index + 1)
         return {'FINISHED'}
 
 class BBP_OT_clear_ioport_encodings(bpy.types.Operator):
@@ -142,55 +148,46 @@ class BBP_OT_clear_ioport_encodings(bpy.types.Operator):
         return wm.invoke_confirm(self, event)
     
     def execute(self, context):
-        encodings = get_ioport_encodings()
+        encodings = get_ioport_encodings(context.scene)
         encodings.clear()
-        set_active_ioport_encoding(0)
+        set_active_ioport_encoding(context.scene, 0)
         return {'FINISHED'}
 
 #endregion
 
-class PtrPropResolver():
+class PropsVisitor():
     """
-    All outside code should use this class static methods to fetch property data or draw property.
-    All function inside in this module should not be called directly.
+    When outside code want to fetch or draw properties defined in ptrprop_resolver,
+    they should create the instance of this class with given associated scene instance first.
+    Then use this class provided member function to draw or fetch these properties.
+    The function located in this module should not be called directly!
     """
 
-    @staticmethod
-    def get_rail_uv_material() -> bpy.types.Material:
-        return get_ptrprop_resolver().rail_uv_material
-    @staticmethod
-    def draw_rail_uv_material(layout: bpy.types.UILayout) -> None:
-        layout.prop(get_ptrprop_resolver(), 'rail_uv_material')
+    __mAssocScene: bpy.types.Scene
 
-    @staticmethod
-    def get_export_collection() -> bpy.types.Collection:
-        return get_ptrprop_resolver().export_collection
-    @staticmethod
-    def draw_export_collection(layout: bpy.types.UILayout) -> None:
-        layout.prop(get_ptrprop_resolver(), 'export_collection')
+    def __init__(self, assoc_scene: bpy.types.Scene):
+        self.__mAssocScene = assoc_scene
 
-    @staticmethod
-    def get_export_object() -> bpy.types.Object:
-        return get_ptrprop_resolver().export_object
-    @staticmethod
-    def draw_export_object(layout: bpy.types.UILayout) -> None:
-        layout.prop(get_ptrprop_resolver(), 'export_object')
+    def get_rail_uv_material(self) -> bpy.types.Material:
+        return get_ptrprop_resolver(self.__mAssocScene).rail_uv_material
+    def draw_rail_uv_material(self, layout: bpy.types.UILayout) -> None:
+        layout.prop(get_ptrprop_resolver(self.__mAssocScene), 'rail_uv_material')
 
-    @staticmethod
-    def get_ioport_encodings() -> tuple[str, ...]:
-        encodings = get_ioport_encodings()
+    def get_export_collection(self) -> bpy.types.Collection:
+        return get_ptrprop_resolver(self.__mAssocScene).export_collection
+    def draw_export_collection(self, layout: bpy.types.UILayout) -> None:
+        layout.prop(get_ptrprop_resolver(self.__mAssocScene), 'export_collection')
+
+    def get_export_object(self) -> bpy.types.Object:
+        return get_ptrprop_resolver(self.__mAssocScene).export_object
+    def draw_export_object(self, layout: bpy.types.UILayout) -> None:
+        layout.prop(get_ptrprop_resolver(self.__mAssocScene), 'export_object')
+
+    def get_ioport_encodings(self) -> tuple[str, ...]:
+        encodings = get_ioport_encodings(self.__mAssocScene)
         return tuple(i.encoding for i in encodings)
-    @staticmethod
-    def set_ioport_encodings(user_encodings: tuple[str, ...]) -> None:
-        encodings = get_ioport_encodings()
-        # clear and apply user encoding one by one
-        encodings.clear()
-        for user_encoding in user_encodings:
-            item = encodings.add()
-            item.encoding = user_encoding
-    @staticmethod
-    def draw_ioport_encodings(layout: bpy.types.UILayout) -> None:
-        target = get_ptrprop_resolver()
+    def draw_ioport_encodings(self, layout: bpy.types.UILayout) -> None:
+        target = get_ptrprop_resolver(self.__mAssocScene)
         row = layout.row()
 
         # draw main list
@@ -212,10 +209,23 @@ class PtrPropResolver():
         col.separator()
         col.operator(BBP_OT_clear_ioport_encodings.bl_idname, icon='TRASH', text='')
 
+@bpy.app.handlers.persistent
+def _ioport_encodings_initializer(file_path: str):
+    # if we can fetch property, and it is empty after loading file
+    # we fill it with default value
+    encodings = get_ioport_encodings(bpy.context.scene)
+    if len(encodings) == 0:
+        for default_enc in UTIL_virtools_types.g_PyBMapDefaultEncodings:
+            item = encodings.add()
+            item.encoding = default_enc
+
 def register() -> None:
     bpy.utils.register_class(BBP_PG_bmap_encoding)
     bpy.utils.register_class(BBP_UL_bmap_encoding)
     bpy.utils.register_class(BBP_PG_ptrprop_resolver)
+
+    # register ioport encodings default value
+    bpy.app.handlers.load_post.append(_ioport_encodings_initializer)
 
     bpy.utils.register_class(BBP_OT_add_ioport_encodings)
     bpy.utils.register_class(BBP_OT_rm_ioport_encodings)
@@ -233,6 +243,9 @@ def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_up_ioport_encodings)
     bpy.utils.unregister_class(BBP_OT_rm_ioport_encodings)
     bpy.utils.unregister_class(BBP_OT_add_ioport_encodings)
+
+    # unregister ioport encodings default value
+    bpy.app.handlers.load_post.remove(_ioport_encodings_initializer)
 
     bpy.utils.unregister_class(BBP_PG_ptrprop_resolver)
     bpy.utils.unregister_class(BBP_UL_bmap_encoding)

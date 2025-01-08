@@ -242,7 +242,7 @@ class ExportParams():
         ),
     ) # type: ignore
 
-    def draw_export_params(self, layout: bpy.types.UILayout) -> None:
+    def draw_export_params(self, context: bpy.types.Context, layout: bpy.types.UILayout) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_export_params", default_closed=False)
@@ -255,22 +255,24 @@ class ExportParams():
         horizon_body.prop(self, "export_mode", expand = True)
 
         # draw picker
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
         if self.export_mode == 'COLLECTION':
-            PROP_ptrprop_resolver.PtrPropResolver.draw_export_collection(body)
+            ptrprops.draw_export_collection(body)
         elif self.export_mode == 'OBJECT':
-            PROP_ptrprop_resolver.PtrPropResolver.draw_export_object(body)
+            ptrprops.draw_export_object(body)
 
-    def general_get_export_objects(self) -> tuple[bpy.types.Object] | None:
+    def general_get_export_objects(self, context: bpy.types.Context) -> tuple[bpy.types.Object] | None:
         """
         Return resolved exported objects or None if no selection.
         """
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
         if self.export_mode == 'COLLECTION':
-            col: bpy.types.Collection = PROP_ptrprop_resolver.PtrPropResolver.get_export_collection()
+            col: bpy.types.Collection = ptrprops.get_export_collection()
             if col is None: return None
             else:
                 return tuple(col.all_objects)
         else:
-            obj: bpy.types.Object = PROP_ptrprop_resolver.PtrPropResolver.get_export_object()
+            obj: bpy.types.Object = ptrprops.get_export_object()
             if obj is None: return None
             else: return (obj, )
 
@@ -278,12 +280,6 @@ class ExportParams():
 _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
 
 class VirtoolsParams():
-    vt_encodings: bpy.props.StringProperty(
-        name = "Encodings",
-        description = "The encoding list used by Virtools engine to resolve object name. Use `;` to split multiple encodings",
-        default = UTIL_virtools_types.g_PyBMapDefaultEncoding
-    ) # type: ignore
-
     texture_save_opt: bpy.props.EnumProperty(
         name = "Global Texture Save Options",
         description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
@@ -304,7 +300,7 @@ class VirtoolsParams():
         default = 5,
     ) # type: ignore
 
-    def draw_virtools_params(self, layout: bpy.types.UILayout, is_importer: bool) -> None:
+    def draw_virtools_params(self, context: bpy.types.Context, layout: bpy.types.UILayout, is_importer: bool) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_virtools_params", default_closed=False)
@@ -313,8 +309,8 @@ class VirtoolsParams():
 
         # draw encodings
         body.label(text = 'Encodings')
-        body.prop(self, 'vt_encodings', text = '')
-        PROP_ptrprop_resolver.PtrPropResolver.draw_ioport_encodings(body)
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
+        ptrprops.draw_ioport_encodings(body)
 
         # following field are only valid in exporter
         if not is_importer:
@@ -329,10 +325,10 @@ class VirtoolsParams():
                 body.prop(self, 'compress_level')
 
 
-    def general_get_vt_encodings(self) -> tuple[str]:
-        # get encoding, split it by `;` and strip blank chars.
-        encodings: str = self.vt_encodings
-        return tuple(map(lambda x: x.strip(), encodings.split(';')))
+    def general_get_vt_encodings(self, context: bpy.types.Context) -> tuple[str, ...]:
+        # get from ptrprop resolver then filter empty item
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
+        return tuple(filter(lambda encoding: len(encoding) != 0, ptrprops.get_ioport_encodings()))
 
     def general_get_texture_save_opt(self) -> UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS:
         return _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.get_selection(self.texture_save_opt)

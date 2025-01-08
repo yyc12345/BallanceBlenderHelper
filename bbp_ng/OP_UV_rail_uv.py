@@ -19,13 +19,10 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def execute(self, context):
         # check material
-        mtl: bpy.types.Material = PROP_ptrprop_resolver.PtrPropResolver.get_rail_uv_material()
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
+        mtl: bpy.types.Material = ptrprops.get_rail_uv_material()
         if mtl is None:
-            UTIL_functions.message_box(
-                ("No specific material", ), 
-                "Lost Parameter", 
-                UTIL_icons_manager.BlenderPresetIcons.Error.value
-            )
+            self.report({'ERROR'}, "Specified material is empty.")
             return {'CANCELLED'}
         
         # apply rail uv
@@ -34,7 +31,8 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
     def draw(self, context):
         layout: bpy.types.UILayout = self.layout
-        PROP_ptrprop_resolver.PtrPropResolver.draw_rail_uv_material(layout)
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
+        ptrprops.draw_rail_uv_material(layout)
 
 #region Real Worker Functions
 

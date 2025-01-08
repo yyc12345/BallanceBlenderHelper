@@ -19,9 +19,15 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
             and bmap.is_bmap_available())
     
     def execute(self, context):
+        # check whether encoding list is empty to avoid real stupid user.
+        encodings = self.general_get_vt_encodings(context)
+        if len(encodings) == 0:
+            self.report({'ERROR'}, 'You must specify at least one encoding for file loading (e.g. cp1252, gb2312)!')
+            return {'CANCELLED'}
+
         _import_virtools(
             self.general_get_filename(),
-            self.general_get_vt_encodings(),
+            encodings,
             self.general_get_conflict_resolver()
         )
         self.report({'INFO'}, "Virtools File Importing Finished.")
@@ -30,7 +36,7 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
     def draw(self, context):
         layout = self.layout
         self.draw_import_params(layout)
-        self.draw_virtools_params(layout, True)
+        self.draw_virtools_params(context, layout, True)
         self.draw_ballance_params(layout, True)
 
 def _import_virtools(file_name_: str, encodings_: tuple[str], resolver: UTIL_ioport_shared.ConflictResolver) -> None:

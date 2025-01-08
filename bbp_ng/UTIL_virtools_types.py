@@ -270,6 +270,9 @@ def virtools_name_regulator(name: str | None) -> str:
 #  Since LibCmo 0.2, the encoding name of LibCmo become universal encoding which is platfoorm independent.
 #  So no need set it according to different platform.
 #  Use universal encoding name (like Python).
-g_PyBMapDefaultEncoding: str = 'cp1252;gb2312'
+g_PyBMapDefaultEncodings: tuple[str, ...] = (
+    'cp1252',
+    'gb2312'
+)
 
 #endregion

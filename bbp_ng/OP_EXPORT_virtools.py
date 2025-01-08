@@ -2,7 +2,7 @@ import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared
-from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_icons_manager, UTIL_naming_convension
+from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_naming_convension
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light
 from .PyBMap import bmap_wrapper as bmap
 
@@ -20,30 +20,28 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     
     def execute(self, context):
         # check selecting first
-        objls: tuple[bpy.types.Object] | None = self.general_get_export_objects()
+        objls: tuple[bpy.types.Object] | None = self.general_get_export_objects(context)
         if objls is None:
-            UTIL_functions.message_box(
-                ('No selected target!', ), 
-                'Lost Parameters', 
-                UTIL_icons_manager.BlenderPresetIcons.Error.value
-            )
+            self.report({'ERROR'}, 'No selected target!')
             return {'CANCELLED'}
 
-        # check texture save option to prevent real stupid user.
+        # check texture save option to avoid real stupid user.
         texture_save_opt = self.general_get_texture_save_opt()
         if texture_save_opt == UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_USEGLOBAL:
-            UTIL_functions.message_box(
-                ('You can not specify "Use Global" as global texture save option!', ), 
-                'Wrong Parameters', 
-                UTIL_icons_manager.BlenderPresetIcons.Error.value
-            )
+            self.report({'ERROR'}, 'You can not specify "Use Global" as global texture save option!')
+            return {'CANCELLED'}
+
+        # check whether encoding list is empty to avoid real stupid user.
+        encodings = self.general_get_vt_encodings(context)
+        if len(encodings) == 0:
+            self.report({'ERROR'}, 'You must specify at least one encoding for file saving (e.g. cp1252, gb2312)!')
             return {'CANCELLED'}
 
         # start exporting
         with UTIL_ioport_shared.ExportEditModeBackup() as editmode_guard:
             _export_virtools(
                 self.general_get_filename(),
-                self.general_get_vt_encodings(),
+                encodings,
                 texture_save_opt,
                 self.general_get_use_compress(),
                 self.general_get_compress_level(),
@@ -57,8 +55,8 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     
     def draw(self, context):
         layout = self.layout
-        self.draw_export_params(layout)
-        self.draw_virtools_params(layout, False)
+        self.draw_export_params(context, layout)
+        self.draw_virtools_params(context, layout, False)
         self.draw_ballance_params(layout, False)
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
