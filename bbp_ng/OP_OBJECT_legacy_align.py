@@ -140,7 +140,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
     def execute(self, context):
         # get processed objects
         (current_obj, target_objs) = _prepare_objects()
-        # INFO: YYC MARK:
+        # YYC MARK:
         # This statement is VERY IMPORTANT.
         # If this statement is not presented, Blender will return identity matrix
         # when getting world matrix from Object since the second execution of this function.
