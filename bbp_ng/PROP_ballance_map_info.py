@@ -22,7 +22,8 @@ class BBP_PG_ballance_map_info(bpy.types.PropertyGroup):
         default = 1,
         max = 999, min = 1,
         soft_max = 8, soft_min = 1,
-        step = 1
+        step = 1,
+        translation_context = 'BBP_PG_ballance_map_info/property'
     ) # type: ignore
     
 def get_ballance_map_info(scene: bpy.types.Scene) -> BBP_PG_ballance_map_info:
@@ -51,6 +52,7 @@ class BBP_PT_ballance_map_info(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "scene"
+    bl_translation_context = 'BBP_PT_ballance_map_info'
     
     @classmethod
     def poll(cls, context):

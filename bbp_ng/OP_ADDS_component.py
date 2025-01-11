@@ -8,10 +8,11 @@ from . import PROP_ballance_element, PROP_virtools_group, PROP_ballance_map_info
 class ComponentSectorParam():
     component_sector: bpy.props.IntProperty(
         name = "Sector",
-        description = "Define which sector the object will be grouped in",
+        description = "The sector which this component will be grouped in.",
         min = 1, max = 999,
         soft_min = 1, soft_max = 8,
         default = 1,
+        translation_context = 'BBP/OP_ADDS_component.ComponentSectorParam/property'
     ) # type: ignore
 
     def general_get_component_sector(self) -> int:
@@ -23,10 +24,11 @@ class ComponentSectorParam():
 class ComponentCountParam():
     component_count: bpy.props.IntProperty(
         name = "Count",
-        description = "The count of components you want to generate",
+        description = "The count of components which you want to generate",
         min = 1, max = 64,
         soft_min = 1, soft_max = 32,
         default = 1,
+        translation_context = 'BBP/OP_ADDS_component.ComponentCountParam/property'
     ) # type: ignore
 
     def general_get_component_count(self) -> int:
@@ -192,15 +194,17 @@ _g_EnumHelper_Component: UTIL_functions.EnumPropHelper = UTIL_functions.EnumProp
 )
 
 class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
-    """Add Component"""
+    """Add ordinary Component"""
     bl_idname = "bbp.add_component"
     bl_label = "Add Component"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_add_component'
 
     component_type: bpy.props.EnumProperty(
         name = "Type",
-        description = "This component type",
+        description = "The type of this component.",
         items = _g_EnumHelper_Component.generate_items(),
+        translation_context = 'BBP_OT_add_component/property'
     ) # type: ignore
 
     def invoke(self, context, event):
@@ -241,7 +245,8 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
 
             cop = layout.operator(
                 BBP_OT_add_component.bl_idname, text = item_name, 
-                icon_value = UTIL_icons_manager.get_component_icon(item_name)
+                icon_value = UTIL_icons_manager.get_component_icon(item_name),
+                translate = False
             )
             cop.component_type = _g_EnumHelper_Component.to_selection(item)
 
@@ -254,6 +259,7 @@ class BBP_OT_add_nong_extra_point(bpy.types.Operator, ComponentSectorParam, Comp
     bl_idname = "bbp.add_nong_extra_point"
     bl_label = "Nong Extra Point"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_nong_extra_point'
 
     def draw(self, context):
         layout = self.layout
@@ -289,13 +295,15 @@ class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, Compo
     bl_idname = "bbp.add_nong_ventilator"
     bl_label = "Nong Ventilator"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_nong_ventilator'
 
     ventilator_count_source: bpy.props.EnumProperty(
         name = "Ventilator Count Source",
         items = [
             ('DEFINED', "Predefined", "Pre-defined ventilator count."),
             ('CUSTOM', "Custom", "User specified ventilator count."),
-        ], 
+        ],
+        translation_context = 'BBP_OT_add_nong_ventilator/property'
     ) # type: ignore
     
     preset_vetilator_count: bpy.props.EnumProperty(
@@ -307,6 +315,7 @@ class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, Compo
             ('WOOD', 'Wood', 'The ventilator count (6) can push wood ball up.'),
             ('STONE', 'Stone', 'The ventilator count (32) can push stone ball up.'),
         ],
+        translation_context = 'BBP_OT_add_nong_ventilator/property'
     ) # type: ignore
 
     def draw(self, context):
@@ -363,6 +372,7 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
     bl_idname = "bbp.add_tilting_block_series"
     bl_label = "Tilting Block Series"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_tilting_block_series'
 
     component_span: bpy.props.FloatProperty(
         name = "Span",
@@ -370,6 +380,7 @@ class BBP_OT_add_tilting_block_series(bpy.types.Operator, ComponentSectorParam, 
         min = 0.0, max = 100.0,
         soft_min = 0.0, soft_max = 12.0,
         default = 6.0022,
+        translation_context = 'BBP_OT_add_tilting_block_series/property'
     ) # type: ignore
 
     def draw(self, context):
@@ -407,6 +418,7 @@ class BBP_OT_add_swing_series(bpy.types.Operator, ComponentSectorParam, Componen
     bl_idname = "bbp.add_swing_series"
     bl_label = "Swing Series"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_swing_series'
 
     component_span: bpy.props.FloatProperty(
         name = "Span",
@@ -414,12 +426,14 @@ class BBP_OT_add_swing_series(bpy.types.Operator, ComponentSectorParam, Componen
         min = 0.0, max = 100.0,
         soft_min = 0.0, soft_max = 30.0,
         default = 15.0,
+        translation_context = 'BBP_OT_add_swing_series/property'
     ) # type: ignore
 
     staggered_swing: bpy.props.BoolProperty(
         name = 'Staggered', 
         description = 'Whether place Swing staggered. Staggered Swing accept any ball however Non-Staggered Swing only accept Wood and Paper ball.',
-        default = True
+        default = True,
+        translation_context = 'BBP_OT_add_swing_series/property'
     ) # type: ignore
 
     def draw(self, context):
@@ -465,6 +479,7 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
     bl_idname = "bbp.add_ventilator_series"
     bl_label = "Ventilator Series"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_ventilator_series'
 
     component_translation: bpy.props.FloatVectorProperty(
         name = "Delta Vector",
@@ -473,6 +488,7 @@ class BBP_OT_add_ventilator_series(bpy.types.Operator, ComponentSectorParam, Com
         min = 0.0, max = 100.0,
         soft_min = 0.0, soft_max = 50.0,
         default = (0.0, 0.0, 15.0),
+        translation_context = 'BBP_OT_add_ventilator_series/property'
     ) # type: ignore
 
     def draw(self, context):
@@ -514,6 +530,7 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
     bl_idname = "bbp.add_sector_component_pair"
     bl_label = "Sector Pair"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_add_sector_component_pair'
 
     def __get_checkpoint(self) -> tuple[PROP_ballance_element.BallanceElementType, int]:
         if self.general_get_component_sector() == 1:

@@ -11,6 +11,7 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
     bl_idname = "bbp.import_virtools"
     bl_label = "Import Virtools File"
     bl_options = {'PRESET', 'UNDO'}
+    bl_translation_context = 'BBP_OT_import_virtools'
 
     @classmethod
     def poll(cls, context):

@@ -43,24 +43,29 @@ class BBP_PG_legacy_align_history(bpy.types.PropertyGroup):
     align_x: bpy.props.BoolProperty(
         name = "X Position",
         default = False,
+        translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
     align_y: bpy.props.BoolProperty(
         name = "Y Position",
         default = False,
+        translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
     align_z: bpy.props.BoolProperty(
         name = "Z Position",
         default = False,
+        translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
     current_align_mode: bpy.props.EnumProperty(
         name = "Current Object (Active Object)",
         items = _g_EnumHelper_AlignMode.generate_items(),
         default = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter),
+        translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
     target_align_mode: bpy.props.EnumProperty(
         name = "Target Objects (Other Objects)",
         items = _g_EnumHelper_AlignMode.generate_items(),
         default = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter),
+        translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
 
 #endregion
@@ -70,6 +75,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
     bl_idname = "bbp.legacy_align"
     bl_label = "3ds Max Align"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_legacy_align'
 
     # the updator for apply flag value
     def apply_flag_updated(self, context):
@@ -111,17 +117,20 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = True, # default True value to make it as a "light" button, not a grey one.
         update = apply_flag_updated,
+        translation_context = 'BBP_OT_legacy_align/property'
     ) # type: ignore
     recursive_hinder: bpy.props.BoolProperty(
-        name = "Recursive Hinder",
-        description = "An internal flag to prevent the loop calling to apply_flags's updator.",
+        # TR: internal used property should not have name and description, otherwise it will be translated.
+        # name = "Recursive Hinder",
+        # description = "An internal flag to prevent the loop calling to apply_flags's updator.",
         options = {'HIDDEN', 'SKIP_SAVE'},
-        default = False,
+        default = False
     ) # type: ignore
     align_history : bpy.props.CollectionProperty(
-        name = "Historys",
-        description = "Align history.",
-        type = BBP_PG_legacy_align_history,
+        # TR: same reason for no name and description.
+        # name = "Historys",
+        # description = "Align history.",
+        type = BBP_PG_legacy_align_history
     ) # type: ignore
     
     @classmethod

@@ -1,7 +1,7 @@
 import bpy, mathutils
 import typing
 from . import PROP_preferences
-from . import UTIL_functions, UTIL_bme
+from . import UTIL_functions, UTIL_translation, UTIL_bme
 
 #region BME Adder
 
@@ -9,29 +9,33 @@ _g_EnumHelper_BmeStructType: UTIL_bme.EnumPropHelper = UTIL_bme.EnumPropHelper()
 
 class BBP_PG_bme_adder_cfgs(bpy.types.PropertyGroup):
     prop_int: bpy.props.IntProperty(
-        name = 'Single Int', description = 'Single Int',
+        name = 'Integral Value', description = 'The field representing a single integral value.',
         min = 0, max = 64,
         soft_min = 0, soft_max = 32,
         step = 1,
         default = 1,
+        translation_context = 'BBP_PG_bme_adder_cfgs/property'
     ) # type: ignore
     prop_float: bpy.props.FloatProperty(
-        name = 'Single Float', description = 'Single Float',
+        name = 'Float Point Value', description = 'The field representing a single float point value.',
         min = 0.0, max = 1024.0,
         soft_min = 0.0, soft_max = 512.0,
         step = 50, # Step is in UI, in [1, 100] (WARNING: actual value is /100). So we choose 50, mean 0.5
         default = 5.0,
+        translation_context = 'BBP_PG_bme_adder_cfgs/property'
     ) # type: ignore
     prop_bool: bpy.props.BoolProperty(
-        name = 'Single Bool', description = 'Single Bool',
-        default = True
+        name = 'Boolean Value', description = 'The field representing a single boolean value.',
+        default = True,
+        translation_context = 'BBP_PG_bme_adder_cfgs/property'
     ) # type: ignore
 
 class BBP_OT_add_bme_struct(bpy.types.Operator):
-    """Add BME Struct"""
+    """Add BME structure"""
     bl_idname = "bbp.add_bme_struct"
-    bl_label = "Add BME Struct"
+    bl_label = "Add BME Structure"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_bme_struct'
     
     ## There is a compromise due to the shitty Blender design.
     #  
@@ -51,8 +55,9 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
     ## Compromise used "outdated" flag.
     outdated_flag: bpy.props.BoolProperty(
-        name = "Outdated Type",
-        description = "Internal flag.",
+        # TR: Internal property should not have name and desc otherwise they will be written in translation.
+        # name = "Outdated Type",
+        # description = "Internal flag.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = False
     ) # type: ignore
@@ -96,29 +101,29 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
 
         # init data collection
-        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
-        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
+        op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # clear first
-        adder_cfgs_visitor.clear()
+        op_cfgs_visitor.clear()
         # create enough entries specified by gotten cfgs
         for _ in range(max(counter_int, counter_float, counter_bool)):
-            adder_cfgs_visitor.add()
+            op_cfgs_visitor.add()
 
         # assign default value
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    adder_cfgs_visitor[cfg_index].prop_int = cfg.get_default()
+                    op_cfgs_visitor[cfg_index].prop_int = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    adder_cfgs_visitor[cfg_index].prop_float = cfg.get_default()
+                    op_cfgs_visitor[cfg_index].prop_float = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    adder_cfgs_visitor[cfg_index].prop_bool = cfg.get_default()
+                    op_cfgs_visitor[cfg_index].prop_bool = cfg.get_default()
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face is just 6 bool
                     default_values: tuple[bool, ...] = cfg.get_default()
                     for i in range(6):
-                        adder_cfgs_visitor[cfg_index + i].prop_bool = default_values[i]
+                        op_cfgs_visitor[cfg_index + i].prop_bool = default_values[i]
 
         # reset outdated flag
         self.outdated_flag = False
@@ -132,15 +137,17 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     
     bme_struct_type: bpy.props.EnumProperty(
         name = "Type",
-        description = "BME struct type",
+        description = "The type of BME structure.",
         items = _g_EnumHelper_BmeStructType.generate_items(),
-        update = bme_struct_type_updated
+        update = bme_struct_type_updated,
+        translation_context = 'BBP_OT_add_bme_struct/property'
     ) # type: ignore
     
     bme_struct_cfgs : bpy.props.CollectionProperty(
-        name = "Cfgs",
-        description = "Cfg collection.",
+        name = "Configurations",
+        description = "The collection holding BME structure configurations.",
         type = BBP_PG_bme_adder_cfgs,
+        translation_context = 'BBP_OT_add_bme_struct/property'
     ) # type: ignore
     
     ## Extra transform for good "what you see is what you gotten".
@@ -151,7 +158,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         size = 3,
         subtype = 'TRANSLATION',
         step = 50, # same step as the float entry of BBP_PG_bme_adder_cfgs
-        default = (0.0, 0.0, 0.0)
+        default = (0.0, 0.0, 0.0),
+        translation_context = 'BBP_OT_add_bme_struct/property'
     ) # type: ignore
     extra_rotation: bpy.props.FloatVectorProperty(
         name = "Extra Rotation",
@@ -159,7 +167,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         size = 3,
         subtype = 'EULER',
         step = 100, # We choosen 100, mean 1. Sync with property window.
-        default = (0.0, 0.0, 0.0)
+        default = (0.0, 0.0, 0.0),
+        translation_context = 'BBP_OT_add_bme_struct/property'
     ) # type: ignore
 
     @classmethod
@@ -185,22 +194,22 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         self.__internal_update_bme_struct_type()
 
         # create cfg visitor
-        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
-        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
+        op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # collect cfgs data
         cfgs: dict[str, typing.Any] = {}
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_int
+                    cfgs[cfg.get_field()] = op_cfgs_visitor[cfg_index].prop_int
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_float
+                    cfgs[cfg.get_field()] = op_cfgs_visitor[cfg_index].prop_float
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    cfgs[cfg.get_field()] = adder_cfgs_visitor[cfg_index].prop_bool
+                    cfgs[cfg.get_field()] = op_cfgs_visitor[cfg_index].prop_bool
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face is just 6 bool tuple
                     cfgs[cfg.get_field()] = tuple(
-                        adder_cfgs_visitor[cfg_index + i].prop_bool for i in range(6)
+                        op_cfgs_visitor[cfg_index + i].prop_bool for i in range(6)
                     )
 
         # call general creator
@@ -231,8 +240,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         layout.prop(self, 'bme_struct_type')
 
         # create cfg visitor
-        adder_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
-        adder_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
+        op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
+        op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # visit cfgs cache list to show cfg
         layout.label(text = "Prototype Configurations:")
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
@@ -246,29 +255,29 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_int', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_int', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_float', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_float', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    box_layout.prop(adder_cfgs_visitor[cfg_index], 'prop_bool', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_bool', text = '')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face will show a special layout (grid view)
                     grids = box_layout.grid_flow(
                         row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
                     grids.alignment = 'CENTER'
                     grids.separator()
-                    grids.prop(adder_cfgs_visitor[cfg_index + 0], 'prop_bool', text = 'Top') # top
-                    grids.prop(adder_cfgs_visitor[cfg_index + 2], 'prop_bool', text = 'Front') # front
-                    grids.prop(adder_cfgs_visitor[cfg_index + 4], 'prop_bool', text = 'Left') # left
+                    grids.prop(op_cfgs_visitor[cfg_index + 0], 'prop_bool', text = 'Top') # top
+                    grids.prop(op_cfgs_visitor[cfg_index + 2], 'prop_bool', text = 'Front') # front
+                    grids.prop(op_cfgs_visitor[cfg_index + 4], 'prop_bool', text = 'Left') # left
                     grids.label(text = '', icon = 'CUBE')   # show a 3d cube as icon
-                    grids.prop(adder_cfgs_visitor[cfg_index + 5], 'prop_bool', text = 'Right') # right
-                    grids.prop(adder_cfgs_visitor[cfg_index + 3], 'prop_bool', text = 'Back') # back
-                    grids.prop(adder_cfgs_visitor[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
+                    grids.prop(op_cfgs_visitor[cfg_index + 5], 'prop_bool', text = 'Right') # right
+                    grids.prop(op_cfgs_visitor[cfg_index + 3], 'prop_bool', text = 'Back') # back
+                    grids.prop(op_cfgs_visitor[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
                     grids.separator()
 
         # show extra transform props
         # forcely order that each one are placed horizontally
-        layout.label(text = "Extra Transform:")
+        layout.label(text = "Extra Transform")
         # translation
         layout.label(text = 'Translation')
         hbox_layout: bpy.types.UILayout = layout.row()
@@ -285,7 +294,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
             cop = layout.operator(
                 cls.bl_idname,
                 text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
-                icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident)
+                icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident),
+                text_ctxt = UTIL_translation.build_prototype_showcase_context(ident)
             )
             # and assign its init type value
             cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)

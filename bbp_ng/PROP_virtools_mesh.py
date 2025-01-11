@@ -24,7 +24,8 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
         name = "Lit Mode",
         description = "Lighting mode of the mesh.",
         items = _g_Helper_VXMESH_LITMODE.generate_items(),
-        default = _g_Helper_VXMESH_LITMODE.to_selection(RawVirtoolsMesh.cDefaultLitMode)
+        default = _g_Helper_VXMESH_LITMODE.to_selection(RawVirtoolsMesh.cDefaultLitMode),
+        translation_context = 'BBP_PG_virtools_mesh/property'
     ) # type: ignore
     
 # Getter Setter
@@ -54,6 +55,7 @@ class BBP_PT_virtools_mesh(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "data" # idk why blender use `data` as the mesh tab.
+    bl_translation_context = 'BBP_PT_virtools_mesh'
     
     @classmethod
     def poll(cls, context):

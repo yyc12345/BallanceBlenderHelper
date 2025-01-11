@@ -29,14 +29,16 @@ class BBP_PG_virtools_texture(bpy.types.PropertyGroup):
         name = "Save Options",
         description = "When saving a composition textures or sprites can be kept as reference to external files or converted to a given format and saved inside the composition file.",
         items = _g_Helper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
-        default = _g_Helper_CK_TEXTURE_SAVEOPTIONS.to_selection(RawVirtoolsTexture.cDefaultSaveOptions)
+        default = _g_Helper_CK_TEXTURE_SAVEOPTIONS.to_selection(RawVirtoolsTexture.cDefaultSaveOptions),
+        translation_context = 'BBP_PG_virtools_texture/property'
     ) # type: ignore
     
     video_format: bpy.props.EnumProperty(
         name = "Video Format",
         description = "The desired surface pixel format in video memory.",
         items = _g_Helper_VX_PIXELFORMAT.generate_items(),
-        default = _g_Helper_VX_PIXELFORMAT.to_selection(RawVirtoolsTexture.cDefaultVideoFormat)
+        default = _g_Helper_VX_PIXELFORMAT.to_selection(RawVirtoolsTexture.cDefaultVideoFormat),
+        translation_context = 'BBP_PG_virtools_texture/property'
     ) # type: ignore
     
 #region Virtools Texture Getter Setter

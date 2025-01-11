@@ -80,7 +80,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         name = "Type",
         description = "The type of this light",
         items = _g_Helper_VXLIGHT_TYPE.generate_items(),
-        default = _g_Helper_VXLIGHT_TYPE.to_selection(RawVirtoolsLight.cDefaultType)
+        default = _g_Helper_VXLIGHT_TYPE.to_selection(RawVirtoolsLight.cDefaultType),
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     light_color: bpy.props.FloatVectorProperty(
@@ -90,7 +91,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsLight.cDefaultColor.to_const_rgb()
+        default = RawVirtoolsLight.cDefaultColor.to_const_rgb(),
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     constant_attenuation: bpy.props.FloatProperty(
@@ -99,7 +101,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultConstantAttenuation
+        default = RawVirtoolsLight.cDefaultConstantAttenuation,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     linear_attenuation: bpy.props.FloatProperty(
@@ -108,7 +111,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultLinearAttenuation
+        default = RawVirtoolsLight.cDefaultLinearAttenuation,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     quadratic_attenuation: bpy.props.FloatProperty(
@@ -117,7 +121,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultQuadraticAttenuation
+        default = RawVirtoolsLight.cDefaultQuadraticAttenuation,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     light_range: bpy.props.FloatProperty(
@@ -126,7 +131,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 200.0,
         step = 100,
-        default = RawVirtoolsLight.cDefaultRange
+        default = RawVirtoolsLight.cDefaultRange,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     hot_spot: bpy.props.FloatProperty(
@@ -135,7 +141,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = math.radians(180),
         subtype = 'ANGLE',
-        default = RawVirtoolsLight.cDefaultHotSpot
+        default = RawVirtoolsLight.cDefaultHotSpot,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     falloff: bpy.props.FloatProperty(
@@ -144,7 +151,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = math.radians(180),
         subtype = 'ANGLE',
-        default = RawVirtoolsLight.cDefaultFalloff
+        default = RawVirtoolsLight.cDefaultFalloff,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
     falloff_shape: bpy.props.FloatProperty(
@@ -153,7 +161,8 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultFalloffShape
+        default = RawVirtoolsLight.cDefaultFalloffShape,
+        translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
 # Getter Setter and Applyer
@@ -239,6 +248,7 @@ class BBP_OT_apply_virtools_light(bpy.types.Operator):
     bl_idname = "bbp.apply_virtools_light"
     bl_label = "Apply to Blender Light"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_apply_virtools_light'
 
     @classmethod
     def poll(cls, context):
@@ -258,6 +268,7 @@ class BBP_PT_virtools_light(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "data" # idk why blender use `data` as the light tab same as mesh.
+    bl_translation_context = 'BBP_PT_virtools_light'
 
     @classmethod
     def poll(cls, context):

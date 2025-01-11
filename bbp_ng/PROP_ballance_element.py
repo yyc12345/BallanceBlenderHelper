@@ -96,12 +96,14 @@ def is_ballance_element(name: str) -> bool:
 class BBP_PG_ballance_element(bpy.types.PropertyGroup):
     element_id: bpy.props.IntProperty(
         name = "Element Id",
-        default = 0
+        default = 0,
+        translation_context = 'BBP_PG_ballance_element/property'
     ) # type: ignore
     
     mesh_ptr: bpy.props.PointerProperty(
         name = "Mesh",
-        type = bpy.types.Mesh
+        type = bpy.types.Mesh,
+        translation_context = 'BBP_PG_ballance_element/property'
     ) # type: ignore
 
 def get_ballance_elements(scene: bpy.types.Scene) -> UTIL_functions.CollectionVisitor[BBP_PG_ballance_element]:
@@ -322,6 +324,7 @@ class BBP_OT_reset_ballance_elements(bpy.types.Operator):
     bl_idname = "bbp.reset_ballance_elements"
     bl_label = "Reset Ballance Elements"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_reset_ballance_elements'
     
     @classmethod
     def poll(cls, context):
@@ -331,11 +334,7 @@ class BBP_OT_reset_ballance_elements(bpy.types.Operator):
         with BallanceElementsHelper(context.scene) as helper:
             helper.reset_elements()
         # show a window to let user know, not silence
-        UTIL_functions.message_box(
-            ('Reset OK.', ),
-            "Reset Result",
-            UTIL_icons_manager.BlenderPresetIcons.Info.value
-        )
+        self.report({'INFO'}, 'Reset Ballance elements successfully.')
         return {'FINISHED'}
 
 class BBP_PT_ballance_elements(bpy.types.Panel):
@@ -345,6 +344,7 @@ class BBP_PT_ballance_elements(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "scene"
+    bl_translation_context = 'BBP_PT_ballance_elements'
 
     @classmethod
     def poll(cls, context):

@@ -46,7 +46,8 @@ class SharedExtraTransform():
         size = 3,
         subtype = 'TRANSLATION',
         step = 50, # same step as the float entry of BBP_PG_bme_adder_cfgs
-        default = (0.0, 0.0, 0.0)
+        default = (0.0, 0.0, 0.0),
+        translation_context = 'BBP/OP_ADDS_rail.SharedExtraTransform/property'
     ) # type: ignore
     extra_rotation: bpy.props.FloatVectorProperty(
         name = "Extra Rotation",
@@ -54,7 +55,8 @@ class SharedExtraTransform():
         size = 3,
         subtype = 'EULER',
         step = 100, # We choosen 100, mean 1. Sync with property window.
-        default = (0.0, 0.0, 0.0)
+        default = (0.0, 0.0, 0.0),
+        translation_context = 'BBP/OP_ADDS_rail.SharedExtraTransform/property'
     ) # type: ignore
 
     def draw_extra_transform_input(self, layout: bpy.types.UILayout) -> None:
@@ -91,6 +93,7 @@ class SharedRailSectionInputProperty():
             ('RAIL', "Rail", ""),
         ],
         default = 'RAIL',
+        translation_context = 'BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property'
     ) # type: ignore
 
     def draw_rail_section_input(self, layout: bpy.types.UILayout) -> None:
@@ -109,13 +112,15 @@ class SharedRailCapInputProperty():
     rail_start_cap: bpy.props.BoolProperty(
         name = 'Start Cap',
         description = 'Whether this rail should have cap at start terminal.',
-        default = False
+        default = False,
+        translation_context = 'BBP/OP_ADDS_rail.SharedRailCapInputProperty/property'
     ) # type: ignore
 
     rail_end_cap: bpy.props.BoolProperty(
         name = 'End Cap',
         description = 'Whether this rail should have cap at end terminal.',
-        default = False
+        default = False,
+        translation_context = 'BBP/OP_ADDS_rail.SharedRailCapInputProperty/property'
     ) # type: ignore
 
     def draw_rail_cap_input(self, layout: bpy.types.UILayout) -> None:
@@ -140,7 +145,8 @@ class SharedStraightRailInputProperty():
         default = 5.0,
         min = 0,
         step = 50, # same unit as BME Struct
-        unit = 'LENGTH'
+        unit = 'LENGTH',
+        translation_context = 'BBP/OP_ADDS_rail.SharedStraightRailInputProperty/property'
     ) # type: ignore
 
     def draw_straight_rail_input(self, layout: bpy.types.UILayout) -> None:
@@ -159,6 +165,7 @@ class SharedScrewRailInputProperty():
         description = "The segment count per iteration. More segment, more smooth but lower performance.",
         default = 28,
         min = 1,
+        translation_context = 'BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property'
     ) # type: ignore
 
     rail_screw_radius: bpy.props.FloatProperty(
@@ -166,25 +173,29 @@ class SharedScrewRailInputProperty():
         description = "The screw radius.",
         default = 5,
         min = 0,
-        unit = 'LENGTH'
+        unit = 'LENGTH',
+        translation_context = 'BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property'
     ) # type: ignore
 
     rail_screw_flip_x: bpy.props.BoolProperty(
         name = 'Flip X',
         description = 'Whether flip this rail with X axis',
-        default = False
+        default = False,
+        translation_context = 'BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property'
     ) # type: ignore
 
     rail_screw_flip_y: bpy.props.BoolProperty(
         name = 'Flip Y',
         description = 'Whether flip this rail with Y axis',
-        default = False
+        default = False,
+        translation_context = 'BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property'
     ) # type: ignore
 
     rail_screw_flip_z: bpy.props.BoolProperty(
         name = 'Flip Z',
         description = 'Whether flip this rail with Z axis',
-        default = False
+        default = False,
+        translation_context = 'BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property'
     ) # type: ignore
 
     def draw_screw_rail_input(self, layout: bpy.types.UILayout) -> None:
@@ -220,6 +231,7 @@ class BBP_OT_add_rail_section(SharedRailSectionInputProperty, bpy.types.Operator
     bl_idname = "bbp.add_rail_section"
     bl_label = "Rail Section"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_rail_section'
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -240,6 +252,7 @@ class BBP_OT_add_transition_section(bpy.types.Operator):
     bl_idname = "bbp.add_transition_section"
     bl_label = "Transition Section"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_transition_section'
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -257,6 +270,7 @@ class BBP_OT_add_straight_rail(SharedExtraTransform, SharedRailSectionInputPrope
     bl_idname = "bbp.add_straight_rail"
     bl_label = "Straight Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_straight_rail'
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -285,6 +299,7 @@ class BBP_OT_add_transition_rail(SharedExtraTransform, SharedRailCapInputPropert
     bl_idname = "bbp.add_transition_rail"
     bl_label = "Transition Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_transition_rail'
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -312,6 +327,7 @@ class BBP_OT_add_side_rail(SharedExtraTransform, SharedRailCapInputProperty, Sha
     bl_idname = "bbp.add_side_rail"
     bl_label = "Side Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_side_rail'
 
     side_rail_type: bpy.props.EnumProperty(
         name = "Side Type",
@@ -321,6 +337,7 @@ class BBP_OT_add_side_rail(SharedExtraTransform, SharedRailCapInputProperty, Sha
             ('STONE', "Stone Specific", "The side rail which also allow stone ball passed."),
         ],
         default = 'NORMAL',
+        translation_context = 'BBP_OT_add_side_rail/property'
     ) # type: ignore
 
     def execute(self, context):
@@ -351,6 +368,7 @@ class BBP_OT_add_arc_rail(SharedExtraTransform, SharedRailSectionInputProperty, 
     bl_idname = "bbp.add_arc_rail"
     bl_label = "Arc Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_arc_rail'
 
     rail_screw_angle: bpy.props.FloatProperty(
         name = "Angle",
@@ -358,6 +376,7 @@ class BBP_OT_add_arc_rail(SharedExtraTransform, SharedRailSectionInputProperty, 
         default = math.radians(90),
         min = 0, max = math.radians(360),
         subtype = 'ANGLE',
+        translation_context = 'BBP_OT_add_arc_rail/property'
     ) # type: ignore
 
     def execute(self, context):
@@ -392,12 +411,14 @@ class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, S
     bl_idname = "bbp.add_spiral_rail"
     bl_label = "Spiral Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_spiral_rail'
 
     rail_screw_screw: bpy.props.FloatProperty(
         name = "Screw",
         description = "The increased height in each iteration. Minus height also is accepted.",
         default = c_SpiralRailScrew,
-        unit = 'LENGTH'
+        unit = 'LENGTH',
+        translation_context = 'BBP_OT_add_spiral_rail/property'
     ) # type: ignore
 
     rail_screw_iterations: bpy.props.IntProperty(
@@ -405,6 +426,7 @@ class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, S
         description = "Indicate how many layers of this spiral rail should be generated.",
         default = 1,
         min = 1,
+        translation_context = 'BBP_OT_add_spiral_rail/property'
     ) # type: ignore
 
     def execute(self, context):
@@ -439,6 +461,7 @@ class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputPr
     bl_idname = "bbp.add_side_spiral_rail"
     bl_label = "Side Spiral Rail"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_add_side_spiral_rail'
 
     rail_screw_iterations: bpy.props.IntProperty(
         name = "Iterations",
@@ -447,6 +470,7 @@ class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputPr
         # at least 2 ietrations can create 1 useful side spiral rail.
         # becuase side spiral rail is edge shared.
         min = 2,
+        translation_context = 'BBP_OT_add_side_spiral_rail/property'
     ) # type: ignore
 
     def execute(self, context):

@@ -12,7 +12,8 @@ from . import UTIL_functions, UTIL_virtools_types
 class BBP_PG_bmap_encoding(bpy.types.PropertyGroup):
     encoding: bpy.props.StringProperty(
         name = "Encoding",
-        default = ""
+        default = "",
+        translation_context = 'BBP_PG_bmap_encoding/property'
     ) # type: ignore
 
 class BBP_UL_bmap_encoding(bpy.types.UIList):
@@ -24,23 +25,25 @@ class BBP_PG_ptrprop_resolver(bpy.types.PropertyGroup):
         name = "Material",
         description = "The material used for rail",
         type = bpy.types.Material,
+        translation_context = 'BBP_PG_ptrprop_resolver/property'
     ) # type: ignore
     
     export_collection: bpy.props.PointerProperty(
-        type = bpy.types.Collection,
         name = "Collection",
-        description = "The collection exported. Nested collections allowed."
+        description = "The collection exported. Nested collections allowed.",
+        type = bpy.types.Collection,
+        translation_context = 'BBP_PG_ptrprop_resolver/property'
     ) # type: ignore
     
     export_object: bpy.props.PointerProperty(
-        type = bpy.types.Object,
         name = "Object",
-        description = "The object exported"
+        description = "The object exported",
+        type = bpy.types.Object,
+        translation_context = 'BBP_PG_ptrprop_resolver/property'
     ) # type: ignore
 
-    ioport_encodings: bpy.props.CollectionProperty(
-        type = BBP_PG_bmap_encoding
-    ) # type: ignore
+    # TR: These encoding related items should not have explicit name and description
+    ioport_encodings: bpy.props.CollectionProperty(type = BBP_PG_bmap_encoding) # type: ignore
     active_ioport_encodings: bpy.props.IntProperty() # type: ignore
 
 #endregion
@@ -62,6 +65,7 @@ class BBP_OT_add_ioport_encodings(bpy.types.Operator):
     bl_idname = "bbp.add_ioport_encodings"
     bl_label = "Add in Encodings List"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_add_ioport_encodings'
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
@@ -77,6 +81,7 @@ class BBP_OT_rm_ioport_encodings(bpy.types.Operator):
     bl_idname = "bbp.rm_ioport_encodings"
     bl_label = "Remove from Encodings List"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_rm_ioport_encodings'
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
@@ -100,6 +105,7 @@ class BBP_OT_up_ioport_encodings(bpy.types.Operator):
     bl_idname = "bbp.up_ioport_encodings"
     bl_label = "Move Up in Encodings List"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_up_ioport_encodings'
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
@@ -119,6 +125,7 @@ class BBP_OT_down_ioport_encodings(bpy.types.Operator):
     bl_idname = "bbp.down_ioport_encodings"
     bl_label = "Move Down in Encodings List"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_down_ioport_encodings'
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:
@@ -138,6 +145,7 @@ class BBP_OT_clear_ioport_encodings(bpy.types.Operator):
     bl_idname = "bbp.clear_ioport_encodings"
     bl_label = "Clear Encodings List"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_clear_ioport_encodings'
 
     @classmethod
     def poll(cls, context: bpy.types.Context) -> bool:

@@ -77,12 +77,14 @@ _g_BMEMaterialPresets: dict[str, _BMEMaterialPreset] = {
 class BBP_PG_bme_material(bpy.types.PropertyGroup):
     bme_material_name: bpy.props.StringProperty(
         name = "Name",
-        default = ""
+        default = "",
+        translation_context = 'BBP_PG_bme_material/property'
     ) # type: ignore
     
     material_ptr: bpy.props.PointerProperty(
         name = "Material",
-        type = bpy.types.Material
+        type = bpy.types.Material,
+        translation_context = 'BBP_PG_bme_material/property'
     ) # type: ignore
 
 def get_bme_materials(scene: bpy.types.Scene) -> UTIL_functions.CollectionVisitor[BBP_PG_bme_material]:
@@ -175,6 +177,14 @@ class BMEMaterialsHelper():
         self.__mMaterialMap[preset_name] = new_mtl
         return new_mtl
 
+    def reset_materials(self) -> None:
+        if not self.is_valid():
+            raise UTIL_functions.BBPException('calling invalid BMEMaterialsHelper')
+        
+        # load all items
+        for preset_name, mtl in self.__mMaterialMap.items():
+            _load_bme_material_preset(mtl, preset_name)
+
     def __write_to_bme_materials(self) -> None:
         mtls = get_bme_materials(self.__mAssocScene)
         mtls.clear()
@@ -194,28 +204,6 @@ class BMEMaterialsHelper():
             # add into map
             self.__mMaterialMap[item.bme_material_name] = item.material_ptr
 
-def reset_bme_materials(scene: bpy.types.Scene) -> None:
-    invalid_idx: list[int] = []
-    mtls = get_bme_materials(scene)
-
-    # re-load all elements
-    index: int = 0
-    item: BBP_PG_bme_material
-    for item in mtls:
-        # load or record invalid entry
-        if item.material_ptr is None:
-            invalid_idx.append(index)
-        else:
-            _load_bme_material_preset(item.material_ptr, item.bme_material_name)
-
-        # inc counter
-        index += 1
-
-    # remove invalid one with reversed order
-    invalid_idx.reverse()
-    for idx in invalid_idx:
-        mtls.remove(idx)
-
 #endregion
 
 #region BME Materials Representation
@@ -233,19 +221,17 @@ class BBP_OT_reset_bme_materials(bpy.types.Operator):
     bl_idname = "bbp.reset_bme_materials"
     bl_label = "Reset BME Materials"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_reset_bme_materials'
     
     @classmethod
     def poll(cls, context):
         return context.scene is not None
     
     def execute(self, context):
-        reset_bme_materials(context.scene)
+        with BMEMaterialsHelper(context.scene) as helper:
+            helper.reset_materials()
         # show a window to let user know, not silence
-        UTIL_functions.message_box(
-            ('Reset OK.', ),
-            "Reset Result",
-            UTIL_icons_manager.BlenderPresetIcons.Info.value
-        )
+        self.report({'INFO'}, 'Reset BME materials successfully.')
         return {'FINISHED'}
 
 class BBP_PT_bme_materials(bpy.types.Panel):
@@ -255,6 +241,7 @@ class BBP_PT_bme_materials(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "scene"
+    bl_translation_context = 'BBP_PT_bme_materials'
 
     @classmethod
     def poll(cls, context):

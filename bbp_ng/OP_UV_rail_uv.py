@@ -8,10 +8,11 @@ class BBP_OT_rail_uv(bpy.types.Operator):
     bl_idname = "bbp.rail_uv"
     bl_label = "Rail UV"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_rail_uv'
 
     @classmethod
     def poll(cls, context):
-        return _check_rail_target()
+        return _check_rail_target(context)
 
     def invoke(self, context, event):
         wm: bpy.types.WindowManager = context.window_manager
@@ -26,7 +27,13 @@ class BBP_OT_rail_uv(bpy.types.Operator):
             return {'CANCELLED'}
         
         # apply rail uv
-        _create_rail_uv(_get_rail_target(), mtl)
+        (has_invalid_objs, meshes) = _get_rail_target(context)
+        _create_rail_uv(meshes, mtl)
+
+        # show warning if there is invalid objects
+        if has_invalid_objs:
+            self.report({'WARNING'}, 'Some objects are invalid for this operation. See Console for more details.')
+
         return {'FINISHED'}
 
     def draw(self, context):
@@ -36,8 +43,8 @@ class BBP_OT_rail_uv(bpy.types.Operator):
 
 #region Real Worker Functions
 
-def _check_rail_target() -> bool:
-    for obj in bpy.context.selected_objects:
+def _check_rail_target(context: bpy.types.Context) -> bool:
+    for obj in context.selected_objects:
         if obj.type != 'MESH':
             continue
         if obj.mode != 'OBJECT':
@@ -47,11 +54,11 @@ def _check_rail_target() -> bool:
         return True
     return False
 
-def _get_rail_target() -> typing.Iterable[bpy.types.Mesh]:
+def _get_rail_target(context: bpy.types.Context) -> tuple[bool, typing.Iterable[bpy.types.Mesh]]:
     # collect objects
     meshes: list[bpy.types.Mesh] = []
     error_objname: list[str] = []
-    for obj in bpy.context.selected_objects:
+    for obj in context.selected_objects:
         if obj.type != 'MESH':
             error_objname.append(obj.name)
             continue
@@ -62,28 +69,21 @@ def _get_rail_target() -> typing.Iterable[bpy.types.Mesh]:
             error_objname.append(obj.name)
             continue
         
-        meshes.append(obj.data)
+        meshes.append(typing.cast(bpy.types.Mesh, obj.data))
     
     # display warning window if necessary
-    if len(error_objname) != 0:
-        # show dialog
-        UTIL_functions.message_box(
-            ("Some objects is not processed, see Console for more infos.", ), 
-            "Object Type Warning", 
-            UTIL_icons_manager.BlenderPresetIcons.Warning.value
-        )
-
+    has_invalid_objs = len(error_objname) != 0
+    if has_invalid_objs:
         # output to console
         print('')
-        print('=====')
+        print('========== Rail UV Report ==========')
         print('Following objects are not processed by Rail UV because they do not meet the requirements of Rail UV.')
         for objname in error_objname:
             print(objname)
-        print('=====')
         print('')
 
     # return valid
-    return meshes
+    return (has_invalid_objs, meshes)
 
 def _tt_reflection_mapping_compute(
         point_: UTIL_virtools_types.ConstVxVector3, 

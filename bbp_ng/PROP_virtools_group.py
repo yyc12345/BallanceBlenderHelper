@@ -7,7 +7,8 @@ from . import UTIL_functions, UTIL_icons_manager
 class BBP_PG_virtools_group(bpy.types.PropertyGroup):
     group_name: bpy.props.StringProperty(
         name = "Group Name",
-        default = ""
+        default = "",
+        translation_context = 'BBP_PG_virtools_group/property'
     ) # type: ignore
 
 def get_virtools_groups(obj: bpy.types.Object) -> UTIL_functions.CollectionVisitor[BBP_PG_virtools_group]:
@@ -251,18 +252,21 @@ class SharedGroupNameInputProperties():
             ('DEFINED', "Predefined", "Pre-defined group name."),
             ('CUSTOM', "Custom", "User specified group name."),
         ),
+        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     preset_group_name: bpy.props.EnumProperty(
         name = "Group Name",
         description = "Pick vanilla Ballance group name.",
         items = _g_EnumHelper_Group.generate_items(),
+        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     custom_group_name: bpy.props.StringProperty(
         name = "Custom Group Name",
         description = "Input your custom group name.",
         default = "",
+        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     def draw_group_name_input(self, layout: bpy.types.UILayout) -> None:
@@ -291,6 +295,7 @@ class BBP_OT_add_virtools_group(bpy.types.Operator, SharedGroupNameInputProperti
     bl_idname = "bbp.add_virtools_groups"
     bl_label = "Add to Virtools Groups"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_add_virtools_group'
     
     @classmethod
     def poll(cls, context: bpy.types.Context):
@@ -315,6 +320,7 @@ class BBP_OT_rm_virtools_group(bpy.types.Operator):
     bl_idname = "bbp.rm_virtools_groups"
     bl_label = "Remove from Virtools Groups"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_rm_virtools_group'
     
     ## This class is slightly unique.
     #  Because we need get user selected group name first.
@@ -347,6 +353,7 @@ class BBP_OT_clear_virtools_groups(bpy.types.Operator):
     bl_idname = "bbp.clear_virtools_groups"
     bl_label = "Clear Virtools Groups"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_clear_virtools_groups'
     
     @classmethod
     def poll(cls, context: bpy.types.Context):
@@ -369,6 +376,7 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "object"
+    bl_translation_context = 'BBP_PT_virtools_groups'
     
     @classmethod
     def poll(cls, context):

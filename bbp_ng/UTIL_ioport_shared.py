@@ -159,6 +159,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process texture name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Current),
+        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     material_conflict_strategy: bpy.props.EnumProperty(
@@ -166,6 +167,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process material name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     mesh_conflict_strategy: bpy.props.EnumProperty(
@@ -173,6 +175,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process mesh name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     light_conflict_strategy: bpy.props.EnumProperty(
@@ -180,6 +183,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process light name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     object_conflict_strategy: bpy.props.EnumProperty(
@@ -187,6 +191,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process object name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     def draw_import_params(self, layout: bpy.types.UILayout) -> None:
@@ -240,6 +245,7 @@ class ExportParams():
             ('COLLECTION', "Collection", "Export a collection", 'OUTLINER_COLLECTION', 0),
             ('OBJECT', "Object", "Export an object", 'OBJECT_DATA', 1),
         ),
+        translation_context = 'BME/UTIL_ioport_shared.ExportParams/property'
     ) # type: ignore
 
     def draw_export_params(self, context: bpy.types.Context, layout: bpy.types.UILayout) -> None:
@@ -284,13 +290,15 @@ class VirtoolsParams():
         name = "Global Texture Save Options",
         description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
         items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
-        default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL)
+        default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL),
+        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     use_compress: bpy.props.BoolProperty(
         name="Use Compress",
         description = "Whether use ZLib to compress result when saving composition.",
         default = True,
+        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     compress_level: bpy.props.IntProperty(
@@ -298,6 +306,7 @@ class VirtoolsParams():
         description = "The ZLib compress level used by Virtools Engine when saving composition.",
         min = 1, max = 9,
         default = 5,
+        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     def draw_virtools_params(self, context: bpy.types.Context, layout: bpy.types.UILayout, is_importer: bool) -> None:
@@ -344,6 +353,7 @@ class BallanceParams():
         name="Successive Sector",
         description = "Whether order exporter to use document specified sector count to make sure sector is successive.",
         default = True,
+        translation_context = 'BME/UTIL_ioport_shared.BallanceParams/property'
     ) # type: ignore
 
     def draw_ballance_params(self, layout: bpy.types.UILayout, is_importer: bool) -> None:

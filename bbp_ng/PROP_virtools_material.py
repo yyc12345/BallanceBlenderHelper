@@ -132,7 +132,8 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultAmbient.to_const_rgb()
+        default = RawVirtoolsMaterial.cDefaultAmbient.to_const_rgb(),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     diffuse: bpy.props.FloatVectorProperty(
@@ -142,7 +143,8 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultDiffuse.to_const_rgba()
+        default = RawVirtoolsMaterial.cDefaultDiffuse.to_const_rgba(),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     specular: bpy.props.FloatVectorProperty(
@@ -152,7 +154,8 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultSpecular.to_const_rgb()
+        default = RawVirtoolsMaterial.cDefaultSpecular.to_const_rgb(),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     emissive: bpy.props.FloatVectorProperty(
@@ -162,7 +165,8 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultEmissive.to_const_rgb()
+        default = RawVirtoolsMaterial.cDefaultEmissive.to_const_rgb(),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     specular_power: bpy.props.FloatProperty(
@@ -170,13 +174,15 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         description = "Specular highlight power",
         min = 0.0,
         max = 100.0,
-        default = RawVirtoolsMaterial.cDefaultSpecularPower
+        default = RawVirtoolsMaterial.cDefaultSpecularPower,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture: bpy.props.PointerProperty(
         type = bpy.types.Image,
         name = "Texture",
-        description = "Texture of the material"
+        description = "Texture of the material",
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture_border_color: bpy.props.FloatVectorProperty(
@@ -186,89 +192,103 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_const_rgba()
+        default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_const_rgba(),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture_blend_mode: bpy.props.EnumProperty(
         name = "Texture Blend",
         description = "Texture blend mode",
         items = _g_Helper_VXTEXTURE_BLENDMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode)
+        default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture_min_mode: bpy.props.EnumProperty(
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode)
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture_mag_mode: bpy.props.EnumProperty(
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode)
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     texture_address_mode: bpy.props.EnumProperty(
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
         items = _g_Helper_VXTEXTURE_ADDRESSMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode)
+        default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     source_blend: bpy.props.EnumProperty(
         name = "Source Blend",
         description = "Source blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
-        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend)
+        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     dest_blend: bpy.props.EnumProperty(
         name = "Destination Blend",
         description = "Destination blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
-        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultDestBlend)
+        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultDestBlend),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     fill_mode: bpy.props.EnumProperty(
         name = "Fill Mode",
         description = "Fill mode",
         items = _g_Helper_VXFILL_MODE.generate_items(),
-        default = _g_Helper_VXFILL_MODE.to_selection(RawVirtoolsMaterial.cDefaultFillMode)
+        default = _g_Helper_VXFILL_MODE.to_selection(RawVirtoolsMaterial.cDefaultFillMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     shade_mode: bpy.props.EnumProperty(
         name = "Shade Mode",
         description = "Shade mode",
         items = _g_Helper_VXSHADE_MODE.generate_items(),
-        default = _g_Helper_VXSHADE_MODE.to_selection(RawVirtoolsMaterial.cDefaultShadeMode)
+        default = _g_Helper_VXSHADE_MODE.to_selection(RawVirtoolsMaterial.cDefaultShadeMode),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     enable_alpha_test: bpy.props.BoolProperty(
         name = "Alpha Test",
         description = "Whether the alpha test is enabled",
-        default = RawVirtoolsMaterial.cDefaultEnableAlphaTest
+        default = RawVirtoolsMaterial.cDefaultEnableAlphaTest,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_alpha_blend: bpy.props.BoolProperty(
         name = "Blend",
         description = "Whether alpha blending is enabled or not.",
-        default = RawVirtoolsMaterial.cDefaultEnableAlphaBlend
+        default = RawVirtoolsMaterial.cDefaultEnableAlphaBlend,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_perspective_correction: bpy.props.BoolProperty(
         name = "Perspective Correction",
         description = "Whether texture perspective correction is enabled",
-        default = RawVirtoolsMaterial.cDefaultEnablePerspectiveCorrection
+        default = RawVirtoolsMaterial.cDefaultEnablePerspectiveCorrection,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_z_write: bpy.props.BoolProperty(
         name = "Z-Buffer Write",
         description = "Whether writing in ZBuffer is enabled.",
-        default = RawVirtoolsMaterial.cDefaultEnableZWrite
+        default = RawVirtoolsMaterial.cDefaultEnableZWrite,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_two_sided: bpy.props.BoolProperty(
         name = "Both Sided",
         description = "Whether the material is both sided or not",
-        default = RawVirtoolsMaterial.cDefaultEnableTwoSided
+        default = RawVirtoolsMaterial.cDefaultEnableTwoSided,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     alpha_ref: bpy.props.IntProperty(
@@ -276,21 +296,24 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         description = "Alpha referential value",
         min = 0,
         max = 255,
-        default = RawVirtoolsMaterial.cDefaultAlphaRef
+        default = RawVirtoolsMaterial.cDefaultAlphaRef,
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     alpha_func: bpy.props.EnumProperty(
         name = "Alpha Test Function",
         description = "Alpha comparision function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
-        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc)
+        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     z_func: bpy.props.EnumProperty(
         name = "Z Compare Function",
         description = "Z Comparison function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
-        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultZFunc)
+        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultZFunc),
+        translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
 
 #region Getter Setter
@@ -877,6 +900,7 @@ class BBP_OT_apply_virtools_material(bpy.types.Operator):
     bl_idname = "bbp.apply_virtools_material"
     bl_label = "Apply to Blender Material"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_apply_virtools_material'
     
     @classmethod
     def poll(cls, context):
@@ -892,6 +916,7 @@ class BBP_OT_fix_single_material(bpy.types.Operator):
     bl_idname = "bbp.fix_single_material"
     bl_label = "Fix Material"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_fix_single_material'
     
     @classmethod
     def poll(cls, context):
@@ -911,7 +936,7 @@ class BBP_OT_fix_single_material(bpy.types.Operator):
         # if suc, apply to blender mtl and show info
         if ret:
             apply_to_blender_material(mtl)
-            self.report({'INFO'}, 'Fix done.')
+            self.report({'INFO'}, 'Fix material successfully.')
         else:
             # otherwise report warning
             self.report({'WARNING'}, 'This material is not suit for fixer.')
@@ -923,6 +948,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     bl_idname = "bbp.preset_virtools_material"
     bl_label = "Preset Virtools Material"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_preset_virtools_material'
     
     preset_type: bpy.props.EnumProperty(
         name = "Preset",
@@ -957,6 +983,7 @@ class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.I
     bl_idname = "bbp.direct_set_virtools_texture"
     bl_label = "Import and Assign Texture"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_direct_set_virtools_texture'
     
     @classmethod
     def poll(cls, context):
@@ -1009,6 +1036,7 @@ class BBP_PT_virtools_material(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "material"
+    bl_translation_context = 'BBP_PT_virtools_material'
     
     @classmethod
     def poll(cls, context):

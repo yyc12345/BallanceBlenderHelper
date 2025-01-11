@@ -32,12 +32,14 @@ class BBP_OT_select_object_by_virtools_group(bpy.types.Operator, PROP_virtools_g
     bl_idname = "bbp.select_object_by_virtools_group"
     bl_label = "Select by Virtools Group"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_select_object_by_virtools_group'
 
     selection_mode: bpy.props.EnumProperty(
         name = "Mode",
         description = "Selection mode",
         items = _g_EnumHelper_SelectMode.generate_items(),
-        default = _g_EnumHelper_SelectMode.to_selection(SelectMode.Intersect)
+        default = _g_EnumHelper_SelectMode.to_selection(SelectMode.Intersect),
+        translation_context = 'BBP_OT_select_object_by_virtools_group/property'
     ) # type: ignore
 
     @classmethod
@@ -122,6 +124,7 @@ class BBP_OT_add_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.
     bl_idname = "bbp.add_objects_virtools_group"
     bl_label = "Grouping Objects"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_add_objects_virtools_group'
 
     @classmethod
     def poll(cls, context):
@@ -147,6 +150,7 @@ class BBP_OT_rm_objects_virtools_group(bpy.types.Operator, PROP_virtools_group.S
     bl_idname = "bbp.rm_objects_virtools_group"
     bl_label = "Ungrouping Objects"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_rm_objects_virtools_group'
 
     @classmethod
     def poll(cls, context):
@@ -172,6 +176,7 @@ class BBP_OT_clear_objects_virtools_group(bpy.types.Operator):
     bl_idname = "bbp.clear_objects_virtools_group"
     bl_label = "Clear All Groups"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_clear_objects_virtools_group'
 
     @classmethod
     def poll(cls, context):

@@ -11,6 +11,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     bl_idname = "bbp.export_virtools"
     bl_label = "Export Virtools File"
     bl_options = {'PRESET'}
+    bl_translation_context = 'BBP_OT_export_virtools'
 
     @classmethod
     def poll(cls, context):

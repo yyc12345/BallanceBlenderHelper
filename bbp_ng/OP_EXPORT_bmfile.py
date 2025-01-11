@@ -6,19 +6,19 @@ class BBP_OT_export_bmfile(bpy.types.Operator, UTIL_file_browser.ExportBmxFile, 
     bl_idname = "bbp.export_bmfile"
     bl_label = "Export BM (Ballance Map) File"
     bl_options = {'PRESET'}
+    bl_translation_context = 'BBP_OT_export_bmfile'
 
     @classmethod
     def poll(cls, context):
         return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
     
     def execute(self, context):
-        self.report({'ERROR'}, 'This function not supported yet.')
+        self.report({'ERROR'}, 'This feature is not supported yet.')
         # self.report({'INFO'}, "BM File Exporting Finished.")
         return {'FINISHED'}
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Export Target')
         self.draw_export_params(context, layout.box())
 
 def register() -> None:

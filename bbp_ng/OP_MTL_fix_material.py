@@ -5,8 +5,9 @@ from . import PROP_virtools_material, PROP_preferences
 class BBP_OT_fix_all_material(bpy.types.Operator):
     """Fix All Materials by Its Referred Ballance Texture Name."""
     bl_idname = "bbp.fix_all_material"
-    bl_label = "Fix Material"
+    bl_label = "Fix All Materials"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_fix_all_material'
     
     @classmethod
     def poll(cls, context):

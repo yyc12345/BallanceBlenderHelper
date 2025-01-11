@@ -78,6 +78,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
     bl_idname = "bbp.flatten_uv"
     bl_label = "Flatten UV"
     bl_options = {'REGISTER', 'UNDO'}
+    bl_translation_context = 'BBP_OT_flatten_uv'
 
     reference_edge: bpy.props.IntProperty(
         name = "Reference Edge",
@@ -85,6 +86,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         min = 0,
         soft_min = 0, soft_max = 3,
         default = 0,
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     flatten_method: bpy.props.EnumProperty(
@@ -94,7 +96,8 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             ('FLOOR', "Floor", "Floor specific flatten UV."),
             ('WOOD', "Wood", "Wood specific flatten UV."),
         ],
-        default = 'RAW'
+        default = 'RAW',
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     scale_mode: bpy.props.EnumProperty(
@@ -103,7 +106,8 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
             ('NUM', "Scale Size", "Scale UV with specific number."),
             ('REF', "Ref. Point", "Scale UV with Reference Point feature."),
         ],
-        default = 'NUM'
+        default = 'NUM',
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     scale_number: bpy.props.FloatProperty(
@@ -114,6 +118,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         default = 5.0,
         step = 10,
         precision = 1,
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     reference_point: bpy.props.IntProperty(
@@ -122,6 +127,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         min = 2,  # 0 and 1 is invalid. we can not order the reference edge to be set on the outside of uv axis
         soft_min = 2, soft_max = 3,
         default = 2,
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     reference_uv: bpy.props.FloatProperty(
@@ -131,6 +137,7 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         default = 0.5,
         step = 10,
         precision = 2,
+        translation_context = 'BBP_OT_flatten_uv/property'
     ) # type: ignore
 
     @classmethod

@@ -7,6 +7,7 @@ class BBP_OT_snoop_group_then_to_mesh(bpy.types.Operator):
     bl_idname = "bbp.snoop_group_then_to_mesh"
     bl_label = "Snoop Group then to Mesh"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_snoop_group_then_to_mesh'
 
     @classmethod
     def poll(cls, context):

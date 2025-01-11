@@ -7,6 +7,7 @@ class BBP_OT_regulate_objects_name(bpy.types.Operator):
     bl_idname = "bbp.regulate_objects_name"
     bl_label = "Regulate Objects Name"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_regulate_objects_name'
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -24,6 +25,7 @@ class BBP_OT_auto_grouping(bpy.types.Operator):
     bl_idname = "bbp.auto_grouping"
     bl_label = "Auto Grouping"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_auto_grouping'
 
     def invoke(self, context, event):
         wm = context.window_manager
@@ -41,6 +43,7 @@ class BBP_OT_convert_to_imengyu(bpy.types.Operator):
     bl_idname = "bbp.convert_to_imengyu"
     bl_label = "Convert to Imengyu"
     bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_convert_to_imengyu'
 
     def invoke(self, context, event):
         wm = context.window_manager
