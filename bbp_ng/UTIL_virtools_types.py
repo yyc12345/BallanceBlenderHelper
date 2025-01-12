@@ -1,4 +1,4 @@
-import mathutils
+import bpy, mathutils
 import typing, math
 from . import UTIL_functions
 
@@ -263,7 +263,7 @@ class EnumPropHelper(UTIL_functions.EnumPropHelper):
 
 def virtools_name_regulator(name: str | None) -> str:
     if name: return name
-    else: return 'annoymous'
+    else: return bpy.app.translations.pgettext_data('annoymous', 'BME/UTIL_virtools_types.virtools_name_regulator()')
 
 ## Default Encoding for PyBMap
 #  Use semicolon split each encodings. Support Western European and Simplified Chinese in default.

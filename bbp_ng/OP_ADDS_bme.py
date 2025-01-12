@@ -55,7 +55,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
     ## Compromise used "outdated" flag.
     outdated_flag: bpy.props.BoolProperty(
-        # TR: Internal property should not have name and desc otherwise they will be written in translation.
+        # TR: Property not showen should not have name and desc.
         # name = "Outdated Type",
         # description = "Internal flag.",
         options = {'HIDDEN', 'SKIP_SAVE'},
@@ -243,49 +243,49 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
         op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # visit cfgs cache list to show cfg
-        layout.label(text = "Prototype Configurations:")
+        layout.label(text="Prototype Configurations:", text_ctxt='BBP_OT_add_bme_struct/draw')
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # create box for cfgs
             box_layout: bpy.types.UILayout = layout.box()
 
             # draw title and description first
-            box_layout.label(text = cfg.get_title())
-            box_layout.label(text = cfg.get_desc())
+            box_layout.label(text=cfg.get_title()) # TODO: finish translation context
+            box_layout.label(text=cfg.get_desc())
 
             # show prop differently by cfg type
             match(cfg.get_type()):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Integer:
-                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_int', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_int', text='')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
-                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_float', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_float', text='')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_bool', text = '')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_bool', text='')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face will show a special layout (grid view)
                     grids = box_layout.grid_flow(
                         row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
                     grids.alignment = 'CENTER'
                     grids.separator()
-                    grids.prop(op_cfgs_visitor[cfg_index + 0], 'prop_bool', text = 'Top') # top
-                    grids.prop(op_cfgs_visitor[cfg_index + 2], 'prop_bool', text = 'Front') # front
-                    grids.prop(op_cfgs_visitor[cfg_index + 4], 'prop_bool', text = 'Left') # left
-                    grids.label(text = '', icon = 'CUBE')   # show a 3d cube as icon
-                    grids.prop(op_cfgs_visitor[cfg_index + 5], 'prop_bool', text = 'Right') # right
-                    grids.prop(op_cfgs_visitor[cfg_index + 3], 'prop_bool', text = 'Back') # back
-                    grids.prop(op_cfgs_visitor[cfg_index + 1], 'prop_bool', text = 'Bottom') # bottom
+                    grids.prop(op_cfgs_visitor[cfg_index + 0], 'prop_bool', text='Top', text_ctxt='BBP_OT_add_bme_struct/draw') # top
+                    grids.prop(op_cfgs_visitor[cfg_index + 2], 'prop_bool', text='Front', text_ctxt='BBP_OT_add_bme_struct/draw') # front
+                    grids.prop(op_cfgs_visitor[cfg_index + 4], 'prop_bool', text='Left', text_ctxt='BBP_OT_add_bme_struct/draw') # left
+                    grids.label(text='', icon='CUBE')   # show a 3d cube as icon
+                    grids.prop(op_cfgs_visitor[cfg_index + 5], 'prop_bool', text='Right', text_ctxt='BBP_OT_add_bme_struct/draw') # right
+                    grids.prop(op_cfgs_visitor[cfg_index + 3], 'prop_bool', text='Back', text_ctxt='BBP_OT_add_bme_struct/draw') # back
+                    grids.prop(op_cfgs_visitor[cfg_index + 1], 'prop_bool', text='Bottom', text_ctxt='BBP_OT_add_bme_struct/draw') # bottom
                     grids.separator()
 
         # show extra transform props
         # forcely order that each one are placed horizontally
-        layout.label(text = "Extra Transform")
+        layout.label(text="Extra Transform", text_ctxt='BBP_OT_add_bme_struct/draw')
         # translation
-        layout.label(text = 'Translation')
+        layout.label(text='Translation', text_ctxt='BBP_OT_add_bme_struct/draw')
         hbox_layout: bpy.types.UILayout = layout.row()
-        hbox_layout.prop(self, 'extra_translation', text = '')
+        hbox_layout.prop(self, 'extra_translation', text='')
         # rotation
-        layout.label(text = 'Rotation')
+        layout.label(text='Rotation', text_ctxt='BBP_OT_add_bme_struct/draw')
         hbox_layout = layout.row()
-        hbox_layout.prop(self, 'extra_rotation', text = '')
+        hbox_layout.prop(self, 'extra_rotation', text='')
 
     @classmethod
     def draw_blc_menu(cls, layout: bpy.types.UILayout):

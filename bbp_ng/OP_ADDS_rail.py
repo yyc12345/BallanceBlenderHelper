@@ -62,15 +62,15 @@ class SharedExtraTransform():
     def draw_extra_transform_input(self, layout: bpy.types.UILayout) -> None:
         # show extra transform props
         # forcely order that each one are placed horizontally
-        layout.label(text = "Extra Transform")
+        layout.label(text="Extra Transform", text_ctxt='BBP/OP_ADDS_rail.SharedExtraTransform/draw')
         # translation
-        layout.label(text = 'Translation')
+        layout.label(text='Translation', text_ctxt='BBP/OP_ADDS_rail.SharedExtraTransform/draw')
         row = layout.row()
-        row.prop(self, 'extra_translation', text = '')
+        row.prop(self, 'extra_translation', text='')
         # rotation
-        layout.label(text = 'Rotation')
+        layout.label(text='Rotation', text_ctxt='BBP/OP_ADDS_rail.SharedExtraTransform/draw')
         row = layout.row()
-        row.prop(self, 'extra_rotation', text = '')
+        row.prop(self, 'extra_rotation', text='')
 
     def general_get_extra_transform(self) -> mathutils.Matrix:
         return mathutils.Matrix.LocRotScale(
@@ -124,7 +124,7 @@ class SharedRailCapInputProperty():
     ) # type: ignore
 
     def draw_rail_cap_input(self, layout: bpy.types.UILayout) -> None:
-        layout.label(text = "Cap Options")
+        layout.label(text="Cap Options", text_ctxt='BBP/OP_ADDS_rail.SharedRailCapInputProperty/draw')
         row = layout.row()
         row.prop(self, "rail_start_cap", toggle = 1)
         row.prop(self, "rail_end_cap", toggle = 1)
@@ -209,7 +209,7 @@ class SharedScrewRailInputProperty():
     
     def draw_screw_rail_flip_input(self, layout: bpy.types.UILayout) -> None:
         # flip options should placed horizontally
-        layout.label(text = "Flip Options")
+        layout.label(text="Flip Options", text_ctxt='BBP/OP_ADDS_rail.SharedScrewRailInputProperty/draw')
         row = layout.row()
         row.prop(self, "rail_screw_flip_x", toggle = 1)
         row.prop(self, "rail_screw_flip_y", toggle = 1)
@@ -263,7 +263,7 @@ class BBP_OT_add_transition_section(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'No Options Available')
+        layout.label(text='No Options Available', text_ctxt='BBP_OT_add_transition_section/draw')
 
 class BBP_OT_add_straight_rail(SharedExtraTransform, SharedRailSectionInputProperty, SharedRailCapInputProperty, SharedStraightRailInputProperty, bpy.types.Operator):
     """Add Straight Rail"""
@@ -286,7 +286,7 @@ class BBP_OT_add_straight_rail(SharedExtraTransform, SharedRailSectionInputPrope
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Straight Rail')
+        layout.label(text='Straight Rail', text_ctxt='BBP_OT_add_straight_rail/draw')
         self.draw_rail_section_input(layout)
         self.draw_straight_rail_input(layout)
         layout.separator()
@@ -315,7 +315,7 @@ class BBP_OT_add_transition_rail(SharedExtraTransform, SharedRailCapInputPropert
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Transition Rail')
+        layout.label(text='Transition Rail', text_ctxt='BBP_OT_add_transition_rail/draw')
         self.draw_straight_rail_input(layout)
         layout.separator()
         self.draw_rail_cap_input(layout)
@@ -355,7 +355,7 @@ class BBP_OT_add_side_rail(SharedExtraTransform, SharedRailCapInputProperty, Sha
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Side Rail')
+        layout.label(text='Side Rail', text_ctxt='BBP_OT_add_side_rail/draw')
         layout.prop(self, 'side_rail_type')
         self.draw_straight_rail_input(layout)
         layout.separator()
@@ -395,7 +395,7 @@ class BBP_OT_add_arc_rail(SharedExtraTransform, SharedRailSectionInputProperty, 
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Arc Rail')
+        layout.label(text='Arc Rail', text_ctxt='BBP_OT_add_arc_rail/draw')
         self.draw_rail_section_input(layout)
         self.draw_screw_rail_input(layout)
         layout.prop(self, "rail_screw_angle")
@@ -445,7 +445,7 @@ class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, S
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Spiral Rail')
+        layout.label(text='Spiral Rail', text_ctxt='BBP_OT_add_spiral_rail/draw')
         self.draw_screw_rail_input(layout)
         layout.prop(self, "rail_screw_screw")
         layout.prop(self, "rail_screw_iterations")
@@ -489,7 +489,7 @@ class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputPr
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text = 'Spiral Rail')
+        layout.label(text='Spiral Rail', text_ctxt='BBP_OT_add_side_spiral_rail/draw')
         self.draw_screw_rail_input(layout)
         layout.prop(self, "rail_screw_iterations")
         layout.separator()

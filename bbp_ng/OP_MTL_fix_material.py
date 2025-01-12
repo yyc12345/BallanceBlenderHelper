@@ -30,7 +30,9 @@ class BBP_OT_fix_all_material(bpy.types.Operator):
                 counter_suc += 1
 
         # report and return
-        self.report({'INFO'}, f'Fix {counter_suc}/{counter_all} materials.')
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            'Fix {0}/{1} materials.', 'BBP_OT_fix_all_material/draw')
+        self.report({'INFO'}, tr_text.format(counter_suc, counter_all))
         return {'FINISHED'}
 
 def register() -> None:

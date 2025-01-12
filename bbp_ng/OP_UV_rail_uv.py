@@ -76,8 +76,12 @@ def _get_rail_target(context: bpy.types.Context) -> tuple[bool, typing.Iterable[
     if has_invalid_objs:
         # output to console
         print('')
-        print('========== Rail UV Report ==========')
-        print('Following objects are not processed by Rail UV because they do not meet the requirements of Rail UV.')
+        tr_text: str = bpy.app.translations.pgettext_rpt('Rail UV Report', 'BBP_OT_rail_uv/execute')
+        print(f'========== {tr_text} ==========')
+        print(bpy.app.translations.pgettext_rpt(
+            'Following objects are not processed by Rail UV because they do not meet the requirements of Rail UV.',
+            'BBP_OT_rail_uv/execute'
+        ))
         for objname in error_objname:
             print(objname)
         print('')

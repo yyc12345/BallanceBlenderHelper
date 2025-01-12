@@ -70,7 +70,10 @@ class RenameErrorReporter():
     def __enter__(self):
         # print console report header
         print('============')
-        print('Rename Report')
+        print(bpy.app.translations.pgettext_rpt(
+            'Rename Report',
+            'BBP/UTIL_naming_convension.RenameErrorReporter'
+        ))
         print('------------')
         # return self as context
         return self
@@ -78,7 +81,9 @@ class RenameErrorReporter():
     def __exit__(self, exc_type, exc_value, traceback):
         # print console report tail
         print('------------')
-        print(f'All / Failed - {self.mAllObjCounter} / {self.mFailedObjCounter}')
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            'All / Failed - {0} / {1}', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+        print(tr_text.format(self.mAllObjCounter, self.mFailedObjCounter))
         print('============')
         # reset variables
         self.mAllObjCounter = 0
@@ -99,11 +104,14 @@ class RenameErrorReporter():
 
         # output header
         # if new name is different with old name, output both of them
+        tr_text: str
         new_name: str = obj.name
         if self.mOldName == new_name:
-            print(f'For object "{new_name}"')
+            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}"', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            print(tr_text.format(new_name))
         else:
-            print(f'For object "{new_name}" (Old name: "{self.mOldName}")')
+            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}" (Old name: "{1}")', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            print(tr_text.format(new_name, self.mOldName))
 
         # output error list with indent
         for item in self.mErrList:
@@ -116,9 +124,12 @@ class RenameErrorReporter():
     @staticmethod
     def __errtype_to_string(err_v: _RenameErrorType) -> str:
         match(err_v):
-            case _RenameErrorType.ERROR: return 'ERROR'
-            case _RenameErrorType.WARNING: return 'WARN'
-            case _RenameErrorType.INFO: return 'INFO'
+            case _RenameErrorType.ERROR:
+                return bpy.app.translations.pgettext_rpt('ERROR', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            case _RenameErrorType.WARNING:
+                return bpy.app.translations.pgettext_rpt('WARN', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            case _RenameErrorType.INFO:
+                return bpy.app.translations.pgettext_rpt('INFO', 'BBP/UTIL_naming_convension.RenameErrorReporter')
             case _: raise UTIL_functions.BBPException("Unknown error type.")
     @staticmethod
     def __erritem_to_string(item: _RenameErrorItem) -> str:

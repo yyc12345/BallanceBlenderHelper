@@ -39,17 +39,17 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text='UV', icon='UV')
+        layout.label(text='UV', icon='UV', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
         layout.separator()
-        layout.label(text='Align', icon='SNAP_ON')
+        layout.label(text='Align', icon='SNAP_ON', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_OBJECT_legacy_align.BBP_OT_legacy_align.bl_idname)
         layout.separator()
-        layout.label(text='Select', icon='SELECT_SET')
+        layout.label(text='Select', icon='SELECT_SET', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_OBJECT_virtools_group.BBP_OT_select_object_by_virtools_group.bl_idname)
         layout.separator()
-        layout.label(text='Material', icon='MATERIAL')
+        layout.label(text='Material', icon='MATERIAL', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_MTL_fix_material.BBP_OT_fix_all_material.bl_idname)
 
 class BBP_MT_AddBmeMenu(bpy.types.Menu):
@@ -71,18 +71,18 @@ class BBP_MT_AddRailMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text="Sections", icon='MESH_CIRCLE')
+        layout.label(text="Sections", icon='MESH_CIRCLE', text_ctxt='BBP_MT_AddRailMenu/draw')
         layout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
 
         layout.separator()
-        layout.label(text="Straight Rails", icon='IPO_CONSTANT')
+        layout.label(text="Straight Rails", icon='IPO_CONSTANT', text_ctxt='BBP_MT_AddRailMenu/draw')
         layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_transition_rail.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_side_rail.bl_idname)
 
         layout.separator()
-        layout.label(text="Curve Rails", icon='MOD_SCREW')
+        layout.label(text="Curve Rails", icon='MOD_SCREW', text_ctxt='BBP_MT_AddRailMenu/draw')
         layout.operator(OP_ADDS_rail.BBP_OT_add_arc_rail.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_spiral_rail.bl_idname)
         layout.operator(OP_ADDS_rail.BBP_OT_add_side_spiral_rail.bl_idname)
@@ -96,22 +96,22 @@ class BBP_MT_AddComponentsMenu(bpy.types.Menu):
     def draw(self, context):
         layout = self.layout
 
-        layout.label(text="Basic Components")
+        layout.label(text="Basic Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
         OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(layout)
         
         layout.separator()
-        layout.label(text="Nong Components")
+        layout.label(text="Nong Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
         OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_nong_ventilator.draw_blc_menu(layout)
 
         layout.separator()
-        layout.label(text="Series Components")
+        layout.label(text="Series Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
         OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_swing_series.draw_blc_menu(layout)
         OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(layout)
 
         layout.separator()
-        layout.label(text="Components Pair")
+        layout.label(text="Components Pair", text_ctxt='BBP_MT_AddComponentsMenu/draw')
         OP_ADDS_component.BBP_OT_add_sector_component_pair.draw_blc_menu(layout)
 
 # ===== Menu Drawer =====
@@ -120,13 +120,29 @@ MenuDrawer_t = typing.Callable[[typing.Any, typing.Any], None]
 
 def menu_drawer_import(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
-    #layout.operator(OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname, text="Ballance Map (.bmx)")
-    layout.operator(OP_IMPORT_virtools.BBP_OT_import_virtools.bl_idname, text="Virtools File (.nmo/.cmo/.vmo) (experimental)")
+    # layout.operator(
+    #     OP_IMPORT_bmfile.BBP_OT_import_bmfile.bl_idname,
+    #     text="Ballance Map (.bmx)",
+    #     text_ctxt='BBP/__init__.menu_drawer_import()'
+    # )
+    layout.operator(
+        OP_IMPORT_virtools.BBP_OT_import_virtools.bl_idname,
+        text="Virtools File (.nmo/.cmo/.vmo) (experimental)",
+        text_ctxt='BBP/__init__.menu_drawer_import()'
+    )
 
 def menu_drawer_export(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
-    #layout.operator(OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname, text="Ballance Map (.bmx)")
-    layout.operator(OP_EXPORT_virtools.BBP_OT_export_virtools.bl_idname, text="Virtools File (.nmo/.cmo/.vmo) (experimental)")
+    # layout.operator(
+    #     OP_EXPORT_bmfile.BBP_OT_export_bmfile.bl_idname,
+    #     text="Ballance Map (.bmx)",
+    #     text_ctxt='BBP/__init__.menu_drawer_export()'
+    # )
+    layout.operator(
+        OP_EXPORT_virtools.BBP_OT_export_virtools.bl_idname,
+        text="Virtools File (.nmo/.cmo/.vmo) (experimental)",
+        text_ctxt='BBP/__init__.menu_drawer_export()'
+    )
 
 def menu_drawer_view3d(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
@@ -135,7 +151,7 @@ def menu_drawer_view3d(self, context) -> None:
 def menu_drawer_add(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
-    layout.label(text="Ballance")
+    layout.label(text="Ballance", text_ctxt='BBP/__init__.menu_drawer_add()')
     layout.menu(BBP_MT_AddBmeMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
     layout.menu(BBP_MT_AddComponentsMenu.bl_idname, icon='MESH_ICOSPHERE')
@@ -151,15 +167,21 @@ def menu_drawer_grouping(self, context) -> None:
     col = layout.column()
     col.operator_context = 'INVOKE_DEFAULT'
 
-    col.label(text="Virtools Group")
-    col.operator(OP_OBJECT_virtools_group.BBP_OT_add_objects_virtools_group.bl_idname, icon='ADD', text="Group into...")
-    col.operator(OP_OBJECT_virtools_group.BBP_OT_rm_objects_virtools_group.bl_idname, icon='REMOVE', text="Ungroup from...")
-    col.operator(OP_OBJECT_virtools_group.BBP_OT_clear_objects_virtools_group.bl_idname, icon='TRASH', text="Clear All Groups")
+    col.label(text="Virtools Group", text_ctxt='BBP/__init__.menu_drawer_grouping()')
+    col.operator(
+        OP_OBJECT_virtools_group.BBP_OT_add_objects_virtools_group.bl_idname, icon='ADD', text="Group into...",
+        text_ctxt='BBP/__init__.menu_drawer_grouping()')
+    col.operator(
+        OP_OBJECT_virtools_group.BBP_OT_rm_objects_virtools_group.bl_idname, icon='REMOVE', text="Ungroup from...",
+        text_ctxt='BBP/__init__.menu_drawer_grouping()')
+    col.operator(
+        OP_OBJECT_virtools_group.BBP_OT_clear_objects_virtools_group.bl_idname, icon='TRASH', text="Clear All Groups",
+        text_ctxt='BBP/__init__.menu_drawer_grouping()')
 
 def menu_drawer_snoop_then_conv(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
-    layout.label(text="Ballance")
+    layout.label(text="Ballance", text_ctxt='BBP/__init__.menu_drawer_snoop_then_conv()')
     layout.operator(OP_OBJECT_snoop_group_then_to_mesh.BBP_OT_snoop_group_then_to_mesh.bl_idname, icon='OUTLINER_OB_MESH')
 
 def menu_drawer_naming_convention(self, context) -> None:
@@ -170,7 +192,7 @@ def menu_drawer_naming_convention(self, context) -> None:
     col = layout.column()
     col.operator_context = 'INVOKE_DEFAULT'
 
-    col.label(text="Ballance")
+    col.label(text="Ballance", text_ctxt='BBP/__init__.menu_drawer_naming_convention()')
     col.operator(OP_OBJECT_naming_convention.BBP_OT_regulate_objects_name.bl_idname, icon='GREASEPENCIL')
     col.operator(OP_OBJECT_naming_convention.BBP_OT_auto_grouping.bl_idname, icon='GROUP')
     col.operator(OP_OBJECT_naming_convention.BBP_OT_convert_to_imengyu.bl_idname, icon='ARROW_LEFTRIGHT')

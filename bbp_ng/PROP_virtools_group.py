@@ -252,21 +252,21 @@ class SharedGroupNameInputProperties():
             ('DEFINED', "Predefined", "Pre-defined group name."),
             ('CUSTOM', "Custom", "User specified group name."),
         ),
-        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
+        translation_context = 'BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     preset_group_name: bpy.props.EnumProperty(
         name = "Group Name",
         description = "Pick vanilla Ballance group name.",
         items = _g_EnumHelper_Group.generate_items(),
-        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
+        translation_context = 'BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     custom_group_name: bpy.props.StringProperty(
         name = "Custom Group Name",
         description = "Input your custom group name.",
         default = "",
-        translation_context = 'BME/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
+        translation_context = 'BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property'
     ) # type: ignore
     
     def draw_group_name_input(self, layout: bpy.types.UILayout) -> None:
@@ -388,7 +388,9 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
 
         # notify on non-mesh object
         if target.type != 'MESH':
-            layout.label(text = 'Virtools Group is invalid on non-mesh object!', icon = 'ERROR')
+            layout.label(
+                text='Virtools Group is invalid on non-mesh object!', icon='ERROR',
+                text_ctxt='BBP_PT_virtools_groups/draw')
 
         # draw main body
         row = layout.row()

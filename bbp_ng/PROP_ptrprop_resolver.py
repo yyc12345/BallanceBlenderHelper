@@ -12,6 +12,7 @@ from . import UTIL_functions, UTIL_virtools_types
 class BBP_PG_bmap_encoding(bpy.types.PropertyGroup):
     encoding: bpy.props.StringProperty(
         name = "Encoding",
+        description = "The name of BMap used encoding.",
         default = "",
         translation_context = 'BBP_PG_bmap_encoding/property'
     ) # type: ignore
@@ -42,7 +43,7 @@ class BBP_PG_ptrprop_resolver(bpy.types.PropertyGroup):
         translation_context = 'BBP_PG_ptrprop_resolver/property'
     ) # type: ignore
 
-    # TR: These encoding related items should not have explicit name and description
+    # TR: Properties not showen should not have name and desc.
     ioport_encodings: bpy.props.CollectionProperty(type = BBP_PG_bmap_encoding) # type: ignore
     active_ioport_encodings: bpy.props.IntProperty() # type: ignore
 

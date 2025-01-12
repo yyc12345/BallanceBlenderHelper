@@ -9,18 +9,21 @@ import bpy
 #  BME module has its own context naming convention which make sure all configuration fields of prototypes are properly translated.
 #  This module also provide a corresponding function to compute these context string from given BME prototype name and the index of configuration fields.
 #  
-#  For BBP plugin self, there is a priniciple list which you should follow when providing translation context.
-#  - For operator, menu, panel and etc, set their `bl_translation_context` to their names, such as `BBP_OT_some_operator`
-#  - For property located in operator, menu, panel and etc, set their `translation_context` to corresponding class name, 
-#    plus `/property` suffix, such as `BBP_OT_some_operator/property`.
-#  - For draw function located in operator, menu, panel and etc, set their `translation_context` to corresponding class name, 
-#    plus `/draw` suffix, such as `BBP_OT_some_operator/draw`.
-#  - For property loacted in shared class (usually shared by multiple operators), set their `translation_context` to `BME/<MODULE_NAME>.<CLASS_NAME>/property`.
-#    `<MODULE_NAME>` is the module name (file name) where this class located. `<CLASS_NAME>` is the name of this class.
-#    For example, `BBP/some_module.some_class/property`
-#    
-#  Due to the shitty design, I can't find a way to add translation context for descrption field.
-#  So these description may collide with Blender official translation and thus not put in result file.
+#  For BBP plugin self, there is a list containing multiple priniciples which you should follow when providing translation context.
+#  - For operator, menu, panel and etc.
+#      * For themselves, fill `bl_translation_context` to their name, such as `BBP_OT_some_operator`.
+#      * For properties located inside, add `/property` suffix, such as `BBP_OT_some_operator/property`.
+#      * For draw function (any function callings requiring translation context inside it), add `/draw` suffix, such as `BBP_OT_some_operator/draw`.
+#      * For execute function, or any functions mainly called by this execution function, add `/execute` suffix, such as `BBP_OT_some_operator/execute`.
+#  - For shared class (usually shared by multiple operators).
+#      * For themselves (usually not used because they don't have `bl_translation_context`), the default context is `BME/<MODULE_NAME>.<CLASS_NAME>`, such as `BBP/some_module.some_class`.
+#      * For properties located inside, add `/property` suffix, such as `BBP/some_module.some_class/property`.
+#      * For draw function (any function callings requiring translation context inside it), add `/draw` suffix, such as `BBP/some_module.some_class/draw`.
+#  - For menu draw function (usually defined in __init__ module).
+#      * For themselves (any calling inside them), the context is `BME/<MODULE_NAME>.<METHOD_NAME>()`, such as `BBP/some_module.some_method()`.
+#  
+#  Due to the shitty design, I can't find a way to add translation context for descrption field and report function used string.
+#  So these description may collide with Blender official translation, thus they may not be put in result translation file.
 #  I have no idea about this.
 #  
 #  Due to the shitty static analyse ability of Blender I18N plugin, all context should be written in literal,
@@ -32,9 +35,18 @@ import bpy
 #  please use `bpy.app.translations.pgettext_rpt()` to get translation message because they are report.
 #  For the string given to `UTIL_functions.message_box()`, please use `bpy.app.translations.pgettext_iface` because they are UI elements.
 #  
-#  It seema that `bpy.app.translations.pgettext` function family has fatal error when extracting message with context
+#  `bpy.app.translations.pgettext` function family has fatal error when extracting message with context
 #  (it will produce a correct one and a wrong one which just simply concat the message and its context. I don't know why).
-#  
+#  This will happen if you put `bpy.app.translations.pgettext` calling inside `UILayout.label` or any UILayout functions like it.
+#  `bpy.app.translations.pgettext` will produce the correct entry but Blender used "magic of `UILayout.label` will produce the wrong one.
+#  It seems that Blender's magic just join the string provided in `text` argument as much as possible.
+#  So the solution is simple:
+#  - If we use `bpy.app.translations.pgettext` and `UILayout.label` together
+#      * Create a variable holding the result of `bpy.app.translations.pgettext`.
+#      * Format this gotten string if necessary.
+#      * Call `UILayout.label` and use this variable as its `text` argument. Then set `translated` to False.
+#  - If we use `bpy.app.translations.pgettext` with other non-Blender functions, such as `print`.
+#      * Use it as a normal function.
 #  
 #  All translation annotation are started with `TR:`
 #  

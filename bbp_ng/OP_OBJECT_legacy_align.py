@@ -112,22 +112,22 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         return None
     
     apply_flag: bpy.props.BoolProperty(
-        name = "Apply Flag",
-        description = "Internal flag.",
+        # TR: Property not showen should not have name and desc.
+        # name = "Apply Flag",
+        # description = "Internal flag.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = True, # default True value to make it as a "light" button, not a grey one.
-        update = apply_flag_updated,
-        translation_context = 'BBP_OT_legacy_align/property'
+        update = apply_flag_updated
     ) # type: ignore
     recursive_hinder: bpy.props.BoolProperty(
-        # TR: internal used property should not have name and description, otherwise it will be translated.
+        # TR: Property not showen should not have name and desc.
         # name = "Recursive Hinder",
         # description = "An internal flag to prevent the loop calling to apply_flags's updator.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = False
     ) # type: ignore
     align_history : bpy.props.CollectionProperty(
-        # TR: same reason for no name and description.
+        # TR: Property not showen should not have name and desc.
         # name = "Historys",
         # description = "Align history.",
         type = BBP_PG_legacy_align_history
@@ -179,7 +179,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         col = layout.column()
 
         # show axis
-        col.label(text="Align Axis (Multi-selection)")
+        col.label(text="Align Axis (Multi-selection)", text_ctxt='BBP_OT_legacy_align/draw')
         row = col.row()
         row.prop(entry, "align_x", toggle = 1)
         row.prop(entry, "align_y", toggle = 1)
@@ -187,9 +187,9 @@ class BBP_OT_legacy_align(bpy.types.Operator):
 
         # show mode
         col.separator()
-        col.label(text = 'Current Object (Active Object)')
+        col.label(text='Current Object (Active Object)', text_ctxt='BBP_OT_legacy_align/draw')
         col.prop(entry, "current_align_mode", expand = True)
-        col.label(text = 'Target Objects (Selected Objects)')
+        col.label(text='Target Objects (Selected Objects)', text_ctxt='BBP_OT_legacy_align/draw')
         col.prop(entry, "target_align_mode", expand = True)
 
         # show apply button
@@ -198,8 +198,10 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         # only allow Apply when there is a selected axis
         conditional_disable_area.enabled = entry.align_x == True or entry.align_y == True or entry.align_z == True
         # show apply and counter
-        conditional_disable_area.prop(self, 'apply_flag', text = 'Apply', icon = 'CHECKMARK', toggle = 1)
-        conditional_disable_area.label(text = f'Total {len(histories) - 1} applied alignments')
+        conditional_disable_area.prop(self, 'apply_flag', toggle = 1, text='Apply', icon='CHECKMARK', text_ctxt='BBP_OT_legacy_align/draw')
+        tr_text: str = bpy.app.translations.pgettext_iface(
+            'Total {0} applied alignments', 'BBP_OT_legacy_align/draw')
+        conditional_disable_area.label(text=tr_text.format(len(histories) - 1), translate=False)
 
 #region Core Functions
 

@@ -283,11 +283,13 @@ class BBP_PT_virtools_light(bpy.types.Panel):
         rawdata: RawVirtoolsLight = get_raw_virtools_light(lit)
 
         # draw operator
-        layout.operator(BBP_OT_apply_virtools_light.bl_idname, text = 'Apply', icon = 'NODETREE')
+        layout.operator(
+            BBP_OT_apply_virtools_light.bl_idname, text='Apply', icon='NODETREE',
+            text_ctxt='BBP_PT_virtools_light/draw')
 
         # draw data
         layout.separator()
-        layout.label(text = 'Basics')
+        layout.label(text='Basics', text_ctxt='BBP_PT_virtools_light/draw')
         # all lights has type and color property
         sublayout = layout.row()
         sublayout.use_property_split = False
@@ -300,15 +302,15 @@ class BBP_PT_virtools_light(bpy.types.Panel):
         # all light has attenuation exception directional light
         if rawdata.mType != UTIL_virtools_types.VXLIGHT_TYPE.VX_LIGHTDIREC:
             layout.separator()
-            layout.label(text = 'Attenuation')
-            layout.prop(props, 'constant_attenuation', text = 'Constant')
-            layout.prop(props, 'linear_attenuation', text = 'Linear')
-            layout.prop(props, 'quadratic_attenuation', text = 'Quadratic')
+            layout.label(text='Attenuation', text_ctxt='BBP_PT_virtools_light/draw')
+            layout.prop(props, 'constant_attenuation', text='Constant', text_ctxt='BBP_PT_virtools_light/draw')
+            layout.prop(props, 'linear_attenuation', text='Linear', text_ctxt='BBP_PT_virtools_light/draw')
+            layout.prop(props, 'quadratic_attenuation', text='Quadratic', text_ctxt='BBP_PT_virtools_light/draw')
 
         # only spot light has spot cone properties.
         if rawdata.mType == UTIL_virtools_types.VXLIGHT_TYPE.VX_LIGHTSPOT:
             layout.separator()
-            layout.label(text = 'Spot Cone')
+            layout.label(text='Spot Cone', text_ctxt='BBP_PT_virtools_light/draw')
             layout.prop(props, 'hot_spot')
             layout.prop(props, 'falloff')
             layout.prop(props, 'falloff_shape')

@@ -907,7 +907,7 @@ class BBP_OT_apply_virtools_material(bpy.types.Operator):
         return context.material is not None
     
     def execute(self, context):
-        mtl: bpy.types.Material = context.material
+        mtl = typing.cast(bpy.types.Material, context.material)
         apply_to_blender_material(mtl)
         return {'FINISHED'}
 
@@ -930,7 +930,7 @@ class BBP_OT_fix_single_material(bpy.types.Operator):
     
     def execute(self, context):
         # get mtl and try to fix
-        mtl: bpy.types.Material = context.material
+        mtl = typing.cast(bpy.types.Material, context.material)
         ret: bool = fix_material(mtl)
 
         # if suc, apply to blender mtl and show info
@@ -969,7 +969,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
     
     def execute(self, context):
         # get essential value
-        mtl: bpy.types.Material = context.material
+        mtl = typing.cast(bpy.types.Material, context.material)
         expected_preset: MaterialPresetType = _g_Helper_MtlPreset.get_selection(self.preset_type)
         
         # apply preset to material
@@ -982,7 +982,7 @@ class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.I
     """Import and Assign Texture Directly"""
     bl_idname = "bbp.direct_set_virtools_texture"
     bl_label = "Import and Assign Texture"
-    bl_options = {'UNDO'}
+    bl_options = {'UNDO', 'INTERNAL'} # NOTE: Use 'INTERNAL' to remove it from search result.
     bl_translation_context = 'BBP_OT_direct_set_virtools_texture'
     
     @classmethod
@@ -1004,7 +1004,7 @@ class BBP_OT_direct_set_virtools_texture(bpy.types.Operator, UTIL_file_browser.I
     
     def execute(self, context):
         # get assoc mtl
-        mtl: bpy.types.Material = context.material
+        mtl = typing.cast(bpy.types.Material, context.material)
         rawmtl: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
 
         # import texture according to whether it is ballance texture
@@ -1045,18 +1045,22 @@ class BBP_PT_virtools_material(bpy.types.Panel):
     def draw(self, context):
         # get layout and target
         layout = self.layout
-        mtl: bpy.types.Material = context.material
+        mtl = typing.cast(bpy.types.Material, context.material)
         props: BBP_PG_virtools_material = get_virtools_material(mtl)
         rawdata: RawVirtoolsMaterial = get_raw_virtools_material(mtl)
         
         # draw operator
         row = layout.row()
-        row.operator(BBP_OT_preset_virtools_material.bl_idname, text = 'Preset', icon = "PRESET")
-        row.operator(BBP_OT_apply_virtools_material.bl_idname, text = 'Apply', icon = "NODETREE")
-        row.operator(BBP_OT_fix_single_material.bl_idname, text = '', icon = "MODIFIER")
+        row.operator(
+            BBP_OT_preset_virtools_material.bl_idname, text='Preset', icon = "PRESET",
+            text_ctxt='BBP_PT_virtools_material/draw')
+        row.operator(
+            BBP_OT_apply_virtools_material.bl_idname, text='Apply', icon = "NODETREE",
+            text_ctxt='BBP_PT_virtools_material/draw')
+        row.operator(BBP_OT_fix_single_material.bl_idname, text='', icon = "MODIFIER")
 
         # draw data
-        layout.label(text="Color Parameters")
+        layout.label(text="Color Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         layout.prop(props, 'ambient')
         layout.prop(props, 'diffuse')
         layout.prop(props, 'specular')
@@ -1064,22 +1068,22 @@ class BBP_PT_virtools_material(bpy.types.Panel):
         layout.prop(props, 'specular_power')
         
         layout.separator()
-        layout.label(text="Mode Parameters")
+        layout.label(text="Mode Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         layout.prop(props, 'enable_two_sided')
         layout.prop(props, 'fill_mode')
         layout.prop(props, 'shade_mode')
         
         layout.separator()
-        layout.label(text="Texture Parameters")
+        layout.label(text="Texture Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         # texture prop with direct importing
         sublay = layout.row()
         sublay.prop(props, 'texture', emboss = True)
-        sublay.operator(BBP_OT_direct_set_virtools_texture.bl_idname, text = '', icon = 'FILEBROWSER')
+        sublay.operator(BBP_OT_direct_set_virtools_texture.bl_idname, text='', icon='FILEBROWSER')
         # texture detail
         if rawdata.mTexture is not None:
             # have texture, show texture settings and enclosed by a border.
             boxlayout = layout.box()
-            boxlayout.label(text="Virtools Texture Settings")
+            boxlayout.label(text="Virtools Texture Settings", text_ctxt='BBP_PT_virtools_material/draw')
             PROP_virtools_texture.draw_virtools_texture(props.texture, boxlayout)
 
         layout.prop(props, 'texture_blend_mode')
@@ -1091,21 +1095,21 @@ class BBP_PT_virtools_material(bpy.types.Panel):
             layout.prop(props, 'texture_border_color')
         
         layout.separator()
-        layout.label(text="Alpha Test Parameters")
+        layout.label(text="Alpha Test Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         layout.prop(props, 'enable_alpha_test')
         if rawdata.mEnableAlphaTest:
             layout.prop(props, 'alpha_func')
             layout.prop(props, 'alpha_ref')
         
         layout.separator()
-        layout.label(text="Alpha Blend Parameters")
+        layout.label(text="Alpha Blend Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         layout.prop(props, 'enable_alpha_blend')
         if rawdata.mEnableAlphaBlend:
             layout.prop(props, 'source_blend')
             layout.prop(props, 'dest_blend')
         
         layout.separator()
-        layout.label(text="Z Write Parameters")
+        layout.label(text="Z Write Parameters", text_ctxt='BBP_PT_virtools_material/draw')
         layout.prop(props, 'enable_z_write')
         if rawdata.mEnableZWrite:
             layout.prop(props, 'z_func')

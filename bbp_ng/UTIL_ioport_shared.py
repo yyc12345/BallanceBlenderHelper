@@ -159,7 +159,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process texture name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Current),
-        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     material_conflict_strategy: bpy.props.EnumProperty(
@@ -167,7 +167,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process material name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     mesh_conflict_strategy: bpy.props.EnumProperty(
@@ -175,7 +175,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process mesh name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     light_conflict_strategy: bpy.props.EnumProperty(
@@ -183,7 +183,7 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process light name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     object_conflict_strategy: bpy.props.EnumProperty(
@@ -191,28 +191,29 @@ class ImportParams():
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
         description = "Define how to process object name conflict",
         default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
-        translation_context = 'BME/UTIL_ioport_shared.ImportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
     def draw_import_params(self, layout: bpy.types.UILayout) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_import_params", default_closed=False)
-        header.label(text = 'Import Parameters')
+        header.label(text='Import Parameters', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        # NOTE: if panel is collapsed, body will be None. So we need check it.
         if body is None: return
 
-        body.label(text = 'Name Conflict Strategy')
-        grid = body.grid_flow(row_major = False, columns = 2)
-        grid.label(text = 'Object', icon = 'CUBE')
-        grid.label(text = 'Light', icon = 'LIGHT')
-        grid.label(text = 'Mesh', icon = 'MESH_DATA')
-        grid.label(text = 'Material', icon = 'MATERIAL')
-        grid.label(text = 'Texture', icon = 'TEXTURE')
-        grid.prop(self, 'object_conflict_strategy', text = '')
-        grid.prop(self, 'light_conflict_strategy', text = '')
-        grid.prop(self, 'mesh_conflict_strategy', text = '')
-        grid.prop(self, 'material_conflict_strategy', text = '')
-        grid.prop(self, 'texture_conflict_strategy', text = '')
+        body.label(text='Name Conflict Strategy', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid = body.grid_flow(row_major=False, columns=2)
+        grid.label(text='Object', icon='CUBE', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.label(text='Light', icon='LIGHT', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.label(text='Mesh', icon='MESH_DATA', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.label(text='Material', icon='MATERIAL', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.label(text='Texture', icon='TEXTURE', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.prop(self, 'object_conflict_strategy', text='')
+        grid.prop(self, 'light_conflict_strategy', text='')
+        grid.prop(self, 'mesh_conflict_strategy', text='')
+        grid.prop(self, 'material_conflict_strategy', text='')
+        grid.prop(self, 'texture_conflict_strategy', text='')
 
     def general_get_texture_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.texture_conflict_strategy)
@@ -245,20 +246,20 @@ class ExportParams():
             ('COLLECTION', "Collection", "Export a collection", 'OUTLINER_COLLECTION', 0),
             ('OBJECT', "Object", "Export an object", 'OBJECT_DATA', 1),
         ),
-        translation_context = 'BME/UTIL_ioport_shared.ExportParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.ExportParams/property'
     ) # type: ignore
 
     def draw_export_params(self, context: bpy.types.Context, layout: bpy.types.UILayout) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_export_params", default_closed=False)
-        header.label(text = 'Export Parameters')
+        header.label(text='Export Parameters', text_ctxt='BBP/UTIL_ioport_shared.ExportParams/draw')
         if body is None: return
 
         # make prop expand horizontaly, not vertical.
         horizon_body = body.row()
         # draw switch
-        horizon_body.prop(self, "export_mode", expand = True)
+        horizon_body.prop(self, "export_mode", expand=True)
 
         # draw picker
         ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
@@ -291,14 +292,14 @@ class VirtoolsParams():
         description = "Decide how texture saved if texture is specified as Use Global as its Save Options.",
         items = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
         default = _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS.to_selection(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_EXTERNAL),
-        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     use_compress: bpy.props.BoolProperty(
         name="Use Compress",
         description = "Whether use ZLib to compress result when saving composition.",
         default = True,
-        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     compress_level: bpy.props.IntProperty(
@@ -306,29 +307,29 @@ class VirtoolsParams():
         description = "The ZLib compress level used by Virtools Engine when saving composition.",
         min = 1, max = 9,
         default = 5,
-        translation_context = 'BME/UTIL_ioport_shared.VirtoolsParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
     def draw_virtools_params(self, context: bpy.types.Context, layout: bpy.types.UILayout, is_importer: bool) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_virtools_params", default_closed=False)
-        header.label(text = 'Virtools Parameters')
+        header.label(text='Virtools Parameters', text_ctxt='BBP/UTIL_ioport_shared.VirtoolsParams/draw')
         if body is None: return
 
         # draw encodings
-        body.label(text = 'Encodings')
+        body.label(text='Encodings', text_ctxt='BBP/UTIL_ioport_shared.VirtoolsParams/draw')
         ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
         ptrprops.draw_ioport_encodings(body)
 
         # following field are only valid in exporter
         if not is_importer:
             body.separator()
-            body.label(text = 'Global Texture Save Options')
-            body.prop(self, 'texture_save_opt', text = '')
+            body.label(text='Global Texture Save Options', text_ctxt='BBP/UTIL_ioport_shared.VirtoolsParams/draw')
+            body.prop(self, 'texture_save_opt', text='')
 
             body.separator()
-            body.label(text = 'Compression')
+            body.label(text='Compression', text_ctxt='BBP/UTIL_ioport_shared.VirtoolsParams/draw')
             body.prop(self, 'use_compress')
             if self.use_compress:
                 body.prop(self, 'compress_level')
@@ -353,7 +354,7 @@ class BallanceParams():
         name="Successive Sector",
         description = "Whether order exporter to use document specified sector count to make sure sector is successive.",
         default = True,
-        translation_context = 'BME/UTIL_ioport_shared.BallanceParams/property'
+        translation_context = 'BBP/UTIL_ioport_shared.BallanceParams/property'
     ) # type: ignore
 
     def draw_ballance_params(self, layout: bpy.types.UILayout, is_importer: bool) -> None:
@@ -365,12 +366,14 @@ class BallanceParams():
         header: bpy.types.UILayout
         body: bpy.types.UILayout
         header, body = layout.panel("BBP_PT_ioport_shared_ballance_params", default_closed=False)
-        header.label(text = 'Ballance Parameters')
+        header.label(text='Ballance Parameters', text_ctxt='BBP/UTIL_ioport_shared.BallanceParams/draw')
         if body is None: return
 
         map_info: PROP_ballance_map_info.RawBallanceMapInfo = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
         body.prop(self, 'successive_sector')
-        body.label(text = f'Map Sectors: {map_info.mSectorCount}')
+        tr_text: str = bpy.app.translations.pgettext_iface(
+            'Map Sectors: {0}', 'BBP/UTIL_ioport_shared.BallanceParams/draw')
+        body.label(text=tr_text.format(map_info.mSectorCount), translate=False)
 
     def general_get_successive_sector(self) -> bool:
         return self.successive_sector

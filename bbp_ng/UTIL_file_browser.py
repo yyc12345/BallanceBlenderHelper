@@ -88,7 +88,7 @@ class ExportVirtoolsFile(bpy_extras.io_utils.ExportHelper):
 class ImportDirectory(bpy_extras.io_utils.ImportHelper):
 
     # add directory prop to receive directory
-    directory: bpy.props.StringProperty()
+    directory: bpy.props.StringProperty() # type: ignore
 
     # blank filter
     filter_glob: bpy.props.StringProperty(

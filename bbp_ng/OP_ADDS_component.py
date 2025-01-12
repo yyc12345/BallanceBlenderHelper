@@ -224,7 +224,9 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
         # check for some special components and show warning
         elename: str | None = _check_component_existance(_g_EnumHelper_Component.get_selection(self.component_type), self.general_get_component_sector())
         if elename is not None:
-            layout.label(text = f'Warning: {elename} already exist.')
+            tr_text: str = bpy.app.translations.pgettext_iface(
+                'Warning: {0} already exist.', 'BBP_OT_add_component/draw')
+            layout.label(text=tr_text.format(elename), translate=False)
 
     def execute(self, context):
         # call general creator
@@ -324,7 +326,8 @@ class BBP_OT_add_nong_ventilator(bpy.types.Operator, ComponentSectorParam, Compo
         self.draw_component_sector_params(layout)
 
         # draw count settings by different source
-        layout.label(text = 'Count')
+        layout.separator()
+        layout.label(text='Count Source', text_ctxt='BBP_OT_add_nong_ventilator/draw')
         layout.prop(self, 'ventilator_count_source', expand = True)
         if (self.ventilator_count_source == 'CUSTOM'):
             self.draw_component_count_params(layout)
@@ -551,16 +554,20 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
         layout = self.layout
         self.draw_component_sector_params(layout)
 
+        # fetch warning string
+        tr_text: str = bpy.app.translations.pgettext_iface(
+            'Warning: {0} already exist.', 'BBP_OT_add_sector_component_pair/draw')
+
         # check checkpoint and resetpoint name conflict and show warnings
         (checkp_ty, checkp_sector) = self.__get_checkpoint()
         elename: str | None = _check_component_existance(checkp_ty, checkp_sector)
         if elename is not None:
-            layout.label(text = f'Warning: {elename} already exist.')
+            layout.label(text=tr_text.format(elename), translate=False)
 
         (resetp_ty, resetp_sector) = self.__get_resetpoint()
         elename = _check_component_existance(resetp_ty, resetp_sector)
         if elename is not None:
-            layout.label(text = f'Warning: {elename} already exist.')
+            layout.label(text=tr_text.format(elename), translate=False)
 
     def execute(self, context):
         # create checkpoint and resetpoint individually in element context

@@ -39,9 +39,9 @@ class BBPPreferences(bpy.types.AddonPreferences):
         
         row = layout.row()
         col = row.column()
-        col.label(text = "Ballance Texture Folder")
+        col.label(text="Ballance Texture Folder", text_ctxt='BBPPreferences/draw')
         col.prop(self, "ballance_texture_folder", text = "")
-        col.label(text = "No Component Collection")
+        col.label(text="No Component Collection", text_ctxt='BBPPreferences/draw')
         col.prop(self, "no_component_collection", text = "")
 
 def get_preferences() -> BBPPreferences:

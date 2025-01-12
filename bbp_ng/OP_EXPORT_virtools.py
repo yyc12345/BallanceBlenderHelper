@@ -79,7 +79,9 @@ def _export_virtools(
 
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
-        print(f'Virtools Engine Temp: {vt_temp_folder}')
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            'Virtools Engine Temporary Directory: {0}', 'BBP_OT_export_virtools/execute')
+        print(tr_text.format(vt_temp_folder))
 
         # create virtools reader context
         with bmap.BMFileWriter(

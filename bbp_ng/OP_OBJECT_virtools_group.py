@@ -60,12 +60,12 @@ class BBP_OT_select_object_by_virtools_group(bpy.types.Operator, PROP_virtools_g
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text='Selection Mode')
+        layout.label(text='Selection Mode', text_ctxt='BBP_OT_select_object_by_virtools_group/draw')
         sublayout = layout.column()    # make selection expand vertically, not horizontal.
         sublayout.prop(self, 'selection_mode', expand = True)
 
         layout.separator()
-        layout.label(text='Group Parameters')
+        layout.label(text='Group Parameters', text_ctxt='BBP_OT_select_object_by_virtools_group/draw')
         self.draw_group_name_input(layout)
 
 def _select_object_by_virtools_group(context: bpy.types.Context, group_name: str, mode: SelectMode) -> None:

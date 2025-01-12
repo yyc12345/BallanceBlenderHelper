@@ -43,7 +43,9 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
 def _import_virtools(file_name_: str, encodings_: tuple[str], resolver: UTIL_ioport_shared.ConflictResolver) -> None:
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
-        print(f'Virtools Engine Temp: {vt_temp_folder}')
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            'Virtools Engine Temporary Directory: {0}', 'BBP_OT_import_virtools/execute')
+        print(tr_text.format(vt_temp_folder))
 
         # create virtools reader context
         with bmap.BMFileReader(
@@ -82,7 +84,9 @@ def _import_virtools_textures(
 
     # create another temp folder for raw data virtools texture importing
     with tempfile.TemporaryDirectory() as rawdata_temp:
-        print(f'Texture Raw Data Temp: {rawdata_temp}')
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            'Texture Raw Data Temporary Directory: {0}', 'BBP_OT_import_virtools/execute')
+        print(tr_text.format(rawdata_temp))
 
         for vttexture in reader.get_textures():
             tex_cret: typing.Callable[[], bpy.types.Image]

@@ -171,24 +171,26 @@ class BBP_OT_flatten_uv(bpy.types.Operator):
         # do flatten uv and report
         failed: int = _flatten_uv_wrapper(context.active_object.data, flatten_param_)
         if failed != 0:
-            print(f'[Flatten UV] {failed} faces are not be processed correctly because process failed.')
+            tr_text: str = bpy.app.translations.pgettext_rpt(
+                '[Flatten UV] {0} faces are not be processed correctly because process failed.', 'BBP_OT_flatten_uv/execute')
+            print(tr_text.format(failed))
         return {'FINISHED'}
 
     def draw(self, context):
         layout = self.layout
         layout.emboss = 'NORMAL'
-        layout.label(text = "Flatten Method")
+        layout.label(text="Flatten Method", text_ctxt='BBP_OT_flatten_uv/draw')
         sublayout = layout.row()
         sublayout.prop(self, "flatten_method", expand = True)
         layout.prop(self, "reference_edge")
 
         layout.separator()
-        layout.label(text = "Scale Mode")
+        layout.label(text="Scale Mode", text_ctxt='BBP_OT_flatten_uv/draw')
         sublayout = layout.row()
         sublayout.prop(self, "scale_mode", expand = True)
 
         layout.separator()
-        layout.label(text = "Scale Config")
+        layout.label(text="Scale Configuration", text_ctxt='BBP_OT_flatten_uv/draw')
         if self.scale_mode == 'NUM':
             layout.prop(self, "scale_number")
         else:
