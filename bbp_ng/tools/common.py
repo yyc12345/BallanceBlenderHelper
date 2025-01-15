@@ -27,8 +27,8 @@ def relative_to_folder(abs_path: str, src_parent: str, dst_parent: str) -> str:
 
 def common_file_migrator(
         from_folder: str, to_folder: str,
-        fct_proc_folder: typing.Callable[[str, str], None],
-        fct_proc_file: typing.Callable[[str, str], None]) -> None:
+        fct_proc_folder: typing.Callable[[str, str, str], None],
+        fct_proc_file: typing.Callable[[str, str, str], None]) -> None:
     """
     Common file migrator used by some build script.
 
@@ -37,7 +37,9 @@ def common_file_migrator(
     `fct_proc_folder` is a function pointer from caller which handle folder migration in detail.
     `fct_proc_file` is same but handle file migration.
 
-    `fct_proc_folder` will receive 2 args. First is the source folder. Second is expected dest folder.
+    `fct_proc_folder` will receive 2 args.
+    First is a relative path presenting the folder we are processing which is usually used for printing to user.
+    Second is the source folder. Third is expected dest folder.
     `fct_proc_file` is same, but receive the file path instead.
     Both of these function pointer should do the migration in detail. This function will only just iterate
     folder and give essential args and will not do any migration operations such as copying or moving.
@@ -55,11 +57,11 @@ def common_file_migrator(
             src_folder: str = os.path.join(root, name)
             dst_folder: str = relative_to_folder(src_folder, from_folder, to_folder)
             # call handler
-            fct_proc_folder(src_folder, dst_folder)
+            fct_proc_folder(name, src_folder, dst_folder)
         # iterate files
         for name in files:
             # prepare handler args
             src_file: str = os.path.join(root, name)
             dst_file: str = relative_to_folder(src_file, from_folder, to_folder)
             # call handler
-            fct_proc_file(src_file, dst_file)
+            fct_proc_file(name, src_file, dst_file)
