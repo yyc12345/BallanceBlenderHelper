@@ -10,6 +10,8 @@ BBP插件为每一个Blender物体添加了新的属性，被称为Virtools Grou
 
 BBP还在Blender的其它菜单提供了对Virtools组的访问，具体内容请参阅[按组操作](./group-operations.md)。
 
+需要注意的是，Virtools组仅对网格物体生效，当你在其它物体上打开Virtools组面板时，你会在面板中看到一条警告消息，提示你Virtools组在该物体上无效。在非网格物体上设置的Virtools组数据尽管会被Blender承认和存储，但不会在导出时保存到Virtools文件中。
+
 ## Virtools材质
 
 插件为每一个Blender材质添加了新的属性，被称为Virtools Material。它在Virtools材质与Blender材质之间架起沟通的桥梁。转到`Material`属性面板，选择一个材质，即可以找到`Virtools Material`面板。
@@ -57,3 +59,11 @@ BBP插件为所有Blender网格添加了新的属性，称为Virtools Mesh。转
 ![](../imgs/virtools-mesh.png)
 
 Virtools网格目前只是作为兼容来使用的。其只有Lit Mode一个属性可以设置。多数早期地图由于不知道如何正确设置材质，导致路面发黑，所以经常将Lit Mode设置为Prelit以让路面正常显示。此属性是为了兼容这种设计而存在的，用户通常无需设置此选项。
+
+## Virtools灯光
+
+BBP插件为所有Blender灯光添加了新的属性，称为Virtools Light。转到`Data`属性面板，即可以找到`Virtools Light`面板。
+
+![](../imgs/virtools-light.png)
+
+与Virtools材质类似，Virtools的灯光系统与Blender的灯光系统差距较大，Virtools灯光相当于一个桥梁，它可以准确地反映Virtools的设置，使得其可以完美地存储于Blender文件中，并在导入导出时提供必要的数据。同时该面板并提供一个应用按钮，用以将Virtools灯光设置应用到Blender灯光中。

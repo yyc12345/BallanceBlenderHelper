@@ -1,5 +1,8 @@
 # Import and Export Virtools Document
 
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+
 !!! warning "This is experimental content"
     Native importing and exporting of Virtools documents is experimental content for the BBP plugin, it may have many problems, see the [Report Issue](./report-bugs.md) section to learn more. When problems are encountered, please report them. the authors of the BBP plugin are not responsible for any consequences resulting from problems with the BBP plugin.
 
@@ -21,7 +24,7 @@ The default values for the options in the Conflict Options section are the solut
 It is well known that Virtools uses a system-based multi-byte character encoding to process documents, and is therefore prone to what is known as garbling; Blender itself does not suffer from garbling, however, if we do not read a Virtools document with the correct encoding, the characters stored in it may still appear garbled when the Virtools document is imported into Blender. The Encodings property in the Virtools Params section specifies the encodings for reading Virtools documents. Multiple encodings can be specified, separated by a `;` (semicolon). Some common encodings are listed below:
 
 * cp1252: Western European encoding used by Ballance.
-* gb2312: The default encoding for Chinese Windows system.
+* gbk: The default encoding for Chinese Windows system.
 
 The encoding attribute is very important. If the wrong encoding is set, the names of the various objects imported into Blender will be unrecognizable, or will cause the program to make an error.
 

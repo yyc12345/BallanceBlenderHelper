@@ -1,5 +1,8 @@
 # Add Rail
 
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+
 In the 3D view, click `Add - Rails` to expand the Add Rails menu. The menu is shown on the left side of the image below.
 
 ![](../imgs/rail-adder.png)

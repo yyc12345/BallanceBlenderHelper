@@ -1,5 +1,8 @@
 # Add Floor
 
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+
 ## Start Generating
 
 In the 3D view, click `Add - Floors` to expand the Add Floors menu. The menu is shown below.

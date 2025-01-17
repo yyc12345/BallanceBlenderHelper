@@ -1,5 +1,8 @@
 # Virtools Properties
 
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+
 ## Virtools Group
 
 The BBP plugin adds a new property to every Blender object, called Virtools Group. has the same functionality as Group in Virtools. Select an object and the `Virtools Group` panel can be found in the `Object` properties panel.
