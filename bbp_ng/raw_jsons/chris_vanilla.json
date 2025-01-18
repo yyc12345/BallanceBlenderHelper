@@ -1,0 +1,398 @@
+[
+    {
+        "identifier": "cv_trapezoid_side",
+        "showcase": null,
+        "params": [
+            {
+                "field": "long_edge_length",
+                "data": "5.0"
+            },
+            {
+                "field": "short_edge_offset",
+                "data": "0.0"
+            },
+            {
+                "field": "short_edge_length",
+                "data": "5.0"
+            },
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, False, False, True, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            },
+            {
+                "field": "is_ribbon",
+                "data": "False"
+            }
+        ],
+        "skip": "long_edge_length == 0.0 or short_edge_length == 0.0",
+        "vars": [
+            {
+                "field": "long_edge_uv_length",
+                "data": "long_edge_length / 5.0"
+            },
+            {
+                "field": "short_edge_uv_offset",
+                "data": "short_edge_offset / 5.0"
+            },
+            {
+                "field": "short_edge_uv_length",
+                "data": "short_edge_length / 5.0"
+            },
+            {
+                "field": "short_edge_total",
+                "data": "short_edge_offset + short_edge_length"
+            },
+            {
+                "field": "short_edge_uv_total",
+                "data": "short_edge_uv_offset + short_edge_uv_length"
+            },
+            {
+                "field": "uv_border_texture",
+                "data": "1.0 if is_ribbon else 0.5"
+            },
+            {
+                "field": "sink",
+                "data": "0.7 if is_sink else 0.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "not face[0]",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(short_edge_offset, 2.5, -sink)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(long_edge_length, 0, 0)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(short_edge_total, 2.5, -sink)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face[0]",
+                "texture": "(\"FloorTopFlat\" if is_ribbon else \"FloorTopProfil\") if is_sink else \"FloorTopBorder\"",
+                "indices": [0, 2, 3, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(0, long_edge_uv_length)",
+                    "(uv_border_texture, short_edge_uv_total)",
+                    "(uv_border_texture, short_edge_uv_offset)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": [
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "long_edge_length",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[2]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(0, 0, short_edge_offset, 2.5)",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "False"
+                },
+                "transform": "rot(0, 0, angle(0, 0, short_edge_offset, 2.5)) @ scale(1, -1, 1)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[3]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(long_edge_length, 0, short_edge_total, 2.5)",
+                    "is_left_sink": "False",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(long_edge_length, 0, 0) @ rot(0, 0, angle(long_edge_length, 0, short_edge_total, 2.5))"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[5]",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(short_edge_offset, 2.5, 0) @ scale(1, -1, 1)"
+            },
+            {
+                "identifier": "floor_4edges_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "top_left_pos": "(0, 0)",
+                    "top_right_pos": "(short_edge_offset, 2.5)",
+                    "bottom_left_pos": "(long_edge_length, 0)",
+                    "bottom_right_pos": "(short_edge_total, 2.5)"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "cv_triangle_side",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, False, False, True, None)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [
+            {
+                "field": "sink",
+                "data": "0.7 if is_sink else 0.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "not face[0]",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(2.5, 2.5, -sink)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(5.0, 0, 0)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face[0]",
+                "texture": "\"FloorTopProfil\" if is_sink else \"FloorTopBorder\"",
+                "indices": [0, 2, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(0, 1)",
+                    "(0.5, 0.5)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": [
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[2]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(0, 0, 2.5, 2.5)",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "False"
+                },
+                "transform": "rot(0, 0, 45) @ scale(1, -1, 1)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[3]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(5, 0, 2.5, 2.5)",
+                    "is_left_sink": "False",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 135)"
+            },
+            {
+                "identifier": "floor_triangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5.0",
+                    "width": "2.5",
+                    "tip_offset": "2.5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "cv_triangle_center",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, False, None, False, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [
+            {
+                "field": "sink",
+                "data": "0.7 if is_sink else 0.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "not face[0]",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(0, 5, 0)"
+            },
+            {
+                "skip": "not face[0]",
+                "data": "(2.5, 2.5, -sink)"
+            },
+            {
+                "skip": "(not face[0]) and is_sink",
+                "data": "(0, 2.5, -sink)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "(not face[0]) and (not is_sink)",
+                "texture": "\"FloorTopFlat\"",
+                "indices": [0, 2, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(0.5, 0.5)",
+                    "(1, 0)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[0]) and is_sink",
+                "texture": "\"FloorTopFlat\"",
+                "indices": [0, 2, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(0.5, 0.5)",
+                    "(0.5, 0)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[0]) and is_sink",
+                "texture": "\"FloorTopFlat\"",
+                "indices": [3, 2, 1],
+                "uvs": [
+                    "(0.5, 0)",
+                    "(0.5, 0.5)",
+                    "(1, 0)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": [
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(0, 0, 2.5, 2.5)",
+                    "is_left_sink": "False",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "rot(0, 0, 45)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[5]",
+                "params": {
+                    "height": "height",
+                    "length": "distance(5, 0, 2.5, 2.5)",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(2.5, 2.5, 0) @ rot(0, 0, 135)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "(not face[2]) and is_sink",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "True"
+                },
+                "transform": "rot(0, 0, 90) @ scale(1, -1 , 1)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "(not face[2]) and is_sink",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "is_left_sink": "True",
+                    "is_right_sink": "False"
+                },
+                "transform": "move(0, 2.5, 0) @ rot(0, 0, 90) @ scale(1, -1 , 1)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "(not face[2]) and (not is_sink)",
+                "params": {
+                    "height": "height",
+                    "length": "5",
+                    "is_left_sink": "False",
+                    "is_right_sink": "False"
+                },
+                "transform": "rot(0, 0, 90) @ scale(1, -1 , 1)"
+            },
+            {
+                "identifier": "floor_triangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "2.5",
+                    "tip_offset": "2.5"
+                },
+                "transform": "move(0, 5, -height) @ rot(0, 0, -90)"
+            }
+        ]
+    }
+]

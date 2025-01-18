@@ -88,6 +88,25 @@ def _get_prototype_by_identifier(ident: str) -> dict[str, typing.Any]:
 
 #region Programmable Field Calc
 
+def _env_fct_distance(x1: float, y1: float, x2: float, y2: float) -> float:
+    diff = mathutils.Vector((x2, y2)) - mathutils.Vector((x1, y1))
+    return diff.length
+
+def _env_fct_angle(x1: float, y1: float, x2: float, y2: float) -> float:
+    # compute blender angle first
+    # computed blender angle has some issues:
+    # first, it is range from -180 to 180 (0 is +X axis).
+    # second, its direction (clockwise is positive) is opposite with blender rotation direction (counter-clockwise is positive).
+    diff = mathutils.Vector((x2, y2)) - mathutils.Vector((x1, y1))
+    bld_angle = math.degrees(mathutils.Vector((1,0)).angle_signed(diff, 0))
+
+    # flip it first
+    bld_angle = -bld_angle
+    # process positove number and negative number respectively
+    # to let it range change from -180~180 to 0~360
+    if bld_angle > 0: return bld_angle
+    else: return 360 + bld_angle
+
 _g_ProgFieldGlobals: dict[str, typing.Any] = {
     # constant
     'pi': math.pi,
@@ -122,6 +141,10 @@ _g_ProgFieldGlobals: dict[str, typing.Any] = {
     'rot': lambda x, y, z: mathutils.Matrix.LocRotScale(None, mathutils.Euler((math.radians(x), math.radians(y), math.radians(z)), 'XYZ'), None),
     'scale': lambda x, y, z: mathutils.Matrix.LocRotScale(None, None, (x, y, z)),
     'ident': lambda: mathutils.Matrix.Identity(4),
+
+    # my misc custom functions
+    'distance': _env_fct_distance,
+    'angle': _env_fct_angle,
 }
 
 def _eval_showcase_cfgs_default(strl: str) -> typing.Any:

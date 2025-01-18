@@ -122,7 +122,142 @@
         "instances": []
     },
     {
-        "identifier": "floor_bottom",
+        "identifier": "floor_4edges_bottom",
+        "showcase": null,
+        "params": [
+            {
+                "field": "top_left_pos",
+                "data": "(0.0, 0.0)"
+            },
+            {
+                "field": "top_right_pos",
+                "data": "(0.0, 5.0)"
+            },
+            {
+                "field": "bottom_left_pos",
+                "data": "(5.0, 0.0)"
+            },
+            {
+                "field": "bottom_right_pos",
+                "data": "(5.0, 5.0)"
+            }
+        ],
+        "skip": "False",
+        "vars": [
+            {
+                "field": "top_left_uv",
+                "data": "tuple(map(lambda x: x / 5.0, top_left_pos))"
+            },
+            {
+                "field": "top_right_uv",
+                "data": "tuple(map(lambda x: x / 5.0, top_right_pos))"
+            },
+            {
+                "field": "bottom_left_uv",
+                "data": "tuple(map(lambda x: x / 5.0, bottom_left_pos))"
+            },
+            {
+                "field": "bottom_right_uv",
+                "data": "tuple(map(lambda x: x / 5.0, bottom_right_pos))"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "top_left_pos + (0, )"
+            },
+            {
+                "skip": "False",
+                "data": "top_right_pos + (0, )"
+            },
+            {
+                "skip": "False",
+                "data": "bottom_left_pos + (0, )"
+            },
+            {
+                "skip": "False",
+                "data": "bottom_right_pos + (0, )"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "False",
+                "texture": "\"FloorTopBorderless\"",
+                "indices": [0, 1, 3, 2],
+                "uvs": [
+                    "top_left_uv",
+                    "top_right_uv",
+                    "bottom_right_uv",
+                    "bottom_left_uv"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": []
+    },
+    {
+        "identifier": "floor_3edges_bottom",
+        "showcase": null,
+        "params": [
+            {
+                "field": "top_pos",
+                "data": "(0.0, 0.0)"
+            },
+            {
+                "field": "bottom_pos",
+                "data": "(5.0, 0.0)"
+            },
+            {
+                "field": "tip_pos",
+                "data": "(2.5, 2.5)"
+            }
+        ],
+        "skip": "False",
+        "vars": [
+            {
+                "field": "top_uv",
+                "data": "tuple(map(lambda x: x / 5.0, top_pos))"
+            },
+            {
+                "field": "bottom_uv",
+                "data": "tuple(map(lambda x: x / 5.0, bottom_pos))"
+            },
+            {
+                "field": "tip_uv",
+                "data": "tuple(map(lambda x: x / 5.0, tip_pos))"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "top_pos + (0, )"
+            },
+            {
+                "skip": "False",
+                "data": "bottom_pos + (0, )"
+            },
+            {
+                "skip": "False",
+                "data": "tip_pos + (0, )"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "False",
+                "texture": "\"FloorTopBorderless\"",
+                "indices": [0, 2, 1],
+                "uvs": [
+                    "top_uv",
+                    "tip_uv",
+                    "bottom_uv"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": []
+    },
+    {
+        "identifier": "floor_rectangle_bottom",
         "showcase": null,
         "params": [
             {
@@ -135,48 +270,55 @@
             }
         ],
         "skip": "length == 0.0 or width == 0.0",
-        "vars": [
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
             {
-                "field": "uv_length",
-                "data": "length / 5.0"
+                "identifier": "floor_4edges_bottom",
+                "skip": "False",
+                "params": {
+                    "top_left_pos": "(0, 0)",
+                    "top_right_pos": "(0, width)",
+                    "bottom_left_pos": "(length, 0)",
+                    "bottom_right_pos": "(length, width)"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_triangle_bottom",
+        "showcase": null,
+        "params": [
+            {
+                "field": "length",
+                "data": "5.0"
             },
             {
-                "field": "uv_width",
-                "data": "width / 5.0"
+                "field": "width",
+                "data": "2.5"
+            },
+            {
+                "field": "tip_offset",
+                "data": "2.5"
             }
         ],
-        "vertices": [
+        "skip": "length == 0.0",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
             {
+                "identifier": "floor_3edges_bottom",
                 "skip": "False",
-                "data": "(0, 0, 0)"
-            },
-            {
-                "skip": "False",
-                "data": "(0, width, 0)"
-            },
-            {
-                "skip": "False",
-                "data": "(length, 0, 0)"
-            },
-            {
-                "skip": "False",
-                "data": "(length, width, 0)"
+                "params": {
+                    "top_pos": "(0, 0)",
+                    "bottom_pos": "(length, 0)",
+                    "tip_pos": "(tip_offset, width)"
+                },
+                "transform": "ident()"
             }
-        ],
-        "faces": [
-            {
-                "skip": "False",
-                "texture": "\"FloorTopBorderless\"",
-                "indices": [0, 1, 3, 2],
-                "uvs": [
-                    "(0, 0)",
-                    "(uv_width, 0)",
-                    "(uv_width, uv_length)",
-                    "(0, uv_length)"
-                ],
-                "normals": null
-            }
-        ],
-        "instances": []
+        ]
     }
 ]
