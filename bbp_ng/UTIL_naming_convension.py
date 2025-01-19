@@ -291,7 +291,9 @@ class VirtoolsGroupConvention():
                 int(regex_result.group(1))
             )
         
-        if reporter: reporter.add_error("PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.")
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            "PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+        if reporter: reporter.add_error(tr_text)
         return None
     
     @staticmethod
@@ -311,6 +313,9 @@ class VirtoolsGroupConvention():
 
     @staticmethod
     def parse_from_object(obj: bpy.types.Object, reporter: RenameErrorReporter | None) -> BallanceObjectInfo | None:
+        # declare translation string type
+        tr_text: str
+
         # create visitor
         with PROP_virtools_group.VirtoolsGroupsHelper(obj) as gp:
             # if no group, we should consider it is decoration or skylayer
@@ -331,10 +336,14 @@ class VirtoolsGroupConvention():
                         # these type's data should be gotten from its name
                         return VirtoolsGroupConvention.__get_pcpr_from_name(obj.name, reporter)
                     case _:
-                        if reporter: reporter.add_error("The match of Unique Component lost.")
+                        tr_text = bpy.app.translations.pgettext_rpt(
+                            "The match of Unique Component lost.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                        if reporter: reporter.add_error(tr_text)
                         return None
             elif len(inter_gps) != 0:
-                if reporter: reporter.add_error("A Multi-grouping Unique Component.")
+                tr_text = bpy.app.translations.pgettext_rpt(
+                    "A Multi-grouping Unique Component.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                if reporter: reporter.add_error(tr_text)
                 return None
             
             # distinguish normal elements
@@ -346,7 +355,9 @@ class VirtoolsGroupConvention():
                 gotten_sector: int | None = VirtoolsGroupConvention.__get_sector_from_groups(gp.iterate_groups())
                 if gotten_sector is None:
                     # fail to get sector
-                    if reporter: reporter.add_error("Component detected. But couldn't get sector from CKGroup data.")
+                    tr_text = bpy.app.translations.pgettext_rpt(
+                        "Component detected. But couldn't get sector from CKGroup data.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                    if reporter: reporter.add_error(tr_text)
                     return None
                 return BallanceObjectInfo.create_from_component(
                     gotten_elements,
@@ -354,7 +365,9 @@ class VirtoolsGroupConvention():
                 )
             elif len(inter_gps) != 0:
                 # must be a weird grouping, report it
-                if reporter: reporter.add_error("A Multi-grouping Component.")
+                tr_text = bpy.app.translations.pgettext_rpt(
+                    "A Multi-grouping Component.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                if reporter: reporter.add_error(tr_text)
                 return None
 
             # distinguish road
@@ -370,7 +383,9 @@ class VirtoolsGroupConvention():
                 elif len(floor_result) == 0 and len(rail_result) > 0:
                     return BallanceObjectInfo.create_from_others(BallanceObjectType.WOOD)
                 else:
-                    if reporter: reporter.add_warning("Can't distinguish object between Floors and Rails. Suppose it is Floors.")
+                    tr_text = bpy.app.translations.pgettext_rpt(
+                        "Can't distinguish object between Floors and Rails. Suppose it is Floors.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                    if reporter: reporter.add_warning(tr_text)
                     return BallanceObjectInfo.create_from_others(BallanceObjectType.FLOOR)
             elif gp.contain_group('Phys_FloorStopper'):
                 return BallanceObjectInfo.create_from_others(BallanceObjectType.STOPPER)
@@ -378,7 +393,9 @@ class VirtoolsGroupConvention():
                 return BallanceObjectInfo.create_from_others(BallanceObjectType.DEPTH_CUBE)
 
             # no matched
-            if reporter: reporter.add_error("Group match lost.")
+            tr_text = bpy.app.translations.pgettext_rpt(
+                "Group match lost.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+            if reporter: reporter.add_error(tr_text)
             return None
 
     @staticmethod
@@ -427,8 +444,9 @@ class VirtoolsGroupConvention():
                     gp.add_group(build_name_from_sector_index(typing.cast(int, info.mSector)))
 
                 case _:
-                    if reporter is not None:
-                        reporter.add_error('No matched info.')
+                    tr_text: str = bpy.app.translations.pgettext_rpt(
+                        "No matched info.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                    if reporter: reporter.add_error(tr_text)
                     return False
                 
         return True
@@ -480,8 +498,9 @@ class YYCToolchainConvention():
         if name == 'SkyLayer':
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
-        if reporter is not None:
-            reporter.add_error("Name match lost.")
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            "Name match lost.", 'BBP/UTIL_naming_convension.YYCToolchainConvention')
+        if reporter: reporter.add_error(tr_text)
         return None
 
 
@@ -523,8 +542,9 @@ class YYCToolchainConvention():
                     info.mComponentType, info.mSector)
                 
             case _:
-                if reporter is not None:
-                    reporter.add_error('No matched info.')
+                tr_text: str = bpy.app.translations.pgettext_rpt(
+                    "No matched info.", 'BBP/UTIL_naming_convension.YYCToolchainConvention')
+                if reporter: reporter.add_error(tr_text)
                 return None
             
     @staticmethod
@@ -586,8 +606,9 @@ class ImengyuConvention():
         if name == 'SkyLayer':
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
-        if reporter is not None:
-            reporter.add_error("Name match lost.")
+        tr_text: str = bpy.app.translations.pgettext_rpt(
+            "Name match lost.", 'BBP/UTIL_naming_convension.ImengyuConvention')
+        if reporter: reporter.add_error(tr_text)
         return None
 
     @staticmethod
@@ -631,8 +652,9 @@ class ImengyuConvention():
                 )
                 
             case _:
-                if reporter is not None:
-                    reporter.add_error('No matched info.')
+                tr_text: str = bpy.app.translations.pgettext_rpt(
+                    "No matched info.", 'BBP/UTIL_naming_convension.ImengyuConvention')
+                if reporter: reporter.add_error(tr_text)
                 return None
             
     @staticmethod

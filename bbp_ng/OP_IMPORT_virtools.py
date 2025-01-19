@@ -80,11 +80,13 @@ def _import_virtools_textures(
         ) -> dict[bmap.BMTexture, bpy.types.Image]:
     # create map
     texture_cret_map: dict[bmap.BMTexture, bpy.types.Image] = {}
-    progress.enter_substeps(reader.get_texture_count(), "Loading Textures")
+    # notify steps
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Textures', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_texture_count(), tr_text)
 
     # create another temp folder for raw data virtools texture importing
     with tempfile.TemporaryDirectory() as rawdata_temp:
-        tr_text: str = bpy.app.translations.pgettext_rpt(
+        tr_text = bpy.app.translations.pgettext_rpt(
             'Texture Raw Data Temporary Directory: {0}', 'BBP_OT_import_virtools/execute')
         print(tr_text.format(rawdata_temp))
 
@@ -148,7 +150,9 @@ def _import_virtools_materials(
         ) -> dict[bmap.BMMaterial, bpy.types.Material]:
     # create map and prepare progress
     material_cret_map: dict[bmap.BMMaterial, bpy.types.Material] = {}
-    progress.enter_substeps(reader.get_material_count(), "Loading Materials")
+    # notify steps
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Materials', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_material_count(), tr_text)
 
     for vtmaterial in reader.get_materials():
         # create mtl
@@ -213,7 +217,9 @@ def _import_virtools_meshes(
         ) -> dict[bmap.BMMesh, bpy.types.Mesh]:
     # create map and prepare progress
     mesh_cret_map: dict[bmap.BMMesh, bpy.types.Mesh] = {}
-    progress.enter_substeps(reader.get_mesh_count(), "Loading Meshes")
+    # notify steps
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Meshes', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_mesh_count(), tr_text)
 
     for vtmesh in reader.get_meshs():
         # create mesh
@@ -309,7 +315,9 @@ def _import_virtools_3dobjects(
         ) -> dict[bmap.BM3dObject, bpy.types.Object]:
     # create map and prepare progress
     obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object] = {}
-    progress.enter_substeps(reader.get_3dobject_count(), "Loading 3dObjects")
+    # notify steps
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading 3dObjects', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_3dobject_count(), tr_text)
 
     for vt3dobj in reader.get_3dobjects():
         # get virtools binding mesh data first
@@ -353,7 +361,8 @@ def _import_virtools_lights(
         resolver: UTIL_ioport_shared.ConflictResolver
         ) -> None:
     # prepare progress
-    progress.enter_substeps(reader.get_target_light_count(), "Loading Lights")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Lights', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_target_light_count(), tr_text)
 
     # please note light is slightly different between virtools and blender.
     # in virtools, light is the sub class of 3d entity.
@@ -414,7 +423,8 @@ def _import_virtools_groups(
     sector_count: int = 1
 
     # prepare progress
-    progress.enter_substeps(reader.get_group_count(), "Loading Groups")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Groups', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_group_count(), tr_text)
 
     for vtgroup in reader.get_groups():
         # if this group do not have name, skip it
@@ -449,7 +459,8 @@ def _import_virtools_groups(
     progress.leave_substeps()
 
     # now we can assign 3dobject group data by reverse map
-    progress.enter_substeps(len(reverse_map), "Applying Groups")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Applying Groups', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(len(reverse_map), tr_text)
     for mapk, mapv in reverse_map.items():
         # check object
         assoc_obj = obj3d_cret_map.get(mapk, None)

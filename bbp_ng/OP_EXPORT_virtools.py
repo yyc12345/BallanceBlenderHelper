@@ -133,7 +133,8 @@ def _prepare_virtools_3dobjects(
     light_crets: list[_TLightPair] = []
     light_cret_set: set[bpy.types.Object] = set()
     # start saving
-    progress.enter_substeps(len(export_objects), "Creating 3dObjects and Lights")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Creating 3dObjects and Lights', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(export_objects), tr_text)
 
     # iterate exported object list
     for obj3d in export_objects:
@@ -176,7 +177,8 @@ def _export_virtools_groups(
     # create virtools group
     group_cret_map: dict[str, bmap.BMGroup] = {}
     # start saving
-    progress.enter_substeps(len(obj3d_crets), "Saving Groups")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Groups', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(obj3d_crets), tr_text)
 
     # create sector group first if user ordered
     # This step is designed for ensure that the created sector group is successive.
@@ -221,7 +223,8 @@ def _export_virtools_light(
         light_crets: tuple[_TLightPair, ...]
         ) -> None:
     # start saving
-    progress.enter_substeps(len(light_crets), "Saving Lights")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Lights', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(light_crets), tr_text)
     
     for obj3d, light, vtlight in light_crets:
         # set name
@@ -268,7 +271,8 @@ def _export_virtools_3dobjects(
     mesh_crets: list[_TMeshPair] = []
     mesh_cret_map: dict[bpy.types.Mesh, bmap.BMMesh] = {}
     # start saving
-    progress.enter_substeps(len(obj3d_crets), "Saving 3dObjects")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving 3dObjects', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(obj3d_crets), tr_text)
 
     for obj3d, vtobj3d in obj3d_crets:
         # set name
@@ -314,7 +318,8 @@ def _export_virtools_meshes(
     material_crets: list[_TMaterialPair] = []
     material_cret_map: dict[bpy.types.Material, bmap.BMMaterial] = {}
     # start saving
-    progress.enter_substeps(len(mesh_crets), "Saving Meshes")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Meshes', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(mesh_crets), tr_text)
 
     # iterate meshes
     for obj3d, mesh, vtmesh in mesh_crets:
@@ -428,7 +433,8 @@ def _export_virtools_materials(
     texture_crets: list[_TTexturePair] = []
     texture_cret_map: dict[bpy.types.Image, bmap.BMTexture] = {}
     # start saving
-    progress.enter_substeps(len(material_crets), "Saving Materials")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Materials', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(material_crets), tr_text)
 
     for mtl, vtmaterial in material_crets:
         # set name
@@ -493,7 +499,8 @@ def _export_virtools_textures(
         texture_crets: tuple[_TTexturePair, ...]
         ) -> None:
     # start saving
-    progress.enter_substeps(len(texture_crets), "Saving Textures")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Textures', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(texture_crets), tr_text)
 
     for tex, vttexture in texture_crets:
         # set name
@@ -532,7 +539,8 @@ def _save_virtools_document(
         compress_level: int
         ) -> None:
     
-    progress.enter_substeps(1, "Saving Document")
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Document', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(1, tr_text)
     writer.save(file_name, texture_save_opt, use_compress, compress_level)
     progress.step()
     progress.leave_substeps()
