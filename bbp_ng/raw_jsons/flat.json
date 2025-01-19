@@ -158,7 +158,7 @@
                 "transform": "move(length, width, 0) @ rot(0, 0, 180)"
             },
             {
-                "identifier": "floor_bottom",
+                "identifier": "floor_rectangle_bottom",
                 "skip": "not face[1]",
                 "params": {
                     "length": "length",

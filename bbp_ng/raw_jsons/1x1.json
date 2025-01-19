@@ -22,52 +22,53 @@
         "faces": [],
         "instances": [
             {
-                "identifier": "raw_floor_corner",
+                "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[4], False, face[3], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "False"
+                    "face": "(face[0], False, False, False, face[3], None)",
+                    "is_sink": "is_sink"
                 },
-                "transform": "move(5, 0, 0) @ rot(0, 0, -270)"
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
             },
             {
-                "identifier": "raw_floor_corner",
+                "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[3], False, face[5], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "False"
+                    "face": "(face[0], False, False, False, face[5], None)",
+                    "is_sink": "is_sink"
                 },
-                "transform": "move(5, 5, 0) @ rot(0, 0, -180)"
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
             },
             {
-                "identifier": "raw_floor_corner",
+                "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[5], False, face[2], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "False"
+                    "face": "(face[0], False, False, False, face[2], None)",
+                    "is_sink": "is_sink"
                 },
-                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+                "transform": "move(0, 5, 0) @ rot(0, 0, 270)"
             },
             {
-                "identifier": "raw_floor_corner",
+                "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
                     "height": "height",
-                    "face": "(face[0], face[1], face[2], False, face[4], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "False"
+                    "face": "(face[0], False, False, False, face[4], None)",
+                    "is_sink": "is_sink"
                 },
-                "transform": "move(0, 0, 0)"
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
             }
         ]
     },

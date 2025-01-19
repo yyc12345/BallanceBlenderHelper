@@ -135,7 +135,7 @@
                 "transform": "move(2.5, 2.5, 0) @ rot(0, 0, 180)"
             },
             {
-                "identifier": "floor_bottom",
+                "identifier": "floor_rectangle_bottom",
                 "skip": "not face[1]",
                 "params": {
                     "length": "2.5",

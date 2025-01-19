@@ -260,7 +260,7 @@
             },
             {
                 "field": "face",
-                "data": "(True, False, False, None, False, False)"
+                "data": "(True, False, False, False, True, None)"
             },
             {
                 "field": "is_sink",
@@ -281,48 +281,48 @@
             },
             {
                 "skip": "not face[0]",
-                "data": "(0, 5, 0)"
+                "data": "(5, 0, 0)"
             },
             {
                 "skip": "not face[0]",
                 "data": "(2.5, 2.5, -sink)"
             },
             {
-                "skip": "(not face[0]) and is_sink",
-                "data": "(0, 2.5, -sink)"
+                "skip": "(not face[0]) or (not is_sink)",
+                "data": "(2.5, 0, -sink)"
             }
         ],
         "faces": [
             {
-                "skip": "(not face[0]) and (not is_sink)",
+                "skip": "(not face[0]) or is_sink",
                 "texture": "\"FloorTopFlat\"",
-                "indices": [0, 2, 1],
+                "indices": [0, 1, 2],
                 "uvs": [
                     "(0, 0)",
-                    "(0.5, 0.5)",
-                    "(1, 0)"
+                    "(1, 0)",
+                    "(0.5, 0.5)"
                 ],
                 "normals": null
             },
             {
-                "skip": "(not face[0]) and is_sink",
-                "texture": "\"FloorTopFlat\"",
-                "indices": [0, 2, 3],
+                "skip": "(not face[0]) or (not is_sink)",
+                "texture": "\"FloorTopProfil\"",
+                "indices": [0, 3, 2],
                 "uvs": [
                     "(0, 0)",
-                    "(0.5, 0.5)",
-                    "(0.5, 0)"
+                    "(0.5, 0)",
+                    "(0.5, 0.5)"
                 ],
                 "normals": null
             },
             {
-                "skip": "(not face[0]) and is_sink",
-                "texture": "\"FloorTopFlat\"",
-                "indices": [3, 2, 1],
+                "skip": "(not face[0]) or (not is_sink)",
+                "texture": "\"FloorTopProfil\"",
+                "indices": [3, 1, 2],
                 "uvs": [
                     "(0.5, 0)",
-                    "(0.5, 0.5)",
-                    "(1, 0)"
+                    "(1, 0)",
+                    "(0.5, 0.5)"
                 ],
                 "normals": null
             }
@@ -330,7 +330,7 @@
         "instances": [
             {
                 "identifier": "raw_floor_side",
-                "skip": "not face[4]",
+                "skip": "not face[2]",
                 "params": {
                     "height": "height",
                     "length": "distance(0, 0, 2.5, 2.5)",
@@ -341,47 +341,47 @@
             },
             {
                 "identifier": "raw_floor_side",
-                "skip": "not face[5]",
+                "skip": "not face[3]",
                 "params": {
                     "height": "height",
                     "length": "distance(5, 0, 2.5, 2.5)",
-                    "is_left_sink": "is_sink",
-                    "is_right_sink": "False"
+                    "is_left_sink": "False",
+                    "is_right_sink": "is_sink"
                 },
-                "transform": "move(2.5, 2.5, 0) @ rot(0, 0, 135)"
+                "transform": "move(5, 0, 0) @ rot(0, 0, 135)"
             },
             {
                 "identifier": "raw_floor_side",
-                "skip": "(not face[2]) and is_sink",
+                "skip": "(not face[4]) or (not is_sink)",
                 "params": {
                     "height": "height",
                     "length": "2.5",
                     "is_left_sink": "False",
                     "is_right_sink": "True"
                 },
-                "transform": "rot(0, 0, 90) @ scale(1, -1 , 1)"
+                "transform": "ident()"
             },
             {
                 "identifier": "raw_floor_side",
-                "skip": "(not face[2]) and is_sink",
+                "skip": "(not face[4]) or (not is_sink)",
                 "params": {
                     "height": "height",
                     "length": "2.5",
                     "is_left_sink": "True",
                     "is_right_sink": "False"
                 },
-                "transform": "move(0, 2.5, 0) @ rot(0, 0, 90) @ scale(1, -1 , 1)"
+                "transform": "move(2.5, 0, 0)"
             },
             {
                 "identifier": "raw_floor_side",
-                "skip": "(not face[2]) and (not is_sink)",
+                "skip": "(not face[4]) or is_sink",
                 "params": {
                     "height": "height",
                     "length": "5",
                     "is_left_sink": "False",
                     "is_right_sink": "False"
                 },
-                "transform": "rot(0, 0, 90) @ scale(1, -1 , 1)"
+                "transform": "ident()"
             },
             {
                 "identifier": "floor_triangle_bottom",
@@ -391,7 +391,7 @@
                     "width": "2.5",
                     "tip_offset": "2.5"
                 },
-                "transform": "move(0, 5, -height) @ rot(0, 0, -90)"
+                "transform": "move(0, 0, -height)"
             }
         ]
     }

@@ -34,52 +34,60 @@
         "faces": [],
         "instances": [
             {
-                "identifier": "raw_floor_corner",
+                "identifier": "cv_trapezoid_side",
                 "skip": "False",
                 "params": {
+                    "long_edge_length": "length + 5",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "length",
                     "height": "height",
-                    "face": "(face[0], face[1], face[4], False, face[3], False)",
+                    "face": "(face[0], False, False, False, face[4], False)",
                     "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(5 + length, 0, 0) @ rot(0, 0, -270)"
-            },
-            {
-                "identifier": "raw_floor_corner",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "face": "(face[0], face[1], face[3], False, face[5], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(5 + length, 5 + width, 0) @ rot(0, 0, -180)"
-            },
-            {
-                "identifier": "raw_floor_corner",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "face": "(face[0], face[1], face[5], False, face[2], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(0, 5 + width, 0) @ rot(0, 0, -90)"
-            },
-            {
-                "identifier": "raw_floor_corner",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "face": "(face[0], face[1], face[2], False, face[4], False)",
-                    "is_sink": "is_sink",
-                    "is_inner": "False",
                     "is_ribbon": "is_ribbon"
                 },
                 "transform": "ident()"
+            },
+            {
+                "identifier": "cv_trapezoid_side",
+                "skip": "False",
+                "params": {
+                    "long_edge_length": "length + 5",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "length",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[5], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(0, 5 + width, 0) @ scale(1, -1, 1)"
+            },
+            {
+                "identifier": "cv_trapezoid_side",
+                "skip": "False",
+                "params": {
+                    "long_edge_length": "width + 5",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "width",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[3], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "move(5 + length, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "cv_trapezoid_side",
+                "skip": "False",
+                "params": {
+                    "long_edge_length": "width + 5",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "width",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[2], False)",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "rot(0, 0, 90) @ scale(1, -1, 1)"
             },
             {
                 "identifier": "floor_flat",
@@ -88,58 +96,19 @@
                     "height": "height",
                     "length": "length",
                     "width": "width",
-                    "face": "(face[0], face[1], False, False, False, False)",
+                    "face": "(face[0], False, False, False, False, False)",
                     "is_sink": "is_sink"
                 },
                 "transform": "move(2.5, 2.5, 0)"
             },
             {
-                "identifier": "raw_floor_border",
-                "skip": "False",
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
                 "params": {
-                    "height": "height",
-                    "length": "length",
-                    "face": "(face[0], face[1], False, False, face[4], False)",
-                    "is_sink": "is_sink",
-                    "is_ribbon": "is_ribbon"
+                    "length": "5 + length",
+                    "width": "5 + width"
                 },
-                "transform": "move(2.5, 0, 0)"
-            },
-            {
-                "identifier": "raw_floor_border",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "length": "width",
-                    "face": "(face[0], face[1], False, False, face[2], False)",
-                    "is_sink": "is_sink",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(0, 2.5 + width, 0) @ rot(0, 0, -90)"
-            },
-            {
-                "identifier": "raw_floor_border",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "length": "length",
-                    "face": "(face[0], face[1], False, False, face[5], False)",
-                    "is_sink": "is_sink",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(2.5 + length, 5 + width, 0) @ rot(0, 0, -180)"
-            },
-            {
-                "identifier": "raw_floor_border",
-                "skip": "False",
-                "params": {
-                    "height": "height",
-                    "length": "width",
-                    "face": "(face[0], face[1], False, False, face[3], False)",
-                    "is_sink": "is_sink",
-                    "is_ribbon": "is_ribbon"
-                },
-                "transform": "move(5 + length, 2.5, 0) @ rot(0, 0, -270)"
+                "transform": "move(0, 0, -height)"
             }
         ]
     },

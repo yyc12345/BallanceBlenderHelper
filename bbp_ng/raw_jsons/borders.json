@@ -25,105 +25,23 @@
             }
         ],
         "skip": "length == 0.0",
-        "vars": [
-            {
-                "field": "uv_length",
-                "data": "length / 5.0"
-            },
-            {
-                "field": "uv_border_texture",
-                "data": "1.0 if is_ribbon else 0.5"
-            },
-            {
-                "field": "sink",
-                "data": "0.7 if is_sink else 0.0"
-            }
-        ],
-        "vertices": [
-            {
-                "skip": "not face[0]",
-                "data": "(0, 0, 0)"
-            },
-            {
-                "skip": "not face[0]",
-                "data": "(0, 2.5, -sink)"
-            },
-            {
-                "skip": "not face[0]",
-                "data": "(length, 0, 0)"
-            },
-            {
-                "skip": "not face[0]",
-                "data": "(length, 2.5, -sink)"
-            }
-        ],
-        "faces": [
-            {
-                "skip": "not face[0]",
-                "texture": "(\"FloorTopFlat\" if is_ribbon else \"FloorTopProfil\") if is_sink else \"FloorTopBorder\"",
-                "indices": [0, 2, 3, 1],
-                "uvs": [
-                    "(0, 0)",
-                    "(0, uv_length)",
-                    "(uv_border_texture, uv_length)",
-                    "(uv_border_texture, 0)"
-                ],
-                "normals": null
-            }
-        ],
+        "vars": [],
+        "vertices": [],
+        "faces": [],
         "instances": [
             {
-                "identifier": "raw_floor_side",
-                "skip": "not face[4]",
+                "identifier": "cv_trapezoid_side",
+                "skip": "False",
                 "params": {
+                    "long_edge_length": "length",
+                    "short_edge_offset": "0",
+                    "short_edge_length": "length",
                     "height": "height",
-                    "length": "length",
-                    "is_left_sink": "False",
-                    "is_right_sink": "False"
+                    "face": "face",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
                 },
                 "transform": "ident()"
-            },
-            {
-                "identifier": "raw_floor_side",
-                "skip": "not face[2]",
-                "params": {
-                    "height": "height",
-                    "length": "2.5",
-                    "is_left_sink": "is_sink",
-                    "is_right_sink": "False"
-                },
-                "transform": "move(0, 2.5, 0) @ rot(0, 0, -90)"
-            },
-            {
-                "identifier": "raw_floor_side",
-                "skip": "not face[3]",
-                "params": {
-                    "height": "height",
-                    "length": "2.5",
-                    "is_left_sink": "False",
-                    "is_right_sink": "is_sink"
-                },
-                "transform": "move(length, 0, 0) @ rot(0, 0, 90)"
-            },
-            {
-                "identifier": "raw_floor_side",
-                "skip": "not face[5]",
-                "params": {
-                    "height": "height",
-                    "length": "length",
-                    "is_left_sink": "is_sink",
-                    "is_right_sink": "is_sink"
-                },
-                "transform": "move(length, 2.5, 0) @ rot(0, 0, 180)"
-            },
-            {
-                "identifier": "floor_bottom",
-                "skip": "not face[1]",
-                "params": {
-                    "length": "length",
-                    "width": "2.5"
-                },
-                "transform": "move(0, 0, -height)"
             }
         ]
     },
