@@ -82,6 +82,7 @@ def _rename_core(
             reporter.leave_object(obj)
 
         # report data
+        tr_text_title: str = bpy.app.translations.pgettext_rpt('Rename System Report', 'BBP/OP_OBJECT_naming_convention._rename_core()')
         tr_text_1: str = bpy.app.translations.pgettext_rpt('View console to get more detail', 'BBP/OP_OBJECT_naming_convention._rename_core()')
         tr_text_2: str = bpy.app.translations.pgettext_rpt('All: {0}', 'BBP/OP_OBJECT_naming_convention._rename_core()')
         tr_text_3: str = bpy.app.translations.pgettext_rpt('Failed: {0}', 'BBP/OP_OBJECT_naming_convention._rename_core()')
@@ -91,7 +92,7 @@ def _rename_core(
                 tr_text_2.format(reporter.get_all_objs_count()),
                 tr_text_3.format(reporter.get_failed_objs_count())
             ),
-            'Rename System Report',
+            tr_text_title,
             UTIL_icons_manager.BlenderPresetIcons.Info.value
         )
 

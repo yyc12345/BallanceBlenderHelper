@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballance Blender Plugin 4.1.0 (0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 15:07+0800\n"
+"POT-Creation-Date: 2025-01-20 22:23+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1333,11 +1333,11 @@ msgstr "根据材质引用的 Ballance 贴图名称修复当前活动的材质�
 #. :src: bpy.types.BBP_OT_flatten_uv
 msgctxt "BBP_OT_flatten_uv"
 msgid "Flatten UV"
-msgstr "展平 UV"
+msgstr "沿边沿 UV"
 
 #. :src: bpy.types.BBP_OT_flatten_uv
 msgid "Flatten selected face UV. Only works for convex face"
-msgstr "展平选中的面的 UV。只对凸面有效"
+msgstr "沿边沿展平选中的面的 UV。只对凸面有效"
 
 #. :src: bpy.types.BBP_OT_flatten_uv.flatten_method
 msgctxt "BBP_OT_flatten_uv/property"
@@ -1664,108 +1664,98 @@ msgstr ""
 "删除编码列表中的选中项，该列表用于指示 BMap 读写 Virtools 文件时的编码。"
 
 #. :src: bpy.types.BBP_OT_rm_objects_virtools_group
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Ungrouping Objects"
 msgctxt "BBP_OT_rm_objects_virtools_group"
 msgid "Ungrouping Objects"
-msgstr "取消归组"
+msgstr "取消物体归组"
 
 #. :src: bpy.types.BBP_OT_rm_objects_virtools_group
 msgid "Ungrouping Selected Objects"
 msgstr "将选定物品取消归组"
 
 #. :src: bpy.types.BBP_OT_rm_virtools_groups
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Remove from Virtools Groups"
 msgctxt "BBP_OT_rm_virtools_group"
 msgid "Remove from Virtools Groups"
-msgstr "从 Virtools 组移除"
+msgstr "从 Virtools 组中移除"
 
 #. :src: bpy.types.BBP_OT_rm_virtools_groups
 msgid "Remove a Virtools Group for Active Object."
 msgstr "将选定物品从指定的 Virtools 组移除。"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Select by Virtools Group"
 msgctxt "BBP_OT_select_object_by_virtools_group"
 msgid "Select by Virtools Group"
-msgstr "使用 Virtools 组选择"
+msgstr "按 Virtools 组选择"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group
 msgid "Select Objects by Virtools Group"
 msgstr "根据 Virtools 组选择物体"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
-#, fuzzy
-#| msgid "Lit Mode"
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Mode"
-msgstr "光照模式"
+msgstr "模式"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
 msgid "Selection mode"
 msgstr "选取模式"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
-#| msgid "Sector"
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Set"
-msgstr ""
+msgstr "选择"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
 msgid "Sets a new selection."
-msgstr "设置为新选取。"
+msgstr "开始新的选取。"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Extend"
-msgstr ""
+msgstr "扩展"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
 msgid "Adds newly selected items to the existing selection."
-msgstr "添加至已有的选取。"
+msgstr "扩展当前选定项。"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Subtract"
-msgstr ""
+msgstr "减去"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
 msgid "Removes newly selected items from the existing selection."
-msgstr "从已有的选取中移除。"
+msgstr "从当前选中项中去除。"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Invert"
-msgstr ""
+msgstr "反转"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
 msgid "Inverts the selection."
-msgstr "反转选取。"
+msgstr "反转现有选中项。"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
 msgctxt "BBP_OT_select_object_by_virtools_group/property"
 msgid "Intersect"
-msgstr ""
+msgstr "相交"
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
 msgid "Selects items that intersect with the existing selection."
-msgstr "仅在已有的选取中选取。"
+msgstr "与现有选中项相交。"
 
 #. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
 msgctxt "BBP_OT_snoop_group_then_to_mesh"
 msgid "Snoop Group then to Mesh"
-msgstr ""
+msgstr "窥视归组并转换为网格"
 
 #. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
 msgid ""
 "Convert selected objects into mesh objects and try to copy the Virtools "
 "Group infos of their associated curve bevel object if they have. "
 msgstr ""
+"将选定对象转换为网格对象，并尝试复制关联的曲线倒角对象的 Virtools 归组信息 "
+"(如果有的话)。 "
 
 #. :src: bpy.types.BBP_OT_up_ioport_encodings
 msgctxt "BBP_OT_up_ioport_encodings"
@@ -1785,30 +1775,24 @@ msgid "Show Ballance Elements Properties."
 msgstr "显示 Ballance 元素属性。"
 
 #. :src: bpy.types.BBP_PT_ballance_elements
-#, fuzzy
-#| msgid "Ballance Elements"
 msgctxt "BBP_PT_ballance_elements"
 msgid "Ballance Elements"
-msgstr "Ballance 元素"
+msgstr "Ballance 机关"
 
 #. :src: bpy.types.BBP_PT_ballance_map_info
 msgid "Show Ballance Map Infos."
 msgstr "显示 Ballance 地图信息。"
 
 #. :src: bpy.types.BBP_PT_ballance_map_info
-#, fuzzy
-#| msgid "Ballance Map"
 msgctxt "BBP_PT_ballance_map_info"
 msgid "Ballance Map"
-msgstr "Ballance 地图"
+msgstr "Balance 地图"
 
 #. :src: bpy.types.BBP_PT_bme_materials
 msgid "Show BME Materials Properties."
 msgstr "显示 BME 材质属性。"
 
 #. :src: bpy.types.BBP_PT_bme_materials
-#, fuzzy
-#| msgid "BME Materials"
 msgctxt "BBP_PT_bme_materials"
 msgid "BME Materials"
 msgstr "BME 材质"
@@ -1849,30 +1833,30 @@ msgctxt "BBP_PT_virtools_mesh"
 msgid "Virtools Mesh"
 msgstr "Virtools 网格"
 
+# 我不知道这些是什么，别翻译。
 #. :src: bpy.types.StringProperty
-#, fuzzy
 msgid "String Definition"
-msgstr "字符串定义"
+msgstr ""
 
+# 我不知道这些是什么，别翻译。
 #. :src: bpy.types.StringProperty
-#, fuzzy
 msgid "RNA text string property definition"
-msgstr "RNA 文本字符串定义"
+msgstr ""
 
+# 我不知道这些是什么，别翻译。
 #. :src: bpy.types.StringProperty.default
-#, fuzzy
 msgid "String default value"
-msgstr "字符串的默认值"
+msgstr ""
 
+# 我不知道这些是什么，别翻译。
 #. :src: bpy.types.StringProperty.length_max
-#, fuzzy
 msgid "Maximum Length"
-msgstr "最大长度"
+msgstr ""
 
+# 我不知道这些是什么，别翻译。
 #. :src: bpy.types.StringProperty.length_max
-#, fuzzy
 msgid "Maximum length of the string, 0 means unlimited"
-msgstr "字符串的最大长度，0表示不限制"
+msgstr ""
 
 #. :src: bpy.types.BBP_PG_ballance_element.element_id
 msgctxt "BBP_PG_ballance_element/property"
@@ -2054,29 +2038,29 @@ msgstr "设置衰减的零次项因数。"
 #. :src: bpy.types.BBP_PG_virtools_light.falloff
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Fall Off"
-msgstr ""
+msgstr "衰减"
 
 #. :src: bpy.types.BBP_PG_virtools_light.falloff
 msgid "Sets the light fall off rate."
-msgstr ""
+msgstr "设置光源衰减的速率。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Fall Off Shape"
-msgstr ""
+msgstr "衰减形状"
 
 #. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
 msgid "Sets the value of the light fall off shape."
-msgstr ""
+msgstr "设置光源衰减的形状。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.hot_spot
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Hot Spot"
-msgstr ""
+msgstr "热点"
 
 #. :src: bpy.types.BBP_PG_virtools_light.hot_spot
 msgid "Sets the value of the hot spot of the light."
-msgstr ""
+msgstr "设置光源热点的大小。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_color
 msgctxt "BBP_PG_virtools_light/property"
@@ -2414,7 +2398,7 @@ msgstr "材质的自发光颜色"
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Blend"
-msgstr "混合"
+msgstr "透明度混合"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
 msgid "Whether alpha blending is enabled or not."
@@ -2573,11 +2557,11 @@ msgstr "寻址模式控制贴图坐标超出 0 到 1 范围时的处理方式"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Wrap"
-msgstr ""
+msgstr "重复"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
 msgid "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "
-msgstr "使用默认网格包裹模式 (参见 CKMesh::SetWrapMode)"
+msgstr "默认使用的重复寻址模式 (参见 CKMesh::SetWrapMode) "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
 msgctxt "BBP_PG_virtools_material/property"
@@ -2585,9 +2569,8 @@ msgid "Mirror"
 msgstr "镜像"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
-#, fuzzy
 msgid "Texture coordinates outside the range [0..1] are flipped evenly. "
-msgstr "超出 [0..1] 范围的贴图坐标会被均匀翻转."
+msgstr "超出 [0..1] 范围的贴图坐标会被均匀翻转。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
 msgctxt "BBP_PG_virtools_material/property"
@@ -2595,36 +2578,31 @@ msgid "Clamp"
 msgstr "钳制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
-#, fuzzy
 msgid ""
 "Texture coordinates greater than 1.0 are set to 1.0, and values less than "
 "0.0 are set to 0.0. "
-msgstr "大于 1.0 的贴图坐标会被设置为 1.0，小于 0.0 的贴图坐标会被设置为 0.0."
+msgstr ""
+"大于 1.0 的贴图坐标会被设置为 1.0，小于 0.0 的贴图坐标会被设置为 0.0。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
-#| msgid "Sink Border"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Border"
-msgstr ""
+msgstr "边框"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
-#, fuzzy
 msgid ""
 "When texture coordinates are greater than 1.0 or less than 0.0  texture is "
 "set to a color defined in CKMaterial::SetTextureBorderColor. "
 msgstr ""
 "当贴图坐标大于 1.0 或小于 0.0 时，贴图将被设置为 CKMaterial::"
-"SetTextureBorderColor 中定义的颜色."
+"SetTextureBorderColor 中定义的颜色。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'5'
-#, fuzzy
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Mirror Once"
-msgstr "一次镜像"
+msgstr "单次镜像"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode
-#, fuzzy
-#| msgid "Texture Blend"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Texture Blend"
 msgstr "贴图混合"
@@ -2634,69 +2612,55 @@ msgid "Texture blend mode"
 msgstr "贴图混合的模式"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
-#, fuzzy
-#| msgid "Decal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Decal"
 msgstr "贴花"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
 msgid "Texture replace any material information "
-msgstr "贴图替代任何材质信息"
+msgstr "贴图替代任何材质信息 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
-#, fuzzy
-#| msgid "Modulate"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Modulate"
 msgstr "调制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
-#, fuzzy
 msgid ""
 "Texture and material are combine. Alpha information of the texture replace "
 "material alpha component. "
-msgstr "贴图和材质会结合。贴图替换材质的 Alpha 信息。"
+msgstr "贴图和材质会结合。贴图替换材质的透明度信息。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
-#, fuzzy
-#| msgid "Decal Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Decal Alpha"
-msgstr "Alpha 贴花"
+msgstr "透明度贴花"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
-#, fuzzy
 msgid ""
 "Alpha information in the texture specify how material and texture are "
 "combined. Alpha information of the texture replace material alpha component. "
 msgstr ""
-"贴图中的 Alpha 信息指定了材质和贴图如何结合。贴图的 Alpha 信息会替代材质的 "
-"Alpha 组件。"
+"贴图中的透明度信息指定了材质和贴图如何结合。贴图的透明度信息替代材质的透明度"
+"分量。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
-#, fuzzy
-#| msgid "Modulate Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Modulate Alpha"
-msgstr "Alpha 调制"
+msgstr "透明度调制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
 msgid ""
 "Alpha information in the texture specify how material and texture are "
 "combined "
-msgstr "贴图中的 Alpha 信息指定了材质和贴图如何结合"
+msgstr "贴图中的透明度信息指定了材质和贴图如何结合 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'5'
-#, fuzzy
-#| msgid "Decal Mask"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Decal Mask"
 msgstr "贴花遮罩"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'6'
-#, fuzzy
-#| msgid "Modulate Mask"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Modulate Mask"
 msgstr "调制遮罩"
@@ -2704,44 +2668,39 @@ msgstr "调制遮罩"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
 msgid "Equivalent to DECAL "
-msgstr "等同于贴花"
+msgstr "等同于贴花 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'8'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Add"
-msgstr ""
+msgstr "相加"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
-#, fuzzy
-#| msgid "Dot Product 3"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Dot Product 3"
-msgstr "三维向量的点积"
+msgstr "点积"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
-#, fuzzy
 msgid ""
 "Perform a Dot Product 3 between texture (normal map) and a referential "
 "vector given in VXRENDERSTATE_TEXTUREFACTOR. "
 msgstr ""
-"在贴图（法线贴图）和在 VXRENDERSTATE_TEXTUREFACTOR 中给定的参考向量之间执行三"
-"维点积。"
+"在贴图 (法线贴图) 和在 VXRENDERSTATE_TEXTUREFACTOR 中给定的参考向量之间执行三"
+"维点积。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'10'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Max"
-msgstr ""
+msgstr "最大值"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
-#, fuzzy
-#| msgid "Border Color"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Border Color"
-msgstr "边界着色"
+msgstr "边界颜色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
 msgid ""
@@ -2750,11 +2709,9 @@ msgid ""
 msgstr "当贴图寻址模式为 VXTEXTURE_ADDRESSBORDER 时，使用边界颜色。"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
-#, fuzzy
-#| msgid "Filter Mag"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Filter Mag"
-msgstr "拉伸过滤"
+msgstr "放大过滤器"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
 msgid "Texture filter mode when the texture is magnified"
@@ -2762,8 +2719,6 @@ msgstr "贴图放大时的贴图过滤模式"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
-#, fuzzy
-#| msgid "Mip Nearest"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Nearest"
 msgstr "最近 Mip 映射"
@@ -2771,12 +2726,10 @@ msgstr "最近 Mip 映射"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
 msgid "No Filter "
-msgstr "无过滤"
+msgstr "无过滤 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
-#, fuzzy
-#| msgid "Mip Linear"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Linear"
 msgstr "线性 Mip 映射"
@@ -2784,12 +2737,10 @@ msgstr "线性 Mip 映射"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
 msgid "Bilinear Interpolation "
-msgstr "双线性插值"
+msgstr "双线性插值 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
-#, fuzzy
-#| msgid "Mip Nearest"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Mip Nearest"
 msgstr "最近 Mip 映射"
@@ -2797,12 +2748,10 @@ msgstr "最近 Mip 映射"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
 msgid "Mip mapping "
-msgstr "Mip 映射"
+msgstr "Mip 映射 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
-#, fuzzy
-#| msgid "Mip Linear"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Mip Linear"
 msgstr "线性 Mip 映射"
@@ -2810,26 +2759,21 @@ msgstr "线性 Mip 映射"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
 msgid "Mip Mapping with Bilinear interpolation "
-msgstr "双线性插值的线性 Mip 映射"
+msgstr "双线性插值的线性 Mip 映射 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
-#, fuzzy
-#| msgid "Linear Mip Nearest"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Linear Mip Nearest"
 msgstr "线性最近 Mip 映射"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
-#, fuzzy
 msgid "Mip Mapping with Bilinear interpolation between mipmap levels. "
-msgstr "在各级 Mipmap 间使用双线性插值的 Mip 映射。"
+msgstr "在各级 Mipmap 间使用双线性插值的 Mip 映射。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
-#, fuzzy
-#| msgid "Linear Mip Linear"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Linear Mip Linear"
 msgstr "线性 Mip 映射"
@@ -2837,42 +2781,36 @@ msgstr "线性 Mip 映射"
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
 msgid "Trilinear Filtering "
-msgstr "三线性过滤"
+msgstr "三线性过滤 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
-#, fuzzy
-#| msgid "Anisotropic filtering "
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Anisotropic"
-msgstr "各向异性过滤"
+msgstr "各向异性"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
 msgid "Anisotropic filtering "
-msgstr "各向异性过滤"
+msgstr "各向异性过滤 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
-#, fuzzy
-#| msgid "Filter Min"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Filter Min"
-msgstr "缩小过滤"
+msgstr "缩小过滤器"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
 msgid "Texture filter mode when the texture is minified"
 msgstr "贴图缩小时的贴图过滤模式"
 
 #. :src: bpy.types.BBP_PG_virtools_material.z_func
-#, fuzzy
-#| msgid "Z Compare Function"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Z Compare Function"
-msgstr "Z 比较函数"
+msgstr "深度比较函数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.z_func
 msgid "Z Comparison function"
-msgstr "Z 比较函数"
+msgstr "深度比较函数"
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
 msgctxt "BBP_PG_virtools_mesh/property"
@@ -3160,74 +3098,74 @@ msgstr "S3/DirectX 贴图压缩 5 "
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits V8U8"
-msgstr "16 Bits V8U8"
+msgstr "16 位 V8U8"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
 msgid "16-bit Bump Map format format (8 bits per color) "
-msgstr "16位凹凸贴图格式 (颜色占 8 位) "
+msgstr "16 位凹凸贴图格式 (颜色占 8 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits V16U16"
-msgstr "32 Bits V16U16"
+msgstr "32 位 V16U16"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
 msgid "32-bit Bump Map format format (16 bits per color) "
-msgstr "32位凹凸贴图格式 (颜色占 16 位) "
+msgstr "32 位凹凸贴图格式 (颜色占 16 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits L6V5U5"
-msgstr "16 Bits L6V5U5"
+msgstr "16 位 L6V5U5"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
 msgid "16-bit Bump Map format format with luminance "
-msgstr "16位具有亮度的凹凸贴图格式 "
+msgstr "16 位具有亮度的凹凸贴图格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits X8L8V8U8"
-msgstr "32 Bits X8L8V8U8"
+msgstr "32 位 X8L8V8U8"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
 msgid "32-bit Bump Map format format with luminance "
-msgstr "32位具有亮度的凹凸贴图格式 "
+msgstr "32 位具有亮度的凹凸贴图格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits ABGR8888 CLUT"
-msgstr "8 Bits ABGR8888 CLUT"
+msgstr "8 位 ABGR8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
 msgid "8 bits indexed CLUT (ABGR) "
-msgstr "8位索引颜色查找表 (ABGR) "
+msgstr "8 位索引颜色查找表 (ABGR) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits ARGB8888 CLUT"
-msgstr "8 Bits ARGB8888 CLUT"
+msgstr "8 位 ARGB8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
 msgid "8 bits indexed CLUT (ARGB) "
-msgstr "8位索引颜色查找表 (ARGB) "
+msgstr "8 位索引颜色查找表 (ARGB) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "4 Bits ABGR8888 CLUT"
-msgstr "4 Bits ABGR8888 CLUT"
+msgstr "4 位 ABGR8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
 msgid "4 bits indexed CLUT (ABGR) "
-msgstr "4位索引颜色查找表 (ABGR) "
+msgstr "4 位索引颜色查找表 (ABGR) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "4 Bits ARGB8888 CLUT"
-msgstr "4 Bits ARGB8888 CLUT"
+msgstr "4 位 ARGB8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
 msgid "4 bits indexed CLUT (ARGB) "
-msgstr "4位索引颜色查找表 (ARGB) "
+msgstr "4 位索引颜色查找表 (ARGB) "
 
 #: extensions/user_default/bbp_ng/OP_ADDS_bme.py:246
 msgctxt "BBP_OT_add_bme_struct/draw"
@@ -3380,22 +3318,16 @@ msgid "Saving 3dObjects"
 msgstr "保存 3D 物体"
 
 #: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:321
-#| msgctxt "Operator"
-#| msgid "Swing Series"
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Meshes"
 msgstr "保存网格"
 
 #: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:436
-#| msgctxt "Operator"
-#| msgid "Fix Material"
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Materials"
 msgstr "保存材质"
 
 #: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:502
-#| msgctxt "Operator"
-#| msgid "Swing Series"
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Textures"
 msgstr "保存贴图"
@@ -3424,19 +3356,15 @@ msgstr "您不能将全局贴图保存选项设置为“使用全局设定”！
 
 #: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
 msgid ""
-"You must specify at least one encoding for file saving (e.g. cp1252, gb2312)!"
-msgstr ""
+"You must specify at least one encoding for file saving (e.g. cp1252, gbk)!"
+msgstr "保存文件时必须指定至少一种编码 (如 cp1252，gbk)！"
 
 #: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:84
-#| msgctxt "Operator"
-#| msgid "Import and Assign Texture"
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Textures"
 msgstr "加载贴图"
 
 #: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:154
-#| msgctxt "Operator"
-#| msgid "Fix Material"
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Materials"
 msgstr "加载材质"
@@ -3447,8 +3375,6 @@ msgid "Loading Meshes"
 msgstr "加载网格"
 
 #: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:319
-#| msgctxt "Operator"
-#| msgid "Grouping Objects"
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading 3dObjects"
 msgstr "加载 3D 物体"
@@ -3484,57 +3410,55 @@ msgstr "贴图原始数据临时文件夹：{0}"
 
 #: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:26
 msgid ""
-"You must specify at least one encoding for file loading (e.g. cp1252, "
-"gb2312)!"
-msgstr ""
+"You must specify at least one encoding for file loading (e.g. cp1252, gbk)!"
+msgstr "读取文件时必须指定至少一种编码 (如 cp1252，gbk)！"
 
 #: extensions/user_default/bbp_ng/OP_MTL_fix_material.py:34
-#| msgid "Fix / materials."
 msgctxt "BBP_OT_fix_all_material/draw"
 msgid "Fix {0}/{1} materials."
 msgstr "修复 {0}/{1} 材质。"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:182
-#| msgid "Align Axis (Multi-selection)"
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Align Axis (Multi-selection)"
 msgstr "对齐轴 (可多选)"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:190
-#| msgid "Current Object (Active Object)"
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Current Object (Active Object)"
 msgstr "当前物体 (活动物体)"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:192
-#| msgid "Target Objects (Selected Objects)"
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Target Objects (Selected Objects)"
 msgstr "目标物体 (选择的物体)"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:201
-#| msgid "Apply"
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Apply"
 msgstr "应用"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:203
-#| msgid "Total  applied alignments"
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Total {0} applied alignments"
 msgstr "共计 {0} 个已应用的对齐"
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:85
 msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "Rename System Report"
+msgstr "重命名系统报告"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:86
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
 msgid "View console to get more detail"
 msgstr "查看控制台获取更多细节"
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:86
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:87
 msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
 msgid "All: {0}"
 msgstr "总计：{0}"
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:87
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:88
 msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
 msgid "Failed: {0}"
 msgstr "失败：{0}"
@@ -3580,7 +3504,7 @@ msgstr "缩放设置"
 msgctxt "BBP_OT_flatten_uv/execute"
 msgid ""
 "[Flatten UV] {0} faces are not be processed correctly because process failed."
-msgstr ""
+msgstr "[沿边沿 UV] {0} 个面未被正确处理，因为处理失败。"
 
 #: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:79
 msgctxt "BBP_OT_rail_uv/execute"
@@ -3594,7 +3518,7 @@ msgstr "选择的材质为空。"
 #: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:35
 msgid ""
 "Some objects are invalid for this operation. See Console for more details."
-msgstr "某些物体无法应用此操作。查看控制来了解细节。"
+msgstr "某些物体无法应用此操作。查看控制台来了解细节。"
 
 #: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:82
 msgctxt "BBP_OT_rail_uv/execute"
@@ -3637,7 +3561,6 @@ msgid "Basics"
 msgstr "基础"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:305
-#| msgid "Rotation"
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Attenuation"
 msgstr "衰减"
@@ -3648,7 +3571,6 @@ msgid "Constant"
 msgstr "零次项系数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:307
-#| msgid "Mip Linear"
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Linear"
 msgstr "一次项系数"
@@ -3881,7 +3803,7 @@ msgstr "匹配唯一机关失败。"
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid ""
 "Can't distinguish object between Floors and Rails. Suppose it is Floors."
-msgstr "无法区分物体时路面还是钢轨，假定为路面。"
+msgstr "无法区分物体是路面还是钢轨，假定为路面。"
 
 #: extensions/user_default/bbp_ng/UTIL_virtools_types.py:266
 msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
@@ -3997,1199 +3919,1109 @@ msgid "The specialized add-on served for creating game map of Ballance"
 msgstr "专用于 Ballance 制图的插件"
 
 #. 1x1.json
-#| msgid "Normal 1x1"
 msgctxt "BBP/BME/floor_normal_1x1"
 msgid "Normal 1x1"
-msgstr ""
+msgstr "1x1 平路块"
 
 #. 1x1.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_1x1/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_normal_1x1/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_normal_1x1/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_normal_1x1/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. 1x1.json
-#| msgid "Sink 1x1"
 msgctxt "BBP/BME/floor_sink_1x1"
 msgid "Sink 1x1"
-msgstr ""
+msgstr "1x1 凹路块"
 
 #. 1x1.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_1x1/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_sink_1x1/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_sink_1x1/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. 1x1.json
 msgctxt "BBP/BME/floor_sink_1x1/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. borders.json
-#| msgid "Normal Border"
 msgctxt "BBP/BME/floor_normal_border"
 msgid "Normal Border"
-msgstr ""
+msgstr "平路边缘"
 
 #. borders.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_normal_border/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. borders.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_normal_border/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. borders.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_border/[1]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. borders.json
 msgctxt "BBP/BME/floor_normal_border/[1]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. borders.json
 msgctxt "BBP/BME/floor_normal_border/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. borders.json
 msgctxt "BBP/BME/floor_normal_border/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. borders.json
-#| msgid "Sink Border"
 msgctxt "BBP/BME/floor_sink_border"
 msgid "Sink Border"
-msgstr ""
+msgstr "凹路边缘"
 
 #. borders.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_sink_border/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. borders.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_sink_border/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. borders.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_border/[1]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. borders.json
 msgctxt "BBP/BME/floor_sink_border/[1]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. borders.json
 msgctxt "BBP/BME/floor_sink_border/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. borders.json
 msgctxt "BBP/BME/floor_sink_border/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. borders.json
-#| msgid "Ribbon Border"
 msgctxt "BBP/BME/floor_ribbon_border"
 msgid "Ribbon Border"
-msgstr ""
+msgstr "双花纹边缘"
 
 #. borders.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_ribbon_border/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. borders.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_ribbon_border/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. borders.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_ribbon_border/[1]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. borders.json
 msgctxt "BBP/BME/floor_ribbon_border/[1]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. borders.json
 msgctxt "BBP/BME/floor_ribbon_border/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. borders.json
 msgctxt "BBP/BME/floor_ribbon_border/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Normal Inner Corner"
 msgctxt "BBP/BME/floor_normal_inner_corner"
 msgid "Normal Inner Corner"
-msgstr ""
+msgstr "平路内侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Sink Inner Corner"
 msgctxt "BBP/BME/floor_sink_inner_corner"
 msgid "Sink Inner Corner"
-msgstr ""
+msgstr "凹路内侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Ribbon Inner Corner"
 msgctxt "BBP/BME/floor_ribbon_inner_corner"
 msgid "Ribbon Inner Corner"
-msgstr ""
+msgstr "双花纹路面内侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Normal Outter Corner"
 msgctxt "BBP/BME/floor_normal_outter_corner"
 msgid "Normal Outter Corner"
-msgstr ""
+msgstr "平路外侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Sink Outter Corner"
 msgctxt "BBP/BME/floor_sink_outter_corner"
 msgid "Sink Outter Corner"
-msgstr ""
+msgstr "凹路外侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. corners.json
-#| msgid "Ribbon Outter Corner"
 msgctxt "BBP/BME/floor_ribbon_outter_corner"
 msgid "Ribbon Outter Corner"
-msgstr ""
+msgstr "双花纹路面外侧拐角"
 
 #. corners.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. corners.json
 msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Normal L Crossing"
 msgctxt "BBP/BME/floor_normal_l_crossing"
 msgid "Normal L Crossing"
-msgstr ""
+msgstr "平路转角"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Sink L Crossing"
 msgctxt "BBP/BME/floor_sink_l_crossing"
 msgid "Sink L Crossing"
-msgstr ""
+msgstr "凹路转角"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Normal T Crossing"
 msgctxt "BBP/BME/floor_normal_t_crossing"
 msgid "Normal T Crossing"
-msgstr ""
+msgstr "平路丁字路口"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Sink T Crossing"
 msgctxt "BBP/BME/floor_sink_t_crossing"
 msgid "Sink T Crossing"
-msgstr ""
+msgstr "凹路丁字路口"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Normal X Crossing"
 msgctxt "BBP/BME/floor_normal_x_crossing"
 msgid "Normal X Crossing"
-msgstr ""
+msgstr "平路十字路口"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. crossings.json
-#| msgid "Sink X Crossing"
 msgctxt "BBP/BME/floor_sink_x_crossing"
 msgid "Sink X Crossing"
-msgstr ""
+msgstr "凹路十字路口"
 
 #. crossings.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. crossings.json
 msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat"
 msgid "Flat"
-msgstr ""
+msgstr "无边框路面"
 
 #. flat.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_flat/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. flat.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_flat/[1]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. flat.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_flat/[1]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[2]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[2]"
 msgid "The width of block."
-msgstr ""
+msgstr "方块的宽度。"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. flat.json
 msgctxt "BBP/BME/floor_flat/[4]"
 msgid "Is Sink"
-msgstr ""
+msgstr "是否为凹路面"
 
 #. flat.json
-#| msgid "Whether the material is both sided or not"
 msgctxt "BBP/BME/floor_flat/[4]"
 msgid "Whether this flat floor is used for sink floor."
-msgstr ""
+msgstr "该平直路面是否是凹路面的一部分。"
 
 #. platforms.json
-#| msgid "Normal Platform"
 msgctxt "BBP/BME/floor_normal_platform"
 msgid "Normal Platform"
-msgstr ""
+msgstr "普通平台"
 
 #. platforms.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_normal_platform/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. platforms.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_normal_platform/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_normal_platform/[1]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_normal_platform/[1]"
 msgid "The width of block."
-msgstr ""
+msgstr "方块的宽度。"
 
 #. platforms.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_platform/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_normal_platform/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_normal_platform/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_normal_platform/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. platforms.json
-#| msgid "Sink Platform"
 msgctxt "BBP/BME/floor_sink_platform"
 msgid "Sink Platform"
-msgstr ""
+msgstr "凹平台"
 
 #. platforms.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_sink_platform/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. platforms.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_sink_platform/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_sink_platform/[1]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_sink_platform/[1]"
 msgid "The width of block."
-msgstr ""
+msgstr "方块的宽度。"
 
 #. platforms.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_platform/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_sink_platform/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_sink_platform/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_sink_platform/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. platforms.json
-#| msgid "Ribbon Platform"
 msgctxt "BBP/BME/floor_ribbon_platform"
 msgid "Ribbon Platform"
-msgstr ""
+msgstr "双花纹平台"
 
 #. platforms.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_ribbon_platform/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. platforms.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_ribbon_platform/[0]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_ribbon_platform/[1]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_ribbon_platform/[1]"
 msgid "The width of block."
-msgstr ""
+msgstr "方块的宽度。"
 
 #. platforms.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_ribbon_platform/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_ribbon_platform/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_ribbon_platform/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. platforms.json
 msgctxt "BBP/BME/floor_ribbon_platform/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. streets.json
-#| msgid "Normal Floor"
 msgctxt "BBP/BME/floor_normal_straight"
 msgid "Normal Floor"
-msgstr ""
+msgstr "平路面"
 
 #. streets.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_straight/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. streets.json
 msgctxt "BBP/BME/floor_normal_straight/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. streets.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_normal_straight/[1]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. streets.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_normal_straight/[1]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. streets.json
 msgctxt "BBP/BME/floor_normal_straight/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. streets.json
 msgctxt "BBP/BME/floor_normal_straight/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. streets.json
-#| msgid "Sink Floor"
 msgctxt "BBP/BME/floor_sink_straight"
 msgid "Sink Floor"
-msgstr ""
+msgstr "凹路面"
 
 #. streets.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_straight/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. streets.json
 msgctxt "BBP/BME/floor_sink_straight/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. streets.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_sink_straight/[1]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. streets.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_sink_straight/[1]"
 msgid "The length of block."
-msgstr ""
+msgstr "方块的长度。"
 
 #. streets.json
 msgctxt "BBP/BME/floor_sink_straight/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. streets.json
 msgctxt "BBP/BME/floor_sink_straight/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. terminals.json
-#| msgid "Normal Floor Terminal"
 msgctxt "BBP/BME/floor_normal_terminal"
 msgid "Normal Floor Terminal"
-msgstr ""
+msgstr "平路面末端"
 
 #. terminals.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_normal_terminal/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_normal_terminal/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_normal_terminal/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_normal_terminal/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. terminals.json
-#| msgid "Sink Floor Terminal"
 msgctxt "BBP/BME/floor_sink_terminal"
 msgid "Sink Floor Terminal"
-msgstr ""
+msgstr "凹路面末端"
 
 #. terminals.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_sink_terminal/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_sink_terminal/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_sink_terminal/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. terminals.json
 msgctxt "BBP/BME/floor_sink_terminal/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. trafos.json
-#| msgid "Wood Trafo"
 msgctxt "BBP/BME/wood_trafo"
 msgid "Wood Trafo"
-msgstr ""
+msgstr "木球变球器底座"
 
 #. trafos.json
-#| msgid "Right"
 msgctxt "BBP/BME/wood_trafo/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. trafos.json
 msgctxt "BBP/BME/wood_trafo/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. trafos.json
 msgctxt "BBP/BME/wood_trafo/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. trafos.json
 msgctxt "BBP/BME/wood_trafo/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. trafos.json
-#| msgid "Stone Trafo"
 msgctxt "BBP/BME/stone_trafo"
 msgid "Stone Trafo"
-msgstr ""
+msgstr "石球变球器底座"
 
 #. trafos.json
-#| msgid "Right"
 msgctxt "BBP/BME/stone_trafo/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. trafos.json
 msgctxt "BBP/BME/stone_trafo/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. trafos.json
 msgctxt "BBP/BME/stone_trafo/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. trafos.json
 msgctxt "BBP/BME/stone_trafo/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. trafos.json
-#| msgid "Paper Trafo"
 msgctxt "BBP/BME/paper_trafo"
 msgid "Paper Trafo"
-msgstr ""
+msgstr "纸球变球器底座"
 
 #. trafos.json
-#| msgid "Right"
 msgctxt "BBP/BME/paper_trafo/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. trafos.json
 msgctxt "BBP/BME/paper_trafo/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. trafos.json
 msgctxt "BBP/BME/paper_trafo/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. trafos.json
 msgctxt "BBP/BME/paper_trafo/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. transitions.json
-#| msgid "Translation"
 msgctxt "BBP/BME/floor_transition"
 msgid "Transition"
-msgstr ""
+msgstr "平凹转换"
 
 #. transitions.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_transition/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_transition/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_transition/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_transition/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. transitions.json
-#| msgid "Narrow Transition"
 msgctxt "BBP/BME/floor_narrow_transition"
 msgid "Narrow Transition"
-msgstr ""
+msgstr "窄式平凹转换"
 
 #. transitions.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_narrow_transition/[0]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_narrow_transition/[0]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_narrow_transition/[1]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. transitions.json
 msgctxt "BBP/BME/floor_narrow_transition/[1]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. wide_floors.json
-#| msgid "Wide Floor"
 msgctxt "BBP/BME/floor_wide_straight"
 msgid "Wide Floor"
-msgstr ""
+msgstr "宽路面"
 
 #. wide_floors.json
-#| msgid "Maximum Length"
 msgctxt "BBP/BME/floor_wide_straight/[0]"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #. wide_floors.json
-#| msgid "The length of this rail."
 msgctxt "BBP/BME/floor_wide_straight/[0]"
 msgid "The length of wide floor."
-msgstr ""
+msgstr "宽路面的长度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_straight/[1]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_straight/[1]"
 msgid "The width of wide floor."
-msgstr ""
+msgstr "宽路面的宽度。"
 
 #. wide_floors.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_wide_straight/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_straight/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_straight/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_straight/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. wide_floors.json
-#| msgid "Wide Floor Terminal"
 msgctxt "BBP/BME/floor_wide_terminal"
 msgid "Wide Floor Terminal"
-msgstr ""
+msgstr "宽路面末端"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_terminal/[0]"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_terminal/[0]"
 msgid "The width of wide floor."
-msgstr ""
+msgstr "宽路面的宽度。"
 
 #. wide_floors.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_wide_terminal/[1]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_terminal/[1]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_terminal/[2]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_terminal/[2]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. wide_floors.json
-#| msgid "Wide Floor L Crossing"
 msgctxt "BBP/BME/floor_wide_l_crossing"
 msgid "Wide Floor L Crossing"
-msgstr ""
+msgstr "宽路面转角"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
 msgid "Horizontal Width"
-msgstr ""
+msgstr "水平路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
-msgstr ""
+msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
 msgid "Vertical Width"
-msgstr ""
+msgstr "垂直路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
 msgid "The vertical floor width of wide floor."
-msgstr ""
+msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. wide_floors.json
-#| msgid "Wide Floor T Crossing"
 msgctxt "BBP/BME/floor_wide_t_crossing"
 msgid "Wide Floor T Crossing"
-msgstr ""
+msgstr "宽路面丁字路口"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
 msgid "Horizontal Width"
-msgstr ""
+msgstr "水平路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
-msgstr ""
+msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
 msgid "Vertical Width"
-msgstr ""
+msgstr "垂直路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
 msgid "The vertical floor width of wide floor."
-msgstr ""
+msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #. wide_floors.json
-#| msgid "Wide Floor X Crossing"
 msgctxt "BBP/BME/floor_wide_x_crossing"
 msgid "Wide Floor X Crossing"
-msgstr ""
+msgstr "宽路面十字路口"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
 msgid "Horizontal Width"
-msgstr ""
+msgstr "水平路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
-msgstr ""
+msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
 msgid "Vertical Width"
-msgstr ""
+msgstr "垂直路面宽度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
 msgid "The vertical floor width of wide floor."
-msgstr ""
+msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-#| msgid "Right"
 msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
 msgid "The height of block."
-msgstr ""
+msgstr "该方块的高度。"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
 msgid "Face"
-msgstr ""
+msgstr "面"
 
 #. wide_floors.json
 msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
 msgid "Whether has some faces."
-msgstr ""
+msgstr "是否生成某些面。"
 
 #~ msgctxt "BBP_PG_legacy_align_history/property"
 #~ msgid "Target Objects (Other Objects)"

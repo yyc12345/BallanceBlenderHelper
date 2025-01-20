@@ -244,13 +244,18 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # visit cfgs cache list to show cfg
         layout.label(text="Prototype Configurations", text_ctxt='BBP_OT_add_bme_struct/draw')
+        prototype_cfg_index: int = 0
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # create box for cfgs
             box_layout: bpy.types.UILayout = layout.box()
 
             # draw title and description first
-            box_layout.label(text=cfg.get_title()) # TODO: finish translation context
-            box_layout.label(text=cfg.get_desc())
+            # get prototype identifier name and showcase configuration index
+            # then increase the index.
+            prototype_ident: str = _g_EnumHelper_BmeStructType.get_selection(self.bme_struct_type)
+            box_layout.label(text=cfg.get_title(), text_ctxt=UTIL_translation.build_prototype_showcase_cfg_context(prototype_ident, prototype_cfg_index))
+            box_layout.label(text=cfg.get_desc(), text_ctxt=UTIL_translation.build_prototype_showcase_cfg_context(prototype_ident, prototype_cfg_index))
+            prototype_cfg_index += 1
 
             # show prop differently by cfg type
             match(cfg.get_type()):

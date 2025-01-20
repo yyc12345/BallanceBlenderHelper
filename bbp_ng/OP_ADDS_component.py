@@ -246,9 +246,9 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
             item_name: str = PROP_ballance_element.get_ballance_element_name(item)
 
             cop = layout.operator(
-                BBP_OT_add_component.bl_idname, text = item_name, 
+                BBP_OT_add_component.bl_idname,
+                text = item_name, text_ctxt = 'BBP_OT_add_component/property',
                 icon_value = UTIL_icons_manager.get_component_icon(item_name),
-                translate = False
             )
             cop.component_type = _g_EnumHelper_Component.to_selection(item)
 

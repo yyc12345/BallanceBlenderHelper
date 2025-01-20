@@ -272,7 +272,7 @@ def virtools_name_regulator(name: str | None) -> str:
 #  Use universal encoding name (like Python).
 g_PyBMapDefaultEncodings: tuple[str, ...] = (
     'cp1252',
-    'gb2312'
+    'gbk'
 )
 
 #endregion

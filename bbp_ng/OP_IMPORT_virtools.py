@@ -23,7 +23,7 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
         # check whether encoding list is empty to avoid real stupid user.
         encodings = self.general_get_vt_encodings(context)
         if len(encodings) == 0:
-            self.report({'ERROR'}, 'You must specify at least one encoding for file loading (e.g. cp1252, gb2312)!')
+            self.report({'ERROR'}, 'You must specify at least one encoding for file loading (e.g. cp1252, gbk)!')
             return {'CANCELLED'}
 
         _import_virtools(
