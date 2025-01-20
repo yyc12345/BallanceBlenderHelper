@@ -25,36 +25,32 @@
                 "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
+                    "edge_length": "2.5",
+                    "tip_offset": "2.5",
                     "height": "height",
-                    "face": "(face[0], False, False, False, face[4], None)",
+                    "face": "(face[0], False, False, face[3], face[4], None)",
                     "is_sink": "is_sink"
                 },
                 "transform": "ident()"
             },
             {
-                "identifier": "cv_triangle_center",
+                "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
+                    "edge_length": "2.5",
+                    "tip_offset": "2.5",
                     "height": "height",
-                    "face": "(face[0], False, False, False, face[3], None)",
+                    "face": "(face[0], False, False, face[3], face[5], None)",
                     "is_sink": "is_sink"
                 },
-                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+                "transform": "move(0, 5, 0) @ scale(1, -1, 1)"
             },
             {
                 "identifier": "cv_triangle_side",
                 "skip": "False",
                 "params": {
-                    "height": "height",
-                    "face": "(face[0], False, False, False, face[5], None)",
-                    "is_sink": "is_sink"
-                },
-                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
-            },
-            {
-                "identifier": "cv_triangle_side",
-                "skip": "False",
-                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
                     "height": "height",
                     "face": "(face[0], False, False, False, face[2], None)",
                     "is_sink": "is_sink"
@@ -65,7 +61,7 @@
                 "identifier": "floor_rectangle_bottom",
                 "skip": "not face[1]",
                 "params": {
-                    "length": "5",
+                    "length": "2.5",
                     "width": "5"
                 },
                 "transform": "move(0, 0, -height)"

@@ -243,7 +243,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
         op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
         # visit cfgs cache list to show cfg
-        layout.label(text="Prototype Configurations:", text_ctxt='BBP_OT_add_bme_struct/draw')
+        layout.label(text="Prototype Configurations", text_ctxt='BBP_OT_add_bme_struct/draw')
         for (cfg, cfg_index) in self.bme_struct_cfg_index_cache:
             # create box for cfgs
             box_layout: bpy.types.UILayout = layout.box()
