@@ -1,0 +1,6023 @@
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: Ballance Blender Plugin 4.1.0 (0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-20 15:07+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. :src: bpy.types.BBPPreferences.ballance_texture_folder
+msgctxt "BBPPreferences/property"
+msgid "Ballance Texture Folder"
+msgstr "Ballance 贴图文件夹"
+
+#. :src: bpy.types.BBPPreferences.ballance_texture_folder
+msgid ""
+"The path to folder which will be used by this plugin to get external "
+"Ballance texture."
+msgstr "指向 Ballance 贴图文件夹的路径，插件运行时会从中获取贴图。."
+
+#. :src: bpy.types.BBPPreferences.no_component_collection
+msgctxt "BBPPreferences/property"
+msgid "No Component Collection"
+msgstr "非机关集合"
+
+#. :src: bpy.types.BBPPreferences.no_component_collection
+msgid ""
+"When importing, it is the name of collection where objects store will not be "
+"saved as component. When exporting, all forced no component objects will be "
+"stored in this name represented collection"
+msgstr ""
+"导入时，该集合中的物体将不会被保存为机关.。导出时，所有强制的非机关物体存放在"
+"此集合中"
+
+#. :src: bpy.types.BBP_MT_AddBmeMenu
+msgid "Add Ballance Floor"
+msgstr "添加 Ballance 路面"
+
+#. :src: bpy.types.BBP_MT_AddBmeMenu
+msgctxt "BBP_MT_AddBmeMenu"
+msgid "Floors"
+msgstr "路面"
+
+#. :src: bpy.types.BBP_MT_AddComponentsMenu
+msgid "Add Ballance Component"
+msgstr "添加 Ballance 机关"
+
+#. :src: bpy.types.BBP_MT_AddComponentsMenu
+msgctxt "BBP_MT_AddComponentsMenu"
+msgid "Components"
+msgstr "机关"
+
+#. :src: bpy.types.BBP_MT_AddRailMenu
+msgid "Add Ballance Rail"
+msgstr "添加 Ballance 钢轨"
+
+#. :src: bpy.types.BBP_MT_AddRailMenu
+msgctxt "BBP_MT_AddRailMenu"
+msgid "Rails"
+msgstr "钢轨"
+
+#. :src: bpy.types.BBP_MT_View3DMenu
+msgid "Ballance 3D related operators"
+msgstr "Ballance 3D 相关操作符"
+
+#. :src: bpy.types.BBP_MT_View3DMenu
+msgctxt "BBP_MT_View3DMenu"
+msgid "Ballance"
+msgstr "Ballance"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail
+msgctxt "BBP_OT_add_arc_rail"
+msgid "Arc Rail"
+msgstr "圆弧轨"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail
+msgid "Add Arc Rail"
+msgstr "添加圆弧轨"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_rotation
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/property"
+msgid "Extra Rotation"
+msgstr "额外旋转"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_rotation
+msgid "The extra rotation applied to object after moving to cursor."
+msgstr "物体移动到游标后额外进行的旋转."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_translation
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/property"
+msgid "Extra Translation"
+msgstr "额外移动"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_translation
+msgid "The extra translation applied to object after moving to cursor."
+msgstr "物体移动到游标后额外进行的移动."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_end_cap
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/property"
+msgid "End Cap"
+msgstr "末端封盖"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_end_cap
+msgid "Whether this rail should have cap at end terminal."
+msgstr "该钢轨是否在末端封盖."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_angle
+msgctxt "BBP_OT_add_arc_rail/property"
+msgid "Angle"
+msgstr "角度"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_angle
+msgid "The angle of this arc rail rotated."
+msgstr "圆弧轨转过的角度."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_x
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip X"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_x
+msgid "Whether flip this rail with X axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_y
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip Y"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_y
+msgid "Whether flip this rail with Y axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_z
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip Z"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_z
+msgid "Whether flip this rail with Z axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_radius
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Radius"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_radius
+msgid "The screw radius."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_steps
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Steps"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_steps
+msgid ""
+"The segment count per iteration. More segment, more smooth but lower "
+"performance."
+msgstr "每次迭代的分段数. 更多分段数看起来更加平滑，但会影响性能."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_start_cap
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/property"
+msgid "Start Cap"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_start_cap
+msgid "Whether this rail should have cap at start terminal."
+msgstr "该钢轨是否在始端补面."
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Type"
+msgstr "类型"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type
+msgid "Rail type"
+msgstr "钢轨类型"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type:'MONORAIL'
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Monorail"
+msgstr "单轨"
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type:'RAIL'
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Rail"
+msgstr "双轨"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgctxt "BBP_OT_add_bme_struct"
+msgid "Add BME Structure"
+msgstr "添加 BME 结构"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgid "Add BME structure"
+msgstr "添加 BME 结构"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_cfgs
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Configurations"
+msgstr "配置"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_cfgs
+msgid "The collection holding BME structure configurations."
+msgstr "持有BME结构配置数据的集合。"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Type"
+msgstr "类型"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type
+msgid "The type of BME structure."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_1x1'
+#, fuzzy
+#| msgid "Normal 1x1"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal 1x1"
+msgstr "1x1 平地路块"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_1x1'
+#, fuzzy
+#| msgid "Sink 1x1"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink 1x1"
+msgstr "1x1 凹路块"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_border'
+#, fuzzy
+#| msgid "Normal Border"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Border"
+msgstr "平地边缘"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_border'
+#, fuzzy
+#| msgid "Sink Border"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Border"
+msgstr "凹路边缘"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_border'
+#, fuzzy
+#| msgid "Ribbon Border"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Border"
+msgstr "细边装饰边缘"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_inner_corner'
+#, fuzzy
+#| msgid "Normal Inner Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Inner Corner"
+msgstr "平地内侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_inner_corner'
+#, fuzzy
+#| msgid "Sink Inner Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Inner Corner"
+msgstr "凹路内侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_inner_corner'
+#, fuzzy
+#| msgid "Ribbon Inner Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Inner Corner"
+msgstr "装饰路面内侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_outter_corner'
+#, fuzzy
+#| msgid "Normal Outter Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Outter Corner"
+msgstr "平地外侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_outter_corner'
+#, fuzzy
+#| msgid "Sink Outter Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Outter Corner"
+msgstr "凹路外侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_outter_corner'
+#, fuzzy
+#| msgid "Ribbon Outter Corner"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Outter Corner"
+msgstr "装饰路面外侧拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_l_crossing'
+#, fuzzy
+#| msgid "Normal L Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal L Crossing"
+msgstr "平地拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_l_crossing'
+#, fuzzy
+#| msgid "Sink L Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink L Crossing"
+msgstr "凹路拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_t_crossing'
+#, fuzzy
+#| msgid "Normal T Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal T Crossing"
+msgstr "平地T字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_t_crossing'
+#, fuzzy
+#| msgid "Sink T Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink T Crossing"
+msgstr "凹路T字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_x_crossing'
+#, fuzzy
+#| msgid "Normal X Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal X Crossing"
+msgstr "平地十字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_x_crossing'
+#, fuzzy
+#| msgid "Sink X Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink X Crossing"
+msgstr "凹路十字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_flat'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Flat"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_platform'
+#, fuzzy
+#| msgid "Normal Platform"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Platform"
+msgstr "平地平台"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_platform'
+#, fuzzy
+#| msgid "Sink Platform"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Platform"
+msgstr "凹平台"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_platform'
+#, fuzzy
+#| msgid "Ribbon Platform"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Platform"
+msgstr "细边装饰平台"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_straight'
+#, fuzzy
+#| msgid "Normal Floor"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Floor"
+msgstr "平直路"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_straight'
+#, fuzzy
+#| msgid "Sink Floor"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Floor"
+msgstr "凹直路"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_terminal'
+#, fuzzy
+#| msgid "Normal Floor Terminal"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Floor Terminal"
+msgstr "平地末端"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_terminal'
+#, fuzzy
+#| msgid "Sink Floor Terminal"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Floor Terminal"
+msgstr "凹路末端"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'wood_trafo'
+#, fuzzy
+#| msgid "Wood Trafo"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wood Trafo"
+msgstr "木球变球器底座"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'stone_trafo'
+#, fuzzy
+#| msgid "Stone Trafo"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Stone Trafo"
+msgstr "石球变球器底座"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'paper_trafo'
+#, fuzzy
+#| msgid "Paper Trafo"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Paper Trafo"
+msgstr "纸球变球器底座"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_transition'
+#, fuzzy
+#| msgid "Translation"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Transition"
+msgstr "移动"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_narrow_transition'
+#, fuzzy
+#| msgid "Narrow Transition"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Narrow Transition"
+msgstr "窄平凹转换"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_straight'
+#, fuzzy
+#| msgid "Wide Floor"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor"
+msgstr "宽路"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_terminal'
+#, fuzzy
+#| msgid "Wide Floor Terminal"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor Terminal"
+msgstr "宽路末端"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_l_crossing'
+#, fuzzy
+#| msgid "Wide Floor L Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor L Crossing"
+msgstr "宽路拐角"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_t_crossing'
+#, fuzzy
+#| msgid "Wide Floor T Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor T Crossing"
+msgstr "宽路T字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_x_crossing'
+#, fuzzy
+#| msgid "Wide Floor X Crossing"
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor X Crossing"
+msgstr "宽路十字路口"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_rotation
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Extra Rotation"
+msgstr "额外旋转"
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_translation
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Extra Translation"
+msgstr "额外移动"
+
+#. :src: bpy.types.BBP_OT_add_component
+msgctxt "BBP_OT_add_component"
+msgid "Add Component"
+msgstr "添加机关"
+
+#. :src: bpy.types.BBP_OT_add_component
+msgid "Add ordinary Component"
+msgstr "添加普通机关"
+
+#. :src: bpy.types.BBP_OT_add_component.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_sector
+#. :src: bpy.types.BBP_OT_add_sector_component_pair.component_sector
+#. :src: bpy.types.BBP_OT_add_swing_series.component_sector
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_sector
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_sector
+msgctxt "BBP/OP_ADDS_component.ComponentSectorParam/property"
+msgid "Sector"
+msgstr "小节"
+
+#. :src: bpy.types.BBP_OT_add_component.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_sector
+#. :src: bpy.types.BBP_OT_add_sector_component_pair.component_sector
+#. :src: bpy.types.BBP_OT_add_swing_series.component_sector
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_sector
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_sector
+msgid "The sector which this component will be grouped in."
+msgstr "该机关要被归入的小节号。"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type
+msgctxt "BBP_OT_add_component/property"
+msgid "Type"
+msgstr "类型"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type
+msgid "The type of this component."
+msgstr "该机关的类型。"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'0'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Extra_Life"
+msgstr "P_Extra_Life (生命球)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'1'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Extra_Point"
+msgstr "P_Extra_Point (分数球)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'2'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Paper"
+msgstr "P_Trafo_Paper (纸球变球器)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'3'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Stone"
+msgstr "P_Trafo_Stone (石球变球器)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'4'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Wood"
+msgstr "P_Trafo_Wood (木球变球器)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'5'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Paper"
+msgstr "P_Ball_Paper (道具纸球)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'6'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Stone"
+msgstr "P_Ball_Stone (道具石球)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'7'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Wood"
+msgstr "P_Ball_Wood (道具木球)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'8'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Box"
+msgstr "P_Box (箱子)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'9'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Dome"
+msgstr "P_Dome (大本钟)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'10'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_01"
+msgstr "P_Modul_01 (木栅栏)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'11'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_03"
+msgstr "P_Modul_03 (升降机)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'12'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_08"
+msgstr "P_Modul_08 (秋千)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'13'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_17"
+msgstr "P_Modul_17 (单摆)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'14'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_18"
+msgstr "P_Modul_18 (风扇)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'15'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_19"
+msgstr "P_Modul_19 (二翼桥)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'16'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_25"
+msgstr "P_Modul_25 (倒板)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'17'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_26"
+msgstr "P_Modul_26 (沙袋)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'18'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_29"
+msgstr "P_Modul_29 (软木桥)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'19'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_30"
+msgstr "P_Modul_30 (跷跷板)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'20'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_34"
+msgstr "P_Modul_34 (34 机关)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'21'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_37"
+msgstr "P_Modul_37 (T 板)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'22'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_41"
+msgstr "P_Modul_41 (帆板)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'23'
+msgctxt "BBP_OT_add_component/property"
+msgid "PC_TwoFlames"
+msgstr "PC_TwoFlames (盘点)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'24'
+msgctxt "BBP_OT_add_component/property"
+msgid "PE_Balloon"
+msgstr "PE_Balloon (飞船)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'25'
+msgctxt "BBP_OT_add_component/property"
+msgid "PR_Resetpoint"
+msgstr "PR_Resetpoint (重生点)"
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'26'
+msgctxt "BBP_OT_add_component/property"
+msgid "PS_FourFlames"
+msgstr "PS_FourFlames (起始盘点)"
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgctxt "BBP_OT_add_ioport_encodings"
+msgid "Add in Encodings List"
+msgstr "添加入编码列表"
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgid ""
+"Add item at the tail of encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgctxt "BBP_OT_add_nong_extra_point"
+msgid "Nong Extra Point"
+msgstr "脓分"
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgid "Add Nong Extra Point"
+msgstr "添加脓分"
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_count
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_count
+#. :src: bpy.types.BBP_OT_add_swing_series.component_count
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_count
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_count
+msgctxt "BBP/OP_ADDS_component.ComponentCountParam/property"
+msgid "Count"
+msgstr "数量"
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_count
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_count
+#. :src: bpy.types.BBP_OT_add_swing_series.component_count
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_count
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_count
+msgid "The count of components which you want to generate"
+msgstr "生成机关的数量"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgctxt "BBP_OT_add_nong_ventilator"
+msgid "Nong Ventilator"
+msgstr "脓风扇"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgid "Add Nong Ventilator"
+msgstr "添加脓风扇"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Preset Count"
+msgstr "数量预设"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count
+msgid "Pick preset ventilator count."
+msgstr "选择预定义的风扇数量。"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'PAPER'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Paper"
+msgstr "纸球"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'PAPER'
+msgid "The ventilator count (1) can push paper ball up."
+msgstr "1 个风扇可以将纸球吹起。"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'WOOD'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Wood"
+msgstr "木球"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'WOOD'
+msgid "The ventilator count (6) can push wood ball up."
+msgstr "6 个风扇可以将木球吹起。"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'STONE'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Stone"
+msgstr "石球"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'STONE'
+msgid "The ventilator count (32) can push stone ball up."
+msgstr "32 个风扇可以将石球吹起。"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Ventilator Count Source"
+msgstr "风扇数量来源"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'DEFINED'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Predefined"
+msgstr "预定义"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'DEFINED'
+msgid "Pre-defined ventilator count."
+msgstr "预定义的风扇数量。"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'CUSTOM'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Custom"
+msgstr "自定义"
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'CUSTOM'
+msgid "User specified ventilator count."
+msgstr "用户自定义风扇数量。"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgctxt "BBP_OT_add_objects_virtools_group"
+msgid "Grouping Objects"
+msgstr "将物体归组"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgid "Grouping Selected Objects"
+msgstr "为选择的物体归组"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.custom_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.custom_group_name
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Custom Group Name"
+msgstr "自定义组名称"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.custom_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.custom_group_name
+msgid "Input your custom group name."
+msgstr "输入自定义组的名称。"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Group Name Source"
+msgstr "组名来源"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'DEFINED'
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Predefined"
+msgstr "组名预设"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'DEFINED'
+msgid "Pre-defined group name."
+msgstr "预定义的组名。"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'CUSTOM'
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Custom"
+msgstr "自定义"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'CUSTOM'
+msgid "User specified group name."
+msgstr "用户自定义的组名。"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.preset_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.preset_group_name
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Group Name"
+msgstr "组名"
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.preset_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.preset_group_name
+msgid "Pick vanilla Ballance group name."
+msgstr "请选择一个原版 Ballance 组名称。"
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgctxt "BBP_OT_add_rail_section"
+msgid "Rail Section"
+msgstr "钢轨截面"
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgid "Add Rail Section"
+msgstr "添加钢轨截面"
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgctxt "BBP_OT_add_sector_component_pair"
+msgid "Sector Pair"
+msgstr "小节对"
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgid "Add Sector Pair, both check point and reset point."
+msgstr "添加小节对，包括重生点与检查点。"
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgctxt "BBP_OT_add_side_rail"
+msgid "Side Rail"
+msgstr "侧轨"
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgid "Add Side Rail"
+msgstr "添加侧轨"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_length
+msgctxt "BBP/OP_ADDS_rail.SharedStraightRailInputProperty/property"
+msgid "Length"
+msgstr "长度"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_length
+msgid "The length of this rail."
+msgstr "该轨道的长度."
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Side Type"
+msgstr "侧轨类型"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type
+msgid "Side rail type"
+msgstr "侧轨的类型"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'NORMAL'
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Normal"
+msgstr "普通"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'NORMAL'
+msgid "The normal side rail."
+msgstr "普通侧轨。"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'STONE'
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Stone Specific"
+msgstr "石球专用"
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'STONE'
+msgid "The side rail which also allow stone ball passed."
+msgstr "石球能够通过的侧轨。"
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgctxt "BBP_OT_add_side_spiral_rail"
+msgid "Side Spiral Rail"
+msgstr "螺旋侧轨"
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgid "Add Side Spiral Rail"
+msgstr "添加螺旋侧轨"
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
+msgctxt "BBP_OT_add_side_spiral_rail/property"
+msgid "Iterations"
+msgstr "迭代"
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
+msgid "Indicate how many layers of this spiral rail should be generated."
+msgstr "指示螺旋轨道需要生成的层数。"
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgctxt "BBP_OT_add_spiral_rail"
+msgid "Spiral Rail"
+msgstr "螺旋轨"
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgid "Add Spiral Rail"
+msgstr "添加螺旋轨"
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
+msgctxt "BBP_OT_add_spiral_rail/property"
+msgid "Iterations"
+msgstr "迭代"
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_screw
+msgctxt "BBP_OT_add_spiral_rail/property"
+msgid "Screw"
+msgstr "螺距"
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_screw
+msgid "The increased height in each iteration."
+msgstr "螺旋每圈上升的高度。"
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgctxt "BBP_OT_add_straight_rail"
+msgid "Straight Rail"
+msgstr "直钢轨"
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgid "Add Straight Rail"
+msgstr "添加直钢轨"
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgctxt "BBP_OT_add_swing_series"
+msgid "Swing Series"
+msgstr "秋千阵"
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgid "Add Swing Series"
+msgstr "添加秋千阵"
+
+#. :src: bpy.types.BBP_OT_add_swing_series.component_span
+msgctxt "BBP_OT_add_swing_series/property"
+msgid "Span"
+msgstr "间距"
+
+#. :src: bpy.types.BBP_OT_add_swing_series.component_span
+msgid "The distance between each swing"
+msgstr "每两个秋千之间的距离"
+
+#. :src: bpy.types.BBP_OT_add_swing_series.staggered_swing
+msgctxt "BBP_OT_add_swing_series/property"
+msgid "Staggered"
+msgstr "交错"
+
+#. :src: bpy.types.BBP_OT_add_swing_series.staggered_swing
+msgid ""
+"Whether place Swing staggered. Staggered Swing accept any ball however Non-"
+"Staggered Swing only accept Wood and Paper ball."
+msgstr ""
+"是否交错放置秋千. 交错放置时允许任何球通过，而不交错放置时仅允许木球和纸球通"
+"过."
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgctxt "BBP_OT_add_tilting_block_series"
+msgid "Tilting Block Series"
+msgstr "帆板序列"
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgid "Add Tilting Block Series"
+msgstr "添加帆板序列"
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
+msgctxt "BBP_OT_add_tilting_block_series/property"
+msgid "Span"
+msgstr "间距"
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
+msgid "The distance between each titling blocks"
+msgstr "每两个帆板之间的距离"
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgctxt "BBP_OT_add_transition_rail"
+msgid "Transition Rail"
+msgstr "单双轨转换"
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgid "Add Transition Rail"
+msgstr "添加单双轨转换"
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgctxt "BBP_OT_add_transition_section"
+msgid "Transition Section"
+msgstr "单双轨转换截面"
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgid "Add Transition Section"
+msgstr "添加单双轨转换截面"
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgctxt "BBP_OT_add_ventilator_series"
+msgid "Ventilator Series"
+msgstr "风扇阵"
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgid "Add Ventilator Series"
+msgstr "添加风扇阵"
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_translation
+msgctxt "BBP_OT_add_ventilator_series/property"
+msgid "Delta Vector"
+msgstr "偏移向量"
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_translation
+msgid ""
+"The translation between each ventilators. You can use this property to "
+"implement vertical or horizontal ventilator series. Set all factors to zero "
+"can get Nong ventilator."
+msgstr ""
+"每两个风扇之间的移动距离. 你可以利用这个字段实现垂直风扇阵或水平风扇阵. 设置"
+"为零向量将得到一个脓风扇."
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgctxt "BBP_OT_add_virtools_group"
+msgid "Add to Virtools Groups"
+msgstr "添加 Virtools 组"
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgid "Add a Virtools Group for Active Object."
+msgstr "为活动物体添加 Virtools 组."
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgctxt "BBP_OT_apply_virtools_light"
+msgid "Apply to Blender Light"
+msgstr "应用至 Blender 灯光"
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgid "Apply Virtools Light to Blender Light."
+msgstr "将 Virtools 灯光应用为 Blender 灯光."
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgctxt "BBP_OT_apply_virtools_material"
+msgid "Apply to Blender Material"
+msgstr "应用至 Blender 灯光"
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgid "Apply Virtools Material to Blender Material."
+msgstr "将 Virtools 材质应用为 Blender 材质."
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgctxt "BBP_OT_auto_grouping"
+msgid "Auto Grouping"
+msgstr "自动归组"
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgid "Auto Grouping Objects by Its Name and Name Convention"
+msgstr "根据物体的名称以及指定的命名规则自动归组"
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgctxt "BBP_OT_clear_ioport_encodings"
+msgid "Clear Encodings List"
+msgstr "清空编码列表"
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgid "Clear the encodings list used by BMap for Virtools file read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgctxt "BBP_OT_clear_objects_virtools_group"
+msgid "Clear All Groups"
+msgstr "清除所有组"
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgid "Clear Virtools Groups on Selected Objects"
+msgstr "清除选定物体的所有归组信息"
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgctxt "BBP_OT_clear_virtools_groups"
+msgid "Clear Virtools Groups"
+msgstr "清除 Virtools 组"
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgid "Clear All Virtools Group for Active Object."
+msgstr "清除活动物体的所有 Virtools 组."
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgctxt "BBP_OT_convert_to_imengyu"
+msgid "Convert to Imengyu"
+msgstr "转换为 Imengyu 命名规范"
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgid "Convert Objects Name from YYC Convention to Imengyu Convention."
+msgstr "将物体的名称由 YYC 的命名规范转换为 Imengyu 的命名规范."
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgctxt "BBP_OT_direct_set_virtools_texture"
+msgid "Import and Assign Texture"
+msgstr "导入并设置为贴图"
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgid "Import and Assign Texture Directly"
+msgstr "导入并直接设置为贴图"
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgctxt "BBP_OT_down_ioport_encodings"
+msgid "Move Down in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgid ""
+"Move selected item down in encodings list used by BMap for Virtools file "
+"read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgctxt "BBP_OT_export_bmfile"
+msgid "Export BM (Ballance Map) File"
+msgstr "导出 BM (Ballance Map) 文件"
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgid "Save a Ballance Map File (BM File Spec 1.4)"
+msgstr "导出为 Ballance Map 文件 (BM 文件标准 1.4)"
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Export Mode"
+msgstr "导出模式"
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Collection"
+msgstr "集合"
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+msgid "Export a collection"
+msgstr "导出一个集合"
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Object"
+msgstr "物体"
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+msgid "Export an object"
+msgstr "导出一个物体"
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgctxt "BBP_OT_export_virtools"
+msgid "Export Virtools File"
+msgstr "导出 Virtools 文件"
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgid "Export Virtools File"
+msgstr "导出为 Virtools 文件"
+
+#. :src: bpy.types.BBP_OT_export_virtools.compress_level
+#. :src: bpy.types.BBP_OT_import_virtools.compress_level
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Compress Level"
+msgstr "压缩等级"
+
+#. :src: bpy.types.BBP_OT_export_virtools.compress_level
+#. :src: bpy.types.BBP_OT_import_virtools.compress_level
+msgid ""
+"The ZLib compress level used by Virtools Engine when saving composition."
+msgstr "Virtools 引擎保存内容时使用的 ZLib 压缩等级."
+
+#. :src: bpy.types.BBP_OT_export_virtools.successive_sector
+#. :src: bpy.types.BBP_OT_import_virtools.successive_sector
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/property"
+msgid "Successive Sector"
+msgstr "小节连续"
+
+#. :src: bpy.types.BBP_OT_export_virtools.successive_sector
+#. :src: bpy.types.BBP_OT_import_virtools.successive_sector
+msgid ""
+"Whether order exporter to use document specified sector count to make sure "
+"sector is successive."
+msgstr "是否命令导出器使用文档指定的小节数来确保小节连续。"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Global Texture Save Options"
+msgstr "全局材质保存选项"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt
+msgid ""
+"Decide how texture saved if texture is specified as Use Global as its Save "
+"Options."
+msgstr "设置材质默认的保存方式."
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'0'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Raw Data"
+msgstr "原始数据"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'0'
+msgid ""
+"Save raw data inside file. The bitmap is saved in a raw 32 bit per pixel "
+"format. "
+msgstr "将原始数据内置在文件中。位图以 32 位的原始格式保存。 "
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'1'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "External"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'1'
+msgid ""
+"Store only the file name for the texture. The bitmap file must be present in "
+"the bitmap paths when loading the composition. "
+msgstr "仅存储贴图的文件名。加载文档时，位图文件必须存在于位图路径中。 "
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'2'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Image Format"
+msgstr "图像格式"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'2'
+msgid ""
+"Save using format specified. The bitmap data will be converted to the "
+"specified format by the correspondant bitmap plugin and saved inside file. "
+msgstr ""
+"使用指定的格式保存。位图数据将由相应的位图插件转换为指定的格式并保存在文件"
+"中。 "
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'3'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Use Global"
+msgstr "使用全局设置"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
+#, fuzzy
+msgid ""
+"Use Global settings, that is the settings given with CKContext::"
+"SetGlobalImagesSaveOptions. (Not valid when using CKContext::"
+"SetImagesSaveOptions). "
+msgstr ""
+"使用全局设置，即使用 CKContext::SetGlobalImagesSaveOptions 给出的设置. （使"
+"用 CKContext::SetImagesSaveOptions 时无效）."
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'4'
+#, fuzzy
+#| msgid "Include Original File"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Include Original File"
+msgstr "包括原始文件"
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'4'
+#, fuzzy
+msgid ""
+"Insert original image file inside CMO file. The bitmap file that was used "
+"originally for the texture or sprite will be append to the composition file "
+"and extracted when the file is loaded. "
+msgstr ""
+"在 CMO 文件中插入原始图像文件. 最初用于贴图或贴图的位图文件将附加到合成文件"
+"中，并在加载文件时提取."
+
+#. :src: bpy.types.BBP_OT_export_virtools.use_compress
+#. :src: bpy.types.BBP_OT_import_virtools.use_compress
+#, fuzzy
+#| msgid "Use Compress"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Use Compress"
+msgstr "使用压缩"
+
+#. :src: bpy.types.BBP_OT_export_virtools.use_compress
+#. :src: bpy.types.BBP_OT_import_virtools.use_compress
+msgid "Whether use ZLib to compress result when saving composition."
+msgstr "保存时是否使用 ZLib 进行压缩."
+
+#. :src: bpy.types.BBP_OT_fix_all_material
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Fix Material"
+msgctxt "BBP_OT_fix_all_material"
+msgid "Fix All Materials"
+msgstr "修复材质"
+
+#. :src: bpy.types.BBP_OT_fix_all_material
+msgid "Fix All Materials by Its Referred Ballance Texture Name."
+msgstr "根据材质引用的 Ballance 贴图名称修复所有材质."
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Fix Material"
+msgctxt "BBP_OT_fix_single_material"
+msgid "Fix Material"
+msgstr "修复材质"
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+msgid "Fix Active Materials by Its Referred Ballance Texture Name."
+msgstr "根据材质引用的 Ballance 贴图名称修复当前活动的材质."
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Flatten UV"
+msgctxt "BBP_OT_flatten_uv"
+msgid "Flatten UV"
+msgstr "展平 UV"
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+msgid "Flatten selected face UV. Only works for convex face"
+msgstr "展平选中的面的 UV. 只对凸面有效"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method
+#, fuzzy
+#| msgid "Flatten Method"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Flatten Method"
+msgstr "展平模式"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'RAW'
+#, fuzzy
+#| msgid "Raw"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Raw"
+msgstr "原始"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'RAW'
+msgid "Legacy flatten UV."
+msgstr "旧式展平 UV."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'FLOOR'
+#, fuzzy
+#| msgid "Floors"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Floor"
+msgstr "路面"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'FLOOR'
+msgid "Floor specific flatten UV."
+msgstr "路面专用的展平 UV."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'WOOD'
+#, fuzzy
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Wood"
+msgstr "木桥"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'WOOD'
+msgid "Wood specific flatten UV."
+msgstr "木板专用的 展平 UV."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_edge
+#, fuzzy
+#| msgid "Reference Edge"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Edge"
+msgstr "参考边"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_edge
+msgid ""
+"The references edge of UV.\n"
+"It will be placed in V axis."
+msgstr "展平 UV 时参考的边. 该边将位于展平后的 V 轴."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_point
+#, fuzzy
+#| msgid "Reference Point"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Point"
+msgstr "参考点"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_point
+msgid ""
+"The references point of UV.\n"
+"It's U component will be set to the number specified by Reference Point UV.\n"
+"This point index is related to the start point of reference edge."
+msgstr ""
+"UV 的参考点. \n"
+"UV 的 U 分量将设置为参考点指定的数字. \n"
+"该点索引与参考边的起点相关."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_uv
+#, fuzzy
+#| msgid "Reference Point UV"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Point UV"
+msgstr "参考点 UV"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_uv
+msgid "The U component which should be applied to references point in UV."
+msgstr "UV 的 U 分量将设置为参考点指定的数字."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode
+#, fuzzy
+#| msgid "Scale Mode"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Scale Mode"
+msgstr "缩放模式"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'NUM'
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_number
+#, fuzzy
+#| msgid "Scale Size"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Scale Size"
+msgstr "缩放大小"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'NUM'
+msgid "Scale UV with specific number."
+msgstr "根据设置的值缩放 UV."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'REF'
+#, fuzzy
+#| msgid "Ref. Point"
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Ref. Point"
+msgstr "参考点"
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'REF'
+msgid "Scale UV with Reference Point feature."
+msgstr "根据参考点缩放 UV."
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_number
+msgid "The size which will be applied for scale."
+msgstr "要应用缩放的大小."
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Import BM (Ballance Map) File"
+msgctxt "BBP_OT_import_bmfile"
+msgid "Import BM (Ballance Map) File"
+msgstr "导入 BM（Ballance Map）文件"
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+msgid "Load a Ballance Map File (BM File Spec 1.4)"
+msgstr "加载 Ballance Map 文件（BM File Spec 1.4）"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy
+#, fuzzy
+#| msgid "Mesh Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Light Name Conflict"
+msgstr "网格名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy
+#, fuzzy
+#| msgid "Define how to process mesh name conflict"
+msgid "Define how to process light name conflict"
+msgstr "设置如何处理网格名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Rename"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgid "Rename the new one"
+msgstr "重命名"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+#, fuzzy
+#| msgid "Use Current"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Use Current"
+msgstr "使用已有"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+msgid "Use current one"
+msgstr "使用已有的重名对象"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy
+#, fuzzy
+#| msgid "Material Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Material Name Conflict"
+msgstr "材质名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy
+msgid "Define how to process material name conflict"
+msgstr "设置如何处理材质名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy
+#, fuzzy
+#| msgid "Mesh Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Mesh Name Conflict"
+msgstr "网格名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy
+msgid "Define how to process mesh name conflict"
+msgstr "设置如何处理网格名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy
+#, fuzzy
+#| msgid "Object Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Object Name Conflict"
+msgstr "物体名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy
+msgid "Define how to process object name conflict"
+msgstr "设置如何处理物体名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy
+#, fuzzy
+#| msgid "Texture Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Texture Name Conflict"
+msgstr "材质名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy
+msgid "Define how to process texture name conflict"
+msgstr "设置如何处理材质名称冲突"
+
+#. :src: bpy.types.BBP_OT_import_virtools
+#, fuzzy
+#| msgid "Import Virtools File"
+msgctxt "BBP_OT_import_virtools"
+msgid "Import Virtools File"
+msgstr "导入 Virtools 文件"
+
+#. :src: bpy.types.BBP_OT_import_virtools
+msgid "Import Virtools File"
+msgstr "导入 Virtools 文件"
+
+#. :src: bpy.types.BBP_OT_legacy_align
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "3ds Max Align"
+msgctxt "BBP_OT_legacy_align"
+msgid "3ds Max Align"
+msgstr "3ds Max 式对齐"
+
+#. :src: bpy.types.BBP_OT_legacy_align
+msgid "Align Objects with 3ds Max Style"
+msgstr "使用 3ds Max 的方式对齐物体"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Preset Virtools Material"
+msgctxt "BBP_OT_preset_virtools_material"
+msgid "Preset Virtools Material"
+msgstr "预设 Virtools 材质"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+msgid "Preset Virtools Material with Original Ballance Data."
+msgstr "使用 Ballance 原始数据预设 Virtools 材质."
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgid "Preset"
+msgstr "预设"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgid "The preset which you want to apply."
+msgstr "你想使用的预设."
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'1'
+msgid "FloorSide"
+msgstr "路面侧面"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'2'
+msgid "FloorTop"
+msgstr "路面顶面"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'3'
+msgid "TrafoPaper"
+msgstr "纸球变球器底座"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'4'
+msgid "TraforWoodStone"
+msgstr "木球/石球变球器底座"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'5'
+msgid "Rail"
+msgstr "双轨"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'6'
+#, fuzzy
+msgid "WoodPath"
+msgstr "木桥"
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'7'
+#, fuzzy
+msgid "WoodChip"
+msgstr "木板"
+
+#. :src: bpy.types.BBP_OT_rail_uv
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Rail UV"
+msgctxt "BBP_OT_rail_uv"
+msgid "Rail UV"
+msgstr "钢轨 UV"
+
+#. :src: bpy.types.BBP_OT_rail_uv
+msgid "Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"
+msgstr "为钢轨创建游戏内视觉效果的 UV（TT_ReflectionMapping）"
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Regulate Objects Name"
+msgctxt "BBP_OT_regulate_objects_name"
+msgid "Regulate Objects Name"
+msgstr "调整物体名称"
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+msgid "Regulate Objects Name by Virtools Group and Naming Convention"
+msgstr "根据其 Virtools 组以及命名规范调节物体名称"
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Reset Ballance Elements"
+msgctxt "BBP_OT_reset_ballance_elements"
+msgid "Reset Ballance Elements"
+msgstr "重置 Ballance 元素"
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+msgid "Reset all Meshes of Loaded Ballance Elements to Original Geometry."
+msgstr "将所有已加载的 Ballance 元素网格重置为原始几何形状."
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Reset BME Materials"
+msgctxt "BBP_OT_reset_bme_materials"
+msgid "Reset BME Materials"
+msgstr "重置 BME 材质"
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+msgid "Reset all BME Materials to Default Settings."
+msgstr "将所有 BME 材质重置为默认设置."
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Remove from Virtools Groups"
+msgctxt "BBP_OT_rm_ioport_encodings"
+msgid "Remove from Encodings List"
+msgstr "从 Virtools 组移除"
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+msgid ""
+"Remove selected item in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Ungrouping Objects"
+msgctxt "BBP_OT_rm_objects_virtools_group"
+msgid "Ungrouping Objects"
+msgstr "取消归组"
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+msgid "Ungrouping Selected Objects"
+msgstr "将选定物品取消归组"
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Remove from Virtools Groups"
+msgctxt "BBP_OT_rm_virtools_group"
+msgid "Remove from Virtools Groups"
+msgstr "从 Virtools 组移除"
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+msgid "Remove a Virtools Group for Active Object."
+msgstr "将选定物品从指定的 Virtools 组移除."
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Select by Virtools Group"
+msgctxt "BBP_OT_select_object_by_virtools_group"
+msgid "Select by Virtools Group"
+msgstr "使用 Virtools 组选择"
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+msgid "Select Objects by Virtools Group"
+msgstr "根据 Virtools 组选择物体"
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
+#, fuzzy
+#| msgid "Lit Mode"
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Mode"
+msgstr "光照模式"
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
+msgid "Selection mode"
+msgstr "选取模式"
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
+#, fuzzy
+#| msgid "Sector"
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Set"
+msgstr "小节"
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
+msgid "Sets a new selection."
+msgstr "设置为新选取."
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Extend"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
+msgid "Adds newly selected items to the existing selection."
+msgstr "添加至已有的选取."
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Subtract"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
+msgid "Removes newly selected items from the existing selection."
+msgstr "从已有的选取中移除."
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Invert"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
+msgid "Inverts the selection."
+msgstr "反转选取."
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Intersect"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
+msgid "Selects items that intersect with the existing selection."
+msgstr "仅在已有的选取中选取."
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgctxt "BBP_OT_snoop_group_then_to_mesh"
+msgid "Snoop Group then to Mesh"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgid ""
+"Convert selected objects into mesh objects and try to copy the Virtools "
+"Group infos of their associated curve bevel object if they have. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgctxt "BBP_OT_up_ioport_encodings"
+msgid "Move Up in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgid ""
+"Move selected item up in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_ballance_elements
+msgid "Show Ballance Elements Properties."
+msgstr "显示 Ballance 元素属性."
+
+#. :src: bpy.types.BBP_PT_ballance_elements
+#, fuzzy
+#| msgid "Ballance Elements"
+msgctxt "BBP_PT_ballance_elements"
+msgid "Ballance Elements"
+msgstr "Ballance 元素"
+
+#. :src: bpy.types.BBP_PT_ballance_map_info
+msgid "Show Ballance Map Infos."
+msgstr "显示 Ballance 地图信息."
+
+#. :src: bpy.types.BBP_PT_ballance_map_info
+#, fuzzy
+#| msgid "Ballance Map"
+msgctxt "BBP_PT_ballance_map_info"
+msgid "Ballance Map"
+msgstr "Ballance 地图"
+
+#. :src: bpy.types.BBP_PT_bme_materials
+msgid "Show BME Materials Properties."
+msgstr "显示 BME 材质属性."
+
+#. :src: bpy.types.BBP_PT_bme_materials
+#, fuzzy
+#| msgid "BME Materials"
+msgctxt "BBP_PT_bme_materials"
+msgid "BME Materials"
+msgstr "BME 材质"
+
+#. :src: bpy.types.BBP_PT_virtools_groups
+msgid "Show Virtools Groups Properties."
+msgstr "显示 Virtools 组属性."
+
+#. :src: bpy.types.BBP_PT_virtools_groups
+msgctxt "BBP_PT_virtools_groups"
+msgid "Virtools Groups"
+msgstr "Virtools 组"
+
+#. :src: bpy.types.BBP_PT_virtools_light
+msgid "Show Virtools Light Properties"
+msgstr "显示 Virtools 灯光属性"
+
+#. :src: bpy.types.BBP_PT_virtools_light
+msgctxt "BBP_PT_virtools_light"
+msgid "Virtools Light"
+msgstr "Virtools 灯光"
+
+#. :src: bpy.types.BBP_PT_virtools_material
+msgid "Show Virtools Material Properties."
+msgstr "显示 Virtools 材质属性."
+
+#. :src: bpy.types.BBP_PT_virtools_material
+msgctxt "BBP_PT_virtools_material"
+msgid "Virtools Material"
+msgstr "Virtools 材质"
+
+#. :src: bpy.types.BBP_PT_virtools_mesh
+msgid "Show Virtools Mesh Properties."
+msgstr "显示 Virtools 网格属性."
+
+#. :src: bpy.types.BBP_PT_virtools_mesh
+msgctxt "BBP_PT_virtools_mesh"
+msgid "Virtools Mesh"
+msgstr "Virtools 网格"
+
+#. :src: bpy.types.StringProperty
+#, fuzzy
+msgid "String Definition"
+msgstr "字符串定义"
+
+#. :src: bpy.types.StringProperty
+#, fuzzy
+msgid "RNA text string property definition"
+msgstr "RNA 文本字符串定义"
+
+#. :src: bpy.types.StringProperty.default
+#, fuzzy
+msgid "String default value"
+msgstr "字符串的默认值"
+
+#. :src: bpy.types.StringProperty.length_max
+#, fuzzy
+msgid "Maximum Length"
+msgstr "最大长度"
+
+#. :src: bpy.types.StringProperty.length_max
+#, fuzzy
+msgid "Maximum length of the string, 0 means unlimited"
+msgstr "字符串的最大长度，0表示不限制"
+
+#. :src: bpy.types.BBP_PG_ballance_element.element_id
+msgctxt "BBP_PG_ballance_element/property"
+msgid "Element Id"
+msgstr "机关 ID"
+
+#. :src: bpy.types.BBP_PG_ballance_element.mesh_ptr
+msgctxt "BBP_PG_ballance_element/property"
+msgid "Mesh"
+msgstr "网格"
+
+#. :src: bpy.types.BBP_PG_ballance_map_info.sector_count
+msgctxt "BBP_PG_ballance_map_info/property"
+msgid "Sector"
+msgstr "小节数"
+
+#. :src: bpy.types.BBP_PG_ballance_map_info.sector_count
+msgid ""
+"The sector count of this Ballance map which is used in exporting map and may "
+"be changed when importing map."
+msgstr "导出 Ballance 地图时所用的小节数。导入地图时可能发生变化。"
+
+#. :src: bpy.types.BBP_PG_bmap_encoding.encoding
+msgctxt "BBP_PG_bmap_encoding/property"
+msgid "Encoding"
+msgstr "编码"
+
+#. :src: bpy.types.BBP_PG_bmap_encoding.encoding
+msgid "The name of BMap used encoding."
+msgstr "BMap所用编码的名称。"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_bool
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Boolean Value"
+msgstr "布尔值"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_bool
+msgid "The field representing a single boolean value."
+msgstr "表示一个布尔值的字段。"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_float
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Float Point Value"
+msgstr "浮点值"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_float
+msgid "The field representing a single float point value."
+msgstr "表示一个浮点值的字段。"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_int
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Integral Value"
+msgstr "整数值"
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_int
+msgid "The field representing a single integral value."
+msgstr "表示一个整数值的字段。"
+
+#. :src: bpy.types.BBP_PG_bme_material.bme_material_name
+msgctxt "BBP_PG_bme_material/property"
+msgid "Name"
+msgstr "名称"
+
+#. :src: bpy.types.BBP_PG_bme_material.material_ptr
+msgctxt "BBP_PG_bme_material/property"
+msgid "Material"
+msgstr "材质"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_x
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "X Position"
+msgstr "X 位置"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_y
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Y Position"
+msgstr "Y 位置"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_z
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Z Position"
+msgstr "Z 位置"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Current Object (Active Object)"
+msgstr "当前物体 (活动物体)"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'1'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'1'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Min"
+msgstr "最小"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'1'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'1'
+msgid "The min value in specified axis."
+msgstr "在指定轴的最小值。"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'2'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'2'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Center (Bounding Box)"
+msgstr "中心 (碰撞箱)"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'2'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'2'
+msgid "The bounding box center in specified axis."
+msgstr "在指定轴上的碰撞箱中心。"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'3'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'3'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Center (Axis)"
+msgstr "中心 (轴)"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'3'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'3'
+msgid "The object's source point in specified axis."
+msgstr "在指定轴上物体原点的位置。"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'4'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'4'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Max"
+msgstr "最大"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'4'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'4'
+msgid "The max value in specified axis."
+msgstr "在指定轴上的最大值。"
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Target Objects (Selected Objects)"
+msgstr "目标物体 (选择的物体)"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_collection
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Collection"
+msgstr "集合"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_collection
+msgid "The collection exported. Nested collections allowed."
+msgstr "要导出的集合。允许嵌套集合。"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_object
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Object"
+msgstr "物体"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_object
+msgid "The object exported"
+msgstr "要导出的物体"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.rail_uv_material
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Material"
+msgstr "材质"
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.rail_uv_material
+msgid "The material used for rail"
+msgstr "钢轨使用的材质"
+
+#. :src: bpy.types.BBP_PG_virtools_group.group_name
+msgctxt "BBP_PG_virtools_group/property"
+msgid "Group Name"
+msgstr "组名"
+
+#. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Constant Attenuation"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
+msgid "Defines the constant attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Fall Off"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff
+msgid "Sets the light fall off rate."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Fall Off Shape"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
+msgid "Sets the value of the light fall off shape."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.hot_spot
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Hot Spot"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.hot_spot
+msgid "Sets the value of the hot spot of the light."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_color
+#, fuzzy
+#| msgid "Src Color"
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Color"
+msgstr "源颜色"
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_color
+msgid "Defines the red, green and blue components of the light."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_range
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Range"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_range
+msgid "Defines the radius of the lighting area."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type
+#, fuzzy
+#| msgid "Side Type"
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Type"
+msgstr "侧轨类型"
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type
+#, fuzzy
+#| msgid "The length of this rail."
+msgid "The type of this light"
+msgstr "该轨道的长度."
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
+#, fuzzy
+#| msgid "Ref. Point"
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Point"
+msgstr "参考点"
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
+msgid "The Light is a point of light "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Spot"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
+msgid "The light is a spotlight "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
+#, fuzzy
+#| msgid "Sections"
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Directional"
+msgstr "片段"
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
+msgid ""
+"The light is directional light : Lights comes from an infinite point so only "
+"direction of light can be given "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
+#, fuzzy
+#| msgid "Bilinear Interpolation "
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Linear Attenuation"
+msgstr "双线性插值"
+
+#. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
+msgid "Defines the linear attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Quadratic Attenuation"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
+msgid "Defines the quadratic attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func
+#, fuzzy
+#| msgid "Alpha Test Function"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Test Function"
+msgstr "Alpha 测试函数"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func
+msgid "Alpha comparision function"
+msgstr "比较 Alpha 值的函数"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Never"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
+#, fuzzy
+msgid "Always fail the test. "
+msgstr "总是失败."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Less"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
+#, fuzzy
+msgid "Accept if value if less than current value. "
+msgstr "比现有值小时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
+#, fuzzy
+#| msgid "Less Equal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Equal"
+msgstr "小于等于"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
+#, fuzzy
+msgid "Accept if value if equal than current value. "
+msgstr "与现有值相等时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
+#, fuzzy
+#| msgid "Less Equal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Less Equal"
+msgstr "小于等于"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
+#, fuzzy
+msgid "Accept if value if less or equal than current value. "
+msgstr "比现有值小或相等时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
+#, fuzzy
+#| msgid "Greater Equal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Greater"
+msgstr "大于等于"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
+#, fuzzy
+msgid "Accept if value if greater than current value. "
+msgstr "比现有值大时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
+#, fuzzy
+#| msgid "Greater Equal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Not Equal"
+msgstr "大于等于"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
+#, fuzzy
+msgid "Accept if value if different than current value. "
+msgstr "与现有值不同时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
+#, fuzzy
+#| msgid "Greater Equal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Greater Equal"
+msgstr "大于等于"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
+#, fuzzy
+msgid "Accept if value if greater or equal current value. "
+msgstr "比现有值大或相等时接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Always"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
+#, fuzzy
+msgid "Always accept the test. "
+msgstr "总是接受."
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
+#, fuzzy
+#| msgid "Alpha Ref Value"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Ref Value"
+msgstr "不透明度参考值"
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
+msgid "Alpha referential value"
+msgstr "不透明度的参考值"
+
+#. :src: bpy.types.BBP_PG_virtools_material.ambient
+#, fuzzy
+#| msgid "Ambient"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Ambient"
+msgstr "环境光"
+
+#. :src: bpy.types.BBP_PG_virtools_material.ambient
+msgid "Ambient color of the material"
+msgstr "材质的环境光颜色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend
+#, fuzzy
+#| msgid "Destination Blend"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Destination Blend"
+msgstr "目标混合"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend
+msgid "Destination blend factor"
+msgstr "目标混合因数"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
+#, fuzzy
+#| msgid "Zero"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Zero"
+msgstr "0"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
+#, fuzzy
+msgid "Blend factor is (0, 0, 0, 0). "
+msgstr "混合因数为 (0, 0, 0, 0)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
+#, fuzzy
+#| msgid "One"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "One"
+msgstr "1"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
+#, fuzzy
+msgid "Blend factor is (1, 1, 1, 1). "
+msgstr "混合因数为 (1, 1, 1, 1)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
+#, fuzzy
+#| msgid "Src Color"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Color"
+msgstr "源颜色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
+#, fuzzy
+msgid "Blend factor is (Rs, Gs, Bs, As). "
+msgstr "混合因数为 (Rs, Gs, Bs, As)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
+#, fuzzy
+#| msgid "Inv Src Color"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Src Color"
+msgstr "源颜色反色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
+#, fuzzy
+msgid "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As). "
+msgstr "混合因数为 (1-Rs, 1-Gs, 1-Bs, 1-As)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
+#, fuzzy
+#| msgid "Src Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Alpha"
+msgstr "源 Alpha"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
+#, fuzzy
+msgid "Blend factor is (As, As, As, As). "
+msgstr "混合因数为 (As, As, As, As)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
+#, fuzzy
+#| msgid "Inv Src Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Src Alpha"
+msgstr "源 Alpha 反转"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
+#, fuzzy
+msgid "Blend factor is (1-As, 1-As, 1-As, 1-As). "
+msgstr "混合因数为 (1-As, 1-As, 1-As, 1-As)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
+#, fuzzy
+#| msgid "Dest Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dest Alpha"
+msgstr "目标 Alpha"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
+#, fuzzy
+msgid "Blend factor is (Ad, Ad, Ad, Ad). "
+msgstr "混合因数为 (Ad, Ad, Ad, Ad)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
+#, fuzzy
+#| msgid "Inv Dest Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Dest Alpha"
+msgstr "目标 Alpha 反转"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
+#, fuzzy
+msgid "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad). "
+msgstr "混合因数为 (1-Ad, 1-Ad, 1-Ad, 1-Ad)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
+#, fuzzy
+#| msgid "Dest Color"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dest Color"
+msgstr "目标颜色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
+#, fuzzy
+msgid "Blend factor is (Rd, Gd, Bd, Ad). "
+msgstr "混合因数为 (Rd, Gd, Bd, Ad)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
+#, fuzzy
+#| msgid "Inv Dest Color"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Dest Color"
+msgstr "目标颜色反色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
+#, fuzzy
+msgid "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad). "
+msgstr "混合因数为 (1-Rd, 1-Gd, 1-Bd, 1-Ad)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
+#, fuzzy
+#| msgid "Src Alpha Sat"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Alpha Sat"
+msgstr "源 Alpha 限制"
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
+#, fuzzy
+msgid "Blend factor is (f, f, f, 1); f = min(As, 1-Ad). "
+msgstr "混合因数为 (f, f, f, 1); f = min(As, 1-Ad)."
+
+#. :src: bpy.types.BBP_PG_virtools_material.diffuse
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Diffuse"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.emissive
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Emissive"
+msgstr "自发光"
+
+#. :src: bpy.types.BBP_PG_virtools_material.emissive
+msgid "Emissive color of the material"
+msgstr "材质的自发光颜色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Blend"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
+msgid "Whether alpha blending is enabled or not."
+msgstr "是否启用不透明度混合。"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
+#, fuzzy
+#| msgid "Alpha Test"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Test"
+msgstr "Alpha 测试"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
+msgid "Whether the alpha test is enabled"
+msgstr "是否启用 Alpha 测试"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_perspective_correction
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Perspective Correction"
+msgstr "透视矫正"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_perspective_correction
+msgid "Whether texture perspective correction is enabled"
+msgstr "是否启用贴图透视矫正"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_two_sided
+#, fuzzy
+#| msgid "Both Sided"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Both Sided"
+msgstr "双面"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_two_sided
+msgid "Whether the material is both sided or not"
+msgstr "是否为双面材质"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
+#, fuzzy
+#| msgid "Z-Buffer Write"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Z-Buffer Write"
+msgstr "写入 Z-Buffer"
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
+msgid "Whether writing in ZBuffer is enabled."
+msgstr "是否写入 Z-Buffer."
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode
+#, fuzzy
+#| msgid "Fill mode"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Fill Mode"
+msgstr "填充模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode
+msgid "Fill mode"
+msgstr "填充模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'1'
+#, fuzzy
+#| msgid "Ref. Point"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Point"
+msgstr "参考点"
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'1'
+msgid "Vertices rendering "
+msgstr "顶点渲染"
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Wireframe"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
+msgid "Edges rendering "
+msgstr "边渲染"
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Solid"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
+msgid "Face rendering "
+msgstr "面渲染"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode
+#, fuzzy
+#| msgid "Shade Mode"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Shade Mode"
+msgstr "着色模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode
+msgid "Shade mode"
+msgstr "着色模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Flat"
+msgstr "平面着色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'1'
+msgid "Flat Shading "
+msgstr "平面着色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Gouraud"
+msgstr "高洛德着色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'2'
+msgid "Gouraud Shading "
+msgstr "高洛德着色 "
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Phong"
+msgstr "冯着色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'3'
+msgid "Phong Shading (Not yet supported by most implementation) "
+msgstr "冯着色 (大多数实现尚不支持) "
+
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend
+#, fuzzy
+#| msgid "Source Blend"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Source Blend"
+msgstr "源混合"
+
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend
+msgid "Source blend factor"
+msgstr "源混合因数"
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Specular"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular_power
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Power"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular_power
+msgid "Specular highlight power"
+msgstr "镜面高光强度"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture
+#, fuzzy
+#| msgid "Texture Blend"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Texture"
+msgstr "贴图混合"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture
+msgid "Texture of the material"
+msgstr "材质的贴图"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode
+#, fuzzy
+#| msgid "Address Mode"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Address Mode"
+msgstr "寻址模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode
+msgid ""
+"The address mode controls how the texture coordinates outside the range 0..1"
+msgstr "地址模式控制贴图坐标超出 0 到 1 范围时的处理方式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Wrap"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
+msgid "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "
+msgstr "使用默认网格包裹模式（参见 CKMesh::SetWrapMode）"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
+#, fuzzy
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mirror"
+msgstr "一次镜像"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
+#, fuzzy
+msgid "Texture coordinates outside the range [0..1] are flipped evenly. "
+msgstr "超出 [0..1] 范围的贴图坐标会被均匀翻转."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Clamp"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
+#, fuzzy
+msgid ""
+"Texture coordinates greater than 1.0 are set to 1.0, and values less than "
+"0.0 are set to 0.0. "
+msgstr "大于 1.0 的贴图坐标会被设置为 1.0，小于 0.0 的贴图坐标会被设置为 0.0."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
+#, fuzzy
+#| msgid "Sink Border"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Border"
+msgstr "凹路边缘"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
+#, fuzzy
+msgid ""
+"When texture coordinates are greater than 1.0 or less than 0.0  texture is "
+"set to a color defined in CKMaterial::SetTextureBorderColor. "
+msgstr ""
+"当贴图坐标大于 1.0 或小于 0.0 时，贴图将被设置为 CKMaterial::"
+"SetTextureBorderColor 中定义的颜色."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'5'
+#, fuzzy
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mirror Once"
+msgstr "一次镜像"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode
+#, fuzzy
+#| msgid "Texture Blend"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Texture Blend"
+msgstr "贴图混合"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode
+msgid "Texture blend mode"
+msgstr "贴图混合的模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
+#, fuzzy
+#| msgid "Decal"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal"
+msgstr "贴花"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
+msgid "Texture replace any material information "
+msgstr "贴图替代任何材质信息"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
+#, fuzzy
+#| msgid "Modulate"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate"
+msgstr "调制"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
+#, fuzzy
+msgid ""
+"Texture and material are combine. Alpha information of the texture replace "
+"material alpha component. "
+msgstr "贴图和材质会结合. 贴图替换材质的 Alpha 信息."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
+#, fuzzy
+#| msgid "Decal Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal Alpha"
+msgstr "Alpha 贴花"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
+#, fuzzy
+msgid ""
+"Alpha information in the texture specify how material and texture are "
+"combined. Alpha information of the texture replace material alpha component. "
+msgstr ""
+"贴图中的 Alpha 信息指定了材质和贴图如何结合. 贴图的 Alpha 信息会替代材质的 "
+"Alpha 组件."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
+#, fuzzy
+#| msgid "Modulate Alpha"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate Alpha"
+msgstr "Alpha 调制"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
+msgid ""
+"Alpha information in the texture specify how material and texture are "
+"combined "
+msgstr "贴图中的 Alpha 信息指定了材质和贴图如何结合"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'5'
+#, fuzzy
+#| msgid "Decal Mask"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal Mask"
+msgstr "贴花遮罩"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'6'
+#, fuzzy
+#| msgid "Modulate Mask"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate Mask"
+msgstr "调制遮罩"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Copy"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
+msgid "Equivalent to DECAL "
+msgstr "等同于贴花"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'8'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Add"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
+#, fuzzy
+#| msgid "Dot Product 3"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dot Product 3"
+msgstr "三维向量的点积"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
+#, fuzzy
+msgid ""
+"Perform a Dot Product 3 between texture (normal map) and a referential "
+"vector given in VXRENDERSTATE_TEXTUREFACTOR. "
+msgstr ""
+"在贴图（法线贴图）和在 VXRENDERSTATE_TEXTUREFACTOR 中给定的参考向量之间执行三"
+"维点积."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'10'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Max"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
+#, fuzzy
+#| msgid "Border Color"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Border Color"
+msgstr "边界着色"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
+msgid ""
+"The border color is used when the texture address mode is "
+"VXTEXTURE_ADDRESSBORDER."
+msgstr "当贴图寻址模式为 VXTEXTURE_ADDRESSBORDER 时，使用边界颜色。"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
+#, fuzzy
+#| msgid "Filter Mag"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Filter Mag"
+msgstr "拉伸过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
+msgid "Texture filter mode when the texture is magnified"
+msgstr "贴图放大时的贴图过滤模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
+#, fuzzy
+#| msgid "Mip Nearest"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Nearest"
+msgstr "最近 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
+msgid "No Filter "
+msgstr "无过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
+#, fuzzy
+#| msgid "Mip Linear"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear"
+msgstr "线性 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
+msgid "Bilinear Interpolation "
+msgstr "双线性插值"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
+#, fuzzy
+#| msgid "Mip Nearest"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mip Nearest"
+msgstr "最近 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
+msgid "Mip mapping "
+msgstr "Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
+#, fuzzy
+#| msgid "Mip Linear"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mip Linear"
+msgstr "线性 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
+msgid "Mip Mapping with Bilinear interpolation "
+msgstr "双线性插值的线性 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
+#, fuzzy
+#| msgid "Linear Mip Nearest"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear Mip Nearest"
+msgstr "线性最近 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
+#, fuzzy
+msgid "Mip Mapping with Bilinear interpolation between mipmap levels. "
+msgstr "在各级 Mipmap 间使用双线性插值的 Mip 映射."
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
+#, fuzzy
+#| msgid "Linear Mip Linear"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear Mip Linear"
+msgstr "线性 Mip 映射"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
+msgid "Trilinear Filtering "
+msgstr "三线性过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
+#, fuzzy
+#| msgid "Anisotropic filtering "
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Anisotropic"
+msgstr "各向异性过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
+msgid "Anisotropic filtering "
+msgstr "各向异性过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
+#, fuzzy
+#| msgid "Filter Min"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Filter Min"
+msgstr "缩小过滤"
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
+msgid "Texture filter mode when the texture is minified"
+msgstr "贴图缩小时的贴图过滤模式"
+
+#. :src: bpy.types.BBP_PG_virtools_material.z_func
+#, fuzzy
+#| msgid "Z Compare Function"
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Z Compare Function"
+msgstr "Z 比较函数"
+
+#. :src: bpy.types.BBP_PG_virtools_material.z_func
+msgid "Z Comparison function"
+msgstr "Z 比较函数"
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
+#, fuzzy
+#| msgid "Lit Mode"
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Lit Mode"
+msgstr "光照模式"
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
+msgid "Lighting mode of the mesh."
+msgstr "网格的光照模式."
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
+#, fuzzy
+#| msgid "Prelit"
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Prelit"
+msgstr "预照明"
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
+msgid "Lighting use color information store with vertices "
+msgstr "利用顶点的颜色信息处理照明"
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
+#, fuzzy
+#| msgid "Lit"
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Lit"
+msgstr "实时照明"
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
+#, fuzzy
+msgid ""
+"Lighting is done by renderer using normals and face material information. "
+msgstr "由法线与面的材质信息完成照明."
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options
+#, fuzzy
+#| msgid "Save Options"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Save Options"
+msgstr "保存选项"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options
+msgid ""
+"When saving a composition textures or sprites can be kept as reference to "
+"external files or converted to a given format and saved inside the "
+"composition file."
+msgstr ""
+"在保存合成时，贴图或贴图可以作为外部文件的引用保留，或者转换为指定格式并保存"
+"在合成文件内部."
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'0'
+#, fuzzy
+#| msgid "Raw Data"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Raw Data"
+msgstr "原始数据"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'1'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "External"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'2'
+#, fuzzy
+#| msgid "Video Format"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Image Format"
+msgstr "媒体格式"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
+#, fuzzy
+#| msgid "Use Global"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Use Global"
+msgstr "使用全局设置"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'4'
+#, fuzzy
+#| msgid "Include Original File"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Include Original File"
+msgstr "包括原始文件"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format
+#, fuzzy
+#| msgid "Video Format"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Video Format"
+msgstr "媒体格式"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format
+msgid "The desired surface pixel format in video memory."
+msgstr "显存中的表面像素格式."
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
+#, fuzzy
+#| msgid "32 Bits ARGB8888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits ARGB8888"
+msgstr "32 位 ARGB8888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
+msgid "32-bit ARGB pixel format with alpha "
+msgstr "32位 ARGB 像素格式（带 Alpha）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
+#, fuzzy
+#| msgid "32 Bits RGB888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits RGB888"
+msgstr "32 位 RGB888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
+msgid "32-bit RGB pixel format without alpha "
+msgstr "32位 RGB 像素格式（无 Alpha）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
+#, fuzzy
+#| msgid "24 Bits RGB888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "24 Bits RGB888"
+msgstr "24 位 RGB888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
+msgid "24-bit RGB pixel format "
+msgstr "24位 RGB 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'4'
+#, fuzzy
+#| msgid "16 Bits RGB565"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits RGB565"
+msgstr "16 位 RGB565"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'4'
+msgid "16-bit RGB pixel format "
+msgstr "16位 RGB 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
+#, fuzzy
+#| msgid "16 Bits RGB555"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits RGB555"
+msgstr "16 位 RGB555"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
+msgid "16-bit RGB pixel format (5 bits per color) "
+msgstr "16位 RGB 像素格式（各颜色占5位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
+#, fuzzy
+#| msgid "16 Bits ARGB1555"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ARGB1555"
+msgstr "16 位 ARGB1555"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
+msgid "16-bit ARGB pixel format (5 bits per color + 1 bit for alpha) "
+msgstr "16位 ARGB 像素格式（各颜色占5位 + Alpha 占1位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
+#, fuzzy
+#| msgid "16 Bits ARGB4444"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ARGB4444"
+msgstr "16 位 ARGB4444"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
+msgid "16-bit ARGB pixel format (4 bits per color) "
+msgstr "16位 ARGB 像素格式（各颜色占4位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'8'
+#, fuzzy
+#| msgid "8 Bits RGB332"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits RGB332"
+msgstr "8 位 RGB332"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'8'
+msgid "8-bit  RGB pixel format "
+msgstr "8位  RGB 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'9'
+#, fuzzy
+#| msgid "8 Bits ARGB2222"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ARGB2222"
+msgstr "8 位 ARGB2222"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'9'
+msgid "8-bit  ARGB pixel format "
+msgstr "8位  ARGB 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'10'
+#, fuzzy
+#| msgid "32 Bits ABGR8888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits ABGR8888"
+msgstr "32 位 ABGR8888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'10'
+msgid "32-bit ABGR pixel format "
+msgstr "32位 ABGR 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'11'
+#, fuzzy
+#| msgid "32 Bits RGBA8888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits RGBA8888"
+msgstr "32 位 RGBA8888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'11'
+msgid "32-bit RGBA pixel format "
+msgstr "32位 RGBA 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'12'
+#, fuzzy
+#| msgid "32 Bits BGRA8888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits BGRA8888"
+msgstr "32 位 BGRA8888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'12'
+msgid "32-bit BGRA pixel format "
+msgstr "32位 BGRA 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'13'
+#, fuzzy
+#| msgid "32 Bits BGR888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits BGR888"
+msgstr "32 位 BGR888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'13'
+msgid "32-bit BGR pixel format "
+msgstr "32位 BGR 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'14'
+#, fuzzy
+#| msgid "24 Bits BGR888"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "24 Bits BGR888"
+msgstr "24 位 BGR888"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'14'
+msgid "24-bit BGR pixel format "
+msgstr "24位 BGR 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'15'
+#, fuzzy
+#| msgid "16 Bits BGR565"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits BGR565"
+msgstr "16 位 BGR565"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'15'
+msgid "16-bit BGR pixel format "
+msgstr "16位 BGR 像素格式 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
+#, fuzzy
+#| msgid "16 Bits BGR555"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits BGR555"
+msgstr "16 位 BGR555"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
+msgid "16-bit BGR pixel format (5 bits per color) "
+msgstr "16位 BGR 像素格式（各颜色占5位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
+#, fuzzy
+#| msgid "16 Bits ABGR1555"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ABGR1555"
+msgstr "16 位 ABGR1555"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
+msgid "16-bit ABGR pixel format (5 bits per color + 1 bit for alpha) "
+msgstr "16位 ABGR 像素格式（各颜色占5位 + Alpha 占1位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
+#, fuzzy
+#| msgid "16 Bits ABGR4444"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ABGR4444"
+msgstr "16 位 ABGR4444"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
+msgid "16-bit ABGR pixel format (4 bits per color) "
+msgstr "16位 ABGR 像素格式（各颜色占4位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'19'
+#, fuzzy
+#| msgid "DXT1"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT1"
+msgstr "DXT1"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'19'
+msgid "S3/DirectX Texture Compression 1 "
+msgstr "S3/DirectX 贴图压缩 1 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'20'
+#, fuzzy
+#| msgid "DXT2"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT2"
+msgstr "DXT2"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'20'
+msgid "S3/DirectX Texture Compression 2 "
+msgstr "S3/DirectX 贴图压缩 2 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'21'
+#, fuzzy
+#| msgid "DXT3"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT3"
+msgstr "DXT3"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'21'
+msgid "S3/DirectX Texture Compression 3 "
+msgstr "S3/DirectX 贴图压缩 3 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'22'
+#, fuzzy
+#| msgid "DXT4"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT4"
+msgstr "DXT4"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'22'
+msgid "S3/DirectX Texture Compression 4 "
+msgstr "S3/DirectX 贴图压缩 4 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'23'
+#, fuzzy
+#| msgid "DXT5"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT5"
+msgstr "DXT5"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'23'
+msgid "S3/DirectX Texture Compression 5 "
+msgstr "S3/DirectX 贴图压缩 5 "
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
+#, fuzzy
+#| msgid "16 Bits V8U8"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits V8U8"
+msgstr "16 Bits V8U8"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
+msgid "16-bit Bump Map format format (8 bits per color) "
+msgstr "16位凹凸贴图格式（各颜色占8位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
+#, fuzzy
+#| msgid "32 Bits V16U16"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits V16U16"
+msgstr "32 Bits V16U16"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
+msgid "32-bit Bump Map format format (16 bits per color) "
+msgstr "32位凹凸贴图格式（各颜色占16位）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
+#, fuzzy
+#| msgid "16 Bits L6V5U5"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits L6V5U5"
+msgstr "16 Bits L6V5U5"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
+msgid "16-bit Bump Map format format with luminance "
+msgstr "16位具有亮度的凹凸贴图格式"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
+#, fuzzy
+#| msgid "32 Bits X8L8V8U8"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits X8L8V8U8"
+msgstr "32 Bits X8L8V8U8"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
+msgid "32-bit Bump Map format format with luminance "
+msgstr "32位具有亮度的凹凸贴图格式"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
+#, fuzzy
+#| msgid "8 Bits ABGR8888 CLUT"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ABGR8888 CLUT"
+msgstr "8 Bits ABGR8888 CLUT"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
+msgid "8 bits indexed CLUT (ABGR) "
+msgstr "8位索引颜色查找表（ABGR）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
+#, fuzzy
+#| msgid "8 Bits ARGB8888 CLUT"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ARGB8888 CLUT"
+msgstr "8 Bits ARGB8888 CLUT"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
+msgid "8 bits indexed CLUT (ARGB) "
+msgstr "8位索引颜色查找表（ARGB）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
+#, fuzzy
+#| msgid "4 Bits ABGR8888 CLUT"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "4 Bits ABGR8888 CLUT"
+msgstr "4 Bits ABGR8888 CLUT"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
+msgid "4 bits indexed CLUT (ABGR) "
+msgstr "4位索引颜色查找表（ABGR）"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
+#, fuzzy
+#| msgid "4 Bits ARGB8888 CLUT"
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "4 Bits ARGB8888 CLUT"
+msgstr "4 Bits ARGB8888 CLUT"
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
+msgid "4 bits indexed CLUT (ARGB) "
+msgstr "4位索引颜色查找表（ARGB）"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:246
+#, fuzzy
+#| msgid "Prototype Configurations:"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Prototype Configurations"
+msgstr "原型配置："
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:280
+#, fuzzy
+#| msgid "Extra Transform:"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Extra Transform"
+msgstr "额外移动："
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:282
+#, fuzzy
+#| msgid "Translation"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Translation"
+msgstr "移动"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:286
+#, fuzzy
+#| msgid "Rotation"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Rotation"
+msgstr "旋转"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:269
+#, fuzzy
+#| msgid "Top"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Top"
+msgstr "顶"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:270
+#, fuzzy
+#| msgid "Front"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Front"
+msgstr "前"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:271
+#, fuzzy
+#| msgid "Left"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Left"
+msgstr "左"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:273
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Right"
+msgstr "右"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:274
+#, fuzzy
+#| msgid "Back"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Back"
+msgstr "后"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:275
+#, fuzzy
+#| msgid "Bottom"
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Bottom"
+msgstr "底"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:330
+#, fuzzy
+#| msgid "Ventilator Count Source"
+msgctxt "BBP_OT_add_nong_ventilator/draw"
+msgid "Count Source"
+msgstr "风扇数量源"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:559
+#, fuzzy
+msgctxt "BBP_OT_add_sector_component_pair/draw"
+msgid "Warning: {0} already exist."
+msgstr "警告：已经存在."
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:228
+#, fuzzy
+msgctxt "BBP_OT_add_component/draw"
+msgid "Warning: {0} already exist."
+msgstr "警告：已经存在."
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:65
+#, fuzzy
+#| msgid "Extra Transform:"
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Extra Transform"
+msgstr "额外移动："
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:67
+#, fuzzy
+#| msgid "Translation"
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Translation"
+msgstr "移动"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:71
+#, fuzzy
+#| msgid "Rotation"
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Rotation"
+msgstr "旋转"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:127
+#, fuzzy
+#| msgid "Save Options"
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/draw"
+msgid "Cap Options"
+msgstr "保存选项"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:212
+#, fuzzy
+#| msgid "Conflict Options"
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/draw"
+msgid "Flip Options"
+msgstr "冲突选项"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:266
+#, fuzzy
+#| msgid "No Options Available"
+msgctxt "BBP_OT_add_transition_section/draw"
+msgid "No Options Available"
+msgstr "没有合适的选项"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:289
+#, fuzzy
+#| msgid "Straight Rail"
+msgctxt "BBP_OT_add_straight_rail/draw"
+msgid "Straight Rail"
+msgstr "直轨"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:318
+#, fuzzy
+#| msgid "Transition Rail"
+msgctxt "BBP_OT_add_transition_rail/draw"
+msgid "Transition Rail"
+msgstr "单双转换轨道"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:358
+#, fuzzy
+#| msgid "Side Rail"
+msgctxt "BBP_OT_add_side_rail/draw"
+msgid "Side Rail"
+msgstr "侧轨"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:398
+#, fuzzy
+#| msgid "Arc Rail"
+msgctxt "BBP_OT_add_arc_rail/draw"
+msgid "Arc Rail"
+msgstr "弯轨"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:449
+#, fuzzy
+#| msgid "Spiral Rail"
+msgctxt "BBP_OT_add_spiral_rail/draw"
+msgid "Spiral Rail"
+msgstr "螺旋轨道"
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:493
+#, fuzzy
+#| msgid "Spiral Rail"
+msgctxt "BBP_OT_add_side_spiral_rail/draw"
+msgid "Spiral Rail"
+msgstr "螺旋轨道"
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_bmfile.py:16
+#: extensions/user_default/bbp_ng/OP_IMPORT_bmfile.py:16
+#, fuzzy
+#| msgid "This material is not suit for fixer."
+msgid "This feature is not supported yet."
+msgstr "该材质不适合修复."
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:136
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Creating 3dObjects and Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:180
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:226
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:274
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Grouping Objects"
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving 3dObjects"
+msgstr "物体归组"
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:321
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Swing Series"
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Meshes"
+msgstr "秋千组合"
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:436
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Fix Material"
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Materials"
+msgstr "修复材质"
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:502
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Swing Series"
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Textures"
+msgstr "秋千组合"
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:542
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Document"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:54
+msgid "Virtools File Exporting Finished."
+msgstr "Virtools 文件导出完毕."
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:83
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Virtools Engine Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:26
+msgid "No selected target!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:32
+msgid "You can not specify \"Use Global\" as global texture save option!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
+msgid ""
+"You must specify at least one encoding for file saving (e.g. cp1252, gb2312)!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:84
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Import and Assign Texture"
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Textures"
+msgstr "导入并设置贴图"
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:154
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Fix Material"
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Materials"
+msgstr "修复材质"
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:221
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Meshes"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:319
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Grouping Objects"
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading 3dObjects"
+msgstr "物体归组"
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:364
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:426
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:462
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Applying Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:34
+msgid "Virtools File Importing Finished."
+msgstr "Virtools 文件导入完毕."
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:47
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Virtools Engine Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:90
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Texture Raw Data Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:26
+msgid ""
+"You must specify at least one encoding for file loading (e.g. cp1252, "
+"gb2312)!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_MTL_fix_material.py:34
+#, fuzzy
+#| msgid "Fix / materials."
+msgctxt "BBP_OT_fix_all_material/draw"
+msgid "Fix {0}/{1} materials."
+msgstr "修复材质."
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:182
+#, fuzzy
+#| msgid "Align Axis (Multi-selection)"
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Align Axis (Multi-selection)"
+msgstr "对齐轴（多选）"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:190
+#, fuzzy
+#| msgid "Current Object (Active Object)"
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Current Object (Active Object)"
+msgstr "对齐参考物体（活动物体）"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:192
+#, fuzzy
+#| msgid "Target Objects (Selected Objects)"
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Target Objects (Selected Objects)"
+msgstr "目标物体（选择的物体）"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:201
+#, fuzzy
+#| msgid "Apply"
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Apply"
+msgstr "应用"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:203
+#, fuzzy
+#| msgid "Total  applied alignments"
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Total {0} applied alignments"
+msgstr "总施加的对齐"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:85
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "View console to get more detail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:86
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "All: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:87
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "Failed: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:63
+#, fuzzy
+#| msgid "Selection Mode"
+msgctxt "BBP_OT_select_object_by_virtools_group/draw"
+msgid "Selection Mode"
+msgstr "选取模式"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:68
+#, fuzzy
+#| msgid "Group Parameters"
+msgctxt "BBP_OT_select_object_by_virtools_group/draw"
+msgid "Group Parameters"
+msgstr "归组参数"
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:142
+msgid "Grouping objects successfully."
+msgstr "归组成功."
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:168
+msgid "Ungrouping objects successfully."
+msgstr "取消归组成功."
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:194
+msgid "Clear objects groups successfully."
+msgstr "清除物体的组信息成功."
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:182
+#, fuzzy
+#| msgid "Flatten Method"
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Flatten Method"
+msgstr "展平模式"
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:188
+#, fuzzy
+#| msgid "Scale Mode"
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Scale Mode"
+msgstr "缩放模式"
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:193
+#, fuzzy
+#| msgid "Scale Config"
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Scale Configuration"
+msgstr "缩放设置"
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:175
+msgctxt "BBP_OT_flatten_uv/execute"
+msgid ""
+"[Flatten UV] {0} faces are not be processed correctly because process failed."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:79
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Rail UV"
+msgctxt "BBP_OT_rail_uv/execute"
+msgid "Rail UV Report"
+msgstr "钢轨 UV"
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:26
+msgid "Specified material is empty."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:35
+msgid ""
+"Some objects are invalid for this operation. See Console for more details."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:82
+msgctxt "BBP_OT_rail_uv/execute"
+msgid ""
+"Following objects are not processed by Rail UV because they do not meet the "
+"requirements of Rail UV."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_ballance_element.py:337
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Reset Ballance Elements"
+msgid "Reset Ballance elements successfully."
+msgstr "重置 Ballance 元素"
+
+#: extensions/user_default/bbp_ng/PROP_bme_material.py:234
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Reset BME Materials"
+msgid "Reset BME materials successfully."
+msgstr "重置 BME 材质"
+
+#: extensions/user_default/bbp_ng/PROP_preferences.py:42
+#, fuzzy
+#| msgid "Ballance Texture Folder"
+msgctxt "BBPPreferences/draw"
+msgid "Ballance Texture Folder"
+msgstr "Ballance 贴图文件夹"
+
+#: extensions/user_default/bbp_ng/PROP_preferences.py:44
+#, fuzzy
+#| msgid "No Component Collection"
+msgctxt "BBPPreferences/draw"
+msgid "No Component Collection"
+msgstr "无机关集合"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_group.py:392
+#, fuzzy
+#| msgid "Clear Virtools Groups on Selected Objects"
+msgctxt "BBP_PT_virtools_groups/draw"
+msgid "Virtools Group is invalid on non-mesh object!"
+msgstr "清除选定物体的归组"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:287
+#, fuzzy
+#| msgid "Apply"
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Apply"
+msgstr "应用"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:292
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Basics"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:305
+#, fuzzy
+#| msgid "Rotation"
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Attenuation"
+msgstr "旋转"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:306
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Constant"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:307
+#, fuzzy
+#| msgid "Mip Linear"
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Linear"
+msgstr "线性 Mip 映射"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:308
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Quadratic"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:313
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Spot Cone"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1055
+#, fuzzy
+#| msgid "Preset"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Preset"
+msgstr "预设"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1058
+#, fuzzy
+#| msgid "Apply"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Apply"
+msgstr "应用"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1063
+#, fuzzy
+#| msgid "Color Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Color Parameters"
+msgstr "颜色参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1071
+#, fuzzy
+#| msgid "Mode Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Mode Parameters"
+msgstr "材质模式参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1077
+#, fuzzy
+#| msgid "Texture Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Texture Parameters"
+msgstr "贴图参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1098
+#, fuzzy
+#| msgid "Alpha Test Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Alpha Test Parameters"
+msgstr "Alpha 测试参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1105
+#, fuzzy
+#| msgid "Alpha Blend Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Alpha Blend Parameters"
+msgstr "Alpha 混合参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1112
+#, fuzzy
+#| msgid "Z Write Parameters"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Z Write Parameters"
+msgstr "Z 写入参数"
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:939
+#, fuzzy
+#| msgid "Fix / materials."
+msgid "Fix material successfully."
+msgstr "修复材质."
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:942
+msgid "This material is not suit for fixer."
+msgstr "该材质不适合修复."
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1086
+#, fuzzy
+#| msgid "Virtools Texture Settings"
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Virtools Texture Settings"
+msgstr "Virtools 贴图设置"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:201
+#, fuzzy
+#| msgid "Color Parameters"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Import Parameters"
+msgstr "颜色参数"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:205
+#, fuzzy
+#| msgid "Mesh Name Conflict"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Name Conflict Strategy"
+msgstr "网格名称冲突"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:207
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Object"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:208
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Light"
+msgstr "右"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:209
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Mesh"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:210
+#, fuzzy
+#| msgid "Material"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Material"
+msgstr "材质"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:211
+#, fuzzy
+#| msgid "Texture Blend"
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Texture"
+msgstr "贴图混合"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:256
+#, fuzzy
+#| msgid "Color Parameters"
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/draw"
+msgid "Export Parameters"
+msgstr "颜色参数"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:317
+#, fuzzy
+#| msgid "Virtools Params"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Virtools Parameters"
+msgstr "Virtools 参数"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:321
+#, fuzzy
+#| msgid "Encodings"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Encodings"
+msgstr "编码"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:369
+#, fuzzy
+#| msgid "Ballance Params"
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
+msgid "Ballance Parameters"
+msgstr "Ballance 参数"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:375
+#, fuzzy
+#| msgid "Map Sectors: "
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
+msgid "Map Sectors: {0}"
+msgstr "地图小节："
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:328
+#, fuzzy
+#| msgid "Global Texture Save Options"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Global Texture Save Options"
+msgstr "全局材质保存选项"
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:332
+#, fuzzy
+#| msgid "Use Compress"
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Compression"
+msgstr "使用压缩"
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:85
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "All / Failed - {0} / {1}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:295
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid ""
+"PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:502
+msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+msgid "Name match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:610
+msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+msgid "Name match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:74
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "Rename Report"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:110
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "For object \"{0}\""
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:113
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "For object \"{0}\" (Old name: \"{1}\")"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:397
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "Group match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:128
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "ERROR"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:130
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "WARN"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:132
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "INFO"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:546
+msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:656
+msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:345
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "A Multi-grouping Unique Component."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:359
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "Component detected. But couldn't get sector from CKGroup data."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:369
+#, fuzzy
+#| msgid "Nong Components"
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "A Multi-grouping Component."
+msgstr "脓机关"
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:448
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:340
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "The match of Unique Component lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:387
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid ""
+"Can't distinguish object between Floors and Rails. Suppose it is Floors."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:266
+msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
+msgid "annoymous"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:130
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgctxt "BBP/__init__.menu_drawer_import()"
+msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性的)"
+
+#: extensions/user_default/bbp_ng/__init__.py:143
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgctxt "BBP/__init__.menu_drawer_export()"
+msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性的)"
+
+#: extensions/user_default/bbp_ng/__init__.py:154
+#, fuzzy
+#| msgid "Ballance"
+msgctxt "BBP/__init__.menu_drawer_add()"
+msgid "Ballance"
+msgstr "Ballance"
+
+#: extensions/user_default/bbp_ng/__init__.py:170
+#, fuzzy
+#| msgid "Virtools Group"
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Virtools Group"
+msgstr "Virtools 组"
+
+#: extensions/user_default/bbp_ng/__init__.py:172
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Group into..."
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Group into..."
+msgstr "归组至…"
+
+#: extensions/user_default/bbp_ng/__init__.py:175
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Ungroup from..."
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Ungroup from..."
+msgstr "取消归组…"
+
+#: extensions/user_default/bbp_ng/__init__.py:178
+#, fuzzy
+#| msgctxt "Operator"
+#| msgid "Clear All Groups"
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Clear All Groups"
+msgstr "清除归组"
+
+#: extensions/user_default/bbp_ng/__init__.py:184
+#, fuzzy
+#| msgid "Ballance"
+msgctxt "BBP/__init__.menu_drawer_snoop_then_conv()"
+msgid "Ballance"
+msgstr "Ballance"
+
+#: extensions/user_default/bbp_ng/__init__.py:195
+#, fuzzy
+#| msgid "Ballance"
+msgctxt "BBP/__init__.menu_drawer_naming_convention()"
+msgid "Ballance"
+msgstr "Ballance"
+
+#: extensions/user_default/bbp_ng/__init__.py:42
+#, fuzzy
+#| msgid "UV"
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "UV"
+msgstr "UV"
+
+#: extensions/user_default/bbp_ng/__init__.py:46
+#, fuzzy
+#| msgid "Align"
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Align"
+msgstr "对齐"
+
+#: extensions/user_default/bbp_ng/__init__.py:49
+#, fuzzy
+#| msgid "Select"
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Select"
+msgstr "选择"
+
+#: extensions/user_default/bbp_ng/__init__.py:52
+#, fuzzy
+#| msgid "Material"
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Material"
+msgstr "材质"
+
+#: extensions/user_default/bbp_ng/__init__.py:74
+#, fuzzy
+#| msgid "Sections"
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Sections"
+msgstr "片段"
+
+#: extensions/user_default/bbp_ng/__init__.py:79
+#, fuzzy
+#| msgid "Straight Rails"
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Straight Rails"
+msgstr "直线轨道"
+
+#: extensions/user_default/bbp_ng/__init__.py:85
+#, fuzzy
+#| msgid "Curve Rails"
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Curve Rails"
+msgstr "曲线轨道"
+
+#: extensions/user_default/bbp_ng/__init__.py:99
+#, fuzzy
+#| msgid "Basic Components"
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Basic Components"
+msgstr "基础机关"
+
+#: extensions/user_default/bbp_ng/__init__.py:103
+#, fuzzy
+#| msgid "Nong Components"
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Nong Components"
+msgstr "脓机关"
+
+#: extensions/user_default/bbp_ng/__init__.py:108
+#, fuzzy
+#| msgid "Series Components"
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Series Components"
+msgstr "多重机关"
+
+#: extensions/user_default/bbp_ng/__init__.py:114
+#, fuzzy
+#| msgid "Components Pair"
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Components Pair"
+msgstr "机关组合"
+
+#: Add-on Ballance Blender Plugin info: name
+msgid "Ballance Blender Plugin"
+msgstr "Ballance Blender 插件"
+
+#: Add-on Ballance Blender Plugin info: description
+msgid "The specialized add-on served for creating game map of Ballance"
+msgstr "专用于 Ballance 制图的插件"
+
+#. 1x1.json
+#, fuzzy
+#| msgid "Normal 1x1"
+msgctxt "BBP/BME/floor_normal_1x1"
+msgid "Normal 1x1"
+msgstr "1x1 平地路块"
+
+#. 1x1.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgid "Height"
+msgstr "右"
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgid "Face"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. 1x1.json
+#, fuzzy
+#| msgid "Sink 1x1"
+msgctxt "BBP/BME/floor_sink_1x1"
+msgid "Sink 1x1"
+msgstr "1x1 凹路块"
+
+#. 1x1.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgid "Height"
+msgstr "右"
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgid "Face"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+#, fuzzy
+#| msgid "Normal Border"
+msgctxt "BBP/BME/floor_normal_border"
+msgid "Normal Border"
+msgstr "平地边缘"
+
+#. borders.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_normal_border/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. borders.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_normal_border/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. borders.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_border/[1]"
+msgid "Height"
+msgstr "右"
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+#, fuzzy
+#| msgid "Sink Border"
+msgctxt "BBP/BME/floor_sink_border"
+msgid "Sink Border"
+msgstr "凹路边缘"
+
+#. borders.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_sink_border/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. borders.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_sink_border/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. borders.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_border/[1]"
+msgid "Height"
+msgstr "右"
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+#, fuzzy
+#| msgid "Ribbon Border"
+msgctxt "BBP/BME/floor_ribbon_border"
+msgid "Ribbon Border"
+msgstr "细边装饰边缘"
+
+#. borders.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. borders.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. borders.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgid "Height"
+msgstr "右"
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Normal Inner Corner"
+msgctxt "BBP/BME/floor_normal_inner_corner"
+msgid "Normal Inner Corner"
+msgstr "平地内侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Sink Inner Corner"
+msgctxt "BBP/BME/floor_sink_inner_corner"
+msgid "Sink Inner Corner"
+msgstr "凹路内侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Ribbon Inner Corner"
+msgctxt "BBP/BME/floor_ribbon_inner_corner"
+msgid "Ribbon Inner Corner"
+msgstr "装饰路面内侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Normal Outter Corner"
+msgctxt "BBP/BME/floor_normal_outter_corner"
+msgid "Normal Outter Corner"
+msgstr "平地外侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Sink Outter Corner"
+msgctxt "BBP/BME/floor_sink_outter_corner"
+msgid "Sink Outter Corner"
+msgstr "凹路外侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+#, fuzzy
+#| msgid "Ribbon Outter Corner"
+msgctxt "BBP/BME/floor_ribbon_outter_corner"
+msgid "Ribbon Outter Corner"
+msgstr "装饰路面外侧拐角"
+
+#. corners.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgid "Height"
+msgstr "右"
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Normal L Crossing"
+msgctxt "BBP/BME/floor_normal_l_crossing"
+msgid "Normal L Crossing"
+msgstr "平地拐角"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Sink L Crossing"
+msgctxt "BBP/BME/floor_sink_l_crossing"
+msgid "Sink L Crossing"
+msgstr "凹路拐角"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Normal T Crossing"
+msgctxt "BBP/BME/floor_normal_t_crossing"
+msgid "Normal T Crossing"
+msgstr "平地T字路口"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Sink T Crossing"
+msgctxt "BBP/BME/floor_sink_t_crossing"
+msgid "Sink T Crossing"
+msgstr "凹路T字路口"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Normal X Crossing"
+msgctxt "BBP/BME/floor_normal_x_crossing"
+msgid "Normal X Crossing"
+msgstr "平地十字路口"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+#, fuzzy
+#| msgid "Sink X Crossing"
+msgctxt "BBP/BME/floor_sink_x_crossing"
+msgid "Sink X Crossing"
+msgstr "凹路十字路口"
+
+#. crossings.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgid "Height"
+msgstr "右"
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat"
+msgid "Flat"
+msgstr ""
+
+#. flat.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_flat/[0]"
+msgid "Height"
+msgstr "右"
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. flat.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_flat/[1]"
+msgid "Length"
+msgstr "最大长度"
+
+#. flat.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_flat/[1]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[2]"
+msgid "Width"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[2]"
+msgid "The width of block."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[3]"
+msgid "Face"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[4]"
+msgid "Is Sink"
+msgstr ""
+
+#. flat.json
+#, fuzzy
+#| msgid "Whether the material is both sided or not"
+msgctxt "BBP/BME/floor_flat/[4]"
+msgid "Whether this flat floor is used for sink floor."
+msgstr "是否为双面材质"
+
+#. platforms.json
+#, fuzzy
+#| msgid "Normal Platform"
+msgctxt "BBP/BME/floor_normal_platform"
+msgid "Normal Platform"
+msgstr "平地平台"
+
+#. platforms.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. platforms.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgid "Height"
+msgstr "右"
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. platforms.json
+#, fuzzy
+#| msgid "Sink Platform"
+msgctxt "BBP/BME/floor_sink_platform"
+msgid "Sink Platform"
+msgstr "凹平台"
+
+#. platforms.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. platforms.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgid "Height"
+msgstr "右"
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. platforms.json
+#, fuzzy
+#| msgid "Ribbon Platform"
+msgctxt "BBP/BME/floor_ribbon_platform"
+msgid "Ribbon Platform"
+msgstr "细边装饰平台"
+
+#. platforms.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. platforms.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgid "Height"
+msgstr "右"
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. streets.json
+#, fuzzy
+#| msgid "Normal Floor"
+msgctxt "BBP/BME/floor_normal_straight"
+msgid "Normal Floor"
+msgstr "平直路"
+
+#. streets.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgid "Height"
+msgstr "右"
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. streets.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgid "Length"
+msgstr "最大长度"
+
+#. streets.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgid "Face"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. streets.json
+#, fuzzy
+#| msgid "Sink Floor"
+msgctxt "BBP/BME/floor_sink_straight"
+msgid "Sink Floor"
+msgstr "凹直路"
+
+#. streets.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgid "Height"
+msgstr "右"
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. streets.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgid "Length"
+msgstr "最大长度"
+
+#. streets.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgid "The length of block."
+msgstr "该轨道的长度."
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgid "Face"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. terminals.json
+#, fuzzy
+#| msgid "Normal Floor Terminal"
+msgctxt "BBP/BME/floor_normal_terminal"
+msgid "Normal Floor Terminal"
+msgstr "平地末端"
+
+#. terminals.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgid "Height"
+msgstr "右"
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgid "Face"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. terminals.json
+#, fuzzy
+#| msgid "Sink Floor Terminal"
+msgctxt "BBP/BME/floor_sink_terminal"
+msgid "Sink Floor Terminal"
+msgstr "凹路末端"
+
+#. terminals.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgid "Height"
+msgstr "右"
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgid "Face"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+#, fuzzy
+#| msgid "Wood Trafo"
+msgctxt "BBP/BME/wood_trafo"
+msgid "Wood Trafo"
+msgstr "木球变球器底座"
+
+#. trafos.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/wood_trafo/[0]"
+msgid "Height"
+msgstr "右"
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+#, fuzzy
+#| msgid "Stone Trafo"
+msgctxt "BBP/BME/stone_trafo"
+msgid "Stone Trafo"
+msgstr "石球变球器底座"
+
+#. trafos.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/stone_trafo/[0]"
+msgid "Height"
+msgstr "右"
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+#, fuzzy
+#| msgid "Paper Trafo"
+msgctxt "BBP/BME/paper_trafo"
+msgid "Paper Trafo"
+msgstr "纸球变球器底座"
+
+#. trafos.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/paper_trafo/[0]"
+msgid "Height"
+msgstr "右"
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. transitions.json
+#, fuzzy
+#| msgid "Translation"
+msgctxt "BBP/BME/floor_transition"
+msgid "Transition"
+msgstr "移动"
+
+#. transitions.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_transition/[0]"
+msgid "Height"
+msgstr "右"
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[1]"
+msgid "Face"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. transitions.json
+#, fuzzy
+#| msgid "Narrow Transition"
+msgctxt "BBP/BME/floor_narrow_transition"
+msgid "Narrow Transition"
+msgstr "窄平凹转换"
+
+#. transitions.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgid "Height"
+msgstr "右"
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgid "Face"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Wide Floor"
+msgctxt "BBP/BME/floor_wide_straight"
+msgid "Wide Floor"
+msgstr "宽路"
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Maximum Length"
+msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgid "Length"
+msgstr "最大长度"
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "The length of this rail."
+msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgid "The length of wide floor."
+msgstr "该轨道的长度."
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgid "Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgid "The width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgid "Height"
+msgstr "右"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Wide Floor Terminal"
+msgctxt "BBP/BME/floor_wide_terminal"
+msgid "Wide Floor Terminal"
+msgstr "宽路末端"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgid "Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgid "The width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgid "Height"
+msgstr "右"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Wide Floor L Crossing"
+msgctxt "BBP/BME/floor_wide_l_crossing"
+msgid "Wide Floor L Crossing"
+msgstr "宽路拐角"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgid "Height"
+msgstr "右"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Wide Floor T Crossing"
+msgctxt "BBP/BME/floor_wide_t_crossing"
+msgid "Wide Floor T Crossing"
+msgstr "宽路T字路口"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgid "Height"
+msgstr "右"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Wide Floor X Crossing"
+msgctxt "BBP/BME/floor_wide_x_crossing"
+msgid "Wide Floor X Crossing"
+msgstr "宽路十字路口"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+#, fuzzy
+#| msgid "Right"
+msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgid "Height"
+msgstr "右"
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#~ msgctxt "BBP_PG_legacy_align_history/property"
+#~ msgid "Target Objects (Other Objects)"
+#~ msgstr "目标物体 (其它物体)"
+
+#~ msgctxt "Operator"
+#~ msgid "Arc Rail"
+#~ msgstr "环形钢轨"
+
+#~ msgid "The screw radius. Minus radius will flip the built screw."
+#~ msgstr "螺旋半径. 负半径将会反转该螺旋."
+
+#~ msgctxt "Operator"
+#~ msgid "Add BME Struct"
+#~ msgstr "添加 BME 结构"
+
+#~ msgid "Cfgs"
+#~ msgstr "配置"
+
+#~ msgid "BME struct type"
+#~ msgstr "BME 结构类型"
+
+#~ msgid "Outdated Type"
+#~ msgstr "旧类型"
+
+#~ msgctxt "Operator"
+#~ msgid "Add Component"
+#~ msgstr "添加机关"
+
+#~ msgctxt "Operator"
+#~ msgid "Side Rail"
+#~ msgstr "侧轨"
+
+#~ msgctxt "Operator"
+#~ msgid "Spiral Rail"
+#~ msgstr "螺旋钢轨"
+
+#~ msgctxt "Operator"
+#~ msgid "Straight Rail"
+#~ msgstr "直线钢轨"
+
+#~ msgctxt "Operator"
+#~ msgid "Transition Rail"
+#~ msgstr "单双轨转换"
+
+#~ msgctxt "Operator"
+#~ msgid "Export Virtools File"
+#~ msgstr "导出 Virtools 文件"
+
+#~ msgid ""
+#~ "The encoding list used by Virtools engine to resolve object name. Use `;` "
+#~ "to split multiple encodings"
+#~ msgstr "Virtools 引擎解析对象名称使用的编码列表，使用 `;` 来分割多个编码"
+
+#~ msgctxt "Operator"
+#~ msgid "Import Virtools File"
+#~ msgstr "导入 Virtools 文件"
+
+#~ msgid "Historys"
+#~ msgstr "历史记录"
+
+#~ msgid "Align history."
+#~ msgstr "对齐记录."
+
+#~ msgid "Apply Flag"
+#~ msgstr "应用设置"
+
+#~ msgid "Recursive Hinder"
+#~ msgstr "递归阻断"
+
+#~ msgid ""
+#~ "An internal flag to prevent the loop calling to apply_flags's updator."
+#~ msgstr "一个内部标志，用于防止循环调用 apply_flags 的更新程序."
+
+#, fuzzy
+#~ msgid "Single Bool"
+#~ msgstr "布尔值"
+
+#, fuzzy
+#~ msgid "Single Float"
+#~ msgstr "浮点数"
+
+#, fuzzy
+#~ msgid "Single Int"
+#~ msgstr "整数"
+
+#, fuzzy
+#~ msgid "Rail Cap"
+#~ msgstr "轨道截面"
+
+#~ msgid "BM File Exporting Finished."
+#~ msgstr "BM 文件导出完毕."
+
+#~ msgid "Export Target"
+#~ msgstr "导出目标"
+
+#~ msgid "Global Texture Save Option"
+#~ msgstr "全局纹理保存选项"
+
+#~ msgid "BM File Importing Finished."
+#~ msgstr "BM 文件导入完毕."
+
+#~ msgctxt "Operator"
+#~ msgid "Preset"
+#~ msgstr "预设"
+
+#~ msgctxt "Operator"
+#~ msgid "Apply"
+#~ msgstr "应用"
+
+#~ msgid "Fix done."
+#~ msgstr "修复完成."
+
+#~ msgid "Blend factor is (Ad, Ad, Ad, Ad)."
+#~ msgstr "混合因数为 (Ad, Ad, Ad, Ad)."
+
+#~ msgid "Texture coordinates outside the range [0..1] are flipped evenly."
+#~ msgstr "超出 [0..1] 范围的纹理坐标会被均匀翻转."
+
+#~ msgid ""
+#~ "When texture coordinates are greater than 1.0 or less than 0.0  texture "
+#~ "is set to a color defined in CKMaterial::SetTextureBorderColor."
+#~ msgstr ""
+#~ "当纹理坐标大于 1.0 或小于 0.0 时，纹理将被设置为 CKMaterial::"
+#~ "SetTextureBorderColor 中定义的颜色."
+
+#~ msgid ""
+#~ "Perform a Dot Product 3 between texture (normal map) and a referential "
+#~ "vector given in VXRENDERSTATE_TEXTUREFACTOR."
+#~ msgstr ""
+#~ "在纹理（法线贴图）和在 VXRENDERSTATE_TEXTUREFACTOR 中给定的参考向量之间执"
+#~ "行三维点积."
+
+#~ msgid "Accept if value if different than current value."
+#~ msgstr "与现有值不同时接受."
+
+#~ msgid ""
+#~ "Texture coordinates greater than 1.0 are set to 1.0, and values less than "
+#~ "0.0 are set to 0.0."
+#~ msgstr ""
+#~ "大于 1.0 的纹理坐标会被设置为 1.0，小于 0.0 的纹理坐标会被设置为 0.0."
+
+#~ msgid ""
+#~ "Save using format specified. The bitmap data will be converted to the "
+#~ "specified format by the correspondant bitmap plugin and saved inside file."
+#~ msgstr ""
+#~ "使用指定的格式保存. 位图数据将由相应的位图插件转换为指定的格式并保存在文件"
+#~ "中."
+
+#~ msgid "Always accept the test."
+#~ msgstr "总是接受."
+
+#~ msgid "Mip Mapping with Bilinear interpolation between mipmap levels."
+#~ msgstr "在各级 Mipmap 间使用双线性插值的 Mip 映射."
+
+#~ msgid ""
+#~ "Save raw data inside file. The bitmap is saved in a raw 32 bit per pixel "
+#~ "format."
+#~ msgstr "将原始数据内置在文件中. 位图以 32 位的原始格式保存."
+
+#~ msgid "Accept if value if greater or equal current value."
+#~ msgstr "比现有值大或相等时接受."
+
+#~ msgid "Blend factor is (Rs, Gs, Bs, As)."
+#~ msgstr "混合因数为 (Rs, Gs, Bs, As)."
+
+#~ msgid "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad)."
+#~ msgstr "混合因数为 (1-Ad, 1-Ad, 1-Ad, 1-Ad)."
+
+#~ msgid "Blend factor is (Rd, Gd, Bd, Ad)."
+#~ msgstr "混合因数为 (Rd, Gd, Bd, Ad)."
+
+#~ msgid "Accept if value if equal than current value."
+#~ msgstr "与现有值相等时接受."
+
+#~ msgid ""
+#~ "Use Global settings, that is the settings given with CKContext::"
+#~ "SetGlobalImagesSaveOptions. (Not valid when using CKContext::"
+#~ "SetImagesSaveOptions)."
+#~ msgstr ""
+#~ "使用全局设置，即使用 CKContext::SetGlobalImagesSaveOptions 给出的设置. "
+#~ "（使用 CKContext::SetImagesSaveOptions 时无效）."
+
+#~ msgid "Accept if value if greater than current value."
+#~ msgstr "比现有值大时接受."
+
+#~ msgid "Always fail the test."
+#~ msgstr "总是失败."
+
+#~ msgid ""
+#~ "Insert original image file inside CMO file. The bitmap file that was used "
+#~ "originally for the texture or sprite will be append to the composition "
+#~ "file and extracted when the file is loaded."
+#~ msgstr ""
+#~ "在 CMO 文件中插入原始图像文件. 最初用于纹理或贴图的位图文件将附加到合成文"
+#~ "件中，并在加载文件时提取."
+
+#~ msgid "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As)."
+#~ msgstr "混合因数为 (1-Rs, 1-Gs, 1-Bs, 1-As)."
+
+#~ msgid ""
+#~ "Lighting is done by renderer using normals and face material information."
+#~ msgstr "由法线与面的材质信息完成照明."
+
+#~ msgid "Accept if value if less or equal than current value."
+#~ msgstr "比现有值小或相等时接受."
+
+#~ msgid ""
+#~ "Texture and material are combine. Alpha information of the texture "
+#~ "replace material alpha component."
+#~ msgstr "纹理和材质会结合. 纹理替换材质的 Alpha 信息."
+
+#~ msgid "Blend factor is (f, f, f, 1); f = min(As, 1-Ad)."
+#~ msgstr "混合因数为 (f, f, f, 1); f = min(As, 1-Ad)."
+
+#~ msgid ""
+#~ "Store only the file name for the texture. The bitmap file must be present "
+#~ "in the bitmap paths when loading the composition."
+#~ msgstr "仅存储纹理的文件名. 加载合成时，位图文件必须存在于位图路径中."
+
+#~ msgid "Blend factor is (0, 0, 0, 0)."
+#~ msgstr "混合因数为 (0, 0, 0, 0)."
+
+#~ msgid "Accept if value if less than current value."
+#~ msgstr "比现有值小时接受."
+
+#~ msgid "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad)."
+#~ msgstr "混合因数为 (1-Rd, 1-Gd, 1-Bd, 1-Ad)."
+
+#~ msgid "Blend factor is (1-As, 1-As, 1-As, 1-As)."
+#~ msgstr "混合因数为 (1-As, 1-As, 1-As, 1-As)."
+
+#~ msgid "Blend factor is (1, 1, 1, 1)."
+#~ msgstr "混合因数为 (1, 1, 1, 1)."
+
+#~ msgid "Blend factor is (As, As, As, As)."
+#~ msgstr "混合因数为 (As, As, As, As)."
+
+#~ msgid ""
+#~ "Alpha information in the texture specify how material and texture are "
+#~ "combined. Alpha information of the texture replace material alpha "
+#~ "component."
+#~ msgstr ""
+#~ "纹理中的 Alpha 信息指定了材质和纹理如何结合. 纹理的 Alpha 信息会替代材质"
+#~ "的 Alpha 组件."

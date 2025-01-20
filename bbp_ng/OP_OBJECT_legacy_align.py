@@ -62,7 +62,7 @@ class BBP_PG_legacy_align_history(bpy.types.PropertyGroup):
         translation_context = 'BBP_PG_legacy_align_history/property'
     ) # type: ignore
     target_align_mode: bpy.props.EnumProperty(
-        name = "Target Objects (Other Objects)",
+        name = "Target Objects (Selected Objects)",
         items = _g_EnumHelper_AlignMode.generate_items(),
         default = _g_EnumHelper_AlignMode.to_selection(AlignMode.AxisCenter),
         translation_context = 'BBP_PG_legacy_align_history/property'

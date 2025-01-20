@@ -1,5 +1,8 @@
 # Compile and Distribute Plugin
 
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+
 This page will guide you in compiling the plugin as well as distributing it.
 
 ## Compiling LibCmo with BMap

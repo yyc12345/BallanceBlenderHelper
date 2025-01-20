@@ -415,8 +415,9 @@ class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, S
 
     rail_screw_screw: bpy.props.FloatProperty(
         name = "Screw",
-        description = "The increased height in each iteration. Minus height also is accepted.",
+        description = "The increased height in each iteration.",
         default = c_SpiralRailScrew,
+        min = 0.0,
         unit = 'LENGTH',
         translation_context = 'BBP_OT_add_spiral_rail/property'
     ) # type: ignore

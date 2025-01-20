@@ -9,6 +9,13 @@ icons/*
 jsons/*
 !jsons/.gitkeep
 
+# Do not include intermidiate translation template (POT)
+# NOTE: it seems that Python default gitignore (written following) disable POT file in default.
+# so, as it wish, I also remove it from git.
+i18n/*
+!i18n/blender.pot
+!i18n/*.po
+
 ## ===== Python =====
 # Byte-compiled / optimized / DLL files
 __pycache__/

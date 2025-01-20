@@ -78,4 +78,5 @@ paths_exclude_pattern = [
   "/raw_jsons", # Raw JSONs.
   "/raw_icons", # Raw Icons.
   "/tools", # Assistant tools.
+  "/i18n", # GNU gettext Translation.
 ]
