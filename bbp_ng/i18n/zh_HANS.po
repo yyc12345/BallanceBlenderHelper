@@ -2045,11 +2045,11 @@ msgstr "组名"
 #. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Constant Attenuation"
-msgstr ""
+msgstr "衰减零次项系数"
 
 #. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
 msgid "Defines the constant attenuation factor."
-msgstr ""
+msgstr "设置衰减的零次项因数。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.falloff
 msgctxt "BBP_PG_virtools_light/property"
@@ -2079,97 +2079,83 @@ msgid "Sets the value of the hot spot of the light."
 msgstr ""
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_color
-#, fuzzy
-#| msgid "Src Color"
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Color"
-msgstr "源颜色"
+msgstr "颜色"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_color
 msgid "Defines the red, green and blue components of the light."
-msgstr ""
+msgstr "设置灯光颜色的红绿蓝分量。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_range
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Range"
-msgstr ""
+msgstr "范围"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_range
 msgid "Defines the radius of the lighting area."
-msgstr ""
+msgstr "设置光照区域的半径。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type
-#, fuzzy
-#| msgid "Side Type"
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Type"
-msgstr "侧轨类型"
+msgstr "类型"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type
-#, fuzzy
-#| msgid "The length of this rail."
 msgid "The type of this light"
-msgstr "该轨道的长度。"
+msgstr "该光源的类型"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
-#, fuzzy
-#| msgid "Ref. Point"
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Point"
-msgstr "参考点"
+msgstr "点光源"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
 msgid "The Light is a point of light "
-msgstr ""
+msgstr "光源是一个点光源 "
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Spot"
-msgstr ""
+msgstr "聚光灯"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
 msgid "The light is a spotlight "
-msgstr ""
+msgstr "光源是一个聚光灯 "
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
-#, fuzzy
-#| msgid "Sections"
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Directional"
-msgstr "片段"
+msgstr "平行光"
 
 #. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
 msgid ""
 "The light is directional light : Lights comes from an infinite point so only "
 "direction of light can be given "
-msgstr ""
+msgstr "光源是平行光：光从无限远处的点照来，所以只能指定光源的方向 "
 
 #. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
-#, fuzzy
-#| msgid "Bilinear Interpolation "
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Linear Attenuation"
-msgstr "双线性插值"
+msgstr "衰减一次项系数"
 
 #. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
 msgid "Defines the linear attenuation factor."
-msgstr ""
+msgstr "设置衰减的一次项因数。"
 
 #. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
 msgctxt "BBP_PG_virtools_light/property"
 msgid "Quadratic Attenuation"
-msgstr ""
+msgstr "衰减二次项系数"
 
 #. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
 msgid "Defines the quadratic attenuation factor."
-msgstr ""
+msgstr "设置衰减的二次项因数。"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func
-#, fuzzy
-#| msgid "Alpha Test Function"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Alpha Test Function"
-msgstr "Alpha 测试函数"
+msgstr "透明度测试函数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func
 msgid "Alpha comparision function"
@@ -2179,133 +2165,109 @@ msgstr "比较 Alpha 值的函数"
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Never"
-msgstr ""
+msgstr "从不"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
-#, fuzzy
 msgid "Always fail the test. "
-msgstr "总是失败。"
+msgstr "总是失败。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Less"
-msgstr ""
+msgstr "小于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
-#, fuzzy
 msgid "Accept if value if less than current value. "
-msgstr "比现有值小时接受。"
+msgstr "比现有值小时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
-#, fuzzy
-#| msgid "Less Equal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Equal"
-msgstr "小于等于"
+msgstr "等于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
-#, fuzzy
 msgid "Accept if value if equal than current value. "
-msgstr "与现有值相等时接受。"
+msgstr "与现有值相等时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
-#, fuzzy
-#| msgid "Less Equal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Less Equal"
 msgstr "小于等于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
-#, fuzzy
 msgid "Accept if value if less or equal than current value. "
-msgstr "比现有值小或相等时接受。"
+msgstr "比现有值小或相等时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
-#, fuzzy
-#| msgid "Greater Equal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Greater"
-msgstr "大于等于"
+msgstr "大于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
-#, fuzzy
 msgid "Accept if value if greater than current value. "
-msgstr "比现有值大时接受。"
+msgstr "比现有值大时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
-#, fuzzy
-#| msgid "Greater Equal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Not Equal"
-msgstr "大于等于"
+msgstr "不等于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
-#, fuzzy
 msgid "Accept if value if different than current value. "
-msgstr "与现有值不同时接受。"
+msgstr "与现有值不同时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
-#, fuzzy
-#| msgid "Greater Equal"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Greater Equal"
 msgstr "大于等于"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
-#, fuzzy
 msgid "Accept if value if greater or equal current value. "
-msgstr "比现有值大或相等时接受。"
+msgstr "比现有值大或相等时接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Always"
-msgstr ""
+msgstr "总是"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
-#, fuzzy
 msgid "Always accept the test. "
-msgstr "总是接受。"
+msgstr "总是接受。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
-#, fuzzy
-#| msgid "Alpha Ref Value"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Alpha Ref Value"
-msgstr "不透明度参考值"
+msgstr "透明度参考值"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
 msgid "Alpha referential value"
-msgstr "不透明度的参考值"
+msgstr "透明度的参考值"
 
 #. :src: bpy.types.BBP_PG_virtools_material.ambient
-#, fuzzy
-#| msgid "Ambient"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Ambient"
-msgstr "环境光"
+msgstr "环境"
 
 #. :src: bpy.types.BBP_PG_virtools_material.ambient
 msgid "Ambient color of the material"
 msgstr "材质的环境光颜色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend
-#, fuzzy
-#| msgid "Destination Blend"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Destination Blend"
 msgstr "目标混合"
@@ -2316,157 +2278,124 @@ msgstr "目标混合因数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
-#, fuzzy
-#| msgid "Zero"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Zero"
-msgstr "0"
+msgstr "零"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
-#, fuzzy
 msgid "Blend factor is (0, 0, 0, 0). "
-msgstr "混合因数为 (0, 0, 0, 0)。"
+msgstr "混合因数为 (0, 0, 0, 0)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
-#, fuzzy
-#| msgid "One"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "One"
-msgstr "1"
+msgstr "壹"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
-#, fuzzy
 msgid "Blend factor is (1, 1, 1, 1). "
-msgstr "混合因数为 (1, 1, 1, 1)。"
+msgstr "混合因数为 (1, 1, 1, 1)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
-#, fuzzy
-#| msgid "Src Color"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Src Color"
 msgstr "源颜色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
-#, fuzzy
 msgid "Blend factor is (Rs, Gs, Bs, As). "
-msgstr "混合因数为 (Rs, Gs, Bs, As)。"
+msgstr "混合因数为 (Rs, Gs, Bs, As)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
-#, fuzzy
-#| msgid "Inv Src Color"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Inv Src Color"
 msgstr "源颜色反色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
-#, fuzzy
 msgid "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As). "
-msgstr "混合因数为 (1-Rs, 1-Gs, 1-Bs, 1-As)。"
+msgstr "混合因数为 (1-Rs, 1-Gs, 1-Bs, 1-As)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
-#, fuzzy
-#| msgid "Src Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Src Alpha"
-msgstr "源 Alpha"
+msgstr "源透明度"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
-#, fuzzy
 msgid "Blend factor is (As, As, As, As). "
-msgstr "混合因数为 (As, As, As, As)。"
+msgstr "混合因数为 (As, As, As, As)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
-#, fuzzy
-#| msgid "Inv Src Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Inv Src Alpha"
-msgstr "源 Alpha 反转"
+msgstr "源透明度反转"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
-#, fuzzy
 msgid "Blend factor is (1-As, 1-As, 1-As, 1-As). "
-msgstr "混合因数为 (1-As, 1-As, 1-As, 1-As)。"
+msgstr "混合因数为 (1-As, 1-As, 1-As, 1-As)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
-#, fuzzy
-#| msgid "Dest Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Dest Alpha"
-msgstr "目标 Alpha"
+msgstr "目标透明度"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
-#, fuzzy
 msgid "Blend factor is (Ad, Ad, Ad, Ad). "
-msgstr "混合因数为 (Ad, Ad, Ad, Ad)。"
+msgstr "混合因数为 (Ad, Ad, Ad, Ad)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
-#, fuzzy
-#| msgid "Inv Dest Alpha"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Inv Dest Alpha"
-msgstr "目标 Alpha 反转"
+msgstr "目标透明度反转"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
-#, fuzzy
 msgid "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad). "
-msgstr "混合因数为 (1-Ad, 1-Ad, 1-Ad, 1-Ad)。"
+msgstr "混合因数为 (1-Ad, 1-Ad, 1-Ad, 1-Ad)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
-#, fuzzy
-#| msgid "Dest Color"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Dest Color"
 msgstr "目标颜色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
-#, fuzzy
 msgid "Blend factor is (Rd, Gd, Bd, Ad). "
-msgstr "混合因数为 (Rd, Gd, Bd, Ad)。"
+msgstr "混合因数为 (Rd, Gd, Bd, Ad)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
-#, fuzzy
-#| msgid "Inv Dest Color"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Inv Dest Color"
 msgstr "目标颜色反色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
-#, fuzzy
 msgid "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad). "
-msgstr "混合因数为 (1-Rd, 1-Gd, 1-Bd, 1-Ad)。"
+msgstr "混合因数为 (1-Rd, 1-Gd, 1-Bd, 1-Ad)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
-#, fuzzy
-#| msgid "Src Alpha Sat"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Src Alpha Sat"
-msgstr "源 Alpha 限制"
+msgstr "源透明度钳制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
-#, fuzzy
 msgid "Blend factor is (f, f, f, 1); f = min(As, 1-Ad). "
-msgstr "混合因数为 (f, f, f, 1); f = min(As, 1-Ad)。"
+msgstr "混合因数为 (f, f, f, 1); f = min(As, 1-Ad)。 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.diffuse
 msgctxt "BBP_PG_virtools_material/property"
@@ -2485,22 +2414,20 @@ msgstr "材质的自发光颜色"
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Blend"
-msgstr ""
+msgstr "混合"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
 msgid "Whether alpha blending is enabled or not."
-msgstr "是否启用不透明度混合。"
+msgstr "是否启用透明度混合。"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
-#, fuzzy
-#| msgid "Alpha Test"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Alpha Test"
-msgstr "Alpha 测试"
+msgstr "透明度测试"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
 msgid "Whether the alpha test is enabled"
-msgstr "是否启用 Alpha 测试"
+msgstr "是否启用透明度测试"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_perspective_correction
 msgctxt "BBP_PG_virtools_material/property"
@@ -2512,8 +2439,6 @@ msgid "Whether texture perspective correction is enabled"
 msgstr "是否启用贴图透视矫正"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_two_sided
-#, fuzzy
-#| msgid "Both Sided"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Both Sided"
 msgstr "双面"
@@ -2523,19 +2448,15 @@ msgid "Whether the material is both sided or not"
 msgstr "是否为双面材质"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
-#, fuzzy
-#| msgid "Z-Buffer Write"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Z-Buffer Write"
-msgstr "写入 Z-Buffer"
+msgstr "写入深度缓冲"
 
 #. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
 msgid "Whether writing in ZBuffer is enabled."
-msgstr "是否写入 Z-Buffer。"
+msgstr "是否启用深度缓冲写入。"
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode
-#, fuzzy
-#| msgid "Fill mode"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Fill Mode"
 msgstr "填充模式"
@@ -2551,7 +2472,7 @@ msgstr "点"
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'1'
 msgid "Vertices rendering "
-msgstr "顶点渲染"
+msgstr "顶点渲染 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
 msgctxt "BBP_PG_virtools_material/property"
@@ -2560,7 +2481,7 @@ msgstr "线框"
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
 msgid "Edges rendering "
-msgstr "边渲染"
+msgstr "边渲染 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
 msgctxt "BBP_PG_virtools_material/property"
@@ -2569,7 +2490,7 @@ msgstr "实体"
 
 #. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
 msgid "Face rendering "
-msgstr "面渲染"
+msgstr "面渲染 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.shade_mode
 msgctxt "BBP_PG_virtools_material/property"
@@ -2587,7 +2508,7 @@ msgstr "平面着色"
 
 #. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'1'
 msgid "Flat Shading "
-msgstr "平面着色"
+msgstr "平面着色 "
 
 #. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'2'
 msgctxt "BBP_PG_virtools_material/property"
@@ -2608,8 +2529,6 @@ msgid "Phong Shading (Not yet supported by most implementation) "
 msgstr "冯着色 (大多数实现尚不支持) "
 
 #. :src: bpy.types.BBP_PG_virtools_material.source_blend
-#, fuzzy
-#| msgid "Source Blend"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Source Blend"
 msgstr "源混合"
@@ -2621,16 +2540,16 @@ msgstr "源混合因数"
 #. :src: bpy.types.BBP_PG_virtools_material.specular
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Specular"
-msgstr ""
+msgstr "高光"
 
 #. :src: bpy.types.BBP_PG_virtools_material.specular_power
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Power"
-msgstr ""
+msgstr "镜面指数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.specular_power
 msgid "Specular highlight power"
-msgstr "镜面高光强度"
+msgstr "镜面光辉的强度"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture
 msgctxt "BBP_PG_virtools_material/property"
@@ -2642,8 +2561,6 @@ msgid "Texture of the material"
 msgstr "材质的贴图"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode
-#, fuzzy
-#| msgid "Address Mode"
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Address Mode"
 msgstr "寻址模式"
@@ -2663,10 +2580,9 @@ msgid "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "
 msgstr "使用默认网格包裹模式 (参见 CKMesh::SetWrapMode)"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
-#, fuzzy
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Mirror"
-msgstr "一次镜像"
+msgstr "镜像"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
 #, fuzzy
@@ -2676,7 +2592,7 @@ msgstr "超出 [0..1] 范围的贴图坐标会被均匀翻转."
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
 msgctxt "BBP_PG_virtools_material/property"
 msgid "Clamp"
-msgstr ""
+msgstr "钳制"
 
 #. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
 #, fuzzy
@@ -2959,8 +2875,6 @@ msgid "Z Comparison function"
 msgstr "Z 比较函数"
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
-#, fuzzy
-#| msgid "Lit Mode"
 msgctxt "BBP_PG_virtools_mesh/property"
 msgid "Lit Mode"
 msgstr "光照模式"
@@ -2970,32 +2884,25 @@ msgid "Lighting mode of the mesh."
 msgstr "网格的光照模式。"
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
-#, fuzzy
-#| msgid "Prelit"
 msgctxt "BBP_PG_virtools_mesh/property"
 msgid "Prelit"
 msgstr "预照明"
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
 msgid "Lighting use color information store with vertices "
-msgstr "利用顶点的颜色信息处理照明"
+msgstr "利用顶点中存储的颜色信息处理照明 "
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
-#, fuzzy
-#| msgid "Lit"
 msgctxt "BBP_PG_virtools_mesh/property"
 msgid "Lit"
 msgstr "实时照明"
 
 #. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
-#, fuzzy
 msgid ""
 "Lighting is done by renderer using normals and face material information. "
-msgstr "由法线与面的材质信息完成照明。"
+msgstr "由法线与面的材质信息完成照明。 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options
-#, fuzzy
-#| msgid "Save Options"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Save Options"
 msgstr "保存选项"
@@ -3010,8 +2917,6 @@ msgstr ""
 "在合成文件内部。"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'0'
-#, fuzzy
-#| msgid "Raw Data"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Raw Data"
 msgstr "原始数据"
@@ -3019,65 +2924,51 @@ msgstr "原始数据"
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'1'
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "External"
-msgstr ""
+msgstr "外部"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'2'
-#, fuzzy
-#| msgid "Video Format"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Image Format"
-msgstr "媒体格式"
+msgstr "图像格式"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
-#, fuzzy
-#| msgid "Use Global"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Use Global"
 msgstr "使用全局设置"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'4'
-#, fuzzy
-#| msgid "Include Original File"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Include Original File"
-msgstr "包括原始文件"
+msgstr "包含原始文件"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format
-#, fuzzy
-#| msgid "Video Format"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "Video Format"
-msgstr "媒体格式"
+msgstr "影像格式"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format
 msgid "The desired surface pixel format in video memory."
-msgstr "显存中的表面像素格式。"
+msgstr "显存中期望的表面像素格式。"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
-#, fuzzy
-#| msgid "32 Bits ARGB8888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits ARGB8888"
 msgstr "32 位 ARGB8888"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
 msgid "32-bit ARGB pixel format with alpha "
-msgstr "32位 ARGB 像素格式（带 Alpha）"
+msgstr "32位 ARGB 像素格式 (带 Alpha) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
-#, fuzzy
-#| msgid "32 Bits RGB888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits RGB888"
 msgstr "32 位 RGB888"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
 msgid "32-bit RGB pixel format without alpha "
-msgstr "32位 RGB 像素格式（无 Alpha）"
+msgstr "32位 RGB 像素格式 (无 Alpha) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
-#, fuzzy
-#| msgid "24 Bits RGB888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "24 Bits RGB888"
 msgstr "24 位 RGB888"
@@ -3087,8 +2978,6 @@ msgid "24-bit RGB pixel format "
 msgstr "24位 RGB 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'4'
-#, fuzzy
-#| msgid "16 Bits RGB565"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits RGB565"
 msgstr "16 位 RGB565"
@@ -3098,41 +2987,33 @@ msgid "16-bit RGB pixel format "
 msgstr "16位 RGB 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
-#, fuzzy
-#| msgid "16 Bits RGB555"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits RGB555"
 msgstr "16 位 RGB555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
 msgid "16-bit RGB pixel format (5 bits per color) "
-msgstr "16位 RGB 像素格式（各颜色占5位）"
+msgstr "16位 RGB 像素格式 (颜色占 5 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
-#, fuzzy
-#| msgid "16 Bits ARGB1555"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits ARGB1555"
 msgstr "16 位 ARGB1555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
 msgid "16-bit ARGB pixel format (5 bits per color + 1 bit for alpha) "
-msgstr "16位 ARGB 像素格式（各颜色占5位 + Alpha 占1位）"
+msgstr "16位 ARGB 像素格式 (颜色占 5 位 + Alpha 占 1 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
-#, fuzzy
-#| msgid "16 Bits ARGB4444"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits ARGB4444"
 msgstr "16 位 ARGB4444"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
 msgid "16-bit ARGB pixel format (4 bits per color) "
-msgstr "16位 ARGB 像素格式（各颜色占4位）"
+msgstr "16位 ARGB 像素格式 (颜色占 4 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'8'
-#, fuzzy
-#| msgid "8 Bits RGB332"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits RGB332"
 msgstr "8 位 RGB332"
@@ -3142,8 +3023,6 @@ msgid "8-bit  RGB pixel format "
 msgstr "8位  RGB 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'9'
-#, fuzzy
-#| msgid "8 Bits ARGB2222"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits ARGB2222"
 msgstr "8 位 ARGB2222"
@@ -3153,8 +3032,6 @@ msgid "8-bit  ARGB pixel format "
 msgstr "8位  ARGB 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'10'
-#, fuzzy
-#| msgid "32 Bits ABGR8888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits ABGR8888"
 msgstr "32 位 ABGR8888"
@@ -3164,8 +3041,6 @@ msgid "32-bit ABGR pixel format "
 msgstr "32位 ABGR 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'11'
-#, fuzzy
-#| msgid "32 Bits RGBA8888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits RGBA8888"
 msgstr "32 位 RGBA8888"
@@ -3175,8 +3050,6 @@ msgid "32-bit RGBA pixel format "
 msgstr "32位 RGBA 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'12'
-#, fuzzy
-#| msgid "32 Bits BGRA8888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits BGRA8888"
 msgstr "32 位 BGRA8888"
@@ -3186,8 +3059,6 @@ msgid "32-bit BGRA pixel format "
 msgstr "32位 BGRA 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'13'
-#, fuzzy
-#| msgid "32 Bits BGR888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits BGR888"
 msgstr "32 位 BGR888"
@@ -3197,8 +3068,6 @@ msgid "32-bit BGR pixel format "
 msgstr "32位 BGR 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'14'
-#, fuzzy
-#| msgid "24 Bits BGR888"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "24 Bits BGR888"
 msgstr "24 位 BGR888"
@@ -3208,8 +3077,6 @@ msgid "24-bit BGR pixel format "
 msgstr "24位 BGR 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'15'
-#, fuzzy
-#| msgid "16 Bits BGR565"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits BGR565"
 msgstr "16 位 BGR565"
@@ -3219,41 +3086,33 @@ msgid "16-bit BGR pixel format "
 msgstr "16位 BGR 像素格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
-#, fuzzy
-#| msgid "16 Bits BGR555"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits BGR555"
 msgstr "16 位 BGR555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
 msgid "16-bit BGR pixel format (5 bits per color) "
-msgstr "16位 BGR 像素格式（各颜色占5位）"
+msgstr "16位 BGR 像素格式 (颜色占 5 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
-#, fuzzy
-#| msgid "16 Bits ABGR1555"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits ABGR1555"
 msgstr "16 位 ABGR1555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
 msgid "16-bit ABGR pixel format (5 bits per color + 1 bit for alpha) "
-msgstr "16位 ABGR 像素格式（各颜色占5位 + Alpha 占1位）"
+msgstr "16位 ABGR 像素格式 (颜色占 5 位 + Alpha 占 1 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
-#, fuzzy
-#| msgid "16 Bits ABGR4444"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits ABGR4444"
 msgstr "16 位 ABGR4444"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
 msgid "16-bit ABGR pixel format (4 bits per color) "
-msgstr "16位 ABGR 像素格式（各颜色占4位）"
+msgstr "16位 ABGR 像素格式 (颜色占 4 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'19'
-#, fuzzy
-#| msgid "DXT1"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "DXT1"
 msgstr "DXT1"
@@ -3263,8 +3122,6 @@ msgid "S3/DirectX Texture Compression 1 "
 msgstr "S3/DirectX 贴图压缩 1 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'20'
-#, fuzzy
-#| msgid "DXT2"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "DXT2"
 msgstr "DXT2"
@@ -3274,8 +3131,6 @@ msgid "S3/DirectX Texture Compression 2 "
 msgstr "S3/DirectX 贴图压缩 2 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'21'
-#, fuzzy
-#| msgid "DXT3"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "DXT3"
 msgstr "DXT3"
@@ -3285,8 +3140,6 @@ msgid "S3/DirectX Texture Compression 3 "
 msgstr "S3/DirectX 贴图压缩 3 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'22'
-#, fuzzy
-#| msgid "DXT4"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "DXT4"
 msgstr "DXT4"
@@ -3296,8 +3149,6 @@ msgid "S3/DirectX Texture Compression 4 "
 msgstr "S3/DirectX 贴图压缩 4 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'23'
-#, fuzzy
-#| msgid "DXT5"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "DXT5"
 msgstr "DXT5"
@@ -3307,92 +3158,76 @@ msgid "S3/DirectX Texture Compression 5 "
 msgstr "S3/DirectX 贴图压缩 5 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
-#, fuzzy
-#| msgid "16 Bits V8U8"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits V8U8"
 msgstr "16 Bits V8U8"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
 msgid "16-bit Bump Map format format (8 bits per color) "
-msgstr "16位凹凸贴图格式（各颜色占8位）"
+msgstr "16位凹凸贴图格式 (颜色占 8 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
-#, fuzzy
-#| msgid "32 Bits V16U16"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits V16U16"
 msgstr "32 Bits V16U16"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
 msgid "32-bit Bump Map format format (16 bits per color) "
-msgstr "32位凹凸贴图格式（各颜色占16位）"
+msgstr "32位凹凸贴图格式 (颜色占 16 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
-#, fuzzy
-#| msgid "16 Bits L6V5U5"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "16 Bits L6V5U5"
 msgstr "16 Bits L6V5U5"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
 msgid "16-bit Bump Map format format with luminance "
-msgstr "16位具有亮度的凹凸贴图格式"
+msgstr "16位具有亮度的凹凸贴图格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
-#, fuzzy
-#| msgid "32 Bits X8L8V8U8"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "32 Bits X8L8V8U8"
 msgstr "32 Bits X8L8V8U8"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
 msgid "32-bit Bump Map format format with luminance "
-msgstr "32位具有亮度的凹凸贴图格式"
+msgstr "32位具有亮度的凹凸贴图格式 "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
-#, fuzzy
-#| msgid "8 Bits ABGR8888 CLUT"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits ABGR8888 CLUT"
 msgstr "8 Bits ABGR8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
 msgid "8 bits indexed CLUT (ABGR) "
-msgstr "8位索引颜色查找表（ABGR）"
+msgstr "8位索引颜色查找表 (ABGR) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
-#, fuzzy
-#| msgid "8 Bits ARGB8888 CLUT"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "8 Bits ARGB8888 CLUT"
 msgstr "8 Bits ARGB8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
 msgid "8 bits indexed CLUT (ARGB) "
-msgstr "8位索引颜色查找表（ARGB）"
+msgstr "8位索引颜色查找表 (ARGB) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
-#, fuzzy
-#| msgid "4 Bits ABGR8888 CLUT"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "4 Bits ABGR8888 CLUT"
 msgstr "4 Bits ABGR8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
 msgid "4 bits indexed CLUT (ABGR) "
-msgstr "4位索引颜色查找表（ABGR）"
+msgstr "4位索引颜色查找表 (ABGR) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
-#, fuzzy
-#| msgid "4 Bits ARGB8888 CLUT"
 msgctxt "BBP_PG_virtools_texture/property"
 msgid "4 Bits ARGB8888 CLUT"
 msgstr "4 Bits ARGB8888 CLUT"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
 msgid "4 bits indexed CLUT (ARGB) "
-msgstr "4位索引颜色查找表（ARGB）"
+msgstr "4位索引颜色查找表 (ARGB) "
 
 #: extensions/user_default/bbp_ng/OP_ADDS_bme.py:246
 msgctxt "BBP_OT_add_bme_struct/draw"
@@ -3799,450 +3634,359 @@ msgstr "应用"
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:292
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Basics"
-msgstr ""
+msgstr "基础"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:305
 #| msgid "Rotation"
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Attenuation"
-msgstr ""
+msgstr "衰减"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:306
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Constant"
-msgstr ""
+msgstr "零次项系数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:307
 #| msgid "Mip Linear"
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Linear"
-msgstr ""
+msgstr "一次项系数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:308
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Quadratic"
-msgstr ""
+msgstr "二次项系数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_light.py:313
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Spot Cone"
-msgstr ""
+msgstr "聚光锥体"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1055
-#, fuzzy
-#| msgid "Preset"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Preset"
 msgstr "预设"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1058
-#, fuzzy
-#| msgid "Apply"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Apply"
 msgstr "应用"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1063
-#, fuzzy
-#| msgid "Color Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Color Parameters"
 msgstr "颜色参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1071
-#, fuzzy
-#| msgid "Mode Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Mode Parameters"
-msgstr "材质模式参数"
+msgstr "模式参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1077
-#, fuzzy
-#| msgid "Texture Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Texture Parameters"
 msgstr "贴图参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1098
-#, fuzzy
-#| msgid "Alpha Test Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Test Parameters"
-msgstr "Alpha 测试参数"
+msgstr "透明度测试参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1105
-#, fuzzy
-#| msgid "Alpha Blend Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Blend Parameters"
-msgstr "Alpha 混合参数"
+msgstr "透明度混合参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1112
-#, fuzzy
-#| msgid "Z Write Parameters"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Z Write Parameters"
-msgstr "Z 写入参数"
+msgstr "深度缓存参数"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:939
-#, fuzzy
-#| msgid "Fix / materials."
 msgid "Fix material successfully."
-msgstr "修复材质。"
+msgstr "修复材质成功。"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:942
 msgid "This material is not suit for fixer."
-msgstr "该材质不适合修复。"
+msgstr "该材质不适用于修复。"
 
 #: extensions/user_default/bbp_ng/PROP_virtools_material.py:1086
-#, fuzzy
-#| msgid "Virtools Texture Settings"
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Virtools Texture Settings"
 msgstr "Virtools 贴图设置"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:201
-#, fuzzy
-#| msgid "Color Parameters"
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Import Parameters"
-msgstr "颜色参数"
+msgstr "导入参数"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:205
-#, fuzzy
-#| msgid "Mesh Name Conflict"
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Name Conflict Strategy"
-msgstr "网格名称冲突"
+msgstr "名称冲突解决策略"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:207
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Object"
-msgstr ""
+msgstr "物体"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:208
-#, fuzzy
-#| msgid "Right"
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Light"
-msgstr "右"
+msgstr "灯光"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:209
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Mesh"
-msgstr ""
+msgstr "网格"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:210
-#, fuzzy
-#| msgid "Material"
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Material"
 msgstr "材质"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:211
-#, fuzzy
-#| msgid "Texture Blend"
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Texture"
-msgstr "贴图混合"
+msgstr "贴图"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:256
-#, fuzzy
-#| msgid "Color Parameters"
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/draw"
 msgid "Export Parameters"
-msgstr "颜色参数"
+msgstr "导出参数"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:317
-#, fuzzy
-#| msgid "Virtools Params"
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Virtools Parameters"
 msgstr "Virtools 参数"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:321
-#, fuzzy
-#| msgid "Encodings"
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Encodings"
 msgstr "编码"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:369
-#, fuzzy
-#| msgid "Ballance Params"
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Ballance Parameters"
 msgstr "Ballance 参数"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:375
-#, fuzzy
-#| msgid "Map Sectors: "
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Map Sectors: {0}"
-msgstr "地图小节："
+msgstr "地图小节数：{0}"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:328
-#, fuzzy
-#| msgid "Global Texture Save Options"
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Global Texture Save Options"
 msgstr "全局材质保存选项"
 
 #: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:332
-#, fuzzy
-#| msgid "Use Compress"
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Compression"
-msgstr "使用压缩"
+msgstr "压缩"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:85
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "All / Failed - {0} / {1}"
-msgstr ""
+msgstr "总计 / 失败 - {0} / {1}"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:295
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid ""
 "PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name."
-msgstr ""
+msgstr "检测到 PC_Checkpoints 或 PR_Resetpoints，但无法从名称中获取小节号。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:502
 msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
 msgid "Name match lost."
-msgstr ""
+msgstr "名称匹配失败。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:610
 msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
 msgid "Name match lost."
-msgstr ""
+msgstr "名称匹配失败。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:74
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "Rename Report"
-msgstr ""
+msgstr "重命名报告"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:110
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "For object \"{0}\""
-msgstr ""
+msgstr "对于物体“{0}”"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:113
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "For object \"{0}\" (Old name: \"{1}\")"
-msgstr ""
+msgstr "对于物体“{0}” (旧名称：“{1}”)"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:397
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "Group match lost."
-msgstr ""
+msgstr "组匹配失败。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:128
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "ERROR"
-msgstr ""
+msgstr "错误"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:130
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "WARN"
-msgstr ""
+msgstr "警告"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:132
 msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
 msgid "INFO"
-msgstr ""
+msgstr "信息"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:546
 msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
 msgid "No matched info."
-msgstr ""
+msgstr "没有匹配的信息。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:656
 msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
 msgid "No matched info."
-msgstr ""
+msgstr "没有匹配的信息。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:345
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "A Multi-grouping Unique Component."
-msgstr ""
+msgstr "多重归组的唯一机关。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:359
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "Component detected. But couldn't get sector from CKGroup data."
-msgstr ""
+msgstr "检测到机关，但是无法从归组数据中获取小节号。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:369
-#, fuzzy
-#| msgid "Nong Components"
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "A Multi-grouping Component."
-msgstr "脓机关"
+msgstr "多重归组的机关。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:448
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "No matched info."
-msgstr ""
+msgstr "没有匹配的信息。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:340
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid "The match of Unique Component lost."
-msgstr ""
+msgstr "匹配唯一机关失败。"
 
 #: extensions/user_default/bbp_ng/UTIL_naming_convension.py:387
 msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
 msgid ""
 "Can't distinguish object between Floors and Rails. Suppose it is Floors."
-msgstr ""
+msgstr "无法区分物体时路面还是钢轨，假定为路面。"
 
 #: extensions/user_default/bbp_ng/UTIL_virtools_types.py:266
 msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
 msgid "annoymous"
-msgstr ""
+msgstr "匿名"
 
 #: extensions/user_default/bbp_ng/__init__.py:130
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgctxt "BBP/__init__.menu_drawer_import()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
-msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性的)"
+msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性)"
 
 #: extensions/user_default/bbp_ng/__init__.py:143
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgctxt "BBP/__init__.menu_drawer_export()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
-msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性的)"
+msgstr "Virtools 文件 (.nmo/.cmo/.vmo) (实验性)"
 
 #: extensions/user_default/bbp_ng/__init__.py:154
-#, fuzzy
-#| msgid "Ballance"
 msgctxt "BBP/__init__.menu_drawer_add()"
 msgid "Ballance"
 msgstr "Ballance"
 
 #: extensions/user_default/bbp_ng/__init__.py:170
-#, fuzzy
-#| msgid "Virtools Group"
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Virtools Group"
 msgstr "Virtools 组"
 
 #: extensions/user_default/bbp_ng/__init__.py:172
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Group into..."
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Group into..."
-msgstr "归组至…"
+msgstr "归组到..."
 
 #: extensions/user_default/bbp_ng/__init__.py:175
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Ungroup from..."
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Ungroup from..."
-msgstr "取消归组…"
+msgstr "取消归组自..."
 
 #: extensions/user_default/bbp_ng/__init__.py:178
-#, fuzzy
-#| msgctxt "Operator"
-#| msgid "Clear All Groups"
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Clear All Groups"
 msgstr "清除归组"
 
 #: extensions/user_default/bbp_ng/__init__.py:184
-#, fuzzy
-#| msgid "Ballance"
 msgctxt "BBP/__init__.menu_drawer_snoop_then_conv()"
 msgid "Ballance"
 msgstr "Ballance"
 
 #: extensions/user_default/bbp_ng/__init__.py:195
-#, fuzzy
-#| msgid "Ballance"
 msgctxt "BBP/__init__.menu_drawer_naming_convention()"
 msgid "Ballance"
 msgstr "Ballance"
 
 #: extensions/user_default/bbp_ng/__init__.py:42
-#, fuzzy
-#| msgid "UV"
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "UV"
 msgstr "UV"
 
 #: extensions/user_default/bbp_ng/__init__.py:46
-#, fuzzy
-#| msgid "Align"
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Align"
 msgstr "对齐"
 
 #: extensions/user_default/bbp_ng/__init__.py:49
-#, fuzzy
-#| msgid "Select"
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Select"
 msgstr "选择"
 
 #: extensions/user_default/bbp_ng/__init__.py:52
-#, fuzzy
-#| msgid "Material"
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Material"
 msgstr "材质"
 
 #: extensions/user_default/bbp_ng/__init__.py:74
-#, fuzzy
-#| msgid "Sections"
 msgctxt "BBP_MT_AddRailMenu/draw"
 msgid "Sections"
-msgstr "片段"
+msgstr "截面"
 
 #: extensions/user_default/bbp_ng/__init__.py:79
-#, fuzzy
-#| msgid "Straight Rails"
 msgctxt "BBP_MT_AddRailMenu/draw"
 msgid "Straight Rails"
-msgstr "直线轨道"
+msgstr "直线钢轨"
 
 #: extensions/user_default/bbp_ng/__init__.py:85
-#, fuzzy
-#| msgid "Curve Rails"
 msgctxt "BBP_MT_AddRailMenu/draw"
 msgid "Curve Rails"
-msgstr "曲线轨道"
+msgstr "曲线钢轨"
 
 #: extensions/user_default/bbp_ng/__init__.py:99
-#, fuzzy
-#| msgid "Basic Components"
 msgctxt "BBP_MT_AddComponentsMenu/draw"
 msgid "Basic Components"
 msgstr "基础机关"
 
 #: extensions/user_default/bbp_ng/__init__.py:103
-#, fuzzy
-#| msgid "Nong Components"
 msgctxt "BBP_MT_AddComponentsMenu/draw"
 msgid "Nong Components"
 msgstr "脓机关"
 
 #: extensions/user_default/bbp_ng/__init__.py:108
-#, fuzzy
-#| msgid "Series Components"
 msgctxt "BBP_MT_AddComponentsMenu/draw"
 msgid "Series Components"
-msgstr "多重机关"
+msgstr "机关序列"
 
 #: extensions/user_default/bbp_ng/__init__.py:114
-#, fuzzy
-#| msgid "Components Pair"
 msgctxt "BBP_MT_AddComponentsMenu/draw"
 msgid "Components Pair"
-msgstr "机关组合"
+msgstr "机关对"
 
 #: Add-on Ballance Blender Plugin info: name
 msgid "Ballance Blender Plugin"
