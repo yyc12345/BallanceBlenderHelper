@@ -6,7 +6,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "bbp_ng"
-version = "4.1.0"
+version = "4.2.0"
 name = "Ballance Blender Plugin"
 tagline = "The specialized add-on served for creating game map of Ballance"
 maintainer = "yyc12345 <yyc12321@outlook.com>"

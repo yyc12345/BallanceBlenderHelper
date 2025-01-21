@@ -1,9 +1,9 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ballance Blender Plugin 4.1.0 (0)\n"
+"Project-Id-Version: Ballance Blender Plugin 4.2.0 (0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 22:23+0800\n"
+"POT-Creation-Date: 2025-01-21 09:59+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -652,7 +652,7 @@ msgstr "PR_Resetpoint (重生点)"
 #. :src: bpy.types.BBP_OT_add_component.component_type:'26'
 msgctxt "BBP_OT_add_component/property"
 msgid "PS_FourFlames"
-msgstr "PS_FourFlames (起始盘点)"
+msgstr "PS_FourFlames (出生盘点)"
 
 #. :src: bpy.types.BBP_OT_add_ioport_encodings
 msgctxt "BBP_OT_add_ioport_encodings"
@@ -3172,47 +3172,47 @@ msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Prototype Configurations"
 msgstr "原型配置"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:280
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:285
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Extra Transform"
 msgstr "额外变换"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:282
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:287
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Translation"
 msgstr "移动"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:286
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:291
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Rotation"
 msgstr "旋转"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:269
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:274
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Top"
 msgstr "顶"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:270
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:275
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Front"
 msgstr "前"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:271
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:276
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Left"
 msgstr "左"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:273
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:278
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Right"
 msgstr "右"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:274
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:279
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Back"
 msgstr "后"
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:275
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:280
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Bottom"
 msgstr "底"
