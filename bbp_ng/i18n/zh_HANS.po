@@ -1281,8 +1281,8 @@ msgid ""
 "SetGlobalImagesSaveOptions. (Not valid when using CKContext::"
 "SetImagesSaveOptions). "
 msgstr ""
-"使用全局设置，即使用 CKContext::SetGlobalImagesSaveOptions 给出的设置。（使"
-"用 CKContext::SetImagesSaveOptions 时无效）。 "
+"使用全局设置，即使用 CKContext::SetGlobalImagesSaveOptions 给出的设置。(使用 "
+"CKContext::SetImagesSaveOptions 时无效)。 "
 
 #. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
 #. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'4'
@@ -2143,7 +2143,7 @@ msgstr "透明度测试函数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func
 msgid "Alpha comparision function"
-msgstr "比较 Alpha 值的函数"
+msgstr "比较透明度的函数"
 
 #. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
 #. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
@@ -2895,7 +2895,7 @@ msgstr "32 位 ARGB8888"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
 msgid "32-bit ARGB pixel format with alpha "
-msgstr "32位 ARGB 像素格式 (带 Alpha) "
+msgstr "32位 ARGB 像素格式 (带透明度) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
 msgctxt "BBP_PG_virtools_texture/property"
@@ -2904,7 +2904,7 @@ msgstr "32 位 RGB888"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
 msgid "32-bit RGB pixel format without alpha "
-msgstr "32位 RGB 像素格式 (无 Alpha) "
+msgstr "32位 RGB 像素格式 (无透明度) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
 msgctxt "BBP_PG_virtools_texture/property"
@@ -2940,7 +2940,7 @@ msgstr "16 位 ARGB1555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
 msgid "16-bit ARGB pixel format (5 bits per color + 1 bit for alpha) "
-msgstr "16位 ARGB 像素格式 (颜色占 5 位 + Alpha 占 1 位) "
+msgstr "16位 ARGB 像素格式 (颜色占 5 位 + 透明度占 1 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
 msgctxt "BBP_PG_virtools_texture/property"
@@ -3039,7 +3039,7 @@ msgstr "16 位 ABGR1555"
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
 msgid "16-bit ABGR pixel format (5 bits per color + 1 bit for alpha) "
-msgstr "16位 ABGR 像素格式 (颜色占 5 位 + Alpha 占 1 位) "
+msgstr "16位 ABGR 像素格式 (颜色占 5 位 + 透明度占 1 位) "
 
 #. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
 msgctxt "BBP_PG_virtools_texture/property"
