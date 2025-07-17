@@ -1,4 +1,4 @@
-# Full context are copied from https://docs.blender.org/manual/en/dev/extensions/getting_started.html
+# Full context are copied from https://docs.blender.org/manual/en/latest/advanced/extensions/getting_started.html
 # Please note any update of this manifest
 
 schema_version = "1.0.0"
@@ -6,7 +6,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "bbp_ng"
-version = "4.2.0"
+version = "4.3.0"
 name = "Ballance Blender Plugin"
 tagline = "The specialized add-on served for creating game map of Ballance"
 maintainer = "yyc12345 <yyc12321@outlook.com>"
@@ -20,7 +20,7 @@ website = "https://github.com/yyc12345/BallanceBlenderHelper"
 # https://docs.blender.org/manual/en/dev/advanced/extensions/tags.html
 tags = ["Object", "Mesh", "UV", "Import-Export"]
 
-blender_version_min = "4.2.0"
+blender_version_min = "4.5.0"
 # # Optional: Blender version that the extension does not support, earlier versions are supported.
 # # This can be omitted and defined later on the extensions platform if an issue is found.
 # blender_version_max = "5.1.0"
