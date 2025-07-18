@@ -579,9 +579,9 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
         # but it is different in FourFlams and TwoFlams
         resetp_offset: float
         if checkp_ty == PROP_ballance_element.BallanceElementType.PS_FourFlames:
-            resetp_offset = 3.25
+            resetp_offset = 3.65
         else:
-            resetp_offset = 2.0
+            resetp_offset = 3.3258
 
         # add elements
         # create checkpoint
