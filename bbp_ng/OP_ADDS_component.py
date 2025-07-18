@@ -574,14 +574,17 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
         # get type and sector data first
         (checkp_ty, checkp_sector) = self.__get_checkpoint()
         (resetp_ty, resetp_sector) = self.__get_resetpoint()
-        # calc resetpoint offset
-        # resetpoint need a extra offset between checkpoint
-        # but it is different in FourFlams and TwoFlams
+        # calc resetpoint offset and checkpoint rotation
+        # resetpoint need a extra offset between checkpoint but it is different in FourFlams and TwoFlams.
+        # 4 flames startpoint need a extra 90 degree rotation to correspond with ballance asset library (and the direction of resetpoint).
         resetp_offset: float
+        checkp_degree: float
         if checkp_ty == PROP_ballance_element.BallanceElementType.PS_FourFlames:
             resetp_offset = 3.65
+            checkp_degree = 90
         else:
             resetp_offset = 3.3258
+            checkp_degree = 0
 
         # add elements
         # create checkpoint
@@ -590,7 +593,7 @@ class BBP_OT_add_sector_component_pair(bpy.types.Operator, ComponentSectorParam)
             checkp_ty,
             checkp_sector,
             1,  # only create one
-            lambda _: mathutils.Matrix.Identity(4)
+            lambda _: mathutils.Matrix.Rotation(math.radians(checkp_degree), 4, 'Z')
         )
         # create resetpoint
         creator.create_component(
