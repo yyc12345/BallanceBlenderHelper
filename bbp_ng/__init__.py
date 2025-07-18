@@ -23,7 +23,7 @@ from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, P
 from . import PROP_ballance_element, PROP_bme_material, PROP_ballance_map_info
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
-from . import OP_MTL_fix_material
+from . import OP_MTL_fix_materials
 from . import OP_ADDS_component, OP_ADDS_bme, OP_ADDS_rail
 from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_snoop_group_then_to_mesh, OP_OBJECT_naming_convention
 
@@ -50,7 +50,7 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout.operator(OP_OBJECT_virtools_group.BBP_OT_select_object_by_virtools_group.bl_idname)
         layout.separator()
         layout.label(text='Material', icon='MATERIAL', text_ctxt='BBP_MT_View3DMenu/draw')
-        layout.operator(OP_MTL_fix_material.BBP_OT_fix_all_material.bl_idname)
+        layout.operator(OP_MTL_fix_materials.BBP_OT_fix_all_materials.bl_idname)
 
 class BBP_MT_AddBmeMenu(bpy.types.Menu):
     """Add Ballance Floor"""
@@ -256,7 +256,7 @@ def register() -> None:
     OP_UV_rail_uv.register()
     OP_UV_flatten_uv.register()
 
-    OP_MTL_fix_material.register()
+    OP_MTL_fix_materials.register()
 
     OP_ADDS_component.register()
     OP_ADDS_bme.register()
@@ -297,7 +297,7 @@ def unregister() -> None:
     OP_ADDS_bme.unregister()
     OP_ADDS_component.unregister()
 
-    OP_MTL_fix_material.unregister()
+    OP_MTL_fix_materials.unregister()
 
     OP_UV_flatten_uv.unregister()
     OP_UV_rail_uv.unregister()

@@ -1,6 +1,6 @@
 import bpy, bmesh, mathutils, math
 import typing
-from . import UTIL_functions, UTIL_naming_convension
+from . import UTIL_functions, UTIL_naming_convention
 from . import PROP_bme_material
 
 #region BMesh Operations Helper
@@ -132,16 +132,16 @@ def rail_creator_wrapper(fct_poly_cret: typing.Callable[[bmesh.types.BMesh], Non
 
     # create object and assoc with it
     # create info first
-    rail_info: UTIL_naming_convension.BallanceObjectInfo = UTIL_naming_convension.BallanceObjectInfo.create_from_others(
-        UTIL_naming_convension.BallanceObjectType.RAIL
+    rail_info: UTIL_naming_convention.BallanceObjectInfo = UTIL_naming_convention.BallanceObjectInfo.create_from_others(
+        UTIL_naming_convention.BallanceObjectType.RAIL
     )
     # then get object name
-    rail_name: str | None = UTIL_naming_convension.YYCToolchainConvention.set_to_name(rail_info, None)
+    rail_name: str | None = UTIL_naming_convention.YYCToolchainConvention.set_to_name(rail_info, None)
     if rail_name is None: raise UTIL_functions.BBPException('impossible null name')
     # create object by name
     obj: bpy.types.Object = bpy.data.objects.new(rail_name, mesh)
     # assign virtools groups
-    UTIL_naming_convension.VirtoolsGroupConvention.set_to_object(obj, rail_info, None)
+    UTIL_naming_convention.VirtoolsGroupConvention.set_to_object(obj, rail_info, None)
 
     # move to cursor
     UTIL_functions.add_into_scene_and_move_to_cursor(obj)

@@ -72,7 +72,7 @@ class RenameErrorReporter():
         print('============')
         print(bpy.app.translations.pgettext_rpt(
             'Rename Report',
-            'BBP/UTIL_naming_convension.RenameErrorReporter'
+            'BBP/UTIL_naming_convention.RenameErrorReporter'
         ))
         print('------------')
         # return self as context
@@ -82,7 +82,7 @@ class RenameErrorReporter():
         # print console report tail
         print('------------')
         tr_text: str = bpy.app.translations.pgettext_rpt(
-            'All / Failed - {0} / {1}', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            'All / Failed - {0} / {1}', 'BBP/UTIL_naming_convention.RenameErrorReporter')
         print(tr_text.format(self.mAllObjCounter, self.mFailedObjCounter))
         print('============')
         # reset variables
@@ -107,10 +107,10 @@ class RenameErrorReporter():
         tr_text: str
         new_name: str = obj.name
         if self.mOldName == new_name:
-            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}"', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}"', 'BBP/UTIL_naming_convention.RenameErrorReporter')
             print(tr_text.format(new_name))
         else:
-            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}" (Old name: "{1}")', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+            tr_text = bpy.app.translations.pgettext_rpt('For object "{0}" (Old name: "{1}")', 'BBP/UTIL_naming_convention.RenameErrorReporter')
             print(tr_text.format(new_name, self.mOldName))
 
         # output error list with indent
@@ -125,11 +125,11 @@ class RenameErrorReporter():
     def __errtype_to_string(err_v: _RenameErrorType) -> str:
         match(err_v):
             case _RenameErrorType.ERROR:
-                return bpy.app.translations.pgettext_rpt('ERROR', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+                return bpy.app.translations.pgettext_rpt('ERROR', 'BBP/UTIL_naming_convention.RenameErrorReporter')
             case _RenameErrorType.WARNING:
-                return bpy.app.translations.pgettext_rpt('WARN', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+                return bpy.app.translations.pgettext_rpt('WARN', 'BBP/UTIL_naming_convention.RenameErrorReporter')
             case _RenameErrorType.INFO:
-                return bpy.app.translations.pgettext_rpt('INFO', 'BBP/UTIL_naming_convension.RenameErrorReporter')
+                return bpy.app.translations.pgettext_rpt('INFO', 'BBP/UTIL_naming_convention.RenameErrorReporter')
             case _: raise UTIL_functions.BBPException("Unknown error type.")
     @staticmethod
     def __erritem_to_string(item: _RenameErrorItem) -> str:
@@ -292,7 +292,7 @@ class VirtoolsGroupConvention():
             )
         
         tr_text: str = bpy.app.translations.pgettext_rpt(
-            "PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+            "PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
         if reporter: reporter.add_error(tr_text)
         return None
     
@@ -337,12 +337,12 @@ class VirtoolsGroupConvention():
                         return VirtoolsGroupConvention.__get_pcpr_from_name(obj.name, reporter)
                     case _:
                         tr_text = bpy.app.translations.pgettext_rpt(
-                            "The match of Unique Component lost.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                            "The match of Unique Component lost.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                         if reporter: reporter.add_error(tr_text)
                         return None
             elif len(inter_gps) != 0:
                 tr_text = bpy.app.translations.pgettext_rpt(
-                    "A Multi-grouping Unique Component.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                    "A Multi-grouping Unique Component.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                 if reporter: reporter.add_error(tr_text)
                 return None
             
@@ -356,7 +356,7 @@ class VirtoolsGroupConvention():
                 if gotten_sector is None:
                     # fail to get sector
                     tr_text = bpy.app.translations.pgettext_rpt(
-                        "Component detected. But couldn't get sector from CKGroup data.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                        "Component detected. But couldn't get sector from CKGroup data.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                     if reporter: reporter.add_error(tr_text)
                     return None
                 return BallanceObjectInfo.create_from_component(
@@ -366,7 +366,7 @@ class VirtoolsGroupConvention():
             elif len(inter_gps) != 0:
                 # must be a weird grouping, report it
                 tr_text = bpy.app.translations.pgettext_rpt(
-                    "A Multi-grouping Component.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                    "A Multi-grouping Component.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                 if reporter: reporter.add_error(tr_text)
                 return None
 
@@ -384,7 +384,7 @@ class VirtoolsGroupConvention():
                     return BallanceObjectInfo.create_from_others(BallanceObjectType.WOOD)
                 else:
                     tr_text = bpy.app.translations.pgettext_rpt(
-                        "Can't distinguish object between Floors and Rails. Suppose it is Floors.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                        "Can't distinguish object between Floors and Rails. Suppose it is Floors.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                     if reporter: reporter.add_warning(tr_text)
                     return BallanceObjectInfo.create_from_others(BallanceObjectType.FLOOR)
             elif gp.contain_group('Phys_FloorStopper'):
@@ -394,7 +394,7 @@ class VirtoolsGroupConvention():
 
             # no matched
             tr_text = bpy.app.translations.pgettext_rpt(
-                "Group match lost.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                "Group match lost.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
             if reporter: reporter.add_error(tr_text)
             return None
 
@@ -445,7 +445,7 @@ class VirtoolsGroupConvention():
 
                 case _:
                     tr_text: str = bpy.app.translations.pgettext_rpt(
-                        "No matched info.", 'BBP/UTIL_naming_convension.VirtoolsGroupConvention')
+                        "No matched info.", 'BBP/UTIL_naming_convention.VirtoolsGroupConvention')
                     if reporter: reporter.add_error(tr_text)
                     return False
                 
@@ -499,7 +499,7 @@ class YYCToolchainConvention():
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
         tr_text: str = bpy.app.translations.pgettext_rpt(
-            "Name match lost.", 'BBP/UTIL_naming_convension.YYCToolchainConvention')
+            "Name match lost.", 'BBP/UTIL_naming_convention.YYCToolchainConvention')
         if reporter: reporter.add_error(tr_text)
         return None
 
@@ -543,7 +543,7 @@ class YYCToolchainConvention():
                 
             case _:
                 tr_text: str = bpy.app.translations.pgettext_rpt(
-                    "No matched info.", 'BBP/UTIL_naming_convension.YYCToolchainConvention')
+                    "No matched info.", 'BBP/UTIL_naming_convention.YYCToolchainConvention')
                 if reporter: reporter.add_error(tr_text)
                 return None
             
@@ -607,7 +607,7 @@ class ImengyuConvention():
             return BallanceObjectInfo.create_from_others(BallanceObjectType.SKYLAYER)
 
         tr_text: str = bpy.app.translations.pgettext_rpt(
-            "Name match lost.", 'BBP/UTIL_naming_convension.ImengyuConvention')
+            "Name match lost.", 'BBP/UTIL_naming_convention.ImengyuConvention')
         if reporter: reporter.add_error(tr_text)
         return None
 
@@ -653,7 +653,7 @@ class ImengyuConvention():
                 
             case _:
                 tr_text: str = bpy.app.translations.pgettext_rpt(
-                    "No matched info.", 'BBP/UTIL_naming_convension.ImengyuConvention')
+                    "No matched info.", 'BBP/UTIL_naming_convention.ImengyuConvention')
                 if reporter: reporter.add_error(tr_text)
                 return None
             

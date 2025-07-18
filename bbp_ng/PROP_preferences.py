@@ -1,6 +1,6 @@
 import bpy
 import os, typing
-from . import UTIL_naming_convension
+from . import UTIL_naming_convention
 
 class RawPreferences():
     cBallanceTextureFolder: typing.ClassVar[str] = ""

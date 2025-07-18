@@ -1,8 +1,8 @@
 import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
-from . import PROP_preferences, UTIL_ioport_shared
-from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_naming_convension
+from . import PROP_preferences, UTIL_ioport_shared, UTIL_naming_convention
+from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light
 from .PyBMap import bmap_wrapper as bmap
 
@@ -190,7 +190,7 @@ def _export_virtools_groups(
     # So we create all needed sector group in here to make sure exported virtools file can be read by Ballancde correctly.
     if successive_sector:
         for i in range(successive_sector_count):
-            gp_name: str = UTIL_naming_convension.build_name_from_sector_index(i + 1)
+            gp_name: str = UTIL_naming_convention.build_name_from_sector_index(i + 1)
             vtgroup: bmap.BMGroup | None = group_cret_map.get(gp_name, None)
             if vtgroup is None:
                 vtgroup = writer.create_group()

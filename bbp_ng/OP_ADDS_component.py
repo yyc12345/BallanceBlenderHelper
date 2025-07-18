@@ -1,6 +1,6 @@
 import bpy, mathutils
 import math, typing
-from . import UTIL_functions, UTIL_icons_manager, UTIL_naming_convension
+from . import UTIL_functions, UTIL_icons_manager, UTIL_naming_convention
 from . import PROP_ballance_element, PROP_virtools_group, PROP_ballance_map_info
 
 #region Param Help Classes
@@ -41,33 +41,33 @@ class ComponentCountParam():
 
 #region Help Classes & Functions
 
-def _get_component_info(comp_type: PROP_ballance_element.BallanceElementType, comp_sector: int) -> UTIL_naming_convension.BallanceObjectInfo:
+def _get_component_info(comp_type: PROP_ballance_element.BallanceElementType, comp_sector: int) -> UTIL_naming_convention.BallanceObjectInfo:
     match(comp_type):
         # process for 2 special unique components
         case PROP_ballance_element.BallanceElementType.PS_FourFlames:
-            return UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.LEVEL_START)
+            return UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.LEVEL_START)
         case PROP_ballance_element.BallanceElementType.PE_Balloon:
-            return UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.LEVEL_END)
+            return UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.LEVEL_END)
         # process naming convention required special components
         case PROP_ballance_element.BallanceElementType.PC_TwoFlames:
-            return UTIL_naming_convension.BallanceObjectInfo.create_from_checkpoint(comp_sector)
+            return UTIL_naming_convention.BallanceObjectInfo.create_from_checkpoint(comp_sector)
         case PROP_ballance_element.BallanceElementType.PR_Resetpoint:
-            return UTIL_naming_convension.BallanceObjectInfo.create_from_resetpoint(comp_sector)
+            return UTIL_naming_convention.BallanceObjectInfo.create_from_resetpoint(comp_sector)
         # process for other components
         case _:
-            return UTIL_naming_convension.BallanceObjectInfo.create_from_component(
+            return UTIL_naming_convention.BallanceObjectInfo.create_from_component(
                 PROP_ballance_element.get_ballance_element_name(comp_type), 
                 comp_sector
             )
     
-def _set_component_by_info(obj: bpy.types.Object, info: UTIL_naming_convension.BallanceObjectInfo) -> None:
+def _set_component_by_info(obj: bpy.types.Object, info: UTIL_naming_convention.BallanceObjectInfo) -> None:
     # set component name and grouping it into virtools group at the same time
     # set name first
-    if not UTIL_naming_convension.YYCToolchainConvention.set_to_object(obj, info, None):
+    if not UTIL_naming_convention.YYCToolchainConvention.set_to_object(obj, info, None):
         raise UTIL_functions.BBPException('impossible fail to set component name.')
 
     # set vt group next
-    if not UTIL_naming_convension.VirtoolsGroupConvention.set_to_object(obj, info, None):
+    if not UTIL_naming_convention.VirtoolsGroupConvention.set_to_object(obj, info, None):
         raise UTIL_functions.BBPException('impossible fail to set component virtools groups.')
 
 def _check_component_existance(comp_type: PROP_ballance_element.BallanceElementType, comp_sector: int) -> str | None:
@@ -85,10 +85,10 @@ def _check_component_existance(comp_type: PROP_ballance_element.BallanceElementT
             return None # return, do not check
     
     # get info
-    comp_info: UTIL_naming_convension.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
+    comp_info: UTIL_naming_convention.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
     
     # get expected name
-    expect_name: str | None = UTIL_naming_convension.YYCToolchainConvention.set_to_name(comp_info, None)
+    expect_name: str | None = UTIL_naming_convention.YYCToolchainConvention.set_to_name(comp_info, None)
     if expect_name is None:
         raise UTIL_functions.BBPException('impossible fail to get component name.')
     
@@ -129,7 +129,7 @@ class _GeneralComponentCreator():
         @return The created component instance.
         """
         # get element info first
-        ele_info: UTIL_naming_convension.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
+        ele_info: UTIL_naming_convention.BallanceObjectInfo = _get_component_info(comp_type, comp_sector)
         
         # create blc element context
         with PROP_ballance_element.BallanceElementsHelper(bpy.context.scene) as creator:
@@ -152,12 +152,12 @@ class _GeneralComponentCreator():
         enlarged_sector: int
         # check component type to get enlarged value
         match(ele_info.mBasicType):
-            case UTIL_naming_convension.BallanceObjectType.COMPONENT:
+            case UTIL_naming_convention.BallanceObjectType.COMPONENT:
                 enlarged_sector = comp_sector
-            case UTIL_naming_convension.BallanceObjectType.CHECKPOINT:
+            case UTIL_naming_convention.BallanceObjectType.CHECKPOINT:
                 # checkpoint 1 means that there is sector 2, so we plus 1 for it.
                 enlarged_sector = comp_sector + 1
-            case UTIL_naming_convension.BallanceObjectType.RESETPOINT:
+            case UTIL_naming_convention.BallanceObjectType.RESETPOINT:
                 enlarged_sector = comp_sector
             case _:
                 # this component is not a sector based component

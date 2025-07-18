@@ -1,8 +1,8 @@
 import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
-from . import PROP_preferences, UTIL_ioport_shared
-from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture, UTIL_naming_convension
+from . import PROP_preferences, UTIL_ioport_shared, UTIL_naming_convention
+from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light, PROP_ballance_map_info
 from .PyBMap import bmap_wrapper as bmap
 
@@ -432,7 +432,7 @@ def _import_virtools_groups(
         if group_name is None: continue
 
         # try extracting sector info
-        potential_sector_count: int | None = UTIL_naming_convension.extract_sector_from_name(group_name)
+        potential_sector_count: int | None = UTIL_naming_convention.extract_sector_from_name(group_name)
         if potential_sector_count is not None:
             sector_count = max(sector_count, potential_sector_count)
 

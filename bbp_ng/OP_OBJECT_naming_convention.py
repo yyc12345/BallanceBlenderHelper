@@ -1,6 +1,6 @@
 import bpy
 import typing
-from . import UTIL_naming_convension, UTIL_functions, UTIL_icons_manager
+from . import UTIL_functions, UTIL_icons_manager, UTIL_naming_convention
 
 class BBP_OT_regulate_objects_name(bpy.types.Operator):
     """Regulate Objects Name by Virtools Group and Naming Convention"""
@@ -15,8 +15,8 @@ class BBP_OT_regulate_objects_name(bpy.types.Operator):
 
     def execute(self, context):
         _rename_core(
-            UTIL_naming_convension.VirtoolsGroupConvention.parse_from_object,
-            UTIL_naming_convension.YYCToolchainConvention.set_to_object
+            UTIL_naming_convention.VirtoolsGroupConvention.parse_from_object,
+            UTIL_naming_convention.YYCToolchainConvention.set_to_object
         )
         return {'FINISHED'}
 
@@ -33,8 +33,8 @@ class BBP_OT_auto_grouping(bpy.types.Operator):
 
     def execute(self, context):
         _rename_core(
-            UTIL_naming_convension.YYCToolchainConvention.parse_from_object,
-            UTIL_naming_convension.VirtoolsGroupConvention.set_to_object
+            UTIL_naming_convention.YYCToolchainConvention.parse_from_object,
+            UTIL_naming_convention.VirtoolsGroupConvention.set_to_object
         )
         return {'FINISHED'}
 
@@ -51,26 +51,26 @@ class BBP_OT_convert_to_imengyu(bpy.types.Operator):
 
     def execute(self, context):
         _rename_core(
-            UTIL_naming_convension.YYCToolchainConvention.parse_from_object,
-            UTIL_naming_convension.ImengyuConvention.set_to_object
+            UTIL_naming_convention.YYCToolchainConvention.parse_from_object,
+            UTIL_naming_convention.ImengyuConvention.set_to_object
         )
         return {'FINISHED'}
 
 def _rename_core(
-    fct_get_info: typing.Callable[[bpy.types.Object, UTIL_naming_convension.RenameErrorReporter], UTIL_naming_convension.BallanceObjectInfo | None],
-    ftc_set_info: typing.Callable[[bpy.types.Object, UTIL_naming_convension.BallanceObjectInfo, UTIL_naming_convension.RenameErrorReporter], bool]
+    fct_get_info: typing.Callable[[bpy.types.Object, UTIL_naming_convention.RenameErrorReporter], UTIL_naming_convention.BallanceObjectInfo | None],
+    ftc_set_info: typing.Callable[[bpy.types.Object, UTIL_naming_convention.BallanceObjectInfo, UTIL_naming_convention.RenameErrorReporter], bool]
     ) -> None:
     # get selected objects. allow nested collection
     selected_objects: typing.Iterable[bpy.types.Object] = bpy.context.view_layer.active_layer_collection.collection.all_objects
     
     # create reporter
-    with UTIL_naming_convension.RenameErrorReporter() as reporter:
+    with UTIL_naming_convention.RenameErrorReporter() as reporter:
         # iterate objects
         for obj in selected_objects:
             reporter.enter_object(obj)
             
             # try get info
-            info: UTIL_naming_convension.BallanceObjectInfo | None = fct_get_info(obj, reporter)
+            info: UTIL_naming_convention.BallanceObjectInfo | None = fct_get_info(obj, reporter)
             if info is not None:
                 # if info is valid, try assign it
                 if not ftc_set_info(obj, info, reporter):

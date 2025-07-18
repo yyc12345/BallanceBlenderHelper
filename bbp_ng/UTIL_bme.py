@@ -1,7 +1,7 @@
 import bpy, mathutils
 import os, json, enum, typing, math
-from . import PROP_virtools_group, PROP_bme_material
-from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh, UTIL_virtools_types, UTIL_naming_convension
+from . import PROP_virtools_group, PROP_bme_material, UTIL_naming_convention
+from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh, UTIL_virtools_types
 
 ## NOTE: Outside caller should use BME struct's unique indetifier to visit each prototype
 #  and drive this class' functions to work.
@@ -271,23 +271,23 @@ def create_bme_struct_wrapper(ident: str, cfgs: dict[str, typing.Any]) -> bpy.ty
     
     # create object and assign prop
     # get obj info first
-    obj_info: UTIL_naming_convension.BallanceObjectInfo
+    obj_info: UTIL_naming_convention.BallanceObjectInfo
     match(PrototypeShowcaseTypes(proto[TOKEN_SHOWCASE][TOKEN_SHOWCASE_TYPE])):
         case PrototypeShowcaseTypes.No:
-            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.DECORATION)
+            obj_info = UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.DECORATION)
         case PrototypeShowcaseTypes.Floor:
-            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.FLOOR)
+            obj_info = UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.FLOOR)
         case PrototypeShowcaseTypes.Rail:
-            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.RAIL)
+            obj_info = UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.RAIL)
         case PrototypeShowcaseTypes.Wood:
-            obj_info = UTIL_naming_convension.BallanceObjectInfo.create_from_others(UTIL_naming_convension.BallanceObjectType.WOOD)
+            obj_info = UTIL_naming_convention.BallanceObjectInfo.create_from_others(UTIL_naming_convention.BallanceObjectType.WOOD)
     # then get object name
-    obj_name: str | None = UTIL_naming_convension.YYCToolchainConvention.set_to_name(obj_info, None)
+    obj_name: str | None = UTIL_naming_convention.YYCToolchainConvention.set_to_name(obj_info, None)
     if obj_name is None: raise UTIL_functions.BBPException('impossible null name')
     # create object by name
     obj: bpy.types.Object = bpy.data.objects.new(obj_name, mesh)
     # assign virtools groups
-    UTIL_naming_convension.VirtoolsGroupConvention.set_to_object(obj, obj_info, None)
+    UTIL_naming_convention.VirtoolsGroupConvention.set_to_object(obj, obj_info, None)
     
     # return object
     return obj

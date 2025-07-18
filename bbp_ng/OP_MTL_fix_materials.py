@@ -2,12 +2,12 @@ import bpy
 from . import UTIL_functions
 from . import PROP_virtools_material, PROP_preferences
 
-class BBP_OT_fix_all_material(bpy.types.Operator):
+class BBP_OT_fix_all_materials(bpy.types.Operator):
     """Fix All Materials by Its Referred Ballance Texture Name."""
-    bl_idname = "bbp.fix_all_material"
+    bl_idname = "bbp.fix_all_materials"
     bl_label = "Fix All Materials"
     bl_options = {'UNDO'}
-    bl_translation_context = 'BBP_OT_fix_all_material'
+    bl_translation_context = 'BBP_OT_fix_all_materials'
     
     @classmethod
     def poll(cls, context):
@@ -31,12 +31,12 @@ class BBP_OT_fix_all_material(bpy.types.Operator):
 
         # report and return
         tr_text: str = bpy.app.translations.pgettext_rpt(
-            'Fix {0}/{1} materials.', 'BBP_OT_fix_all_material/draw')
+            'Fix {0}/{1} materials.', 'BBP_OT_fix_all_materials/draw')
         self.report({'INFO'}, tr_text.format(counter_suc, counter_all))
         return {'FINISHED'}
 
 def register() -> None:
-    bpy.utils.register_class(BBP_OT_fix_all_material)
+    bpy.utils.register_class(BBP_OT_fix_all_materials)
 
 def unregister() -> None:
-    bpy.utils.unregister_class(BBP_OT_fix_all_material)
+    bpy.utils.unregister_class(BBP_OT_fix_all_materials)
