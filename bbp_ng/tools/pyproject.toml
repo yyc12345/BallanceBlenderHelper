@@ -1,0 +1,9 @@
+[project]
+name = "tools"
+version = "1.0.0"
+requires-python = ">=3.11"
+dependencies = [
+    "pillow==10.2.0",
+    "polib>=1.2.0",
+    "pydantic>=2.11.7",
+]
