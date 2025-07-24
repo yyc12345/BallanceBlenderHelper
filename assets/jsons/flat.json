@@ -1,0 +1,171 @@
+[
+    {
+        "identifier": "floor_flat",
+        "showcase": {
+            "title": "Flat",
+            "icon": "Flat",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "width_",
+                    "type": "float",
+                    "title": "Width",
+                    "desc": "The width of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, False, False)"
+                },
+                {
+                    "field": "is_sink_",
+                    "type": "float",
+                    "title": "Is Sink",
+                    "desc": "Whether this flat floor is used for sink floor.",
+                    "default": "False"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "width",
+                "data": "width_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            },
+            {
+                "field": "is_sink",
+                "data": "is_sink_"
+            }
+        ],
+        "skip": "length == 0.0 or width == 0.0",
+        "vars": [
+            {
+                "field": "sink",
+                "data": "0.7 if is_sink else 0"
+            },
+            {
+                "field": "uv_length",
+                "data": "length / 5.0"
+            },
+            {
+                "field": "uv_width",
+                "data": "width / 5.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "(0, 0, -sink)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, 0, -sink)"
+            },
+            {
+                "skip": "False",
+                "data": "(length, width, -sink)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, width, -sink)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face[0]",
+                "texture": "\"FloorTopBorderless\"",
+                "indices": [0, 1, 2, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_length, 0)",
+                    "(uv_length, uv_width)",
+                    "(0, uv_width)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": [
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[4]",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[2]",
+                "params": {
+                    "height": "height",
+                    "length": "width",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(0, width, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[3]",
+                "params": {
+                    "height": "height",
+                    "length": "width",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(length, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "raw_floor_side",
+                "skip": "not face[5]",
+                "params": {
+                    "height": "height",
+                    "length": "length",
+                    "is_left_sink": "is_sink",
+                    "is_right_sink": "is_sink"
+                },
+                "transform": "move(length, width, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "length",
+                    "width": "width"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    }
+]

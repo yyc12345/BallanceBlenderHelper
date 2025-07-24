@@ -1,0 +1,286 @@
+[
+    {
+        "identifier": "raw_trafo",
+        "showcase": null,
+        "params": [
+            {
+                "field": "trafo_texture",
+                "data": "\"BallWood\""
+            },
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, True, True, True)"
+            }
+        ],
+        "skip": "False",
+        "vars": [
+            {
+                "field": "uv_height",
+                "data": "height / 5.0"
+            }
+        ],
+        "vertices": [
+            {
+                "skip": "False",
+                "data": "(0, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 0, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 5, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 5, 0)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 0, -height)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 0, -height)"
+            },
+            {
+                "skip": "False",
+                "data": "(5, 5, -height)"
+            },
+            {
+                "skip": "False",
+                "data": "(0, 5, -height)"
+            }
+        ],
+        "faces": [
+            {
+                "skip": "not face[0]",
+                "texture": "trafo_texture",
+                "indices": [0, 1, 2, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[1]) or height == 0.0",
+                "texture": "trafo_texture",
+                "indices": [5, 4, 7, 6],
+                "uvs": [
+                    "(0, 0)",
+                    "(1, 0)",
+                    "(1, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[2]) or height == 0.0",
+                "texture": "trafo_texture",
+                "indices": [3, 7, 4, 0],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height, 0)",
+                    "(uv_height, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[3]) or height == 0.0",
+                "texture": "trafo_texture",
+                "indices": [1, 5, 6, 2],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height, 0)",
+                    "(uv_height, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[4]) or height == 0.0",
+                "texture": "trafo_texture",
+                "indices": [0, 4, 5, 1],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height, 0)",
+                    "(uv_height, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            },
+            {
+                "skip": "(not face[5]) or height == 0.0",
+                "texture": "trafo_texture",
+                "indices": [2, 6, 7, 3],
+                "uvs": [
+                    "(0, 0)",
+                    "(uv_height, 0)",
+                    "(uv_height, 1)",
+                    "(0, 1)"
+                ],
+                "normals": null
+            }
+        ],
+        "instances": []
+    },
+    {
+        "identifier": "wood_trafo",
+        "showcase": {
+            "title": "Wood Trafo",
+            "icon": "WoodTrafo",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallWood\"",
+                    "height": "height",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "stone_trafo",
+        "showcase": {
+            "title": "Stone Trafo",
+            "icon": "StoneTrafo",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallStone\"",
+                    "height": "height",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "paper_trafo",
+        "showcase": {
+            "title": "Paper Trafo",
+            "icon": "PaperTrafo",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_trafo",
+                "skip": "False",
+                "params": {
+                    "trafo_texture": "\"BallPaper\"",
+                    "height": "height",
+                    "face": "face"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

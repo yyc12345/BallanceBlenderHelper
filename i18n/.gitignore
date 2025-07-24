@@ -1,0 +1,4 @@
+# Do not include intermidiate translation template (POT)
+# Only keep the final merged POT file.
+*.pot
+!blender.pot

@@ -1,20 +1,15 @@
 ## ===== Personal =====
 # Do not include PyBMap in this repository.
-# Order build fetch it manually.
+# Order user build and fetch it manually.
 PyBMap/
 
-# Disable generated icons and jsons but keep the directory hierarchy.
+# Disable generated assets but keep the directory hierarchy.
 icons/*
 !icons/.gitkeep
 jsons/*
 !jsons/.gitkeep
-
-# Do not include intermidiate translation template (POT)
-# NOTE: it seems that Python default gitignore (written following) disable POT file in default.
-# so, as it wish, I also remove it from git.
-i18n/*
-!i18n/blender.pot
-!i18n/*.po
+meshes/*
+!meshes/.gitkeep
 
 ## ===== Python =====
 # Byte-compiled / optimized / DLL files

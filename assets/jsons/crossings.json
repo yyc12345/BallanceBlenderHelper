@@ -1,0 +1,527 @@
+[
+    {
+        "identifier": "raw_floor_l_crossing",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, False, True, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[4], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[3], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[5], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[2], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "raw_floor_t_crossing",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, False, False, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[4], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[3], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[5], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[2], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "raw_floor_x_crossing",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, False, False, False, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[4], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[3], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[5], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "cv_triangle_center",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[2], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, -90)"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_l_crossing",
+        "showcase": {
+            "title": "Normal L Crossing",
+            "icon": "NormalLCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_l_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_l_crossing",
+        "showcase": {
+            "title": "Sink L Crossing",
+            "icon": "SinkLCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_l_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_t_crossing",
+        "showcase": {
+            "title": "Normal T Crossing",
+            "icon": "NormalTCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_t_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_t_crossing",
+        "showcase": {
+            "title": "Sink T Crossing",
+            "icon": "SinkTCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_t_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_x_crossing",
+        "showcase": {
+            "title": "Normal X Crossing",
+            "icon": "NormalXCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_x_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_x_crossing",
+        "showcase": {
+            "title": "Sink X Crossing",
+            "icon": "SinkXCrossing",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, False, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_x_crossing",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

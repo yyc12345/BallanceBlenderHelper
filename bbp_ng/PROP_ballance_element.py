@@ -124,7 +124,7 @@ def _load_element(mesh: bpy.types.Mesh, element_type: BallanceElementType) -> No
     element_filename: str = os.path.join(
         os.path.dirname(__file__),
         "meshes",
-        element_name + '.bin'
+        element_name + '.ph'
     )
 
     # open file and read

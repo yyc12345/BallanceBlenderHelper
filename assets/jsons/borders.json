@@ -1,0 +1,237 @@
+[
+    {
+        "identifier": "raw_floor_border",
+        "showcase": null,
+        "params": [
+            {
+                "field": "length",
+                "data": "5.0"
+            },
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, False, False, True, False)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            },
+            {
+                "field": "is_ribbon",
+                "data": "False"
+            }
+        ],
+        "skip": "length == 0.0",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "cv_trapezoid_side",
+                "skip": "False",
+                "params": {
+                    "long_edge_length": "length",
+                    "short_edge_offset": "0",
+                    "short_edge_length": "length",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "is_sink",
+                    "is_ribbon": "is_ribbon"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_border",
+        "showcase": {
+            "title": "Normal Border",
+            "icon": "NormalBorder",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False",
+                    "is_ribbon": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_border",
+        "showcase": {
+            "title": "Sink Border",
+            "icon": "SinkBorder",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True",
+                    "is_ribbon": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_ribbon_border",
+        "showcase": {
+            "title": "Ribbon Border",
+            "icon": "RibbonBorder",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "length_",
+                    "type": "float",
+                    "title": "Length",
+                    "desc": "The length of block.",
+                    "default": "2.5"
+                },
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, False, False, True, False)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "length",
+                "data": "length_"
+            },
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_border",
+                "skip": "False",
+                "params": {
+                    "length": "length",
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True",
+                    "is_ribbon": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]

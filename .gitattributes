@@ -1,7 +1,6 @@
-# all png are binary
+# All PNG image are binary
 *.png binary
-# our generated mesh should be save as binary
-*.bin binary
-# the raw json data should be binary
-# although i edit it manually
-bbp_ng/raw_jsons/*.json    binary
+# Element placeholder mesh should be save as binary
+*.ph binary
+# Raw json data should be binary, although i edit it manually
+assets/jsons/*.json    binary

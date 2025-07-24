@@ -1,0 +1,4991 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-21 09:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. :src: bpy.types.BBPPreferences.ballance_texture_folder
+msgctxt "BBPPreferences/property"
+msgid "Ballance Texture Folder"
+msgstr ""
+
+#. :src: bpy.types.BBPPreferences.ballance_texture_folder
+msgid ""
+"The path to folder which will be used by this plugin to get external "
+"Ballance texture."
+msgstr ""
+
+#. :src: bpy.types.BBPPreferences.no_component_collection
+msgctxt "BBPPreferences/property"
+msgid "No Component Collection"
+msgstr ""
+
+#. :src: bpy.types.BBPPreferences.no_component_collection
+msgid ""
+"When importing, it is the name of collection where objects store will not be "
+"saved as component. When exporting, all forced no component objects will be "
+"stored in this name represented collection"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddBmeMenu
+msgid "Add Ballance Floor"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddBmeMenu
+msgctxt "BBP_MT_AddBmeMenu"
+msgid "Floors"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddComponentsMenu
+msgid "Add Ballance Component"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddComponentsMenu
+msgctxt "BBP_MT_AddComponentsMenu"
+msgid "Components"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddRailMenu
+msgid "Add Ballance Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_AddRailMenu
+msgctxt "BBP_MT_AddRailMenu"
+msgid "Rails"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_View3DMenu
+msgid "Ballance 3D related operators"
+msgstr ""
+
+#. :src: bpy.types.BBP_MT_View3DMenu
+msgctxt "BBP_MT_View3DMenu"
+msgid "Ballance"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail
+msgctxt "BBP_OT_add_arc_rail"
+msgid "Arc Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail
+msgid "Add Arc Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_rotation
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/property"
+msgid "Extra Rotation"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_rotation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_rotation
+msgid "The extra rotation applied to object after moving to cursor."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_translation
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/property"
+msgid "Extra Translation"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_spiral_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_straight_rail.extra_translation
+#. :src: bpy.types.BBP_OT_add_transition_rail.extra_translation
+msgid "The extra translation applied to object after moving to cursor."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_end_cap
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/property"
+msgid "End Cap"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_end_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_end_cap
+msgid "Whether this rail should have cap at end terminal."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_angle
+msgctxt "BBP_OT_add_arc_rail/property"
+msgid "Angle"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_angle
+msgid "The angle of this arc rail rotated."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_x
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip X"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_x
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_x
+msgid "Whether flip this rail with X axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_y
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip Y"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_y
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_y
+msgid "Whether flip this rail with Y axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_z
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Flip Z"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_flip_z
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_flip_z
+msgid "Whether flip this rail with Z axis"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_radius
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Radius"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_radius
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_radius
+msgid "The screw radius."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_steps
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/property"
+msgid "Steps"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_steps
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_steps
+msgid ""
+"The segment count per iteration. More segment, more smooth but lower "
+"performance."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_start_cap
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/property"
+msgid "Start Cap"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_start_cap
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_start_cap
+msgid "Whether this rail should have cap at start terminal."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type
+msgid "Rail type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type:'MONORAIL'
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type:'MONORAIL'
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Monorail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_rail_section.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_type:'RAIL'
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_type:'RAIL'
+msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
+msgid "Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgctxt "BBP_OT_add_bme_struct"
+msgid "Add BME Structure"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgid "Add BME structure"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_cfgs
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Configurations"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_cfgs
+msgid "The collection holding BME structure configurations."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type
+msgid "The type of BME structure."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_1x1'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal 1x1"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_1x1'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink 1x1"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_border'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Border"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_border'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Border"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_border'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Border"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_inner_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Inner Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_inner_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Inner Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_inner_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Inner Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_outter_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Outter Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_outter_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Outter Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_outter_corner'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Outter Corner"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_l_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal L Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_l_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink L Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_t_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal T Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_t_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink T Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_x_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal X Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_x_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink X Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_flat'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Flat"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_platform'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Platform"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_platform'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Platform"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_ribbon_platform'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Ribbon Platform"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_straight'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Floor"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_straight'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Floor"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_normal_terminal'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Normal Floor Terminal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_sink_terminal'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Sink Floor Terminal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'wood_trafo'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wood Trafo"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'stone_trafo'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Stone Trafo"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'paper_trafo'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Paper Trafo"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_transition'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Transition"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_narrow_transition'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Narrow Transition"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_straight'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_terminal'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor Terminal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_l_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor L Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_t_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor T Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_type:'floor_wide_x_crossing'
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Wide Floor X Crossing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_rotation
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Extra Rotation"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct.extra_translation
+msgctxt "BBP_OT_add_bme_struct/property"
+msgid "Extra Translation"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component
+msgctxt "BBP_OT_add_component"
+msgid "Add Component"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component
+msgid "Add ordinary Component"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_sector
+#. :src: bpy.types.BBP_OT_add_sector_component_pair.component_sector
+#. :src: bpy.types.BBP_OT_add_swing_series.component_sector
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_sector
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_sector
+msgctxt "BBP/OP_ADDS_component.ComponentSectorParam/property"
+msgid "Sector"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_sector
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_sector
+#. :src: bpy.types.BBP_OT_add_sector_component_pair.component_sector
+#. :src: bpy.types.BBP_OT_add_swing_series.component_sector
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_sector
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_sector
+msgid "The sector which this component will be grouped in."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type
+msgctxt "BBP_OT_add_component/property"
+msgid "Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type
+msgid "The type of this component."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'0'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Extra_Life"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'1'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Extra_Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'2'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Paper"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'3'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Stone"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'4'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Trafo_Wood"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'5'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Paper"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'6'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Stone"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'7'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Ball_Wood"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'8'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Box"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'9'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Dome"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'10'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_01"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'11'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_03"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'12'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_08"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'13'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_17"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'14'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_18"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'15'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_19"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'16'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_25"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'17'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_26"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'18'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_29"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'19'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_30"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'20'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_34"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'21'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_37"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'22'
+msgctxt "BBP_OT_add_component/property"
+msgid "P_Modul_41"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'23'
+msgctxt "BBP_OT_add_component/property"
+msgid "PC_TwoFlames"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'24'
+msgctxt "BBP_OT_add_component/property"
+msgid "PE_Balloon"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'25'
+msgctxt "BBP_OT_add_component/property"
+msgid "PR_Resetpoint"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component.component_type:'26'
+msgctxt "BBP_OT_add_component/property"
+msgid "PS_FourFlames"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgctxt "BBP_OT_add_ioport_encodings"
+msgid "Add in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgid ""
+"Add item at the tail of encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgctxt "BBP_OT_add_nong_extra_point"
+msgid "Nong Extra Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgid "Add Nong Extra Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_count
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_count
+#. :src: bpy.types.BBP_OT_add_swing_series.component_count
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_count
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_count
+msgctxt "BBP/OP_ADDS_component.ComponentCountParam/property"
+msgid "Count"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point.component_count
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.component_count
+#. :src: bpy.types.BBP_OT_add_swing_series.component_count
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_count
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_count
+msgid "The count of components which you want to generate"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgctxt "BBP_OT_add_nong_ventilator"
+msgid "Nong Ventilator"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgid "Add Nong Ventilator"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Preset Count"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count
+msgid "Pick preset ventilator count."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'PAPER'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Paper"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'PAPER'
+msgid "The ventilator count (1) can push paper ball up."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'WOOD'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Wood"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'WOOD'
+msgid "The ventilator count (6) can push wood ball up."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'STONE'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Stone"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count:'STONE'
+msgid "The ventilator count (32) can push stone ball up."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Ventilator Count Source"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'DEFINED'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Predefined"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'DEFINED'
+msgid "Pre-defined ventilator count."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'CUSTOM'
+msgctxt "BBP_OT_add_nong_ventilator/property"
+msgid "Custom"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'CUSTOM'
+msgid "User specified ventilator count."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgctxt "BBP_OT_add_objects_virtools_group"
+msgid "Grouping Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgid "Grouping Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.custom_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.custom_group_name
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Custom Group Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.custom_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.custom_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.custom_group_name
+msgid "Input your custom group name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Group Name Source"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'DEFINED'
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Predefined"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'DEFINED'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'DEFINED'
+msgid "Pre-defined group name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'CUSTOM'
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Custom"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_add_virtools_groups.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.group_name_source:'CUSTOM'
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.group_name_source:'CUSTOM'
+msgid "User specified group name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.preset_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.preset_group_name
+msgctxt "BBP/PROP_virtools_grourp.SharedGroupNameInputProperties/property"
+msgid "Group Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_add_virtools_groups.preset_group_name
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group.preset_group_name
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.preset_group_name
+msgid "Pick vanilla Ballance group name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgctxt "BBP_OT_add_rail_section"
+msgid "Rail Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgid "Add Rail Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgctxt "BBP_OT_add_sector_component_pair"
+msgid "Sector Pair"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgid "Add Sector Pair, both check point and reset point."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgctxt "BBP_OT_add_side_rail"
+msgid "Side Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgid "Add Side Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_length
+msgctxt "BBP/OP_ADDS_rail.SharedStraightRailInputProperty/property"
+msgid "Length"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_straight_rail.rail_length
+#. :src: bpy.types.BBP_OT_add_transition_rail.rail_length
+msgid "The length of this rail."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Side Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type
+msgid "Side rail type"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'NORMAL'
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Normal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'NORMAL'
+msgid "The normal side rail."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'STONE'
+msgctxt "BBP_OT_add_side_rail/property"
+msgid "Stone Specific"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail.side_rail_type:'STONE'
+msgid "The side rail which also allow stone ball passed."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgctxt "BBP_OT_add_side_spiral_rail"
+msgid "Side Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgid "Add Side Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
+msgctxt "BBP_OT_add_side_spiral_rail/property"
+msgid "Iterations"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
+msgid "Indicate how many layers of this spiral rail should be generated."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgctxt "BBP_OT_add_spiral_rail"
+msgid "Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgid "Add Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
+msgctxt "BBP_OT_add_spiral_rail/property"
+msgid "Iterations"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_screw
+msgctxt "BBP_OT_add_spiral_rail/property"
+msgid "Screw"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_screw
+msgid "The increased height in each iteration."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgctxt "BBP_OT_add_straight_rail"
+msgid "Straight Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgid "Add Straight Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgctxt "BBP_OT_add_swing_series"
+msgid "Swing Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgid "Add Swing Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series.component_span
+msgctxt "BBP_OT_add_swing_series/property"
+msgid "Span"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series.component_span
+msgid "The distance between each swing"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series.staggered_swing
+msgctxt "BBP_OT_add_swing_series/property"
+msgid "Staggered"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series.staggered_swing
+msgid ""
+"Whether place Swing staggered. Staggered Swing accept any ball however Non-"
+"Staggered Swing only accept Wood and Paper ball."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgctxt "BBP_OT_add_tilting_block_series"
+msgid "Tilting Block Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgid "Add Tilting Block Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
+msgctxt "BBP_OT_add_tilting_block_series/property"
+msgid "Span"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
+msgid "The distance between each titling blocks"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgctxt "BBP_OT_add_transition_rail"
+msgid "Transition Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgid "Add Transition Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgctxt "BBP_OT_add_transition_section"
+msgid "Transition Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgid "Add Transition Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgctxt "BBP_OT_add_ventilator_series"
+msgid "Ventilator Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgid "Add Ventilator Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_translation
+msgctxt "BBP_OT_add_ventilator_series/property"
+msgid "Delta Vector"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series.component_translation
+msgid ""
+"The translation between each ventilators. You can use this property to "
+"implement vertical or horizontal ventilator series. Set all factors to zero "
+"can get Nong ventilator."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgctxt "BBP_OT_add_virtools_group"
+msgid "Add to Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgid "Add a Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgctxt "BBP_OT_apply_virtools_light"
+msgid "Apply to Blender Light"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgid "Apply Virtools Light to Blender Light."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgctxt "BBP_OT_apply_virtools_material"
+msgid "Apply to Blender Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgid "Apply Virtools Material to Blender Material."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgctxt "BBP_OT_auto_grouping"
+msgid "Auto Grouping"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgid "Auto Grouping Objects by Its Name and Name Convention"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgctxt "BBP_OT_clear_ioport_encodings"
+msgid "Clear Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgid "Clear the encodings list used by BMap for Virtools file read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgctxt "BBP_OT_clear_objects_virtools_group"
+msgid "Clear All Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgid "Clear Virtools Groups on Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgctxt "BBP_OT_clear_virtools_groups"
+msgid "Clear Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgid "Clear All Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgctxt "BBP_OT_convert_to_imengyu"
+msgid "Convert to Imengyu"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgid "Convert Objects Name from YYC Convention to Imengyu Convention."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgctxt "BBP_OT_direct_set_virtools_texture"
+msgid "Import and Assign Texture"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgid "Import and Assign Texture Directly"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgctxt "BBP_OT_down_ioport_encodings"
+msgid "Move Down in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgid ""
+"Move selected item down in encodings list used by BMap for Virtools file "
+"read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgctxt "BBP_OT_export_bmfile"
+msgid "Export BM (Ballance Map) File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgid "Save a Ballance Map File (BM File Spec 1.4)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Export Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Collection"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+msgid "Export a collection"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+msgid "Export an object"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgctxt "BBP_OT_export_virtools"
+msgid "Export Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgid "Export Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.compress_level
+#. :src: bpy.types.BBP_OT_import_virtools.compress_level
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Compress Level"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.compress_level
+#. :src: bpy.types.BBP_OT_import_virtools.compress_level
+msgid ""
+"The ZLib compress level used by Virtools Engine when saving composition."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.successive_sector
+#. :src: bpy.types.BBP_OT_import_virtools.successive_sector
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/property"
+msgid "Successive Sector"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.successive_sector
+#. :src: bpy.types.BBP_OT_import_virtools.successive_sector
+msgid ""
+"Whether order exporter to use document specified sector count to make sure "
+"sector is successive."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Global Texture Save Options"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt
+msgid ""
+"Decide how texture saved if texture is specified as Use Global as its Save "
+"Options."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'0'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Raw Data"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'0'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'0'
+msgid ""
+"Save raw data inside file. The bitmap is saved in a raw 32 bit per pixel "
+"format. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'1'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "External"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'1'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'1'
+msgid ""
+"Store only the file name for the texture. The bitmap file must be present in "
+"the bitmap paths when loading the composition. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'2'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Image Format"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'2'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'2'
+msgid ""
+"Save using format specified. The bitmap data will be converted to the "
+"specified format by the correspondant bitmap plugin and saved inside file. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'3'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Use Global"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'3'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
+msgid ""
+"Use Global settings, that is the settings given with CKContext::"
+"SetGlobalImagesSaveOptions. (Not valid when using CKContext::"
+"SetImagesSaveOptions). "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'4'
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Include Original File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'4'
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'4'
+msgid ""
+"Insert original image file inside CMO file. The bitmap file that was used "
+"originally for the texture or sprite will be append to the composition file "
+"and extracted when the file is loaded. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.use_compress
+#. :src: bpy.types.BBP_OT_import_virtools.use_compress
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/property"
+msgid "Use Compress"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools.use_compress
+#. :src: bpy.types.BBP_OT_import_virtools.use_compress
+msgid "Whether use ZLib to compress result when saving composition."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_all_material
+msgctxt "BBP_OT_fix_all_material"
+msgid "Fix All Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_all_material
+msgid "Fix All Materials by Its Referred Ballance Texture Name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+msgctxt "BBP_OT_fix_single_material"
+msgid "Fix Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+msgid "Fix Active Materials by Its Referred Ballance Texture Name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+msgctxt "BBP_OT_flatten_uv"
+msgid "Flatten UV"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+msgid "Flatten selected face UV. Only works for convex face"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Flatten Method"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'RAW'
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Raw"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'RAW'
+msgid "Legacy flatten UV."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'FLOOR'
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Floor"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'FLOOR'
+msgid "Floor specific flatten UV."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'WOOD'
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Wood"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.flatten_method:'WOOD'
+msgid "Wood specific flatten UV."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_edge
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Edge"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_edge
+msgid ""
+"The references edge of UV.\n"
+"It will be placed in V axis."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_point
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_point
+msgid ""
+"The references point of UV.\n"
+"It's U component will be set to the number specified by Reference Point UV.\n"
+"This point index is related to the start point of reference edge."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_uv
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Reference Point UV"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.reference_uv
+msgid "The U component which should be applied to references point in UV."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Scale Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'NUM'
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_number
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Scale Size"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'NUM'
+msgid "Scale UV with specific number."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'REF'
+msgctxt "BBP_OT_flatten_uv/property"
+msgid "Ref. Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_mode:'REF'
+msgid "Scale UV with Reference Point feature."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv.scale_number
+msgid "The size which will be applied for scale."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+msgctxt "BBP_OT_import_bmfile"
+msgid "Import BM (Ballance Map) File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+msgid "Load a Ballance Map File (BM File Spec 1.4)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Light Name Conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy
+msgid "Define how to process light name conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Rename"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgid "Rename the new one"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Use Current"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+msgid "Use current one"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Material Name Conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy
+msgid "Define how to process material name conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Mesh Name Conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy
+msgid "Define how to process mesh name conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Object Name Conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy
+msgid "Define how to process object name conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Texture Name Conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy
+msgid "Define how to process texture name conflict"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_virtools
+msgctxt "BBP_OT_import_virtools"
+msgid "Import Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_virtools
+msgid "Import Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_legacy_align
+msgctxt "BBP_OT_legacy_align"
+msgid "3ds Max Align"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_legacy_align
+msgid "Align Objects with 3ds Max Style"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+msgctxt "BBP_OT_preset_virtools_material"
+msgid "Preset Virtools Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+msgid "Preset Virtools Material with Original Ballance Data."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgid "Preset"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgid "The preset which you want to apply."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'1'
+msgid "FloorSide"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'2'
+msgid "FloorTop"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'3'
+msgid "TrafoPaper"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'4'
+msgid "TraforWoodStone"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'5'
+msgid "Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'6'
+msgid "WoodPath"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'7'
+msgid "WoodChip"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rail_uv
+msgctxt "BBP_OT_rail_uv"
+msgid "Rail UV"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rail_uv
+msgid "Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+msgctxt "BBP_OT_regulate_objects_name"
+msgid "Regulate Objects Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+msgid "Regulate Objects Name by Virtools Group and Naming Convention"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+msgctxt "BBP_OT_reset_ballance_elements"
+msgid "Reset Ballance Elements"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+msgid "Reset all Meshes of Loaded Ballance Elements to Original Geometry."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+msgctxt "BBP_OT_reset_bme_materials"
+msgid "Reset BME Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+msgid "Reset all BME Materials to Default Settings."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+msgctxt "BBP_OT_rm_ioport_encodings"
+msgid "Remove from Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+msgid ""
+"Remove selected item in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+msgctxt "BBP_OT_rm_objects_virtools_group"
+msgid "Ungrouping Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+msgid "Ungrouping Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+msgctxt "BBP_OT_rm_virtools_group"
+msgid "Remove from Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+msgid "Remove a Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+msgctxt "BBP_OT_select_object_by_virtools_group"
+msgid "Select by Virtools Group"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+msgid "Select Objects by Virtools Group"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
+msgid "Selection mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Set"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'1'
+msgid "Sets a new selection."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Extend"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'2'
+msgid "Adds newly selected items to the existing selection."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Subtract"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'3'
+msgid "Removes newly selected items from the existing selection."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Invert"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'4'
+msgid "Inverts the selection."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
+msgctxt "BBP_OT_select_object_by_virtools_group/property"
+msgid "Intersect"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode:'5'
+msgid "Selects items that intersect with the existing selection."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgctxt "BBP_OT_snoop_group_then_to_mesh"
+msgid "Snoop Group then to Mesh"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgid ""
+"Convert selected objects into mesh objects and try to copy the Virtools "
+"Group infos of their associated curve bevel object if they have. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgctxt "BBP_OT_up_ioport_encodings"
+msgid "Move Up in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgid ""
+"Move selected item up in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_ballance_elements
+msgid "Show Ballance Elements Properties."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_ballance_elements
+msgctxt "BBP_PT_ballance_elements"
+msgid "Ballance Elements"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_ballance_map_info
+msgid "Show Ballance Map Infos."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_ballance_map_info
+msgctxt "BBP_PT_ballance_map_info"
+msgid "Ballance Map"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_bme_materials
+msgid "Show BME Materials Properties."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_bme_materials
+msgctxt "BBP_PT_bme_materials"
+msgid "BME Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_groups
+msgid "Show Virtools Groups Properties."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_groups
+msgctxt "BBP_PT_virtools_groups"
+msgid "Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_light
+msgid "Show Virtools Light Properties"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_light
+msgctxt "BBP_PT_virtools_light"
+msgid "Virtools Light"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_material
+msgid "Show Virtools Material Properties."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_material
+msgctxt "BBP_PT_virtools_material"
+msgid "Virtools Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_mesh
+msgid "Show Virtools Mesh Properties."
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_mesh
+msgctxt "BBP_PT_virtools_mesh"
+msgid "Virtools Mesh"
+msgstr ""
+
+#. :src: bpy.types.StringProperty
+msgid "String Definition"
+msgstr ""
+
+#. :src: bpy.types.StringProperty
+msgid "RNA text string property definition"
+msgstr ""
+
+#. :src: bpy.types.StringProperty.default
+msgid "String default value"
+msgstr ""
+
+#. :src: bpy.types.StringProperty.length_max
+msgid "Maximum Length"
+msgstr ""
+
+#. :src: bpy.types.StringProperty.length_max
+msgid "Maximum length of the string, 0 means unlimited"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ballance_element.element_id
+msgctxt "BBP_PG_ballance_element/property"
+msgid "Element Id"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ballance_element.mesh_ptr
+msgctxt "BBP_PG_ballance_element/property"
+msgid "Mesh"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ballance_map_info.sector_count
+msgctxt "BBP_PG_ballance_map_info/property"
+msgid "Sector"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ballance_map_info.sector_count
+msgid ""
+"The sector count of this Ballance map which is used in exporting map and may "
+"be changed when importing map."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bmap_encoding.encoding
+msgctxt "BBP_PG_bmap_encoding/property"
+msgid "Encoding"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bmap_encoding.encoding
+msgid "The name of BMap used encoding."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_bool
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Boolean Value"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_bool
+msgid "The field representing a single boolean value."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_float
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Float Point Value"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_float
+msgid "The field representing a single float point value."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_int
+msgctxt "BBP_PG_bme_adder_cfgs/property"
+msgid "Integral Value"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_adder_cfgs.prop_int
+msgid "The field representing a single integral value."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_material.bme_material_name
+msgctxt "BBP_PG_bme_material/property"
+msgid "Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_bme_material.material_ptr
+msgctxt "BBP_PG_bme_material/property"
+msgid "Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_x
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "X Position"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_y
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Y Position"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.align_z
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Z Position"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Current Object (Active Object)"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'1'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'1'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Min"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'1'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'1'
+msgid "The min value in specified axis."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'2'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'2'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Center (Bounding Box)"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'2'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'2'
+msgid "The bounding box center in specified axis."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'3'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'3'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Center (Axis)"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'3'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'3'
+msgid "The object's source point in specified axis."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'4'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'4'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Max"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'4'
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode:'4'
+msgid "The max value in specified axis."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Target Objects (Selected Objects)"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_collection
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Collection"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_collection
+msgid "The collection exported. Nested collections allowed."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_object
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.export_object
+msgid "The object exported"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.rail_uv_material
+msgctxt "BBP_PG_ptrprop_resolver/property"
+msgid "Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_ptrprop_resolver.rail_uv_material
+msgid "The material used for rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_group.group_name
+msgctxt "BBP_PG_virtools_group/property"
+msgid "Group Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Constant Attenuation"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.constant_attenuation
+msgid "Defines the constant attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Fall Off"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff
+msgid "Sets the light fall off rate."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Fall Off Shape"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.falloff_shape
+msgid "Sets the value of the light fall off shape."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.hot_spot
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Hot Spot"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.hot_spot
+msgid "Sets the value of the hot spot of the light."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_color
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_color
+msgid "Defines the red, green and blue components of the light."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_range
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Range"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_range
+msgid "Defines the radius of the lighting area."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type
+msgid "The type of this light"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'1'
+msgid "The Light is a point of light "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Spot"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'2'
+msgid "The light is a spotlight "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Directional"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.light_type:'3'
+msgid ""
+"The light is directional light : Lights comes from an infinite point so only "
+"direction of light can be given "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Linear Attenuation"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.linear_attenuation
+msgid "Defines the linear attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
+msgctxt "BBP_PG_virtools_light/property"
+msgid "Quadratic Attenuation"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_light.quadratic_attenuation
+msgid "Defines the quadratic attenuation factor."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Test Function"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func
+msgid "Alpha comparision function"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Never"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'1'
+msgid "Always fail the test. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Less"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'2'
+msgid "Accept if value if less than current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Equal"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'3'
+msgid "Accept if value if equal than current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Less Equal"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'4'
+msgid "Accept if value if less or equal than current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Greater"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'5'
+msgid "Accept if value if greater than current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Not Equal"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'6'
+msgid "Accept if value if different than current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Greater Equal"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'7'
+msgid "Accept if value if greater or equal current value. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Always"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_func:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.z_func:'8'
+msgid "Always accept the test. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Ref Value"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.alpha_ref
+msgid "Alpha referential value"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.ambient
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Ambient"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.ambient
+msgid "Ambient color of the material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Destination Blend"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend
+msgid "Destination blend factor"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Zero"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'1'
+msgid "Blend factor is (0, 0, 0, 0). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "One"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'2'
+msgid "Blend factor is (1, 1, 1, 1). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'3'
+msgid "Blend factor is (Rs, Gs, Bs, As). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Src Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'4'
+msgid "Blend factor is (1-Rs, 1-Gs, 1-Bs, 1-As). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'5'
+msgid "Blend factor is (As, As, As, As). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Src Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'6'
+msgid "Blend factor is (1-As, 1-As, 1-As, 1-As). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dest Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'7'
+msgid "Blend factor is (Ad, Ad, Ad, Ad). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Dest Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'8'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'8'
+msgid "Blend factor is (1-Ad, 1-Ad, 1-Ad, 1-Ad). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dest Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'9'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'9'
+msgid "Blend factor is (Rd, Gd, Bd, Ad). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Inv Dest Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'10'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'10'
+msgid "Blend factor is (1-Rd, 1-Gd, 1-Bd, 1-Ad). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Src Alpha Sat"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.dest_blend:'11'
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend:'11'
+msgid "Blend factor is (f, f, f, 1); f = min(As, 1-Ad). "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.diffuse
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Diffuse"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.emissive
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Emissive"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.emissive
+msgid "Emissive color of the material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Blend"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_blend
+msgid "Whether alpha blending is enabled or not."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Alpha Test"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_alpha_test
+msgid "Whether the alpha test is enabled"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_perspective_correction
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Perspective Correction"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_perspective_correction
+msgid "Whether texture perspective correction is enabled"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_two_sided
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Both Sided"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_two_sided
+msgid "Whether the material is both sided or not"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Z-Buffer Write"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.enable_z_write
+msgid "Whether writing in ZBuffer is enabled."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Fill Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode
+msgid "Fill mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'1'
+msgid "Vertices rendering "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Wireframe"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'2'
+msgid "Edges rendering "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Solid"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.fill_mode:'3'
+msgid "Face rendering "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Shade Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode
+msgid "Shade mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Flat"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'1'
+msgid "Flat Shading "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Gouraud"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'2'
+msgid "Gouraud Shading "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Phong"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.shade_mode:'3'
+msgid "Phong Shading (Not yet supported by most implementation) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Source Blend"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.source_blend
+msgid "Source blend factor"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Specular"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular_power
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Power"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.specular_power
+msgid "Specular highlight power"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Texture"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture
+msgid "Texture of the material"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Address Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode
+msgid ""
+"The address mode controls how the texture coordinates outside the range 0..1"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Wrap"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'1'
+msgid "Default mesh wrap mode is used (see CKMesh::SetWrapMode) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mirror"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'2'
+msgid "Texture coordinates outside the range [0..1] are flipped evenly. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Clamp"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'3'
+msgid ""
+"Texture coordinates greater than 1.0 are set to 1.0, and values less than "
+"0.0 are set to 0.0. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Border"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'4'
+msgid ""
+"When texture coordinates are greater than 1.0 or less than 0.0  texture is "
+"set to a color defined in CKMaterial::SetTextureBorderColor. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_address_mode:'5'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mirror Once"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Texture Blend"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode
+msgid "Texture blend mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'1'
+msgid "Texture replace any material information "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'2'
+msgid ""
+"Texture and material are combine. Alpha information of the texture replace "
+"material alpha component. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'3'
+msgid ""
+"Alpha information in the texture specify how material and texture are "
+"combined. Alpha information of the texture replace material alpha component. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate Alpha"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'4'
+msgid ""
+"Alpha information in the texture specify how material and texture are "
+"combined "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'5'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Decal Mask"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'6'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Modulate Mask"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Copy"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'7'
+msgid "Equivalent to DECAL "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'8'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Add"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Dot Product 3"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'9'
+msgid ""
+"Perform a Dot Product 3 between texture (normal map) and a referential "
+"vector given in VXRENDERSTATE_TEXTUREFACTOR. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_blend_mode:'10'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Max"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Border Color"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_border_color
+msgid ""
+"The border color is used when the texture address mode is "
+"VXTEXTURE_ADDRESSBORDER."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Filter Mag"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode
+msgid "Texture filter mode when the texture is magnified"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Nearest"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'1'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'1'
+msgid "No Filter "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'2'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'2'
+msgid "Bilinear Interpolation "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mip Nearest"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'3'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'3'
+msgid "Mip mapping "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Mip Linear"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'4'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'4'
+msgid "Mip Mapping with Bilinear interpolation "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear Mip Nearest"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'5'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'5'
+msgid "Mip Mapping with Bilinear interpolation between mipmap levels. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Linear Mip Linear"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'6'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'6'
+msgid "Trilinear Filtering "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Anisotropic"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_mag_mode:'7'
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode:'7'
+msgid "Anisotropic filtering "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Filter Min"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.texture_min_mode
+msgid "Texture filter mode when the texture is minified"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.z_func
+msgctxt "BBP_PG_virtools_material/property"
+msgid "Z Compare Function"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_material.z_func
+msgid "Z Comparison function"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Lit Mode"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode
+msgid "Lighting mode of the mesh."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Prelit"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'0'
+msgid "Lighting use color information store with vertices "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
+msgctxt "BBP_PG_virtools_mesh/property"
+msgid "Lit"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_mesh.lit_mode:'1'
+msgid ""
+"Lighting is done by renderer using normals and face material information. "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Save Options"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options
+msgid ""
+"When saving a composition textures or sprites can be kept as reference to "
+"external files or converted to a given format and saved inside the "
+"composition file."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'0'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Raw Data"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'1'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "External"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'2'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Image Format"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Use Global"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.save_options:'4'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Include Original File"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "Video Format"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format
+msgid "The desired surface pixel format in video memory."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits ARGB8888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'1'
+msgid "32-bit ARGB pixel format with alpha "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits RGB888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'2'
+msgid "32-bit RGB pixel format without alpha "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "24 Bits RGB888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'3'
+msgid "24-bit RGB pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'4'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits RGB565"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'4'
+msgid "16-bit RGB pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits RGB555"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'5'
+msgid "16-bit RGB pixel format (5 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ARGB1555"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'6'
+msgid "16-bit ARGB pixel format (5 bits per color + 1 bit for alpha) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ARGB4444"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'7'
+msgid "16-bit ARGB pixel format (4 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'8'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits RGB332"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'8'
+msgid "8-bit  RGB pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'9'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ARGB2222"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'9'
+msgid "8-bit  ARGB pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'10'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits ABGR8888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'10'
+msgid "32-bit ABGR pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'11'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits RGBA8888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'11'
+msgid "32-bit RGBA pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'12'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits BGRA8888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'12'
+msgid "32-bit BGRA pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'13'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits BGR888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'13'
+msgid "32-bit BGR pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'14'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "24 Bits BGR888"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'14'
+msgid "24-bit BGR pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'15'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits BGR565"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'15'
+msgid "16-bit BGR pixel format "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits BGR555"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'16'
+msgid "16-bit BGR pixel format (5 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ABGR1555"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'17'
+msgid "16-bit ABGR pixel format (5 bits per color + 1 bit for alpha) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits ABGR4444"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'18'
+msgid "16-bit ABGR pixel format (4 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'19'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT1"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'19'
+msgid "S3/DirectX Texture Compression 1 "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'20'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT2"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'20'
+msgid "S3/DirectX Texture Compression 2 "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'21'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT3"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'21'
+msgid "S3/DirectX Texture Compression 3 "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'22'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT4"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'22'
+msgid "S3/DirectX Texture Compression 4 "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'23'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "DXT5"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'23'
+msgid "S3/DirectX Texture Compression 5 "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits V8U8"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'24'
+msgid "16-bit Bump Map format format (8 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits V16U16"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'25'
+msgid "32-bit Bump Map format format (16 bits per color) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "16 Bits L6V5U5"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'26'
+msgid "16-bit Bump Map format format with luminance "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "32 Bits X8L8V8U8"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'27'
+msgid "32-bit Bump Map format format with luminance "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ABGR8888 CLUT"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'28'
+msgid "8 bits indexed CLUT (ABGR) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "8 Bits ARGB8888 CLUT"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'29'
+msgid "8 bits indexed CLUT (ARGB) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "4 Bits ABGR8888 CLUT"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'30'
+msgid "4 bits indexed CLUT (ABGR) "
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
+msgctxt "BBP_PG_virtools_texture/property"
+msgid "4 Bits ARGB8888 CLUT"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_texture.video_format:'31'
+msgid "4 bits indexed CLUT (ARGB) "
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:246
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Prototype Configurations"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:285
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Extra Transform"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:287
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Translation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:291
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Rotation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:274
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Top"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:275
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Front"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:276
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Left"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:278
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Right"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:279
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Back"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:280
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Bottom"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:330
+msgctxt "BBP_OT_add_nong_ventilator/draw"
+msgid "Count Source"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:559
+msgctxt "BBP_OT_add_sector_component_pair/draw"
+msgid "Warning: {0} already exist."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_component.py:228
+msgctxt "BBP_OT_add_component/draw"
+msgid "Warning: {0} already exist."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:65
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Extra Transform"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:67
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Translation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:71
+msgctxt "BBP/OP_ADDS_rail.SharedExtraTransform/draw"
+msgid "Rotation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:127
+msgctxt "BBP/OP_ADDS_rail.SharedRailCapInputProperty/draw"
+msgid "Cap Options"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:212
+msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/draw"
+msgid "Flip Options"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:266
+msgctxt "BBP_OT_add_transition_section/draw"
+msgid "No Options Available"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:289
+msgctxt "BBP_OT_add_straight_rail/draw"
+msgid "Straight Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:318
+msgctxt "BBP_OT_add_transition_rail/draw"
+msgid "Transition Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:358
+msgctxt "BBP_OT_add_side_rail/draw"
+msgid "Side Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:398
+msgctxt "BBP_OT_add_arc_rail/draw"
+msgid "Arc Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:449
+msgctxt "BBP_OT_add_spiral_rail/draw"
+msgid "Spiral Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:493
+msgctxt "BBP_OT_add_side_spiral_rail/draw"
+msgid "Spiral Rail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_bmfile.py:16
+#: extensions/user_default/bbp_ng/OP_IMPORT_bmfile.py:16
+msgid "This feature is not supported yet."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:136
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Creating 3dObjects and Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:180
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:226
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:274
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving 3dObjects"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:321
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Meshes"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:436
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Materials"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:502
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Textures"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:542
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Document"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:54
+msgid "Virtools File Exporting Finished."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:83
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Virtools Engine Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:26
+msgid "No selected target!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:32
+msgid "You can not specify \"Use Global\" as global texture save option!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
+msgid ""
+"You must specify at least one encoding for file saving (e.g. cp1252, gbk)!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:84
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Textures"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:154
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Materials"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:221
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Meshes"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:319
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading 3dObjects"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:364
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Lights"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:426
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:462
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Applying Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:34
+msgid "Virtools File Importing Finished."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:47
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Virtools Engine Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:90
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Texture Raw Data Temporary Directory: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:26
+msgid ""
+"You must specify at least one encoding for file loading (e.g. cp1252, gbk)!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_MTL_fix_material.py:34
+msgctxt "BBP_OT_fix_all_material/draw"
+msgid "Fix {0}/{1} materials."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:182
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Align Axis (Multi-selection)"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:190
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Current Object (Active Object)"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:192
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Target Objects (Selected Objects)"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:201
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Apply"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:203
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Total {0} applied alignments"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:85
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "Rename System Report"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:86
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "View console to get more detail"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:87
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "All: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:88
+msgctxt "BBP/OP_OBJECT_naming_convention._rename_core()"
+msgid "Failed: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:63
+msgctxt "BBP_OT_select_object_by_virtools_group/draw"
+msgid "Selection Mode"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:68
+msgctxt "BBP_OT_select_object_by_virtools_group/draw"
+msgid "Group Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:142
+msgid "Grouping objects successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:168
+msgid "Ungrouping objects successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_virtools_group.py:194
+msgid "Clear objects groups successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:182
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Flatten Method"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:188
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Scale Mode"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:193
+msgctxt "BBP_OT_flatten_uv/draw"
+msgid "Scale Configuration"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_flatten_uv.py:175
+msgctxt "BBP_OT_flatten_uv/execute"
+msgid ""
+"[Flatten UV] {0} faces are not be processed correctly because process failed."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:79
+msgctxt "BBP_OT_rail_uv/execute"
+msgid "Rail UV Report"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:26
+msgid "Specified material is empty."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:35
+msgid ""
+"Some objects are invalid for this operation. See Console for more details."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_UV_rail_uv.py:82
+msgctxt "BBP_OT_rail_uv/execute"
+msgid ""
+"Following objects are not processed by Rail UV because they do not meet the "
+"requirements of Rail UV."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_ballance_element.py:337
+msgid "Reset Ballance elements successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_bme_material.py:234
+msgid "Reset BME materials successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_preferences.py:42
+msgctxt "BBPPreferences/draw"
+msgid "Ballance Texture Folder"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_preferences.py:44
+msgctxt "BBPPreferences/draw"
+msgid "No Component Collection"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_group.py:392
+msgctxt "BBP_PT_virtools_groups/draw"
+msgid "Virtools Group is invalid on non-mesh object!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:287
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Apply"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:292
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Basics"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:305
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Attenuation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:306
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Constant"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:307
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Linear"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:308
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Quadratic"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:313
+msgctxt "BBP_PT_virtools_light/draw"
+msgid "Spot Cone"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1055
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Preset"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1058
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Apply"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1063
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Color Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1071
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Mode Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1077
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Texture Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1098
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Alpha Test Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1105
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Alpha Blend Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1112
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Z Write Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:939
+msgid "Fix material successfully."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:942
+msgid "This material is not suit for fixer."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1086
+msgctxt "BBP_PT_virtools_material/draw"
+msgid "Virtools Texture Settings"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:201
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Import Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:205
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Name Conflict Strategy"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:207
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Object"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:208
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Light"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:209
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Mesh"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:210
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Material"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:211
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Texture"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:256
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/draw"
+msgid "Export Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:317
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Virtools Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:321
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Encodings"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:369
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
+msgid "Ballance Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:375
+msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
+msgid "Map Sectors: {0}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:328
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Global Texture Save Options"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:332
+msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
+msgid "Compression"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:85
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "All / Failed - {0} / {1}"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:295
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid ""
+"PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:502
+msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+msgid "Name match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:610
+msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+msgid "Name match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:74
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "Rename Report"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:110
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "For object \"{0}\""
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:113
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "For object \"{0}\" (Old name: \"{1}\")"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:397
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "Group match lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:128
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "ERROR"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:130
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "WARN"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:132
+msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+msgid "INFO"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:546
+msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:656
+msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:345
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "A Multi-grouping Unique Component."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:359
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "Component detected. But couldn't get sector from CKGroup data."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:369
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "A Multi-grouping Component."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:448
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "No matched info."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:340
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid "The match of Unique Component lost."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:387
+msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+msgid ""
+"Can't distinguish object between Floors and Rails. Suppose it is Floors."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:266
+msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
+msgid "annoymous"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:130
+msgctxt "BBP/__init__.menu_drawer_import()"
+msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:143
+msgctxt "BBP/__init__.menu_drawer_export()"
+msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:154
+msgctxt "BBP/__init__.menu_drawer_add()"
+msgid "Ballance"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:170
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Virtools Group"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:172
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Group into..."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:175
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Ungroup from..."
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:178
+msgctxt "BBP/__init__.menu_drawer_grouping()"
+msgid "Clear All Groups"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:184
+msgctxt "BBP/__init__.menu_drawer_snoop_then_conv()"
+msgid "Ballance"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:195
+msgctxt "BBP/__init__.menu_drawer_naming_convention()"
+msgid "Ballance"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:42
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "UV"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:46
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Align"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:49
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Select"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:52
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Material"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:74
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Sections"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:79
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Straight Rails"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:85
+msgctxt "BBP_MT_AddRailMenu/draw"
+msgid "Curve Rails"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:99
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Basic Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:103
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Nong Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:108
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Series Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:114
+msgctxt "BBP_MT_AddComponentsMenu/draw"
+msgid "Components Pair"
+msgstr ""
+
+#: Add-on Ballance Blender Plugin info: name
+msgid "Ballance Blender Plugin"
+msgstr ""
+
+#: Add-on Ballance Blender Plugin info: description
+msgid "The specialized add-on served for creating game map of Ballance"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1"
+msgid "Normal 1x1"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgid "Height"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgid "Face"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1"
+msgid "Sink 1x1"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgid "Height"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgid "Face"
+msgstr ""
+
+#. 1x1.json
+msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border"
+msgid "Normal Border"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[0]"
+msgid "Length"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[1]"
+msgid "Height"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_normal_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border"
+msgid "Sink Border"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[0]"
+msgid "Length"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[1]"
+msgid "Height"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_sink_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border"
+msgid "Ribbon Border"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgid "Length"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgid "Height"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgid "Face"
+msgstr ""
+
+#. borders.json
+msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner"
+msgid "Normal Inner Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner"
+msgid "Sink Inner Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner"
+msgid "Ribbon Inner Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner"
+msgid "Normal Outter Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner"
+msgid "Sink Outter Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner"
+msgid "Ribbon Outter Corner"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgid "Height"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgid "Face"
+msgstr ""
+
+#. corners.json
+msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing"
+msgid "Normal L Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing"
+msgid "Sink L Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing"
+msgid "Normal T Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing"
+msgid "Sink T Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing"
+msgid "Normal X Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing"
+msgid "Sink X Crossing"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgid "Height"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgid "Face"
+msgstr ""
+
+#. crossings.json
+msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat"
+msgid "Flat"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[0]"
+msgid "Height"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[1]"
+msgid "Length"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[1]"
+msgid "The length of block."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[2]"
+msgid "Width"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[2]"
+msgid "The width of block."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[3]"
+msgid "Face"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[4]"
+msgid "Is Sink"
+msgstr ""
+
+#. flat.json
+msgctxt "BBP/BME/floor_flat/[4]"
+msgid "Whether this flat floor is used for sink floor."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform"
+msgid "Normal Platform"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgid "Length"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgid "Height"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform"
+msgid "Sink Platform"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgid "Length"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgid "Height"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform"
+msgid "Ribbon Platform"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgid "Length"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgid "The length of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgid "Width"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgid "The width of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgid "Height"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgid "Face"
+msgstr ""
+
+#. platforms.json
+msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight"
+msgid "Normal Floor"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgid "Height"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgid "Length"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgid "The length of block."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgid "Face"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight"
+msgid "Sink Floor"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgid "Height"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgid "Length"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgid "The length of block."
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgid "Face"
+msgstr ""
+
+#. streets.json
+msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal"
+msgid "Normal Floor Terminal"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgid "Height"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgid "Face"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal"
+msgid "Sink Floor Terminal"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgid "Height"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgid "Face"
+msgstr ""
+
+#. terminals.json
+msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo"
+msgid "Wood Trafo"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[0]"
+msgid "Height"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/wood_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo"
+msgid "Stone Trafo"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[0]"
+msgid "Height"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/stone_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo"
+msgid "Paper Trafo"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[0]"
+msgid "Height"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[1]"
+msgid "Face"
+msgstr ""
+
+#. trafos.json
+msgctxt "BBP/BME/paper_trafo/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition"
+msgid "Transition"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[0]"
+msgid "Height"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[1]"
+msgid "Face"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_transition/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition"
+msgid "Narrow Transition"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgid "Height"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgid "The height of block."
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgid "Face"
+msgstr ""
+
+#. transitions.json
+msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight"
+msgid "Wide Floor"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgid "Length"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgid "The length of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgid "Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgid "The width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgid "Height"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal"
+msgid "Wide Floor Terminal"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgid "Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgid "The width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgid "Height"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing"
+msgid "Wide Floor L Crossing"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgid "Height"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing"
+msgid "Wide Floor T Crossing"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgid "Height"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing"
+msgid "Wide Floor X Crossing"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgid "Horizontal Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgid "The horizontal floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgid "Vertical Width"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgid "The vertical floor width of wide floor."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgid "Height"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgid "The height of block."
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgid "Face"
+msgstr ""
+
+#. wide_floors.json
+msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgid "Whether has some faces."
+msgstr ""

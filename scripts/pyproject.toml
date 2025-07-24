@@ -1,5 +1,5 @@
 [project]
-name = "tools"
+name = "scripts"
 version = "1.0.0"
 requires-python = ">=3.11"
 dependencies = [

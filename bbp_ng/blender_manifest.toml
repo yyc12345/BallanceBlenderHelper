@@ -71,12 +71,8 @@ files = "Import/export Virtools file from/to disk"
 [build]
 paths_exclude_pattern = [
   "__pycache__/", # Python runtime cache
+  ".gitignore", # Git Ignore File
   ".style.yapf", # Python code style
   "*.gitkeep", # Git directory keeper
-  ".gitignore", # Git Ignore File
   "*.md", # Useless document.
-  "/raw_jsons", # Raw JSONs.
-  "/raw_icons", # Raw Icons.
-  "/tools", # Assistant tools.
-  "/i18n", # GNU gettext Translation.
 ]

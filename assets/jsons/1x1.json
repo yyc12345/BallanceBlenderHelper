@@ -1,0 +1,183 @@
+[
+    {
+        "identifier": "raw_floor_1x1",
+        "showcase": null,
+        "params": [
+            {
+                "field": "height",
+                "data": "5.0"
+            },
+            {
+                "field": "face",
+                "data": "(True, False, True, True, True, True)"
+            },
+            {
+                "field": "is_sink",
+                "data": "False"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[3], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 0, 0) @ rot(0, 0, 90)"
+            },
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[5], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(5, 5, 0) @ rot(0, 0, 180)"
+            },
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[2], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "move(0, 5, 0) @ rot(0, 0, 270)"
+            },
+            {
+                "identifier": "cv_triangle_side",
+                "skip": "False",
+                "params": {
+                    "edge_length": "5",
+                    "tip_offset": "2.5",
+                    "height": "height",
+                    "face": "(face[0], False, False, False, face[4], None)",
+                    "is_sink": "is_sink"
+                },
+                "transform": "ident()"
+            },
+            {
+                "identifier": "floor_rectangle_bottom",
+                "skip": "not face[1]",
+                "params": {
+                    "length": "5",
+                    "width": "5"
+                },
+                "transform": "move(0, 0, -height)"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_normal_1x1",
+        "showcase": {
+            "title": "Normal 1x1",
+            "icon": "Normal1x1",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_1x1",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "False"
+                },
+                "transform": "ident()"
+            }
+        ]
+    },
+    {
+        "identifier": "floor_sink_1x1",
+        "showcase": {
+            "title": "Sink 1x1",
+            "icon": "Sink1x1",
+            "type": "floor",
+            "cfgs": [
+                {
+                    "field": "height_",
+                    "type": "float",
+                    "title": "Height",
+                    "desc": "The height of block.",
+                    "default": "5.0"
+                },
+                {
+                    "field": "face_",
+                    "type": "face",
+                    "title": "Face",
+                    "desc": "Whether has some faces.",
+                    "default": "(True, False, True, True, True, True)"
+                }
+            ]
+        },
+        "params": [
+            {
+                "field": "height",
+                "data": "height_"
+            },
+            {
+                "field": "face",
+                "data": "face_"
+            }
+        ],
+        "skip": "False",
+        "vars": [],
+        "vertices": [],
+        "faces": [],
+        "instances": [
+            {
+                "identifier": "raw_floor_1x1",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "face": "face",
+                    "is_sink": "True"
+                },
+                "transform": "ident()"
+            }
+        ]
+    }
+]
