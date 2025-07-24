@@ -24,6 +24,8 @@ Execute `uv run build_meshes.py`
 
 Validate the correction of BME prorotype JSON files.
 
+Validation is VERY crucial. Before running anything involving BME prototype JSONs, please validate them first.
+
 Execute `uv run validate_json.py`
 
 ## Extract BME Translation

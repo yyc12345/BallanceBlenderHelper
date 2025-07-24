@@ -1,7 +1,7 @@
 import json, logging, ast, typing
-import pydantic
 import common, bme
 from common import AssetKind
+import pydantic
 
 #region Assistant Validator
 
@@ -27,7 +27,12 @@ def _validate_prototype(prototype: bme.Prototype) -> None:
 
 #endregion
 
-def validate_json() -> None:
+# 把提取JSON翻译的要求写入到验证中：
+# - Showcase::Cfgs::Title或Desc不能为空。
+# - Showcase::Cfgs::Title和Showcase::Cfgs::Desc不能重复
+
+
+def validate_jsons() -> None:
     raw_jsons_dir = common.get_raw_assets_folder(AssetKind.Jsons)
 
     # Load all prototypes and check their basic format
@@ -68,4 +73,4 @@ def validate_json() -> None:
 
 if __name__ == '__main__':
     common.setup_logging()
-    validate_json()
+    validate_jsons()
