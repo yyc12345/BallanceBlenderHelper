@@ -164,7 +164,7 @@ def _validate_prototype(prototype: bme.Prototype, identifiers: set[str]) -> None
         _validate_showcase(prototype.showcase, variables)
     _validate_params(prototype.params, variables)
     _check_programmable_field(prototype.skip)
-    _validate_vars(prototype.vars, identifiers)
+    _validate_vars(prototype.vars, variables)
     _validate_vertices(prototype.vertices)
     _validate_faces(prototype.faces, len(prototype.vertices))
     _validate_instances(prototype.instances, identifiers)
