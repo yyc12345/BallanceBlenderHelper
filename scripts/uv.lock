@@ -131,7 +131,7 @@ wheels = [
 ]
 
 [[package]]
-name = "tools"
+name = "scripts"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

@@ -1,4 +1,4 @@
-# Tools
+# Scripts
 
 These tool scripts is served for BBP_NG specifically. We use Astral UV with a single Python project file to manage these tools. You can browse their usage in this file.
 
@@ -13,6 +13,12 @@ Execute `uv run build_icons.py`
 Compress BME prototype JSON files into smaller size.
 
 Execute `uv run build_json.py`
+
+## Build Meshes
+
+Copy Ballance element placeholder into Blender plugin.
+
+Execute `uv run build_meshes.py`
 
 ## Validate BME Prototype
 

@@ -156,7 +156,7 @@ class Prototypes(RootModel):
 
 
 def validate_json() -> None:
-    raw_json_folder = common.get_plugin_folder() / 'raw_jsons'
+    raw_json_folder = common.get_root_folder() / 'raw_jsons'
 
     for json_file in raw_json_folder.rglob('*.json'):
         logging.info(f'Validating {json_file} ...')

@@ -13,7 +13,7 @@ class ThumbnailBuilder():
 
     def build_thumbnails(self) -> None:
         # get folder path
-        root_folder = common.get_plugin_folder()
+        root_folder = common.get_root_folder()
 
         # prepare handler
         def folder_handler(rel_name: str, src_folder: Path, dst_folder: Path) -> None:
