@@ -1,17 +1,9 @@
-import json, logging, ast, typing
+import logging, ast, typing
 import common, bme
 from common import AssetKind
-import pydantic
+import pydantic, json5
 
 #region Assistant Checker
-
-# TODO:
-# If possible, following check should be done.
-# They are not done now because they are so complex to implement.
-# - The reference to variables and functions in programmable fields.
-# - The return type of prorgammable fields.
-# - Texture name referred in the programmable field in Face.
-# - In instance, passed params to instance is fulfilled.
 
 
 def _try_add(entries: set[str], entry: str) -> bool:
@@ -23,9 +15,6 @@ def _try_add(entries: set[str], entry: str) -> bool:
 
 
 def _check_programmable_field(probe: str) -> None:
-    # TODO:
-    # If possible, allow checking the reference to variables and function,
-    # to make sure the statement must can be executed.
     try:
         ast.parse(probe)
     except SyntaxError:
@@ -178,7 +167,7 @@ def validate_jsons() -> None:
 
     # Load all prototypes and check their basic format
     prototypes: list[bme.Prototype] = []
-    for raw_json_file in raw_jsons_dir.glob('*.json'):
+    for raw_json_file in raw_jsons_dir.glob('*.json5'):
         # Skip non-file
         if not raw_json_file.is_file():
             continue
@@ -189,12 +178,12 @@ def validate_jsons() -> None:
         # Load prototypes
         try:
             with open(raw_json_file, 'r', encoding='utf-8') as f:
-                docuement = json.load(f)
+                docuement = json5.load(f)
                 file_prototypes = bme.Prototypes.model_validate(docuement)
-        except json.JSONDecodeError as e:
-            logging.error(f'File {raw_json_file} is not a valid JSON file. Reason: {e}')
         except pydantic.ValidationError as e:
             logging.error(f'JSON file {raw_json_file} lose essential fields. Detail: {e}')
+        except (ValueError, UnicodeDecodeError) as e:
+            logging.error(f'File {raw_json_file} is not a valid JSON5 file. Reason: {e}')
 
         # Append all prototypes into list
         prototypes += file_prototypes.root

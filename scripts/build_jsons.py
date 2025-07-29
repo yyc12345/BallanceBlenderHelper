@@ -2,12 +2,13 @@ import json, logging
 from pathlib import Path
 import common
 from common import AssetKind
+import json5
 
 
 def _compress_json(src_file: Path, dst_file: Path) -> None:
     # load data first
     with open(src_file, 'r', encoding='utf-8') as f:
-        loaded_prototypes = json.load(f)
+        loaded_prototypes = json5.load(f)
 
     # save result with compress config
     with open(dst_file, 'w', encoding='utf-8') as f:
@@ -24,13 +25,14 @@ def build_jsons() -> None:
     raw_jsons_dir = common.get_raw_assets_folder(AssetKind.Jsons)
     plg_jsons_dir = common.get_plugin_assets_folder(AssetKind.Jsons)
 
-    for raw_json_file in raw_jsons_dir.glob('*.json'):
+    for raw_json_file in raw_jsons_dir.glob('*.json5'):
         # Skip non-file.
         if not raw_json_file.is_file():
             continue
 
         # Build final path
         plg_json_file = plg_jsons_dir / raw_json_file.relative_to(raw_jsons_dir)
+        plg_json_file = plg_json_file.with_suffix('.json')
 
         # Show message
         logging.info(f'Compressing {raw_json_file} -> {plg_json_file}')

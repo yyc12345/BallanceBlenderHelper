@@ -1,8 +1,8 @@
-import json, logging, typing, itertools
+import logging, typing, itertools
 from pathlib import Path
 import common, bme
 from common import AssetKind
-import pydantic, polib
+import pydantic, polib, json5
 
 ## YYC MARK:
 #  This translation context string prefix is cpoied from UTIL_translation.py.
@@ -38,14 +38,14 @@ def _extract_json(json_file: Path) -> typing.Iterator[polib.POEntry]:
     try:
         # Read file and convert it into BME struct.
         with open(json_file, 'r', encoding='utf-8') as f:
-            document = json.load(f)
+            document = json5.load(f)
         prototypes = bme.Prototypes.model_validate(document)
         # Extract translation
         return itertools.chain.from_iterable(_extract_prototype(prototype) for prototype in prototypes.root)
-    except json.JSONDecodeError:
-        logging.error(f'Can not extract translation from {json_file} due to JSON error. Please validate it first.')
     except pydantic.ValidationError:
         logging.error(f'Can not extract translation from {json_file} due to struct error. Please validate it first.')
+    except (ValueError, UnicodeDecodeError):
+        logging.error(f'Can not extract translation from {json_file} due to JSON5 error. Please validate it first.')
 
     # Output nothing
     return itertools.chain.from_iterable(())
@@ -70,7 +70,7 @@ def extract_jsons() -> None:
     }
 
     # Iterate all prototypes and add into POT
-    for raw_json_file in raw_jsons_dir.glob('*.json'):
+    for raw_json_file in raw_jsons_dir.glob('*.json5'):
         # Skip non-file.
         if not raw_json_file.is_file():
             continue
