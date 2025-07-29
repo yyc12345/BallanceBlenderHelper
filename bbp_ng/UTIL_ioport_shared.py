@@ -245,6 +245,7 @@ class ExportParams():
         items = (
             ('COLLECTION', "Collection", "Export a collection", 'OUTLINER_COLLECTION', 0),
             ('OBJECT', "Object", "Export an object", 'OBJECT_DATA', 1),
+            ('SELECTED', "Selected Objects", "Export selected objects", 'SELECT_SET', 2),
         ),
         translation_context = 'BBP/UTIL_ioport_shared.ExportParams/property'
     ) # type: ignore
@@ -267,8 +268,10 @@ class ExportParams():
             ptrprops.draw_export_collection(body)
         elif self.export_mode == 'OBJECT':
             ptrprops.draw_export_object(body)
+        elif self.export_mode == 'SELECTED':
+            pass # Draw nothing
 
-    def general_get_export_objects(self, context: bpy.types.Context) -> tuple[bpy.types.Object] | None:
+    def general_get_export_objects(self, context: bpy.types.Context) -> tuple[bpy.types.Object, ...] | None:
         """
         Return resolved exported objects or None if no selection.
         """
@@ -276,12 +279,13 @@ class ExportParams():
         if self.export_mode == 'COLLECTION':
             col: bpy.types.Collection = ptrprops.get_export_collection()
             if col is None: return None
-            else:
-                return tuple(col.all_objects)
-        else:
+            else: return tuple(col.all_objects)
+        elif self.export_mode == 'OBJECT':
             obj: bpy.types.Object = ptrprops.get_export_object()
             if obj is None: return None
             else: return (obj, )
+        elif self.export_mode == 'SELECTED':
+            return tuple(context.selected_objects)
 
 # define global tex save opt blender enum prop helper
 _g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
