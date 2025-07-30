@@ -5,7 +5,7 @@ from . import UTIL_functions, UTIL_translation, UTIL_bme
 
 #region BME Adder
 
-_g_EnumHelper_BmeStructType: UTIL_bme.EnumPropHelper = UTIL_bme.EnumPropHelper()
+_g_EnumHelper_BmeStructType = UTIL_bme.EnumPropHelper()
 
 class BBP_PG_bme_adder_cfgs(bpy.types.PropertyGroup):
     prop_int: bpy.props.IntProperty(

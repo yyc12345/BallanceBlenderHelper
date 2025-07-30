@@ -18,7 +18,7 @@ _g_SelectModeDesc: dict[SelectMode, tuple[str, str, str]] = {
     SelectMode.Difference: ('Invert', 'Inverts the selection.', 'SELECT_DIFFERENCE'),
     SelectMode.Intersect: ('Intersect', 'Selects items that intersect with the existing selection.', 'SELECT_INTERSECT')
 }
-_g_EnumHelper_SelectMode: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_EnumHelper_SelectMode = UTIL_functions.EnumPropHelper(
     SelectMode,
     lambda x: str(x.value),
     lambda x: SelectMode(int(x)),

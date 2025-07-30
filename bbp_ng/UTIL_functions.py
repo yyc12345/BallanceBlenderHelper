@@ -135,17 +135,23 @@ class EnumPropHelper(typing.Generic[_TRawEnum]):
     parsing data from EnumProperty string value and getting EnumProperty acceptable string format from data.
     """
     
+    # YYC MARK:
+    # I don't know why I can have subscripting for a `typing.Callable` object.
+    # It was not introduced in any document and I just know it from AI.
+    # If I am not doing this, the type hint will crash into Unknown type.
+    # But it works now I don't want to touch it anymore.
+
     __mCollections: typing.Iterable[_TRawEnum]
-    __mFctToStr: _TFctToStr
-    __mFctFromStr: _TFctFromStr
-    __mFctName: _TFctName
-    __mFctDesc: _TFctDesc
-    __mFctIcon: _TFctIcon
+    __mFctToStr: _TFctToStr[_TRawEnum]
+    __mFctFromStr: _TFctFromStr[_TRawEnum]
+    __mFctName: _TFctName[_TRawEnum]
+    __mFctDesc: _TFctDesc[_TRawEnum]
+    __mFctIcon: _TFctIcon[_TRawEnum]
     
-    def __init__(self, collections: typing.Iterable[typing.Any],
-                 fct_to_str: _TFctToStr, fct_from_str: _TFctFromStr,
-                 fct_name: _TFctName, fct_desc: _TFctDesc,
-                 fct_icon: _TFctIcon):
+    def __init__(self, collections: typing.Iterable[_TRawEnum],
+                 fct_to_str: _TFctToStr[_TRawEnum], fct_from_str: _TFctFromStr[_TRawEnum],
+                 fct_name: _TFctName[_TRawEnum], fct_desc: _TFctDesc[_TRawEnum],
+                 fct_icon: _TFctIcon[_TRawEnum]):
         """
         Initialize an EnumProperty helper.
 

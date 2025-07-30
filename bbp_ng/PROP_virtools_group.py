@@ -205,7 +205,7 @@ class VirtoolsGroupsPreset(enum.Enum):
     
     Shadow = "Shadow"
 
-_g_VtGrpPresetValues: tuple[str] = tuple(map(lambda x: x.value, VirtoolsGroupsPreset))
+_g_VtGrpPresetValues: tuple[str, ...] = tuple(map(lambda x: x.value, VirtoolsGroupsPreset))
 
 ## Some of group names are not matched with icon name
 #  So we create a convertion map to convert them.
@@ -236,7 +236,7 @@ def _get_group_icon_by_name(gp_name: str) -> int:
     if value is not None: return value
     else: return UTIL_icons_manager.get_empty_icon()
 # blender group name prop helper
-_g_EnumHelper_Group: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_EnumHelper_Group = UTIL_functions.EnumPropHelper(
     VirtoolsGroupsPreset,
     lambda x: x.value,  # member is string self
     lambda x: VirtoolsGroupsPreset(x),   # convert directly because it is StrEnum.

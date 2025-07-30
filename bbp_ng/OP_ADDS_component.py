@@ -184,7 +184,7 @@ def _get_component_icon_by_name(elename: str):
     icon: int | None = UTIL_icons_manager.get_component_icon(elename)
     if icon is None: return UTIL_icons_manager.get_empty_icon()
     else: return icon
-_g_EnumHelper_Component: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_EnumHelper_Component = UTIL_functions.EnumPropHelper(
     PROP_ballance_element.BallanceElementType,
     lambda x: str(x.value),
     lambda x: PROP_ballance_element.BallanceElementType(int(x)),
@@ -217,7 +217,7 @@ class BBP_OT_add_component(bpy.types.Operator, ComponentSectorParam):
         layout.prop(self, "component_type")
 
         # only show sector for non-PE/PS component
-        eletype: PROP_ballance_element.BallanceElementType = _g_EnumHelper_Component.get_selection(self.component_type)
+        eletype = _g_EnumHelper_Component.get_selection(self.component_type)
         if eletype != PROP_ballance_element.BallanceElementType.PS_FourFlames and eletype != PROP_ballance_element.BallanceElementType.PE_Balloon:
             self.draw_component_sector_params(layout)
 

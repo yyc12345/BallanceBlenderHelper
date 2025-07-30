@@ -15,7 +15,7 @@ class RawVirtoolsMesh():
         self.mLitMode = kwargs.get('mLitMode', RawVirtoolsMesh.cDefaultLitMode)
 
 # blender enum prop helper defines
-_g_Helper_VXMESH_LITMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXMESH_LITMODE)
+_g_Helper_VXMESH_LITMODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXMESH_LITMODE)
 
 # Blender Property Group
 

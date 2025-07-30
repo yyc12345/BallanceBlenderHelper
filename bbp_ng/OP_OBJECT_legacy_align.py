@@ -15,7 +15,7 @@ _g_AlignModeDesc: dict[AlignMode, tuple[str, str]] = {
     AlignMode.AxisCenter: ("Center (Axis)", "The object's source point in specified axis."),
     AlignMode.Max: ("Max", "The max value in specified axis."),
 }
-_g_EnumHelper_AlignMode: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_EnumHelper_AlignMode = UTIL_functions.EnumPropHelper(
     AlignMode,
     lambda x: str(x.value),
     lambda x: AlignMode(int(x)),

@@ -114,13 +114,13 @@ class RawVirtoolsMaterial():
 
 #region Blender Enum Prop Helper (Virtools type specified)
 
-_g_Helper_VXTEXTURE_BLENDMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_BLENDMODE)
-_g_Helper_VXTEXTURE_FILTERMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_FILTERMODE)
-_g_Helper_VXTEXTURE_ADDRESSMODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_ADDRESSMODE)
-_g_Helper_VXBLEND_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXBLEND_MODE)
-_g_Helper_VXFILL_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXFILL_MODE)
-_g_Helper_VXSHADE_MODE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXSHADE_MODE)
-_g_Helper_VXCMPFUNC: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXCMPFUNC)
+_g_Helper_VXTEXTURE_BLENDMODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_BLENDMODE)
+_g_Helper_VXTEXTURE_FILTERMODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_FILTERMODE)
+_g_Helper_VXTEXTURE_ADDRESSMODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXTEXTURE_ADDRESSMODE)
+_g_Helper_VXBLEND_MODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXBLEND_MODE)
+_g_Helper_VXFILL_MODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXFILL_MODE)
+_g_Helper_VXSHADE_MODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXSHADE_MODE)
+_g_Helper_VXCMPFUNC = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXCMPFUNC)
 
 #endregion
 
@@ -558,7 +558,7 @@ def preset_virtools_material(mtl: bpy.types.Material, preset_type: MaterialPrese
     set_raw_virtools_material(mtl, preset_data)
 
 # create preset enum blender helper
-_g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_Helper_MtlPreset = UTIL_functions.EnumPropHelper(
     MaterialPresetType,
     lambda x: str(x.value),
     lambda x: MaterialPresetType(int(x)),

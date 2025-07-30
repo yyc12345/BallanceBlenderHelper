@@ -73,7 +73,7 @@ class RawVirtoolsLight():
 
 # Blender Property Group
 
-_g_Helper_VXLIGHT_TYPE: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXLIGHT_TYPE)
+_g_Helper_VXLIGHT_TYPE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXLIGHT_TYPE)
 
 class BBP_PG_virtools_light(bpy.types.PropertyGroup):
     light_type: bpy.props.EnumProperty(

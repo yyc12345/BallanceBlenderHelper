@@ -20,8 +20,8 @@ class RawVirtoolsTexture():
         self.mVideoFormat = kwargs.get('mVideoFormat', RawVirtoolsTexture.cDefaultVideoFormat)
     
 # blender enum prop helper defines
-_g_Helper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
-_g_Helper_VX_PIXELFORMAT: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VX_PIXELFORMAT)
+_g_Helper_CK_TEXTURE_SAVEOPTIONS = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
+_g_Helper_VX_PIXELFORMAT = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VX_PIXELFORMAT)
 
 class BBP_PG_virtools_texture(bpy.types.PropertyGroup):
 

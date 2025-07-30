@@ -3,11 +3,13 @@ import enum, typing
 from . import UTIL_virtools_types, UTIL_functions
 from . import PROP_ptrprop_resolver, PROP_ballance_map_info
 
-## Intent
-#  Some importer or exporter may share same properties.
-#  So we create some shared class and user just need inherit them 
-#  and call general getter to get user selected data.
-#  Also provide draw function thus caller do not need draw the params themselves.
+# INTENT:
+# Some importer or exporter may share same properties.
+# So we create some shared class and user just need inherit them 
+# and call general getter to get user selected data.
+# Also provide draw function thus caller do not need draw the params themselves.
+
+#region Import Params
 
 class ConflictStrategy(enum.IntEnum):
     Rename = enum.auto()
@@ -16,7 +18,7 @@ _g_ConflictStrategyDesc: dict[ConflictStrategy, tuple[str, str]] = {
     ConflictStrategy.Rename: ('Rename', 'Rename the new one'),
     ConflictStrategy.Current: ('Use Current', 'Use current one'),
 }
-_g_EnumHelper_ConflictStrategy: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelper(
+_g_EnumHelper_ConflictStrategy = UTIL_functions.EnumPropHelper(
     ConflictStrategy,
     lambda x: str(x.value),
     lambda x: ConflictStrategy(int(x)),
@@ -25,39 +27,6 @@ _g_EnumHelper_ConflictStrategy: UTIL_functions.EnumPropHelper = UTIL_functions.E
     lambda _: ''
 )
 
-#region Assist Classes
-
-class ExportEditModeBackup():
-    """
-    The class which save Edit Mode when exporting and restore it after exporting.
-    Because edit mode is not allowed when exporting.
-    Support `with` statement.
-
-    ```
-    with ExportEditModeBackup():
-        # do some exporting work
-        blabla()
-    # restore automatically when exiting "with"
-    ```
-    """
-    mInEditMode: bool
-
-    def __init__(self):
-        if bpy.context.object and bpy.context.object.mode == "EDIT":
-            # set and toggle it. otherwise exporting will failed.
-            self.mInEditMode = True
-            bpy.ops.object.editmode_toggle()
-        else:
-            self.mInEditMode = False
-    
-    def __enter__(self):
-        return self
-    
-    def __exit__(self, exc_type, exc_value, traceback):
-        if self.mInEditMode:
-            bpy.ops.object.editmode_toggle()
-            self.mInEditMode = False
-    
 class ConflictResolver():
     """
     This class frequently used when importing objects.
@@ -151,8 +120,6 @@ class ConflictResolver():
         tex.name = name
         return (tex, True)
 
-#endregion
-
 class ImportParams():
     texture_conflict_strategy: bpy.props.EnumProperty(
         name = "Texture Name Conflict",
@@ -239,14 +206,65 @@ class ImportParams():
             self.general_get_texture_conflict_strategy()
         )
 
+#endregion
+
+#region Export Params
+
+class ExportEditModeBackup():
+    """
+    The class which save Edit Mode when exporting and restore it after exporting.
+    Because edit mode is not allowed when exporting.
+    Support `with` statement.
+
+    ```
+    with ExportEditModeBackup():
+        # do some exporting work
+        blabla()
+    # restore automatically when exiting "with"
+    ```
+    """
+    mInEditMode: bool
+
+    def __init__(self):
+        if bpy.context.object and bpy.context.object.mode == "EDIT":
+            # set and toggle it. otherwise exporting will failed.
+            self.mInEditMode = True
+            bpy.ops.object.editmode_toggle()
+        else:
+            self.mInEditMode = False
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self.mInEditMode:
+            bpy.ops.object.editmode_toggle()
+            self.mInEditMode = False
+    
+class ExportMode(enum.IntEnum):
+    BldColl = enum.auto()
+    BldObj = enum.auto()
+    BldSelObjs = enum.auto()
+_g_ExportModeDesc: dict[ExportMode, tuple[str, str, str]] = {
+    ExportMode.BldColl: ('Collection', 'Export a collection', 'OUTLINER_COLLECTION'),
+    ExportMode.BldObj: ('Object', 'Export an object', 'OBJECT_DATA'),
+    ExportMode.BldSelObjs: ('Selected Objects', 'Export selected objects', 'SELECT_SET'),
+}
+_g_EnumHelper_ExportMode = UTIL_functions.EnumPropHelper(
+    ExportMode,
+    lambda x: str(x.value),
+    lambda x: ExportMode(int(x)),
+    lambda x: _g_ExportModeDesc[x][0],
+    lambda x: _g_ExportModeDesc[x][1],
+    lambda x: _g_ExportModeDesc[x][2]
+)
+
 class ExportParams():
     export_mode: bpy.props.EnumProperty(
         name = "Export Mode",
-        items = (
-            ('COLLECTION', "Collection", "Export a collection", 'OUTLINER_COLLECTION', 0),
-            ('OBJECT', "Object", "Export an object", 'OBJECT_DATA', 1),
-            ('SELECTED', "Selected Objects", "Export selected objects", 'SELECT_SET', 2),
-        ),
+        description = "Define which 3D objects should be exported",
+        items = _g_EnumHelper_ExportMode.generate_items(),
+        default = _g_EnumHelper_ExportMode.to_selection(ExportMode.BldColl),
         translation_context = 'BBP/UTIL_ioport_shared.ExportParams/property'
     ) # type: ignore
 
@@ -263,32 +281,40 @@ class ExportParams():
         horizon_body.prop(self, "export_mode", expand=True)
 
         # draw picker
+        export_mode = _g_EnumHelper_ExportMode.get_selection(self.export_mode)
         ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
-        if self.export_mode == 'COLLECTION':
-            ptrprops.draw_export_collection(body)
-        elif self.export_mode == 'OBJECT':
-            ptrprops.draw_export_object(body)
-        elif self.export_mode == 'SELECTED':
-            pass # Draw nothing
+        match export_mode:
+            case ExportMode.BldColl:
+                ptrprops.draw_export_collection(body)
+            case ExportMode.BldObj:
+                ptrprops.draw_export_object(body)
+            case ExportMode.BldSelObjs:
+                pass # Draw nothing
 
     def general_get_export_objects(self, context: bpy.types.Context) -> tuple[bpy.types.Object, ...] | None:
         """
         Return resolved exported objects or None if no selection.
         """
+        export_mode = _g_EnumHelper_ExportMode.get_selection(self.export_mode)
         ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
-        if self.export_mode == 'COLLECTION':
-            col: bpy.types.Collection = ptrprops.get_export_collection()
-            if col is None: return None
-            else: return tuple(col.all_objects)
-        elif self.export_mode == 'OBJECT':
-            obj: bpy.types.Object = ptrprops.get_export_object()
-            if obj is None: return None
-            else: return (obj, )
-        elif self.export_mode == 'SELECTED':
-            return tuple(context.selected_objects)
+        match export_mode:
+            case ExportMode.BldColl:
+                col: bpy.types.Collection = ptrprops.get_export_collection()
+                if col is None: return None
+                else: return tuple(col.all_objects)
+            case ExportMode.BldObj:
+                obj: bpy.types.Object = ptrprops.get_export_object()
+                if obj is None: return None
+                else: return (obj, )
+            case ExportMode.BldSelObjs:
+                return tuple(context.selected_objects)
+
+#endregion
+
+#region Virtools Params
 
 # define global tex save opt blender enum prop helper
-_g_EnumHelper_CK_TEXTURE_SAVEOPTIONS: UTIL_virtools_types.EnumPropHelper = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
+_g_EnumHelper_CK_TEXTURE_SAVEOPTIONS = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
 
 class VirtoolsParams():
     texture_save_opt: bpy.props.EnumProperty(
@@ -353,6 +379,10 @@ class VirtoolsParams():
     def general_get_compress_level(self) -> int:
         return self.compress_level
     
+#endregion
+
+#region Ballance Params
+
 class BallanceParams():
     successive_sector: bpy.props.BoolProperty(
         name="Successive Sector",
@@ -391,3 +421,5 @@ class BallanceParams():
         map_info: PROP_ballance_map_info.RawBallanceMapInfo
         map_info = PROP_ballance_map_info.get_raw_ballance_map_info(bpy.context.scene)
         return map_info.mSectorCount
+
+#endregion
