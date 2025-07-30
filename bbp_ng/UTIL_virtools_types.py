@@ -235,21 +235,28 @@ _g_Annotation: dict[type, dict[int, EnumAnnotation]] = {
     }
 }
 
-class EnumPropHelper(UTIL_functions.EnumPropHelper):
+_TRawEnum = typing.TypeVar('_TRawEnum', bound = enum.Enum)
+
+class EnumPropHelper(UTIL_functions.EnumPropHelper[_TRawEnum]):
     """
     Virtools type specified Blender EnumProp helper.
     """
     __mAnnotationDict: dict[int, EnumAnnotation]
-    __mEnumTy: type[enum.Enum]
+    __mEnumTy: type[_TRawEnum]
 
-    def __init__(self, ty: type[enum.Enum]):
+    def __init__(self, ty: type[_TRawEnum]):
         # set enum type and annotation ref first
         self.__mEnumTy = ty
         self.__mAnnotationDict = _g_Annotation[ty]
-        # init parent data
-        UTIL_functions.EnumPropHelper.__init__(
-            self,
-            self.__mEnumTy, # enum.Enum it self is iterable
+
+        # YYC MARK:
+        # It seems that Pylance has bad generic analyse ability in there.
+        # It can not deduce the correct generic type in lambda.
+        # I gave up.
+
+        # Init parent data
+        super().__init__(
+            self.__mEnumTy, # enum.Enum its self is iterable
             lambda x: str(x.value), # convert enum.Enum's value to string
             lambda x: self.__mEnumTy(int(x)),   # use stored enum type and int() to get enum member
             lambda x: self.__mAnnotationDict[x.value].mDisplayName,
@@ -265,11 +272,11 @@ def virtools_name_regulator(name: str | None) -> str:
     if name: return name
     else: return bpy.app.translations.pgettext_data('annoymous', 'BME/UTIL_virtools_types.virtools_name_regulator()')
 
-## Default Encoding for PyBMap
-#  Use semicolon split each encodings. Support Western European and Simplified Chinese in default.
-#  Since LibCmo 0.2, the encoding name of LibCmo become universal encoding which is platfoorm independent.
-#  So no need set it according to different platform.
-#  Use universal encoding name (like Python).
+# YYC MARK:
+# There are default encodings for PyBMap. We support Western European and Simplified Chinese in default.
+# Since LibCmo 0.2, the encoding name of LibCmo become universal encoding which is platfoorm independent.
+# So no need set it according to different platform.
+# Use universal encoding name (like Python).
 g_PyBMapDefaultEncodings: tuple[str, ...] = (
     'cp1252',
     'gbk'

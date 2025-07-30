@@ -187,15 +187,14 @@ class PrototypeShowcaseCfgDescriptor():
     def get_default(self) -> typing.Any:
         return _eval_showcase_cfgs_default(self.__mRawCfg[TOKEN_SHOWCASE_CFGS_DEFAULT])
 
-class EnumPropHelper(UTIL_functions.EnumPropHelper):
+class EnumPropHelper(UTIL_functions.EnumPropHelper[str]):
     """
     The BME specialized Blender EnumProperty helper.
     """
     
     def __init__(self):
         # init parent class
-        UTIL_functions.EnumPropHelper.__init__(
-            self,
+        super().__init__(
             self.get_bme_identifiers(),
             lambda x: x,
             lambda x: x,

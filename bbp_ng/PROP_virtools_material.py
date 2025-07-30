@@ -572,13 +572,13 @@ _g_Helper_MtlPreset: UTIL_functions.EnumPropHelper = UTIL_functions.EnumPropHelp
 #region Fix Material
 
 def fix_material(mtl: bpy.types.Material) -> bool:
-    """!
+    """
     Fix single Blender material.
 
-    @remark The implementation of this function is copied from BallanceVirtoolsHelper/bvh/features/mapping/bmfile_fix_texture.cpp
+    The implementation of this function is copied from `BallanceVirtoolsHelper/bvh/features/mapping/bmfile_fix_texture.cpp`
 
-    @param mtl[in] The blender material need to be processed.
-    @return True if we do a fix, otherwise return False.
+    :param mtl: The blender material need to be processed.
+    :return: True if we do a fix, otherwise return False.
     """
     # prepare return value first
     ret: bool = False

@@ -64,12 +64,10 @@ def set_raw_virtools_texture(img: bpy.types.Image, rawdata: RawVirtoolsTexture) 
 
 #region Virtools Texture Drawer
 
-"""!
-@remark
-Because Image do not have its unique properties window
-so we only can draw virtools texture properties in other window
-we provide various function to help draw property.
-"""
+# YYC MARK:
+# Because Image do not have its unique properties window,
+# so we only can draw Virtools Texture properties in other window.
+# We provide various functions to help draw properties.
 
 def draw_virtools_texture(img: bpy.types.Image, layout: bpy.types.UILayout):
     props: BBP_PG_virtools_texture = get_virtools_texture(img)
