@@ -1,16 +1,14 @@
-#region Reload and Import
+#region Import and Reload
 
 # import core lib
 import bpy
-import typing, collections
+import typing, enum
 
 # reload if needed
 # TODO: finish reload feature if needed.
 # (reload script raise too much exceptions so I usually restart blender to test my plugin.)
 if "bpy" in locals():
     import importlib
-
-#endregion
 
 # we must load icons manager first
 # and register it
@@ -27,9 +25,146 @@ from . import OP_MTL_fix_materials
 from . import OP_ADDS_component, OP_ADDS_bme, OP_ADDS_rail
 from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_snoop_group_then_to_mesh, OP_OBJECT_naming_convention
 
-#region Menu
+#endregion
 
-# ===== Menu Defines =====
+#region Menu and Sidebar Panel
+
+#region Ballance Adder Menu and Panel
+
+class DrawTarget(enum.IntEnum):
+    BldMenu = enum.auto()
+    BldPanel = enum.auto()
+
+def reuse_create_layout(layout: bpy.types.UILayout, target: DrawTarget) -> bpy.types.UILayout:
+    # If we are draw for Panel, we need use Grid to use space enough.
+    match target:
+        case DrawTarget.BldMenu:
+            return layout
+        case DrawTarget.BldPanel:
+            return layout.grid_flow(even_columns=True, even_rows=True)
+
+def reuse_draw_add_bme(layout: bpy.types.UILayout, target: DrawTarget):
+    # Draw operators.
+    print('reuse_draw_add_bme()')
+    OP_ADDS_bme.BBP_OT_add_bme_struct.draw_blc_menu(reuse_create_layout(layout, target))
+
+def reuse_draw_add_rail(layout: bpy.types.UILayout, target: DrawTarget):
+    print('reuse_draw_add_rail()')
+    layout.label(text="Sections", icon='MESH_CIRCLE', text_ctxt='BBP/__init__.reuse_draw_add_rail()')
+    sublayout = reuse_create_layout(layout, target)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
+
+    layout.separator()
+    layout.label(text="Straight Rails", icon='IPO_CONSTANT', text_ctxt='BBP/__init__.reuse_draw_add_rail()')
+    sublayout = reuse_create_layout(layout, target)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_transition_rail.bl_idname)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_side_rail.bl_idname)
+
+    layout.separator()
+    layout.label(text="Curve Rails", icon='MOD_SCREW', text_ctxt='BBP/__init__.reuse_draw_add_rail()')
+    sublayout = reuse_create_layout(layout, target)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_arc_rail.bl_idname)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_spiral_rail.bl_idname)
+    sublayout.operator(OP_ADDS_rail.BBP_OT_add_side_spiral_rail.bl_idname)
+
+def reuse_draw_add_component(layout: bpy.types.UILayout, target: DrawTarget):
+    print('reuse_draw_add_component()')
+    # We only use Grid for basic components
+    layout.label(text="Basic Components", text_ctxt='BBP/__init__.reuse_draw_add_component()')
+    OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(reuse_create_layout(layout, target))
+    
+    layout.separator()
+    layout.label(text="Nong Components", text_ctxt='BBP/__init__.reuse_draw_add_component()')
+    sublayout = reuse_create_layout(layout, target)
+    OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(sublayout)
+    OP_ADDS_component.BBP_OT_add_nong_ventilator.draw_blc_menu(sublayout)
+
+    layout.separator()
+    layout.label(text="Series Components", text_ctxt='BBP/__init__.reuse_draw_add_component()')
+    sublayout = reuse_create_layout(layout, target)
+    OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(sublayout)
+    OP_ADDS_component.BBP_OT_add_swing_series.draw_blc_menu(sublayout)
+    OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(sublayout)
+
+    layout.separator()
+    layout.label(text="Components Pair", text_ctxt='BBP/__init__.reuse_draw_add_component()')
+    sublayout = reuse_create_layout(layout, target)
+    OP_ADDS_component.BBP_OT_add_sector_component_pair.draw_blc_menu(sublayout)
+
+class BBP_MT_AddBmeMenu(bpy.types.Menu):
+    """Add Ballance Floor"""
+    bl_idname = "BBP_MT_AddBmeMenu"
+    bl_label = "Floors"
+    bl_translation_context = 'BBP_MT_AddBmeMenu'
+
+    def draw(self, context):
+        reuse_draw_add_bme(self.layout, DrawTarget.BldMenu)
+        
+class BBP_MT_AddRailMenu(bpy.types.Menu):
+    """Add Ballance Rail"""
+    bl_idname = "BBP_MT_AddRailMenu"
+    bl_label = "Rails"
+    bl_translation_context = 'BBP_MT_AddRailMenu'
+
+    def draw(self, context):
+        reuse_draw_add_rail(self.layout, DrawTarget.BldMenu)
+
+class BBP_MT_AddComponentMenu(bpy.types.Menu):
+    """Add Ballance Component"""
+    bl_idname = "BBP_MT_AddComponentsMenu"
+    bl_label = "Components"
+    bl_translation_context = 'BBP_MT_AddComponentsMenu'
+
+    def draw(self, context):
+        reuse_draw_add_component(self.layout, DrawTarget.BldMenu)
+
+class BBP_PT_SidebarAddBmePanel(bpy.types.Panel):
+    """Add Ballance Floor"""
+    bl_label = "Floors"
+    bl_idname = "BBP_PT_SidebarAddBmePanel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_context = "objectmode"
+    bl_category = 'Ballance'
+    bl_options = {'DEFAULT_CLOSED'}
+    bl_translation_context = 'BBP_PT_SidebarAddBmePanel'
+
+    def draw(self, context):
+        reuse_draw_add_bme(self.layout, DrawTarget.BldPanel)
+
+class BBP_PT_SidebarAddRailPanel(bpy.types.Panel):
+    """Add Ballance Rail"""
+    bl_label = "Rails"
+    bl_idname = "BBP_PT_SidebarAddRailPanel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_context = "objectmode"
+    bl_category = 'Ballance'
+    bl_options = {'DEFAULT_CLOSED'}
+    bl_translation_context = 'BBP_PT_SidebarAddRailPanel'
+
+    def draw(self, context):
+        reuse_draw_add_rail(self.layout, DrawTarget.BldPanel)
+
+class BBP_PT_SidebarAddComponentPanel(bpy.types.Panel):
+    """Add Ballance Component"""
+    bl_label = "Components"
+    bl_idname = "BBP_PT_SidebarAddComponentPanel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_context = "objectmode"
+    bl_category = 'Ballance'
+    bl_options = {'DEFAULT_CLOSED'}
+    bl_translation_context = 'BBP_PT_SidebarAddComponentPanel'
+
+    def draw(self, context):
+        reuse_draw_add_component(self.layout, DrawTarget.BldPanel)
+
+#endregion
+
+#region Other Menu
 
 class BBP_MT_View3DMenu(bpy.types.Menu):
     """Ballance 3D related operators"""
@@ -52,71 +187,11 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout.label(text='Material', icon='MATERIAL', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_MTL_fix_materials.BBP_OT_fix_all_materials.bl_idname)
 
-class BBP_MT_AddBmeMenu(bpy.types.Menu):
-    """Add Ballance Floor"""
-    bl_idname = "BBP_MT_AddBmeMenu"
-    bl_label = "Floors"
-    bl_translation_context = 'BBP_MT_AddBmeMenu'
+#endregion
 
-    def draw(self, context):
-        layout = self.layout
-        OP_ADDS_bme.BBP_OT_add_bme_struct.draw_blc_menu(layout)
-        
-class BBP_MT_AddRailMenu(bpy.types.Menu):
-    """Add Ballance Rail"""
-    bl_idname = "BBP_MT_AddRailMenu"
-    bl_label = "Rails"
-    bl_translation_context = 'BBP_MT_AddRailMenu'
+#region Menu Drawer
 
-    def draw(self, context):
-        layout = self.layout
-
-        layout.label(text="Sections", icon='MESH_CIRCLE', text_ctxt='BBP_MT_AddRailMenu/draw')
-        layout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_transition_section.bl_idname)
-
-        layout.separator()
-        layout.label(text="Straight Rails", icon='IPO_CONSTANT', text_ctxt='BBP_MT_AddRailMenu/draw')
-        layout.operator(OP_ADDS_rail.BBP_OT_add_straight_rail.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_transition_rail.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_side_rail.bl_idname)
-
-        layout.separator()
-        layout.label(text="Curve Rails", icon='MOD_SCREW', text_ctxt='BBP_MT_AddRailMenu/draw')
-        layout.operator(OP_ADDS_rail.BBP_OT_add_arc_rail.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_spiral_rail.bl_idname)
-        layout.operator(OP_ADDS_rail.BBP_OT_add_side_spiral_rail.bl_idname)
-        
-class BBP_MT_AddComponentsMenu(bpy.types.Menu):
-    """Add Ballance Component"""
-    bl_idname = "BBP_MT_AddComponentsMenu"
-    bl_label = "Components"
-    bl_translation_context = 'BBP_MT_AddComponentsMenu'
-
-    def draw(self, context):
-        layout = self.layout
-
-        layout.label(text="Basic Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
-        OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(layout)
-        
-        layout.separator()
-        layout.label(text="Nong Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
-        OP_ADDS_component.BBP_OT_add_nong_extra_point.draw_blc_menu(layout)
-        OP_ADDS_component.BBP_OT_add_nong_ventilator.draw_blc_menu(layout)
-
-        layout.separator()
-        layout.label(text="Series Components", text_ctxt='BBP_MT_AddComponentsMenu/draw')
-        OP_ADDS_component.BBP_OT_add_tilting_block_series.draw_blc_menu(layout)
-        OP_ADDS_component.BBP_OT_add_swing_series.draw_blc_menu(layout)
-        OP_ADDS_component.BBP_OT_add_ventilator_series.draw_blc_menu(layout)
-
-        layout.separator()
-        layout.label(text="Components Pair", text_ctxt='BBP_MT_AddComponentsMenu/draw')
-        OP_ADDS_component.BBP_OT_add_sector_component_pair.draw_blc_menu(layout)
-
-# ===== Menu Drawer =====
-
-MenuDrawer_t = typing.Callable[[typing.Any, typing.Any], None]
+TFctMenuDrawer = typing.Callable[[typing.Any, typing.Any], None]
 
 def menu_drawer_import(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
@@ -154,7 +229,7 @@ def menu_drawer_add(self, context) -> None:
     layout.label(text="Ballance", text_ctxt='BBP/__init__.menu_drawer_add()')
     layout.menu(BBP_MT_AddBmeMenu.bl_idname, icon='MESH_CUBE')
     layout.menu(BBP_MT_AddRailMenu.bl_idname, icon='MESH_CIRCLE')
-    layout.menu(BBP_MT_AddComponentsMenu.bl_idname, icon='MESH_ICOSPHERE')
+    layout.menu(BBP_MT_AddComponentMenu.bl_idname, icon='MESH_ICOSPHERE')
 
 def menu_drawer_grouping(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
@@ -199,37 +274,43 @@ def menu_drawer_naming_convention(self, context) -> None:
 
 #endregion
 
+#endregion
+
 #region Register and Unregister.
 
 g_BldClasses: tuple[typing.Any, ...] = (
     BBP_MT_View3DMenu,
     BBP_MT_AddBmeMenu,
     BBP_MT_AddRailMenu,
-    BBP_MT_AddComponentsMenu
+    BBP_MT_AddComponentMenu,
+
+    BBP_PT_SidebarAddBmePanel,
+    BBP_PT_SidebarAddRailPanel,
+    BBP_PT_SidebarAddComponentPanel,
 )
 
 class MenuEntry():
     mContainerMenu: bpy.types.Menu
     mIsAppend: bool
-    mMenuDrawer: MenuDrawer_t
-    def __init__(self, cont: bpy.types.Menu, is_append: bool, menu_func: MenuDrawer_t):
+    mMenuDrawer: TFctMenuDrawer
+    def __init__(self, cont: bpy.types.Menu, is_append: bool, menu_func: TFctMenuDrawer):
         self.mContainerMenu = cont
         self.mIsAppend = is_append
         self.mMenuDrawer = menu_func
 
 g_BldMenus: tuple[MenuEntry, ...] = (
-     MenuEntry(bpy.types.VIEW3D_MT_editor_menus, False, menu_drawer_view3d),
-     MenuEntry(bpy.types.TOPBAR_MT_file_import, True, menu_drawer_import),
-     MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
-     MenuEntry(bpy.types.VIEW3D_MT_add, True, menu_drawer_add),
+    MenuEntry(bpy.types.VIEW3D_MT_editor_menus, False, menu_drawer_view3d),
+    MenuEntry(bpy.types.TOPBAR_MT_file_import, True, menu_drawer_import),
+    MenuEntry(bpy.types.TOPBAR_MT_file_export, True, menu_drawer_export),
+    MenuEntry(bpy.types.VIEW3D_MT_add, True, menu_drawer_add),
 
-     MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_snoop_then_conv),
+    MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_snoop_then_conv),
 
-    # register double (for 2 menus)
-     MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_grouping),
-     MenuEntry(bpy.types.OUTLINER_MT_object, True, menu_drawer_grouping),
+    # Register this twice (for 2 menus respectively)
+    MenuEntry(bpy.types.VIEW3D_MT_object_context_menu, True, menu_drawer_grouping),
+    MenuEntry(bpy.types.OUTLINER_MT_object, True, menu_drawer_grouping),
 
-     MenuEntry(bpy.types.OUTLINER_MT_collection, True, menu_drawer_naming_convention),
+    MenuEntry(bpy.types.OUTLINER_MT_collection, True, menu_drawer_naming_convention),
 )
 
 def register() -> None:

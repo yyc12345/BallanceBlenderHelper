@@ -300,9 +300,12 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
                 cls.bl_idname,
                 text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
                 icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident),
-                text_ctxt = UTIL_translation.build_prototype_showcase_context(ident)
+                text_ctxt = UTIL_translation.build_prototype_showcase_context(ident),
             )
             # and assign its init type value
+            # TODO: 
+            # There is a fatal bug which cause Blender UI repeatly calling this draw function in al ticks.
+            # It possible caused by that assign this field may trigger something located Operator inside.
             cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
 
 #endregion
