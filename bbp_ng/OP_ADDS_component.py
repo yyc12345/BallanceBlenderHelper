@@ -176,7 +176,7 @@ class _GeneralComponentCreator():
 
 #endregion
 
-#region Noemal Component Adder
+#region Normal Component Adder
 
 # element enum prop helper
 

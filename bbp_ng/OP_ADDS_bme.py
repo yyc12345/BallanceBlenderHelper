@@ -37,39 +37,44 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_add_bme_struct'
     
-    ## There is a compromise due to the shitty Blender design.
-    #  
-    #  The passed `self` of Blender Property update function is not the instance of operator,
-    #  but a simple OperatorProperties.
-    #  It mean that I can not visit the full operator, only what I can do is visit existing 
-    #  Blender properties.
-    #  
-    #  So these is the solution about generating cache list according to the change of bme struct type.
-    #  First, update function will only set a "outdated" flag for operator which is a pre-registered Blender property.
-    #  The "outdated" flags is not showen and not saved.
-    #  Then call a internal cache list update function at the begin of `invoke`, `execute` and `draw`.
-    #  In this internal cache list updator, check "outdated" flag first, if cache is outdated, update and reset flag.
-    #  Otherwise do nothing.
-    #  
-    #  Reference: https://docs.blender.org/api/current/bpy.props.html#update-example
-
-    ## Compromise used "outdated" flag.
-    outdated_flag: bpy.props.BoolProperty(
-        # TR: Property not showen should not have name and desc.
-        # name = "Outdated Type",
-        # description = "Internal flag.",
-        options = {'HIDDEN', 'SKIP_SAVE'},
-        default = False
-    ) # type: ignore
+    # YYC MARK:
+    # ===== 20231217 =====
+    # There is a compromise due to the shitty Blender design.
+    # The passed `self` of Blender Property update function is not the instance of operator,
+    # but a simple OperatorProperties.
+    # It mean that I can not visit the full operator, only what I can do is visit existing 
+    # Blender properties.
+    # 
+    # So these is the solution about generating cache list according to the change of bme struct type.
+    # First, update function will only set a "outdated" flag for operator which is a pre-registered Blender property.
+    # The "outdated" flags is not showen and not saved.
+    # Then call a internal cache list update function at the begin of `invoke`, `execute` and `draw`.
+    # In this internal cache list updator, check "outdated" flag first, if cache is outdated, update and reset flag.
+    # Otherwise do nothing.
+    # 
+    # Reference: https://docs.blender.org/api/current/bpy.props.html#update-example
+    # 
+    # ===== 20250131 =====
+    # There is a fatal performance bug when I adding BME operator list into 3D View sidebar panels (N Menu).
+    # It will cause calling my Panel's `draw` function infinityly of Panel in each render tick, 
+    # which calls `BBP_OT_add_bme_struct.draw_blc_menu` directly,
+    # eat too much CPU and GPU resources and make the whole Blender be laggy.
+    # 
+    # After some research, I found that if I comment the parameter `update` of the member `bme_struct_type`,
+    # everything will be resolved.
+    # It even doesn't work that do nothing in update function.
+    # So I realize that sidebar panel may not be compatible with update function.
+    # After reading the note written above, I decide to remove the whole feature of this ugly implementation,
+    # so that I need to remove the ability that changing BME prototype type in left-bottom window.
+    # 
+    # After talking with the requestor of this feature, ZZQ,
+    # he agree with my decision and I think this change will not broke any experience of BBP.
 
     ## A BME struct cfgs descriptor cache list
     #  Not only the descriptor self, also the cfg associated index in bme_struct_cfgs
     bme_struct_cfg_index_cache: list[tuple[UTIL_bme.PrototypeShowcaseCfgDescriptor, int]]
 
-    def __internal_update_bme_struct_type(self) -> None:
-        # if not outdated, skip
-        if not self.outdated_flag: return
-
+    def __build_bme_struct_cfg_index_cache(self) -> None:
         # get available cfg entires
         cfgs: typing.Iterator[UTIL_bme.PrototypeShowcaseCfgDescriptor]
         cfgs = _g_EnumHelper_BmeStructType.get_bme_showcase_cfgs(
@@ -125,21 +130,10 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
                     for i in range(6):
                         op_cfgs_visitor[cfg_index + i].prop_bool = default_values[i]
 
-        # reset outdated flag
-        self.outdated_flag = False
-
-    # the updator for default side value
-    def bme_struct_type_updated(self, context):
-        # update outdated flag
-        self.outdated_flag = True
-        # blender required
-        return None
-    
     bme_struct_type: bpy.props.EnumProperty(
         name = "Type",
         description = "The type of BME structure.",
         items = _g_EnumHelper_BmeStructType.generate_items(),
-        update = bme_struct_type_updated,
         translation_context = 'BBP_OT_add_bme_struct/property'
     ) # type: ignore
     
@@ -180,19 +174,16 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         self.extra_translation = (0.0, 0.0, 0.0)
         self.extra_rotation = (0.0, 0.0, 0.0)
         self.extra_scale = (1.0, 1.0, 1.0)
+
         # create internal list
         self.bme_struct_cfg_index_cache = []
-        # trigger default bme struct type updator
-        self.bme_struct_type_updated(context)
-        # call internal updator
-        self.__internal_update_bme_struct_type()
+        # call internal builder to load prototype data inside it
+        self.__build_bme_struct_cfg_index_cache()
+
         # run execute() function
         return self.execute(context)
     
     def execute(self, context):
-        # call internal updator
-        self.__internal_update_bme_struct_type()
-
         # create cfg visitor
         op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
         op_cfgs_visitor = UTIL_functions.CollectionVisitor(self.bme_struct_cfgs)
@@ -231,13 +222,8 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
         return {'FINISHED'}
     
     def draw(self, context):
-        # call internal updator
-        self.__internal_update_bme_struct_type()
-
         # start drawing
         layout: bpy.types.UILayout = self.layout
-        # show type
-        layout.prop(self, 'bme_struct_type')
 
         # create cfg visitor
         op_cfgs_visitor: UTIL_functions.CollectionVisitor[BBP_PG_bme_adder_cfgs]
@@ -303,9 +289,6 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
                 text_ctxt = UTIL_translation.build_prototype_showcase_context(ident),
             )
             # and assign its init type value
-            # TODO: 
-            # There is a fatal bug which cause Blender UI repeatly calling this draw function in al ticks.
-            # It possible caused by that assign this field may trigger something located Operator inside.
             cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
 
 #endregion

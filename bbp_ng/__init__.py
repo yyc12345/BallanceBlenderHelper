@@ -45,11 +45,9 @@ def reuse_create_layout(layout: bpy.types.UILayout, target: DrawTarget) -> bpy.t
 
 def reuse_draw_add_bme(layout: bpy.types.UILayout, target: DrawTarget):
     # Draw operators.
-    print('reuse_draw_add_bme()')
     OP_ADDS_bme.BBP_OT_add_bme_struct.draw_blc_menu(reuse_create_layout(layout, target))
 
 def reuse_draw_add_rail(layout: bpy.types.UILayout, target: DrawTarget):
-    print('reuse_draw_add_rail()')
     layout.label(text="Sections", icon='MESH_CIRCLE', text_ctxt='BBP/__init__.reuse_draw_add_rail()')
     sublayout = reuse_create_layout(layout, target)
     sublayout.operator(OP_ADDS_rail.BBP_OT_add_rail_section.bl_idname)
@@ -70,7 +68,6 @@ def reuse_draw_add_rail(layout: bpy.types.UILayout, target: DrawTarget):
     sublayout.operator(OP_ADDS_rail.BBP_OT_add_side_spiral_rail.bl_idname)
 
 def reuse_draw_add_component(layout: bpy.types.UILayout, target: DrawTarget):
-    print('reuse_draw_add_component()')
     # We only use Grid for basic components
     layout.label(text="Basic Components", text_ctxt='BBP/__init__.reuse_draw_add_component()')
     OP_ADDS_component.BBP_OT_add_component.draw_blc_menu(reuse_create_layout(layout, target))
@@ -235,10 +232,11 @@ def menu_drawer_grouping(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
 
-    # NOTE: because outline context may change operator context
+    # YYC MARK:
+    # Because outline context change operator context into EXEC_*,
     # so it will cause no popup window when click operator in outline.
-    # thus we create a sub layout and set its operator context as 'INVOKE_DEFAULT'
-    # thus, all operators can pop up normally.
+    # Thus we create a sub layout and set its operator context as 'INVOKE_DEFAULT',
+    # so that all operators can pop up normally.
     col = layout.column()
     col.operator_context = 'INVOKE_DEFAULT'
 
@@ -263,7 +261,8 @@ def menu_drawer_naming_convention(self, context) -> None:
     layout: bpy.types.UILayout = self.layout
     layout.separator()
 
-    # same reason in `menu_drawer_grouping()``
+    # YYC MARK:
+    # Same reason for changing operator context introduced in `menu_drawer_grouping()`
     col = layout.column()
     col.operator_context = 'INVOKE_DEFAULT'
 
