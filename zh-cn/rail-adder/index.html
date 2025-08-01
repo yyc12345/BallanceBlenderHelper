@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/rail-adder/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>添加钢轨 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6dfb\u52a0\u94a2\u8f68";
+        var mkdocs_page_input_path = "zh-cn/rail-adder.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/rail-adder/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">添加钢轨</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">钢轨截面</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rail-section">Rail Section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transition-section">Transition Section</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">直线钢轨</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#straight-rail">Straight Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transition-rail">Transition Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#side-rail">Side Rail</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">曲线钢轨</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#arc-rail">Arc Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spiral-rail">Spiral Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#side-spiral-rail">Side Spiral Rail</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">额外变换</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">添加钢轨</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">添加钢轨</h1>
+<p>在3D视图中，点击<code>Add - Rails</code>可展开添加钢轨菜单。菜单如下图左侧所示。</p>
+<p><img alt="" src="../../imgs/rail-adder.png" /></p>
+<p>上图右侧则展示了一些钢轨添加的界面，会在后续依次介绍它们，右侧从上到下分别是：添加Rail Section（钢轨截面），添加Straight Rail（直钢轨），添加Side Rail（侧轨），添加Arc Rail（圆弧轨），添加Spiral Rail（螺旋轨）。</p>
+<div class="admonition info">
+<p class="admonition-title">非标准数据的钢轨</p>
+<p>BBP的钢轨添加菜单是为新手玩家快速添加钢轨而设计的，并不是为老手添加钢轨而设计的。对于需要非标准数据的钢轨的情况，例如具有非标准间距或非标准截面的钢轨，你需要通过Blender自带的创建圆操作构建钢轨截面，然后通过挤出，桥接，又或者螺旋修改器生成整个钢轨。在这样的创作过程中，你可以随意控制每个步骤的所有参数，以满足你对钢轨参数的特殊需求。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">钢轨数据的来源</p>
+<p>钢轨添加菜单的所使用的钢轨各类参数来源于游戏中的实际测量和Ballance社区中多位制图玩家十几年来总结的经验数据。</p>
+<p>钢轨截面半径与轨距由多年制图经验总结和测量所得。侧轨倾斜数据来源BallanceBug计算。单双轨转换下沉数据来源失衡之梦计算。螺旋轨间距来自第九关和第十三关测量。</p>
+</div>
+<h2 id="_2">钢轨截面</h2>
+<p>在添加钢轨菜单中，<code>Sections</code>分类下的是钢轨截面的添加。钢轨截面是钢轨的轮廓，钢轨截面的创建通常是各类异形钢轨的创建的开始步骤，例如通过放样，挤出等操作制作钢轨。</p>
+<h3 id="rail-section">Rail Section</h3>
+<p>钢轨截面创建一个钢轨截面，你可以在面板中选择创建一个单轨或双轨截面。</p>
+<p>当创建单轨截面时，会自动将八边形的钢轨截面的平头朝上，双轨截面则不会。如果你需要修改这种行为，你需要在创建后进入编辑模式，手动旋转钢轨截面顶点使其钢轨截面的平头或尖头朝上。</p>
+<h3 id="transition-section">Transition Section</h3>
+<p>单双轨转换截面将创建一个适用于单双轨转换的钢轨截面。这个轨道截面的创建不需要指定任何参数。</p>
+<h2 id="_3">直线钢轨</h2>
+<p>在添加钢轨菜单中，<code>Straight Rails</code>分类下的是直线钢轨的添加。</p>
+<h3 id="straight-rail">Straight Rail</h3>
+<p>直钢轨是一段直来直去的钢轨。创建直钢轨需要为其指定Length（长度）。你也可以选择创建直的双轨或单轨。</p>
+<p>当创建单轨时，与截面类似，会自动将钢轨截面的平头朝上，修改这一行为的操作则也是创建后进入编辑模式再旋转即可。</p>
+<p>直钢轨的创建还支持封盖属性，这些特性由位于Rail Cap（钢轨封盖）下的Start Cap（始端封盖）和End Cap（末端封盖）选项控制，勾选后对应端将进行封盖。封盖即为钢轨的端面自动补面，并正确处理其法线问题，这通常用于确保钢轨与其它路面或物体接触的部分的美观，钢轨与钢轨之间的连接端无需封盖。</p>
+<h3 id="transition-rail">Transition Rail</h3>
+<p>单双轨转换轨通常可被视为是Transition Section创建的进阶使用，将Transition Section创建的截面挤出并处理好法线问题即可得到此选项创建的结果。创建单双轨转换轨需要为其指定Length（长度），其也支持封盖属性。</p>
+<h3 id="side-rail">Side Rail</h3>
+<p>侧轨创建首先需要指定Side Type（侧轨类型）可以选择Normal（纸球木球用侧轨）或Stone Specific（石球专用侧轨）。纸球木球用侧轨就是通常意义上的侧轨，石球不可以通过。石球专用侧轨是倾斜度更大的侧轨，石球也可以通过，当然，纸球和木球也可以。</p>
+<p>除了侧轨类型外，侧轨创建也需要Length（长度）和封盖属性。</p>
+<h2 id="_4">曲线钢轨</h2>
+<p>在添加钢轨菜单中，<code>Curve Rails</code>分类下的是曲线钢轨的添加。</p>
+<h3 id="arc-rail">Arc Rail</h3>
+<p>圆弧轨首先需要指定Angle（角度）和Radius（半径），表示这个圆弧轨将会以多少的半径转过多少角度。通常来说，角度以90度，180度，270度比较常见，当然也可以指定任意度数。半径则通常按需调整。对于双轨圆弧轨，半径是圆弧轨旋转圆心到双轨截面两轨中心连线的中点的距离；对于单轨圆弧轨，半径是圆弧轨旋转中心到单轨截面的中心的距离。</p>
+<p>圆弧轨的Steps（步数），步数表示这个圆弧轨的分段数，数字越大，圆弧轨看起来越平滑，相对的，顶点也会更多，对存储空间和渲染的要求也越高，因此需要选择一个合理的数值。</p>
+<p>圆弧轨的Flip（翻转）选项可以让你在指定的轴向上翻转（也可以视为镜像）生成的结构，三个轴上的翻转选项可以满足所有对应手性结构的生成。</p>
+<p>圆弧轨同样支持双轨单轨选择，可以创建单轨圆弧轨和双轨圆弧轨。也支持封盖属性。</p>
+<h3 id="spiral-rail">Spiral Rail</h3>
+<p>螺旋轨，也就是螺旋双轨，其与圆弧轨类似，需要指定Radius（半径），表示其旋转半径，但不需要指定角度，因为它总是旋转一圈。</p>
+<p>螺旋轨有Iterations（迭代）属性，表示这个螺旋轨将要螺旋上升几圈。Screw（螺距）属性则表示每一个迭代之间的距离是多少。</p>
+<p>螺旋轨也需要设置Steps（步数）属性，含义与圆弧轨一致。但需要注意的是步数指的是每一个迭代内的步数个数，并不是总体的步数。因此调整迭代属性的时候，不需要再调整步数属性。</p>
+<p>螺旋轨也有封盖属性和翻转属性。</p>
+<h3 id="side-spiral-rail">Side Spiral Rail</h3>
+<p>侧边螺旋轨，与螺旋轨类似，但是球是沿侧边滚动的，类似于侧轨。</p>
+<p>侧边螺旋轨没有螺距属性，因为侧边螺旋轨在设计上，相邻的旋进是共用一条边的，因此螺距是固定的。</p>
+<p>侧边螺旋轨设定中的Radius（半径），Iterations（迭代）和Steps（步数）属性，含义均与螺旋轨一致。</p>
+<p>侧边螺旋轨也有封盖属性和翻转属性。</p>
+<h2 id="_5">额外变换</h2>
+<p>在添加直线钢轨和曲线钢轨的时候，你总可以设置一个被称为额外变换的属性。其效果与添加路面中的额外变换字段一致，都是为可视化服务的。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bme-adder/" class="btn btn-neutral float-left" title="添加路面"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../component-adder/" class="btn btn-neutral float-right" title="添加机关">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bme-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
