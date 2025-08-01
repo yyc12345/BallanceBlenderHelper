@@ -1,4 +1,12 @@
 [
+    // One of Chris suggested more vanilla prototypes.
+    // This prototype represent a half of a normal, sink or double ribbon border,
+    // which looks like trapezoid from top to bottom.
+    // 
+    // The bottom edge of trapezoid is from origin to +X with `long_edge_length` length.
+    // The length of top edge is `short_edge_length` and it just like moving bottom edge to +Y direction.
+    // The offset between top edge and bottom edge is always 2.5.
+    // The distance from the closest point of top edge, to Y axis is `short_edge_offset`.
     {
         "identifier": "cv_trapezoid_side",
         "showcase": null,
@@ -153,6 +161,11 @@
             }
         ]
     },
+    // Same as previous one, but looks like triangle from top to bottom.
+    // 
+    // The bottom edge is from origin to +X with `edge_length` length.
+    // The tip is going to +Y.
+    // The height of this triangle is always 2.5 and the offset between tip and Y axis is `tip_offset`.
     {
         "identifier": "cv_triangle_side",
         "showcase": null,

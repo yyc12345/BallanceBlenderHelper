@@ -166,34 +166,50 @@
                 "transform": "rot(0, 0, 90) @ scale(1, -1, 1)"
             },
             {
-                "identifier": "cv_triangle_side",
+                "identifier": "cv_trapezoid_side",
                 "skip": "False",
                 "params": {
-                    "edge_length": "2.5",
-                    "tip_offset": "2.5",
+                    "long_edge_length": "5.0",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "2.5",
                     "height": "height",
-                    "face": "(face[0], False, False, face[3], face[4], None)",
-                    "is_sink": "True"
+                    "face": "(face[0], False, False, face[3], face[4], False)",
+                    "is_sink": "True",
+                    "is_ribbon": "False"
                 },
                 "transform": "ident()"
             },
             {
-                "identifier": "cv_triangle_side",
+                "identifier": "cv_trapezoid_side",
                 "skip": "False",
                 "params": {
-                    "edge_length": "2.5",
-                    "tip_offset": "2.5",
+                    "long_edge_length": "5.0",
+                    "short_edge_offset": "2.5",
+                    "short_edge_length": "2.5",
                     "height": "height",
-                    "face": "(face[0], False, False, face[3], face[5], None)",
-                    "is_sink": "True"
+                    "face": "(face[0], False, False, face[3], face[5], False)",
+                    "is_sink": "True",
+                    "is_ribbon": "False"
                 },
                 "transform": "move(0, width + 5, 0) @ scale(1, -1, 1)"
+            },
+            {
+                "identifier": "floor_flat",
+                "skip": "False",
+                "params": {
+                    "height": "height",
+                    "length": "2.5",
+                    "width": "width",
+                    "face": "(face[0], False, False, face[3], False, False)",
+                    "is_sink": "True"
+                },
+                "transform": "move(2.5, 2.5, 0)"
             },
             {
                 "identifier": "floor_rectangle_bottom",
                 "skip": "not face[1]",
                 "params": {
-                    "length": "2.5",
+                    "length": "5",
                     "width": "5 + width"
                 },
                 "transform": "move(0, 0, -height)"
