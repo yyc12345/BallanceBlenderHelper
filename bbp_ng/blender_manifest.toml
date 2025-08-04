@@ -6,7 +6,7 @@ schema_version = "1.0.0"
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "bbp_ng"
-version = "4.2.0"
+version = "4.2.1"
 name = "Ballance Blender Plugin"
 tagline = "The specialized add-on served for creating game map of Ballance"
 maintainer = "yyc12345 <yyc12321@outlook.com>"
@@ -37,7 +37,7 @@ license = [
 # ]
 
 # Optional list of supported platforms. If omitted, the extension will be available in all operating systems.
-platforms = ["windows-x64", "linux-x64"]
+platforms = ["windows-x64", "linux-x64", "macos-arm64"]
 # Supported platforms: "windows-x64", "macos-arm64", "linux-x64", "windows-arm64", "macos-x64"
 
 # Optional: bundle 3rd party Python modules.
