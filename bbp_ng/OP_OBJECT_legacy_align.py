@@ -213,7 +213,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
 
         # show current instance
         col.separator()
-        col.label(text='Current Instance', text_ctxt='BBP_OT_legacy_align/draw')
+        col.label(text='Current Object', text_ctxt='BBP_OT_legacy_align/draw')
         # it should be shown in horizon so we create a new sublayout
         row = col.row()
         row.prop(entry, 'current_instance', expand=True)
@@ -224,9 +224,9 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         # because there is no mode for 3d cursor.
         current_instnce = _g_EnumHelper_CurrentInstance.get_selection(entry.current_instance)
         if current_instnce == CurrentInstance.ActiveObject:
-            col.label(text='Current Object (Active Object)', text_ctxt='BBP_OT_legacy_align/draw')
+            col.label(text='Current Object Align Mode', text_ctxt='BBP_OT_legacy_align/draw')
             col.prop(entry, "current_align_mode", expand = True)
-        col.label(text='Target Objects (Selected Objects)', text_ctxt='BBP_OT_legacy_align/draw')
+        col.label(text='Target Objects Align Mode', text_ctxt='BBP_OT_legacy_align/draw')
         col.prop(entry, "target_align_mode", expand = True)
 
         # show apply button
