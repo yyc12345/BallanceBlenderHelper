@@ -2,10 +2,42 @@ import bpy, mathutils
 import typing, enum, math
 from . import UTIL_functions
 
+# TODO:
+# This file should have fully refactor after we finish Virtools Camera import and export,
+# because this module is highly rely on it. Current implementation is a compromise.
+# There is a list of things to be done:
+# - Remove BBP_OT_game_resolution operator, because Virtools Camera will have similar function in panel.
+# - Update BBP_OT_game_cameraoperator with Virtools Camera.
+
 #region Game Resolution
 
-# TODO: this is a temporary solution.
-# We use Virtools Camera data replace this once we finish it.
+class ResolutionKind(enum.IntEnum):
+    Normal = enum.auto()
+    Extended = enum.auto()
+    Widescreen = enum.auto()
+    Panoramic = enum.auto()
+
+    def to_resolution(self) -> tuple[int, int]:
+        match self:
+            case ResolutionKind.Normal: return (1024, 768)
+            case ResolutionKind.Extended: return (1280, 720)
+            case ResolutionKind.Widescreen: return (1400, 600)
+            case ResolutionKind.Panoramic: return (2000, 700)
+
+_g_ResolutionKindDesc: dict[ResolutionKind, tuple[str, str]] = {
+    ResolutionKind.Normal: ("Normal", "Aspect ratio: 4:3."),
+    ResolutionKind.Extended: ("Extended", "Aspect ratio: 16:9."),
+    ResolutionKind.Widescreen: ("Widescreen", "Aspect ratio: 7:3."),
+    ResolutionKind.Panoramic: ("Panoramic", "Aspect ratio: 20:7."),
+}
+_g_EnumHelper_ResolutionKind = UTIL_functions.EnumPropHelper(
+    ResolutionKind,
+    lambda x: str(x.value),
+    lambda x: ResolutionKind(int(x)),
+    lambda x: _g_ResolutionKindDesc[x][0],
+    lambda x: _g_ResolutionKindDesc[x][1],
+    lambda _: ""
+)
 
 class BBP_OT_game_resolution(bpy.types.Operator):
     """Set Blender render resolution to Ballance game"""
@@ -14,13 +46,29 @@ class BBP_OT_game_resolution(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_game_resolution'
 
+    resolution_kind: bpy.props.EnumProperty(
+        name = "Resolution Kind",
+        description = "The type of preset resolution.",
+        items = _g_EnumHelper_ResolutionKind.generate_items(),
+        default = _g_EnumHelper_ResolutionKind.to_selection(ResolutionKind.Normal)
+    ) # type: ignore
+
     def invoke(self, context, event):
         return self.execute(context)
     
     def draw(self, context):
         layout = self.layout
+        layout.use_property_split = True
+        layout.prop(self, 'resolution_kind')
 
     def execute(self, context):
+        # fetch resolution
+        resolution_kind = _g_EnumHelper_ResolutionKind.get_selection(self.resolution_kind)
+        resolution = resolution_kind.to_resolution()
+        # setup resolution
+        render_settings = bpy.context.scene.render
+        render_settings.resolution_x = resolution[0]
+        render_settings.resolution_y = resolution[1]
         return {'FINISHED'}
 
 #endregion
@@ -125,8 +173,6 @@ _g_EnumHelper_PerspectiveKind = UTIL_functions.EnumPropHelper(
 )
 
 #endregion
-
-# TODO: update this operator after we finish Camera import and export.
 
 class BBP_OT_game_camera(bpy.types.Operator):
     """Order active camera look at target like Ballance does"""
@@ -331,8 +377,6 @@ def _setup_camera_transform(camobj: bpy.types.Object, angle: float, perspective:
     camobj.matrix_world = glob_trans_mat @ trans_mat @ rot_mat
 
 def _setup_camera_properties(camobj: bpy.types.Object) -> None:
-    # TODO: use Virtools Camera replace these in future
-
     # fetch camera
     camera = typing.cast(bpy.types.Camera, camobj.data)
 
