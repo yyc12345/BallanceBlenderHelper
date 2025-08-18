@@ -23,7 +23,7 @@ from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
 from . import OP_MTL_fix_materials
 from . import OP_ADDS_component, OP_ADDS_bme, OP_ADDS_rail
-from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_snoop_group_then_to_mesh, OP_OBJECT_naming_convention
+from . import OP_OBJECT_legacy_align, OP_OBJECT_virtools_group, OP_OBJECT_snoop_group_then_to_mesh, OP_OBJECT_naming_convention, OP_OBJECT_game_view
 
 #endregion
 
@@ -170,13 +170,17 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
     bl_translation_context = 'BBP_MT_View3DMenu'
 
     def draw(self, context):
-        layout = self.layout
+        layout = typing.cast(bpy.types.UILayout, self.layout)
         layout.label(text='UV', icon='UV', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_UV_flatten_uv.BBP_OT_flatten_uv.bl_idname)
         layout.operator(OP_UV_rail_uv.BBP_OT_rail_uv.bl_idname)
         layout.separator()
         layout.label(text='Align', icon='SNAP_ON', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_OBJECT_legacy_align.BBP_OT_legacy_align.bl_idname)
+        layout.separator()
+        layout.label(text='Camera', icon='CAMERA_DATA', text_ctxt='BBP_MT_View3DMenu/draw')
+        layout.operator(OP_OBJECT_game_view.BBP_OT_game_resolution.bl_idname)
+        layout.operator(OP_OBJECT_game_view.BBP_OT_game_camera.bl_idname)
         layout.separator()
         layout.label(text='Select', icon='SELECT_SET', text_ctxt='BBP_MT_View3DMenu/draw')
         layout.operator(OP_OBJECT_virtools_group.BBP_OT_select_object_by_virtools_group.bl_idname)
@@ -346,6 +350,7 @@ def register() -> None:
     OP_OBJECT_virtools_group.register()
     OP_OBJECT_snoop_group_then_to_mesh.register()
     OP_OBJECT_naming_convention.register()
+    OP_OBJECT_game_view.register()
 
     # register other classes
     for cls in g_BldClasses:
@@ -368,6 +373,7 @@ def unregister() -> None:
         bpy.utils.unregister_class(cls)
 
     # unregister modules
+    OP_OBJECT_game_view.unregister()
     OP_OBJECT_naming_convention.unregister()
     OP_OBJECT_snoop_group_then_to_mesh.unregister()
     OP_OBJECT_virtools_group.unregister()
