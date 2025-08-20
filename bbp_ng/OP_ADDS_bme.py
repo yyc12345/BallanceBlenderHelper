@@ -250,7 +250,7 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Float:
                     box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_float', text='')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Boolean:
-                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_bool', text='')
+                    box_layout.prop(op_cfgs_visitor[cfg_index], 'prop_bool', toggle=1, text='Yes', text_ctxt='BBP_OT_add_bme_struct/draw')
                 case UTIL_bme.PrototypeShowcaseCfgsTypes.Face:
                     # face will show a special layout (grid view)
                     grids = box_layout.grid_flow(
