@@ -340,6 +340,14 @@ class VirtoolsParams():
         translation_context = 'BBP/UTIL_ioport_shared.VirtoolsParams/property'
     ) # type: ignore
 
+    def preset_vt_encodings_if_possible(self, context: bpy.types.Context):
+        """
+        Set preset value for Virtools Encoding list if there is no value inside it.
+        """
+        ptrprops = PROP_ptrprop_resolver.PropsVisitor(context.scene)
+        if len(ptrprops.get_ioport_encodings()) == 0:
+            ptrprops.preset_ioport_encodings()
+
     def draw_virtools_params(self, context: bpy.types.Context, layout: bpy.types.UILayout, is_importer: bool) -> None:
         header: bpy.types.UILayout
         body: bpy.types.UILayout
@@ -363,7 +371,6 @@ class VirtoolsParams():
             body.prop(self, 'use_compress')
             if self.use_compress:
                 body.prop(self, 'compress_level')
-
 
     def general_get_vt_encodings(self, context: bpy.types.Context) -> tuple[str, ...]:
         # get from ptrprop resolver then filter empty item

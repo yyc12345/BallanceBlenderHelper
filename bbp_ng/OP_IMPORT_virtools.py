@@ -18,6 +18,12 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
         return (
             PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
             and bmap.is_bmap_available())
+
+    def invoke(self, context, event):
+        # preset virtools encoding if possible
+        self.preset_vt_encodings_if_possible(context)
+        # call parent invoke function (do no call self "execute", because we need show a modal window)
+        return super().invoke(context, event)
     
     def execute(self, context):
         # check whether encoding list is empty to avoid real stupid user.

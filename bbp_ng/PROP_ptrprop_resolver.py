@@ -195,6 +195,16 @@ class PropsVisitor():
     def get_ioport_encodings(self) -> tuple[str, ...]:
         encodings = get_ioport_encodings(self.__mAssocScene)
         return tuple(i.encoding for i in encodings)
+    def preset_ioport_encodings(self) -> None:
+        """
+        Set IOPort used encodings list as preset encoding list.
+        Please note that all old values will be overwritten.
+        """
+        encodings = get_ioport_encodings(self.__mAssocScene)
+        encodings.clear()
+        for default_enc in UTIL_virtools_types.g_PyBMapDefaultEncodings:
+            item = encodings.add()
+            item.encoding = default_enc
     def draw_ioport_encodings(self, layout: bpy.types.UILayout) -> None:
         target = get_ptrprop_resolver(self.__mAssocScene)
         row = layout.row()
@@ -218,23 +228,10 @@ class PropsVisitor():
         col.separator()
         col.operator(BBP_OT_clear_ioport_encodings.bl_idname, icon='TRASH', text='')
 
-@bpy.app.handlers.persistent
-def _ioport_encodings_initializer(file_path: str):
-    # if we can fetch property, and it is empty after loading file
-    # we fill it with default value
-    encodings = get_ioport_encodings(bpy.context.scene)
-    if len(encodings) == 0:
-        for default_enc in UTIL_virtools_types.g_PyBMapDefaultEncodings:
-            item = encodings.add()
-            item.encoding = default_enc
-
 def register() -> None:
     bpy.utils.register_class(BBP_PG_bmap_encoding)
     bpy.utils.register_class(BBP_UL_bmap_encoding)
     bpy.utils.register_class(BBP_PG_ptrprop_resolver)
-
-    # register ioport encodings default value
-    bpy.app.handlers.load_post.append(_ioport_encodings_initializer)
 
     bpy.utils.register_class(BBP_OT_add_ioport_encodings)
     bpy.utils.register_class(BBP_OT_rm_ioport_encodings)
@@ -252,9 +249,6 @@ def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_up_ioport_encodings)
     bpy.utils.unregister_class(BBP_OT_rm_ioport_encodings)
     bpy.utils.unregister_class(BBP_OT_add_ioport_encodings)
-
-    # unregister ioport encodings default value
-    bpy.app.handlers.load_post.remove(_ioport_encodings_initializer)
 
     bpy.utils.unregister_class(BBP_PG_ptrprop_resolver)
     bpy.utils.unregister_class(BBP_UL_bmap_encoding)

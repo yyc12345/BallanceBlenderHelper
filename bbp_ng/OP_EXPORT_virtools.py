@@ -18,6 +18,12 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         return (
             PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
             and bmap.is_bmap_available())
+
+    def invoke(self, context, event):
+        # preset virtools encoding if possible
+        self.preset_vt_encodings_if_possible(context)
+        # call parent invoke function (same reason written in IMPORT module)
+        return super().invoke(context, event)
     
     def execute(self, context):
         # check selecting first
