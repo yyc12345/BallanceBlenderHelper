@@ -3919,1107 +3919,1107 @@ msgid "The specialized add-on served for creating game map of Ballance"
 msgstr "专用于 Ballance 制图的插件"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_normal_1x1"
+msgctxt "BBP/BME/Proto/floor_normal_1x1"
 msgid "Normal 1x1"
 msgstr "1x1 平路块"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_1x1/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_normal_1x1/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_1x1/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_1x1/[1]"
 msgid "Face"
 msgstr "面"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_normal_1x1/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_1x1/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_sink_1x1"
+msgctxt "BBP/BME/Proto/floor_sink_1x1"
 msgid "Sink 1x1"
 msgstr "1x1 凹路块"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_1x1/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_sink_1x1/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_1x1/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_1x1/[1]"
 msgid "Face"
 msgstr "面"
 
 #. 1x1.json
-msgctxt "BBP/BME/floor_sink_1x1/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_1x1/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border"
+msgctxt "BBP/BME/Proto/floor_normal_border"
 msgid "Normal Border"
 msgstr "平路边缘"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[1]"
 msgid "Height"
 msgstr "高度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[1]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[2]"
 msgid "Face"
 msgstr "面"
 
 #. borders.json
-msgctxt "BBP/BME/floor_normal_border/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_border/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border"
+msgctxt "BBP/BME/Proto/floor_sink_border"
 msgid "Sink Border"
 msgstr "凹路边缘"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[1]"
 msgid "Height"
 msgstr "高度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[1]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[2]"
 msgid "Face"
 msgstr "面"
 
 #. borders.json
-msgctxt "BBP/BME/floor_sink_border/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_border/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border"
+msgctxt "BBP/BME/Proto/floor_ribbon_border"
 msgid "Ribbon Border"
 msgstr "双花纹边缘"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[1]"
 msgid "Height"
 msgstr "高度"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[1]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[2]"
 msgid "Face"
 msgstr "面"
 
 #. borders.json
-msgctxt "BBP/BME/floor_ribbon_border/[2]"
+msgctxt "BBP/BME/Proto/floor_ribbon_border/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_inner_corner"
+msgctxt "BBP/BME/Proto/floor_normal_inner_corner"
 msgid "Normal Inner Corner"
 msgstr "平路内侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_inner_corner"
+msgctxt "BBP/BME/Proto/floor_sink_inner_corner"
 msgid "Sink Inner Corner"
 msgstr "凹路内侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_inner_corner"
+msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner"
 msgid "Ribbon Inner Corner"
 msgstr "双花纹路面内侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_inner_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_inner_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_outter_corner"
+msgctxt "BBP/BME/Proto/floor_normal_outter_corner"
 msgid "Normal Outter Corner"
 msgstr "平路外侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_normal_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_outter_corner"
+msgctxt "BBP/BME/Proto/floor_sink_outter_corner"
 msgid "Sink Outter Corner"
 msgstr "凹路外侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_sink_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_outter_corner"
+msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner"
 msgid "Ribbon Outter Corner"
 msgstr "双花纹路面外侧拐角"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_outter_corner/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[1]"
 msgid "Face"
 msgstr "面"
 
 #. corners.json
-msgctxt "BBP/BME/floor_ribbon_outter_corner/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_l_crossing"
+msgctxt "BBP/BME/Proto/floor_normal_l_crossing"
 msgid "Normal L Crossing"
 msgstr "平路转角"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_l_crossing"
+msgctxt "BBP/BME/Proto/floor_sink_l_crossing"
 msgid "Sink L Crossing"
 msgstr "凹路转角"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_t_crossing"
+msgctxt "BBP/BME/Proto/floor_normal_t_crossing"
 msgid "Normal T Crossing"
 msgstr "平路丁字路口"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_t_crossing"
+msgctxt "BBP/BME/Proto/floor_sink_t_crossing"
 msgid "Sink T Crossing"
 msgstr "凹路丁字路口"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_x_crossing"
+msgctxt "BBP/BME/Proto/floor_normal_x_crossing"
 msgid "Normal X Crossing"
 msgstr "平路十字路口"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_normal_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_x_crossing"
+msgctxt "BBP/BME/Proto/floor_sink_x_crossing"
 msgid "Sink X Crossing"
 msgstr "凹路十字路口"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[1]"
 msgid "Face"
 msgstr "面"
 
 #. crossings.json
-msgctxt "BBP/BME/floor_sink_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat"
+msgctxt "BBP/BME/Proto/floor_flat"
 msgid "Flat"
 msgstr "无边框路面"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[0]"
+msgctxt "BBP/BME/Proto/floor_flat/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[0]"
+msgctxt "BBP/BME/Proto/floor_flat/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[1]"
+msgctxt "BBP/BME/Proto/floor_flat/[1]"
 msgid "Length"
 msgstr "长度"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[1]"
+msgctxt "BBP/BME/Proto/floor_flat/[1]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[2]"
+msgctxt "BBP/BME/Proto/floor_flat/[2]"
 msgid "Width"
 msgstr "宽度"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[2]"
+msgctxt "BBP/BME/Proto/floor_flat/[2]"
 msgid "The width of block."
 msgstr "方块的宽度。"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[3]"
+msgctxt "BBP/BME/Proto/floor_flat/[3]"
 msgid "Face"
 msgstr "面"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[3]"
+msgctxt "BBP/BME/Proto/floor_flat/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[4]"
+msgctxt "BBP/BME/Proto/floor_flat/[4]"
 msgid "Is Sink"
 msgstr "是否为凹路面"
 
 #. flat.json
-msgctxt "BBP/BME/floor_flat/[4]"
+msgctxt "BBP/BME/Proto/floor_flat/[4]"
 msgid "Whether this flat floor is used for sink floor."
 msgstr "该平直路面是否是凹路面的一部分。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform"
+msgctxt "BBP/BME/Proto/floor_normal_platform"
 msgid "Normal Platform"
 msgstr "普通平台"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[1]"
 msgid "Width"
 msgstr "宽度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[1]"
 msgid "The width of block."
 msgstr "方块的宽度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[3]"
 msgid "Face"
 msgstr "面"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_normal_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_normal_platform/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform"
+msgctxt "BBP/BME/Proto/floor_sink_platform"
 msgid "Sink Platform"
 msgstr "凹平台"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[1]"
 msgid "Width"
 msgstr "宽度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[1]"
 msgid "The width of block."
 msgstr "方块的宽度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[3]"
 msgid "Face"
 msgstr "面"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_sink_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_sink_platform/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform"
 msgid "Ribbon Platform"
 msgstr "双花纹平台"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[0]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[0]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[1]"
 msgid "Width"
 msgstr "宽度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[1]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[1]"
 msgid "The width of block."
 msgstr "方块的宽度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[2]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[3]"
 msgid "Face"
 msgstr "面"
 
 #. platforms.json
-msgctxt "BBP/BME/floor_ribbon_platform/[3]"
+msgctxt "BBP/BME/Proto/floor_ribbon_platform/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight"
+msgctxt "BBP/BME/Proto/floor_normal_straight"
 msgid "Normal Floor"
 msgstr "平路面"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[1]"
 msgid "Length"
 msgstr "长度"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[1]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[2]"
 msgid "Face"
 msgstr "面"
 
 #. streets.json
-msgctxt "BBP/BME/floor_normal_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_normal_straight/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight"
+msgctxt "BBP/BME/Proto/floor_sink_straight"
 msgid "Sink Floor"
 msgstr "凹路面"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[1]"
 msgid "Length"
 msgstr "长度"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[1]"
 msgid "The length of block."
 msgstr "方块的长度。"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[2]"
 msgid "Face"
 msgstr "面"
 
 #. streets.json
-msgctxt "BBP/BME/floor_sink_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_sink_straight/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_normal_terminal"
+msgctxt "BBP/BME/Proto/floor_normal_terminal"
 msgid "Normal Floor Terminal"
 msgstr "平路面末端"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_terminal/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_normal_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_normal_terminal/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_terminal/[1]"
 msgid "Face"
 msgstr "面"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_normal_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_normal_terminal/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_sink_terminal"
+msgctxt "BBP/BME/Proto/floor_sink_terminal"
 msgid "Sink Floor Terminal"
 msgstr "凹路面末端"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_terminal/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_sink_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_sink_terminal/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_terminal/[1]"
 msgid "Face"
 msgstr "面"
 
 #. terminals.json
-msgctxt "BBP/BME/floor_sink_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_sink_terminal/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. trafos.json
-msgctxt "BBP/BME/wood_trafo"
+msgctxt "BBP/BME/Proto/wood_trafo"
 msgid "Wood Trafo"
 msgstr "木球变球器底座"
 
 #. trafos.json
-msgctxt "BBP/BME/wood_trafo/[0]"
+msgctxt "BBP/BME/Proto/wood_trafo/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. trafos.json
-msgctxt "BBP/BME/wood_trafo/[0]"
+msgctxt "BBP/BME/Proto/wood_trafo/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. trafos.json
-msgctxt "BBP/BME/wood_trafo/[1]"
+msgctxt "BBP/BME/Proto/wood_trafo/[1]"
 msgid "Face"
 msgstr "面"
 
 #. trafos.json
-msgctxt "BBP/BME/wood_trafo/[1]"
+msgctxt "BBP/BME/Proto/wood_trafo/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. trafos.json
-msgctxt "BBP/BME/stone_trafo"
+msgctxt "BBP/BME/Proto/stone_trafo"
 msgid "Stone Trafo"
 msgstr "石球变球器底座"
 
 #. trafos.json
-msgctxt "BBP/BME/stone_trafo/[0]"
+msgctxt "BBP/BME/Proto/stone_trafo/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. trafos.json
-msgctxt "BBP/BME/stone_trafo/[0]"
+msgctxt "BBP/BME/Proto/stone_trafo/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. trafos.json
-msgctxt "BBP/BME/stone_trafo/[1]"
+msgctxt "BBP/BME/Proto/stone_trafo/[1]"
 msgid "Face"
 msgstr "面"
 
 #. trafos.json
-msgctxt "BBP/BME/stone_trafo/[1]"
+msgctxt "BBP/BME/Proto/stone_trafo/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. trafos.json
-msgctxt "BBP/BME/paper_trafo"
+msgctxt "BBP/BME/Proto/paper_trafo"
 msgid "Paper Trafo"
 msgstr "纸球变球器底座"
 
 #. trafos.json
-msgctxt "BBP/BME/paper_trafo/[0]"
+msgctxt "BBP/BME/Proto/paper_trafo/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. trafos.json
-msgctxt "BBP/BME/paper_trafo/[0]"
+msgctxt "BBP/BME/Proto/paper_trafo/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. trafos.json
-msgctxt "BBP/BME/paper_trafo/[1]"
+msgctxt "BBP/BME/Proto/paper_trafo/[1]"
 msgid "Face"
 msgstr "面"
 
 #. trafos.json
-msgctxt "BBP/BME/paper_trafo/[1]"
+msgctxt "BBP/BME/Proto/paper_trafo/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_transition"
+msgctxt "BBP/BME/Proto/floor_transition"
 msgid "Transition"
 msgstr "平凹转换"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_transition/[0]"
+msgctxt "BBP/BME/Proto/floor_transition/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_transition/[0]"
+msgctxt "BBP/BME/Proto/floor_transition/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_transition/[1]"
+msgctxt "BBP/BME/Proto/floor_transition/[1]"
 msgid "Face"
 msgstr "面"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_transition/[1]"
+msgctxt "BBP/BME/Proto/floor_transition/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_narrow_transition"
+msgctxt "BBP/BME/Proto/floor_narrow_transition"
 msgid "Narrow Transition"
 msgstr "窄式平凹转换"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgctxt "BBP/BME/Proto/floor_narrow_transition/[0]"
 msgid "Height"
 msgstr "高度"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_narrow_transition/[0]"
+msgctxt "BBP/BME/Proto/floor_narrow_transition/[0]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgctxt "BBP/BME/Proto/floor_narrow_transition/[1]"
 msgid "Face"
 msgstr "面"
 
 #. transitions.json
-msgctxt "BBP/BME/floor_narrow_transition/[1]"
+msgctxt "BBP/BME/Proto/floor_narrow_transition/[1]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight"
+msgctxt "BBP/BME/Proto/floor_wide_straight"
 msgid "Wide Floor"
 msgstr "宽路面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[0]"
 msgid "Length"
 msgstr "长度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[0]"
 msgid "The length of wide floor."
 msgstr "宽路面的长度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[1]"
 msgid "Width"
 msgstr "宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[1]"
 msgid "The width of wide floor."
 msgstr "宽路面的宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[3]"
 msgid "Face"
 msgstr "面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_straight/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_straight/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal"
+msgctxt "BBP/BME/Proto/floor_wide_terminal"
 msgid "Wide Floor Terminal"
 msgstr "宽路面末端"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[0]"
 msgid "Width"
 msgstr "宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[0]"
 msgid "The width of wide floor."
 msgstr "宽路面的宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[1]"
 msgid "Height"
 msgstr "高度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[1]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[2]"
 msgid "Face"
 msgstr "面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_terminal/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_terminal/[2]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing"
 msgid "Wide Floor L Crossing"
 msgstr "宽路面转角"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[0]"
 msgid "Horizontal Width"
 msgstr "水平路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[1]"
 msgid "Vertical Width"
 msgstr "垂直路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[3]"
 msgid "Face"
 msgstr "面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_l_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing"
 msgid "Wide Floor T Crossing"
 msgstr "宽路面丁字路口"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[0]"
 msgid "Horizontal Width"
 msgstr "水平路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[1]"
 msgid "Vertical Width"
 msgstr "垂直路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[3]"
 msgid "Face"
 msgstr "面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_t_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing"
 msgid "Wide Floor X Crossing"
 msgstr "宽路面十字路口"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[0]"
 msgid "Horizontal Width"
 msgstr "水平路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[0]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr "水平宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[1]"
 msgid "Vertical Width"
 msgstr "垂直路面宽度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[1]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr "垂直宽路面宽度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[2]"
 msgid "Height"
 msgstr "高度"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[2]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[2]"
 msgid "The height of block."
 msgstr "该方块的高度。"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[3]"
 msgid "Face"
 msgstr "面"
 
 #. wide_floors.json
-msgctxt "BBP/BME/floor_wide_x_crossing/[3]"
+msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
