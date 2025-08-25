@@ -27,6 +27,7 @@ class ShowcaseCfg(BaseModel):
 
 class Showcase(BaseModel):
     title: str = Field(frozen=True, strict=True)
+    category: str = Field(frozen=True, strict=True)
     icon: str = Field(frozen=True, strict=True)
     type: ShowcaseType = Field(frozen=True)
     cfgs: list[ShowcaseCfg] = Field(frozen=True, strict=True)

@@ -3,6 +3,7 @@
         "identifier": "floor_wide_straight",
         "showcase": {
             "title": "Wide Floor",
+            "category": "Wide Floors",
             "icon": "WideFloor",
             "type": "floor",
             "cfgs": [
@@ -106,6 +107,7 @@
         "identifier": "floor_wide_terminal",
         "showcase": {
             "title": "Wide Floor Terminal",
+            "category": "Wide Floors",
             "icon": "WideFloorTerminal",
             "type": "floor",
             "cfgs": [
@@ -220,6 +222,7 @@
         "identifier": "floor_wide_l_crossing",
         "showcase": {
             "title": "Wide Floor L Crossing",
+            "category": "Wide Floors",
             "icon": "WideLCrossing",
             "type": "floor",
             "cfgs": [
@@ -352,6 +355,7 @@
         "identifier": "floor_wide_t_crossing",
         "showcase": {
             "title": "Wide Floor T Crossing",
+            "category": "Wide Floors",
             "icon": "WideTCrossing",
             "type": "floor",
             "cfgs": [
@@ -475,6 +479,7 @@
         "identifier": "floor_wide_x_crossing",
         "showcase": {
             "title": "Wide Floor X Crossing",
+            "category": "Wide Floors",
             "icon": "WideXCrossing",
             "type": "floor",
             "cfgs": [

@@ -84,6 +84,7 @@
         "identifier": "floor_normal_1x1",
         "showcase": {
             "title": "Normal 1x1",
+            "category": "1x1 Blocks",
             "icon": "Normal1x1",
             "type": "floor",
             "cfgs": [
@@ -134,6 +135,7 @@
         "identifier": "floor_sink_1x1",
         "showcase": {
             "title": "Sink 1x1",
+            "category": "1x1 Blocks",
             "icon": "Sink1x1",
             "type": "floor",
             "cfgs": [

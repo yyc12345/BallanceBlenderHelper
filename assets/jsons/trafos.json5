@@ -137,6 +137,7 @@
         "identifier": "wood_trafo",
         "showcase": {
             "title": "Wood Trafo",
+            "category": "Trafo",
             "icon": "WoodTrafo",
             "type": "floor",
             "cfgs": [
@@ -187,6 +188,7 @@
         "identifier": "stone_trafo",
         "showcase": {
             "title": "Stone Trafo",
+            "category": "Trafo",
             "icon": "StoneTrafo",
             "type": "floor",
             "cfgs": [
@@ -237,6 +239,7 @@
         "identifier": "paper_trafo",
         "showcase": {
             "title": "Paper Trafo",
+            "category": "Trafo",
             "icon": "PaperTrafo",
             "type": "floor",
             "cfgs": [

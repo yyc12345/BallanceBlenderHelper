@@ -228,6 +228,7 @@
         "identifier": "floor_normal_l_crossing",
         "showcase": {
             "title": "Normal L Crossing",
+            "category": "Floor Crossings",
             "icon": "NormalLCrossing",
             "type": "floor",
             "cfgs": [
@@ -278,6 +279,7 @@
         "identifier": "floor_sink_l_crossing",
         "showcase": {
             "title": "Sink L Crossing",
+            "category": "Floor Crossings",
             "icon": "SinkLCrossing",
             "type": "floor",
             "cfgs": [
@@ -328,6 +330,7 @@
         "identifier": "floor_normal_t_crossing",
         "showcase": {
             "title": "Normal T Crossing",
+            "category": "Floor Crossings",
             "icon": "NormalTCrossing",
             "type": "floor",
             "cfgs": [
@@ -378,6 +381,7 @@
         "identifier": "floor_sink_t_crossing",
         "showcase": {
             "title": "Sink T Crossing",
+            "category": "Floor Crossings",
             "icon": "SinkTCrossing",
             "type": "floor",
             "cfgs": [
@@ -428,6 +432,7 @@
         "identifier": "floor_normal_x_crossing",
         "showcase": {
             "title": "Normal X Crossing",
+            "category": "Floor Crossings",
             "icon": "NormalXCrossing",
             "type": "floor",
             "cfgs": [
@@ -478,6 +483,7 @@
         "identifier": "floor_sink_x_crossing",
         "showcase": {
             "title": "Sink X Crossing",
+            "category": "Floor Crossings",
             "icon": "SinkXCrossing",
             "type": "floor",
             "cfgs": [

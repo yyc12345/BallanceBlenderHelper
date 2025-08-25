@@ -149,6 +149,7 @@
         "identifier": "floor_normal_inner_corner",
         "showcase": {
             "title": "Normal Inner Corner",
+            "category": "Half Block Corners",
             "icon": "NormalInnerCorner",
             "type": "floor",
             "cfgs": [
@@ -201,6 +202,7 @@
         "identifier": "floor_sink_inner_corner",
         "showcase": {
             "title": "Sink Inner Corner",
+            "category": "Half Block Corners",
             "icon": "SinkInnerCorner",
             "type": "floor",
             "cfgs": [
@@ -253,6 +255,7 @@
         "identifier": "floor_ribbon_inner_corner",
         "showcase": {
             "title": "Ribbon Inner Corner",
+            "category": "Half Block Corners",
             "icon": "RibbonInnerCorner",
             "type": "floor",
             "cfgs": [
@@ -305,6 +308,7 @@
         "identifier": "floor_normal_outter_corner",
         "showcase": {
             "title": "Normal Outter Corner",
+            "category": "Half Block Corners",
             "icon": "NormalOutterCorner",
             "type": "floor",
             "cfgs": [
@@ -357,6 +361,7 @@
         "identifier": "floor_sink_outter_corner",
         "showcase": {
             "title": "Sink Outter Corner",
+            "category": "Half Block Corners",
             "icon": "SinkOutterCorner",
             "type": "floor",
             "cfgs": [
@@ -409,6 +414,7 @@
         "identifier": "floor_ribbon_outter_corner",
         "showcase": {
             "title": "Ribbon Outter Corner",
+            "category": "Half Block Corners",
             "icon": "RibbonOutterCorner",
             "type": "floor",
             "cfgs": [

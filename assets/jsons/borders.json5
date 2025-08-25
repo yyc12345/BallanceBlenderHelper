@@ -49,6 +49,7 @@
         "identifier": "floor_normal_border",
         "showcase": {
             "title": "Normal Border",
+            "category": "Borders",
             "icon": "NormalBorder",
             "type": "floor",
             "cfgs": [
@@ -112,6 +113,7 @@
         "identifier": "floor_sink_border",
         "showcase": {
             "title": "Sink Border",
+            "category": "Borders",
             "icon": "SinkBorder",
             "type": "floor",
             "cfgs": [
@@ -175,6 +177,7 @@
         "identifier": "floor_ribbon_border",
         "showcase": {
             "title": "Ribbon Border",
+            "category": "Borders",
             "icon": "RibbonBorder",
             "type": "floor",
             "cfgs": [

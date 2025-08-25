@@ -3,6 +3,7 @@
         "identifier": "floor_normal_straight",
         "showcase": {
             "title": "Normal Floor",
+            "category": "Floors",
             "icon": "NormalFloor",
             "type": "floor",
             "cfgs": [
@@ -142,6 +143,7 @@
         "identifier": "floor_sink_straight",
         "showcase": {
             "title": "Sink Floor",
+            "category": "Floors",
             "icon": "SinkFloor",
             "type": "floor",
             "cfgs": [

@@ -116,6 +116,7 @@
         "identifier": "floor_normal_platform",
         "showcase": {
             "title": "Normal Platform",
+            "category": "Platforms",
             "icon": "NormalPlatform",
             "type": "floor",
             "cfgs": [
@@ -191,6 +192,7 @@
         "identifier": "floor_sink_platform",
         "showcase": {
             "title": "Sink Platform",
+            "category": "Platforms",
             "icon": "SinkPlatform",
             "type": "floor",
             "cfgs": [
@@ -266,6 +268,7 @@
         "identifier": "floor_ribbon_platform",
         "showcase": {
             "title": "Ribbon Platform",
+            "category": "Platforms",
             "icon": "RibbonPlatform",
             "type": "floor",
             "cfgs": [

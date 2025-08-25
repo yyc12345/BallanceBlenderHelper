@@ -111,6 +111,7 @@
         "identifier": "floor_transition",
         "showcase": {
             "title": "Transition",
+            "category": "Miscellaneous",
             "icon": "Transition",
             "type": "floor",
             "cfgs": [
@@ -191,6 +192,7 @@
         "identifier": "floor_narrow_transition",
         "showcase": {
             "title": "Narrow Transition",
+            "category": "Miscellaneous",
             "icon": "NarrowTransition",
             "type": "floor",
             "cfgs": [

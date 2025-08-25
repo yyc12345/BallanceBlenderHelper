@@ -48,6 +48,9 @@ def _validate_showcase(showcase: bme.Showcase, variables: set[str]) -> None:
     # The title of showcase should not be empty
     if len(showcase.title) == 0:
         logging.error('The title of showcase should not be empty.')
+    # Category words should not be empty.
+    if len(showcase.category) == 0:
+        logging.error('The category of showcase should not be empty.')
 
     # Check icon name
     _check_showcase_icon(showcase.icon)

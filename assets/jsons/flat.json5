@@ -3,6 +3,7 @@
         "identifier": "floor_flat",
         "showcase": {
             "title": "Flat",
+            "category": "Miscellaneous",
             "icon": "Flat",
             "type": "floor",
             "cfgs": [
