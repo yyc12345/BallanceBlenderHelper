@@ -1,6 +1,6 @@
 import bpy, mathutils, math
 import typing
-from . import UTIL_rail_creator
+from . import UTIL_rail_creator, PROP_preferences
 
 ## Const Value Hint:
 #  Default Rail Radius: 0.35 (in measure)
@@ -233,6 +233,10 @@ class BBP_OT_add_rail_section(SharedRailSectionInputProperty, bpy.types.Operator
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_add_rail_section'
 
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
             lambda bm: UTIL_rail_creator.create_rail_section(
@@ -254,6 +258,10 @@ class BBP_OT_add_transition_section(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_add_transition_section'
 
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
             lambda bm: UTIL_rail_creator.create_transition_section(bm, c_DefaultRailRadius, c_DefaultRailSpan),
@@ -271,6 +279,10 @@ class BBP_OT_add_straight_rail(SharedExtraTransform, SharedRailSectionInputPrope
     bl_label = "Straight Rail"
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_add_straight_rail'
+
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -300,6 +312,10 @@ class BBP_OT_add_transition_rail(SharedExtraTransform, SharedRailCapInputPropert
     bl_label = "Transition Rail"
     bl_options = {'REGISTER', 'UNDO'}
     bl_translation_context = 'BBP_OT_add_transition_rail'
+
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -340,6 +356,10 @@ class BBP_OT_add_side_rail(SharedExtraTransform, SharedRailCapInputProperty, Sha
         translation_context = 'BBP_OT_add_side_rail/property'
     ) # type: ignore
 
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
             lambda bm: UTIL_rail_creator.create_straight_rail(
@@ -378,6 +398,10 @@ class BBP_OT_add_arc_rail(SharedExtraTransform, SharedRailSectionInputProperty, 
         subtype = 'ANGLE',
         translation_context = 'BBP_OT_add_arc_rail/property'
     ) # type: ignore
+
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
@@ -430,6 +454,10 @@ class BBP_OT_add_spiral_rail(SharedExtraTransform, SharedRailCapInputProperty, S
         translation_context = 'BBP_OT_add_spiral_rail/property'
     ) # type: ignore
 
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
+
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
             lambda bm: UTIL_rail_creator.create_screw_rail(
@@ -473,6 +501,10 @@ class BBP_OT_add_side_spiral_rail(SharedExtraTransform, SharedRailSectionInputPr
         min = 2,
         translation_context = 'BBP_OT_add_side_spiral_rail/property'
     ) # type: ignore
+
+    @classmethod
+    def poll(cls, context):
+        return PROP_preferences.get_raw_preferences().has_valid_blc_tex_folder()
 
     def execute(self, context):
         UTIL_rail_creator.rail_creator_wrapper(
