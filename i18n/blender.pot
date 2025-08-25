@@ -3675,99 +3675,99 @@ msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Compression"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:85
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:85
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "All / Failed - {0} / {1}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:295
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:295
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid ""
 "PC_Checkpoints or PR_Resetpoints detected. But couldn't get sector from name."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:502
-msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:502
+msgctxt "BBP/UTIL_naming_convention.YYCToolchainConvention"
 msgid "Name match lost."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:610
-msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:610
+msgctxt "BBP/UTIL_naming_convention.ImengyuConvention"
 msgid "Name match lost."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:74
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:74
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "Rename Report"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:110
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:110
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "For object \"{0}\""
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:113
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:113
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "For object \"{0}\" (Old name: \"{1}\")"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:397
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:397
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "Group match lost."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:128
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:128
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "ERROR"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:130
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:130
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "WARN"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:132
-msgctxt "BBP/UTIL_naming_convension.RenameErrorReporter"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:132
+msgctxt "BBP/UTIL_naming_convention.RenameErrorReporter"
 msgid "INFO"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:546
-msgctxt "BBP/UTIL_naming_convension.YYCToolchainConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:546
+msgctxt "BBP/UTIL_naming_convention.YYCToolchainConvention"
 msgid "No matched info."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:656
-msgctxt "BBP/UTIL_naming_convension.ImengyuConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:656
+msgctxt "BBP/UTIL_naming_convention.ImengyuConvention"
 msgid "No matched info."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:345
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:345
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "A Multi-grouping Unique Component."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:359
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:359
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "Component detected. But couldn't get sector from CKGroup data."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:369
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:369
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "A Multi-grouping Component."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:448
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:448
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "No matched info."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:340
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:340
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid "The match of Unique Component lost."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_naming_convension.py:387
-msgctxt "BBP/UTIL_naming_convension.VirtoolsGroupConvention"
+#: extensions/user_default/bbp_ng/UTIL_naming_convention.py:387
+msgctxt "BBP/UTIL_naming_convention.VirtoolsGroupConvention"
 msgid ""
 "Can't distinguish object between Floors and Rails. Suppose it is Floors."
 msgstr ""
