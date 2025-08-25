@@ -32,8 +32,14 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
             self.report({'ERROR'}, 'You must specify at least one encoding for file loading (e.g. cp1252, gbk)!')
             return {'CANCELLED'}
 
+        # check file name
+        filename = self.general_get_filename()
+        if not os.path.isfile(filename):
+            self.report({'ERROR'}, 'No file was selected!')
+            return {'CANCELLED'}
+
         _import_virtools(
-            self.general_get_filename(),
+            filename,
             encodings,
             self.general_get_conflict_resolver()
         )
@@ -46,7 +52,7 @@ class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtool
         self.draw_virtools_params(context, layout, True)
         self.draw_ballance_params(layout, True)
 
-def _import_virtools(file_name_: str, encodings_: tuple[str], resolver: UTIL_ioport_shared.ConflictResolver) -> None:
+def _import_virtools(file_name_: str, encodings_: tuple[str, ...], resolver: UTIL_ioport_shared.ConflictResolver) -> None:
     # create temp folder
     with tempfile.TemporaryDirectory() as vt_temp_folder:
         tr_text: str = bpy.app.translations.pgettext_rpt(

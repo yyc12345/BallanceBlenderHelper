@@ -44,10 +44,16 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
             self.report({'ERROR'}, 'You must specify at least one encoding for file saving (e.g. cp1252, gbk)!')
             return {'CANCELLED'}
 
+        # check file name
+        filename = self.general_get_filename()
+        if not os.path.isfile(filename):
+            self.report({'ERROR'}, 'No file was selected!')
+            return {'CANCELLED'}
+
         # start exporting
         with UTIL_ioport_shared.ExportEditModeBackup() as editmode_guard:
             _export_virtools(
-                self.general_get_filename(),
+                filename,
                 encodings,
                 texture_save_opt,
                 self.general_get_use_compress(),
@@ -74,7 +80,7 @@ _TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
 
 def _export_virtools(
         file_name_: str, 
-        encodings_: tuple[str], 
+        encodings_: tuple[str, ...], 
         texture_save_opt_: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS,
         use_compress_: bool,
         compress_level_: int, 
