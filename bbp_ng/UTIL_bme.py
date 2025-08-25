@@ -24,6 +24,7 @@ TOKEN_IDENTIFIER: str = 'identifier'
 
 TOKEN_SHOWCASE: str = 'showcase'
 TOKEN_SHOWCASE_TITLE: str = 'title'
+TOKEN_SHOWCASE_CATEGORY: str = 'category'
 TOKEN_SHOWCASE_ICON: str = 'icon'
 TOKEN_SHOWCASE_TYPE: str = 'type'
 TOKEN_SHOWCASE_CFGS: str = 'cfgs'
@@ -64,10 +65,10 @@ TOKEN_INSTANCES_TRANSFORM: str = 'transform'
 
 #region Prototype Loader
 
-## The list storing BME prototype.
 _g_BMEPrototypes: list[dict[str, typing.Any]] = []
-## The dict. Key is prototype identifier. value is the index of prototype in prototype list.
+"""The list storing BME prototype."""
 _g_BMEPrototypeIndexMap: dict[str, int] = {}
+"""The dict. Key is prototype identifier. Value is the index of prototype in prototype list."""
 
 # the core loader
 for walk_root, walk_dirs, walk_files in os.walk(os.path.join(os.path.dirname(__file__), 'jsons')):
@@ -99,7 +100,7 @@ def _env_fct_angle(x1: float, y1: float, x2: float, y2: float) -> float:
     # second, its direction (clockwise is positive) is opposite with blender rotation direction (counter-clockwise is positive).
     diff = mathutils.Vector((x2, y2)) - mathutils.Vector((x1, y1))
     bld_angle = math.degrees(mathutils.Vector((1,0)).angle_signed(diff, 0))
-
+    
     # flip it first
     bld_angle = -bld_angle
     # process positove number and negative number respectively
@@ -141,7 +142,7 @@ _g_ProgFieldGlobals: dict[str, typing.Any] = {
     'rot': lambda x, y, z: mathutils.Matrix.LocRotScale(None, mathutils.Euler((math.radians(x), math.radians(y), math.radians(z)), 'XYZ'), None),
     'scale': lambda x, y, z: mathutils.Matrix.LocRotScale(None, None, (x, y, z)),
     'ident': lambda: mathutils.Matrix.Identity(4),
-
+    
     # my misc custom functions
     'distance': _env_fct_distance,
     'angle': _env_fct_angle,
@@ -191,8 +192,32 @@ class EnumPropHelper(UTIL_functions.EnumPropHelper[str]):
     """
     The BME specialized Blender EnumProperty helper.
     """
+
+    showcase_identifiers: tuple[str, ...]
+    showcase_categories: dict[str, tuple[str, ...]]
     
     def __init__(self):
+        # build cache for showcase identifiers and categories
+        # prepare cache value
+        identifiers: list[str] = []
+        categories: dict[str, list[str]] = {}
+        # iterate showcase prototypes
+        for x in filter(lambda x: x[TOKEN_SHOWCASE] is not None, _g_BMEPrototypes):
+            # fetch identifier and category
+            identifier = typing.cast(str, x[TOKEN_IDENTIFIER])
+            category = typing.cast(str, x[TOKEN_SHOWCASE][TOKEN_SHOWCASE_CATEGORY])
+            # add into identifier list
+            identifiers.append(identifier)
+            # add into categories
+            categories_inner = categories.get(category, None)
+            if categories_inner is None:
+                categories_inner = []
+                categories[category] = categories_inner
+            categories_inner.append(identifier)
+        # tuple the result
+        self.showcase_identifiers = tuple(identifiers)
+        self.showcase_categories = {k: tuple(v) for k, v in categories.items()}
+
         # init parent class
         super().__init__(
             self.get_bme_identifiers(),
@@ -202,17 +227,20 @@ class EnumPropHelper(UTIL_functions.EnumPropHelper[str]):
             lambda _: '',
             lambda x: self.get_bme_showcase_icon(x)
         )
-    
+
     def get_bme_identifiers(self) -> tuple[str, ...]:
         """
         Get the identifier of prototype which need to be exposed to user.
-        Template prototype is not included.
+        In other words, template prototype is not included.
         """
-        return tuple(
-            x[TOKEN_IDENTIFIER] # get identifier
-            for x in filter(lambda x: x[TOKEN_SHOWCASE] is not None, _g_BMEPrototypes)  # filter() to filter no showcase template.
-        )
+        return self.showcase_identifiers
     
+    def get_bme_categories(self) -> dict[str, tuple[str, ...]]:
+        """
+        Get user-oriented identifier list grouped by category.
+        """
+        return self.showcase_categories
+
     def get_bme_showcase_title(self, ident: str) -> str:
         """
         Get BME display title by prototype identifier.
@@ -326,14 +354,14 @@ def create_bme_struct(
     # create mtl slot remap to help following mesh adding
     # because mesh writer do not accept string format mtl slot visiting,
     # it only accept int based mtl slot index.
-    # 
+    #
     # Also we build face used mtl slot index at the same time.
     # So we do not analyse texture field again when providing face data.
     # The result is in `prebuild_face_mtl_idx` and please note it will store all face's mtl index.
     # For example: if face 0 is skipped and face 1 is used, the first entry in `prebuild_face_mtl_idx`
     # will be the mtl slot index used by face 0, not 1. And its length is equal to the face count.
     # However, because face 0 is skipped, so the entry is not used and default set to 0.
-    # 
+    #
     # NOTE: since Python 3.6, the item of builtin dict is ordered by inserting order.
     # we rely on this to implement following features.
     mtl_remap: dict[str, int] = {}
@@ -351,7 +379,7 @@ def create_bme_struct(
             # if existing, no need to add into remap
             # but we need get its index from remap
             prebuild_face_mtl_idx[face_idx] = mtl_remap.get(mtl_name, 0)
-
+    
     # pre-compute vertices data because we may need used later.
     # Because if face normal data is null, it mean that we need to compute it
     # by given vertices.
@@ -366,7 +394,7 @@ def create_bme_struct(
         cache_bv = typing.cast(mathutils.Vector, transform @ cache_bv)
         # get result
         prebuild_vec_data.append((cache_bv.x, cache_bv.y, cache_bv.z))
-
+    
     # Check whether given transform is mirror matrix
     # because mirror matrix will reverse triangle indice order.
     # If matrix is mirror matrix, we need reverse it again in following procession,

@@ -55,14 +55,22 @@ import bpy
 CTX_BBP: str = 'BBP'
 
 # The universal translation context prefix for BME module in BBP_NG plugin.
-CTX_BBP_BME: str = CTX_BBP + '/BME'
-def build_prototype_showcase_context(identifier: str) -> str:
+CTX_BBP_BME: str = f'{CTX_BBP}/BME'
+CTX_BBP_BME_CATEGORY: str = f'{CTX_BBP_BME}/Category'
+CTX_BBP_BME_PROTOTYPE: str = f'{CTX_BBP_BME}/Proto'
+def build_prototype_showcase_category_context() -> str:
+    """
+    Build the context for getting the translation for BME prototype showcase category.
+    @return The context for getting translation.
+    """
+    return CTX_BBP_BME_CATEGORY
+def build_prototype_showcase_title_context(identifier: str) -> str:
     """
     Build the context for getting the translation for BME prototype showcase title.
     @param[in] identifier The identifier of this prototype.
     @return The context for getting translation.
     """
-    return CTX_BBP_BME + '/' + identifier
+    return f'{CTX_BBP_BME_PROTOTYPE}/{identifier}'
 def build_prototype_showcase_cfg_context(identifier: str, cfg_index: int) -> str:
     """
     Build the context for getting the translation for BME prototype showcase configuration title or description.
@@ -70,7 +78,7 @@ def build_prototype_showcase_cfg_context(identifier: str, cfg_index: int) -> str
     @param[in] cfg_index The index of this configuration in this prototype showcase.
     @return The context for getting translation.
     """
-    return CTX_BBP_BME + f'/{identifier}/[{cfg_index}]'
+    return f'{CTX_BBP_BME_PROTOTYPE}/{identifier}/[{cfg_index}]'
 
 #endregion
 

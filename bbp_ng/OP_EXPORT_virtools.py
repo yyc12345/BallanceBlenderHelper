@@ -21,7 +21,7 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
     
     def execute(self, context):
         # check selecting first
-        objls: tuple[bpy.types.Object] | None = self.general_get_export_objects(context)
+        objls: tuple[bpy.types.Object, ...] | None = self.general_get_export_objects(context)
         if objls is None:
             self.report({'ERROR'}, 'No selected target!')
             return {'CANCELLED'}

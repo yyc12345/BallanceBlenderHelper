@@ -280,16 +280,24 @@ class BBP_OT_add_bme_struct(bpy.types.Operator):
 
     @classmethod
     def draw_blc_menu(cls, layout: bpy.types.UILayout):
-        for ident in _g_EnumHelper_BmeStructType.get_bme_identifiers():
-            # draw operator
-            cop = layout.operator(
-                cls.bl_idname,
-                text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
-                icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident),
-                text_ctxt = UTIL_translation.build_prototype_showcase_context(ident),
-            )
-            # and assign its init type value
-            cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
+        for category, idents in _g_EnumHelper_BmeStructType.get_bme_categories().items():
+            # draw category label
+            layout.label(text=category, text_ctxt=UTIL_translation.build_prototype_showcase_category_context())
+
+            # draw prototypes list
+            for ident in idents:
+                # draw operator
+                cop = layout.operator(
+                    cls.bl_idname,
+                    text = _g_EnumHelper_BmeStructType.get_bme_showcase_title(ident),
+                    icon_value = _g_EnumHelper_BmeStructType.get_bme_showcase_icon(ident),
+                    text_ctxt = UTIL_translation.build_prototype_showcase_title_context(ident),
+                )
+                # and assign its init type value
+                cop.bme_struct_type = _g_EnumHelper_BmeStructType.to_selection(ident)
+
+            # draw separator
+            layout.separator()
 
 #endregion
 
