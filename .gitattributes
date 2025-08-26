@@ -3,4 +3,4 @@
 # Element placeholder mesh should be save as binary
 *.ph binary
 # Raw json data should be binary, although i edit it manually
-assets/jsons/*.json    binary
+assets/jsons/*.json5    binary
