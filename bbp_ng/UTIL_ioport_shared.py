@@ -245,10 +245,12 @@ class ExportMode(enum.IntEnum):
     BldColl = enum.auto()
     BldObj = enum.auto()
     BldSelObjs = enum.auto()
+    BldAllObjs = enum.auto()
 _g_ExportModeDesc: dict[ExportMode, tuple[str, str, str]] = {
     ExportMode.BldColl: ('Collection', 'Export a collection', 'OUTLINER_COLLECTION'),
     ExportMode.BldObj: ('Object', 'Export an object', 'OBJECT_DATA'),
     ExportMode.BldSelObjs: ('Selected Objects', 'Export selected objects', 'SELECT_SET'),
+    ExportMode.BldAllObjs: ('All Objects', 'Export all objects stored in this file', 'FILE_BLEND'),
 }
 _g_EnumHelper_ExportMode = UTIL_functions.EnumPropHelper(
     ExportMode,
@@ -275,10 +277,8 @@ class ExportParams():
         header.label(text='Export Parameters', text_ctxt='BBP/UTIL_ioport_shared.ExportParams/draw')
         if body is None: return
 
-        # make prop expand horizontaly, not vertical.
-        horizon_body = body.row()
         # draw switch
-        horizon_body.prop(self, "export_mode", expand=True)
+        body.prop(self, "export_mode", expand=True)
 
         # draw picker
         export_mode = _g_EnumHelper_ExportMode.get_selection(self.export_mode)
@@ -289,6 +289,8 @@ class ExportParams():
             case ExportMode.BldObj:
                 ptrprops.draw_export_object(body)
             case ExportMode.BldSelObjs:
+                pass # Draw nothing
+            case ExportMode.BldAllObjs:
                 pass # Draw nothing
 
     def general_get_export_objects(self, context: bpy.types.Context) -> tuple[bpy.types.Object, ...] | None:
@@ -308,6 +310,8 @@ class ExportParams():
                 else: return (obj, )
             case ExportMode.BldSelObjs:
                 return tuple(context.selected_objects)
+            case ExportMode.BldAllObjs:
+                return tuple(bpy.data.objects)
 
 #endregion
 
