@@ -50,7 +50,8 @@ class BBP_OT_game_resolution(bpy.types.Operator):
         name = "Resolution Kind",
         description = "The type of preset resolution.",
         items = _g_EnumHelper_ResolutionKind.generate_items(),
-        default = _g_EnumHelper_ResolutionKind.to_selection(ResolutionKind.Normal)
+        default = _g_EnumHelper_ResolutionKind.to_selection(ResolutionKind.Normal),
+        translation_context = 'BBP_OT_game_resolution/property'
     ) # type: ignore
 
     def invoke(self, context, event):
@@ -185,37 +186,42 @@ class BBP_OT_game_camera(bpy.types.Operator):
         name = "Target Kind",
         description = "",
         items = _g_EnumHelper_TargetKind.generate_items(),
-        default = _g_EnumHelper_TargetKind.to_selection(TargetKind.Cursor)
+        default = _g_EnumHelper_TargetKind.to_selection(TargetKind.Cursor),
+        translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
 
     rotation_kind: bpy.props.EnumProperty(
         name = "Rotation Angle Kind",
         description = "",
         items = _g_EnumHelper_RotationKind.generate_items(),
-        default = _g_EnumHelper_RotationKind.to_selection(RotationKind.Preset)
+        default = _g_EnumHelper_RotationKind.to_selection(RotationKind.Preset),
+        translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
     preset_rotation_angle: bpy.props.EnumProperty(
         name = "Preset Rotation Angle",
         description = "",
         items = _g_EnumHelper_RotationAngle.generate_items(),
-        default = _g_EnumHelper_RotationAngle.to_selection(RotationAngle.Deg0)
+        default = _g_EnumHelper_RotationAngle.to_selection(RotationAngle.Deg0),
+        translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
     custom_rotation_angle: bpy.props.FloatProperty(
         name = "Custom Rotation Angle",
-        description = "The rotation angle of camera relative to 3D Cursor",
+        description = "The rotation angle of camera relative to 3D Cursor or Active Object",
         subtype = 'ANGLE',
         min = 0, max = math.radians(360),
         step = 100,
         # MARK: What the fuck of the precision?
         # I set it to 2 but it doesn't work so I forcely set it to 100.
         precision = 100,
+        translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
 
     perspective_kind: bpy.props.EnumProperty(
         name = "Rotation Angle Kind",
         description = "",
         items = _g_EnumHelper_PerspectiveKind.generate_items(),
-        default = _g_EnumHelper_PerspectiveKind.to_selection(PerspectiveKind.Ordinary)
+        default = _g_EnumHelper_PerspectiveKind.to_selection(PerspectiveKind.Ordinary),
+        translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
 
     @classmethod

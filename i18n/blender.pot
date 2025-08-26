@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-21 09:59+0800\n"
+"POT-Creation-Date: 2025-08-26 21:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,7 @@ msgid ""
 msgstr ""
 
 #. :src: bpy.types.BBP_MT_AddBmeMenu
+#. :src: bpy.types.BBP_PT_SidebarAddBmePanel
 msgid "Add Ballance Floor"
 msgstr ""
 
@@ -50,6 +51,7 @@ msgid "Floors"
 msgstr ""
 
 #. :src: bpy.types.BBP_MT_AddComponentsMenu
+#. :src: bpy.types.BBP_PT_SidebarAddComponentPanel
 msgid "Add Ballance Component"
 msgstr ""
 
@@ -59,6 +61,7 @@ msgid "Components"
 msgstr ""
 
 #. :src: bpy.types.BBP_MT_AddRailMenu
+#. :src: bpy.types.BBP_PT_SidebarAddRailPanel
 msgid "Add Ballance Rail"
 msgstr ""
 
@@ -77,12 +80,454 @@ msgid "Ballance"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_arc_rail
+msgid "Add Arc Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_arc_rail
 msgctxt "BBP_OT_add_arc_rail"
 msgid "Arc Rail"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_arc_rail
-msgid "Add Arc Rail"
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgid "Add BME structure"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_bme_struct
+msgctxt "BBP_OT_add_bme_struct"
+msgid "Add BME Structure"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component
+msgid "Add ordinary Component"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_component
+msgctxt "BBP_OT_add_component"
+msgid "Add Component"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgid ""
+"Add item at the tail of encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ioport_encodings
+msgctxt "BBP_OT_add_ioport_encodings"
+msgid "Add in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgid "Add Nong Extra Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_extra_point
+msgctxt "BBP_OT_add_nong_extra_point"
+msgid "Nong Extra Point"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgid "Add Nong Ventilator"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_nong_ventilator
+msgctxt "BBP_OT_add_nong_ventilator"
+msgid "Nong Ventilator"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgid "Grouping Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_objects_virtools_group
+msgctxt "BBP_OT_add_objects_virtools_group"
+msgid "Grouping Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgid "Add Rail Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_rail_section
+msgctxt "BBP_OT_add_rail_section"
+msgid "Rail Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgid "Add Sector Pair, both check point and reset point."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_sector_component_pair
+msgctxt "BBP_OT_add_sector_component_pair"
+msgid "Sector Pair"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgid "Add Side Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_rail
+msgctxt "BBP_OT_add_side_rail"
+msgid "Side Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgid "Add Side Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_side_spiral_rail
+msgctxt "BBP_OT_add_side_spiral_rail"
+msgid "Side Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgid "Add Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_spiral_rail
+msgctxt "BBP_OT_add_spiral_rail"
+msgid "Spiral Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgid "Add Straight Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_straight_rail
+msgctxt "BBP_OT_add_straight_rail"
+msgid "Straight Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgid "Add Swing Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_swing_series
+msgctxt "BBP_OT_add_swing_series"
+msgid "Swing Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgid "Add Tilting Block Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_tilting_block_series
+msgctxt "BBP_OT_add_tilting_block_series"
+msgid "Tilting Block Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgid "Add Transition Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_rail
+msgctxt "BBP_OT_add_transition_rail"
+msgid "Transition Rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgid "Add Transition Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_transition_section
+msgctxt "BBP_OT_add_transition_section"
+msgid "Transition Section"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgid "Add Ventilator Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_ventilator_series
+msgctxt "BBP_OT_add_ventilator_series"
+msgid "Ventilator Series"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgid "Add a Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_add_virtools_groups
+msgctxt "BBP_OT_add_virtools_group"
+msgid "Add to Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgid "Apply Virtools Light to Blender Light."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_light
+msgctxt "BBP_OT_apply_virtools_light"
+msgid "Apply to Blender Light"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgid "Apply Virtools Material to Blender Material."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_material
+msgctxt "BBP_OT_apply_virtools_material"
+msgid "Apply to Blender Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgid "Auto Grouping Objects by Its Name and Name Convention"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_auto_grouping
+msgctxt "BBP_OT_auto_grouping"
+msgid "Auto Grouping"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgid "Clear the encodings list used by BMap for Virtools file read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_ioport_encodings
+msgctxt "BBP_OT_clear_ioport_encodings"
+msgid "Clear Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgid "Clear Virtools Groups on Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
+msgctxt "BBP_OT_clear_objects_virtools_group"
+msgid "Clear All Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgid "Clear All Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_clear_virtools_groups
+msgctxt "BBP_OT_clear_virtools_groups"
+msgid "Clear Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgid "Convert Objects Name from YYC Convention to Imengyu Convention."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_convert_to_imengyu
+msgctxt "BBP_OT_convert_to_imengyu"
+msgid "Convert to Imengyu"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgid "Import and Assign Texture Directly"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
+msgctxt "BBP_OT_direct_set_virtools_texture"
+msgid "Import and Assign Texture"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgid ""
+"Move selected item down in encodings list used by BMap for Virtools file "
+"read and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_down_ioport_encodings
+msgctxt "BBP_OT_down_ioport_encodings"
+msgid "Move Down in Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgid "Save a Ballance Map File (BM File Spec 1.4)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile
+msgctxt "BBP_OT_export_bmfile"
+msgid "Export BM (Ballance Map) File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgid "Export Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_virtools
+msgctxt "BBP_OT_export_virtools"
+msgid "Export Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_all_materials
+msgid "Fix All Materials by Its Referred Ballance Texture Name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_all_materials
+msgctxt "BBP_OT_fix_all_materials"
+msgid "Fix All Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+msgid "Fix Active Materials by Its Referred Ballance Texture Name."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_fix_single_material
+msgctxt "BBP_OT_fix_single_material"
+msgid "Fix Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+msgid "Flatten selected face UV. Only works for convex face"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_flatten_uv
+msgctxt "BBP_OT_flatten_uv"
+msgid "Flatten UV"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera
+msgid "Order active camera look at target like Ballance does"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera
+msgctxt "BBP_OT_game_camera"
+msgid "Game Camera"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution
+msgid "Set Blender render resolution to Ballance game"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution
+msgctxt "BBP_OT_game_resolution"
+msgid "Game Resolution"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+msgid "Load a Ballance Map File (BM File Spec 1.4)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_bmfile
+msgctxt "BBP_OT_import_bmfile"
+msgid "Import BM (Ballance Map) File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_virtools
+msgid "Import Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_import_virtools
+msgctxt "BBP_OT_import_virtools"
+msgid "Import Virtools File"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_legacy_align
+msgid "Align Objects with 3ds Max Style"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_legacy_align
+msgctxt "BBP_OT_legacy_align"
+msgid "3ds Max Align"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+msgid "Preset Virtools Material with Original Ballance Data."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material
+msgctxt "BBP_OT_preset_virtools_material"
+msgid "Preset Virtools Material"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rail_uv
+msgid "Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rail_uv
+msgctxt "BBP_OT_rail_uv"
+msgid "Rail UV"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+msgid "Regulate Objects Name by Virtools Group and Naming Convention"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_regulate_objects_name
+msgctxt "BBP_OT_regulate_objects_name"
+msgid "Regulate Objects Name"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+msgid "Reset all Meshes of Loaded Ballance Elements to Original Geometry."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_ballance_elements
+msgctxt "BBP_OT_reset_ballance_elements"
+msgid "Reset Ballance Elements"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+msgid "Reset all BME Materials to Default Settings."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_reset_bme_materials
+msgctxt "BBP_OT_reset_bme_materials"
+msgid "Reset BME Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+msgid ""
+"Remove selected item in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_ioport_encodings
+msgctxt "BBP_OT_rm_ioport_encodings"
+msgid "Remove from Encodings List"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+msgid "Ungrouping Selected Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
+msgctxt "BBP_OT_rm_objects_virtools_group"
+msgid "Ungrouping Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+msgid "Remove a Virtools Group for Active Object."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_rm_virtools_groups
+msgctxt "BBP_OT_rm_virtools_group"
+msgid "Remove from Virtools Groups"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+msgid "Select Objects by Virtools Group"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
+msgctxt "BBP_OT_select_object_by_virtools_group"
+msgid "Select by Virtools Group"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgid ""
+"Convert selected objects into mesh objects and try to copy the Virtools "
+"Group infos of their associated curve bevel object if they have. "
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
+msgctxt "BBP_OT_snoop_group_then_to_mesh"
+msgid "Snoop Group then to Mesh"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgid ""
+"Move selected item up in encodings list used by BMap for Virtools file read "
+"and write."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_up_ioport_encodings
+msgctxt "BBP_OT_up_ioport_encodings"
+msgid "Move Up in Encodings List"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_arc_rail.extra_rotation
@@ -268,15 +713,6 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_add_straight_rail.rail_type:'RAIL'
 msgctxt "BBP/OP_ADDS_rail.SharedRailSectionInputProperty/property"
 msgid "Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_bme_struct
-msgctxt "BBP_OT_add_bme_struct"
-msgid "Add BME Structure"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_bme_struct
-msgid "Add BME structure"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_bme_struct.bme_struct_cfgs
@@ -482,15 +918,6 @@ msgctxt "BBP_OT_add_bme_struct/property"
 msgid "Extra Translation"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_component
-msgctxt "BBP_OT_add_component"
-msgid "Add Component"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_component
-msgid "Add ordinary Component"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_add_component.component_sector
 #. :src: bpy.types.BBP_OT_add_nong_extra_point.component_sector
 #. :src: bpy.types.BBP_OT_add_nong_ventilator.component_sector
@@ -656,26 +1083,6 @@ msgctxt "BBP_OT_add_component/property"
 msgid "PS_FourFlames"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_ioport_encodings
-msgctxt "BBP_OT_add_ioport_encodings"
-msgid "Add in Encodings List"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_ioport_encodings
-msgid ""
-"Add item at the tail of encodings list used by BMap for Virtools file read "
-"and write."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_nong_extra_point
-msgctxt "BBP_OT_add_nong_extra_point"
-msgid "Nong Extra Point"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_nong_extra_point
-msgid "Add Nong Extra Point"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_add_nong_extra_point.component_count
 #. :src: bpy.types.BBP_OT_add_nong_ventilator.component_count
 #. :src: bpy.types.BBP_OT_add_swing_series.component_count
@@ -691,15 +1098,6 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_add_tilting_block_series.component_count
 #. :src: bpy.types.BBP_OT_add_ventilator_series.component_count
 msgid "The count of components which you want to generate"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_nong_ventilator
-msgctxt "BBP_OT_add_nong_ventilator"
-msgid "Nong Ventilator"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_nong_ventilator
-msgid "Add Nong Ventilator"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_nong_ventilator.preset_vetilator_count
@@ -759,15 +1157,6 @@ msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_nong_ventilator.ventilator_count_source:'CUSTOM'
 msgid "User specified ventilator count."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_objects_virtools_group
-msgctxt "BBP_OT_add_objects_virtools_group"
-msgid "Grouping Objects"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_objects_virtools_group
-msgid "Grouping Selected Objects"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_objects_virtools_group.custom_group_name
@@ -838,33 +1227,6 @@ msgstr ""
 msgid "Pick vanilla Ballance group name."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_rail_section
-msgctxt "BBP_OT_add_rail_section"
-msgid "Rail Section"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_rail_section
-msgid "Add Rail Section"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_sector_component_pair
-msgctxt "BBP_OT_add_sector_component_pair"
-msgid "Sector Pair"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_sector_component_pair
-msgid "Add Sector Pair, both check point and reset point."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_side_rail
-msgctxt "BBP_OT_add_side_rail"
-msgid "Side Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_side_rail
-msgid "Add Side Rail"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_add_side_rail.rail_length
 #. :src: bpy.types.BBP_OT_add_straight_rail.rail_length
 #. :src: bpy.types.BBP_OT_add_transition_rail.rail_length
@@ -905,15 +1267,6 @@ msgstr ""
 msgid "The side rail which also allow stone ball passed."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_side_spiral_rail
-msgctxt "BBP_OT_add_side_spiral_rail"
-msgid "Side Spiral Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_side_spiral_rail
-msgid "Add Side Spiral Rail"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
 msgctxt "BBP_OT_add_side_spiral_rail/property"
 msgid "Iterations"
@@ -922,15 +1275,6 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_add_side_spiral_rail.rail_screw_iterations
 #. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
 msgid "Indicate how many layers of this spiral rail should be generated."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_spiral_rail
-msgctxt "BBP_OT_add_spiral_rail"
-msgid "Spiral Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_spiral_rail
-msgid "Add Spiral Rail"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_iterations
@@ -945,24 +1289,6 @@ msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_spiral_rail.rail_screw_screw
 msgid "The increased height in each iteration."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_straight_rail
-msgctxt "BBP_OT_add_straight_rail"
-msgid "Straight Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_straight_rail
-msgid "Add Straight Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_swing_series
-msgctxt "BBP_OT_add_swing_series"
-msgid "Swing Series"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_swing_series
-msgid "Add Swing Series"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_swing_series.component_span
@@ -985,15 +1311,6 @@ msgid ""
 "Staggered Swing only accept Wood and Paper ball."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_tilting_block_series
-msgctxt "BBP_OT_add_tilting_block_series"
-msgid "Tilting Block Series"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_tilting_block_series
-msgid "Add Tilting Block Series"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
 msgctxt "BBP_OT_add_tilting_block_series/property"
 msgid "Span"
@@ -1001,33 +1318,6 @@ msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_tilting_block_series.component_span
 msgid "The distance between each titling blocks"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_transition_rail
-msgctxt "BBP_OT_add_transition_rail"
-msgid "Transition Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_transition_rail
-msgid "Add Transition Rail"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_transition_section
-msgctxt "BBP_OT_add_transition_section"
-msgid "Transition Section"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_transition_section
-msgid "Add Transition Section"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_ventilator_series
-msgctxt "BBP_OT_add_ventilator_series"
-msgid "Ventilator Series"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_ventilator_series
-msgid "Add Ventilator Series"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_add_ventilator_series.component_translation
@@ -1042,142 +1332,59 @@ msgid ""
 "can get Nong ventilator."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_add_virtools_groups
-msgctxt "BBP_OT_add_virtools_group"
-msgid "Add to Virtools Groups"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_add_virtools_groups
-msgid "Add a Virtools Group for Active Object."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_apply_virtools_light
-msgctxt "BBP_OT_apply_virtools_light"
-msgid "Apply to Blender Light"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_apply_virtools_light
-msgid "Apply Virtools Light to Blender Light."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_apply_virtools_material
-msgctxt "BBP_OT_apply_virtools_material"
-msgid "Apply to Blender Material"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_apply_virtools_material
-msgid "Apply Virtools Material to Blender Material."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_auto_grouping
-msgctxt "BBP_OT_auto_grouping"
-msgid "Auto Grouping"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_auto_grouping
-msgid "Auto Grouping Objects by Its Name and Name Convention"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_ioport_encodings
-msgctxt "BBP_OT_clear_ioport_encodings"
-msgid "Clear Encodings List"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_ioport_encodings
-msgid "Clear the encodings list used by BMap for Virtools file read and write."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
-msgctxt "BBP_OT_clear_objects_virtools_group"
-msgid "Clear All Groups"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_objects_virtools_group
-msgid "Clear Virtools Groups on Selected Objects"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_virtools_groups
-msgctxt "BBP_OT_clear_virtools_groups"
-msgid "Clear Virtools Groups"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_clear_virtools_groups
-msgid "Clear All Virtools Group for Active Object."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_convert_to_imengyu
-msgctxt "BBP_OT_convert_to_imengyu"
-msgid "Convert to Imengyu"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_convert_to_imengyu
-msgid "Convert Objects Name from YYC Convention to Imengyu Convention."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
-msgctxt "BBP_OT_direct_set_virtools_texture"
-msgid "Import and Assign Texture"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_direct_set_virtools_texture
-msgid "Import and Assign Texture Directly"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_down_ioport_encodings
-msgctxt "BBP_OT_down_ioport_encodings"
-msgid "Move Down in Encodings List"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_down_ioport_encodings
-msgid ""
-"Move selected item down in encodings list used by BMap for Virtools file "
-"read and write."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_export_bmfile
-msgctxt "BBP_OT_export_bmfile"
-msgid "Export BM (Ballance Map) File"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_export_bmfile
-msgid "Save a Ballance Map File (BM File Spec 1.4)"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_export_bmfile.export_mode
 #. :src: bpy.types.BBP_OT_export_virtools.export_mode
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
 msgid "Export Mode"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
-#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode
+msgid "Define which 3D objects should be exported"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'1'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'1'
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
 msgid "Collection"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'COLLECTION'
-#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'COLLECTION'
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'1'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'1'
 msgid "Export a collection"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
-#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'2'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'2'
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
 msgid "Object"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'OBJECT'
-#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'OBJECT'
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'2'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'2'
 msgid "Export an object"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_virtools
-msgctxt "BBP_OT_export_virtools"
-msgid "Export Virtools File"
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'3'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'3'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "Selected Objects"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_export_virtools
-msgid "Export Virtools File"
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'3'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'3'
+msgid "Export selected objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'4'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'4'
+msgctxt "BBP/UTIL_ioport_shared.ExportParams/property"
+msgid "All Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_export_bmfile.export_mode:'4'
+#. :src: bpy.types.BBP_OT_export_virtools.export_mode:'4'
+msgid "Export all objects stored in this file"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_export_virtools.compress_level
@@ -1270,9 +1477,9 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_import_virtools.texture_save_opt:'3'
 #. :src: bpy.types.BBP_PG_virtools_texture.save_options:'3'
 msgid ""
-"Use Global settings, that is the settings given with CKContext::"
-"SetGlobalImagesSaveOptions. (Not valid when using CKContext::"
-"SetImagesSaveOptions). "
+"Use Global settings, that is the settings given with "
+"CKContext::SetGlobalImagesSaveOptions. (Not valid when using "
+"CKContext::SetImagesSaveOptions). "
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_export_virtools.texture_save_opt:'4'
@@ -1299,33 +1506,6 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_export_virtools.use_compress
 #. :src: bpy.types.BBP_OT_import_virtools.use_compress
 msgid "Whether use ZLib to compress result when saving composition."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_fix_all_material
-msgctxt "BBP_OT_fix_all_material"
-msgid "Fix All Materials"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_fix_all_material
-msgid "Fix All Materials by Its Referred Ballance Texture Name."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_fix_single_material
-msgctxt "BBP_OT_fix_single_material"
-msgid "Fix Material"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_fix_single_material
-msgid "Fix Active Materials by Its Referred Ballance Texture Name."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_flatten_uv
-msgctxt "BBP_OT_flatten_uv"
-msgid "Flatten UV"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_flatten_uv
-msgid "Flatten selected face UV. Only works for convex face"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_flatten_uv.flatten_method
@@ -1420,13 +1600,209 @@ msgstr ""
 msgid "The size which will be applied for scale."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_import_bmfile
-msgctxt "BBP_OT_import_bmfile"
-msgid "Import BM (Ballance Map) File"
+#. :src: bpy.types.BBP_OT_game_camera.custom_rotation_angle
+msgctxt "BBP_OT_game_camera/property"
+msgid "Custom Rotation Angle"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_import_bmfile
-msgid "Load a Ballance Map File (BM File Spec 1.4)"
+#. :src: bpy.types.BBP_OT_game_camera.custom_rotation_angle
+msgid "The rotation angle of camera relative to 3D Cursor or Active Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind
+#. :src: bpy.types.BBP_OT_game_camera.rotation_kind
+msgctxt "BBP_OT_game_camera/property"
+msgid "Rotation Angle Kind"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'1'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Ordinary"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'1'
+msgid "The default perspective for game camera."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'2'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Lift"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'2'
+msgid "Lifted camera in game for downcast level."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'3'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Easter Egg"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.perspective_kind:'3'
+msgid "A very close view to player ball in game."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle
+msgctxt "BBP_OT_game_camera/property"
+msgid "Preset Rotation Angle"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'1'
+msgctxt "BBP_OT_game_camera/property"
+msgid "0 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'1'
+msgid "0 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'2'
+msgctxt "BBP_OT_game_camera/property"
+msgid "45 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'2'
+msgid "45 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'3'
+msgctxt "BBP_OT_game_camera/property"
+msgid "90 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'3'
+msgid "90 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'4'
+msgctxt "BBP_OT_game_camera/property"
+msgid "135 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'4'
+msgid "135 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'5'
+msgctxt "BBP_OT_game_camera/property"
+msgid "180 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'5'
+msgid "180 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'6'
+msgctxt "BBP_OT_game_camera/property"
+msgid "225 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'6'
+msgid "225 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'7'
+msgctxt "BBP_OT_game_camera/property"
+msgid "270 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'7'
+msgid "270 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'8'
+msgctxt "BBP_OT_game_camera/property"
+msgid "315 Degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'8'
+msgid "315 degree"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'1'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Preset"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'1'
+msgid "8 preset rotation angles usually used in game."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'2'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Custom"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'2'
+msgid "User manually input rotation angle."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.target_kind
+msgctxt "BBP_OT_game_camera/property"
+msgid "Target Kind"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.target_kind:'1'
+msgctxt "BBP_OT_game_camera/property"
+msgid "3D Cursor"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.target_kind:'1'
+msgid "3D cursor is player ball."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.target_kind:'2'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Active Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.target_kind:'2'
+msgid "The origin point of active object is player ball."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind
+msgctxt "BBP_OT_game_resolution/property"
+msgid "Resolution Kind"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind
+msgid "The type of preset resolution."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'1'
+msgctxt "BBP_OT_game_resolution/property"
+msgid "Normal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'1'
+msgid "Aspect ratio: 4:3."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'2'
+msgctxt "BBP_OT_game_resolution/property"
+msgid "Extended"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'2'
+msgid "Aspect ratio: 16:9."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'3'
+msgctxt "BBP_OT_game_resolution/property"
+msgid "Widescreen"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'3'
+msgid "Aspect ratio: 7:3."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'4'
+msgctxt "BBP_OT_game_resolution/property"
+msgid "Panoramic"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'4'
+msgid "Aspect ratio: 20:7."
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
@@ -1538,34 +1914,8 @@ msgstr ""
 msgid "Define how to process texture name conflict"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_import_virtools
-msgctxt "BBP_OT_import_virtools"
-msgid "Import Virtools File"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_import_virtools
-msgid "Import Virtools File"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_legacy_align
-msgctxt "BBP_OT_legacy_align"
-msgid "3ds Max Align"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_legacy_align
-msgid "Align Objects with 3ds Max Style"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_preset_virtools_material
-msgctxt "BBP_OT_preset_virtools_material"
-msgid "Preset Virtools Material"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_preset_virtools_material
-msgid "Preset Virtools Material with Original Ballance Data."
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "Preset"
 msgstr ""
 
@@ -1574,105 +1924,38 @@ msgid "The preset which you want to apply."
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'1'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "FloorSide"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'2'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "FloorTop"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'3'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "TrafoPaper"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'4'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "TraforWoodStone"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'5'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "Rail"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'6'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "WoodPath"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'7'
+msgctxt "BBP_OT_preset_virtools_material/property"
 msgid "WoodChip"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rail_uv
-msgctxt "BBP_OT_rail_uv"
-msgid "Rail UV"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rail_uv
-msgid "Create UV for Rail as Ballance Showen (TT_ReflectionMapping)"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_regulate_objects_name
-msgctxt "BBP_OT_regulate_objects_name"
-msgid "Regulate Objects Name"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_regulate_objects_name
-msgid "Regulate Objects Name by Virtools Group and Naming Convention"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_reset_ballance_elements
-msgctxt "BBP_OT_reset_ballance_elements"
-msgid "Reset Ballance Elements"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_reset_ballance_elements
-msgid "Reset all Meshes of Loaded Ballance Elements to Original Geometry."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_reset_bme_materials
-msgctxt "BBP_OT_reset_bme_materials"
-msgid "Reset BME Materials"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_reset_bme_materials
-msgid "Reset all BME Materials to Default Settings."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_ioport_encodings
-msgctxt "BBP_OT_rm_ioport_encodings"
-msgid "Remove from Encodings List"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_ioport_encodings
-msgid ""
-"Remove selected item in encodings list used by BMap for Virtools file read "
-"and write."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
-msgctxt "BBP_OT_rm_objects_virtools_group"
-msgid "Ungrouping Objects"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_objects_virtools_group
-msgid "Ungrouping Selected Objects"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_virtools_groups
-msgctxt "BBP_OT_rm_virtools_group"
-msgid "Remove from Virtools Groups"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_rm_virtools_groups
-msgid "Remove a Virtools Group for Active Object."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
-msgctxt "BBP_OT_select_object_by_virtools_group"
-msgid "Select by Virtools Group"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_select_object_by_virtools_group
-msgid "Select Objects by Virtools Group"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_select_object_by_virtools_group.selection_mode
@@ -1729,26 +2012,19 @@ msgstr ""
 msgid "Selects items that intersect with the existing selection."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
-msgctxt "BBP_OT_snoop_group_then_to_mesh"
-msgid "Snoop Group then to Mesh"
+#. :src: bpy.types.BBP_PT_SidebarAddBmePanel
+msgctxt "BBP_PT_SidebarAddBmePanel"
+msgid "Floors"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_snoop_group_then_to_mesh
-msgid ""
-"Convert selected objects into mesh objects and try to copy the Virtools "
-"Group infos of their associated curve bevel object if they have. "
+#. :src: bpy.types.BBP_PT_SidebarAddComponentPanel
+msgctxt "BBP_PT_SidebarAddComponentPanel"
+msgid "Components"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_up_ioport_encodings
-msgctxt "BBP_OT_up_ioport_encodings"
-msgid "Move Up in Encodings List"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_up_ioport_encodings
-msgid ""
-"Move selected item up in encodings list used by BMap for Virtools file read "
-"and write."
+#. :src: bpy.types.BBP_PT_SidebarAddRailPanel
+msgctxt "BBP_PT_SidebarAddRailPanel"
+msgid "Rails"
 msgstr ""
 
 #. :src: bpy.types.BBP_PT_ballance_elements
@@ -1918,7 +2194,11 @@ msgstr ""
 
 #. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode
 msgctxt "BBP_PG_legacy_align_history/property"
-msgid "Current Object (Active Object)"
+msgid "Current Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode
+msgid "The align mode applied to Current Object"
 msgstr ""
 
 #. :src: bpy.types.BBP_PG_legacy_align_history.current_align_mode:'1'
@@ -1965,9 +2245,42 @@ msgstr ""
 msgid "The max value in specified axis."
 msgstr ""
 
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Current Instance"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance
+msgid "Decide which instance should be used as Current Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance:'1'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "Active Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance:'1'
+msgid "Use Active Object as Current Object"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance:'2'
+msgctxt "BBP_PG_legacy_align_history/property"
+msgid "3D Cursor"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.current_instance:'2'
+msgid "Use 3D Cursor as Current Object"
+msgstr ""
+
 #. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode
 msgctxt "BBP_PG_legacy_align_history/property"
-msgid "Target Objects (Selected Objects)"
+msgid "Target Objects"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_legacy_align_history.target_align_mode
+msgid ""
+"The align mode applied to Target Objects (selected objects except active "
+"object if Current Instance is active object)"
 msgstr ""
 
 #. :src: bpy.types.BBP_PG_ptrprop_resolver.export_collection
@@ -3134,52 +3447,57 @@ msgstr ""
 msgid "4 bits indexed CLUT (ARGB) "
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:246
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:232
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Prototype Configurations"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:285
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:271
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Extra Transform"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:287
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:273
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Translation"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:291
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:277
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Rotation"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:274
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:253
+msgctxt "BBP_OT_add_bme_struct/draw"
+msgid "Yes"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:260
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Top"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:275
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:261
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Front"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:276
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:262
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Left"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:278
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:264
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Right"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:279
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:265
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Back"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:280
+#: extensions/user_default/bbp_ng/OP_ADDS_bme.py:266
 msgctxt "BBP_OT_add_bme_struct/draw"
 msgid "Bottom"
 msgstr ""
@@ -3224,37 +3542,37 @@ msgctxt "BBP/OP_ADDS_rail.SharedScrewRailInputProperty/draw"
 msgid "Flip Options"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:266
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:274
 msgctxt "BBP_OT_add_transition_section/draw"
 msgid "No Options Available"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:289
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:301
 msgctxt "BBP_OT_add_straight_rail/draw"
 msgid "Straight Rail"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:318
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:334
 msgctxt "BBP_OT_add_transition_rail/draw"
 msgid "Transition Rail"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:358
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:378
 msgctxt "BBP_OT_add_side_rail/draw"
 msgid "Side Rail"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:398
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:422
 msgctxt "BBP_OT_add_arc_rail/draw"
 msgid "Arc Rail"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:449
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:477
 msgctxt "BBP_OT_add_spiral_rail/draw"
 msgid "Spiral Rail"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:493
+#: extensions/user_default/bbp_ng/OP_ADDS_rail.py:525
 msgctxt "BBP_OT_add_side_spiral_rail/draw"
 msgid "Spiral Rail"
 msgstr ""
@@ -3264,150 +3582,175 @@ msgstr ""
 msgid "This feature is not supported yet."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:136
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:148
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Creating 3dObjects and Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:180
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:192
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:226
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:238
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:274
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:286
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving 3dObjects"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:321
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:333
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Meshes"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:436
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:448
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Materials"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:502
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:514
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Textures"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:542
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:554
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Document"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:54
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:66
 msgid "Virtools File Exporting Finished."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:83
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:95
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Virtools Engine Temporary Directory: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:26
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:32
 msgid "No selected target!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:32
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
 msgid "You can not specify \"Use Global\" as global texture save option!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:44
 msgid ""
 "You must specify at least one encoding for file saving (e.g. cp1252, gbk)!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:84
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:50
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:38
+msgid "No file was selected!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:96
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Textures"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:154
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:166
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Materials"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:221
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:233
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Meshes"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:319
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:331
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading 3dObjects"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:364
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:376
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:426
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:438
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:462
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:474
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Applying Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:34
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:46
 msgid "Virtools File Importing Finished."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:47
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:59
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Virtools Engine Temporary Directory: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:90
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:102
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Texture Raw Data Temporary Directory: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:26
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:32
 msgid ""
 "You must specify at least one encoding for file loading (e.g. cp1252, gbk)!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_MTL_fix_material.py:34
-msgctxt "BBP_OT_fix_all_material/draw"
+#: extensions/user_default/bbp_ng/OP_MTL_fix_materials.py:34
+msgctxt "BBP_OT_fix_all_materials/draw"
 msgid "Fix {0}/{1} materials."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:182
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:248
+msgctxt "BBP_OT_game_camera/draw"
+msgid "Target"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:253
+msgctxt "BBP_OT_game_camera/draw"
+msgid "Rotation"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:264
+msgctxt "BBP_OT_game_camera/draw"
+msgid "Perspective"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:208
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Align Axis (Multi-selection)"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:190
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:216
 msgctxt "BBP_OT_legacy_align/draw"
-msgid "Current Object (Active Object)"
+msgid "Current Object"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:192
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:229
 msgctxt "BBP_OT_legacy_align/draw"
-msgid "Target Objects (Selected Objects)"
+msgid "Target Objects Align Mode"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:201
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:238
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Apply"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:203
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:240
 msgctxt "BBP_OT_legacy_align/draw"
 msgid "Total {0} applied alignments"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:227
+msgctxt "BBP_OT_legacy_align/draw"
+msgid "Current Object Align Mode"
 msgstr ""
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_naming_convention.py:85
@@ -3552,42 +3895,42 @@ msgctxt "BBP_PT_virtools_light/draw"
 msgid "Spot Cone"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1055
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1056
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Preset"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1058
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1059
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Apply"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1063
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1064
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Color Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1071
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1072
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Mode Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1077
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1078
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Texture Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1098
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1099
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Test Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1105
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1106
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Blend Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1112
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1113
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Z Write Parameters"
 msgstr ""
@@ -3600,77 +3943,77 @@ msgstr ""
 msgid "This material is not suit for fixer."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1086
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1087
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Virtools Texture Settings"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:201
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:168
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Import Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:205
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:172
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Name Conflict Strategy"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:207
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:174
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Object"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:208
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:175
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Light"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:209
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:176
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Mesh"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:210
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:177
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Material"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:211
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:178
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Texture"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:256
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:277
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/draw"
 msgid "Export Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:317
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:359
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Virtools Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:321
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:363
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Encodings"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:369
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:414
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Ballance Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:375
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:420
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Map Sectors: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:328
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:370
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Global Texture Save Options"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:332
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:374
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Compression"
 msgstr ""
@@ -3772,109 +4115,114 @@ msgid ""
 "Can't distinguish object between Floors and Rails. Suppose it is Floors."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:266
+#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:273
 msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
 msgid "annoymous"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:130
+#: extensions/user_default/bbp_ng/__init__.py:51
+msgctxt "BBP/__init__.reuse_draw_add_rail()"
+msgid "Sections"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:57
+msgctxt "BBP/__init__.reuse_draw_add_rail()"
+msgid "Straight Rails"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:64
+msgctxt "BBP/__init__.reuse_draw_add_rail()"
+msgid "Curve Rails"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:72
+msgctxt "BBP/__init__.reuse_draw_add_component()"
+msgid "Basic Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:76
+msgctxt "BBP/__init__.reuse_draw_add_component()"
+msgid "Nong Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:82
+msgctxt "BBP/__init__.reuse_draw_add_component()"
+msgid "Series Components"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:89
+msgctxt "BBP/__init__.reuse_draw_add_component()"
+msgid "Components Pair"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:206
 msgctxt "BBP/__init__.menu_drawer_import()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:143
+#: extensions/user_default/bbp_ng/__init__.py:219
 msgctxt "BBP/__init__.menu_drawer_export()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:154
+#: extensions/user_default/bbp_ng/__init__.py:230
 msgctxt "BBP/__init__.menu_drawer_add()"
 msgid "Ballance"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:170
+#: extensions/user_default/bbp_ng/__init__.py:247
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Virtools Group"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:172
+#: extensions/user_default/bbp_ng/__init__.py:249
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Group into..."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:175
+#: extensions/user_default/bbp_ng/__init__.py:252
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Ungroup from..."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:178
+#: extensions/user_default/bbp_ng/__init__.py:255
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Clear All Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:184
+#: extensions/user_default/bbp_ng/__init__.py:261
 msgctxt "BBP/__init__.menu_drawer_snoop_then_conv()"
 msgid "Ballance"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:195
+#: extensions/user_default/bbp_ng/__init__.py:273
 msgctxt "BBP/__init__.menu_drawer_naming_convention()"
 msgid "Ballance"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:42
+#: extensions/user_default/bbp_ng/__init__.py:174
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "UV"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:46
+#: extensions/user_default/bbp_ng/__init__.py:178
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Align"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:49
+#: extensions/user_default/bbp_ng/__init__.py:181
+msgctxt "BBP_MT_View3DMenu/draw"
+msgid "Camera"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/__init__.py:185
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Select"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:52
+#: extensions/user_default/bbp_ng/__init__.py:188
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Material"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:74
-msgctxt "BBP_MT_AddRailMenu/draw"
-msgid "Sections"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:79
-msgctxt "BBP_MT_AddRailMenu/draw"
-msgid "Straight Rails"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:85
-msgctxt "BBP_MT_AddRailMenu/draw"
-msgid "Curve Rails"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:99
-msgctxt "BBP_MT_AddComponentsMenu/draw"
-msgid "Basic Components"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:103
-msgctxt "BBP_MT_AddComponentsMenu/draw"
-msgid "Nong Components"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:108
-msgctxt "BBP_MT_AddComponentsMenu/draw"
-msgid "Series Components"
-msgstr ""
-
-#: extensions/user_default/bbp_ng/__init__.py:114
-msgctxt "BBP_MT_AddComponentsMenu/draw"
-msgid "Components Pair"
 msgstr ""
 
 #: Add-on Ballance Blender Plugin info: name
@@ -3885,1107 +4233,922 @@ msgstr ""
 msgid "The specialized add-on served for creating game map of Ballance"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_normal_1x1"
 msgid "Normal 1x1"
 msgstr ""
 
-#. 1x1.json
+msgctxt "BBP/BME/Category"
+msgid "1x1 Blocks"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_1x1/[0]"
 msgid "Height"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_normal_1x1/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_normal_1x1/[1]"
 msgid "Face"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_normal_1x1/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_sink_1x1"
 msgid "Sink 1x1"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_sink_1x1/[0]"
 msgid "Height"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_sink_1x1/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_sink_1x1/[1]"
 msgid "Face"
 msgstr ""
 
-#. 1x1.json
 msgctxt "BBP/BME/Proto/floor_sink_1x1/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border"
 msgid "Normal Border"
 msgstr ""
 
-#. borders.json
+msgctxt "BBP/BME/Category"
+msgid "Borders"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_border/[0]"
 msgid "Length"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border/[1]"
 msgid "Height"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border/[1]"
 msgid "The height of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border/[2]"
 msgid "Face"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_normal_border/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border"
 msgid "Sink Border"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[0]"
 msgid "Length"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[1]"
 msgid "Height"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[1]"
 msgid "The height of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[2]"
 msgid "Face"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_sink_border/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border"
 msgid "Ribbon Border"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[0]"
 msgid "Length"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[1]"
 msgid "Height"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[1]"
 msgid "The height of block."
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[2]"
 msgid "Face"
 msgstr ""
 
-#. borders.json
 msgctxt "BBP/BME/Proto/floor_ribbon_border/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_inner_corner"
 msgid "Normal Inner Corner"
 msgstr ""
 
-#. corners.json
+msgctxt "BBP/BME/Category"
+msgid "Half Block Corners"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_inner_corner"
 msgid "Sink Inner Corner"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner"
 msgid "Ribbon Inner Corner"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_inner_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_outter_corner"
 msgid "Normal Outter Corner"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_normal_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_outter_corner"
 msgid "Sink Outter Corner"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_sink_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner"
 msgid "Ribbon Outter Corner"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[0]"
 msgid "Height"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[1]"
 msgid "Face"
 msgstr ""
 
-#. corners.json
 msgctxt "BBP/BME/Proto/floor_ribbon_outter_corner/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_l_crossing"
 msgid "Normal L Crossing"
 msgstr ""
 
-#. crossings.json
+msgctxt "BBP/BME/Category"
+msgid "Floor Crossings"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_l_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_l_crossing"
 msgid "Sink L Crossing"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_l_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_t_crossing"
 msgid "Normal T Crossing"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_t_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_t_crossing"
 msgid "Sink T Crossing"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_t_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_x_crossing"
 msgid "Normal X Crossing"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_normal_x_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_x_crossing"
 msgid "Sink X Crossing"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[0]"
 msgid "Height"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[1]"
 msgid "Face"
 msgstr ""
 
-#. crossings.json
 msgctxt "BBP/BME/Proto/floor_sink_x_crossing/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat"
 msgid "Flat"
 msgstr ""
 
-#. flat.json
+msgctxt "BBP/BME/Category"
+msgid "Miscellaneous"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_flat/[0]"
 msgid "Height"
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[1]"
 msgid "Length"
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[1]"
 msgid "The length of block."
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[2]"
 msgid "Width"
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[2]"
 msgid "The width of block."
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[3]"
 msgid "Face"
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[4]"
 msgid "Is Sink"
 msgstr ""
 
-#. flat.json
 msgctxt "BBP/BME/Proto/floor_flat/[4]"
 msgid "Whether this flat floor is used for sink floor."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform"
 msgid "Normal Platform"
 msgstr ""
 
-#. platforms.json
+msgctxt "BBP/BME/Category"
+msgid "Platforms"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_platform/[0]"
 msgid "Length"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[1]"
 msgid "Width"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[1]"
 msgid "The width of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[2]"
 msgid "Height"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[3]"
 msgid "Face"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_normal_platform/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform"
 msgid "Sink Platform"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[0]"
 msgid "Length"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[1]"
 msgid "Width"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[1]"
 msgid "The width of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[2]"
 msgid "Height"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[3]"
 msgid "Face"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_sink_platform/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform"
 msgid "Ribbon Platform"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[0]"
 msgid "Length"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[0]"
 msgid "The length of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[1]"
 msgid "Width"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[1]"
 msgid "The width of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[2]"
 msgid "Height"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[3]"
 msgid "Face"
 msgstr ""
 
-#. platforms.json
 msgctxt "BBP/BME/Proto/floor_ribbon_platform/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight"
 msgid "Normal Floor"
 msgstr ""
 
-#. streets.json
+msgctxt "BBP/BME/Category"
+msgid "Floors"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_normal_straight/[0]"
 msgid "Height"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight/[1]"
 msgid "Length"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight/[1]"
 msgid "The length of block."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight/[2]"
 msgid "Face"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_normal_straight/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight"
 msgid "Sink Floor"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[0]"
 msgid "Height"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[1]"
 msgid "Length"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[1]"
 msgid "The length of block."
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[2]"
 msgid "Face"
 msgstr ""
 
-#. streets.json
 msgctxt "BBP/BME/Proto/floor_sink_straight/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_normal_terminal"
 msgid "Normal Floor Terminal"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_normal_terminal/[0]"
 msgid "Height"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_normal_terminal/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_normal_terminal/[1]"
 msgid "Face"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_normal_terminal/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_sink_terminal"
 msgid "Sink Floor Terminal"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_sink_terminal/[0]"
 msgid "Height"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_sink_terminal/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_sink_terminal/[1]"
 msgid "Face"
 msgstr ""
 
-#. terminals.json
 msgctxt "BBP/BME/Proto/floor_sink_terminal/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/wood_trafo"
 msgid "Wood Trafo"
 msgstr ""
 
-#. trafos.json
+msgctxt "BBP/BME/Category"
+msgid "Trafo"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/wood_trafo/[0]"
 msgid "Height"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/wood_trafo/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/wood_trafo/[1]"
 msgid "Face"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/wood_trafo/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/stone_trafo"
 msgid "Stone Trafo"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/stone_trafo/[0]"
 msgid "Height"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/stone_trafo/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/stone_trafo/[1]"
 msgid "Face"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/stone_trafo/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/paper_trafo"
 msgid "Paper Trafo"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/paper_trafo/[0]"
 msgid "Height"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/paper_trafo/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/paper_trafo/[1]"
 msgid "Face"
 msgstr ""
 
-#. trafos.json
 msgctxt "BBP/BME/Proto/paper_trafo/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_transition"
 msgid "Transition"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_transition/[0]"
 msgid "Height"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_transition/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_transition/[1]"
 msgid "Face"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_transition/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_narrow_transition"
 msgid "Narrow Transition"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_narrow_transition/[0]"
 msgid "Height"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_narrow_transition/[0]"
 msgid "The height of block."
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_narrow_transition/[1]"
 msgid "Face"
 msgstr ""
 
-#. transitions.json
 msgctxt "BBP/BME/Proto/floor_narrow_transition/[1]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight"
 msgid "Wide Floor"
 msgstr ""
 
-#. wide_floors.json
+msgctxt "BBP/BME/Category"
+msgid "Wide Floors"
+msgstr ""
+
 msgctxt "BBP/BME/Proto/floor_wide_straight/[0]"
 msgid "Length"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[0]"
 msgid "The length of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[1]"
 msgid "Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[1]"
 msgid "The width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[2]"
 msgid "Height"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[3]"
 msgid "Face"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_straight/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal"
 msgid "Wide Floor Terminal"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[0]"
 msgid "Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[0]"
 msgid "The width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[1]"
 msgid "Height"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[1]"
 msgid "The height of block."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[2]"
 msgid "Face"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_terminal/[2]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing"
 msgid "Wide Floor L Crossing"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[0]"
 msgid "Horizontal Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[1]"
 msgid "Vertical Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[2]"
 msgid "Height"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[3]"
 msgid "Face"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_l_crossing/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing"
 msgid "Wide Floor T Crossing"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[0]"
 msgid "Horizontal Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[1]"
 msgid "Vertical Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[2]"
 msgid "Height"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[3]"
 msgid "Face"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_t_crossing/[3]"
 msgid "Whether has some faces."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing"
 msgid "Wide Floor X Crossing"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[0]"
 msgid "Horizontal Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[0]"
 msgid "The horizontal floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[1]"
 msgid "Vertical Width"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[1]"
 msgid "The vertical floor width of wide floor."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[2]"
 msgid "Height"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[2]"
 msgid "The height of block."
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[3]"
 msgid "Face"
 msgstr ""
 
-#. wide_floors.json
 msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[3]"
 msgid "Whether has some faces."
 msgstr ""

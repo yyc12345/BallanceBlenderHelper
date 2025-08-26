@@ -954,6 +954,7 @@ class BBP_OT_preset_virtools_material(bpy.types.Operator):
         name = "Preset",
         description = "The preset which you want to apply.",
         items = _g_Helper_MtlPreset.generate_items(),
+        translation_context = 'BBP_OT_preset_virtools_material/property'
     ) # type: ignore
     
     @classmethod
