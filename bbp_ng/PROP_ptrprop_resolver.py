@@ -43,7 +43,7 @@ class BBP_PG_ptrprop_resolver(bpy.types.PropertyGroup):
         translation_context = 'BBP_PG_ptrprop_resolver/property'
     ) # type: ignore
 
-    # TR: Properties not showen should not have name and desc.
+    # I18N: Properties not showen should not have name and desc.
     ioport_encodings: bpy.props.CollectionProperty(type = BBP_PG_bmap_encoding) # type: ignore
     active_ioport_encodings: bpy.props.IntProperty() # type: ignore
 

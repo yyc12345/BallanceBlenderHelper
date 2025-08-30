@@ -48,7 +48,7 @@ import bpy
 #  - If we use `bpy.app.translations.pgettext` with other non-Blender functions, such as `print`.
 #      * Use it as a normal function.
 #  
-#  All translation annotation are started with `TR:`
+#  All translation annotation are started with `I18N:`
 #  
 
 # The universal translation context prefix for BBP_NG plugin.

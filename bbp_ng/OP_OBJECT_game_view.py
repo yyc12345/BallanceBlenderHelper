@@ -198,11 +198,65 @@ class BBP_OT_game_camera(bpy.types.Operator):
         translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
     preset_rotation_angle: bpy.props.EnumProperty(
-        name = "Preset Rotation Angle",
-        description = "",
+        # I18N: Property not showen should not have name and desc.
+        # name = "Preset Rotation Angle",
+        # description = "",
+        options = {'HIDDEN'},
         items = _g_EnumHelper_RotationAngle.generate_items(),
         default = _g_EnumHelper_RotationAngle.to_selection(RotationAngle.Deg0),
-        translation_context = 'BBP_OT_game_camera/property'
+    ) # type: ignore
+    def preset_rotation_angle_deg_getter(self, probe) -> bool:
+        return  _g_EnumHelper_RotationAngle.get_selection(self.preset_rotation_angle) == probe
+    def preset_rotation_angle_deg_setter(self, val) -> None:
+        self.preset_rotation_angle = _g_EnumHelper_RotationAngle.to_selection(val)
+        return None
+    preset_rotation_angle_deg0: bpy.props.BoolProperty(
+        name = "0 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg0),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg0)
+    ) # type: ignore
+    preset_rotation_angle_deg45: bpy.props.BoolProperty(
+        name = "45 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg45),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg45)
+    ) # type: ignore
+    preset_rotation_angle_deg90: bpy.props.BoolProperty(
+        name = "90 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg90),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg90)
+    ) # type: ignore
+    preset_rotation_angle_deg135: bpy.props.BoolProperty(
+        name = "135 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg135),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg135)
+    ) # type: ignore
+    preset_rotation_angle_deg180: bpy.props.BoolProperty(
+        name = "180 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg180),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg180)
+    ) # type: ignore
+    preset_rotation_angle_deg225: bpy.props.BoolProperty(
+        name = "225 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg225),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg225)
+    ) # type: ignore
+    preset_rotation_angle_deg270: bpy.props.BoolProperty(
+        name = "270 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg270),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg270)
+    ) # type: ignore
+    preset_rotation_angle_deg315: bpy.props.BoolProperty(
+        name = "315 Degree",
+        translation_context = 'BBP_OT_game_camera/property',
+        get = lambda self: BBP_OT_game_camera.preset_rotation_angle_deg_getter(self, RotationAngle.Deg315),
+        set = lambda self, _: BBP_OT_game_camera.preset_rotation_angle_deg_setter(self, RotationAngle.Deg315)
     ) # type: ignore
     custom_rotation_angle: bpy.props.FloatProperty(
         name = "Custom Rotation Angle",
@@ -255,7 +309,19 @@ class BBP_OT_game_camera(bpy.types.Operator):
         rot_kind = _g_EnumHelper_RotationKind.get_selection(self.rotation_kind)
         match rot_kind:
             case RotationKind.Preset:
-                layout.prop(self, 'preset_rotation_angle', text='')
+                # for preset angles, we show a special layout (grid view)
+                subgrid = layout.grid_flow(row_major=True, columns=3, even_columns=True, even_rows=True, align=True)
+                subgrid.prop(self, 'preset_rotation_angle_deg315', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg0', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg45', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg270', toggle = 1)
+                subicon = subgrid.row()
+                subicon.alignment = 'CENTER'
+                subicon.label(text='', icon='MESH_CIRCLE') # show a 3d circle as icon
+                subgrid.prop(self, 'preset_rotation_angle_deg90', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg225', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg180', toggle = 1)
+                subgrid.prop(self, 'preset_rotation_angle_deg135', toggle = 1)
             case RotationKind.Custom:
                 layout.prop(self, 'custom_rotation_angle', text='')
 

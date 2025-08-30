@@ -137,7 +137,7 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         return None
     
     apply_flag: bpy.props.BoolProperty(
-        # TR: Property not showen should not have name and desc.
+        # I18N: Property not showen should not have name and desc.
         # name = "Apply Flag",
         # description = "Internal flag.",
         options = {'HIDDEN', 'SKIP_SAVE'},
@@ -145,14 +145,14 @@ class BBP_OT_legacy_align(bpy.types.Operator):
         update = apply_flag_updated
     ) # type: ignore
     recursive_hinder: bpy.props.BoolProperty(
-        # TR: Property not showen should not have name and desc.
+        # I18N: Property not showen should not have name and desc.
         # name = "Recursive Hinder",
         # description = "An internal flag to prevent the loop calling to apply_flags's updator.",
         options = {'HIDDEN', 'SKIP_SAVE'},
         default = False
     ) # type: ignore
     align_history : bpy.props.CollectionProperty(
-        # TR: Property not showen should not have name and desc.
+        # I18N: Property not showen should not have name and desc.
         # name = "Historys",
         # description = "Align history.",
         type = BBP_PG_legacy_align_history
