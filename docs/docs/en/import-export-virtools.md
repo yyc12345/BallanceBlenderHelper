@@ -42,7 +42,12 @@ Virtools files can be exported by clicking `File - Export - Virtools File`. Clic
 
 ### Export Target
 
-The Export Target section is used to determine which objects you need to export to a Virtools document. You can choose to export a collection or an object and select the corresponding collection or object below. Note that selecting a collection will export the objects in the internal collection as well, i.e. exporting nested collections is supported.
+The Export Target section is used to determine which objects you need to export to a Virtools document. You can choose 1 of 4 options:
+
+* Object: Export single object. Select an object in following input box.
+* Collection: Export single collection. **This is the most commonly used option.** Select a collection in following input box. Note that selecting a collection will export the objects in the internal collection as well, i.e. exporting nested collections is supported.
+* Selected Object: Export selected objects. Select the objects to be exported before enter this dialog.
+* All Objects: Export all objects inside this document. This option should be used with caution. Because it brutely iterate the list of document objects to export, and it is likely to export many objects you don't need.
 
 ### Virtools Params
 

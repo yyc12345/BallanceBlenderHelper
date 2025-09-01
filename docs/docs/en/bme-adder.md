@@ -3,16 +3,26 @@
 !!! info "Not latest version"
     This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
 
+!!! info "BME is extensible"
+    BME's floor adder is extensible, each item in the menu is actually described by a set of JSON data. You can read the [Technical Information](./tech-infos.md) section to learn how we write this JSON, and you can even expand the types of floors that BME can create to suit your needs.
+
 ## Start Generating
+
+### From Menu
 
 In the 3D view, click `Add - Floors` to expand the Add Floors menu. The menu is shown below.
 
 ![](../imgs/bme-adder.png)
 
-Click on the menu to see all supported floor types in the submenu that pops up. Their names and icons hint at the style and shape of the floor it is intended to create.
+Click on the menu to see all supported floor types by categories in the submenu that pops up. Their names and icons hint at the style and shape of the floor it is intended to create.
 
-!!! info "BME is extensible"
-    BME's floor adder is extensible, each item in the menu is actually described by a set of JSON data. You can read the [Technical Information](./tech-infos.md) section to learn how we write this JSON, and you can even expand the types of floors that BME can create to suit your needs.
+### From Sidebar
+
+Additionally, you can press `N` on keyboard to expand the sidebar of 3D view and find `Ballance` tab inside it. You also can find these adder by clicking it and expanding `Floor` panel as presented in following image:
+
+![](../imgs/bme-adder-sidebar.png)
+
+Comparing with menu, the advantage of this solution is that the sidebar is persistent in UI layout. It is more convenient and effective when adding multiple floors by reducing the time of repetitive opening add menu. Also, there is Rail and Component adder panels under this tab. This will not be introduced again in following chapters.
 
 ## Configure Floor
 

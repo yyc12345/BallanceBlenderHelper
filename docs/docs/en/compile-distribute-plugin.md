@@ -15,11 +15,29 @@ Then we need to configure PyBMap, which comes with LibCmo. Please follow the man
 
 Then we need to copy the configured PyBMap to our project under `bbp_ng/PyBMap` to complete this step.
 
-## Generate Thumbnails and Compress JSON
+## Generate Resources
 
-BBP comes with a built-in set of custom icons, as well as the JSON files needed by its component BME to describe the structure. By batch generating thumbnails and compressing JSON operations, the size of these parts can be reduced, making them suitable for loading in Blender and easier to distribute.
+BBP needs some resoures to run, and these resources need to be processed before using them.
 
-Go to the `bbp_ng/tools` folder and run `python3 build_icons.py` which will batch generate thumbnails (this requires the PIL library, please install it via pip in advance). It actually generates thumbnails from the original images in the `bbp_ng/raw_icons` directory and stores them in the `bbp_ng/icons` folder. Running `python3 build_jsons.py` will compress the JSON, which actually reads, compresses, and writes the raw JSON files from the `bbp_ng/raw_jsons` directory into the `bbp_ng/jsons` folder.
+For generating these resrouces, we firstly need to navigate to `scripts` directory, and execute `uv sync` to restore the environment for scripts (Astral UV required).
+
+### Generate Thumbnails
+
+BBP comes with a built-in set of custom icons, however these icons are stored as their original size in repository for keeping convenient editing and high quality. We need to reduce the size of these icons to make them are easy to be loaded on Blender and easy for distribution by generating thumbnails for them.
+
+Execute `uv run build_icons.py` to generate thumbnails. It actually generates thumbnails from the original images in the `assets/icons` directory and stores them in the `bbp_ng/icons` folder.
+
+### Generate JSONs
+
+The BME component in BBP relies on a series of JSON files to describe the prototype. These profiles are stored in the library in JSON5 format, making them easy for writers to read and write. We converte these JSON5 files to JSON files and compressing their size makes them easier to load in Blender, as well as to facilitate plugin distribution, by batchly generating them.
+
+If you are the plugin developer or writer of these prototypes, you need to do an additional thing before generating these JSON files: verify these JSON files. The BBP plugin will assume that these JSON files are correct when loading them. If you put a JSON file with errors (e.g. missing some fields or has some typos, etc.), it will cause Blender to throw an error when creating prototype. Therefore, it is necessary to verify these JSON files. Execute `uv run validate_jsons.py` to verify all prototype files. If there are no errors, it means that everything is okey. It is important to note that the validator is not perfect, it can only verify the data as much as possible to ensure that some common erros (e.g. typo in field name) will not occur. It can not make 100% sure about that there is no error inside these files.
+
+For compilers, all you need to do is that execute `uv run build_jsons.py` to generate JSON files. It actually reads, compresses, and writes the original JSON5 files in `assets/jsons` directory to the `bbp_ng/jsons` folder in JSON format.
+
+### Generate Element Meshes
+
+BBP has built-in mesh data for all Ballance element placeholders. Execute `uv run build_jsons.py` to deploy these meshes, which simply copies the mesh files under `assets/jsons` folder to `bbp_ng/jsons` folder.
 
 ## Packaging
 

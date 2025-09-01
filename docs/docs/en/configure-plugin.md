@@ -19,7 +19,9 @@ The BBP plugin currently has 2 settings to configure.
 
 Please fill in the `Texture` directory of Ballance, from which the plugin will use the external texture files (i.e. the ones Ballance originally came with). Click on the folder button on the right to browse the folders and select it.
 
-This is crucial for BBP to work properly, and only if it is filled out correctly will BBP not make errors during operation.
+This option is almost mandatory. If you don't fill it, various core functions like Virtools file import export, BME creation, rail creation, etc. will not be available (button is in grey color).
+
+This is crucial for BBP to work properly, and only if it is filled correctly will BBP not make errors during operation.
 
 ### No Component Collection
 

@@ -2,7 +2,7 @@
 
 ## Determining the Version
 
-The principle of BBP's Blender support is to support the latest **LTS** version, and to spend some time migrating the plugin after the latest LTS version is released. The current plugin version **4.0** is based on Blender version **4.2.x**.
+The principle of BBP's Blender support is to support the latest **LTS** version, and to spend some time migrating the plugin after the latest LTS version is released. The current plugin version **4.3** is based on Blender version **4.5.x**.
 
 Theoretically, BBP will work fine on other versions of Blender if no major changes have been made. For example you can try to run BBP plugin based on Blender 3.6 LTS on Blender 4.0. However, the developers of BBP do not deal with bugs that only appear in non-LTS versions. before installing the plugin, please select the appropriate version.
 
