@@ -1,8 +1,5 @@
 # Import and Export Virtools Document
 
-!!! info "Not latest version"
-    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
-
 !!! warning "This is experimental content"
     Native importing and exporting of Virtools documents is experimental content for the BBP plugin, it may have many problems, see the [Report Issue](./report-bugs.md) section to learn more. When problems are encountered, please report them. the authors of the BBP plugin are not responsible for any consequences resulting from problems with the BBP plugin.
 
@@ -12,7 +9,7 @@ Virtools files can be imported by clicking `File - Import - Virtools File`. Impo
 
 ### Conflict Options
 
-The Conflict Options section indicates what to do when the importer encounters duplicate object names. There are 4 levels, for Object, Mesh, Material and Texture. There are 2 ways to handle it: Rename and Use Current. When Rename is selected and a duplicate name is encountered, a suffix will be added to the name to make it unique. By choosing Use Current, the import of the item from the file will be ignored and the item with the same name will be used instead, which already exists in the Blender document.
+The Conflict Options section indicates what to do when the importer encounters duplicate object names. There are 5 levels, for Object, Light, Mesh, Material and Texture. There are 2 ways to handle it: Rename and Use Current. When Rename is selected and a duplicate name is encountered, a suffix will be added to the name to make it unique. By choosing Use Current, the import of the item from the file will be ignored and the item with the same name will be used instead, which already exists in the Blender document.
 
 !!! info "Differences from Virtools conflict resolution"
     Compared to the conflict resolution dialog in Virtools, the conflict resolution options provided by the BBP plugin do not support replacement, and the granularity is not fine-tuned to individual instances, but only for an entire type. So you can't set a different conflict resolution for each instance of a conflict individually. However, this setting is sufficient for most scenarios.
@@ -21,7 +18,7 @@ The default values for the options in the Conflict Options section are the solut
 
 ### Virtools Params
 
-It is well known that Virtools uses a system-based multi-byte character encoding to process documents, and is therefore prone to what is known as garbling; Blender itself does not suffer from garbling, however, if we do not read a Virtools document with the correct encoding, the characters stored in it may still appear garbled when the Virtools document is imported into Blender. The Encodings property in the Virtools Params section specifies the encodings for reading Virtools documents. Multiple encodings can be specified, separated by a `;` (semicolon). Some common encodings are listed below:
+It is well known that Virtools uses a system-based multi-byte character encoding to process documents, and is therefore prone to what is known as garbling; Blender itself does not suffer from garbling, however, if we do not read a Virtools document with the correct encoding, the characters stored in it may still appear garbled when the Virtools document is imported into Blender. The Encodings property in the Virtools Params section specifies the encodings for reading Virtools documents. Multiple encodings may be specified, with the encodings higher up in the list being prioritized for use. The next level of encoding will only be utilized when decoding with the current level fails. Some common encodings are listed below:
 
 * cp1252: Western European encoding used by Ballance.
 * gbk: The default encoding for Chinese Windows system.
@@ -64,3 +61,11 @@ The Ballance Params section contains parameters that optimize the export process
 Successive Sector is an option to work around a bug that occurs when exporting groups of sectors. For some reason, if there are no elements in a sector (actually, no objects are grouped in a sector group), the export plugin thinks that the sector group doesn't exist and misses the export. And since Ballance determines the final sector, i.e. the sector where the spaceships appears, by incrementing the number of sectors from 1 to the last sector group that exists, the combination of the two causes Ballance to incorrectly determine the number of sectors in the map, and thus display the spaceships in the wrong sector, which is an export bug. when this option is checked, the exported document will be pre-defined according to the number of sectors specified in the Ballance Map information in the current Blender file. When this option is checked, the exported document will pre-create all of the sectors according to the number of sectors specified in the Ballance map information in the current Blender file before exporting, so that you don't miss creating some sector groups, and the spaceships will be displayed in the correct sectors.
 
 This option is usually checked when exporting playable maps, if you just want to export some models then you need to turn this option off, otherwise it will create a lot of useless sector groups in the final file.
+
+## Can't Import or Export
+
+In general, after you have properly installed and configured the plugin according to the previously introduced steps, you should theoretically be able to use the import and export functions for Virtools documents. However, unexpected issues may arise. The inability to import or export refers to the buttons for importing and exporting Virtools documents being greyed out and unclickable. You will need to follow the steps outlined below for checking. If you are referring to an error occurring during the import and export process, please refer to the warning information at the top of this page.
+
+First, check whether you have correctly configured the `External Texture Folder` setting of the plugin in the [Configure Plugin](configure-plugin.md) section. If you have not configured it, you will naturally be unable to import or export Virtools files. This is because importing and exporting Virtools files relies on the original Ballance texture data. Please configure this setting carefully according to the tutorial.
+
+If you are certain that you have set the correct texture path, you may try clicking the menu `Window - Toggle System Console` to open the console. There may be some relevant error messages outputted there, such as a failure to load the underlying BMap library, etc. The failure to load the underlying BMap library typically only occurs on machines with rare architectures, such as Windows systems using Snapdragon processors, as the plugin we packaged does not include the Virtools file underlying reading library BMap that supports these platforms. In this situation, you have two options: one is to report this to the developers and wait for support, and the other is to compile the library on yourself (this is only recommended for those with extensive computer knowledge).

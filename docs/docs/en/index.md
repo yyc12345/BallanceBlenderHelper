@@ -3,6 +3,16 @@
 !!! info "May be Outdated"
     This document is translated from other languages and may not always be up to date.
 
+<!---
+!!! info "Not latest version"
+    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
+--->
+
+<!---
+!!! info "No Translation"
+    This page has not been translated. Please see source page of this page.
+--->
+
 Welcome to the Ballance Blender Plugin, the user manual for the free and open source Ballance map creation suite.
 
 Ballance Blender Plugin (aka BBP) is a plugin that focuses on the creation of Ballance custom maps. It offers a wide range of features that can be used to create Ballance maps by anyone from novice to experienced mappers. BBP provides the ability to import and export formats used in Ballance maps, and a series of convenient features tailored to the creation of Ballance maps: for novice mappers, you can quickly assemble a map with prefabricated road blocks, and for the experienced mappers, the mapping tools needed to build complex structures are also provided.

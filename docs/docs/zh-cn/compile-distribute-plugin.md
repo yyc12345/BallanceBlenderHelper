@@ -69,8 +69,8 @@ Blender对于插件的多语言支持不尽如人意，且BBP的设计比较特�
 
 如果未来BBP需要支持更多语言，你需要从POT文件为新语言创建其对应的PO翻译文件。你可以通过以下方式之一来创建它们。
 
-1. 通过使用Poedit等软件打开POT文件，选择创建新的翻译，再进行保存来创建。
-1. 通过诸如`msginit -i blender.pot -o zh_HANS.po -l zh_CN.utf8`的命令来创建新语言的PO翻译文件。
+* 通过使用Poedit等软件打开POT文件，选择创建新的翻译，再进行保存来创建。
+* 通过诸如`msginit -i blender.pot -o zh_HANS.po -l zh_CN.utf8`的命令来创建新语言的PO翻译文件。
 
 创建的方式多种多样，唯一需要注意的是你需要按下表所示设定文件名（文件名错误，Blender会拒绝接受）和区域名称（使用`msginit`时会用到，目的是确保是UTF8格式编码的）。
 
@@ -82,8 +82,8 @@ Blender对于插件的多语言支持不尽如人意，且BBP的设计比较特�
 
 创建新的语言翻译并不常见，更为常见的操作是根据翻译模板，对现有语言翻译文件进行更新。你可以通过以下方式之一来更新它们
 
-1. 通过Poedit等软件打开PO文件，再选择从POT文件更新。
-1. 通过诸如`msgmerge -U zh-HANS.po blender.pot --backup=none`的命令来更新。
+* 通过Poedit等软件打开PO文件，再选择从POT文件更新。
+* 通过诸如`msgmerge -U zh-HANS.po blender.pot --backup=none`的命令来更新。
 
 ### 进行翻译
 
@@ -108,14 +108,11 @@ PO格式的翻译并不能被Blender识别，因此在翻译完成后，你还�
 
 Blender会根据`blender_manifest.toml`的指示，在排除下列文件的情况下将插件打包：
 
-* `bbp_ng/i18n`：翻译文件夹。
-* `bbp_ng/raw_icons`：原始图片文件夹。
-* `bbp_ng/raw_jsons`：原始JSON文件夹。
-* `bbp_ng/tools`：编译用工具。
-* `bbp_ng/.style.yapf`：代码风格描述文件
-* `bbp_ng/.gitignore`：gitignore
-* `bbp_ng/icons/.gitkeep`：文件夹占位符
-* `bbp_ng/jsons/.gitkeep`：文件夹占位符
+* `__pycache__/`：Python缓存
+* `.style.yapf`：代码风格描述文件
+* `.gitignore`：gitignore
+* `.gitkeep`：文件夹占位符
+* `.md`：文档
 
 ## 生成帮助文档
 

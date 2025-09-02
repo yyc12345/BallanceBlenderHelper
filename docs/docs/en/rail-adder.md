@@ -1,8 +1,5 @@
 # Add Rail
 
-!!! info "Not latest version"
-    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
-
 In the 3D view, click `Add - Rails` to expand the Add Rails menu. The menu is shown on the left side of the image below.
 
 ![](../imgs/rail-adder.png)
@@ -63,6 +60,8 @@ The first thing you need to do with an arc rail is to specify the Angle and Radi
 
 Steps of the arc rail, the number of steps indicates the number of segments of the arc rail, the larger the number, the smoother the arc rail looks, relatively, the vertices will be more, the storage space and rendering requirements are also higher, so you need to choose a reasonable value.
 
+The Flip option for arc rail allows you to flip (in other word, mirror) the generated structure along a specified axis, and the flip options available on all three axes can accommodate the generation of all possible arc rail structures.
+
 Arc rails also support double-rail mono-rail selection, you can create mono-rail arc rails and double-rail arc rails. The capping attribute is also supported.
 
 ### Spiral Rail
@@ -73,7 +72,7 @@ Spiral rails have an Iterations property, which indicates how many times the rai
 
 The spiral rail also needs to set the Steps property, which has the same meaning as the arc rail. However, it should be noted that the number of steps refers to the number of steps in each iteration, not the overall number of steps. Therefore, when adjusting the iteration attribute, you do not need to change the Steps attribute again.
 
-Side Spiral Rail also has a capping property.
+Side Spiral Rail also has capping and flip property.
 
 ### Side Spiral Rail
 
@@ -82,3 +81,9 @@ Side Spiral Rail, similar to spiral rail, but the ball is rolled along the side,
 Side Spiral Rail does not have a Screw property, because Side Spiral Rail is designed so that adjacent spins share a common edge, so the screw is fixed.
 
 The Radius, Iterations and Steps attributes in the Side Spiral Rail settings have the same meaning as the spiral rail. Side Spiral Rail also have a capping attribute.
+
+Spiral Rail also has capping and flip property.
+
+## Extra Transform
+
+When adding straight rails and curved rails, you can always set a property known as the Extra Transform. Its effect is consistent with the Extra Transform field in adding floors, both serving the purpose of visual edit.

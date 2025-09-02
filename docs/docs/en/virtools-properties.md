@@ -1,8 +1,5 @@
 # Virtools Properties
 
-!!! info "Not latest version"
-    This translated page is not the latest version because the modification of source page. Please see source page of the latest version.
-
 ## Virtools Group
 
 The BBP plugin adds a new property to every Blender object, called Virtools Group. has the same functionality as Group in Virtools. Select an object and the `Virtools Group` panel can be found in the `Object` properties panel.
@@ -12,6 +9,8 @@ The BBP plugin adds a new property to every Blender object, called Virtools Grou
 In the `Virtools Group` panel, you can click Add to group objects. After clicking the Add button, you can select Predefined and then select one of all legal Ballance group names to add. Or select Custom and enter the group name you want to add. The selected Virtools group can also be deleted by clicking the Delete button. Finally, all group data for this object can be deleted at once by clicking the Trash icon button (which will let you confirm before deleting).
 
 BBP also provides access to Virtools groups in Blender's other menus, see [Group Operation](./group-operations.md).
+
+It is important to note that the Virtools group only works on mesh objects. When you open the Virtools group panel on other objects, you will see a warning message in the panel indicating that the Virtools group is invalid for that object. Although the Virtools group data set on non-mesh objects will be recognized and stored by Blender, it will not be saved to the Virtools file when exporting.
 
 ## Virtools Material
 
@@ -60,3 +59,11 @@ The BBP plugin adds a new property to all Blender meshes called Virtools Mesh. g
 ![](../imgs/virtools-mesh.png)
 
 The Virtools Mesh is currently only used as a compatibility feature. It has only one property, Lit Mode, that can be set. Most early maps had black floor issue because they didn't know how to set the material correctly, so the Lit Mode was often set to Prelit to get the floor to show up properly. This attribute exists for compatibility with this compromise and the user usually does not need to set this option.
+
+## Virtools Light
+
+The BBP plugin adds a new property called Virtools Light to all Blender lights. You can find the Virtools Light panel by navigating to the Data properties panel.
+
+![](../imgs/virtools-light.png)
+
+Similar to the materials in Virtools, the lighting system in Virtools differs significantly from that in Blender. The Virtools Light acts as a bridge, accurately reflecting the settings of Virtools, allowing for seamless storage within Blender files and providing necessary data during import and export. Additionally, this panel includes an Apply button to apply the Virtools lighting settings to Blender's lighting.
