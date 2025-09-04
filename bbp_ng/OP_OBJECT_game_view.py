@@ -191,6 +191,9 @@ class BBP_OT_game_camera(bpy.types.Operator):
     ) # type: ignore
 
     rotation_kind: bpy.props.EnumProperty(
+        # YYC MAKR: 
+        # This property is not shown on UI layout,
+        # but it should be translated because it is not PURE assistant property.
         name = "Rotation Angle Kind",
         description = "",
         items = _g_EnumHelper_RotationKind.generate_items(),
@@ -198,9 +201,9 @@ class BBP_OT_game_camera(bpy.types.Operator):
         translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
     preset_rotation_angle: bpy.props.EnumProperty(
-        # I18N: Property not showen should not have name and desc.
-        # name = "Preset Rotation Angle",
-        # description = "",
+        name = "Preset Rotation Angle",
+        description = "",
+        translation_context = 'BBP_OT_game_camera/property',
         options = {'HIDDEN'},
         items = _g_EnumHelper_RotationAngle.generate_items(),
         default = _g_EnumHelper_RotationAngle.to_selection(RotationAngle.Deg0),

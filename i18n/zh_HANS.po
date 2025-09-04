@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ballance Blender Plugin 4.2.0 (0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-03 09:48+0800\n"
+"POT-Creation-Date: 2025-09-04 09:55+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1661,7 +1661,14 @@ msgstr "彩蛋"
 msgid "A very close view to player ball in game."
 msgstr "游戏中一种非常贴近玩家球的视角。"
 
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle
+msgctxt "BBP_OT_game_camera/property"
+msgid "Preset Rotation Angle"
+msgstr "预设旋转角度"
+
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'1'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg0
+msgctxt "BBP_OT_game_camera/property"
 msgid "0 Degree"
 msgstr "0 度"
 
@@ -1670,6 +1677,8 @@ msgid "0 degree"
 msgstr "0 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'2'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg45
+msgctxt "BBP_OT_game_camera/property"
 msgid "45 Degree"
 msgstr "45 度"
 
@@ -1678,6 +1687,8 @@ msgid "45 degree"
 msgstr "45 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'3'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg90
+msgctxt "BBP_OT_game_camera/property"
 msgid "90 Degree"
 msgstr "90 度"
 
@@ -1686,6 +1697,8 @@ msgid "90 degree"
 msgstr "90 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'4'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg135
+msgctxt "BBP_OT_game_camera/property"
 msgid "135 Degree"
 msgstr "135 度"
 
@@ -1694,6 +1707,8 @@ msgid "135 degree"
 msgstr "135 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'5'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg180
+msgctxt "BBP_OT_game_camera/property"
 msgid "180 Degree"
 msgstr "180 度"
 
@@ -1702,6 +1717,8 @@ msgid "180 degree"
 msgstr "180 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'6'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg225
+msgctxt "BBP_OT_game_camera/property"
 msgid "225 Degree"
 msgstr "225 度"
 
@@ -1710,6 +1727,8 @@ msgid "225 degree"
 msgstr "225 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'7'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg270
+msgctxt "BBP_OT_game_camera/property"
 msgid "270 Degree"
 msgstr "270 度"
 
@@ -1718,52 +1737,14 @@ msgid "270 degree"
 msgstr "270 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'8'
+#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg315
+msgctxt "BBP_OT_game_camera/property"
 msgid "315 Degree"
 msgstr "315 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle:'8'
 msgid "315 degree"
 msgstr "315 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg0
-msgctxt "BBP_OT_game_camera/property"
-msgid "0 Degree"
-msgstr "0 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg135
-msgctxt "BBP_OT_game_camera/property"
-msgid "135 Degree"
-msgstr "135 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg180
-msgctxt "BBP_OT_game_camera/property"
-msgid "180 Degree"
-msgstr "180 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg225
-msgctxt "BBP_OT_game_camera/property"
-msgid "225 Degree"
-msgstr "225 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg270
-msgctxt "BBP_OT_game_camera/property"
-msgid "270 Degree"
-msgstr "270 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg315
-msgctxt "BBP_OT_game_camera/property"
-msgid "315 Degree"
-msgstr "315 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg45
-msgctxt "BBP_OT_game_camera/property"
-msgid "45 Degree"
-msgstr "45 度"
-
-#. :src: bpy.types.BBP_OT_game_camera.preset_rotation_angle_deg90
-msgctxt "BBP_OT_game_camera/property"
-msgid "90 Degree"
-msgstr "90 度"
 
 #. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'1'
 msgctxt "BBP_OT_game_camera/property"
@@ -3769,17 +3750,17 @@ msgctxt "BBP_OT_fix_all_materials/draw"
 msgid "Fix {0}/{1} materials."
 msgstr "修复 {0}/{1} 材质。"
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:302
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:305
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Target"
 msgstr "目标"
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:307
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:310
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Rotation"
 msgstr "旋转"
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:330
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:333
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Perspective"
 msgstr "视角"
@@ -5214,9 +5195,29 @@ msgctxt "BBP/BME/Proto/floor_wide_x_crossing/[3]"
 msgid "Whether has some faces."
 msgstr "是否生成某些面。"
 
-#~ msgctxt "BBP_OT_game_camera/property"
-#~ msgid "Preset Rotation Angle"
-#~ msgstr "预设旋转角度"
+#~ msgid "0 Degree"
+#~ msgstr "0 度"
+
+#~ msgid "45 Degree"
+#~ msgstr "45 度"
+
+#~ msgid "90 Degree"
+#~ msgstr "90 度"
+
+#~ msgid "135 Degree"
+#~ msgstr "135 度"
+
+#~ msgid "180 Degree"
+#~ msgstr "180 度"
+
+#~ msgid "225 Degree"
+#~ msgstr "225 度"
+
+#~ msgid "270 Degree"
+#~ msgstr "270 度"
+
+#~ msgid "315 Degree"
+#~ msgstr "315 度"
 
 #~ msgctxt "BBP_PG_legacy_align_history/property"
 #~ msgid "Target Objects (Selected Objects)"
