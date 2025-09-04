@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/install-plugin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Install Plugin - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Install Plugin";
+        var mkdocs_page_input_path = "en/install-plugin.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/install-plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Install Plugin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#determining-the-version">Determining the Version</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#uninstall-the-old-plugin">Uninstall the Old Plugin</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#download-plugin">Download Plugin</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#install-plugin_1">Install Plugin</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Install Plugin</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="install-plugin">Install Plugin</h1>
+<h2 id="determining-the-version">Determining the Version</h2>
+<p>The principle of BBP's Blender support is to support the latest <strong>LTS</strong> version, and to spend some time migrating the plugin after the latest LTS version is released. The current plugin version <strong>4.3</strong> is based on Blender version <strong>4.5.x</strong>.</p>
+<p>Theoretically, BBP will work fine on other versions of Blender if no major changes have been made. For example you can try to run BBP plugin based on Blender 3.6 LTS on Blender 4.0. However, the developers of BBP do not deal with bugs that only appear in non-LTS versions. before installing the plugin, please select the appropriate version.</p>
+<h2 id="uninstall-the-old-plugin">Uninstall the Old Plugin</h2>
+<p>If you have used BBP before then you need to uninstall it first. Older versions of BBP are usually installed in the following locations:</p>
+<ul>
+<li><code>&lt;Blender&gt;/3.6/scripts/addons/ballance_blender_plugin</code>: BBP 3.0 or lower version.</li>
+<li><code>&lt;Blender&gt;/3.6/scripts/addons_contrib/ballance_blender_plugin</code>: BBP 3.0 or lower version.</li>
+<li><code>&lt;Blender&gt;/3.6/scripts/addons/bbp_ng</code>: BBP 4.0 internal test version</li>
+<li><code>%APPDATA%/Blender Foundation/Blender/3.6/scripts/addons/bbp_ng</code>: BBP 4.0 internal test version</li>
+<li><code>%APPDATA%/Blender Foundation/Blender/4.2/extensions/user_default/bbp_ng</code>: BBP 4.0 or higher version</li>
+</ul>
+<p>You just need to disable the plugin in Blender first (uncheck the box in front of the plugin name) and then delete these folders (if they exist) to uninstall the plugin completely. The <code>&lt;Blender&gt;</code> in the path refers to the location of your Blender installation. The <code>3.6</code> and <code>4.2</code> in the path are the version numbers of your Blender installation, which need to be adjusted according to the version you have installed, and subsequent occurrences of version numbers should be understood as the same meanings.</p>
+<div class="admonition warning">
+<p class="admonition-title">Should not use Blender's plugin uninstall feature</p>
+<p>It is not possible to uninstall BBP using the plugin uninstall function on the Blender plugins page, because BBP loads the Virtools file read/write library BMap into Blender as soon as it is loaded by Blender (whether it is enabled or not). if you remove it while Blender is running, you will get an access denied error. Therefore you must manually delete the plugin directory after closing Blender.</p>
+<p>If you are really not sure where the plugin is installed, you can find the <code>File</code> property in the Addons page of Blender's Preferences, and the folder it points to where the file is located is the folder to be deleted.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title"><code>ballance_blender_plugin</code> and <code>bbp_ng</code></p>
+<p><code>ballance_blender_plugin</code> is the module name of the old version of the BBP plugin (before version 4.0) and <code>bbp_ng</code> is the module name of the new version of the BBP plugin (after and including version 4.0). Both are provided in order to ensure that the user actually deleted the old version of the plugin.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title"><code>addons</code> and <code>addons_contrib</code></p>
+<p>After Blender version 3.6 LTS, i.e. BBP version 3.3, Blender no longer supports Testing type plugins. As a result, the <code>addons_contrib</code> folder, which was dedicated to installing Testing plugins, is no longer used, and plugins need to be installed uniformly in <code>addons</code>. Both are provided to ensure that the user actually deletes the old version of the plugin.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title"><code>addons</code> and <code>extensions</code></p>
+<p>In Blender version 4.2 LTS, Blender uses Extensions instead of Addons to describe plugins. This has resulted in a change in where plugins are installed. Both are provided in order to ensure that the user actually removes the old version of the plugin.</p>
+</div>
+<h2 id="download-plugin">Download Plugin</h2>
+<p>You can download the latest plugin via <a href="https://github.com/yyc12345/BallanceBlenderHelper/releases">the Release page of the GitHub codebase for this project</a>. Plugins are provided as ZIP archives.</p>
+<p>In addition, you can also get this plugin in the mapping tutorial web disk provided by yyc12345:</p>
+<ul>
+<li>Overworld: <a href="https://mega.nz/#F!CV5SyapR!LbduTW51xmkDO4EDxMfH9w">Mega</a> (located in <code>Mapping</code> directory)</li>
+<li>Chinese Region Only: <a href="https://pan.baidu.com/s/1QgWz7A7TEit09nPUeQtL7w?pwd=hf2u">Baidu Web Disk</a> (Extract code: hf2u, located under <code>制图插件（新）</code>)</li>
+</ul>
+<p>!!! warning “Do not download this repository directly for use”
+    Please do not download this project's repository directly for use. First of all, because the latest commit is not guaranteed to be stable and available. The second reason is that this project contains some C++ code that needs to be compiled, and must be compiled before it can be used. See <a href="../compile-distribute-plugin/">Compile and Distribute Plugin</a> for more information.</p>
+<h2 id="install-plugin_1">Install Plugin</h2>
+<p>Open Blender, click <code>Edit - Preferences</code>, in the window that opens go to the <code>Add-ons</code> tab, click on the arrow at the top right of the window and then click on the <code>Install from Disk....</code> button, select the ZIP archive you just downloaded, and the installation will be completed. If you don't see it in the list you can click the Refresh button or restart Blender.</p>
+<p>You can also choose to install the plugin manually (if the above installation method fails), go to <code>%APPDATA%/Blender Foundation/Blender/4.2/extensions/user_default</code>, create a folder named <code>bbp_ng</code> and go inside it, extract the downloaded ZIP archive to this folder, start Blender and you will find BBP in the list of addons.</p>
+<p>The name of BBP plugin in the list is <code>Ballance Blender Plugin</code>, when you find it, you can enable the plugin by checking the box on the left side of the name. The Preferences window after the plugin is installed is shown below.</p>
+<p><img alt="" src="../../imgs/config-plugin.png" /></p>
+<p>After <strong>installing or updating</strong> the plugin, be sure to <a href="../configure-plugin/">configure plugin</a> before using it, see the next section for details.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../configure-plugin/" class="btn btn-neutral float-right" title="Configure Plugin">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../configure-plugin/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

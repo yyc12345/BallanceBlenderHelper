@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/component-adder/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>添加机关 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6dfb\u52a0\u673a\u5173";
+        var mkdocs_page_input_path = "zh-cn/component-adder.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/component-adder/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">添加机关</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">普通机关</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">添加脓机关</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#nong-extra-point">Nong Extra Point</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nong-ventilator">Nong Ventilator</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">添加阵列机关</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tilting-block-series">Tilting Block Series</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ventilator-series">Ventilator Series</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">添加机关对</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sector-pair">Sector Pair</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">添加机关</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">添加机关</h1>
+<p>在3D视图中，点击<code>Add - Components</code>可展开添加机关菜单。菜单如下图左侧所示。</p>
+<p><img alt="" src="../../imgs/component-adder.png" /></p>
+<p>上图右侧则展示了一些机关添加的界面，会在后续依次介绍它们，右侧从上到下分别是：添加Checkpoint（检查点）、添加Nong Extra Point（脓分）、添加Nong Ventilator（脓风扇）、添加Ventilator Series（风扇阵列）、添加Sector Pair（盘点对）</p>
+<h2 id="_2">普通机关</h2>
+<p>在添加机关菜单中，<code>Basic Components</code>分类下的是普通机关的添加。对于大多数机关而言，添加机关需要指定其所属小节，表示这个机关只在这个小节中激活。然而有一些例外：</p>
+<ul>
+<li>PS_FourFlame：关卡开始的4火焰盘点，全局唯一，因此没有小节属性。</li>
+<li>PE_Ballon：关卡终点的飞船，全局唯一，因此没有小节属性。</li>
+<li>PC_TwoFlames：小节的检查点，具有小节属性。但需要注意的是，其小节属性指的是其要检查哪个小节，例如指定小节属性为1，则表示它是第一小节的检查点，即第二小节的开始，通过后开启第二小节。</li>
+<li>PR_Resetpoint：小节的重生点，具有小节属性。但需要注意的是，小节属性表示它是哪个小节的重生点。由此可知，当PC_TwoFlames和PR_Resetpoint成对出现时，PR_Resetpoint总比PC_TwoFlames的标号大1。</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">自动名称冲突检测</p>
+<p>一部分物体在一张Ballance地图中名称是唯一的，例如开头盘点与终点飞船有且只能有一个，小节检查点与复活点同一小节只能存在一个等。</p>
+<p>BBP在创建这些机关时提供了名称检测功能，如果名称已存在，会在创建时在下方用文字显示出来，以提醒用户不要创建重复的内容。如上文展示图右上角显示为例，其正在尝试添加一个已经存在的PC_TwoFlames并收到了警告。</p>
+</div>
+<h2 id="_3">添加脓机关</h2>
+<p>在添加机关菜单中，<code>Nong Components</code>分类下的是脓机关的添加。我们只提供两类常用脓机关的添加：脓分和脓风扇。</p>
+<h3 id="nong-extra-point">Nong Extra Point</h3>
+<p>脓分添加需要指定脓分的小节号和个数。并且会自动帮用户对脓分实现一个逐个旋转的效果，以让游戏内的脓分显示的更好看。</p>
+<h3 id="nong-ventilator">Nong Ventilator</h3>
+<p>脓风扇的添加同样要指定小节号和个数。不同的是我们提供了一些预设数值，这些预设数值构造的脓风扇可以恰好吹起木球或石球，如果你对这些预设数值不满意，仍可以自行输入数量。</p>
+<div class="admonition info">
+<p class="admonition-title">风扇阵列也可以</p>
+<p>你知道吗，在添加风扇阵列时将偏移设为0也可以实现脓风扇。这里的脓风扇创建只是提供了一些预设数值罢了。</p>
+</div>
+<h2 id="_4">添加阵列机关</h2>
+<p>在添加机关菜单中，<code>Series Components</code>分类下的是阵列机关的添加。我们只提供两类常用阵列机关的添加：浮板阵列和风扇阵列。</p>
+<h3 id="tilting-block-series">Tilting Block Series</h3>
+<p>浮板阵列需要提供小节号和浮板个数，并且还可以自由调整相邻浮板之间的间距，默认间距取自游戏内。</p>
+<h3 id="ventilator-series">Ventilator Series</h3>
+<p>风扇阵列也需要提供小节号和风扇个数，然而它提供三维的偏移量，这样你就可以构建竖直的风扇阵列或水平的风扇阵列。默认偏移数值取自游戏内竖直风扇阵列的数值。</p>
+<h2 id="_5">添加机关对</h2>
+<p>在添加机关菜单中，<code>Components Pair</code>分类下的是机关对的添加。目前只有一种机关对：盘点对可添加。</p>
+<h3 id="sector-pair">Sector Pair</h3>
+<p>盘点对需要你输入一个小节号，它会为你自动生成盘点火与重生点机关对。例如输入1小节，则会自动生成4火焰盘点火和第1小节的重生点，输入2，则会生成第1小节检查点和第2小节重生点，以此类推。</p>
+<div class="admonition info">
+<p class="admonition-title">自动名称冲突检测</p>
+<p>与普通机关添加类似，盘点对的添加也有名称冲突检测功能。上文图中右下角为例，其显示第1小节的盘点对已经存在，不需要添加。</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../rail-adder/" class="btn btn-neutral float-left" title="添加钢轨"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../zzq-features/" class="btn btn-neutral float-right" title="ZZQ功能">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../rail-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../zzq-features/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

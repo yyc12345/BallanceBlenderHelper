@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/import-export-virtools/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>导入导出Virtools文档 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u5bfc\u5165\u5bfc\u51faVirtools\u6587\u6863";
+        var mkdocs_page_input_path = "zh-cn/import-export-virtools.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/import-export-virtools/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">导入导出Virtools文档</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_1">导入Virtools文档</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">冲突解决选项</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtools_2">Virtools参数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_3">导出Virtools文档</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">导出目标</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtools_4">Virtools参数</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ballance">Ballance参数</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">无法导入导出</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">导入导出Virtools文档</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="virtools">导入导出Virtools文档</h1>
+<div class="admonition warning">
+<p class="admonition-title">这是实验性内容</p>
+<p>原生导入导出Virtools文档是BBP插件的试验性内容，它可能存在许多问题，请参阅<a href="../report-bugs/">报告问题</a>章节来了解更多。当遇到问题时，请及时汇报。BBP插件的作者不对因BBP插件问题导致的任何后果负责。</p>
+</div>
+<h2 id="virtools_1">导入Virtools文档</h2>
+<p>点击<code>File - Import - Virtools File</code>可以导入Virtools文档。导入支持CMO，VMO，NMO文件。点击后会弹出文件打开界面，并在侧边栏展示导入设置。首先你需要选择导入的Virtools文档，然后在侧边栏配置导入设置，配置完导入设置后即可点击导入开始导入，并等待Blender下方提示导入完成即可。</p>
+<h3 id="_1">冲突解决选项</h3>
+<p>Conflict Options（冲突解决选项）章节指示了当导入器遇到物体名称重复的情况时，该如何处理。分为5个等级，分别针对Object（物体），Light（灯光），Mesh（网格），Material（材质），Texture（贴图）。处理方式则有2种：Rename（重命名）和Use Current（使用当前）。选择重命名后，当遇到重复名称时，将会自动为其添加名称后缀使其名称唯一化。而选择使用当前，则会忽略从文件中导入此项，转而使用Blender文档中已经存在的同名的项目。</p>
+<div class="admonition info">
+<p class="admonition-title">与Virtools冲突解决的不同</p>
+<p>相比较于在Virtools的冲突解决对话框，BBP插件提供的冲突解决选项不支持替换功能，同时其粒度也不支持精细到单个实例，只能针对一整个类型进行设定。因此你无法单独为每一个冲突的实例设置不同的冲突解决方案。但目前这种设置已经能满足绝大对数的使用场景了。</p>
+</div>
+<p>冲突解决选项章节里的选项的默认值是通常导入时会选择的解决方案。当然针对特殊导入情况需要特殊设置，例如正在从外部导入一个从原版中导出的机关模型，则可能连材质选项都可以选择使用当前，而无需复制一份。正确使用冲突解决选项是制图经验所给予的，本手册不会对此进行教学。</p>
+<h3 id="virtools_2">Virtools参数</h3>
+<p>众所周知，Virtools使用基于系统的多字节字符编码来处理文档，因而很容易出现所谓乱码问题。Blender本身不会出现乱码问题，然而如果我们不能以正确的编码读取Virtools文档，则当Virtools文档被导入Blender时，其中存储的字符仍然可能会呈现乱码状态。Virtools Params（Virtools参数）章节的Encodings（编码）属性用于指定读取Virtools文档的编码。可以指定多个编码，越靠上的编码越优先使用，当无法解码时才会使用下一级编码。下面列出一些常用的编码：</p>
+<ul>
+<li>cp1252：Ballance所用的西欧编码</li>
+<li>gbk：中文Windows系统默认编码</li>
+</ul>
+<p>编码属性非常重要，如果设置了错误的编码，导入Blender的各类物体的名称会出现不可认知的情况，又或者会导致程序出错。</p>
+<div class="admonition info">
+<p class="admonition-title">有哪些编码可以使用？</p>
+<p>自BBP 4.1版本后，我们使用编码的名字基本上就是照抄Python的编码名。大多数Python中常用的编码名都有映射，只有一些特别罕见的编码没有支持，对于具体支持的编码则需要查看源码。有关Python支持的编码，请查看<a href="https://docs.python.org/3/library/codecs.html#standard-encodings">Python相关文档</a>。编码名不区分大小写。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">从旧版本迁移的警告</p>
+<p>自BBP 4.1版本开始，BBP的Virtools文档导入模块使用的底层库LibCmo版本号提升为0.2。在此版本前，编码属性是一个平台相关的设定。在Windows下，这里需要填写的是<a href="https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers">Windows代码页</a>数字。而在其它操作系统下，LibCmo使用iconv进行字符编码解码，因此需要使用合法的<a href="https://www.gnu.org/software/libiconv/">iconv编码标识符</a>。</p>
+<p>这一切在LibCmo 0.2后发生了改变，从这个版本开始，LibCmo采用了类似Python的统一编码名。它是平台无关的，你不再需要检查你正在使用的操作系统是Windows还是Linux，所有平台的编码字符均为相同的字符串。这也就意味着如果您之前自定义过编码设置，你需要注意将他们转换到新的统一编码名，因为旧的编码名可能在统一编码名下没有对应映射，例如之前在Windows上指定的<code>1252</code>，在新的统一编码名下应当被书写为<code>cp1252</code>，原编码在新系统下无法被正确识别。</p>
+</div>
+<h2 id="virtools_3">导出Virtools文档</h2>
+<p>点击<code>File - Export - Virtools File</code>可以导出Virtools文档。点击后会弹出文件打开界面，并在侧边栏展示导出设置。首先你需要选择导出的Virtools文档的位置，然后在侧边栏配置导出设置，配置完导出设置后即可点击导出开始导出，并等待Blender下方提示导出完成即可。</p>
+<h3 id="_2">导出目标</h3>
+<p>Export Target（导出目标）章节用于决定你需要将哪写物体导出到Virtools文档中。你可以在四种模式中选择其一，来决定需要导出的内容：</p>
+<ul>
+<li>Object：导出单个物体。选择后需要在下面选择需要导出的物体。</li>
+<li>Collection：导出单个集合，<strong>这是最常用的选项</strong>。选择后需要在下面选择需要导出的集合。值得注意的是，该选项支持嵌套集合导出，即选择集合的时候，会将集合中的集合的物体也一起导出。</li>
+<li>Selected Objects：导出选择的物体。你需要在导出前选择好需要导出的物体。</li>
+<li>All Objects：导出该文档中的所有物体。该选项慎用，因为它是粗暴地遍历文档中的物体列表来进行导出，很可能会导出许多你不需要的物体。</li>
+</ul>
+<h3 id="virtools_4">Virtools参数</h3>
+<p>Virtools Params（Virtools参数）章节与导入Virtools文档中的类似。Encodings（编码）属性决定了导出Virtools文档时所用的编码。</p>
+<p>Global Texture Save Option（全局贴图保存选项）决定了那些设置了Use Global（使用全局设定）的贴图的真实保存方式。通常而言，设置为Raw Data（原始数据）则可以100%保证保存的Virtools文档可以包含正确贴图，但是其体积也可能会变大，设置为External（外部数据）则可以尽可能减少文件大小，但可能会出现导出的文档找不到贴图文件的问题。我们建议你在进行材质设置时就对每个材质单独指定应该如何保存，而不是依赖全局选项来设置。这个选项是给那些依赖全局贴图保存选项的旧地图的再编辑来使用的。还需要注意的是，尽管这个选项里有Use Global选项，但请 <strong>不要</strong> 选择，否则会导致错误，因为显然你不能让一个全局选项再去使用全局选项的设置。</p>
+<p>Use Compress（使用压缩）属性指定保存的文档是否压缩存储。压缩可以显著减少文档体积，且在现代计算机平台上，压缩所造成的性能损失几乎可以忽略不计。当选择使用压缩后，一个额外的Compress Level（压缩等级）属性将会显示，用于指定压缩的级别，数值越高，压缩率越大，文件越小。</p>
+<h3 id="ballance">Ballance参数</h3>
+<p>Ballance Params（Ballance参数）章节包含针对Ballance特有内容，对导出过程进行优化的参数。</p>
+<p>Successive Sector（小节连续）是一个解决导出小节组时出现的Bug的选项。由于某些原因，如果一个小节中没有任何机关（实际上是某小节组中没有归入任何物体），导出插件会认为该小节组不存在，因而遗漏导出。且由于Ballance对最终小节，即飞船出现小节的判定是从1开始递增寻找最后一个存在的小节组，所以二者叠加，会导致Ballance错误地认定地图的小节数，从而在错误的小节显示飞船，这也就是导出Bug。当勾选此选项后，导出文档时会预先按照当前Blender文件中Ballance地图信息中指定的小节数预先创建所有小节组，然后再进行导出，这样就不会遗漏创建某些小节组，飞船也会在正确的小节显示。</p>
+<p>这个选项通常在导出可游玩的地图时选中，如果你只是想导出一些模型，那么需要关闭此选项，否则会在最终文件中产生许多无用的小节组。</p>
+<h2 id="_3">无法导入导出</h2>
+<p>通常而言，在你正确按照之前介绍的步骤安装和配置插件后，你理论上就可以使用Virtools文档的导入导出功能了。但难免有意外发生。这里说的无法导入导出指的是导入和导出Virtools文档的按钮是灰色的，不可点击的。你需要按照下述步骤检查。如果你所指的是在导入导出过程中出错了，请参考本页页首的警告信息。</p>
+<p>首先检查你是否已经在<a href="../configure-plugin/">配置插件</a>章节正确配置了插件的<code>External Texture Folder</code>设置项。如果你没有配置，则自然无法导入导出Virtools文件。因为导入导出Virtools文件需要依赖Ballance原版贴图数据。请按教程认真配置这一设置项。</p>
+<p>如果你确定你已经设置了正确的贴图路径，你可以尝试点击菜单<code>Window - Toggle System Console</code>来打开控制台。在控制台中，可能会有一些相关的错误信息输出在其中，例如加载底层BMap库时失败等。加载底层BMap库失败通常只发生在一些罕见架构的机器上，例如使用Snapdragon处理器的Windows系统等，因为我们打包的插件中，并未包含支持这些平台的Virtools文件底层读取库BMap。在面对这种情况时，你有两个选择，一是汇报给开发者，等待开发者主动支持，二是自行编译该库（仅建议有丰富计算机知识的人这样做）。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ballance-properties/" class="btn btn-neutral float-left" title="Ballance属性"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../group-operations/" class="btn btn-neutral float-right" title="按组操作">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ballance-properties/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../group-operations/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

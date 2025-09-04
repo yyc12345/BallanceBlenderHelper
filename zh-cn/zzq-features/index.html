@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/zzq-features/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>ZZQ功能 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ZZQ\u529f\u80fd";
+        var mkdocs_page_input_path = "zh-cn/zzq-features.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/zzq-features/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">ZZQ功能</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">窥视归组并转换为网格</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">游戏内摄像机</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">ZZQ功能</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="zzq">ZZQ功能</h1>
+<p>本插件在制作过程中得到了来自ZZQ的许多建议，这些建议所产生的功能比较杂乱，因此在一个单独的页面中一起描述。</p>
+<h2 id="_1">窥视归组并转换为网格</h2>
+<p>窥视归组并转换为网格，其全称为：窥视并复制曲线倒角物体的Virtools归组信息后再转换为网格。你可以选中一些物体后右键，在物体上下文菜单中找到这一功能。</p>
+<p>该功能正如其名，其将选中的物体转换为网格，如果选中的物体是曲线，且设置了倒角物体，则将倒角物体的归组信息赋予当前曲线（覆盖曲线当前归组设置）。如果选中的物体不是曲线，或者是曲线但没有倒角物体，那么该功能与执行转换为网格无异。该功能在放样建模时极为有用，因为只需要为截面物体进行正确的归组，然后再使用此功能将曲线转换为网格，就可以确保放样后的物体归组正确。</p>
+<h2 id="_2">游戏内摄像机</h2>
+<p>许多制图者在制作地图时，往往对地图大小没有概念，很容易创建出过大或过小的地图。菜单项<code>Ballance - Game Camera</code>的游戏内摄像机功能则提供了一种在Blender内以游戏内摄像机视角预览地图的功能，方便制图者可以把握地图的大小。</p>
+<p>为了使用该功能，你的场景中必须首先有一个摄像机，且被设置为场景的活动摄像机（无摄像机时，通过添加菜单新添加的摄像机会被自动设置）。然后你还需要一个活动物体，且该活动物体不能是这个摄像机。</p>
+<div class="admonition question">
+<p class="admonition-title">为什么一定需要活动物体？</p>
+<p>由于Blender插件的限制，活动物体是必须的，因为游戏内摄像机功能支持以3D游标 <strong>或活动物体</strong> 为目标。</p>
+<p>通常只有在一个空白的Blender文档中，才会出现无活动物体可用的情况，进而导致该功能不可用。对于一张自制地图，最不缺少的就是可成为活动物体的物体，只需要随便点击一个物体就可以得到（当想使用3D游标作为目标时）。</p>
+</div>
+<p>点击该功能后，视图将自动转为活动摄像机的视角，方便你进行预览。你可以在左下角的面板中调整相关设置。</p>
+<p><img alt="" src="../../imgs/game-camera.png" /></p>
+<p>首先是选择目标，实际上就是选择玩家球位于哪里。如果选择3D游标，则将3D游标视为玩家球。如果选择活动物体，则将玩家球放置在活动物体的原点。</p>
+<div class="admonition info">
+<p class="admonition-title">玩家球的位置并非那么简单</p>
+<p>无论是选择3D游标，还是选择活动物体，如果不做特别精细的调整，其预览的结果和游戏中会有细微出入。</p>
+<p>当你使用3D游标模式并将其简单地吸附到地面上时，它并非代表球的位置。因为玩家球是一个半径为2的球，实际上你需要向+Z方向移动2个单位长度才能够得到和游戏中一模一样的视角。但这个操作过于繁琐，不执行这个操作，预览的效果也不会偏差太多。</p>
+<p>当你使用活动物体模式时，需要注意物体的原点是选择物体时显示的那个圆点的位置。对于大多数物体，这可能并非你想要的，因为他们可能位于物体内部或外部，并非总位于物体表面，或者某个面的中心。针对这种情况，我建议你改用3D游标作为目标，并通过进入编辑模式，灵活运用吸附和<code>Shift + S</code>菜单，来将游标放置在正确的位置。</p>
+</div>
+<p>然后是选择摄像机的旋转角度。我们提供了8种游戏内预设角度，分别对应90度和45度的各4种。此外如果这些预设角度不能满足你的需求，你还可以设置自定义角度。</p>
+<p>最后是选择摄像机视角，分为Ordinary（常规视角），Lift（按住空格键的视角）和Easter Egg（彩蛋视角）三种。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../component-adder/" class="btn btn-neutral float-left" title="添加机关"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../compile-distribute-plugin/" class="btn btn-neutral float-right" title="编译与分发插件">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../compile-distribute-plugin/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

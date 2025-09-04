@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/compile-distribute-plugin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Compile and Distribute Plugin - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Compile and Distribute Plugin";
+        var mkdocs_page_input_path = "en/compile-distribute-plugin.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/compile-distribute-plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Compile and Distribute Plugin</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#compiling-libcmo-with-bmap">Compiling LibCmo with BMap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generate-resources">Generate Resources</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-thumbnails">Generate Thumbnails</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-jsons">Generate JSONs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-element-meshes">Generate Element Meshes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#translation">Translation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#extract-translation-template">Extract Translation Template</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#merge-translation-template">Merge Translation Template</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#create-new-language-translation">Create New Language Translation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-language-translation">Update Language Translation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#start-translating">Start Translating</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#write-translation-back">Write Translation Back</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#packaging">Packaging</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generating-help-documentation">Generating Help Documentation</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Compile and Distribute Plugin</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="compile-and-distribute-plugin">Compile and Distribute Plugin</h1>
+<p>This page will guide you in compiling the plugin as well as distributing it.</p>
+<h2 id="compiling-libcmo-with-bmap">Compiling LibCmo with BMap</h2>
+<p>BBP's Virtools file native import/export functionality relies on BMap and its Python binding PyBMap. In order to distribute the plugin, we need to first compile BMap and its predecessor LibCmo, and before doing so, you need to check the version of BMap you need. Because BBP doesn't always use the latest version of BMap, e.g. if you're compiling an older version of BBP, it's obviously not possible to rely on the latest version of BMap. BMap is constantly being upgraded, and the functionality it provides is constantly changing, and different versions of BMap are incompatible. BBP usually states the version of BMap it uses at the time of release, but if BBP doesn't point it out, you may need to look for the most recent version of BMap that compiles with the version of BBP at the time of its release.</p>
+<p>After specifying the version, you need to visit <a href="https://github.com/yyc12345/libcmo21">LibCmo GitHub repository</a>. Then clone the project and use the Git command to go to the corresponding version (or just download the source code of the corresponding version). Then follow LibCmo's compilation manual to compile to get BMap. on Windows, you'll usually get the files <code>BMap.dll</code> and <code>BMap.pdb</code>. On Linux, it will be <code>BMap.so</code>.</p>
+<p>Then we need to configure PyBMap, which comes with LibCmo. Please follow the manual of PyBMap to combine the compiled binary BMap library with PyBMap. That is to complete the PyBMap configuration.</p>
+<p>Then we need to copy the configured PyBMap to our project under <code>bbp_ng/PyBMap</code> to complete this step.</p>
+<h2 id="generate-resources">Generate Resources</h2>
+<p>BBP needs some resoures to run, and these resources need to be processed before using them.</p>
+<p>For generating these resrouces, we firstly need to navigate to <code>scripts</code> directory, and execute <code>uv sync</code> to restore the environment for scripts (Astral UV required).</p>
+<h3 id="generate-thumbnails">Generate Thumbnails</h3>
+<p>BBP comes with a built-in set of custom icons, however these icons are stored as their original size in repository for keeping convenient editing and high quality. We need to reduce the size of these icons to make them are easy to be loaded on Blender and easy for distribution by generating thumbnails for them.</p>
+<p>Execute <code>uv run build_icons.py</code> to generate thumbnails. It actually generates thumbnails from the original images in the <code>assets/icons</code> directory and stores them in the <code>bbp_ng/icons</code> folder.</p>
+<h3 id="generate-jsons">Generate JSONs</h3>
+<p>The BME component in BBP relies on a series of JSON files to describe the prototype. These profiles are stored in the library in JSON5 format, making them easy for writers to read and write. We converte these JSON5 files to JSON files and compressing their size makes them easier to load in Blender, as well as to facilitate plugin distribution, by batchly generating them.</p>
+<p>If you are the plugin developer or writer of these prototypes, you need to do an additional thing before generating these JSON files: verify these JSON files. The BBP plugin will assume that these JSON files are correct when loading them. If you put a JSON file with errors (e.g. missing some fields or has some typos, etc.), it will cause Blender to throw an error when creating prototype. Therefore, it is necessary to verify these JSON files. Execute <code>uv run validate_jsons.py</code> to verify all prototype files. If there are no errors, it means that everything is okey. It is important to note that the validator is not perfect, it can only verify the data as much as possible to ensure that some common erros (e.g. typo in field name) will not occur. It can not make 100% sure about that there is no error inside these files.</p>
+<p>For compilers, all you need to do is that execute <code>uv run build_jsons.py</code> to generate JSON files. It actually reads, compresses, and writes the original JSON5 files in <code>assets/jsons</code> directory to the <code>bbp_ng/jsons</code> folder in JSON format.</p>
+<h3 id="generate-element-meshes">Generate Element Meshes</h3>
+<p>BBP has built-in mesh data for all Ballance element placeholders. Execute <code>uv run build_jsons.py</code> to deploy these meshes, which simply copies the mesh files under <code>assets/jsons</code> folder to <code>bbp_ng/jsons</code> folder.</p>
+<h2 id="translation">Translation</h2>
+<p>The BBP plugin supports multilingual functionality, so we need to extract and update the content to be translated before the official release, and then proceed to the next step after translating all the content.</p>
+<p>Blender's multilingual support for plugins is not satisfactory, and BBP's design is relatively special, so BBP adopts a different way to manage translations than the official recommended plugin translation management method of Blender: that is, use PO files to manage translations instead of the officially recommended Python script format.</p>
+<div class="admonition info">
+<p class="admonition-title">Do NOT submit translations in Python format</p>
+<p>As mentioned above, BBP uses PO files to manage translations, rather than the Python source format recommended by Blender. However, this does not prevent Blender's multilingual plugins from writing translations in the Python source format into the plugin's source code. Submitting duplicate translations not only increases the repository size but also complicates management. Therefore, BBP requires you to delete the Python-format translations before submission.</p>
+<p>The specific operational method is to open the <code>bbp_ng/UTIL_translation.py</code> file before submission and change the value of the translation tuple variable <code>translations_tuple</code> to an empty tuple (i.e., <code>translations_tuple = ()</code>).</p>
+</div>
+<h3 id="extract-translation-template">Extract Translation Template</h3>
+<p>Before translating, it is important to first recognize that the text requiring translation for BBP consists of two parts. One part is the BBP plugin itself, whose text to be translated can be extracted by Blender's built-in multilingual plugin. The other part is the JSON file in the BME component that describes the structure, where the names of various showcase fields need to be translated. However, this part cannot be handled by Blender's multilingual plugin, as it is dynamically loaded. Fortunately, we have written an extractor that can extract the relevant text to be translated from the BME's JSON file. To do this, execute <code>uv run extract_jsons.py</code> in the folder where the previous script was run, and the script will extract the text to be translated and write it into the <code>i18n/bme.pot</code> file. Therefore, the next task is simply to extract the translation for the plugin portion.</p>
+<p>First, you need to enable Blender's built-in multilingual plugin, "Manage UI translations". To enable it, you may also need to download the source code and translation repository corresponding to your version of Blender. For specific instructions, please refer to the <a href="https://developer.blender.org/docs/handbook/translating/translator_guide/">official Blender Documentation</a>. Once you have enabled the plugin and configured the appropriate related paths in the preferences, you can find the "I18n Update Translation" panel under the "Render" panel. You can then proceed to extract the translations by following these steps:</p>
+<ol>
+<li>First, ensure that all Blender processes are closed; otherwise, the plugin will remain in a loading state, and modifications to the translated tuple variables will not take effect.</li>
+<li>Change the value of the translation tuple variable <code>translations_tuple</code> in the plugin to an empty tuple (refer to the earlier mentioned submission notes). Setting the translation tuple to empty can reset the translation status of the plugin, ensuring that subsequent text extraction operations are not affected by any existing translations.</li>
+<li>Open Blender, go to the "I18n Update Translation" panel, click "Deselect All" to uncheck all languages, and then only check the boxes next to the following languages (as BBP currently supports a limited number of languages):<ul>
+<li>Simplified Chinese (简体中文)</li>
+</ul>
+</li>
+<li>Click the "Refresh I18n Data" button at the bottom of the section, then in the pop-up window, select "Ballance Blender Plugin". After a short wait, the plugin will complete the extraction of the characters to be translated. At this point, the plugin merely extracts the translation fields into the source code of the plugin in a format recommended by Blender, using Python source code.</li>
+<li>In order to obtain the desired editable POT file, you need to click the "Export PO" button. In the pop-up window, select the "Ballance Blender Plugin", and you can choose any folder for saving the location (for example, the desktop, as it will generate many files, including our desired POT file). Uncheck the "Update Existing" option on the right and ensure that "Export POT" is checked, then proceed to save. After the export is complete, you will find a translation template file named <code>blender.pot</code> and numerous <code>.po</code> files named after language identifiers in the folder you selected.</li>
+<li>You need to copy <code>blender.pot</code> to the <code>i18n</code> folder and rename it to <code>bbp_ng.pot</code>. At this point, we have extracted all the content that needs to be translated.</li>
+</ol>
+<h3 id="merge-translation-template">Merge Translation Template</h3>
+<p>There are currently two POT files in the <code>i18n</code> folder, which represent two sets of extracted text awaiting translation. We need to merge them. Execute <code>xgettext -o blender.pot bbp_ng.pot bme.pot</code> in the <code>i18n</code> folder to perform the merge. The merged <code>i18n/blender.pot</code> will serve as the translation template.</p>
+<h3 id="create-new-language-translation">Create New Language Translation</h3>
+<p>If BBP needs to support more languages in the future, you will need to create the corresponding PO translation files for the new languages from the POT files. You can create them through one of the following methods.</p>
+<ul>
+<li>By using software such as Poedit to open the POT file, select function like create new translation from it, and then save to create.</li>
+<li>Create a new language PO translation file using commands such as <code>msginit -i blender.pot -o zh_HANS.po -l zh_CN.utf8</code>.</li>
+</ul>
+<p>There are various ways to create, but the only point to note is that you need to set the file name (if the file name is incorrect, Blender will refuse to accept it) and the area name (which will be used when using <code>msginit</code>, with the purpose of ensuring UTF8 format encoding) as shown in the table below.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Language</th>
+<th style="text-align: left;">File Name</th>
+<th style="text-align: left;">Area Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Simplified Chinese (简体中文)</td>
+<td style="text-align: left;"><code>zh_HANS.po</code></td>
+<td style="text-align: left;"><code>zh_CN.utf8</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="update-language-translation">Update Language Translation</h3>
+<p>Creating new language translations is not common; a more common practice is to update existing language translation files based on translation templates. You can update them through one of the following methods.</p>
+<ul>
+<li>Open the PO file using software such as Poedit, and then select to update from the POT file.</li>
+<li>Update using commands such as <code>msgmerge -U zh-HANS.po blender.pot --backup=none</code>.</li>
+</ul>
+<h3 id="start-translating">Start Translating</h3>
+<p>After updating the PO translation files for all languages, you may choose your preferred method for translation, such as using Poedit or editing directly.</p>
+<p>The BBP requires the use of the KDE community's translation standards to standardize the translations of plugins. For example, you can find the KDE community's translation standards for Simplified Chinese on the <a href="https://kde-china.org/tutorial.html">KDE China</a> website.</p>
+<h3 id="write-translation-back">Write Translation Back</h3>
+<p>The translation in PO format cannot be recognized by Blender. Therefore, after the translation is completed, you also need to utilize Blender's multilingual plugin to convert the PO file back into a translation in Python source code format that Blender can recognize. Due to issues with the design of Blender's multilingual plugin, we cannot directly use the "Import PO" function to convert the PO file back into Python source code format. You need to follow the steps below sequentially in order to import the PO translation into the plugin:</p>
+<ol>
+<li>First, ensure that all Blender processes are closed; otherwise, the plugin will remain in a loading state, and modifications to the translated tuple variables will not take effect.</li>
+<li>Change the value of the translation tuple variable <code>translations_tuple</code> in the plugin to an empty tuple (refer to the earlier notes regarding submissions). The purpose of this step is to ensure that the entire plugin lacks translation entries, so that when using the "Import PO" feature, Blender's multilingual plugin will consider all fields stored in the PO file as needing translation, thereby preventing situations where only a portion of the translations is imported (as the translations for the BME portion were merged later).</li>
+<li>Open Blender, navigate to the "I18n Update Translation" panel, and following the procedure used when extracting the translation template, select only the languages that need to be translated from the language list.</li>
+<li>Click the "Import PO" button in the bottom row, then select the "Ballance Blender Plugin" in the pop-up window, and choose the <code>i18n</code> folder for import. In this way, we have completed the process of importing the PO file into a Python source code format recognizable by Blender.</li>
+</ol>
+<h2 id="packaging">Packaging</h2>
+<p>Starting from Blender 4.2 LTS, plugins are packaged using Blender's own packaging feature.</p>
+<p>Assuming that the final output file is <code>redist/bbp_ng.zip</code>. If you are in the root directory of the project, execute the <code>blender --command extension build --source-dir bbp_ng --output-filepath redist/bbp_ ng.zip</code> command in a command line window to finish packaging. Please note <code>blender</code> is the executable Blender program.</p>
+<p>Blender will package the plugin according to the instructions in <code>blender_manifest.toml</code> with the following files excluded:</p>
+<ul>
+<li><code>__pycache__/</code>：Python cache.</li>
+<li><code>.style.yapf</code>：code style description file.</li>
+<li><code>.gitignore</code>：gitignore</li>
+<li><code>.gitkeep</code>：folder placeholder</li>
+<li><code>.md</code>：documentation</li>
+</ul>
+<h2 id="generating-help-documentation">Generating Help Documentation</h2>
+<p>Although this project will utilize the GitHub Page feature to provide help documentation, sometimes you may need to provide an offline version of the help documentation, this section will explain how to generate an offline version of the help documentation.</p>
+<p>First you need to install <code>mkdocs</code> and <code>pymdown-extensions</code> via pip. Then go to the <code>docs</code> folder and run <code>mkdocs build --no-directory-urls</code>. After running the command you get a folder called <code>site</code>, which is the help documentation that can be viewed offline.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../zzq-features/" class="btn btn-neutral float-left" title="ZZQ Features"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../report-bugs/" class="btn btn-neutral float-right" title="Report Issue">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../zzq-features/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../report-bugs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/ballance-properties/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Ballance属性 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Ballance\u5c5e\u6027";
+        var mkdocs_page_input_path = "zh-cn/ballance-properties.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/ballance-properties/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Ballance属性</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ballance_1">Ballance地图信息</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ballance_2">Ballance机关</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bme">BME材质</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">Ballance属性</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ballance">Ballance属性</h1>
+<p>Ballance属性有别于Virtools属性，它是专门为Ballance制图服务的一系列属性。这些属性寄宿于场景，在同一场景中（制图不会涉及Blender中的场景切换），这些属性不会改变。在<code>Scene</code>属性面板可以找到Ballance属性相关的面板，如下图所示，它们分别是：</p>
+<ul>
+<li><code>Ballance Elements</code>面板（红色箭头），对应Ballance机关</li>
+<li><code>BME Materials</code>面板（绿色箭头），对应BME材质</li>
+<li><code>Ballance Map</code>面板（蓝色箭头），对应Ballance地图信息</li>
+</ul>
+<p>其中，只有Ballance地图信息是你需要重点关注的，其它属性在通常情况下不需要关注，除非地图中的某些材质或网格出现错误后，才需要关注这些属性。</p>
+<p><img alt="" src="../../imgs/ballance-properties.png" /></p>
+<h2 id="ballance_1">Ballance地图信息</h2>
+<p>Ballance地图信息目前只有一个选项，Sector（地图小节数）。此属性指示了当前地图的最终期望小节数。这个属性主要是用于解决导出地图Bug的，具体Bug内容可参考<a href="../import-export-virtools/">导入导出Virtools文档</a>章节。</p>
+<p>你需要做的唯一一件事就是在导出最终地图前检查此字段是否是你期望的小节数。需要注意的是，尽管你可以在创建地图的一开始就设置此字段，然而BBP中的其它一些功能可能会修改此字段，比如：添加机关，导入Virtools文档等。例如当你的地图小节指定为3，你正在添加一个归属于第4小节的机关，那么此值会自动增加到4。同理，在导入一个总共4小节的Ballance地图时，此值也会增加到4（如果先前值小于4的话）。这么做主要是为了用户可以在没有感知到此值的情况下使用此插件，尤其是在对某些现有地图进行略微修改时。然而如此操作，可能会在某些情况下不能满足用户的需求，所以仍建议你在导出前检查此字段。</p>
+<h2 id="ballance_2">Ballance机关</h2>
+<p>Ballance机关记录了你所有使用BBP添加机关功能添加的机关的网格。在3D文件中，通常而言网格占据了最大的数据量，因此减少网格的数量，即通过在各个相同形状的物体之间共享网格，可以大幅减少地图文件所占用的大小。当你使用BBP添加机关相关功能时，会首先尝试从这里获取机关的网格，如果没有对应网格，则加载并记录在这里。</p>
+<p>这个面板只供查看，不可编辑。当你不小心修改了BBP添加的机关的网格（它们本不该被修改）后，想要恢复其原有形状时，只需点击<code>Reset Ballance Elements</code>即可将列表中的所有机关网格重置为正确状态。</p>
+<h2 id="bme">BME材质</h2>
+<p>与Ballance机关类似，记录了使用BME添加路面时使用的材质。这也是为了可以复用材质而设计的，这样就不需要每创建一个物体就创建一套与之相关的材质，大大减少了重复材质的数量。</p>
+<p>这个面板只供查看，不可编辑。当你不小心修改了BME相关的材质（它们本不该被修改）后，想要恢复其原有材质时，只需点击<code>Reset BME Materials</code>即可将列表中的所有材质重置为正确状态。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../virtools-properties/" class="btn btn-neutral float-left" title="Virtools属性"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../import-export-virtools/" class="btn btn-neutral float-right" title="导入导出Virtools文档">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../virtools-properties/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../import-export-virtools/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

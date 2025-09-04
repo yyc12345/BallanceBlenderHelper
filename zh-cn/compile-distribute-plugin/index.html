@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/compile-distribute-plugin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>编译与分发插件 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u7f16\u8bd1\u4e0e\u5206\u53d1\u63d2\u4ef6";
+        var mkdocs_page_input_path = "zh-cn/compile-distribute-plugin.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/compile-distribute-plugin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">编译与分发插件</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#libcmobmap">编译LibCmo与BMap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">生成资源</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">生成缩略图</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json">生成JSON文件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">生成机关网格</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">翻译</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">提取翻译模板</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">合并翻译模板</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">创建新语言翻译</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">更新语言翻译</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_10">进行翻译</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_11">翻译回写</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_12">打包</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_13">生成帮助文档</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">编译与分发插件</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">编译与分发插件</h1>
+<p>本页面将指导你编译插件以及分发它。</p>
+<h2 id="libcmobmap">编译LibCmo与BMap</h2>
+<p>BBP的Virtools文件原生导入导出功能依赖BMap以及其Python绑定PyBMap来实现。为了分发插件，我们需要首先编译BMap及其前置LibCmo。而在编译前，你需要先确认你需要的BMap版本。因为BBP并不总是使用最新的BMap，例如你正在编译一个旧版的BBP，其显然不可能依赖最新的BMap。BMap也在不断升级中，其提供的功能也在不断变化，不同版本的BMap是不兼容的。BBP通常会在发布时写明其所用的BMap版本，如果BBP没有指出，你可能需要寻找与BBP发布时最近的BMap版本来编译。</p>
+<p>在明确版本后，你需要访问<a href="https://github.com/yyc12345/libcmo21">LibCmo位于GitHub的存储库</a>。然后克隆项目，使用Git命令转到对应版本（或者直接下载对应版本的源码）。然后按照LibCmo的编译手册编译得到BMap。在Windows上，你通常会得到<code>BMap.dll</code>和<code>BMap.pdb</code>这两个文件。而在Linux上，则会是<code>BMap.so</code>。</p>
+<p>然后我们需要配置PyBMap。PyBMap是随LibCmo一起提供的。请按照PyBMap的手册，将编译得到的二进制BMap库，和PyBMap结合在一起。即完成PyBMap配置。</p>
+<p>然后我们需要将配置好的PyBMap拷贝到本项目的根目录下即可完成此步（即存在<code>bbp_ng/PyBMap</code>文件夹，为配置好的PyBMap）。</p>
+<h2 id="_2">生成资源</h2>
+<p>BBP的正常运行离不开一系列资源文件，而这些资源文件则需要一些处理才能够正常使用。</p>
+<p>为了生成这些资源文件，首先需要转到<code>scripts</code>文件夹下，执行<code>uv sync</code>指令来还原脚本环境（需提前安装Astral UV）。</p>
+<h3 id="_3">生成缩略图</h3>
+<p>BBP内置了一系列自定义图标，但这些图标都以其原始大小存储在库中。通过批量生成缩略图的操作，可以减小这些部分的大小，使得其适合在Blender中加载，也更方便分发。</p>
+<p>执行<code>uv run build_icons.py</code>来生成缩略图。其实际上是将<code>assets/icons</code>目录下的原始图片生成对应的缩略图并存储于<code>bbp_ng/icons</code>文件夹下。</p>
+<h3 id="json">生成JSON文件</h3>
+<p>BBP中的BME组件依赖一系列JSON文件来描述原型。这些描述文件以JSON5格式存储在库中，方便编写者阅读。通过批量生成操作，将这些JSON5文件转换为JSON文件并压缩其大小，可以方便其在Blender中加载，以及方便插件分发。</p>
+<p>如果你是插件开发者，或者是这些原型的编写者，那么你在生成JSON文件前，还需要额外地进行一项操作：验证JSON文件的正确性。BBP插件在加载这些JSON文件时会默认这些文件都是正确的，无错误的。如果将有错误的JSON文件放入（例如缺少部分字段或者拼写错误等），则会导致Blender在创建原型时抛出错误。所以验证JSON文件的正确性很有必要。执行<code>uv run validate_jsons.py</code>来验证所有原型文件。如果没有任何报错，则验证无误。需要注意的是，验证器并非完美的，它只能尽可能地验证数据，确保一些常见的错误，例如字段名称拼写错误等，不会发生，并不能100%保证验证后的文件没有错误。</p>
+<p>对于编译人员而言，只需要执行<code>uv run build_jsons.py</code>来生成JSON文件即可。其实际上是将<code>assets/jsons</code>目录下的原始JSON5文件读取，压缩，再以JSON格式写入到<code>bbp_ng/jsons</code>文件夹下。</p>
+<h3 id="_4">生成机关网格</h3>
+<p>BBP中内置了Ballance所有机关占位符的网格信息。执行<code>uv run build_meshes.py</code>来部署这些内容，其简单地将<code>assets/meshes</code>下的网格文件复制到<code>bbp_ng/meshes</code>文件夹下。</p>
+<h2 id="_5">翻译</h2>
+<p>BBP插件支持多语言功能，因此在正式发布前我们需要先提取并更新要翻译的内容，翻译完所有内容后，再进行下一步操作。</p>
+<p>Blender对于插件的多语言支持不尽如人意，且BBP的设计比较特殊，因此BBP采用了一套与Blender官方推荐的插件翻译管理方式不同的方式来管理翻译：即使用PO文件来管理翻译，而非官方推荐的Python脚本格式。</p>
+<div class="admonition info">
+<p class="admonition-title">不要提交Python格式的翻译</p>
+<p>如上文所述，BBP使用PO文件来管理翻译，而不是Blender官方建议的Python源码格式。但这并不能阻止Blender的多语言插件将Python源码格式的翻译写入到插件源码中。重复提交翻译不仅增加仓库体积，也不利于管理，因此BBP要求你在提交前需要删除Python格式的翻译。</p>
+<p>具体的操作方法是在提交前，打开<code>bbp_ng/UTIL_translation.py</code>文件，将翻译元组变量<code>translations_tuple</code>的值改为空元组（即<code>translations_tuple = ()</code>）。</p>
+</div>
+<h3 id="_6">提取翻译模板</h3>
+<p>在翻译之前，首先你需要意识到，BBP需要翻译的文本由两部分组成，一部分是BBP插件本身，可以通过Blender自带的多语言插件来实现待翻译文本的提取。另一部分是BME组件中的用于描述结构的JSON文件，其中各个展示用字段的名称需要进行翻译，而这一部分Blender的多语言插件无能为力，因为它是动态加载的。幸运的是，我们已经写好了一个提取器，可以提取BME的JSON文件中的相关待翻译文本。就是在上一步运行脚本的文件夹中，执行<code>uv run extract_jsons.py</code>，脚本就会提取待翻译文本并写入<code>i18n/bme.pot</code>文件中。那么接下来的任务就只剩下提取插件部分的翻译了。</p>
+<p>首先你需要启用Blender内置的多语言插件Manage UI translations。为了启用它，你可能还需要下载对应Blender版本的源代码和翻译仓库，具体操作方法可参考<a href="https://developer.blender.org/docs/handbook/translating/translator_guide/">Blender的官方文档</a>。在启用插件并在偏好设置中配置了合适的相关路径后，你就可以在Render面板下找到I18n Update Translation面板，接下来就可以提取翻译了。按照以下步骤提取翻译：</p>
+<ol>
+<li>首先确保关闭了所有Blender进程，否则插件会保持在加载状态，对翻译元组变量的修改会不起作用。</li>
+<li>将插件中翻译元组变量<code>translations_tuple</code>的值改为空元组（参见前文有关提交的注意事项）。将翻译元组设置为空可以将插件的翻译状态归零，使得后文进行的文本提取操作不会受到已有翻译的干扰。</li>
+<li>打开Blender，转到I18n Update Translation面板，点击Deselect All取消所有语言的选中，然后仅勾选下列语言右侧的框（因为BBP目前仅支持有限的语言）：<ul>
+<li>Simplified Chinese (简体中文)</li>
+</ul>
+</li>
+<li>点击最下方一栏的Refresh I18n Data按钮，然后在弹出的窗口中选择Ballance Blender Plugin，等待一会后，插件就会完成待翻译字符的提取。此时插件只是将他们按照Blender推荐的方式，以Python源码的格式将翻译字段提取到了插件的源代码中。</li>
+<li>为了获得我们希望的，可以用于编辑的POT文件，还需要点击Export PO按钮，在弹出的窗口中选择Ballance Blender Plugin，保存的位置可以选择任意的文件夹（例如桌面，因为它会产生许多文件，其中只有POT文件才是我们想要的），取消勾选右侧的Update Existing选项并确保Export POT是勾选的，最后进行保存。导出完成后，可以在你选择的文件夹中找到一个名为<code>blender.pot</code>的翻译模板文件，以及众多以语言标识符为文件名的<code>.po</code>文件。</li>
+<li>你需要复制<code>blender.pot</code>到<code>i18n</code>文件夹下，并将其重命名为<code>bbp_ng.pot</code>。至此我们提取了所有需要翻译的内容。</li>
+</ol>
+<h3 id="_7">合并翻译模板</h3>
+<p>现在<code>i18n</code>文件夹下有两个POT文件，分别代表了两部分提取的待翻译文本，我们需要把他们合并起来。在<code>i18n</code>文件夹执行<code>xgettext -o blender.pot bbp_ng.pot bme.pot</code>来进行合并。合并完成后的<code>i18n/blender.pot</code>将用作翻译模板。</p>
+<h3 id="_8">创建新语言翻译</h3>
+<p>如果未来BBP需要支持更多语言，你需要从POT文件为新语言创建其对应的PO翻译文件。你可以通过以下方式之一来创建它们。</p>
+<ul>
+<li>通过使用Poedit等软件打开POT文件，选择创建新的翻译，再进行保存来创建。</li>
+<li>通过诸如<code>msginit -i blender.pot -o zh_HANS.po -l zh_CN.utf8</code>的命令来创建新语言的PO翻译文件。</li>
+</ul>
+<p>创建的方式多种多样，唯一需要注意的是你需要按下表所示设定文件名（文件名错误，Blender会拒绝接受）和区域名称（使用<code>msginit</code>时会用到，目的是确保是UTF8格式编码的）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">语言</th>
+<th style="text-align: left;">文件名</th>
+<th style="text-align: left;">区域名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Simplified Chinese (简体中文)</td>
+<td style="text-align: left;"><code>zh_HANS.po</code></td>
+<td style="text-align: left;"><code>zh_CN.utf8</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">更新语言翻译</h3>
+<p>创建新的语言翻译并不常见，更为常见的操作是根据翻译模板，对现有语言翻译文件进行更新。你可以通过以下方式之一来更新它们</p>
+<ul>
+<li>通过Poedit等软件打开PO文件，再选择从POT文件更新。</li>
+<li>通过诸如<code>msgmerge -U zh-HANS.po blender.pot --backup=none</code>的命令来更新。</li>
+</ul>
+<h3 id="_10">进行翻译</h3>
+<p>在更新完所有语言的PO翻译文件后，你可以选择你喜欢的方式来进行翻译，例如使用Poedit或直接进行编辑。</p>
+<p>BBP要求使用KDE社区的翻译规范来规范插件的翻译。例如你可以在<a href="https://kde-china.org/tutorial.html">KDE中国相关网页</a>找到KDE社区有关简体中文的翻译标准。</p>
+<h3 id="_11">翻译回写</h3>
+<p>PO格式的翻译并不能被Blender识别，因此在翻译完成后，你还需要继续借助Blender的多语言插件，将PO文件回写成Blender可识别的Python源码格式的翻译。由于Blender的多语言插件设计的问题，我们不能直接使用Import PO功能将PO文件回写成Python源码格式。你需要按照下列步骤依次操作才可以将PO翻译导入插件中：</p>
+<ol>
+<li>首先确保关闭了所有Blender进程，否则插件会保持在加载状态，对翻译元组变量的修改会不起作用。</li>
+<li>将插件中翻译元组变量<code>translations_tuple</code>的值改为空元组（参见前文有关提交的注意事项）。这一步操作的意图是让整个插件不存在翻译条目，这样之后在使用Import PO功能的时候，Blender的多语言插件就会认为PO文件中存储的所有字段都是要翻译的，就不会出现只导入了一部分翻译的情况（因为BME部分的翻译是后来合并入的）。</li>
+<li>打开Blender，转到I18n Update Translation面板，按照提取翻译模板时的操作方法，在语言列表中仅选中需要翻译的语言。</li>
+<li>点击最下方一栏的Import PO按钮，然后在弹出的窗口中选择Ballance Blender Plugin，然后选择<code>i18n</code>文件夹进行导入。这样我们就完成了将PO文件导入为Blender可识别的Python源码格式的操作。</li>
+</ol>
+<h2 id="_12">打包</h2>
+<p>从Blender 4.2 LTS开始，插件使用Blender自带的打包功能进行打包。</p>
+<p>假定在项目根目录下执行命令，最终输出文件为<code>redist/bbp_ng.zip</code>，那么在命令行窗口中执行<code>blender --command extension build --source-dir bbp_ng --output-filepath redist/bbp_ng.zip</code>命令即可完成打包。其中<code>blender</code>为Blender的可执行程序。</p>
+<p>Blender会根据<code>blender_manifest.toml</code>的指示，在排除下列文件的情况下将插件打包：</p>
+<ul>
+<li><code>__pycache__/</code>：Python缓存</li>
+<li><code>.style.yapf</code>：代码风格描述文件</li>
+<li><code>.gitignore</code>：gitignore</li>
+<li><code>.gitkeep</code>：文件夹占位符</li>
+<li><code>.md</code>：文档</li>
+</ul>
+<h2 id="_13">生成帮助文档</h2>
+<p>虽然本项目会利用GitHub Page功能提供帮助文档，但有时你可能需要提供帮助文档的离线版本，本节将会介绍如何生成离线版本的帮助文档。</p>
+<p>首先你需要通过pip安装<code>mkdocs</code>和<code>pymdown-extensions</code>。然后转到<code>docs</code>文件夹下，运行<code>mkdocs build --no-directory-urls</code>。运行命令后得到一个名为<code>site</code>的文件夹，其中就是可以离线浏览的帮助文档。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../zzq-features/" class="btn btn-neutral float-left" title="ZZQ功能"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../report-bugs/" class="btn btn-neutral float-right" title="报告问题">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../zzq-features/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../report-bugs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

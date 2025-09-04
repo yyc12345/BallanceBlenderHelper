@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/virtools-properties/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Virtools属性 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Virtools\u5c5e\u6027";
+        var mkdocs_page_input_path = "zh-cn/virtools-properties.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/virtools-properties/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Virtools属性</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_1">Virtools组</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_2">Virtools材质</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_3">Virtools贴图</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_4">Virtools网格</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools_5">Virtools灯光</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">Virtools属性</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="virtools">Virtools属性</h1>
+<h2 id="virtools_1">Virtools组</h2>
+<p>BBP插件为每一个Blender物体添加了新的属性，被称为Virtools Group。与Virtools中的组具有相同的功能。选择一个物体，在<code>Object</code>属性面板可以找到<code>Virtools Group</code>面板。</p>
+<p><img alt="" src="../../imgs/virtools-group.png" /></p>
+<p>在<code>Virtools Group</code>面板中，可以点击添加为物体归组。在点击添加按钮后，可以选择预定义，然后从所有合法的Ballance组名中选择一个添加。或选择自定义，然后输入你想要的组名添加。也可以点击删除按钮，删除选中的Virtools组。最后，可以通过点击垃圾桶按钮一次性删除这个物体的所有组数据（删除前会让你确认）。</p>
+<p>BBP还在Blender的其它菜单提供了对Virtools组的访问，具体内容请参阅<a href="../group-operations/">按组操作</a>。</p>
+<p>需要注意的是，Virtools组仅对网格物体生效，当你在其它物体上打开Virtools组面板时，你会在面板中看到一条警告消息，提示你Virtools组在该物体上无效。在非网格物体上设置的Virtools组数据尽管会被Blender承认和存储，但不会在导出时保存到Virtools文件中。</p>
+<h2 id="virtools_2">Virtools材质</h2>
+<p>插件为每一个Blender材质添加了新的属性，被称为Virtools Material。它在Virtools材质与Blender材质之间架起沟通的桥梁。转到<code>Material</code>属性面板，选择一个材质，即可以找到<code>Virtools Material</code>面板。</p>
+<p><img alt="" src="../../imgs/virtools-material.png" /></p>
+<p>可以在<code>Virtools Material</code>面板中设置材质属性，就像在Virtools中操作一般。<code>Virtools Material</code>面板中所有的材质参数均为Virtools中材质参数的映射，将准确地反映到最后保存的Virtools文档中。</p>
+<p><code>Virtools Material</code>面板提供了预设功能，点击顶部的<code>Preset</code>按钮即可开始进行预设。预设功能允许用户使用一些预设的材质设置，例如路面顶面，侧面的材质数据等，方便使用。需要注意的是，使用预设不会影响材质的贴图选项，当应用预设后，你仍然需要手动设置材质的贴图。</p>
+<p><code>Virtools Material</code>面板同样提供把<code>Virtools Material</code>面板中的材质数据转换到Blender材质上的功能，以在Blender中获得可视的效果。点击顶部的<code>Apply</code>按钮即可执行此功能。当你在Blender中保存Virtools文档时，Virtools文档中的材质数据将从<code>Virtools Material</code>面板中指定的数值获取，而不会从Blender材质中获取。这意味一个正确的材质设置过程是：先在<code>Virtools Material</code>面板中编辑材质参数，然后使用<code>Apply</code>按钮将其转换到Blender材质上，而不是直接去编辑Blender材质。</p>
+<p><code>Virtools Material</code>面板提供了材质修复功能，这个功能来源于<a href="https://github.com/yyc12345/BallanceVirtoolsHelper">Ballance Virtools Plugin</a>。材质修复按钮位于<code>Preset</code>按钮和<code>Apply</code>按钮的右侧，是一个带有扳手图标的按钮。点击后需要再次确认才能使用，防止误操作。材质修复功能会根据当前材质引用的贴图文件的文件名判定它是哪一种类型的材质，再根据我们预设的修复设定（从游戏中获取）将其他参数修改得符合视觉要求。这通常用于一些游戏中看起来材质错误的物体的修复，例如发黑的Stopper等。</p>
+<div class="admonition info">
+<p class="admonition-title">还有一个全局材质修复功能</p>
+<p>3D视图中，菜单<code>Ballance - Fix Material</code>与材质修复功能类似，但其会修复当前文档内所有材质。除非你确定当前文档内所有材质都需要修复，否则不要使用这个功能，因为它可能会将一些原本特殊设置的，正确的材质设置回你不想要的通用数值。</p>
+<p>全局材质修复功能点击后也需再次确认才能使用，以防止误操作。</p>
+</div>
+<p><code>Virtools Material</code>面板中的Texture（贴图）属性不仅可以通过点击它来选择文档内的贴图，还可以通过点击右侧的文件夹按钮打开贴图文件浏览器，直接从文件系统中选择你想要的贴图（比从Shading菜单中选取更加快速）。文件浏览器默认位于Ballance的Texture目录下，以方便Ballance材质的选取。</p>
+<h2 id="virtools_3">Virtools贴图</h2>
+<p>BBP插件为所有Blender贴图（实际上是Image）添加了新的属性，称为Virtools Texture。它在Virtools贴图与Blender图片之间架起联系。</p>
+<p>与Blender材质不同的是，由于Blender的实现原因，贴图没有单独的属性面板，因此我们只能在<code>Virtools Material</code>面板中通过一种非直接的方式访问Virtools贴图属性。首先参照Virtools材质章节的说明找到<code>Virtools Material</code>面板，然后在<code>Virtools Material</code>面板中的材质插槽中选择一个贴图或打开一个贴图，就可以发现在材质的贴图属性下方额外显示了Virtools贴图属性，如下图高亮部分所示。</p>
+<p><img alt="" src="../../imgs/virtools-texture.png" /></p>
+<p>其中，Save Option表示贴图在Virtools中的存储方式，常见的存储方式有这几种：</p>
+<ul>
+<li>External：外部存储，文件只存储引用的文件名。所有Ballance原生贴图都应该使用此模式。</li>
+<li>Raw Data：原始数据，贴图存储在文件内，缺点是会导致文件很大。所有非原生Ballance贴图都应该使用此模式。</li>
+<li>Use Global：使用全局设定。除非是你正在修改一张已经存在地图，否则我们不建议使用此方式。我们建议在这里就明确指定各个贴图的存储方式，而不要使用全局值。全局设定在导出Virtools文档时被确定下来。</li>
+</ul>
+<p>而Video Format表示贴图在Virtools中的渲染模式，常用的模式有这几种：</p>
+<ul>
+<li>32 Bits ARGB8888：带有透明度的各类贴图的存储方式，例如柱子渐变部分。</li>
+<li>16 Bits ARGB1555：不带有透明度的各类贴图的存储方式，例如路面。</li>
+</ul>
+<h2 id="virtools_4">Virtools网格</h2>
+<p>BBP插件为所有Blender网格添加了新的属性，称为Virtools Mesh。转到<code>Data</code>属性面板，即可以找到<code>Virtools Mesh</code>面板。</p>
+<p><img alt="" src="../../imgs/virtools-mesh.png" /></p>
+<p>Virtools网格目前只是作为兼容来使用的。其只有Lit Mode一个属性可以设置。多数早期地图由于不知道如何正确设置材质，导致路面发黑，所以经常将Lit Mode设置为Prelit以让路面正常显示。此属性是为了兼容这种设计而存在的，用户通常无需设置此选项。</p>
+<h2 id="virtools_5">Virtools灯光</h2>
+<p>BBP插件为所有Blender灯光添加了新的属性，称为Virtools Light。转到<code>Data</code>属性面板，即可以找到<code>Virtools Light</code>面板。</p>
+<p><img alt="" src="../../imgs/virtools-light.png" /></p>
+<p>与Virtools材质类似，Virtools的灯光系统与Blender的灯光系统差距较大，Virtools灯光相当于一个桥梁，它可以准确地反映Virtools的设置，使得其可以完美地存储于Blender文件中，并在导入导出时提供必要的数据。同时该面板并提供一个应用按钮，用以将Virtools灯光设置应用到Blender灯光中。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../configure-plugin/" class="btn btn-neutral float-left" title="配置插件"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ballance-properties/" class="btn btn-neutral float-right" title="Ballance属性">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../configure-plugin/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ballance-properties/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
