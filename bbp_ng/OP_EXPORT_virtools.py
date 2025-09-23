@@ -44,9 +44,18 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
             self.report({'ERROR'}, 'You must specify at least one encoding for file saving (e.g. cp1252, gbk)!')
             return {'CANCELLED'}
 
-        # check file name
+        # check file name, but has slightly difference with importer.
+        # when exporting, file can be inexisting in file system, so we can't check it directly.
         filename = self.general_get_filename()
-        if not os.path.isfile(filename):
+        bad_filename: bool = False
+        # for filename, at first, it should not be empty surely.
+        if len(filename) == 0:
+            bad_filename = True
+        # then, if it is existing, it should be a file, otherwise everything is okey.
+        if os.path.exists(filename) and (not os.path.isfile(filename)):
+            bad_filename = True
+        # now, show message and exit if we have bad file name
+        if bad_filename:
             self.report({'ERROR'}, 'No file was selected!')
             return {'CANCELLED'}
 
