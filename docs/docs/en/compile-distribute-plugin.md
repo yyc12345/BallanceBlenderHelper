@@ -4,13 +4,13 @@ This page will guide you in compiling the plugin as well as distributing it.
 
 ## Compiling LibCmo with BMap
 
-BBP's Virtools file native import/export functionality relies on BMap and its Python binding PyBMap. In order to distribute the plugin, we need to first compile BMap and its predecessor LibCmo, and before doing so, you need to check the version of BMap you need. Because BBP doesn't always use the latest version of BMap, e.g. if you're compiling an older version of BBP, it's obviously not possible to rely on the latest version of BMap. BMap is constantly being upgraded, and the functionality it provides is constantly changing, and different versions of BMap are incompatible. BBP usually states the version of BMap it uses at the time of release, but if BBP doesn't point it out, you may need to look for the most recent version of BMap that compiles with the version of BBP at the time of its release.
+BBP's Virtools file native import/export functionality relies on BMap and its Python binding pybmap. In order to distribute the plugin, we need to first compile BMap and its predecessor LibCmo, and before doing so, you need to check the version of BMap you need. Because BBP doesn't always use the latest version of BMap, e.g. if you're compiling an older version of BBP, it's obviously not possible to rely on the latest version of BMap. BMap is constantly being upgraded, and the functionality it provides is constantly changing, and different versions of BMap are incompatible. BBP usually states the version of BMap it uses at the time of release, but if BBP doesn't point it out, you may need to look for the most recent version of BMap that compiles with the version of BBP at the time of its release.
 
 After specifying the version, you need to visit [LibCmo GitHub repository](https://github.com/yyc12345/libcmo21). Then clone the project and use the Git command to go to the corresponding version (or just download the source code of the corresponding version). Then follow LibCmo's compilation manual to compile to get BMap. on Windows, you'll usually get the files `BMap.dll` and `BMap.pdb`. On Linux, it will be `BMap.so`.
 
-Then we need to configure PyBMap, which comes with LibCmo. Please follow the manual of PyBMap to combine the compiled binary BMap library with PyBMap. That is to complete the PyBMap configuration.
+Then we need to configure pybmap, which comes with LibCmo. Please follow the manual of pybmap to combine the compiled binary BMap library with pybmap. That is to complete the pybmap configuration.
 
-Then we need to copy the configured PyBMap to our project under `bbp_ng/PyBMap` to complete this step.
+Then we need to copy the configured pybmap to our project under `bbp_ng/pybmap` to complete this step.
 
 ## Generate Resources
 

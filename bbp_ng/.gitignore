@@ -1,7 +1,7 @@
 ## ===== Personal =====
-# Do not include PyBMap in this repository.
+# Do not include pybmap in this repository.
 # Order user build and fetch it manually.
-PyBMap/
+pybmap/
 
 # Disable generated assets but keep the directory hierarchy.
 icons/*

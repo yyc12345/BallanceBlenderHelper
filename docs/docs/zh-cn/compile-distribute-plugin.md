@@ -4,13 +4,13 @@
 
 ## 编译LibCmo与BMap
 
-BBP的Virtools文件原生导入导出功能依赖BMap以及其Python绑定PyBMap来实现。为了分发插件，我们需要首先编译BMap及其前置LibCmo。而在编译前，你需要先确认你需要的BMap版本。因为BBP并不总是使用最新的BMap，例如你正在编译一个旧版的BBP，其显然不可能依赖最新的BMap。BMap也在不断升级中，其提供的功能也在不断变化，不同版本的BMap是不兼容的。BBP通常会在发布时写明其所用的BMap版本，如果BBP没有指出，你可能需要寻找与BBP发布时最近的BMap版本来编译。
+BBP的Virtools文件原生导入导出功能依赖BMap以及其Python绑定pybmap来实现。为了分发插件，我们需要首先编译BMap及其前置LibCmo。而在编译前，你需要先确认你需要的BMap版本。因为BBP并不总是使用最新的BMap，例如你正在编译一个旧版的BBP，其显然不可能依赖最新的BMap。BMap也在不断升级中，其提供的功能也在不断变化，不同版本的BMap是不兼容的。BBP通常会在发布时写明其所用的BMap版本，如果BBP没有指出，你可能需要寻找与BBP发布时最近的BMap版本来编译。
 
 在明确版本后，你需要访问[LibCmo位于GitHub的存储库](https://github.com/yyc12345/libcmo21)。然后克隆项目，使用Git命令转到对应版本（或者直接下载对应版本的源码）。然后按照LibCmo的编译手册编译得到BMap。在Windows上，你通常会得到`BMap.dll`和`BMap.pdb`这两个文件。而在Linux上，则会是`BMap.so`。
 
-然后我们需要配置PyBMap。PyBMap是随LibCmo一起提供的。请按照PyBMap的手册，将编译得到的二进制BMap库，和PyBMap结合在一起。即完成PyBMap配置。
+然后我们需要配置pybmap。pybmap是随LibCmo一起提供的。请按照pybmap的手册，将编译得到的二进制BMap库，和pybmap结合在一起。即完成pybmap配置。
 
-然后我们需要将配置好的PyBMap拷贝到本项目的根目录下即可完成此步（即存在`bbp_ng/PyBMap`文件夹，为配置好的PyBMap）。
+然后我们需要将配置好的pybmap拷贝到本项目的根目录下即可完成此步（即存在`bbp_ng/pybmap`文件夹，为配置好的pybmap）。
 
 ## 生成资源
 

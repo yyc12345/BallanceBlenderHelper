@@ -4,7 +4,7 @@ import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared, UTIL_naming_convention
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
 from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light
-from .PyBMap import bmap_wrapper as bmap
+from .pybmap import bmap_wrapper as bmap
 
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
     """Export Virtools File"""

@@ -2,8 +2,8 @@ import bpy, mathutils
 import typing, math
 from . import UTIL_functions
 
-# extract all declarations in PyBMap
-from .PyBMap.virtools_types import *
+# extract all declarations in pybmap
+from .pybmap.virtools_types import *
 # and add some patches for them
 # mainly patch them with functions exchanging data with blender
 # and the convertion between differnet coordinate system.
@@ -273,11 +273,11 @@ def virtools_name_regulator(name: str | None) -> str:
     else: return bpy.app.translations.pgettext_data('annoymous', 'BME/UTIL_virtools_types.virtools_name_regulator()')
 
 # YYC MARK:
-# There are default encodings for PyBMap. We support Western European and Simplified Chinese in default.
+# There are default encodings for pybmap. We support Western European and Simplified Chinese in default.
 # Since LibCmo 0.2, the encoding name of LibCmo become universal encoding which is platfoorm independent.
 # So no need set it according to different platform.
 # Use universal encoding name (like Python).
-g_PyBMapDefaultEncodings: tuple[str, ...] = (
+g_PybmapDefaultEncodings: tuple[str, ...] = (
     'cp1252',
     'gbk'
 )

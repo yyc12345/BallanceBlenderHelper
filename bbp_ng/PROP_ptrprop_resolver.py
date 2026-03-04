@@ -202,7 +202,7 @@ class PropsVisitor():
         """
         encodings = get_ioport_encodings(self.__mAssocScene)
         encodings.clear()
-        for default_enc in UTIL_virtools_types.g_PyBMapDefaultEncodings:
+        for default_enc in UTIL_virtools_types.g_PybmapDefaultEncodings:
             item = encodings.add()
             item.encoding = default_enc
     def draw_ioport_encodings(self, layout: bpy.types.UILayout) -> None:
