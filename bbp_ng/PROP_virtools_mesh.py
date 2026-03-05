@@ -1,6 +1,6 @@
 import bpy
 import typing, enum
-from . import UTIL_functions, UTIL_virtools_types
+from . import UTIL_functions, UTIL_blender_mesh, UTIL_virtools_types
 
 # Raw Data
 
@@ -30,19 +30,21 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
     
 # Getter Setter
 
-def get_virtools_mesh(mesh: bpy.types.Mesh) -> BBP_PG_virtools_mesh:
-    return mesh.virtools_mesh
+CanToMesh = bpy.types.Mesh | bpy.types.Curve | bpy.types.SurfaceCurve | bpy.types.TextCurve | bpy.types.MetaBall
 
-def get_raw_virtools_mesh(mesh: bpy.types.Mesh) -> RawVirtoolsMesh:
-    props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
+def get_virtools_mesh(meshlike: CanToMesh) -> BBP_PG_virtools_mesh:
+    return meshlike.virtools_mesh
+
+def get_raw_virtools_mesh(meshlike: CanToMesh) -> RawVirtoolsMesh:
+    props: BBP_PG_virtools_mesh = get_virtools_mesh(meshlike)
     rawdata: RawVirtoolsMesh = RawVirtoolsMesh()
 
     rawdata.mLitMode = _g_Helper_VXMESH_LITMODE.get_selection(props.lit_mode)
 
     return rawdata
 
-def set_raw_virtools_mesh(mesh: bpy.types.Mesh, rawdata: RawVirtoolsMesh) -> None:
-    props: BBP_PG_virtools_mesh = get_virtools_mesh(mesh)
+def set_raw_virtools_mesh(meshlike: CanToMesh, rawdata: RawVirtoolsMesh) -> None:
+    props: BBP_PG_virtools_mesh = get_virtools_mesh(meshlike)
 
     props.lit_mode = _g_Helper_VXMESH_LITMODE.to_selection(rawdata.mLitMode)
 
@@ -59,12 +61,22 @@ class BBP_PT_virtools_mesh(bpy.types.Panel):
     
     @classmethod
     def poll(cls, context):
-        return context.mesh is not None
+        if context.mesh is not None: return True
+        if context.curve is not None: return True
+        if context.meta_ball is not None: return True
+        return False
     
     def draw(self, context):
-        # get layout and target
+        # get layout
         layout = self.layout
-        props: BBP_PG_virtools_mesh = get_virtools_mesh(context.mesh)
+        # get target
+        datablock: typing.Any
+        if context.mesh is not None: datablock = context.mesh
+        elif context.curve is not None: datablock = context.curve
+        elif context.meta_ball is not None: datablock = context.meta_ball
+        else: datablock = None
+        # get mesh properties
+        props: BBP_PG_virtools_mesh = get_virtools_mesh(datablock)
 
         # draw data
         layout.prop(props, 'lit_mode')
@@ -75,11 +87,21 @@ def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_mesh)
     bpy.utils.register_class(BBP_PT_virtools_mesh)
 
-    # add into mesh metadata
+    # Add metadata into mesh-like data block.
+    # according to TemporaryMesh, we need add it into:
+    # mesh, curve, surface, font, and metaball.
     bpy.types.Mesh.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
+    bpy.types.Curve.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
+    bpy.types.SurfaceCurve.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
+    bpy.types.TextCurve.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
+    bpy.types.MetaBall.virtools_mesh = bpy.props.PointerProperty(type = BBP_PG_virtools_mesh)
 
 def unregister() -> None:
     # remove from metadata
+    del bpy.types.MetaBall.virtools_mesh
+    del bpy.types.TextCurve.virtools_mesh
+    del bpy.types.SurfaceCurve.virtools_mesh
+    del bpy.types.Curve.virtools_mesh
     del bpy.types.Mesh.virtools_mesh
 
     bpy.utils.unregister_class(BBP_PT_virtools_mesh)

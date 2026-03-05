@@ -159,28 +159,33 @@ def _prepare_virtools_3dobjects(
 
     # iterate exported object list
     for obj3d in export_objects:
-        # only accept mesh object and light object
+        # only accept mesh-like object, camera and light object
         # all of other objects will be discard.
-        match(obj3d.type):
-            case 'MESH':
-                # mesh object
-                if obj3d not in obj3d_cret_set:
-                    # add into set
-                    obj3d_cret_set.add(obj3d)
-                    # create virtools instance
-                    vtobj3d: bmap.BM3dObject = writer.create_3dobject()
-                    # add into result list
-                    obj3d_crets.append((obj3d, vtobj3d))
-            case 'LIGHT':
-                # light object
-                if obj3d not in light_cret_set:
-                    # add into set
-                    light_cret_set.add(obj3d)
-                    # create virtools instance
-                    vtlight: bmap.BMTargetLight = writer.create_target_light()
-                    # add into result list
-                    light_crets.append((obj3d, typing.cast(bpy.types.Light, obj3d.data), vtlight))
-        
+        if UTIL_blender_mesh.TemporaryMesh.has_geometry(obj3d):
+            # mesh-like object
+            if obj3d not in obj3d_cret_set:
+                # add into set
+                obj3d_cret_set.add(obj3d)
+                # create virtools instance
+                vtobj3d: bmap.BM3dObject = writer.create_3dobject()
+                # add into result list
+                obj3d_crets.append((obj3d, vtobj3d))
+        else:
+            match(obj3d.type):
+                case 'CAMERA':
+                    # camera object
+                    # TODO
+                    pass
+                case 'LIGHT':
+                    # light object
+                    if obj3d not in light_cret_set:
+                        # add into set
+                        light_cret_set.add(obj3d)
+                        # create virtools instance
+                        vtlight: bmap.BMTargetLight = writer.create_target_light()
+                        # add into result list
+                        light_crets.append((obj3d, typing.cast(bpy.types.Light, obj3d.data), vtlight))
+            
         # step progress no matter whether create new one
         progress.step()
 

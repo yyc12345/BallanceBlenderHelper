@@ -105,22 +105,37 @@ def _nest_custom_split_normal(nml_array: array.array) -> typing.Iterator[UTIL_vi
 class TemporaryMesh():
     """
     Create a temporary mesh for convenient exporting.
-    When exporting mesh, we need triangulate it first.
-    We create a temporary mesh to hold the triangulated mesh result.
+    When exporting mesh, we need evaluate it first, then triangulate it.
+    We create a temporary mesh to hold the evaluated and triangulated mesh result.
     So that original object will not be affected and keep its original geometry.
-    Please note passed bpy.types.Object must be Mesh Object.
+    Please note passed bpy.types.Object must be an object which can be converted into mesh.
+    You can use this class provided static method to check it.
     """
+
+    __cAllowedObjectType: typing.ClassVar[set[str]] = {
+        'MESH', 'CURVE', 'SURFACE', 'FONT', 'META'
+    }
+
+    @staticmethod
+    def has_geometry(obj: bpy.types.Object):
+        """
+        Check whether given Blender object has geometry.
+        If it has, it can safely utilize this class for visiting mesh.
+        """
+        return obj.type in TemporaryMesh.__cAllowedObjectType
     
     __mBindingObject: bpy.types.Object
+    __mEvaluatedObject: bpy.types.Object
     __mTempMesh: bpy.types.Mesh
     
     def __init__(self, binding_obj: bpy.types.Object):
+        depsgraph = bpy.context.evaluated_depsgraph_get()
         self.__mBindingObject = binding_obj
-        self.__mTempMesh = None
+        self.__mEvaluatedObject = self.__mBindingObject.evaluated_get(depsgraph)
+        self.__mTempMesh = self.__mEvaluatedObject.to_mesh()
         
-        if self.__mBindingObject.data is None:
+        if self.__mTempMesh is None:
             raise UTIL_functions.BBPException('try getting mesh from an object without mesh.')
-        self.__mTempMesh = self.__mBindingObject.to_mesh()
     
     def __enter__(self):
         return self
@@ -130,13 +145,15 @@ class TemporaryMesh():
     
     def is_valid(self) -> bool:
         if self.__mBindingObject is None: return False
+        if self.__mBindingObject is None: return False
         if self.__mTempMesh is None: return False
         return True
     
     def dispose(self) -> None:
         if self.is_valid():
             self.__mTempMesh = None
-            self.__mBindingObject.to_mesh_clear()
+            self.__mEvaluatedObject.to_mesh_clear()
+            self.__mEvaluatedObject = None
             self.__mBindingObject = None
     
     def get_temp_mesh(self) -> bpy.types.Mesh:

@@ -1,6 +1,6 @@
 import bpy
 import typing, enum
-from . import UTIL_functions, UTIL_icons_manager
+from . import UTIL_functions, UTIL_icons_manager, UTIL_blender_mesh
 
 #region Virtools Groups Define & Help Class
 
@@ -387,9 +387,9 @@ class BBP_PT_virtools_groups(bpy.types.Panel):
         target = typing.cast(bpy.types.Object, context.active_object)
 
         # notify on non-mesh object
-        if target.type != 'MESH':
+        if not UTIL_blender_mesh.TemporaryMesh.has_geometry(target):
             layout.label(
-                text='Virtools Group is invalid on non-mesh object!', icon='ERROR',
+                text='Virtools Group is invalid on non-mesh-like object!', icon='ERROR',
                 text_ctxt='BBP_PT_virtools_groups/draw')
 
         # draw main body
