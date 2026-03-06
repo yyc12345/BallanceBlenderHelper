@@ -19,7 +19,7 @@
                     "type": "float",
                     "title": "Length",
                     "desc": "The length of block.",
-                    "default": "2.5"
+                    "default": "5.0"
                 },
                 {
                     "field": "face_",
@@ -159,7 +159,7 @@
                     "type": "float",
                     "title": "Length",
                     "desc": "The length of block.",
-                    "default": "2.5"
+                    "default": "5.0"
                 },
                 {
                     "field": "face_",
