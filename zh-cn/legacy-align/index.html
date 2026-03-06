@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/legacy-align/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>传统对齐 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u4f20\u7edf\u5bf9\u9f50";
+        var mkdocs_page_input_path = "zh-cn/legacy-align.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/legacy-align/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">传统对齐</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">使用方法</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">面板介绍</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">传统对齐</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">传统对齐</h1>
+<p><code>Ballance - 3ds Max Align</code>提供了一种类似于3ds Max中对齐方式的对齐功能。</p>
+<p>所谓传统对齐功能，是是将3ds Max中的对齐操作完美地在Blender中重新进行了实现。可以使得很多从3ds Max转来使用Blender的制图人可以更快地上手，并且提供了一些便捷的对齐操作。下图展示了正在运作的传统对齐。</p>
+<p><img alt="" src="../../imgs/legacy-align.png" /></p>
+<h2 id="_2">使用方法</h2>
+<p>传统对齐支持将多个物体对一个物体的对齐，操作方法是先依次选中需要被对齐的物体，然后在最后选中对齐参考对象（也就是使其成为活动物体），然后点击<code>Ballance - 3ds Max Align</code>，即可弹出传统对齐面板，之后便可开始对齐操作。</p>
+<h2 id="_3">面板介绍</h2>
+<p>在面板中，<code>Align Axis</code>指定了你要对齐的轴，此处可以多选以指定多个轴，不指定任何轴将无法进行对齐操作，因而也无法点击<code>Apply</code>按钮。</p>
+<p><code>Current Object</code>指示选择哪个实例作为对齐参考。你可以选择场景中的活动物体，通常也就是你选择的最后一个物体。或者是3D游标。需要注意的是，如果你选择活动物体模式，那么活动物体将排除在对齐操作之外，不会被移动，因为参考物体是不可动的。而如果你选择3D游标，则活动物体会被纳入对齐操作的范围之中。</p>
+<p><code>Current Object Align Mode</code>是对齐参考物体的对齐模式，它只有在你选择活动物体作为对齐参考物体时才会出现。因为3D游标是一个单纯的点，而物体占有一定体积，我们需要按照某种模式（后文叙述）在空间中选择一个点作为后续对齐操作时使用的点。在这个选项里指定你需要参考其什么数值进行对齐，分别有<code>Min</code>（轴上最小值）、<code>Center (Bounding Box)</code>（碰撞箱的中心）、<code>Center (Axis)</code>（物体的原点）、<code>Max</code>（轴上的最大值）可选。这些选项与3ds Max中的对齐选项是一致的。</p>
+<p><code>Target Objects Align Mode</code>是正在被对齐的物体，可能有很多个，在这个选项里也是指定你需要参考其什么数值进行对齐。选项与<code>Current Object Align Mode</code>含义一致。</p>
+<p><code>Apply</code>按钮点击后将把当前页面的配置压入操作栈，并重置上面的设置，使得你可以开始新一轮对齐操作而无需再次执行传统对齐。操作栈中的操作个数在<code>Apply</code>按钮下方显示。</p>
+<div class="admonition info">
+<p class="admonition-title">Apply按钮做了什么</p>
+<p>了解这部分对制图没有用，除非你感兴趣，否则不需要阅读这个框里的内容。</p>
+<p>在设计上，Blender不支持所谓“在Operator内进行操作”，但是我们通过一些小把戏，模拟了一种类似于3ds Max中应用的效果。</p>
+<p>Apply按钮实际上是一个特殊显示的BoolProperty，通过监听其值变化事件，在避免递归调用的情况下，将当前设置记录在一个隐藏的CollectionProperty中，并重置自身数值和显示的属性，以达到“应用”的效果。Operator在执行过程中则是依次处理CollectionProperty中积攒的对齐要求。</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../group-operations/" class="btn btn-neutral float-left" title="按组操作"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../naming-convention/" class="btn btn-neutral float-right" title="命名规则">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../group-operations/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../naming-convention/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

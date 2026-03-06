@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/bme-adder/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>添加路面 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6dfb\u52a0\u8def\u9762";
+        var mkdocs_page_input_path = "zh-cn/bme-adder.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/bme-adder/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">添加路面</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">开始生成</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">从添加菜单生成</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">从侧边栏生成</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">配置路面</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_6">额外变换</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">小贴士</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">添加路面</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">添加路面</h1>
+<div class="admonition info">
+<p class="admonition-title">BME是可扩展的</p>
+<p>BME的路面添加器是可扩展的，菜单中的每一个项实际上都由一组JSON数据描述。您可以阅读<a href="../tech-infos/">技术信息</a>章节来了解我们是如何编写这些JSON的，甚至您还可以根据你的需求自行扩展BME可创建的路面种类。</p>
+</div>
+<h2 id="_2">开始生成</h2>
+<h3 id="_3">从添加菜单生成</h3>
+<p>在3D视图中，点击<code>Add - Floors</code>可展开添加路面菜单。菜单如下图所示。</p>
+<p><img alt="" src="../../imgs/bme-adder.png" /></p>
+<p>点击菜单后可以在弹出的子菜单中按分类查看所有受支持的路面类型。其名称和图标提示了它所要创建路面的样式与形状。</p>
+<h3 id="_4">从侧边栏生成</h3>
+<p>此外，还可以通过点按N键，打开3D视图的侧边栏，在其中找到Ballance选项卡，展开Floor面板也可找到，如下图所示：</p>
+<p><img alt="" src="../../imgs/bme-adder-sidebar.png" /></p>
+<p>该面板相较于添加菜单，其好处在于可常驻在界面之中，避免了在持续添加路面的操作中，频繁打开菜单寻找路面的麻烦。此外，该选项卡中还有用于添加钢轨和机关的面板可供展开，在后续章节中不再赘述。</p>
+<h2 id="_5">配置路面</h2>
+<p>点击其中一个路面类型，将打开路面创建对话框，这里我们展示的是Normal Platform（平面平台），如下图所示。在对话框里我们可以配置这个路面类型的各种属性，例如长宽高等距离属性，面的显示与否的属性等，来定制它生成的几何模型，以使其符合我们的要求。</p>
+<p><img alt="" src="../../imgs/bme-adder-dialog.png" /></p>
+<p>在Normal Platform的对话框中，我们首先可以看到它要求我们提供路面的长度，宽度，这决定了我们平台的大小，下面还有对应的文字描述来帮助你理解这个属性具体是控制着什么。</p>
+<p>然后它还需要我们提供这个平台的高度，高度默认为5，即Ballance中默认的路面高度大小，小于5将创建类似“魔虬”地图中的薄路面，大于5将创建类似“魔脓空间站”中非常高的路面墙体。</p>
+<p>最后它指示我们需要配置这个路面哪些面需要显示。需要注意的是，Top和Bottom指的是沿高度方向（Z轴）的顶面和底面，而Front，Back，Left，Right则是以头顶朝向-X轴，眼睛朝向-Z轴俯视状态下的前后左右。您可能注意到这6个面按钮中间有一个透视的六面体，实际上这六个面的选项的位置与这个透视六面体的六个面的位置是一一对应的。</p>
+<h2 id="_6">额外变换</h2>
+<p>在BME配置对话框的底部，您总是可以找到一个被称为额外变换的区域。在这个区域中，有额外移动和额外旋转两个选项可以配置。这些字段主要是为了可视化服务的。</p>
+<p>在说明这些字段的实际作用前，你需要知道，BME创建的路面总是以当前3D游标的位置进行创建的，即3D游标在哪里，新创建的路面就在哪里。这主要是为了可视化来考虑到，用户可以先将3D游标移动到想要添加路面的位置，再添加对应的BME结构，便可以在调整参数的时候即时预览到结果。有时候你的3D游标的位置不是那么的准确，又或者最终生成的结构需要一定的旋转才是你期望的，此时就可以利用额外变换字段，为最终生成的结构，增加相对于3D游标的额外的移动和旋转，使之处于正确的位置，这样就可以在调整参数的时候预览到正确的结果了。</p>
+<h2 id="_7">小贴士</h2>
+<p>每个路面类型，其配置的条目数是不同的，因此对于不同路面类型，需要根据配置的提示文本来了解对应配置具体是做什么的。一些路面类型所需要设置的条目可能很多，另一些则根本没有配置条目。</p>
+<p>路面类型配置的默认值被设置为创建此路面时最常用的值。每一次切换路面类型或重新创建时，都会将值重置为默认值。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../uv-mapping/" class="btn btn-neutral float-left" title="UV贴图"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../rail-adder/" class="btn btn-neutral float-right" title="添加钢轨">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../uv-mapping/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../rail-adder/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

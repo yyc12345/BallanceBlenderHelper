@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/zzq-features/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>ZZQ Features - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ZZQ Features";
+        var mkdocs_page_input_path = "en/zzq-features.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/zzq-features/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">ZZQ Features</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#snoop-group-then-to-mesh">Snoop Group then to Mesh</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#game-camera">Game Camera</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">ZZQ Features</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="zzq-features">ZZQ Features</h1>
+<p>This plugin received many suggestions from ZZQ during its development process, resulting in a rather disordered set of features, which are therefore described together on a separate page.</p>
+<h2 id="snoop-group-then-to-mesh">Snoop Group then to Mesh</h2>
+<p>Snoop Group then to Mesh, fully referred to as: snoop and copy the Virtools Group infomations into corresponding curve object and convert it into mesh object. You can select certain objects and then right-click to find this function in the context menu of the object.</p>
+<p>This function, as its name, converts the selected object into a mesh. If the selected object is a curve and there is a beveled object set, the grouping information of the beveled object will be assigned to the current curve (overriding the curve's current grouping settings). If the selected object is not a curve, or if it is a curve but lacks a beveled object, then this function is basically the same as executing a conversion to mesh. This function is extremely useful in loft modeling, as it only requires the correct grouping of the section object, after which using this function to convert the curve to a mesh will ensure that the grouping of the lofted object is correct.</p>
+<h2 id="game-camera">Game Camera</h2>
+<p>Many map makers often lack a clear concept of the size of their maps when creating them, which can easily lead to the production of maps that are either too large or too small. The in-game camera function of the menu item <code>Ballance - Game Camera</code> offers a way to preview the map from the perspective of the in-game camera within Blender, allowing map makers to better grasp the dimensions of the map.</p>
+<p>In order to use this feature, there must first be a camera in your scene, set as the active camera of the scene (when no camera is present, a newly added camera through the add menu will be automatically set). Additionally, you will need an active object, which cannot be the same as this camera.</p>
+<div class="admonition question">
+<p class="admonition-title">Why is it necessary to have active object?</p>
+<p>Due to the limitations of the Blender plugin, an active object is required since the in-game camera functionality supports targeting either the 3D cursor <strong>or an active object</strong>.</p>
+<p>Typically, the situation where there are no active objects available only occurs in a blank Blender document, which consequently renders the functionality unavailable. In a custom map, there is no any lack of objects which can become active objects; simply clicking on any object is enough (when wishing to use the 3D cursor as a target).</p>
+</div>
+<p>After clicking this function, the view will automatically switch to the perspective of the active camera, facilitating your preview. You can adjust the relevant settings in the panel located at the bottom left.</p>
+<p><img alt="" src="../../imgs/game-camera.png" /></p>
+<p>First, select the target, which essentially means choosing the position of the player's ball. If 3D cursor is selected, it is treated as the origin of player's ball. If active object is selected, the player's ball is placed at the origin of the active object.</p>
+<div class="admonition info">
+<p class="admonition-title">The position of the player's ball is not that straightforward.</p>
+<p>Regardless of whether one chooses 3D cursor or active object, if no extremely fine adjustments are made, the preview results may have slight differences compared with in-game result.</p>
+<p>When you use the 3D cursor mode and simply snap it to the ground, it does not represent the position of player ball. Since the radius of player ball is 2, you actually need to move 2 units in +Z direction to achieve the exact same perspective as in the game. However, this operation is too complex, and not performing this action does not cause a significant difference in the preview effect.</p>
+<p>When using active object mode, it is important to note that the origin of the object corresponds to the position of the dot displayed in viewport when the object is selected. For most objects, this may not be what you desire, as they may be located inside or outside the object, and are not always positioned on the surface of the object or at the center of a particular face. To address this situation, I recommend using the 3D cursor as a target and, by entering edit mode, utilizing snapping and the <code>Shift + S</code> menu to place the cursor in the correct position.</p>
+</div>
+<p>Next is the selection of the camera's rotation angles. We offer 8 common used in-game preset angles, corresponding to 4 each for 90 degrees camera and 45 degrees camera. Furthermore, if these preset angles do not meet your requirements, you can also set custom angles.</p>
+<p>Finally, there is the selection of camera perspectives, which can be divided into 3 types: Ordinary (standard perspective), Lift (perspective activated by holding the spacebar), and Easter Egg (special Easter Egg perspective).</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../component-adder/" class="btn btn-neutral float-left" title="Add Component"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../compile-distribute-plugin/" class="btn btn-neutral float-right" title="Compile and Distribute Plugin">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../compile-distribute-plugin/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
