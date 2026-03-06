@@ -17,7 +17,7 @@ UTIL_icons_manager.register()
 
 # then load other modules
 from . import UTIL_translation
-from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_virtools_light, PROP_virtools_group
+from . import PROP_preferences, PROP_ptrprop_resolver, PROP_virtools_material, PROP_virtools_texture, PROP_virtools_mesh, PROP_virtools_light, PROP_virtools_camera, PROP_virtools_group
 from . import PROP_ballance_element, PROP_bme_material, PROP_ballance_map_info
 from . import OP_IMPORT_bmfile, OP_EXPORT_bmfile, OP_IMPORT_virtools, OP_EXPORT_virtools
 from . import OP_UV_flatten_uv, OP_UV_rail_uv
@@ -327,6 +327,7 @@ def register() -> None:
     PROP_virtools_texture.register()
     PROP_virtools_mesh.register()
     PROP_virtools_light.register()
+    PROP_virtools_camera.register()
     PROP_virtools_group.register()
     PROP_ballance_element.register()
     PROP_bme_material.register()
@@ -397,6 +398,7 @@ def unregister() -> None:
     PROP_bme_material.unregister()
     PROP_ballance_element.unregister()
     PROP_virtools_group.unregister()
+    PROP_virtools_camera.unregister()
     PROP_virtools_light.unregister()
     PROP_virtools_mesh.unregister()
     PROP_virtools_texture.unregister()

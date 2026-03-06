@@ -1,5 +1,4 @@
-import bpy, mathutils
-from bpy.types import Context
+import bpy
 import typing, math
 from . import UTIL_functions, UTIL_virtools_types
 
