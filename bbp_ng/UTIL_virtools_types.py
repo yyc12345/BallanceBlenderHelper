@@ -79,7 +79,7 @@ def vxmatrix_to_blender(self: VxMatrix) -> mathutils.Matrix:
 ## Hints about Light Matrix
 #  There is a slight difference between Virtools and Blender.
 #  In blender, the default direction of all directional light (spot and sun) are Down (-Z).
-#  Hoewver, in Virtools, the default direction of all directional light (spot and directional) are Forward (+Z).
+#  However, in Virtools, the default direction of all directional light (spot and directional) are Forward (+Z).
 #  
 #  As brief view, in Blender coordinate system, you can see that we got Blender default light direction
 #  from Virtools default light direction by rotating it around X-axis with -90 degree
@@ -107,6 +107,31 @@ def bldmatrix_restore_light_obj(data: mathutils.Matrix) -> mathutils.Matrix:
     # which represent a 90 degree roration in X-axis to remove the matrix we added in patch step.
     # however, the reverse matrix of 90 degree X-axis rotation is just NEGATUIVE 90 degree X-axis rotation.
     # so we simply right multiple it.
+    return data @ mathutils.Matrix.Rotation(math.radians(-90), 4, 'X')
+
+## Hints about Camera Matrix
+#  Just like light, camera is also different between Virtools and Blender.
+#  In Blender, the default camera orientation is looking at -Z and +Y up.
+#  Oppositely, Virtools camera is looking at +Z and +Y up.
+#  
+#  These direction is based on their own coordinate system respectively.
+#  Accidently this difference is same like light.
+#  So we can simply copy light strategy in there.
+
+def bldmatrix_patch_camera_obj(data: mathutils.Matrix) -> mathutils.Matrix:
+    """
+    Add patch for camera world matrix to correct its direction.
+    This function is usually used when importing camera.
+    """
+    # same operation like light matrix patch
+    return data @ mathutils.Matrix.Rotation(math.radians(90), 4, 'X')
+
+def bldmatrix_restore_camera_obj(data: mathutils.Matrix) -> mathutils.Matrix:
+    """
+    The reverse operation of bldmatrix_patch_camera_mat().
+    This function is usually used when exporting camera.
+    """
+    # same operation like light matrix patch
     return data @ mathutils.Matrix.Rotation(math.radians(-90), 4, 'X')
 
 #endregion

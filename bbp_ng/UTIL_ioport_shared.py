@@ -37,6 +37,7 @@ class ConflictResolver():
     
     __mObjectStrategy: ConflictStrategy
     __mLightStrategy: ConflictStrategy
+    __mCameraStrategy: ConflictStrategy
     __mMeshStrategy: ConflictStrategy
     __mMaterialStrategy: ConflictStrategy
     __mTextureStrategy: ConflictStrategy
@@ -44,11 +45,13 @@ class ConflictResolver():
     def __init__(self, 
             obj_strategy: ConflictStrategy, 
             light_strategy: ConflictStrategy, 
+            camera_strategy: ConflictStrategy,
             mesh_strategy: ConflictStrategy, 
             mtl_strategy: ConflictStrategy, 
             tex_strategy: ConflictStrategy):
         self.__mObjectStrategy = obj_strategy
         self.__mLightStrategy = light_strategy
+        self.__mCameraStrategy = camera_strategy
         self.__mMeshStrategy = mesh_strategy
         self.__mMaterialStrategy = mtl_strategy
         self.__mTextureStrategy = tex_strategy
@@ -87,6 +90,22 @@ class ConflictResolver():
         new_light: bpy.types.Light = bpy.data.lights.new(name, 'POINT')
         new_obj: bpy.types.Object = bpy.data.objects.new(name, new_light)
         return (new_obj, new_light, True)
+
+    def create_camera(self, name: str) -> tuple[bpy.types.Object, bpy.types.Camera, bool]:
+        """
+        Create camera data block and associated 3d object.
+
+        Same execution pattern with light creation.
+        """
+        if self.__mCameraStrategy == ConflictStrategy.Current:
+            old_obj: bpy.types.Object | None = bpy.data.objects.get(name, None)
+            if old_obj is not None and old_obj.type == 'CAMERA':
+                return (old_obj, typing.cast(bpy.types.Camera, old_obj.data), False)
+        # create new object.
+        # if object or camera name is conflict, rename it directly without considering conflict strategy
+        new_camera: bpy.types.Camera = bpy.data.cameras.new(name)
+        new_obj: bpy.types.Object = bpy.data.objects.new(name, new_camera)
+        return (new_obj, new_camera, True)
 
     def create_mesh(self, name: str) -> tuple[bpy.types.Mesh, bool]:
         if self.__mMeshStrategy == ConflictStrategy.Current:
@@ -153,6 +172,14 @@ class ImportParams():
         translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
     ) # type: ignore
 
+    camera_conflict_strategy: bpy.props.EnumProperty(
+        name = "Camera Name Conflict",
+        items = _g_EnumHelper_ConflictStrategy.generate_items(),
+        description = "Define how to process camera name conflict",
+        default = _g_EnumHelper_ConflictStrategy.to_selection(ConflictStrategy.Rename),
+        translation_context = 'BBP/UTIL_ioport_shared.ImportParams/property'
+    ) # type: ignore
+
     object_conflict_strategy: bpy.props.EnumProperty(
         name = "Object Name Conflict",
         items = _g_EnumHelper_ConflictStrategy.generate_items(),
@@ -173,11 +200,13 @@ class ImportParams():
         grid = body.grid_flow(row_major=False, columns=2)
         grid.label(text='Object', icon='CUBE', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
         grid.label(text='Light', icon='LIGHT', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
+        grid.label(text='Camera', icon='CAMERA_DATA', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
         grid.label(text='Mesh', icon='MESH_DATA', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
         grid.label(text='Material', icon='MATERIAL', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
         grid.label(text='Texture', icon='TEXTURE', text_ctxt='BBP/UTIL_ioport_shared.ImportParams/draw')
         grid.prop(self, 'object_conflict_strategy', text='')
         grid.prop(self, 'light_conflict_strategy', text='')
+        grid.prop(self, 'camera_conflict_strategy', text='')
         grid.prop(self, 'mesh_conflict_strategy', text='')
         grid.prop(self, 'material_conflict_strategy', text='')
         grid.prop(self, 'texture_conflict_strategy', text='')
@@ -194,6 +223,9 @@ class ImportParams():
     def general_get_light_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.light_conflict_strategy)
 
+    def general_get_camera_conflict_strategy(self) -> ConflictStrategy:
+        return _g_EnumHelper_ConflictStrategy.get_selection(self.camera_conflict_strategy)
+
     def general_get_object_conflict_strategy(self) -> ConflictStrategy:
         return _g_EnumHelper_ConflictStrategy.get_selection(self.object_conflict_strategy)
 
@@ -201,6 +233,7 @@ class ImportParams():
         return ConflictResolver(
             self.general_get_object_conflict_strategy(),
             self.general_get_light_conflict_strategy(),
+            self.general_get_camera_conflict_strategy(),
             self.general_get_mesh_conflict_strategy(),
             self.general_get_material_conflict_strategy(),
             self.general_get_texture_conflict_strategy()

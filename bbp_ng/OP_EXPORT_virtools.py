@@ -1,9 +1,10 @@
 import bpy, mathutils
 from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
+from dataclasses import dataclass
 from . import PROP_preferences, UTIL_ioport_shared, UTIL_naming_convention
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light, PROP_virtools_camera
 from .pybmap import bmap_wrapper as bmap
 
 class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtoolsFile, UTIL_ioport_shared.ExportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
@@ -83,9 +84,16 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
 
 _TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
 _TLightPair = tuple[bpy.types.Object, bpy.types.Light, bmap.BMTargetLight]
+_TCameraPair = tuple[bpy.types.Object, bpy.types.Camera, bmap.BMTargetCamera]
 _TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
 _TMaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
 _TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
+
+@dataclass
+class _PreparedCrets:
+    obj3d_crets: tuple[_TObj3dPair, ...]
+    light_crets: tuple[_TLightPair, ...]
+    camera_crets: tuple[_TCameraPair, ...]
 
 def _export_virtools(
         file_name_: str, 
@@ -112,17 +120,16 @@ def _export_virtools(
 
             # prepare progress reporter
             with ProgressReport(wm = bpy.context.window_manager) as progress:
-                # prepare 3dobject and light
-                obj3d_crets: tuple[_TObj3dPair, ...]
-                light_crets: tuple[_TLightPair, ...]
-                (obj3d_crets, light_crets) = _prepare_virtools_3dobjects(writer, progress, export_objects)
+                # prepare 3dobject, light and camera
+                prep_crets = _prepare_virtools_3dobjects(writer, progress, export_objects)
                 # export group according to prepared 3dobject
-                _export_virtools_groups(writer, progress, successive_sector_, successive_sector_count_, obj3d_crets)
-                # export prepared light
-                _export_virtools_light(writer, progress, light_crets)
+                _export_virtools_groups(writer, progress, successive_sector_, successive_sector_count_, prep_crets.obj3d_crets)
+                # export prepared light and camera
+                _export_virtools_light(writer, progress, prep_crets.light_crets)
+                _export_virtools_camera(writer, progress, prep_crets.camera_crets)
                 # export prepared 3dobject
                 mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
-                    writer, progress, obj3d_crets)
+                    writer, progress, prep_crets.obj3d_crets)
                 # export mesh
                 material_crets: tuple[_TMaterialPair, ...] = _export_virtools_meshes(
                     writer, progress, mesh_crets)
@@ -140,7 +147,7 @@ def _prepare_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
         export_objects: tuple[bpy.types.Object, ...]
-        ) -> tuple[tuple[_TObj3dPair, ...], tuple[_TLightPair, ...]]:
+        ) -> _PreparedCrets:
     # this function only create equvalent entries in virtools engine and do not export anything
     # because _export_virtools_3dobjects() and _export_virtools_groups() are need use the return value of this function
     # 
@@ -153,6 +160,9 @@ def _prepare_virtools_3dobjects(
     # create light hashset and result
     light_crets: list[_TLightPair] = []
     light_cret_set: set[bpy.types.Object] = set()
+    # create camera hashset and result
+    camera_crets: list[_TCameraPair] = []
+    camera_cret_set: set[bpy.types.Object] = set()
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Creating 3dObjects and Lights', 'BBP_OT_export_virtools/execute')
     progress.enter_substeps(len(export_objects), tr_text)
@@ -174,8 +184,13 @@ def _prepare_virtools_3dobjects(
             match(obj3d.type):
                 case 'CAMERA':
                     # camera object
-                    # TODO
-                    pass
+                    if obj3d not in camera_cret_set:
+                        # add into set
+                        camera_cret_set.add(obj3d)
+                        # create virtools instance
+                        vtcamera: bmap.BMTargetCamera = writer.create_target_camera()
+                        # add into result list
+                        camera_crets.append((obj3d, typing.cast(bpy.types.Camera, obj3d.data), vtcamera))
                 case 'LIGHT':
                     # light object
                     if obj3d not in light_cret_set:
@@ -191,7 +206,7 @@ def _prepare_virtools_3dobjects(
 
     # leave progress and return
     progress.leave_substeps()
-    return (tuple(obj3d_crets), tuple(light_crets))
+    return _PreparedCrets(tuple(obj3d_crets), tuple(light_crets), tuple(camera_crets))
 
 def _export_virtools_groups(
         writer: bmap.BMFileWriter,
@@ -282,6 +297,49 @@ def _export_virtools_light(
         vtlight.set_falloff(rawlight.mFalloff)
         vtlight.set_falloff_shape(rawlight.mFalloffShape)
 
+        # step
+        progress.step()
+
+    # leave progress and return
+    progress.leave_substeps()
+
+def _export_virtools_camera(
+        writer: bmap.BMFileWriter,
+        progress: ProgressReport,
+        camera_crets: tuple[_TCameraPair, ...]
+        ) -> None:
+    # start saving
+    tr_text: str = bpy.app.translations.pgettext_rpt('Saving Cameras', 'BBP_OT_export_virtools/execute')
+    progress.enter_substeps(len(camera_crets), tr_text)
+
+    for obj3d, camera, vtcamera in camera_crets:
+        # set name
+        vtcamera.set_name(obj3d.name)
+
+        # setup 3d entity parts
+        # set world matrix
+        vtmat: UTIL_virtools_types.VxMatrix = UTIL_virtools_types.VxMatrix()
+        bldmat: mathutils.Matrix = UTIL_virtools_types.bldmatrix_restore_camera_obj(obj3d.matrix_world)
+        UTIL_virtools_types.vxmatrix_from_blender(vtmat, bldmat)
+        UTIL_virtools_types.vxmatrix_conv_co(vtmat)
+        vtcamera.set_world_matrix(vtmat)
+        # set visibility
+        vtcamera.set_visibility(not obj3d.hide_get())
+
+        # setup camera data
+        rawcamera: PROP_virtools_camera.RawVirtoolsCamera = PROP_virtools_camera.get_raw_virtools_camera(camera)
+
+        vtcamera.set_projection_type(rawcamera.mProjectionType)
+
+        vtcamera.set_orthographic_zoom(rawcamera.mOrthographicZoom)
+
+        vtcamera.set_front_plane(rawcamera.mFrontPlane)
+        vtcamera.set_back_plane(rawcamera.mBackPlane)
+        vtcamera.set_fov(rawcamera.mFov)
+
+        (w, h) = rawcamera.mAspectRatio
+        vtcamera.set_aspect_ratio(w, h)
+        
         # step
         progress.step()
 

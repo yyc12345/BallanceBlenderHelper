@@ -3,7 +3,7 @@ from bpy_extras.wm_utils.progress_report import ProgressReport
 import tempfile, os, typing
 from . import PROP_preferences, UTIL_ioport_shared, UTIL_naming_convention
 from . import UTIL_virtools_types, UTIL_functions, UTIL_file_browser, UTIL_blender_mesh, UTIL_ballance_texture
-from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light, PROP_ballance_map_info
+from . import PROP_virtools_group, PROP_virtools_material, PROP_virtools_mesh, PROP_virtools_texture, PROP_virtools_light, PROP_virtools_camera, PROP_ballance_map_info
 from .pybmap import bmap_wrapper as bmap
 
 class BBP_OT_import_virtools(bpy.types.Operator, UTIL_file_browser.ImportVirtoolsFile, UTIL_ioport_shared.ImportParams, UTIL_ioport_shared.VirtoolsParams, UTIL_ioport_shared.BallanceParams):
@@ -80,8 +80,9 @@ def _import_virtools(file_name_: str, encodings_: tuple[str, ...], resolver: UTI
                 # import 3dobjects
                 obj3d_cret_map: dict[bmap.BM3dObject, bpy.types.Object] = _import_virtools_3dobjects(
                     reader, progress, resolver, mesh_cret_map)
-                # import light
+                # import light and camera
                 _import_virtools_lights(reader, progress, resolver)
+                _import_virtools_cameras(reader, progress, resolver)
                 # import groups
                 _import_virtools_groups(reader, progress, obj3d_cret_map)
 
@@ -419,6 +420,53 @@ def _import_virtools_lights(
             light_3dobj.matrix_world = UTIL_virtools_types.bldmatrix_patch_light_obj(bldmat)
             # set visibility
             light_3dobj.hide_set(not vtlight.get_visibility())
+
+    # leave progress
+    progress.leave_substeps()
+
+def _import_virtools_cameras(
+        reader: bmap.BMFileReader, 
+        progress: ProgressReport,
+        resolver: UTIL_ioport_shared.ConflictResolver
+        ) -> None:
+    # prepare progress
+    tr_text: str = bpy.app.translations.pgettext_rpt('Loading Cameras', 'BBP_OT_import_virtools/execute')
+    progress.enter_substeps(reader.get_target_camera_count(), tr_text)
+
+    # same creation notes like light
+    for vtcamera in reader.get_target_cameras():
+        # create camera data block and 3d object together
+        (camera_3dobj, camera, init_camera) = resolver.create_camera(
+            UTIL_virtools_types.virtools_name_regulator(vtcamera.get_name())
+        )
+
+        if init_camera:
+            # setup camera data block
+            rawcamera: PROP_virtools_camera.RawVirtoolsCamera = PROP_virtools_camera.RawVirtoolsCamera()
+            
+            rawcamera.mProjectionType = vtcamera.get_projection_type()
+
+            rawcamera.mOrthographicZoom = vtcamera.get_orthographic_zoom()
+
+            rawcamera.mFrontPlane = vtcamera.get_front_plane()
+            rawcamera.mBackPlane = vtcamera.get_back_plane()
+            rawcamera.mFov = vtcamera.get_fov()
+
+            rawcamera.mAspectRatio = vtcamera.get_aspect_ratio()
+
+            PROP_virtools_camera.set_raw_virtools_camera(camera, rawcamera)
+            PROP_virtools_camera.apply_to_blender_camera(camera)
+
+            # setup camera associated 3d object
+            # add into scene
+            UTIL_functions.add_into_scene(camera_3dobj)
+            # set world matrix
+            vtmat: UTIL_virtools_types.VxMatrix = vtcamera.get_world_matrix()
+            UTIL_virtools_types.vxmatrix_conv_co(vtmat)
+            bldmat: mathutils.Matrix = UTIL_virtools_types.vxmatrix_to_blender(vtmat)
+            camera_3dobj.matrix_world = UTIL_virtools_types.bldmatrix_patch_camera_obj(bldmat)
+            # set visibility
+            camera_3dobj.hide_set(not vtcamera.get_visibility())
 
     # leave progress
     progress.leave_substeps()

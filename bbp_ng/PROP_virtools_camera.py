@@ -191,10 +191,39 @@ def apply_to_blender_camera(cam: bpy.types.Camera) -> None:
     cam.lens_unit = 'FOV'
     cam.angle = rawdata.mFov
 
+def apply_to_blender_scene_resolution(cam: bpy.types.Camera) -> None:
+    # get raw data first
+    rawdata: RawVirtoolsCamera = get_raw_virtools_camera(cam)
+
+    # fetch width and height
+    (w, h) = rawdata.mAspectRatio
+
+    # compute a proper resolution from this aspect ratio
+    # calculate their lcm first
+    hw_lcm = math.lcm(w, h)
+    # get the first number which is greater than 1000 (1000 is a proper resolution size)
+    # and can be integrally divided by this lcm.
+    HW_MIN: int = 1000
+    min_edge = ((HW_MIN // hw_lcm) + 1) * hw_lcm
+    # calculate the final resolution
+    if w < h:
+        # width is shorter than height, set width as min edge
+        width = min_edge
+        height = width // w * h
+    else:
+        # opposite case
+        height = min_edge
+        width = height // h * w
+
+    # setup resolution
+    render_settings = bpy.context.scene.render
+    render_settings.resolution_x = width
+    render_settings.resolution_y = height
+
 # Operators
 
 class BBP_OT_apply_virtools_camera(bpy.types.Operator):
-    """Apply Virtools Camera to Blender Camera."""
+    """Apply Virtools Camera to Blender Camera except Resolution."""
     bl_idname = "bbp.apply_virtools_camera"
     bl_label = "Apply to Blender Camera"
     bl_options = {'UNDO'}
@@ -207,6 +236,22 @@ class BBP_OT_apply_virtools_camera(bpy.types.Operator):
     def execute(self, context):
         cam: bpy.types.Camera = context.camera
         apply_to_blender_camera(cam)
+        return {'FINISHED'}
+
+class BBP_OT_apply_virtools_camera_resolution(bpy.types.Operator):
+    """Apply Virtools Camera Resolution to Blender Scene."""
+    bl_idname = "bbp.apply_virtools_camera_resolution"
+    bl_label = "Apply to Blender Scene Resolution"
+    bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_apply_virtools_camera_resolution'
+
+    @classmethod
+    def poll(cls, context):
+        return context.camera is not None
+
+    def execute(self, context):
+        cam: bpy.types.Camera = context.camera
+        apply_to_blender_scene_resolution(cam)
         return {'FINISHED'}
 
 # Display Panel
@@ -232,8 +277,12 @@ class BBP_PT_virtools_camera(bpy.types.Panel):
         rawdata: RawVirtoolsCamera = get_raw_virtools_camera(cam)
 
         # draw operator
-        layout.operator(
+        row = layout.row()
+        row.operator(
             BBP_OT_apply_virtools_camera.bl_idname, text='Apply', icon='NODETREE',
+            text_ctxt='BBP_PT_virtools_camera/draw')
+        row.operator(
+            BBP_OT_apply_virtools_camera_resolution.bl_idname, text='Apply Resolution', icon='SCENE',
             text_ctxt='BBP_PT_virtools_camera/draw')
 
         # draw data
@@ -276,6 +325,7 @@ class BBP_PT_virtools_camera(bpy.types.Panel):
 def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_camera)
     bpy.utils.register_class(BBP_OT_apply_virtools_camera)
+    bpy.utils.register_class(BBP_OT_apply_virtools_camera_resolution)
     bpy.utils.register_class(BBP_PT_virtools_camera)
 
     # add into camera metadata
@@ -286,6 +336,7 @@ def unregister() -> None:
     del bpy.types.Camera.virtools_camera
 
     bpy.utils.unregister_class(BBP_PT_virtools_camera)
+    bpy.utils.unregister_class(BBP_OT_apply_virtools_camera_resolution)
     bpy.utils.unregister_class(BBP_OT_apply_virtools_camera)
     bpy.utils.unregister_class(BBP_PG_virtools_camera)
 
