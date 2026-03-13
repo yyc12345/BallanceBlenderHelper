@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/rail-adder/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Add Rail - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Add Rail";
+        var mkdocs_page_input_path = "en/rail-adder.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/rail-adder/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Add Rail</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#rail-sections">Rail Sections</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rail-section">Rail Section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transition-section">Transition Section</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#straight-rails">Straight Rails</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#straight-rail">Straight Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transition-rail">Transition Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#side-rail">Side Rail</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#curve-rails">Curve Rails</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#arc-rail">Arc Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#spiral-rail">Spiral Rail</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#side-spiral-rail">Side Spiral Rail</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#extra-transform">Extra Transform</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Add Rail</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="add-rail">Add Rail</h1>
+<p>In the 3D view, click <code>Add - Rails</code> to expand the Add Rails menu. The menu is shown on the left side of the image below.</p>
+<p><img alt="" src="../../imgs/rail-adder.png" /></p>
+<p>The right side of the picture above shows the interface for adding some rails, and we will introduce them in turn later, from top to bottom on the right side are: Add Rail Section, Add Straight Rail, Add Side Rail, Add Arc Rail, and Add Spiral Rail.</p>
+<div class="admonition info">
+<p class="admonition-title">Rails with non-standard data</p>
+<p>BBP's rail adding menu is designed for new players to add rails quickly, and is not designed for skilled mapper to add rails. For cases where you need rails with non-standard data, such as rails with non-standard spacing or non-standard section, you need to build the rail section with Blender's own Circle operation, and then generate the entire rail with the Extrude, Bridge, or Spiral modifiers. In this way, you can control all the parameters of each step to meet your specific needs for rail parameters.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Source of the rail parameters</p>
+<p>The various parameters of rails used in the Rails Add menu are derived from actual in-game measurements and from the experience of several mappers in the Ballance community over more than a decade.</p>
+<p>The rail section radius and gauge are derived from years of mapping experience and measurements. Side rail tilt degree data is calculated by BallanceBug. Mono and double rail transition sinking data from the calculation by Imbalanced Dream. Spiral rail spacing is measured from Level 9 and Level 13.</p>
+</div>
+<h2 id="rail-sections">Rail Sections</h2>
+<p>In the Add Rails menu, under the <code>Sections</code> category, you can add rail sections. A rail section is the outline of a rail, and the creation of a rail section is usually the first step in the creation of various types of shaped rails, e.g. rails made by lofting, extruding etc.</p>
+<h3 id="rail-section">Rail Section</h3>
+<p>To create a rail section, you can choose in the panel to create a mono or double rail section.</p>
+<p>When creating a mono rail section, the octagonal rail section is automatically created with the flat side edge facing up, while the double rail section is not (vertex tip facing up). If you need to change this behavior, you need to go into edit mode after creation and manually rotate the vertices of the rail section so that the flat side or vertex tip of the rail section faces up.</p>
+<h3 id="transition-section">Transition Section</h3>
+<p>The mono and double rail transition section will create a rail section that is suitable for mono and double rail transitions. This rail section is created without specifying any parameters.</p>
+<h2 id="straight-rails">Straight Rails</h2>
+<p>In the Add Rails menu, under the <code>Straight Rails</code> category, you can add straight rails.</p>
+<h3 id="straight-rail">Straight Rail</h3>
+<p>A Straight Rail is a straight rail of rail. To create a straight rail you need to specify a Length. You can also choose to create a straight double rail or a mono rail.</p>
+<p>When creating a mono rail, similar to a section, the flat side of the rail section is automatically turned upwards, and this behavior can be modified by entering edit mode after creation and then rotating.</p>
+<p>The creation of straight rails also supports the capping properties, which are controlled by the Start Cap and End Cap options located under Rail Cap, which are checked to cap the corresponding end. Capping is the process of automatically adding face for the end of a rail and correctly handling its normal. This is usually done to ensure that the rail is aesthetically pleasing where it comes into contact with other surfaces or objects, rail-to-rail joints do not need to be capped.</p>
+<h3 id="transition-rail">Transition Rail</h3>
+<p>Mono and double transition rail can often be seen as an advanced use of Transition Section creation, where the section created by the transition section is extruded and the normals are taken care of to produce the result created by this option. To create a mono or double transition rail you need to specify a Length, which is also supported by the capping property.</p>
+<h3 id="side-rail">Side Rail</h3>
+<p>Side rails are created by specifying a Side Type which can be either Normal (for paper or wood balls) or Stone Specific (for stone ball specific). Side rails for paper and wood balls are the usual side rails that stone balls cannot pass through. Stone Specific side rails are side rails that are more tilted and can be passed by stone balls, and of course, paper and wood balls.</p>
+<p>In addition to the side rail type, side rail creation also requires the Length and capping attributes.</p>
+<h2 id="curve-rails">Curve Rails</h2>
+<p>In the Add Rails menu, under the <code>Curve Rails</code> category, you can add curved rails.</p>
+<h3 id="arc-rail">Arc Rail</h3>
+<p>The first thing you need to do with an arc rail is to specify the Angle and Radius, which indicates how much the rail will turn at what radius. Generally speaking, angles of 90, 180, and 270 degrees are more common, but any number of degrees can be specified. The radius is usually adjusted as needed. For the double rail arc, the radius is the distence between arc rail rotation center to the double rail section center. For the mono rail arc rail, is the distence between arc rail rotation center to the mono rail section center.</p>
+<p>Steps of the arc rail, the number of steps indicates the number of segments of the arc rail, the larger the number, the smoother the arc rail looks, relatively, the vertices will be more, the storage space and rendering requirements are also higher, so you need to choose a reasonable value.</p>
+<p>The Flip option for arc rail allows you to flip (in other word, mirror) the generated structure along a specified axis, and the flip options available on all three axes can accommodate the generation of all possible arc rail structures.</p>
+<p>Arc rails also support double-rail mono-rail selection, you can create mono-rail arc rails and double-rail arc rails. The capping attribute is also supported.</p>
+<h3 id="spiral-rail">Spiral Rail</h3>
+<p>Spiral rail, or spiral double rail, is similar to arc rail in that you need to specify Radius, which is the radius of rotation, but not the angle, since it always rotates in 360 degrees.</p>
+<p>Spiral rails have an Iterations property, which indicates how many times the rail will spiral up, and a Screw property, which indicates the distance between each iteration.</p>
+<p>The spiral rail also needs to set the Steps property, which has the same meaning as the arc rail. However, it should be noted that the number of steps refers to the number of steps in each iteration, not the overall number of steps. Therefore, when adjusting the iteration attribute, you do not need to change the Steps attribute again.</p>
+<p>Side Spiral Rail also has capping and flip property.</p>
+<h3 id="side-spiral-rail">Side Spiral Rail</h3>
+<p>Side Spiral Rail, similar to spiral rail, but the ball is rolled along the side, similar to side rail.</p>
+<p>Side Spiral Rail does not have a Screw property, because Side Spiral Rail is designed so that adjacent spins share a common edge, so the screw is fixed.</p>
+<p>The Radius, Iterations and Steps attributes in the Side Spiral Rail settings have the same meaning as the spiral rail. Side Spiral Rail also have a capping attribute.</p>
+<p>Spiral Rail also has capping and flip property.</p>
+<h2 id="extra-transform">Extra Transform</h2>
+<p>When adding straight rails and curved rails, you can always set a property known as the Extra Transform. Its effect is consistent with the Extra Transform field in adding floors, both serving the purpose of visual edit.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../bme-adder/" class="btn btn-neutral float-left" title="Add Floor"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../component-adder/" class="btn btn-neutral float-right" title="Add Component">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../bme-adder/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../component-adder/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

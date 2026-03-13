@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/import-export-virtools/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Import and Export Virtools Document - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Import and Export Virtools Document";
+        var mkdocs_page_input_path = "en/import-export-virtools.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/import-export-virtools/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Import and Export Virtools Document</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#import-virtools-file">Import Virtools File</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#conflict-options">Conflict Options</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtools-params">Virtools Params</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#export-virtools-file">Export Virtools File</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#export-target">Export Target</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#virtools-params_1">Virtools Params</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ballance-params">Ballance Params</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cant-import-or-export">Can't Import or Export</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Import and Export Virtools Document</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="import-and-export-virtools-document">Import and Export Virtools Document</h1>
+<div class="admonition warning">
+<p class="admonition-title">This is experimental content</p>
+<p>Native importing and exporting of Virtools documents is experimental content for the BBP plugin, it may have many problems, see the <a href="../report-bugs/">Report Issue</a> section to learn more. When problems are encountered, please report them. the authors of the BBP plugin are not responsible for any consequences resulting from problems with the BBP plugin.</p>
+</div>
+<h2 id="import-virtools-file">Import Virtools File</h2>
+<p>Virtools files can be imported by clicking <code>File - Import - Virtools File</code>. Importing supports CMO, VMO and NMO files. Clicking on it will bring up the file opening window and show the import settings in the sidebar. First of all, you need to select the Virtools file to be imported, and then configure the import settings in the sidebar. After configuring the import settings, you can click Import to start the import, and wait for the status bar at the bottom of Blender to indicate that the import is complete.</p>
+<h3 id="conflict-options">Conflict Options</h3>
+<p>The Conflict Options section indicates what to do when the importer encounters duplicate object names. There are 5 levels, for Object, Light, Mesh, Material and Texture. There are 2 ways to handle it: Rename and Use Current. When Rename is selected and a duplicate name is encountered, a suffix will be added to the name to make it unique. By choosing Use Current, the import of the item from the file will be ignored and the item with the same name will be used instead, which already exists in the Blender document.</p>
+<div class="admonition info">
+<p class="admonition-title">Differences from Virtools conflict resolution</p>
+<p>Compared to the conflict resolution dialog in Virtools, the conflict resolution options provided by the BBP plugin do not support replacement, and the granularity is not fine-tuned to individual instances, but only for an entire type. So you can't set a different conflict resolution for each instance of a conflict individually. However, this setting is sufficient for most scenarios.</p>
+</div>
+<p>The default values for the options in the Conflict Options section are the solutions that are usually selected for import. Of course, special settings are needed for special import situations, e.g. if you are importing an externally exported element model from the original version, you may be able to use Use Current option in material options instead of making a copy. The correct use of the conflict options is a matter of mapping experience and is not taught in this manual.</p>
+<h3 id="virtools-params">Virtools Params</h3>
+<p>It is well known that Virtools uses a system-based multi-byte character encoding to process documents, and is therefore prone to what is known as garbling; Blender itself does not suffer from garbling, however, if we do not read a Virtools document with the correct encoding, the characters stored in it may still appear garbled when the Virtools document is imported into Blender. The Encodings property in the Virtools Params section specifies the encodings for reading Virtools documents. Multiple encodings may be specified, with the encodings higher up in the list being prioritized for use. The next level of encoding will only be utilized when decoding with the current level fails. Some common encodings are listed below:</p>
+<ul>
+<li>cp1252: Western European encoding used by Ballance.</li>
+<li>gbk: The default encoding for Chinese Windows system.</li>
+</ul>
+<p>The encoding attribute is very important. If the wrong encoding is set, the names of the various objects imported into Blender will be unrecognizable, or will cause the program to make an error.</p>
+<div class="admonition info">
+<p class="admonition-title">What encodings are available?</p>
+<p>Since BBP version 4.1, the names of the encodings we use are basically just copied from the Python encoding names. Most of the commonly used encoding names in Most of the commonly used encoding names in Python are mapped, with only a few particularly rare encodings unsupported, and for specific supported encodings it is necessary to check the source code. See <a href="https://docs.python.org/3/library/codecs.html#standard-encodings">Python documentation</a> for information on Python's supported encodings. Encodings are not case-sensitive.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning about migration from older versions</p>
+<p>Starting with BBP version 4.1, the version number of LibCmo, the underlying library used by BBP's Virtools document import module, has been bumped to 0.2. Before this version, the encoding attribute was a platform-dependent setting. Under Windows, the <a href="https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers">Windows Code Page</a> number is required here. Under other operating systems, LibCmo uses iconv for character encoding decoding, so the legal <a href="hhttps://www.gnu.org/software/libiconv/">iconv encoding identifier</a> is required.</p>
+<p>This all changed with LibCmo 0.2, from which LibCmo uses Python-like universal encoding names. It is platform-independent, you no longer need to check whether the operating system you are using is Windows or Linux, the encoded characters are the same string for all platforms. This also means that if you have customized your encoding settings before, you need to be careful to convert them to the new universal encoding name, because the old encoding name may not have a corresponding mapping under the universal encoding name system, for example, <code>1252</code> specified on Windows before should be written as <code>cp1252</code> under the new universal encoding name, and the original encoding name won't be recognized correctly on the new system.</p>
+</div>
+<h2 id="export-virtools-file">Export Virtools File</h2>
+<p>Virtools files can be exported by clicking <code>File - Export - Virtools File</code>. Clicking on it will bring up the file opening window and show you the export settings in the sidebar. First of all, you need to select the location of the exported Virtools file, then configure the export settings in the sidebar, after configuring the export settings, you can click Export to start the export, and wait for the status bar at the bottom of Blender to indicate that the export is complete.</p>
+<h3 id="export-target">Export Target</h3>
+<p>The Export Target section is used to determine which objects you need to export to a Virtools document. You can choose 1 of 4 options:</p>
+<ul>
+<li>Object: Export single object. Select an object in following input box.</li>
+<li>Collection: Export single collection. <strong>This is the most commonly used option.</strong> Select a collection in following input box. Note that selecting a collection will export the objects in the internal collection as well, i.e. exporting nested collections is supported.</li>
+<li>Selected Object: Export selected objects. Select the objects to be exported before enter this dialog.</li>
+<li>All Objects: Export all objects inside this document. This option should be used with caution. Because it brutely iterate the list of document objects to export, and it is likely to export many objects you don't need.</li>
+</ul>
+<h3 id="virtools-params_1">Virtools Params</h3>
+<p>The Virtools Params section is similar to the one in the importing Virtools document; the Encodings property determines the encoding used when exporting a Virtools document.</p>
+<p>The Global Texture Save Option determines how textures that are set to Use Global are actually saved. In general, setting it to Raw Data will 100% guarantee that the saved Virtools document will contain the correct texture, but it may be larger, while setting it to External will minimize the size of the file, but there may be problems with the exported document not finding the texture file. We recommend that you specify how each material should be saved individually when you set it up, rather than relying on the global option to set it up. This option is for re-editing old maps that rely on the Global Texture Saving Option. It should also be noted that even though there is a Use Global option in this option, please <strong>don't</strong> select it or it will result in an error, because obviously you can't have a global option that then uses the global option's settings.</p>
+<p>The Use Compress property specifies whether saved documents are stored compressed. Compression can significantly reduce the size of a document, and on modern computer platforms, the performance loss caused by compression is almost negligible. When Use Compress is selected, an additional Compress Level attribute is displayed, which specifies the level of compression; the higher the value, the greater the compression rate and the smaller the file.</p>
+<h3 id="ballance-params">Ballance Params</h3>
+<p>The Ballance Params section contains parameters that optimize the export process for Ballance-specific content.</p>
+<p>Successive Sector is an option to work around a bug that occurs when exporting groups of sectors. For some reason, if there are no elements in a sector (actually, no objects are grouped in a sector group), the export plugin thinks that the sector group doesn't exist and misses the export. And since Ballance determines the final sector, i.e. the sector where the spaceships appears, by incrementing the number of sectors from 1 to the last sector group that exists, the combination of the two causes Ballance to incorrectly determine the number of sectors in the map, and thus display the spaceships in the wrong sector, which is an export bug. when this option is checked, the exported document will be pre-defined according to the number of sectors specified in the Ballance Map information in the current Blender file. When this option is checked, the exported document will pre-create all of the sectors according to the number of sectors specified in the Ballance map information in the current Blender file before exporting, so that you don't miss creating some sector groups, and the spaceships will be displayed in the correct sectors.</p>
+<p>This option is usually checked when exporting playable maps, if you just want to export some models then you need to turn this option off, otherwise it will create a lot of useless sector groups in the final file.</p>
+<h2 id="cant-import-or-export">Can't Import or Export</h2>
+<p>In general, after you have properly installed and configured the plugin according to the previously introduced steps, you should theoretically be able to use the import and export functions for Virtools documents. However, unexpected issues may arise. The inability to import or export refers to the buttons for importing and exporting Virtools documents being greyed out and unclickable. You will need to follow the steps outlined below for checking. If you are referring to an error occurring during the import and export process, please refer to the warning information at the top of this page.</p>
+<p>First, check whether you have correctly configured the <code>External Texture Folder</code> setting of the plugin in the <a href="../configure-plugin/">Configure Plugin</a> section. If you have not configured it, you will naturally be unable to import or export Virtools files. This is because importing and exporting Virtools files relies on the original Ballance texture data. Please configure this setting carefully according to the tutorial.</p>
+<p>If you are certain that you have set the correct texture path, you may try clicking the menu <code>Window - Toggle System Console</code> to open the console. There may be some relevant error messages outputted there, such as a failure to load the underlying BMap library, etc. The failure to load the underlying BMap library typically only occurs on machines with rare architectures, such as Windows systems using Snapdragon processors, as the plugin we packaged does not include the Virtools file underlying reading library BMap that supports these platforms. In this situation, you have two options: one is to report this to the developers and wait for support, and the other is to compile the library on yourself (this is only recommended for those with extensive computer knowledge).</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ballance-properties/" class="btn btn-neutral float-left" title="Ballance Properties"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../group-operations/" class="btn btn-neutral float-right" title="Group Operation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../ballance-properties/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../group-operations/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

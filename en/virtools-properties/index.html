@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/en/virtools-properties/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Virtools Properties - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Virtools Properties";
+        var mkdocs_page_input_path = "en/virtools-properties.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/en/virtools-properties/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Virtools Properties</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#virtools-group">Virtools Group</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools-material">Virtools Material</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools-texture">Virtools Texture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools-mesh">Virtools Mesh</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtools-light">Virtools Light</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../zh-cn/tech-infos/">技术信息</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">English</li>
+      <li class="breadcrumb-item active">Virtools Properties</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="virtools-properties">Virtools Properties</h1>
+<h2 id="virtools-group">Virtools Group</h2>
+<p>The BBP plugin adds a new property to every Blender object, called Virtools Group. has the same functionality as Group in Virtools. Select an object and the <code>Virtools Group</code> panel can be found in the <code>Object</code> properties panel.</p>
+<p><img alt="" src="../../imgs/virtools-group.png" /></p>
+<p>In the <code>Virtools Group</code> panel, you can click Add to group objects. After clicking the Add button, you can select Predefined and then select one of all legal Ballance group names to add. Or select Custom and enter the group name you want to add. The selected Virtools group can also be deleted by clicking the Delete button. Finally, all group data for this object can be deleted at once by clicking the Trash icon button (which will let you confirm before deleting).</p>
+<p>BBP also provides access to Virtools groups in Blender's other menus, see <a href="../group-operations/">Group Operation</a>.</p>
+<p>It is important to note that the Virtools group only works on mesh objects. When you open the Virtools group panel on other objects, you will see a warning message in the panel indicating that the Virtools group is invalid for that object. Although the Virtools group data set on non-mesh objects will be recognized and stored by Blender, it will not be saved to the Virtools file when exporting.</p>
+<h2 id="virtools-material">Virtools Material</h2>
+<p>The plugin adds a new property to every Blender material, called Virtools Material, which bridges the gap between Virtools materials and Blender materials. Go to the <code>Material</code> properties panel and select a material to find the <code>Virtools Material</code> panel.</p>
+<p><img alt="" src="../../imgs/virtools-material.png" /></p>
+<p>You can set material properties in the <code>Virtools Material</code> panel, just like in Virtools. All material parameters in the <code>Virtools Material</code> panel are maps of the material parameters in Virtools and will be accurately reflected in the final saved Virtools document.</p>
+<p>The <code>Virtools Material</code> panel provides a preset function, which can be started by clicking the <code>Preset</code> button at the top. The preset function allows the user to use some preset material settings, such as the material data for the top surface of the road, the sides, etc., for ease of use. Note that using a preset does not affect the material's texture options, and you will still need to set the material's texture manually once the preset has been applied.</p>
+<p>The <code>Virtools Material</code> panel also provides the ability to convert the material data in the <code>Virtools Material</code> panel to the Blender material for a visual effect in Blender. Click the <code>Apply</code> button at the top to perform this function. When you save a Virtools document in Blender, the material data in the Virtools document will be retrieved from the values specified in the <code>Virtools Material</code> panel and not from the Blender material. This means that a proper procedure for setting up a material is to edit the material parameters in the <code>Virtools Material</code> panel and then use the <code>Apply</code> button to convert them to the Blender material, instead of editing the Blender material directly.</p>
+<p>The <code>Virtools Material</code> panel provides material repair functionality, which is inherited from the <a href="https://github.com/yyc12345/BallanceVirtoolsHelper">Ballance Virtools Plugin</a>. The Material repair button is located to the right of the <code>Preset</code> button and the <code>Apply</code> button, and is a button with a wrench icon. Clicking it requires reconfirmation to prevent misuse. The material repair function determines which type of material the current material is based on the filename of the texture file it references, and then modifies the other parameters to make it visually appealing based on our preset repair settings (taken from the game). This is usually used for fixing objects that look like they have the wrong material in the game, such as a black Stopper, etc.</p>
+<div class="admonition info">
+<p class="admonition-title">There is also a global material fix function</p>
+<p>In the 3D view, the menu <code>Ballance - Fix Material</code> is similar to the material fix function, but it will fix all materials within the current document. Don't use this feature unless you are sure that all materials in the current document need to be fixed, as it may set some of the originally special, correct materials back to generic values that you don't want.</p>
+<p>The Global Material Repair function also needs to be reconfirmed after clicking on it before it can be used, to prevent misuse.</p>
+</div>
+<p>The Texture property in the <code>Virtools Material</code> panel not only allows you to select a texture within a document by clicking on it, but also opens the Texture File Browser by clicking on the folder button on the right side, which allows you to select the texture you want directly from the file system (much faster than selecting it from the Shading tab). The file browser is navigated in Ballance's Texture directory by default, to make it easier to select Ballance materials.</p>
+<h2 id="virtools-texture">Virtools Texture</h2>
+<p>The BBP plugin adds a new property to all Blender textures (actually Images) called Virtools Texture, which creates a link between Virtools textures and Blender images.</p>
+<p>Unlike Blender materials, due to Blender's implementation there is no separate properties panel for textures, so we can only access Virtools texture properties in an indirect way in the <code>Virtools Material</code> panel. First find the <code>Virtools Material</code> panel by referring to the instructions in the <code>Virtools Material</code> chapter, then select a texture or open a texture in the material slot in the <code>Virtools Material</code> panel, and you'll see that the Virtools texture attributes are displayed additionally underneath the texture attributes of the material, as shown in the highlighted portion of the image below.</p>
+<p><img alt="" src="../../imgs/virtools-texture.png" /></p>
+<p>Among them, Save Option indicates how the texture is stored in Virtools, and these are the common storage methods:</p>
+<ul>
+<li>External: The file only stores the name of the referenced file. All Ballance native textures should use this mode.</li>
+<li>Raw Data: The texture is stored inside the file, the disadvantage is that it will lead to a large file. All non-native Ballance maps should use this mode.</li>
+<li>Use Global: Use global settings. We do not recommend using this unless you are modifying an existing map. We recommend explicitly specifying how individual textures are stored right here, rather than using global values. The global setting is determined when exporting the Virtools document.</li>
+</ul>
+<p>The Video Format indicates the rendering mode of the texture in Virtools, and these are the commonly used modes:</p>
+<ul>
+<li>32 Bits ARGB8888: The storage mode for all kinds of textures with transparency, such as the column gradient part.</li>
+<li>16 Bits ARGB1555: The way to store all kinds of maps without transparency, such as floor.</li>
+</ul>
+<h2 id="virtools-mesh">Virtools Mesh</h2>
+<p>The BBP plugin adds a new property to all Blender meshes called Virtools Mesh. go to the <code>Data</code> properties panel to find the <code>Virtools Mesh</code> panel.</p>
+<p><img alt="" src="../../imgs/virtools-mesh.png" /></p>
+<p>The Virtools Mesh is currently only used as a compatibility feature. It has only one property, Lit Mode, that can be set. Most early maps had black floor issue because they didn't know how to set the material correctly, so the Lit Mode was often set to Prelit to get the floor to show up properly. This attribute exists for compatibility with this compromise and the user usually does not need to set this option.</p>
+<h2 id="virtools-light">Virtools Light</h2>
+<p>The BBP plugin adds a new property called Virtools Light to all Blender lights. You can find the Virtools Light panel by navigating to the Data properties panel.</p>
+<p><img alt="" src="../../imgs/virtools-light.png" /></p>
+<p>Similar to the materials in Virtools, the lighting system in Virtools differs significantly from that in Blender. The Virtools Light acts as a bridge, accurately reflecting the settings of Virtools, allowing for seamless storage within Blender files and providing necessary data during import and export. Additionally, this panel includes an Apply button to apply the Virtools lighting settings to Blender's lighting.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../configure-plugin/" class="btn btn-neutral float-left" title="Configure Plugin"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ballance-properties/" class="btn btn-neutral float-right" title="Ballance Properties">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../configure-plugin/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ballance-properties/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
