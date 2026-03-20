@@ -1,8 +1,6 @@
 import bpy
-import typing, math
+import typing, math, enum
 from . import UTIL_functions, UTIL_virtools_types
-
-# Raw Data
 
 class RawVirtoolsCamera():
     # Class Member
@@ -54,9 +52,11 @@ class RawVirtoolsCamera():
         h = max(1, h)
         self.mAspectRatio = (w, h)
 
-# Blender Property Group
+#region Blender Enum Prop Helper
 
 _g_Helper_CK_CAMERA_PROJECTION = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_CAMERA_PROJECTION)
+
+#endregion
 
 class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
     projection_type: bpy.props.EnumProperty(
@@ -134,7 +134,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
-# Getter Setter and Applyer
+#region Getter Setter and Applyer
 
 def get_virtools_camera(cam: bpy.types.Camera) -> BBP_PG_virtools_camera:
     return cam.virtools_camera
@@ -220,7 +220,50 @@ def apply_to_blender_scene_resolution(cam: bpy.types.Camera) -> None:
     render_settings.resolution_x = width
     render_settings.resolution_y = height
 
-# Operators
+#endregion
+
+#region Aspect Ratio Preset
+
+class AspectRatioPresetType(enum.IntEnum):
+    Normal = enum.auto()
+    Extended = enum.auto()
+    Widescreen = enum.auto()
+    Panoramic = enum.auto()
+
+    def to_aspect_ratio(self) -> tuple[int, int]:
+        match self:
+            case AspectRatioPresetType.Normal: return (4, 3)
+            case AspectRatioPresetType.Extended: return (16, 9)
+            case AspectRatioPresetType.Widescreen: return (7, 3)
+            case AspectRatioPresetType.Panoramic: return (20, 7)
+
+_g_AspectRatioPresetTypeDesc: dict[AspectRatioPresetType, tuple[str, str]] = {
+    AspectRatioPresetType.Normal: ("Normal", "Aspect ratio: 4:3."),
+    AspectRatioPresetType.Extended: ("Extended", "Aspect ratio: 16:9."),
+    AspectRatioPresetType.Widescreen: ("Widescreen", "Aspect ratio: 7:3."),
+    AspectRatioPresetType.Panoramic: ("Panoramic", "Aspect ratio: 20:7."),
+}
+
+_g_Helper_AspectRatioPresetType = UTIL_functions.EnumPropHelper(
+    AspectRatioPresetType,
+    lambda x: str(x.value),
+    lambda x: AspectRatioPresetType(int(x)),
+    lambda x: _g_AspectRatioPresetTypeDesc[x][0],
+    lambda x: _g_AspectRatioPresetTypeDesc[x][1],
+    lambda _: ""
+)
+
+def preset_virtools_camera_aspect_ratio(cam: bpy.types.Camera, preset_type: AspectRatioPresetType) -> None:
+    # get raw data from it
+    rawdata = get_raw_virtools_camera(cam)
+    # modify its aspect ratio
+    rawdata.mAspectRatio = preset_type.to_aspect_ratio()
+    # rewrite it.
+    set_raw_virtools_camera(cam, rawdata)
+
+#endregion
+
+#region Operators
 
 class BBP_OT_apply_virtools_camera(bpy.types.Operator):
     """Apply Virtools Camera to Blender Camera except Resolution."""
@@ -254,7 +297,41 @@ class BBP_OT_apply_virtools_camera_resolution(bpy.types.Operator):
         apply_to_blender_scene_resolution(cam)
         return {'FINISHED'}
 
-# Display Panel
+class BBP_OT_preset_virtools_camera_aspect_ratio(bpy.types.Operator):
+    """Preset Virtools Camera Aspect Ratio with Virtools Presets."""
+    bl_idname = "bbp.preset_virtools_camera_aspect_ratio"
+    bl_label = "Preset Virtools Camera Aspect Ratio"
+    bl_options = {'UNDO'}
+    bl_translation_context = 'BBP_OT_preset_virtools_camera_aspect_ratio'
+
+    preset_type: bpy.props.EnumProperty(
+        name = "Preset",
+        description = "The preset which you want to apply.",
+        items = _g_Helper_AspectRatioPresetType.generate_items(),
+        translation_context = 'BBP_OT_preset_virtools_camera_aspect_ratio/property'
+    ) # type: ignore
+
+    @classmethod
+    def poll(cls, context):
+        return context.camera is not None
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+    
+    def draw(self, context):
+        self.layout.prop(self, "preset_type")
+    
+    def execute(self, context):
+        # get essential value
+        cam: bpy.types.Camera = context.camera
+        expected_preset: AspectRatioPresetType = _g_Helper_AspectRatioPresetType.get_selection(self.preset_type)
+        
+        # apply preset to material
+        preset_virtools_camera_aspect_ratio(cam, expected_preset)
+        return {'FINISHED'}
+
+#endregion
 
 class BBP_PT_virtools_camera(bpy.types.Panel):
     """Show Virtools Camera Properties"""
@@ -314,7 +391,9 @@ class BBP_PT_virtools_camera(bpy.types.Panel):
 
         # aspect ratio
         layout.separator()
-        layout.label(text='Aspect Ratio', text_ctxt='BBP_PT_virtools_camera/draw')
+        row = layout.row()
+        row.label(text='Aspect Ratio', text_ctxt='BBP_PT_virtools_camera/draw')
+        row.operator(BBP_OT_preset_virtools_camera_aspect_ratio.bl_idname, text='', icon = "PRESET")
         sublayout = layout.row()
         sublayout.use_property_split = False
         sublayout.prop(props, 'aspect_ratio_w', text = '', expand = True)
@@ -326,6 +405,7 @@ def register() -> None:
     bpy.utils.register_class(BBP_PG_virtools_camera)
     bpy.utils.register_class(BBP_OT_apply_virtools_camera)
     bpy.utils.register_class(BBP_OT_apply_virtools_camera_resolution)
+    bpy.utils.register_class(BBP_OT_preset_virtools_camera_aspect_ratio)
     bpy.utils.register_class(BBP_PT_virtools_camera)
 
     # add into camera metadata
@@ -336,6 +416,7 @@ def unregister() -> None:
     del bpy.types.Camera.virtools_camera
 
     bpy.utils.unregister_class(BBP_PT_virtools_camera)
+    bpy.utils.unregister_class(BBP_OT_preset_virtools_camera_aspect_ratio)
     bpy.utils.unregister_class(BBP_OT_apply_virtools_camera_resolution)
     bpy.utils.unregister_class(BBP_OT_apply_virtools_camera)
     bpy.utils.unregister_class(BBP_PG_virtools_camera)

@@ -1,34 +1,15 @@
 import bpy, mathutils
 import typing, enum, math
-from . import UTIL_functions
+from . import UTIL_functions, PROP_virtools_camera
 
-# TODO:
-# This file should have fully refactor after we finish Virtools Camera import and export,
-# because this module is highly rely on it. Current implementation is a compromise.
-# There is a list of things to be done:
-# - Remove BBP_OT_game_resolution operator, because Virtools Camera will have similar function in panel.
-# - Update BBP_OT_game_cameraoperator with Virtools Camera.
-
-#region Game Resolution
+#region Enum Defines
 
 class ResolutionKind(enum.IntEnum):
     Normal = enum.auto()
-    Extended = enum.auto()
-    Widescreen = enum.auto()
-    Panoramic = enum.auto()
-
-    def to_resolution(self) -> tuple[int, int]:
-        match self:
-            case ResolutionKind.Normal: return (1024, 768)
-            case ResolutionKind.Extended: return (1280, 720)
-            case ResolutionKind.Widescreen: return (1400, 600)
-            case ResolutionKind.Panoramic: return (2000, 700)
-
+    WideScreen = enum.auto()
 _g_ResolutionKindDesc: dict[ResolutionKind, tuple[str, str]] = {
-    ResolutionKind.Normal: ("Normal", "Aspect ratio: 4:3."),
-    ResolutionKind.Extended: ("Extended", "Aspect ratio: 16:9."),
-    ResolutionKind.Widescreen: ("Widescreen", "Aspect ratio: 7:3."),
-    ResolutionKind.Panoramic: ("Panoramic", "Aspect ratio: 20:7."),
+    ResolutionKind.Normal: ("Normal", "Vanilla Ballance Resolution"),
+    ResolutionKind.WideScreen: ("Wide Screen", "Ballance Resolution with Wide Screen Fix"),
 }
 _g_EnumHelper_ResolutionKind = UTIL_functions.EnumPropHelper(
     ResolutionKind,
@@ -38,45 +19,6 @@ _g_EnumHelper_ResolutionKind = UTIL_functions.EnumPropHelper(
     lambda x: _g_ResolutionKindDesc[x][1],
     lambda _: ""
 )
-
-class BBP_OT_game_resolution(bpy.types.Operator):
-    """Set Blender render resolution to Ballance game"""
-    bl_idname = "bbp.game_resolution"
-    bl_label = "Game Resolution"
-    bl_options = {'REGISTER', 'UNDO'}
-    bl_translation_context = 'BBP_OT_game_resolution'
-
-    resolution_kind: bpy.props.EnumProperty(
-        name = "Resolution Kind",
-        description = "The type of preset resolution.",
-        items = _g_EnumHelper_ResolutionKind.generate_items(),
-        default = _g_EnumHelper_ResolutionKind.to_selection(ResolutionKind.Normal),
-        translation_context = 'BBP_OT_game_resolution/property'
-    ) # type: ignore
-
-    def invoke(self, context, event):
-        return self.execute(context)
-    
-    def draw(self, context):
-        layout = self.layout
-        layout.use_property_split = True
-        layout.prop(self, 'resolution_kind')
-
-    def execute(self, context):
-        # fetch resolution
-        resolution_kind = _g_EnumHelper_ResolutionKind.get_selection(self.resolution_kind)
-        resolution = resolution_kind.to_resolution()
-        # setup resolution
-        render_settings = bpy.context.scene.render
-        render_settings.resolution_x = resolution[0]
-        render_settings.resolution_y = resolution[1]
-        return {'FINISHED'}
-
-#endregion
-
-#region Game Camera
-
-#region Enum Defines
 
 class TargetKind(enum.IntEnum):
     Cursor = enum.auto()
@@ -281,6 +223,21 @@ class BBP_OT_game_camera(bpy.types.Operator):
         translation_context = 'BBP_OT_game_camera/property'
     ) # type: ignore
 
+
+    modify_resolution: bpy.props.BoolProperty(
+        name = 'Modify Resolution',
+        description = 'Whether modify the resolution of camera.',
+        default = False,
+        translation_context = 'BBP_OT_game_camera/property'
+    ) # type: ignore
+    resolution_kind: bpy.props.EnumProperty(
+        name = "Resolution Kind",
+        description = "The type of preset resolution.",
+        items = _g_EnumHelper_ResolutionKind.generate_items(),
+        default = _g_EnumHelper_ResolutionKind.to_selection(ResolutionKind.Normal),
+        translation_context = 'BBP_OT_game_camera/property'
+    ) # type: ignore
+
     @classmethod
     def poll(cls, context):
         # find camera object
@@ -333,6 +290,12 @@ class BBP_OT_game_camera(bpy.types.Operator):
         layout.label(text='Perspective', text_ctxt='BBP_OT_game_camera/draw')
         layout.row().prop(self, 'perspective_kind', expand=True)
 
+        # Show resolution kind
+        layout.separator()
+        layout.prop(self, 'modify_resolution', text='Resolution', text_ctxt='BBP_OT_game_camera/draw')
+        if self.modify_resolution:
+            layout.row().prop(self, 'resolution_kind', expand=True)
+
     def execute(self, context):
         # fetch angle
         angle: float
@@ -347,11 +310,12 @@ class BBP_OT_game_camera(bpy.types.Operator):
         camera_obj = typing.cast(bpy.types.Object, _find_camera_obj())
         target_kind = _g_EnumHelper_TargetKind.get_selection(self.target_kind)
         perspective_kind = _g_EnumHelper_PerspectiveKind.get_selection(self.perspective_kind)
+        resolution_kind = _g_EnumHelper_ResolutionKind.get_selection(self.resolution_kind)
 
         # setup its transform and properties
         glob_trans = _fetch_glob_translation(camera_obj, target_kind)
         _setup_camera_transform(camera_obj, angle, perspective_kind, glob_trans)
-        _setup_camera_properties(camera_obj)
+        _setup_camera_properties(camera_obj, resolution_kind)
 
         # return
         return {'FINISHED'}
@@ -451,24 +415,39 @@ def _setup_camera_transform(camobj: bpy.types.Object, angle: float, perspective:
     glob_trans_mat = mathutils.Matrix.Translation(glob_trans)
     camobj.matrix_world = glob_trans_mat @ trans_mat @ rot_mat
 
-def _setup_camera_properties(camobj: bpy.types.Object) -> None:
-    # fetch camera
+def _setup_camera_properties(camobj: bpy.types.Object, resolution_kind: ResolutionKind | None) -> None:
+    # fetch camera and its raw data
     camera = typing.cast(bpy.types.Camera, camobj.data)
+    rawdata = PROP_virtools_camera.get_raw_virtools_camera(camera)
 
     # set clipping
-    camera.clip_start = 4
-    camera.clip_end = 1200
-    # set FOV
-    camera.lens_unit = 'FOV'
-    camera.angle = math.radians(58)
-
-#endregion
+    rawdata.mFrontPlane = 4
+    rawdata.mBackPlane = 1200
+    # set FOV and aspect ratio according to presented resolution kind
+    if resolution_kind is not None:
+        match resolution_kind:
+            case ResolutionKind.Normal:
+                rawdata.mFov = math.radians(58)
+                rawdata.mAspectRatio = (4, 3)
+            case ResolutionKind.WideScreen:
+                # prepare input arguments
+                aspect_ratio = (16, 9)
+                fov = math.radians(58)
+                # FOV correction reference:
+                # https://github.com/doyaGu/BallanceModLoaderPlus/blob/c4ab4386fd834af69a960c156fca97237b2fd4c5/src/RenderHook.cpp#L46
+                aspect = aspect_ratio[0] / aspect_ratio[1]
+                rawdata.mFov = math.atan2(math.tan(fov * 0.5) * 0.75 * aspect, 1.0) * 2.0
+                rawdata.mAspectRatio = aspect_ratio
+                
+    # rewrite it back
+    PROP_virtools_camera.set_raw_virtools_camera(camera, rawdata)
+    # and apply it into camera and blender scene
+    PROP_virtools_camera.apply_to_blender_camera(camera)
+    PROP_virtools_camera.apply_to_blender_scene_resolution(camera)
 
 def register() -> None:
-    bpy.utils.register_class(BBP_OT_game_resolution)
     bpy.utils.register_class(BBP_OT_game_camera)
 
 def unregister() -> None:
     bpy.utils.unregister_class(BBP_OT_game_camera)
-    bpy.utils.unregister_class(BBP_OT_game_resolution)
 

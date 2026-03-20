@@ -179,7 +179,6 @@ class BBP_MT_View3DMenu(bpy.types.Menu):
         layout.operator(OP_OBJECT_legacy_align.BBP_OT_legacy_align.bl_idname)
         layout.separator()
         layout.label(text='Camera', icon='CAMERA_DATA', text_ctxt='BBP_MT_View3DMenu/draw')
-        layout.operator(OP_OBJECT_game_view.BBP_OT_game_resolution.bl_idname)
         layout.operator(OP_OBJECT_game_view.BBP_OT_game_camera.bl_idname)
         layout.separator()
         layout.label(text='Select', icon='SELECT_SET', text_ctxt='BBP_MT_View3DMenu/draw')
