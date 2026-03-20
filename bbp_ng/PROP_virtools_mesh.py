@@ -1,18 +1,16 @@
 import bpy
 import typing, enum
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_functions, UTIL_blender_mesh, UTIL_virtools_types
 
 # Raw Data
 
+@dataclass
 class RawVirtoolsMesh():
-    # Instance Member Declarations
-    mLitMode: UTIL_virtools_types.VXMESH_LITMODE
-    # Default Value Declarations
-    cDefaultLitMode: typing.ClassVar[UTIL_virtools_types.VXMESH_LITMODE] = UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH
-
-    def __init__(self, **kwargs):
-        # assign default value for each component
-        self.mLitMode = kwargs.get('mLitMode', RawVirtoolsMesh.cDefaultLitMode)
+    mLitMode: UTIL_virtools_types.VXMESH_LITMODE = datafield(default=UTIL_virtools_types.VXMESH_LITMODE.VX_LITMESH)
+    
+DEFAULT_RAW_VIRTOOLS_MESH = RawVirtoolsMesh()
 
 # blender enum prop helper defines
 _g_Helper_VXMESH_LITMODE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXMESH_LITMODE)
@@ -24,7 +22,7 @@ class BBP_PG_virtools_mesh(bpy.types.PropertyGroup):
         name = "Lit Mode",
         description = "Lighting mode of the mesh.",
         items = _g_Helper_VXMESH_LITMODE.generate_items(),
-        default = _g_Helper_VXMESH_LITMODE.to_selection(RawVirtoolsMesh.cDefaultLitMode),
+        default = _g_Helper_VXMESH_LITMODE.to_selection(DEFAULT_RAW_VIRTOOLS_MESH.mLitMode),
         translation_context = 'BBP_PG_virtools_mesh/property'
     ) # type: ignore
     

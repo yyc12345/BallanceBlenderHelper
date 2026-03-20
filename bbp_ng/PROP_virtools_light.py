@@ -1,54 +1,26 @@
 import bpy
 import typing, math
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_functions, UTIL_virtools_types
 
 # Raw Data
 
+@dataclass
 class RawVirtoolsLight():
-    # Class member
+    
+    mType: UTIL_virtools_types.VXLIGHT_TYPE = datafield(default=UTIL_virtools_types.VXLIGHT_TYPE.VX_LIGHTPOINT)
+    mColor: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(1.0, 1.0, 1.0, 1.0))
 
-    mType: UTIL_virtools_types.VXLIGHT_TYPE
-    mColor: UTIL_virtools_types.VxColor
+    mConstantAttenuation: float = datafield(default=1.0)
+    mLinearAttenuation: float = datafield(default=0.0)
+    mQuadraticAttenuation: float = datafield(default=0.0)
 
-    mConstantAttenuation: float
-    mLinearAttenuation: float
-    mQuadraticAttenuation: float
+    mRange: float = datafield(default=100.0)
 
-    mRange: float
-
-    mHotSpot: float
-    mFalloff: float
-    mFalloffShape: float
-
-    # Class member default value
-
-    cDefaultType: typing.ClassVar[UTIL_virtools_types.VXLIGHT_TYPE] = UTIL_virtools_types.VXLIGHT_TYPE.VX_LIGHTPOINT
-    cDefaultColor: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(1.0, 1.0, 1.0, 1.0)
-
-    cDefaultConstantAttenuation: typing.ClassVar[float] = 1.0
-    cDefaultLinearAttenuation: typing.ClassVar[float] = 0.0
-    cDefaultQuadraticAttenuation: typing.ClassVar[float] = 0.0
-
-    cDefaultRange: typing.ClassVar[float] = 100.0
-
-    cDefaultHotSpot: typing.ClassVar[float] = math.radians(40)
-    cDefaultFalloff: typing.ClassVar[float] = math.radians(45)
-    cDefaultFalloffShape: typing.ClassVar[float] = 1.0
-
-    def __init__(self, **kwargs):
-        # assign default value for each component
-        self.mType = kwargs.get('mType', RawVirtoolsLight.cDefaultType)
-        self.mColor = kwargs.get('mColor', RawVirtoolsLight.cDefaultColor).clone()
-
-        self.mConstantAttenuation = kwargs.get('mConstantAttenuation', RawVirtoolsLight.cDefaultConstantAttenuation)
-        self.mLinearAttenuation = kwargs.get('mLinearAttenuation', RawVirtoolsLight.cDefaultLinearAttenuation)
-        self.mQuadraticAttenuation = kwargs.get('mQuadraticAttenuation', RawVirtoolsLight.cDefaultQuadraticAttenuation)
-        
-        self.mRange = kwargs.get('mRange', RawVirtoolsLight.cDefaultRange)
-
-        self.mHotSpot = kwargs.get('mHotSpot', RawVirtoolsLight.cDefaultHotSpot)
-        self.mFalloff = kwargs.get('mFalloff', RawVirtoolsLight.cDefaultFalloff)
-        self.mFalloffShape = kwargs.get('mFalloffShape', RawVirtoolsLight.cDefaultFalloffShape)
+    mHotSpot: float = datafield(default=math.radians(40))
+    mFalloff: float = datafield(default=math.radians(45))
+    mFalloffShape: float = datafield(default=1.0)
 
     def regulate(self) -> None:
         # regulate color and reset its alpha value
@@ -70,6 +42,8 @@ class RawVirtoolsLight():
         if self.mFalloff < self.mHotSpot:
             self.mFalloff = self.mHotSpot
 
+DEFAULT_RAW_VIRTOOLS_LIGHT = RawVirtoolsLight()
+
 # Blender Property Group
 
 _g_Helper_VXLIGHT_TYPE = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VXLIGHT_TYPE)
@@ -79,7 +53,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         name = "Type",
         description = "The type of this light",
         items = _g_Helper_VXLIGHT_TYPE.generate_items(),
-        default = _g_Helper_VXLIGHT_TYPE.to_selection(RawVirtoolsLight.cDefaultType),
+        default = _g_Helper_VXLIGHT_TYPE.to_selection(DEFAULT_RAW_VIRTOOLS_LIGHT.mType),
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -90,7 +64,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsLight.cDefaultColor.to_const_rgb(),
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mColor.to_const_rgb(),
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -100,7 +74,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultConstantAttenuation,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mConstantAttenuation,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -110,7 +84,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultLinearAttenuation,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mLinearAttenuation,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -120,7 +94,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultQuadraticAttenuation,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mQuadraticAttenuation,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -130,7 +104,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 200.0,
         step = 100,
-        default = RawVirtoolsLight.cDefaultRange,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mRange,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -140,7 +114,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = math.radians(180),
         subtype = 'ANGLE',
-        default = RawVirtoolsLight.cDefaultHotSpot,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mHotSpot,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -150,7 +124,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = math.radians(180),
         subtype = 'ANGLE',
-        default = RawVirtoolsLight.cDefaultFalloff,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mFalloff,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 
@@ -160,7 +134,7 @@ class BBP_PG_virtools_light(bpy.types.PropertyGroup):
         min = 0.0,
         max = 10.0,
         step = 10,
-        default = RawVirtoolsLight.cDefaultFalloffShape,
+        default = DEFAULT_RAW_VIRTOOLS_LIGHT.mFalloffShape,
         translation_context = 'BBP_PG_virtools_light/property'
     ) # type: ignore
 

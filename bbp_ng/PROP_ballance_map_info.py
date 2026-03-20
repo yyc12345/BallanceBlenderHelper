@@ -1,14 +1,12 @@
 import bpy
 import typing
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_functions
 
+@dataclass
 class RawBallanceMapInfo():
-    cSectorCount: typing.ClassVar[int] = 1
-
-    mSectorCount: int
-
-    def __init__(self, **kwargs):
-        self.mSectorCount = kwargs.get("mSectorCount", RawBallanceMapInfo.cSectorCount)
+    mSectorCount: int = datafield(default=1)
 
     def regulate(self):
         self.mSectorCount = UTIL_functions.clamp_int(self.mSectorCount, 1, 999)

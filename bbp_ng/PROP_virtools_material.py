@@ -1,98 +1,41 @@
 import bpy
 import typing, enum, copy, os
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_virtools_types, UTIL_functions, UTIL_ballance_texture, UTIL_file_browser
 from . import PROP_virtools_texture, PROP_preferences
 
+@dataclass
 class RawVirtoolsMaterial():
     
-    # Instance Member Declarations
+    mDiffuse: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(0.7, 0.7, 0.7, 1.0))
+    mAmbient: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(0.3, 0.3, 0.3, 1.0))
+    mSpecular: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(0.5, 0.5, 0.5, 1.0))
+    mEmissive: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(0.0, 0.0, 0.0, 1.0))
+    mSpecularPower: float = datafield(default=0.0)
     
-    mDiffuse: UTIL_virtools_types.VxColor
-    mAmbient: UTIL_virtools_types.VxColor
-    mSpecular: UTIL_virtools_types.VxColor
-    mEmissive: UTIL_virtools_types.VxColor
-    mSpecularPower: float
+    mTexture: bpy.types.Image | None = datafield(default=None)
+    mTextureBorderColor: UTIL_virtools_types.VxColor = datafield(default_factory=lambda: UTIL_virtools_types.VxColor(0.0, 0.0, 0.0, 0.0))
     
-    mTexture: bpy.types.Image | None
-    mTextureBorderColor: UTIL_virtools_types.VxColor
+    mTextureBlendMode: UTIL_virtools_types.VXTEXTURE_BLENDMODE = datafield(default=UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEALPHA)
+    mTextureMinMode: UTIL_virtools_types.VXTEXTURE_FILTERMODE = datafield(default=UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR)
+    mTextureMagMode: UTIL_virtools_types.VXTEXTURE_FILTERMODE = datafield(default=UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR)
+    mTextureAddressMode: UTIL_virtools_types.VXTEXTURE_ADDRESSMODE = datafield(default=UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSWRAP)
     
-    mTextureBlendMode: UTIL_virtools_types.VXTEXTURE_BLENDMODE
-    mTextureMinMode: UTIL_virtools_types.VXTEXTURE_FILTERMODE
-    mTextureMagMode: UTIL_virtools_types.VXTEXTURE_FILTERMODE
-    mTextureAddressMode: UTIL_virtools_types.VXTEXTURE_ADDRESSMODE
+    mSourceBlend: UTIL_virtools_types.VXBLEND_MODE = datafield(default=UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ONE)
+    mDestBlend: UTIL_virtools_types.VXBLEND_MODE = datafield(default=UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ZERO)
+    mFillMode: UTIL_virtools_types.VXFILL_MODE = datafield(default=UTIL_virtools_types.VXFILL_MODE.VXFILL_SOLID)
+    mShadeMode: UTIL_virtools_types.VXSHADE_MODE = datafield(default=UTIL_virtools_types.VXSHADE_MODE.VXSHADE_GOURAUD)
     
-    mSourceBlend: UTIL_virtools_types.VXBLEND_MODE
-    mDestBlend: UTIL_virtools_types.VXBLEND_MODE
-    mFillMode: UTIL_virtools_types.VXFILL_MODE
-    mShadeMode: UTIL_virtools_types.VXSHADE_MODE
+    mEnableAlphaTest: bool = datafield(default=False)
+    mEnableAlphaBlend: bool = datafield(default=False)
+    mEnablePerspectiveCorrection: bool = datafield(default=True)
+    mEnableZWrite: bool = datafield(default=True)
+    mEnableTwoSided: bool = datafield(default=False)
     
-    mEnableAlphaTest: bool
-    mEnableAlphaBlend: bool
-    mEnablePerspectiveCorrection: bool
-    mEnableZWrite: bool
-    mEnableTwoSided: bool
-    
-    mAlphaRef: int
-    mAlphaFunc: UTIL_virtools_types.VXCMPFUNC
-    mZFunc: UTIL_virtools_types.VXCMPFUNC
-    
-    # Default Value Declarations
-    
-    cDefaultDiffuse: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(0.7, 0.7, 0.7, 1.0)
-    cDefaultAmbient: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(0.3, 0.3, 0.3, 1.0)
-    cDefaultSpecular: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(0.5, 0.5, 0.5, 1.0)
-    cDefaultEmissive: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(0.0, 0.0, 0.0, 1.0)
-    cDefaultSpecularPower: typing.ClassVar[float] = 0.0
-    
-    cDefaultTexture: typing.ClassVar[bpy.types.Image | None] = None
-    cDefaultTextureBorderColor: typing.ClassVar[UTIL_virtools_types.VxColor] = UTIL_virtools_types.VxColor(0.0, 0.0, 0.0, 0.0)
-    
-    cDefaultTextureBlendMode: typing.ClassVar[UTIL_virtools_types.VXTEXTURE_BLENDMODE]= UTIL_virtools_types.VXTEXTURE_BLENDMODE.VXTEXTUREBLEND_MODULATEALPHA
-    cDefaultTextureMinMode: typing.ClassVar[UTIL_virtools_types.VXTEXTURE_FILTERMODE] = UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR
-    cDefaultTextureMagMode: typing.ClassVar[UTIL_virtools_types.VXTEXTURE_FILTERMODE] = UTIL_virtools_types.VXTEXTURE_FILTERMODE.VXTEXTUREFILTER_LINEAR
-    cDefaultTextureAddressMode: typing.ClassVar[UTIL_virtools_types.VXTEXTURE_ADDRESSMODE] = UTIL_virtools_types.VXTEXTURE_ADDRESSMODE.VXTEXTURE_ADDRESSWRAP
-    
-    cDefaultSourceBlend: typing.ClassVar[UTIL_virtools_types.VXBLEND_MODE] = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ONE
-    cDefaultDestBlend: typing.ClassVar[UTIL_virtools_types.VXBLEND_MODE] = UTIL_virtools_types.VXBLEND_MODE.VXBLEND_ZERO
-    cDefaultFillMode: typing.ClassVar[UTIL_virtools_types.VXFILL_MODE] = UTIL_virtools_types.VXFILL_MODE.VXFILL_SOLID
-    cDefaultShadeMode: typing.ClassVar[UTIL_virtools_types.VXSHADE_MODE] = UTIL_virtools_types.VXSHADE_MODE.VXSHADE_GOURAUD
-    
-    cDefaultEnableAlphaTest: typing.ClassVar[bool] = False
-    cDefaultEnableAlphaBlend: typing.ClassVar[bool] = False
-    cDefaultEnablePerspectiveCorrection: typing.ClassVar[bool] = True
-    cDefaultEnableZWrite: typing.ClassVar[bool] = True
-    cDefaultEnableTwoSided: typing.ClassVar[bool] = False
-    
-    cDefaultAlphaRef: typing.ClassVar[int] = 0
-    cDefaultAlphaFunc: typing.ClassVar[UTIL_virtools_types.VXCMPFUNC] = UTIL_virtools_types.VXCMPFUNC.VXCMP_ALWAYS
-    cDefaultZFunc: typing.ClassVar[UTIL_virtools_types.VXCMPFUNC] = UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL
-    
-    def __init__(self, **kwargs):
-        # assign default value for each component
-        self.mDiffuse = kwargs.get('mDiffuse', RawVirtoolsMaterial.cDefaultDiffuse).clone()
-        self.mAmbient = kwargs.get('mAmbient', RawVirtoolsMaterial.cDefaultAmbient).clone()
-        self.mSpecular = kwargs.get('mSpecular', RawVirtoolsMaterial.cDefaultSpecular).clone()
-        self.mSpecularPower = kwargs.get('mSpecularPower', RawVirtoolsMaterial.cDefaultSpecularPower)
-        self.mEmissive = kwargs.get('mEmissive', RawVirtoolsMaterial.cDefaultEmissive).clone()
-        self.mEnableTwoSided = kwargs.get('mEnableTwoSided', RawVirtoolsMaterial.cDefaultEnableTwoSided)
-        self.mTexture = kwargs.get('mTexture', RawVirtoolsMaterial.cDefaultTexture)
-        self.mTextureMinMode = kwargs.get('mTextureMinMode', RawVirtoolsMaterial.cDefaultTextureMinMode)
-        self.mTextureMagMode = kwargs.get('mTextureMagMode', RawVirtoolsMaterial.cDefaultTextureMagMode)
-        self.mSourceBlend = kwargs.get('mSourceBlend', RawVirtoolsMaterial.cDefaultSourceBlend)
-        self.mDestBlend = kwargs.get('mDestBlend', RawVirtoolsMaterial.cDefaultDestBlend)
-        self.mEnableAlphaBlend = kwargs.get('mEnableAlphaBlend', RawVirtoolsMaterial.cDefaultEnableAlphaBlend)
-        self.mShadeMode = kwargs.get('mShadeMode', RawVirtoolsMaterial.cDefaultShadeMode)
-        self.mFillMode = kwargs.get('mFillMode', RawVirtoolsMaterial.cDefaultFillMode)
-        self.mEnableAlphaTest = kwargs.get('mEnableAlphaTest', RawVirtoolsMaterial.cDefaultEnableAlphaTest)
-        self.mEnableZWrite = kwargs.get('mEnableZWrite', RawVirtoolsMaterial.cDefaultEnableZWrite)
-        
-        self.mEnablePerspectiveCorrection = kwargs.get('mEnablePerspectiveCorrection', RawVirtoolsMaterial.cDefaultEnablePerspectiveCorrection)
-        self.mTextureBlendMode = kwargs.get('mTextureBlendMode', RawVirtoolsMaterial.cDefaultTextureBlendMode)
-        self.mTextureAddressMode = kwargs.get('mTextureAddressMode', RawVirtoolsMaterial.cDefaultTextureAddressMode)
-        self.mZFunc = kwargs.get('mZFunc', RawVirtoolsMaterial.cDefaultZFunc)
-        self.mAlphaFunc = kwargs.get('mAlphaFunc', RawVirtoolsMaterial.cDefaultAlphaFunc)
-        self.mTextureBorderColor = kwargs.get('mTextureBorderColor', RawVirtoolsMaterial.cDefaultTextureBorderColor).clone()
-        self.mAlphaRef = kwargs.get('mAlphaRef', RawVirtoolsMaterial.cDefaultAlphaRef)
+    mAlphaRef: int = datafield(default=0)
+    mAlphaFunc: UTIL_virtools_types.VXCMPFUNC = datafield(default=UTIL_virtools_types.VXCMPFUNC.VXCMP_ALWAYS)
+    mZFunc: UTIL_virtools_types.VXCMPFUNC = datafield(default=UTIL_virtools_types.VXCMPFUNC.VXCMP_LESSEQUAL)
     
     def regulate(self) -> None:
         # regulate colors
@@ -111,6 +54,8 @@ class RawVirtoolsMaterial():
         
         # specular power
         self.mSpecularPower = UTIL_functions.clamp_float(self.mSpecularPower, 0.0, 100.0)
+
+DEFAULT_RAW_VIRTOOLS_MATERIAL = RawVirtoolsMaterial()
 
 #region Blender Enum Prop Helper (Virtools type specified)
 
@@ -132,7 +77,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultAmbient.to_const_rgb(),
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mAmbient.to_const_rgb(),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -143,7 +88,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultDiffuse.to_const_rgba(),
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mDiffuse.to_const_rgba(),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -154,7 +99,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultSpecular.to_const_rgb(),
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mSpecular.to_const_rgb(),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -165,7 +110,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 3,
-        default = RawVirtoolsMaterial.cDefaultEmissive.to_const_rgb(),
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEmissive.to_const_rgb(),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -174,7 +119,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         description = "Specular highlight power",
         min = 0.0,
         max = 100.0,
-        default = RawVirtoolsMaterial.cDefaultSpecularPower,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mSpecularPower,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -192,7 +137,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         min = 0.0,
         max = 1.0,
         size = 4,
-        default = RawVirtoolsMaterial.cDefaultTextureBorderColor.to_const_rgba(),
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mTextureBorderColor.to_const_rgba(),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -200,7 +145,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Texture Blend",
         description = "Texture blend mode",
         items = _g_Helper_VXTEXTURE_BLENDMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureBlendMode),
+        default = _g_Helper_VXTEXTURE_BLENDMODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mTextureBlendMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -208,7 +153,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Filter Min",
         description = "Texture filter mode when the texture is minified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMinMode),
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mTextureMinMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -216,7 +161,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Filter Mag",
         description = "Texture filter mode when the texture is magnified",
         items = _g_Helper_VXTEXTURE_FILTERMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureMagMode),
+        default = _g_Helper_VXTEXTURE_FILTERMODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mTextureMagMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -224,7 +169,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Address Mode",
         description = "The address mode controls how the texture coordinates outside the range 0..1",
         items = _g_Helper_VXTEXTURE_ADDRESSMODE.generate_items(),
-        default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(RawVirtoolsMaterial.cDefaultTextureAddressMode),
+        default = _g_Helper_VXTEXTURE_ADDRESSMODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mTextureAddressMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -232,7 +177,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Source Blend",
         description = "Source blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
-        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultSourceBlend),
+        default = _g_Helper_VXBLEND_MODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mSourceBlend),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -240,7 +185,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Destination Blend",
         description = "Destination blend factor",
         items = _g_Helper_VXBLEND_MODE.generate_items(),
-        default = _g_Helper_VXBLEND_MODE.to_selection(RawVirtoolsMaterial.cDefaultDestBlend),
+        default = _g_Helper_VXBLEND_MODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mDestBlend),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -248,7 +193,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Fill Mode",
         description = "Fill mode",
         items = _g_Helper_VXFILL_MODE.generate_items(),
-        default = _g_Helper_VXFILL_MODE.to_selection(RawVirtoolsMaterial.cDefaultFillMode),
+        default = _g_Helper_VXFILL_MODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mFillMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -256,38 +201,38 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Shade Mode",
         description = "Shade mode",
         items = _g_Helper_VXSHADE_MODE.generate_items(),
-        default = _g_Helper_VXSHADE_MODE.to_selection(RawVirtoolsMaterial.cDefaultShadeMode),
+        default = _g_Helper_VXSHADE_MODE.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mShadeMode),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
     enable_alpha_test: bpy.props.BoolProperty(
         name = "Alpha Test",
         description = "Whether the alpha test is enabled",
-        default = RawVirtoolsMaterial.cDefaultEnableAlphaTest,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEnableAlphaTest,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_alpha_blend: bpy.props.BoolProperty(
         name = "Blend",
         description = "Whether alpha blending is enabled or not.",
-        default = RawVirtoolsMaterial.cDefaultEnableAlphaBlend,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEnableAlphaBlend,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_perspective_correction: bpy.props.BoolProperty(
         name = "Perspective Correction",
         description = "Whether texture perspective correction is enabled",
-        default = RawVirtoolsMaterial.cDefaultEnablePerspectiveCorrection,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEnablePerspectiveCorrection,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_z_write: bpy.props.BoolProperty(
         name = "Z-Buffer Write",
         description = "Whether writing in ZBuffer is enabled.",
-        default = RawVirtoolsMaterial.cDefaultEnableZWrite,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEnableZWrite,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     enable_two_sided: bpy.props.BoolProperty(
         name = "Both Sided",
         description = "Whether the material is both sided or not",
-        default = RawVirtoolsMaterial.cDefaultEnableTwoSided,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mEnableTwoSided,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -296,7 +241,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         description = "Alpha referential value",
         min = 0,
         max = 255,
-        default = RawVirtoolsMaterial.cDefaultAlphaRef,
+        default = DEFAULT_RAW_VIRTOOLS_MATERIAL.mAlphaRef,
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -304,7 +249,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Alpha Test Function",
         description = "Alpha comparision function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
-        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultAlphaFunc),
+        default = _g_Helper_VXCMPFUNC.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mAlphaFunc),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
     
@@ -312,7 +257,7 @@ class BBP_PG_virtools_material(bpy.types.PropertyGroup):
         name = "Z Compare Function",
         description = "Z Comparison function",
         items = _g_Helper_VXCMPFUNC.generate_items(),
-        default = _g_Helper_VXCMPFUNC.to_selection(RawVirtoolsMaterial.cDefaultZFunc),
+        default = _g_Helper_VXCMPFUNC.to_selection(DEFAULT_RAW_VIRTOOLS_MATERIAL.mZFunc),
         translation_context = 'BBP_PG_virtools_material/property'
     ) # type: ignore
 

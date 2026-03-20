@@ -1,44 +1,22 @@
 import bpy
 import typing, math, enum
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_functions, UTIL_virtools_types
 
+@dataclass
 class RawVirtoolsCamera():
-    # Class Member
-
-    mProjectionType: UTIL_virtools_types.CK_CAMERA_PROJECTION
-
-    mOrthographicZoom: float
-
-    mFrontPlane: float
-    mBackPlane: float
-    mFov: float
-
-    mAspectRatio: tuple[int, int]
-
-    # Class member default value
-
-    cDefaultProjectionType: typing.ClassVar[UTIL_virtools_types.CK_CAMERA_PROJECTION] = UTIL_virtools_types.CK_CAMERA_PROJECTION.CK_PERSPECTIVEPROJECTION
     
-    cDefaultOrthographicZoom: typing.ClassVar[float] = 1.0
+    mProjectionType: UTIL_virtools_types.CK_CAMERA_PROJECTION = datafield(default=UTIL_virtools_types.CK_CAMERA_PROJECTION.CK_PERSPECTIVEPROJECTION)
 
-    cDefaultFrontPlane: typing.ClassVar[float] = 1.0
-    cDefaultBackPlane: typing.ClassVar[float] = 4000.0
-    cDefaultFov: typing.ClassVar[float] = 0.5
+    mOrthographicZoom: float = datafield(default=1.0)
 
-    cDefaultAspectRatio: typing.ClassVar[tuple[int, int]] = (4, 3)
+    mFrontPlane: float = datafield(default=1.0)
+    mBackPlane: float = datafield(default=4000.0)
+    mFov: float = datafield(default=0.5)
 
-    def __init__(self, **kwargs):
-        # assign default value for each component
-        self.mProjectionType = kwargs.get("mProjectionType", RawVirtoolsCamera.cDefaultProjectionType)
-        
-        self.mOrthographicZoom = kwargs.get("mOrthographicZoom", RawVirtoolsCamera.cDefaultOrthographicZoom)
-        
-        self.mFrontPlane = kwargs.get("mFrontPlane", RawVirtoolsCamera.cDefaultFrontPlane)
-        self.mBackPlane = kwargs.get("mBackPlane", RawVirtoolsCamera.cDefaultBackPlane)
-        self.mFov = kwargs.get("mFov", RawVirtoolsCamera.cDefaultFov)
-        
-        self.mAspectRatio = kwargs.get("mAspectRatio", RawVirtoolsCamera.cDefaultAspectRatio)
-        
+    mAspectRatio: tuple[int, int] = datafield(default_factory=lambda: (4, 3))
+
     def regulate(self) -> None:
         # everything should be positive
         self.mOrthographicZoom = max(0.0, self.mOrthographicZoom)
@@ -52,6 +30,8 @@ class RawVirtoolsCamera():
         h = max(1, h)
         self.mAspectRatio = (w, h)
 
+DEFAULT_RAW_VIRTOOLS_CAMERA = RawVirtoolsCamera()
+
 #region Blender Enum Prop Helper
 
 _g_Helper_CK_CAMERA_PROJECTION = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_CAMERA_PROJECTION)
@@ -63,7 +43,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         name = "Type",
         description = "The type of this camera.",
         items = _g_Helper_CK_CAMERA_PROJECTION.generate_items(),
-        default = _g_Helper_CK_CAMERA_PROJECTION.to_selection(RawVirtoolsCamera.cDefaultProjectionType),
+        default = _g_Helper_CK_CAMERA_PROJECTION.to_selection(DEFAULT_RAW_VIRTOOLS_CAMERA.mProjectionType),
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -74,7 +54,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         soft_min = 0.0,
         soft_max = 0.5,
         step = 5,
-        default = RawVirtoolsCamera.cDefaultOrthographicZoom,
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mOrthographicZoom,
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -85,7 +65,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         soft_min = 0.0,
         soft_max = 5000.0,
         step = 100,
-        default = RawVirtoolsCamera.cDefaultFrontPlane,
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mFrontPlane,
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -96,7 +76,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         soft_min = 0.0,
         soft_max = 5000.0,
         step = 100,
-        default = RawVirtoolsCamera.cDefaultBackPlane,
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mBackPlane,
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -108,7 +88,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         max = math.radians(180.0),
         step = 100,
         precision = 100,
-        default = RawVirtoolsCamera.cDefaultFov,
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mFov,
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -119,7 +99,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         soft_min = 1,
         soft_max = 40,
         step = 1,
-        default = RawVirtoolsCamera.cDefaultAspectRatio[0],
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mAspectRatio[0],
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 
@@ -130,7 +110,7 @@ class BBP_PG_virtools_camera(bpy.types.PropertyGroup):
         soft_min = 1,
         soft_max = 40,
         step = 1,
-        default = RawVirtoolsCamera.cDefaultAspectRatio[1],
+        default = DEFAULT_RAW_VIRTOOLS_CAMERA.mAspectRatio[1],
         translation_context = 'BBP_PG_virtools_camera/property'
     ) # type: ignore
 

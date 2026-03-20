@@ -1,24 +1,17 @@
 import bpy
 import typing
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_virtools_types, UTIL_functions
 
+@dataclass
 class RawVirtoolsTexture():
     
-    # Instance Member Declarations
-    
-    mSaveOptions: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS
-    mVideoFormat: UTIL_virtools_types.VX_PIXELFORMAT
+    mSaveOptions: UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS = datafield(default=UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA)
+    mVideoFormat: UTIL_virtools_types.VX_PIXELFORMAT = datafield(default=UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB1555)
 
-    # Default Value Declarations
-    
-    cDefaultSaveOptions: typing.ClassVar[UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS] = UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS.CKTEXTURE_RAWDATA
-    cDefaultVideoFormat: typing.ClassVar[UTIL_virtools_types.VX_PIXELFORMAT] = UTIL_virtools_types.VX_PIXELFORMAT._16_ARGB1555
+DEFAULT_RAW_VIRTOOLS_TEXTURE = RawVirtoolsTexture()
 
-    def __init__(self, **kwargs):
-        # assign default value for each component
-        self.mSaveOptions = kwargs.get('mSaveOptions', RawVirtoolsTexture.cDefaultSaveOptions)
-        self.mVideoFormat = kwargs.get('mVideoFormat', RawVirtoolsTexture.cDefaultVideoFormat)
-    
 # blender enum prop helper defines
 _g_Helper_CK_TEXTURE_SAVEOPTIONS = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.CK_TEXTURE_SAVEOPTIONS)
 _g_Helper_VX_PIXELFORMAT = UTIL_virtools_types.EnumPropHelper(UTIL_virtools_types.VX_PIXELFORMAT)
@@ -29,7 +22,7 @@ class BBP_PG_virtools_texture(bpy.types.PropertyGroup):
         name = "Save Options",
         description = "When saving a composition textures or sprites can be kept as reference to external files or converted to a given format and saved inside the composition file.",
         items = _g_Helper_CK_TEXTURE_SAVEOPTIONS.generate_items(),
-        default = _g_Helper_CK_TEXTURE_SAVEOPTIONS.to_selection(RawVirtoolsTexture.cDefaultSaveOptions),
+        default = _g_Helper_CK_TEXTURE_SAVEOPTIONS.to_selection(DEFAULT_RAW_VIRTOOLS_TEXTURE.mSaveOptions),
         translation_context = 'BBP_PG_virtools_texture/property'
     ) # type: ignore
     
@@ -37,7 +30,7 @@ class BBP_PG_virtools_texture(bpy.types.PropertyGroup):
         name = "Video Format",
         description = "The desired surface pixel format in video memory.",
         items = _g_Helper_VX_PIXELFORMAT.generate_items(),
-        default = _g_Helper_VX_PIXELFORMAT.to_selection(RawVirtoolsTexture.cDefaultVideoFormat),
+        default = _g_Helper_VX_PIXELFORMAT.to_selection(DEFAULT_RAW_VIRTOOLS_TEXTURE.mVideoFormat),
         translation_context = 'BBP_PG_virtools_texture/property'
     ) # type: ignore
     

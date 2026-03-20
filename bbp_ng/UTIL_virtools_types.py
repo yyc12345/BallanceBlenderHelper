@@ -260,8 +260,8 @@ _g_Docstring: dict[type, dict[int, EnumDocstring]] = {
         VXMESH_LITMODE.VX_LITMESH.value: EnumDocstring("Lit", "Lighting is done by renderer using normals and face material information. "),
     },
     CK_CAMERA_PROJECTION: {
-        CK_CAMERA_PROJECTION.CK_PERSPECTIVEPROJECTION.value: EnumDocstring("Perspective projection", ""),
-        CK_CAMERA_PROJECTION.CK_ORTHOGRAPHICPROJECTION.value: EnumDocstring("Orthographic projection", ""),
+        CK_CAMERA_PROJECTION.CK_PERSPECTIVEPROJECTION.value: EnumDocstring("Perspective Projection", ""),
+        CK_CAMERA_PROJECTION.CK_ORTHOGRAPHICPROJECTION.value: EnumDocstring("Orthographic Projection", ""),
     }
 }
 

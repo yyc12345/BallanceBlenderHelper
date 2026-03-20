@@ -1,20 +1,18 @@
 import bpy
 import os, typing
+from dataclasses import dataclass
+from dataclasses import field as datafield
 from . import UTIL_naming_convention
 
+@dataclass
 class RawPreferences():
-    cBallanceTextureFolder: typing.ClassVar[str] = ""
-    cNoComponentCollection: typing.ClassVar[str] = ""
-
-    mBallanceTextureFolder: str
-    mNoComponentCollection: str
-
-    def __init__(self, **kwargs):
-        self.mBallanceTextureFolder = kwargs.get("mBallanceTextureFolder", "")
-        self.mNoComponentCollection = kwargs.get("mNoComponentCollection", "")
+    mBallanceTextureFolder: str = datafield(default="")
+    mNoComponentCollection: str = datafield(default="")
 
     def has_valid_blc_tex_folder(self) -> bool:
         return os.path.isdir(self.mBallanceTextureFolder)
+
+DEFAULT_RAW_PREFERENCES = RawPreferences()
 
 class BBPPreferences(bpy.types.AddonPreferences):
     bl_idname = __package__
@@ -23,14 +21,14 @@ class BBPPreferences(bpy.types.AddonPreferences):
         name = "Ballance Texture Folder",
         description = "The path to folder which will be used by this plugin to get external Ballance texture.",
         subtype = 'DIR_PATH',
-        default = RawPreferences.cBallanceTextureFolder,
+        default = DEFAULT_RAW_PREFERENCES.mBallanceTextureFolder,
         translation_context = 'BBPPreferences/property'
     ) # type: ignore
     
     no_component_collection: bpy.props.StringProperty(
         name = "No Component Collection",
         description = "When importing, it is the name of collection where objects store will not be saved as component. When exporting, all forced no component objects will be stored in this name represented collection",
-        default = RawPreferences.cNoComponentCollection,
+        default = DEFAULT_RAW_PREFERENCES.mNoComponentCollection,
         translation_context = 'BBPPreferences/property'
     ) # type: ignore
     
