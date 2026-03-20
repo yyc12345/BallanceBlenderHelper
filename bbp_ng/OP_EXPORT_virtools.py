@@ -82,18 +82,18 @@ class BBP_OT_export_virtools(bpy.types.Operator, UTIL_file_browser.ExportVirtool
         self.draw_virtools_params(context, layout, False)
         self.draw_ballance_params(layout, False)
 
-_TObj3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
-_TLightPair = tuple[bpy.types.Object, bpy.types.Light, bmap.BMTargetLight]
-_TCameraPair = tuple[bpy.types.Object, bpy.types.Camera, bmap.BMTargetCamera]
-_TMeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
-_TMaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
-_TTexturePair = tuple[bpy.types.Image, bmap.BMTexture]
+_Object3dPair = tuple[bpy.types.Object, bmap.BM3dObject]
+_LightPair = tuple[bpy.types.Object, bpy.types.Light, bmap.BMTargetLight]
+_CameraPair = tuple[bpy.types.Object, bpy.types.Camera, bmap.BMTargetCamera]
+_MeshPair = tuple[bpy.types.Object, bpy.types.Mesh, bmap.BMMesh]
+_MaterialPair = tuple[bpy.types.Material, bmap.BMMaterial]
+_TexturePair = tuple[bpy.types.Image, bmap.BMTexture]
 
 @dataclass
 class _PreparedCrets:
-    obj3d_crets: tuple[_TObj3dPair, ...]
-    light_crets: tuple[_TLightPair, ...]
-    camera_crets: tuple[_TCameraPair, ...]
+    obj3d_crets: tuple[_Object3dPair, ...]
+    light_crets: tuple[_LightPair, ...]
+    camera_crets: tuple[_CameraPair, ...]
 
 def _export_virtools(
         file_name_: str, 
@@ -128,13 +128,13 @@ def _export_virtools(
                 _export_virtools_light(writer, progress, prep_crets.light_crets)
                 _export_virtools_camera(writer, progress, prep_crets.camera_crets)
                 # export prepared 3dobject
-                mesh_crets: tuple[_TMeshPair, ...] = _export_virtools_3dobjects(
+                mesh_crets: tuple[_MeshPair, ...] = _export_virtools_3dobjects(
                     writer, progress, prep_crets.obj3d_crets)
                 # export mesh
-                material_crets: tuple[_TMaterialPair, ...] = _export_virtools_meshes(
+                material_crets: tuple[_MaterialPair, ...] = _export_virtools_meshes(
                     writer, progress, mesh_crets)
                 # export material
-                texture_crets: tuple[_TTexturePair, ...] = _export_virtools_materials(
+                texture_crets: tuple[_TexturePair, ...] = _export_virtools_materials(
                     writer, progress, material_crets)
                 # export texture
                 _export_virtools_textures(writer, progress, vt_temp_folder, texture_crets)
@@ -155,13 +155,13 @@ def _prepare_virtools_3dobjects(
     # we also need extract exported lights and create equvalent entries in virtools for them.
 
     # create 3dobject hashset and result
-    obj3d_crets: list[_TObj3dPair] = []
+    obj3d_crets: list[_Object3dPair] = []
     obj3d_cret_set: set[bpy.types.Object] = set()
     # create light hashset and result
-    light_crets: list[_TLightPair] = []
+    light_crets: list[_LightPair] = []
     light_cret_set: set[bpy.types.Object] = set()
     # create camera hashset and result
-    camera_crets: list[_TCameraPair] = []
+    camera_crets: list[_CameraPair] = []
     camera_cret_set: set[bpy.types.Object] = set()
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Creating 3dObjects and Lights', 'BBP_OT_export_virtools/execute')
@@ -213,7 +213,7 @@ def _export_virtools_groups(
         progress: ProgressReport,
         successive_sector: bool,
         successive_sector_count: int,
-        obj3d_crets: tuple[_TObj3dPair, ...]
+        obj3d_crets: tuple[_Object3dPair, ...]
         ) -> None:
     # create virtools group
     group_cret_map: dict[str, bmap.BMGroup] = {}
@@ -261,7 +261,7 @@ def _export_virtools_groups(
 def _export_virtools_light(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        light_crets: tuple[_TLightPair, ...]
+        light_crets: tuple[_LightPair, ...]
         ) -> None:
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving Lights', 'BBP_OT_export_virtools/execute')
@@ -306,7 +306,7 @@ def _export_virtools_light(
 def _export_virtools_camera(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        camera_crets: tuple[_TCameraPair, ...]
+        camera_crets: tuple[_CameraPair, ...]
         ) -> None:
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving Cameras', 'BBP_OT_export_virtools/execute')
@@ -349,10 +349,10 @@ def _export_virtools_camera(
 def _export_virtools_3dobjects(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        obj3d_crets: tuple[_TObj3dPair, ...]
-        ) -> tuple[_TMeshPair, ...]:
+        obj3d_crets: tuple[_Object3dPair, ...]
+        ) -> tuple[_MeshPair, ...]:
     # create virtools mesh
-    mesh_crets: list[_TMeshPair] = []
+    mesh_crets: list[_MeshPair] = []
     mesh_cret_map: dict[bpy.types.Mesh, bmap.BMMesh] = {}
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving 3dObjects', 'BBP_OT_export_virtools/execute')
@@ -396,10 +396,10 @@ def _export_virtools_3dobjects(
 def _export_virtools_meshes(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        mesh_crets: tuple[_TMeshPair, ...]
-        ) -> tuple[_TMaterialPair, ...]:
+        mesh_crets: tuple[_MeshPair, ...]
+        ) -> tuple[_MaterialPair, ...]:
     # create virtools mesh
-    material_crets: list[_TMaterialPair] = []
+    material_crets: list[_MaterialPair] = []
     material_cret_map: dict[bpy.types.Material, bmap.BMMaterial] = {}
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving Meshes', 'BBP_OT_export_virtools/execute')
@@ -511,10 +511,10 @@ def _export_virtools_meshes(
 def _export_virtools_materials(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
-        material_crets: tuple[_TMaterialPair, ...]
-        ) -> tuple[_TTexturePair, ...]:
+        material_crets: tuple[_MaterialPair, ...]
+        ) -> tuple[_TexturePair, ...]:
     # create virtools mesh
-    texture_crets: list[_TTexturePair] = []
+    texture_crets: list[_TexturePair] = []
     texture_cret_map: dict[bpy.types.Image, bmap.BMTexture] = {}
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving Materials', 'BBP_OT_export_virtools/execute')
@@ -580,7 +580,7 @@ def _export_virtools_textures(
         writer: bmap.BMFileWriter,
         progress: ProgressReport,
         vt_temp_folder: str,
-        texture_crets: tuple[_TTexturePair, ...]
+        texture_crets: tuple[_TexturePair, ...]
         ) -> None:
     # start saving
     tr_text: str = bpy.app.translations.pgettext_rpt('Saving Textures', 'BBP_OT_export_virtools/execute')
