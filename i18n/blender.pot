@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-04 09:55+0800\n"
+"POT-Creation-Date: 2026-03-24 19:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -252,6 +252,24 @@ msgctxt "BBP_OT_add_virtools_group"
 msgid "Add to Virtools Groups"
 msgstr ""
 
+#. :src: bpy.types.BBP_OT_apply_virtools_camera
+msgid "Apply Virtools Camera to Blender Camera except Resolution."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_camera
+msgctxt "BBP_OT_apply_virtools_camera"
+msgid "Apply to Blender Camera"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_camera_resolution
+msgid "Apply Virtools Camera Resolution to Blender Scene."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_apply_virtools_camera_resolution
+msgctxt "BBP_OT_apply_virtools_camera_resolution"
+msgid "Apply to Blender Scene Resolution"
+msgstr ""
+
 #. :src: bpy.types.BBP_OT_apply_virtools_light
 msgid "Apply Virtools Light to Blender Light."
 msgstr ""
@@ -389,15 +407,6 @@ msgctxt "BBP_OT_game_camera"
 msgid "Game Camera"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution
-msgid "Set Blender render resolution to Ballance game"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_game_resolution
-msgctxt "BBP_OT_game_resolution"
-msgid "Game Resolution"
-msgstr ""
-
 #. :src: bpy.types.BBP_OT_import_bmfile
 msgid "Load a Ballance Map File (BM File Spec 1.4)"
 msgstr ""
@@ -423,6 +432,15 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_legacy_align
 msgctxt "BBP_OT_legacy_align"
 msgid "3ds Max Align"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio
+msgid "Preset Virtools Camera Aspect Ratio with Virtools Presets."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio"
+msgid "Preset Virtools Camera Aspect Ratio"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material
@@ -1609,6 +1627,15 @@ msgstr ""
 msgid "The rotation angle of camera relative to 3D Cursor or Active Object"
 msgstr ""
 
+#. :src: bpy.types.BBP_OT_game_camera.modify_resolution
+msgctxt "BBP_OT_game_camera/property"
+msgid "Modify Resolution"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.modify_resolution
+msgid "Whether modify the resolution of camera."
+msgstr ""
+
 #. :src: bpy.types.BBP_OT_game_camera.perspective_kind
 #. :src: bpy.types.BBP_OT_game_camera.rotation_kind
 msgctxt "BBP_OT_game_camera/property"
@@ -1727,6 +1754,33 @@ msgstr ""
 msgid "315 degree"
 msgstr ""
 
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind
+msgctxt "BBP_OT_game_camera/property"
+msgid "Resolution Kind"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind
+msgid "The type of preset resolution."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind:'1'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Normal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind:'1'
+msgid "Vanilla Ballance Resolution"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind:'2'
+msgctxt "BBP_OT_game_camera/property"
+msgid "Wide Screen"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_game_camera.resolution_kind:'2'
+msgid "Ballance Resolution with Wide Screen Fix"
+msgstr ""
+
 #. :src: bpy.types.BBP_OT_game_camera.rotation_kind:'1'
 msgctxt "BBP_OT_game_camera/property"
 msgid "Preset"
@@ -1768,49 +1822,77 @@ msgstr ""
 msgid "The origin point of active object is player ball."
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind
-msgctxt "BBP_OT_game_resolution/property"
-msgid "Resolution Kind"
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Camera Name Conflict"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind
-msgid "The type of preset resolution."
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy
+msgid "Define how to process camera name conflict"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'1'
-msgctxt "BBP_OT_game_resolution/property"
-msgid "Normal"
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Rename"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'1'
-msgid "Aspect ratio: 4:3."
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
+msgid "Rename the new one"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'2'
-msgctxt "BBP_OT_game_resolution/property"
-msgid "Extended"
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
+msgid "Use Current"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'2'
-msgid "Aspect ratio: 16:9."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'3'
-msgctxt "BBP_OT_game_resolution/property"
-msgid "Widescreen"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'3'
-msgid "Aspect ratio: 7:3."
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'4'
-msgctxt "BBP_OT_game_resolution/property"
-msgid "Panoramic"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_game_resolution.resolution_kind:'4'
-msgid "Aspect ratio: 20:7."
+#. :src: bpy.types.BBP_OT_import_bmfile.camera_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.camera_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
+#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
+msgid "Use current one"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
@@ -1822,60 +1904,6 @@ msgstr ""
 #. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy
 #. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy
 msgid "Define how to process light name conflict"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
-msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
-msgid "Rename"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'1'
-#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'1'
-msgid "Rename the new one"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
-msgctxt "BBP/UTIL_ioport_shared.ImportParams/property"
-msgid "Use Current"
-msgstr ""
-
-#. :src: bpy.types.BBP_OT_import_bmfile.light_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.mesh_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.object_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_bmfile.texture_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.light_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.material_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.mesh_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.object_conflict_strategy:'2'
-#. :src: bpy.types.BBP_OT_import_virtools.texture_conflict_strategy:'2'
-msgid "Use current one"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_import_bmfile.material_conflict_strategy
@@ -1922,13 +1950,55 @@ msgstr ""
 msgid "Define how to process texture name conflict"
 msgstr ""
 
-#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
-msgctxt "BBP_OT_preset_virtools_material/property"
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio/property"
 msgid "Preset"
 msgstr ""
 
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
 msgid "The preset which you want to apply."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'1'
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio/property"
+msgid "Normal"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'1'
+msgid "Aspect ratio: 4:3."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'2'
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio/property"
+msgid "Extended"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'2'
+msgid "Aspect ratio: 16:9."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'3'
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio/property"
+msgid "Widescreen"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'3'
+msgid "Aspect ratio: 7:3."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'4'
+msgctxt "BBP_OT_preset_virtools_camera_aspect_ratio/property"
+msgid "Panoramic"
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_camera_aspect_ratio.preset_type:'4'
+msgid "Aspect ratio: 20:7."
+msgstr ""
+
+#. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type
+msgctxt "BBP_OT_preset_virtools_material/property"
+msgid "Preset"
 msgstr ""
 
 #. :src: bpy.types.BBP_OT_preset_virtools_material.preset_type:'1'
@@ -2060,6 +2130,15 @@ msgstr ""
 #. :src: bpy.types.BBP_PT_bme_materials
 msgctxt "BBP_PT_bme_materials"
 msgid "BME Materials"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_camera
+msgid "Show Virtools Camera Properties"
+msgstr ""
+
+#. :src: bpy.types.BBP_PT_virtools_camera
+msgctxt "BBP_PT_virtools_camera"
+msgid "Virtools Camera"
 msgstr ""
 
 #. :src: bpy.types.BBP_PT_virtools_groups
@@ -2316,6 +2395,79 @@ msgstr ""
 
 #. :src: bpy.types.BBP_PG_ptrprop_resolver.rail_uv_material
 msgid "The material used for rail"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.aspect_ratio_h
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Aspect Ratio Height"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.aspect_ratio_h
+msgid "Defines the height of aspect ratio."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.aspect_ratio_w
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Aspect Ratio Width"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.aspect_ratio_w
+msgid "Defines the width of aspect ratio."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.back_plane
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Back Plane"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.back_plane
+msgid "Defines the back plane."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.fov
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Field of View"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.fov
+msgid "Defines the field of view."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.front_plane
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Front Plane"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.front_plane
+msgid "Defines the front plane."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.orthographic_zoom
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Orthographic Zoom"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.orthographic_zoom
+msgid "Defines the orthographic zoom."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.projection_type
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Type"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.projection_type
+msgid "The type of this camera."
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.projection_type:'1'
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Perspective Projection"
+msgstr ""
+
+#. :src: bpy.types.BBP_PG_virtools_camera.projection_type:'2'
+msgctxt "BBP_PG_virtools_camera/property"
+msgid "Orthographic Projection"
 msgstr ""
 
 #. :src: bpy.types.BBP_PG_virtools_group.group_name
@@ -3590,104 +3742,114 @@ msgstr ""
 msgid "This feature is not supported yet."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:148
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:167
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Creating 3dObjects and Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:192
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:221
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:238
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:267
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:286
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:312
+msgctxt "BBP_OT_export_virtools/execute"
+msgid "Saving Cameras"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:358
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving 3dObjects"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:333
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:405
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Meshes"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:448
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:520
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Materials"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:514
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:586
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Textures"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:554
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:626
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Saving Document"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:66
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:76
 msgid "Virtools File Exporting Finished."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:95
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:112
 msgctxt "BBP_OT_export_virtools/execute"
 msgid "Virtools Engine Temporary Directory: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:32
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:33
 msgid "No selected target!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:38
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:39
 msgid "You can not specify \"Use Global\" as global texture save option!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:44
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:45
 msgid ""
 "You must specify at least one encoding for file saving (e.g. cp1252, gbk)!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:50
+#: extensions/user_default/bbp_ng/OP_EXPORT_virtools.py:60
 #: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:38
 msgid "No file was selected!"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:96
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:97
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Textures"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:166
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:167
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Materials"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:233
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:234
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Meshes"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:331
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:332
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading 3dObjects"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:376
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:377
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Lights"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:438
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:433
+msgctxt "BBP_OT_import_virtools/execute"
+msgid "Loading Cameras"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:486
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Loading Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:474
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:522
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Applying Groups"
 msgstr ""
@@ -3701,7 +3863,7 @@ msgctxt "BBP_OT_import_virtools/execute"
 msgid "Virtools Engine Temporary Directory: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:102
+#: extensions/user_default/bbp_ng/OP_IMPORT_virtools.py:103
 msgctxt "BBP_OT_import_virtools/execute"
 msgid "Texture Raw Data Temporary Directory: {0}"
 msgstr ""
@@ -3716,19 +3878,24 @@ msgctxt "BBP_OT_fix_all_materials/draw"
 msgid "Fix {0}/{1} materials."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:305
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:262
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Target"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:310
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:267
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Rotation"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:333
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:290
 msgctxt "BBP_OT_game_camera/draw"
 msgid "Perspective"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/OP_OBJECT_game_view.py:295
+msgctxt "BBP_OT_game_camera/draw"
+msgid "Resolution"
 msgstr ""
 
 #: extensions/user_default/bbp_ng/OP_OBJECT_legacy_align.py:208
@@ -3853,175 +4020,210 @@ msgstr ""
 msgid "Reset BME materials successfully."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_preferences.py:42
+#: extensions/user_default/bbp_ng/PROP_preferences.py:40
 msgctxt "BBPPreferences/draw"
 msgid "Ballance Texture Folder"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_preferences.py:44
+#: extensions/user_default/bbp_ng/PROP_preferences.py:42
 msgctxt "BBPPreferences/draw"
 msgid "No Component Collection"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_group.py:392
-msgctxt "BBP_PT_virtools_groups/draw"
-msgid "Virtools Group is invalid on non-mesh object!"
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:339
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Apply"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:287
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:342
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Apply Resolution"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:350
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Clipping"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:375
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Aspect Ratio"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:359
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Perspective Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_camera.py:367
+msgctxt "BBP_PT_virtools_camera/draw"
+msgid "Orthographic Parameters"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_group.py:392
+msgctxt "BBP_PT_virtools_groups/draw"
+msgid "Virtools Group is invalid on non-mesh-like object!"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:260
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Apply"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:292
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:265
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Basics"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:305
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:278
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Attenuation"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:306
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:279
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Constant"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:307
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:280
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Linear"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:308
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:281
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Quadratic"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_light.py:313
+#: extensions/user_default/bbp_ng/PROP_virtools_light.py:286
 msgctxt "BBP_PT_virtools_light/draw"
 msgid "Spot Cone"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1056
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1001
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Preset"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1059
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1004
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Apply"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1064
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1009
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Color Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1072
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1017
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Mode Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1078
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1023
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Texture Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1099
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1044
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Test Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1106
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1051
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Alpha Blend Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1113
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1058
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Z Write Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:939
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:884
 msgid "Fix material successfully."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:942
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:887
 msgid "This material is not suit for fixer."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1087
+#: extensions/user_default/bbp_ng/PROP_virtools_material.py:1032
 msgctxt "BBP_PT_virtools_material/draw"
 msgid "Virtools Texture Settings"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:168
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:195
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Import Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:172
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:199
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Name Conflict Strategy"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:174
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:201
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Object"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:175
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:202
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Light"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:176
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:203
+msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
+msgid "Camera"
+msgstr ""
+
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:204
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Mesh"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:177
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:205
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Material"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:178
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:206
 msgctxt "BBP/UTIL_ioport_shared.ImportParams/draw"
 msgid "Texture"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:277
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:310
 msgctxt "BBP/UTIL_ioport_shared.ExportParams/draw"
 msgid "Export Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:359
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:392
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Virtools Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:363
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:396
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Encodings"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:414
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:447
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Ballance Parameters"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:420
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:453
 msgctxt "BBP/UTIL_ioport_shared.BallanceParams/draw"
 msgid "Map Sectors: {0}"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:370
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:403
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Global Texture Save Options"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:374
+#: extensions/user_default/bbp_ng/UTIL_ioport_shared.py:407
 msgctxt "BBP/UTIL_ioport_shared.VirtoolsParams/draw"
 msgid "Compression"
 msgstr ""
@@ -4123,7 +4325,7 @@ msgid ""
 "Can't distinguish object between Floors and Rails. Suppose it is Floors."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:273
+#: extensions/user_default/bbp_ng/UTIL_virtools_types.py:303
 msgctxt "BME/UTIL_virtools_types.virtools_name_regulator()"
 msgid "annoymous"
 msgstr ""
@@ -4163,47 +4365,47 @@ msgctxt "BBP/__init__.reuse_draw_add_component()"
 msgid "Components Pair"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:206
+#: extensions/user_default/bbp_ng/__init__.py:205
 msgctxt "BBP/__init__.menu_drawer_import()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:219
+#: extensions/user_default/bbp_ng/__init__.py:218
 msgctxt "BBP/__init__.menu_drawer_export()"
 msgid "Virtools File (.nmo/.cmo/.vmo) (experimental)"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:230
+#: extensions/user_default/bbp_ng/__init__.py:229
 msgctxt "BBP/__init__.menu_drawer_add()"
 msgid "Ballance"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:247
+#: extensions/user_default/bbp_ng/__init__.py:246
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Virtools Group"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:249
+#: extensions/user_default/bbp_ng/__init__.py:248
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Group into..."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:252
+#: extensions/user_default/bbp_ng/__init__.py:251
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Ungroup from..."
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:255
+#: extensions/user_default/bbp_ng/__init__.py:254
 msgctxt "BBP/__init__.menu_drawer_grouping()"
 msgid "Clear All Groups"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:261
+#: extensions/user_default/bbp_ng/__init__.py:260
 msgctxt "BBP/__init__.menu_drawer_snoop_then_conv()"
 msgid "Ballance"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:273
+#: extensions/user_default/bbp_ng/__init__.py:272
 msgctxt "BBP/__init__.menu_drawer_naming_convention()"
 msgid "Ballance"
 msgstr ""
@@ -4223,12 +4425,12 @@ msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Camera"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:185
+#: extensions/user_default/bbp_ng/__init__.py:184
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Select"
 msgstr ""
 
-#: extensions/user_default/bbp_ng/__init__.py:188
+#: extensions/user_default/bbp_ng/__init__.py:187
 msgctxt "BBP_MT_View3DMenu/draw"
 msgid "Material"
 msgstr ""
