@@ -10,7 +10,7 @@ In the `Virtools Group` panel, you can click Add to group objects. After clickin
 
 BBP also provides access to Virtools groups in Blender's other menus, see [Group Operation](./group-operations.md).
 
-It is important to note that the Virtools group only works on mesh objects. When you open the Virtools group panel on other objects, you will see a warning message in the panel indicating that the Virtools group is invalid for that object. Although the Virtools group data set on non-mesh objects will be recognized and stored by Blender, it will not be saved to the Virtools file when exporting.
+It's important to note that Virtools groups only apply to mesh objects and objects that can be converted to meshes. For a list of supported objects, please refer to the "Export Virtools File" section on the [Import and Export Virtools Document](./import-export-virtools.md) page. When you open the Virtools group panel on an unsupported object, you will see a warning message indicating that the Virtools group is invalid on that object. Virtools group data set on unsupported objects will be recognized and stored by Blender, but will not be saved to the Virtools file during export.
 
 ## Virtools Material
 
@@ -67,3 +67,18 @@ The BBP plugin adds a new property called Virtools Light to all Blender lights. 
 ![](../imgs/virtools-light.png)
 
 Similar to the materials in Virtools, the lighting system in Virtools differs significantly from that in Blender. The Virtools Light acts as a bridge, accurately reflecting the settings of Virtools, allowing for seamless storage within Blender files and providing necessary data during import and export. Additionally, this panel includes an Apply button to apply the Virtools lighting settings to Blender's lighting.
+
+## Virtools Camera
+
+The BBP plugin adds a new property called Virtools Camera to all Blender cameras. You can find the Virtools Camera panel by navigating to the Data properties panel.
+
+![](../imgs/virtools-camera.png)
+
+Similar to the lights in Virtools, the cameraing system in Virtools differs significantly from that in Blender. The Virtools Camera acts as a bridge, accurately reflecting the settings of Virtools, allowing for seamless storage within Blender files and providing necessary data during import and export.
+
+However, unlike Virtools light, Virtools camera and the Blender camera system have a significant difference. Each Virtools camera can hold a different aspect ratio, such as 4:3, 16:9, etc.; while the Blender camera system does not hold this data, but instead stores it in the scene's rendering settings, where only a single value can be entered. To solve this problem, the "Apply" button in this panel only precisely maps properties other than Aspect Ratio to the Blender camera. For Aspect Ratio, a separate button called "Apply Resolution" is provided to reflect the resolution value in the scene's rendering settings. When you want to use the current camera as the viewpoint, click this button, apply the resolution, and then enter the camera's view to see the camera result that matches the Aspect Ratio.
+
+!!! tip "Specific Values ​​for Applying Resolution"
+    When applying resolution, we do not provide a function to specify the number of pixels on a particular side. Instead, we use a fully automatic algorithm to calculate a suitable resolution. Specifically: First, we obtain the LCM of the Aspect Ratio. Then, we find the first number greater than 1000 that is an integer multiple of that LCM, and use this as the number of pixels on the shorter side. Then, we calculate the number of pixels on the longer side proportionally. This algorithm guarantees that the calculated resolution will always be an integer.
+
+    1000 was chosen because it is a relatively moderate resolution size. However, this randomly selected fixed value also means that the final resolution may not be what the user wants. Users can adjust the resolution proportionally according to their needs.

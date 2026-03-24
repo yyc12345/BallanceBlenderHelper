@@ -5,11 +5,13 @@
 
 ## Import Virtools File
 
-Virtools files can be imported by clicking `File - Import - Virtools File`. Importing supports CMO, VMO and NMO files. Clicking on it will bring up the file opening window and show the import settings in the sidebar. First of all, you need to select the Virtools file to be imported, and then configure the import settings in the sidebar. After configuring the import settings, you can click Import to start the import, and wait for the status bar at the bottom of Blender to indicate that the import is complete.
+Virtools files can be imported by clicking `File - Import - Virtools File`. Importing supports CMO, VMO and NMO files. Clicking on it will bring up the file opening window and show the import settings in the sidebar as shown below. First of all, you need to select the Virtools file to be imported, and then configure the import settings in the sidebar. After configuring the import settings, you can click Import to start the import, and wait for the status bar at the bottom of Blender to indicate that the import is complete.
+
+![](../imgs/import-virtools.png)
 
 ### Conflict Options
 
-The Conflict Options section indicates what to do when the importer encounters duplicate object names. There are 5 levels, for Object, Light, Mesh, Material and Texture. There are 2 ways to handle it: Rename and Use Current. When Rename is selected and a duplicate name is encountered, a suffix will be added to the name to make it unique. By choosing Use Current, the import of the item from the file will be ignored and the item with the same name will be used instead, which already exists in the Blender document.
+The Conflict Options section indicates what to do when the importer encounters duplicate object names. There are 6 levels, for Object, Light, Camera, Mesh, Material and Texture. There are 2 ways to handle it: Rename and Use Current. When Rename is selected and a duplicate name is encountered, a suffix will be added to the name to make it unique. By choosing Use Current, the import of the item from the file will be ignored and the item with the same name will be used instead, which already exists in the Blender document.
 
 !!! info "Differences from Virtools conflict resolution"
     Compared to the conflict resolution dialog in Virtools, the conflict resolution options provided by the BBP plugin do not support replacement, and the granularity is not fine-tuned to individual instances, but only for an entire type. So you can't set a different conflict resolution for each instance of a conflict individually. However, this setting is sufficient for most scenarios.
@@ -35,7 +37,9 @@ The encoding attribute is very important. If the wrong encoding is set, the name
 
 ## Export Virtools File
 
-Virtools files can be exported by clicking `File - Export - Virtools File`. Clicking on it will bring up the file opening window and show you the export settings in the sidebar. First of all, you need to select the location of the exported Virtools file, then configure the export settings in the sidebar, after configuring the export settings, you can click Export to start the export, and wait for the status bar at the bottom of Blender to indicate that the export is complete.
+Virtools files can be exported by clicking `File - Export - Virtools File`. Clicking on it will bring up the file opening window and show you the export settings in the sidebar as shown below. First of all, you need to select the location of the exported Virtools file, then configure the export settings in the sidebar, after configuring the export settings, you can click Export to start the export, and wait for the status bar at the bottom of Blender to indicate that the export is complete.
+
+![](../imgs/export-virtools.png)
 
 ### Export Target
 
@@ -45,6 +49,11 @@ The Export Target section is used to determine which objects you need to export 
 * Collection: Export single collection. **This is the most commonly used option.** Select a collection in following input box. Note that selecting a collection will export the objects in the internal collection as well, i.e. exporting nested collections is supported.
 * Selected Object: Export selected objects. Select the objects to be exported before enter this dialog.
 * All Objects: Export all objects inside this document. This option should be used with caution. Because it brutely iterate the list of document objects to export, and it is likely to export many objects you don't need.
+
+!!! warning "Exportable Targets and Modifiers"
+    Starting with BBP version 4.4, BBP not only supports exporting Mesh type objects, but also supports exporting all objects that can be converted to Mesh type, including: Curves, Surfaces, Fonts, and Meta Balls. Previously, BBP only supported exporting Mesh type objects. With this feature, users no longer need to convert various objects into meshes before exporting and testing maps. For example, when creating fancy rails using curve lofting, users can now export directly in curve form, test their playability in the game, and then solidify it into a mesh with appropriate materials after the complete test. This feature significantly speeds up map creation and adjustment.
+
+    Additionally, starting with BBP version 4.4, it's no longer necessary to apply modifiers to objects during export. BBP applies all modifiers to something like a "temporary object" before exporting (you can think of it this way, but the actual implementation is not exactly the same). This feature lays a solid foundation for enabling rapid creation of Balance maps using modifiers such as geometry nodes.
 
 ### Virtools Params
 

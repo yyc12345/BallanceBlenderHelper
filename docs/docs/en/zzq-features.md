@@ -34,4 +34,6 @@ First, select the target, which essentially means choosing the position of the p
 
 Next is the selection of the camera's rotation angles. We offer 8 common used in-game preset angles, corresponding to 4 each for 90 degrees camera and 45 degrees camera. Furthermore, if these preset angles do not meet your requirements, you can also set custom angles.
 
-Finally, there is the selection of camera perspectives, which can be divided into 3 types: Ordinary (standard perspective), Lift (perspective activated by holding the spacebar), and Easter Egg (special Easter Egg perspective).
+Then, there is the selection of camera perspectives, which can be divided into 3 types: Ordinary (standard perspective), Lift (perspective activated by holding the spacebar), and Easter Egg (special Easter Egg perspective).
+
+Finally, there's the resolution option, where you can choose between Normal (normal game view) and Wide Screen (view after adding the widescreen patch). Generally, choosing the normal game view is sufficient; no special configuration is needed for widescreen. Furthermore, if this resolution option is not checked, the resolution of the currently selected camera will not be modified. Due to the implementation differences between Blender and Virtools cameras, the size of the Blender rendering window will also not be changed. For more information on this behavior, please refer to the "Virtools Camera" section on the [Virtools Properties](./virtools-properties.md) page.
