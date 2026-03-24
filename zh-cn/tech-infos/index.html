@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="yyc12345" /><link rel="canonical" href="https://yyc12345.github.io/BallanceBlenderHelper/zh-cn/tech-infos/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>技术信息 - Ballance Blender Plugin Manual</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\u6280\u672f\u4fe1\u606f";
+        var mkdocs_page_input_path = "zh-cn/tech-infos.md";
+        var mkdocs_page_url = "/BallanceBlenderHelper/zh-cn/tech-infos/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Ballance Blender Plugin Manual
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">English</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/">Start</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/install-plugin/">Install Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/configure-plugin/">Configure Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/virtools-properties/">Virtools Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/ballance-properties/">Ballance Properties</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/import-export-virtools/">Import and Export Virtools Document</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/group-operations/">Group Operation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/legacy-align/">Legacy Alignment</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/naming-convention/">Naming Convention</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/uv-mapping/">UV Mapping</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/bme-adder/">Add Floor</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/rail-adder/">Add Rail</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/component-adder/">Add Component</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/zzq-features/">ZZQ Features</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/compile-distribute-plugin/">Compile and Distribute Plugin</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/report-bugs/">Report Issue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../en/tech-infos/">Technical Information</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">简体中文</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">开始</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install-plugin/">安装插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../configure-plugin/">配置插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../virtools-properties/">Virtools属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ballance-properties/">Ballance属性</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../import-export-virtools/">导入导出Virtools文档</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../group-operations/">按组操作</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../legacy-align/">传统对齐</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../naming-convention/">命名规则</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../uv-mapping/">UV贴图</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bme-adder/">添加路面</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rail-adder/">添加钢轨</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../component-adder/">添加机关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../zzq-features/">ZZQ功能</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compile-distribute-plugin/">编译与分发插件</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../report-bugs/">报告问题</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">技术信息</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">标准与协议文档</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">开发辅助包</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">版本号规则</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Ballance Blender Plugin Manual</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">简体中文</li>
+      <li class="breadcrumb-item active">技术信息</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="_1">技术信息</h1>
+<h2 id="_2">标准与协议文档</h2>
+<ul>
+<li>BM文件标准：<a href="https://github.com/yyc12345/gist/blob/master/BMFileSpec/BMSpec_ZH.md">https://github.com/yyc12345/gist/blob/master/BMFileSpec/BMSpec_ZH.md</a></li>
+<li>制图工具链标准及<code>meshes</code>文件夹下的文件的格式：<a href="https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md">https://github.com/yyc12345/gist/blob/master/BMFileSpec/YYCToolsChainSpec_ZH.md</a></li>
+<li>BMERevenge的JSON文件的格式：<a href="https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_v2.0_ZH.md">https://github.com/yyc12345/gist/blob/master/BMERevenge/DevDocument_v2.0_ZH.md</a></li>
+</ul>
+<h2 id="_3">开发辅助包</h2>
+<p>本插件配合了<code>fake-bpy-module</code>模块来实现类型提示以加快开发速度。使用如下命令来安装Blender的类型提示库。</p>
+<ul>
+<li>Blender 3.6: <code>pip install fake-bpy-module-latest==20230627</code></li>
+<li>Blender 4.2: <code>pip install fake-bpy-module-latest==20240716</code></li>
+<li>Blender 4.5: <code>pip install fake-bpy-module-latest==20250604</code></li>
+</ul>
+<p>这么做主要是因为<code>fake-bpy-module</code>没有很及时地发布适用于指定Blender版本的包，因此我只能通过选择最接近Blender对应版本离开<code>main</code>主线时间的每日编译版本来安装它（因为每日编译版本只编译<code>main</code>主线）。</p>
+<div class="admonition question">
+<p class="admonition-title">为什么不采用Blender官方的bpy模块？</p>
+<p>Blender在PyPI上提供了官方的名为<code>bpy</code>的包，但我们不会采用它作为我们的开发辅助包。因为它基本上就是将Blender打包成了一个模块（也就意味着你基本上又把Blender重新下载了一遍），使得你可以通过Python来操纵Blender。这与我们使用一个仅提供类型提示的包来辅助插件开发的目的相悖。</p>
+</div>
+<h2 id="_4">版本号规则</h2>
+<p>BBP的版本号格式遵循<a href="https://semver.org/lang/zh-CN/">语义化版本</a>。但略有区别：</p>
+<ul>
+<li>主版本号只在重构整个插件时提升。</li>
+<li>次版本号是常规更新使用。</li>
+<li>修订号则是在不修改任何功能的情况下递增的版本号。例如4.2.1版本仅增加了对macOS Blender的更新，不更改任何功能。</li>
+</ul>
+<p>在BBP发布一个正式版前，通常有3个阶段性版本，分别是：Alpha版本，Beta版本和RC版本。Alpha版本专注于功能性更新，用于检验新添加或修改的功能是否正常工作，不包含文档和翻译。Beta版本则专注于插件文档，而RC版本则关注于插件翻译。但这三个版本并非总是存在，如果更新内容较少，则可能会跳过其中一些版本，或直接进行发布。</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../report-bugs/" class="btn btn-neutral float-left" title="报告问题"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Text is available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../report-bugs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
